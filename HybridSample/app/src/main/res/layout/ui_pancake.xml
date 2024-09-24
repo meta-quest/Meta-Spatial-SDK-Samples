@@ -1,0 +1,56 @@
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:gravity="left"
+  android:background="#0F0F0F"
+  android:clipToOutline="true"
+>
+ <!--Header Image-->
+  <ImageView
+    android:gravity="center"
+    android:src="@drawable/hybrid"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:scaleType="centerCrop"
+  />
+
+  <!--Heading-->
+  <TextView
+    android:gravity="center"
+    android:id="@+id/title_text_view"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_width="match_parent"
+    android:text="Welcome"
+    android:textSize="36dp"
+    android:textStyle="bold"
+    android:textColor="#ffffff"
+  />
+
+  <!--Body text-->
+  <TextView
+    android:gravity="center"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:text="Click the button to switch between the 2D panel view and an immersive view."
+    android:padding="12dp"
+    android:textSize="12dp"
+    android:lineHeight="18dp"
+    android:textColor="#cccccc"
+  />
+
+  <!--Button-->
+  <Button
+    android:id="@+id/chosen"
+    android:layout_height="36dp"
+    android:layout_width="120dp"
+    android:layout_gravity="center"
+    android:text="Click Me"
+    android:background="@drawable/button_bg"
+    android:textColor="#ffffff"
+  />
+
+</LinearLayout>

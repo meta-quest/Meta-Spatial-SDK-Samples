@@ -1,0 +1,72 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:buttonBaseMat
+            - ref:buttonTriggerMat
+            - ref:buttongGeo
+            - ref:buttongGeo1
+        com.meta.components.Name:
+          name: button
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry1.bin
+      tag: Geometry1
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+      tag: Geometry
+  com.meta.models.Material:
+    - uri: docref:materials/buttonBaseMat.metaspatialmaterial
+      tag: buttonBaseMat
+    - uri: docref:materials/buttonTriggerMat.metaspatialmaterial
+      tag: buttonTriggerMat
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive1
+        com.meta.components.Name:
+          name: buttongGeo
+      tag: buttongGeo
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive
+        com.meta.components.Name:
+          name: buttongGeo1
+      tag: buttongGeo1
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry1
+          material: ref:buttonTriggerMat
+      tag: Primitive1
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry
+          material: ref:buttonBaseMat
+      tag: Primitive
+metadata:
+  version: 1.0

@@ -1,0 +1,9 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: New Texture
+    com.meta.components.Texture:
+      image: ref:MediaRoom_room
+      sampler: ref:Sampler1
+metadata:
+  version: 1.0

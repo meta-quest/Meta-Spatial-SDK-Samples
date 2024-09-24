@@ -1,0 +1,25 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:sphere_primitive1
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: sphere_primitive
+        com.meta.components.SceneNode:
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:sphere_primitive2
+      tag: sphere_primitive1
+metadata:
+  version: 1.0

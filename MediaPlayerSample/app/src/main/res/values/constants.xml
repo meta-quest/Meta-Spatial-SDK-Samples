@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <integer name="floor_id">1</integer>
+  <integer name="list_panel">2</integer>
+  <integer name="video_id">3</integer>
+  <integer name="sky_video_id">5</integer>
+  <integer name="mr_panel">6</integer>
+</resources>

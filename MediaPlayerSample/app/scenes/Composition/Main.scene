@@ -1,0 +1,143 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:panels
+            - ref:Environment
+            - ref:VideoPanel
+            - ref:SkyVideoPanel
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:MediaRoom/Main.metaspatialobj
+        com.meta.components.Name:
+          name: Environment
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.spatial.toolkit.SupportsLocomotion:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: true
+      tag: Environment
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: VideoPanel
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 4
+            - 2.4000001
+            - 1
+          translation:
+            - -6.13085729e-16
+            - 1.32000005
+            - 4.8499999
+        com.meta.spatial.toolkit.Grabbable:
+          enabled: false
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/video_id"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: true
+      tag: VideoPanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: ListPanel
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 2.72346128e-08
+            - 0
+            - -6.258486e-08
+            - 0
+          rotation.format: Euler
+          scale:
+            - 1.5
+            - 2
+            - 1
+        com.meta.spatial.toolkit.Grabbable:
+          {}
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/list_panel"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: ListPanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: SkyVideoPanel
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0
+            - 0
+            - 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/sky_video_id"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: true
+      tag: SkyVideoPanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: panels
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - -0.959931076
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -1.66999996
+            - 1.33000004
+            - 1.72000003
+          children:
+            - ref:ListPanel
+            - ref:MRPanel
+      tag: panels
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: MRPanel
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.600000024
+            - 0.200000003
+            - 1
+          translation:
+            - -0.0439346731
+            - -0.809792161
+            - -0.200919628
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/mr_panel"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: MRPanel
+metadata:
+  version: 1.0

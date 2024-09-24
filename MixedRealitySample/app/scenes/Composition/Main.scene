@@ -1,0 +1,100 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:defaultFloor
+            - ref:BasketBall
+            - ref:Panel
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Panel
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 6.12323426e-17
+            - 6.12323426e-17
+            - 1
+            - -3.74939976e-33
+          rotation.format: Quaternion
+          scale:
+            - 2
+            - 1.29999995
+            - 1
+          translation:
+            - 0
+            - 1.10000002
+            - -1.70000005
+        com.meta.spatial.physics.Physics:
+          angularVelocity:
+            - 0
+            - 0
+            - 0
+          dimensions:
+            - 1
+            - 0.649999976
+            - 0.00999999978
+          restitution: 0.90000000000000002
+          state: 0
+          shape: box
+        com.meta.spatial.toolkit.Grabbable:
+          enabled: true
+          type: 0
+        com.meta.spatial.toolkit.Panel:
+          panel: "@layout/about"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: Panel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:BasketBall/Main.metaspatialobj
+        com.meta.components.Name:
+          name: BasketBall
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: BasketBall
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:cube/Main.metaspatialobj
+        com.meta.components.Name:
+          name: defaultFloor
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 10
+            - 0.00999999978
+            - 10
+          translation:
+            - 0
+            - -0.0500000007
+            - 0
+        com.meta.spatial.physics.Physics:
+          shape: box
+          restitution: 0.80000000000000004
+          state: 0
+          dimensions:
+            - 10
+            - 0.00999999978
+            - 10
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: defaultFloor
+metadata:
+  version: 1.0

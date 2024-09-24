@@ -1,0 +1,97 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:MergedBake_BakeB_PBR_Diffuse
+            - ref:rampB_mat_Normal
+            - ref:rampB_mat_ORM
+            - ref:rampB_mat
+            - ref:ramp4_block_geo
+        com.meta.components.Name:
+          name: marbleRun_block
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+      tag: Geometry
+  com.meta.models.Image:
+    - components:
+        com.meta.components.Asset:
+          path: assets/rampB_mat_ORM.png
+        com.meta.components.Image:
+          height: 1024
+          mimeType: image/png
+          width: 1024
+        com.meta.components.Name:
+          name: rampB_mat_ORM
+      tag: rampB_mat_ORM
+    - components:
+        com.meta.components.Asset:
+          path: assets/MergedBake_BakeB_PBR_Diffuse.png
+        com.meta.components.Image:
+          height: 1024
+          mimeType: image/png
+          width: 1024
+        com.meta.components.Name:
+          name: MergedBake_BakeB_PBR_Diffuse
+      tag: MergedBake_BakeB_PBR_Diffuse
+    - components:
+        com.meta.components.Asset:
+          path: assets/rampB_mat_Normal.png
+        com.meta.components.Image:
+          height: 1024
+          mimeType: image/png
+          width: 1024
+        com.meta.components.Name:
+          name: rampB_mat_Normal
+      tag: rampB_mat_Normal
+  com.meta.models.Material:
+    - uri: docref:materials/rampB_mat.metaspatialmaterial
+      tag: rampB_mat
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive
+        com.meta.components.Name:
+          name: ramp4_block_geo
+      tag: ramp4_block_geo
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry
+          material: ref:rampB_mat
+      tag: Primitive
+  com.meta.models.Sampler:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Sampler:
+          magFilter: 2
+          minFilter: 2
+      tag: Sampler
+  com.meta.models.Texture:
+    - uri: docref:textures/texture3.metaspatialtexture
+    - uri: docref:textures/texture2.metaspatialtexture
+      tag: texture2
+    - uri: docref:textures/texture1.metaspatialtexture
+      tag: texture1
+    - uri: docref:textures/New Texture.metaspatialtexture
+      tag: New Texture
+metadata:
+  version: 1.0

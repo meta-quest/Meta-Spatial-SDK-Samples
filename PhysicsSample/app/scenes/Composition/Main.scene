@@ -1,0 +1,631 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:Environment
+            - ref:Panel
+            - ref:InfoPanel
+            - ref:ramps
+            - ref:triggerArea01
+            - ref:triggerArea1
+            - ref:triggerArea2
+            - ref:triggerArea31
+            - ref:triggerArea4
+            - ref:ball0
+            - ref:ball1
+            - ref:ball2
+            - ref:button1
+            - ref:blocks
+            - ref:rotatingBlock
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.spatial.physics.Physics:
+          restitution: 0.10000000100000001
+          state: 0
+          densityInternal: 1
+          shape: environment_collisions.glb
+        com.meta.spatial.toolkit.SupportsLocomotion:
+          {}
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:environment/Main.metaspatialobj
+        com.meta.components.Name:
+          name: Environment
+        com.meta.components.SceneNode:
+          scale:
+            - 1
+            - 1
+            - 1
+      tag: Environment
+    - components:
+        com.meta.spatial.toolkit.Panel:
+          panel: "@layout/ui_example"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Panel
+        com.meta.components.SceneNode:
+          scale:
+            - 2
+            - 1.5
+            - 1
+          translation:
+            - 0
+            - 1.10000002
+            - -1.70000005
+      tag: Panel
+    - components:
+        com.meta.spatial.samples.physicssample.Trigger:
+          size:
+            - 0.0399999991
+            - 0.0399999991
+            - 0.0399999991
+        com.meta.spatial.physics.Physics:
+          shape: sphere
+          frictionInternal:
+            - 0
+            - 0
+            - 0
+          dimensions:
+            - 0.0399999991
+            - 0.0399999991
+            - 0.0399999991
+          densityInternal: 50
+          restitution: 0.01
+          state: 1
+        com.meta.spatial.toolkit.Grabbable:
+          {}
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:ballPurple/Main.metaspatialobj
+        com.meta.components.Name:
+          name: ball0
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 0.200000003
+            - 0.200000003
+            - 0.200000003
+          translation:
+            - 1.20000005
+            - 2.38000011
+            - 2.02361226
+      tag: ball0
+    - components:
+        com.meta.spatial.samples.physicssample.TriggerArea:
+          size:
+            - 1
+            - 0.25
+            - 0.219999999
+          eventName: speed_up
+          value: 40
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:cubePrimitive/Main.metaspatialobj
+        com.meta.components.Name:
+          name: triggerArea3
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 4.25148308e-08
+            - 0
+            - -2.85385653e-08
+            - 0
+          scale:
+            - 1
+            - 0.25
+            - 0.219999999
+          translation:
+            - -0.750840366
+            - 0.185904026
+            - -0.412973434
+      tag: triggerArea31
+    - components:
+        com.meta.spatial.physics.Physics:
+          linearVelocity:
+            - 0
+            - 0
+            - 0
+          restitution: 0
+          state: 0
+          shape: marbleRun_collision.glb
+          frictionInternal:
+            - 0
+            - 0
+            - 0
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:marbleRunRamps/Main.metaspatialobj
+        com.meta.components.Name:
+          name: ramps
+        com.meta.components.SceneNode:
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0
+            - 1.44247222
+            - 0.438352346
+      tag: ramps
+    - components:
+        com.meta.spatial.samples.physicssample.Trigger:
+          size:
+            - 0.0399999991
+            - 0.0399999991
+            - 0.0399999991
+        com.meta.spatial.physics.Physics:
+          state: 1
+          restitution: 0.01
+          densityInternal: 50
+          dimensions:
+            - 0.0399999991
+            - 0.0399999991
+            - 0.0399999991
+          frictionInternal:
+            - 0
+            - 0
+            - 0
+          shape: sphere
+        com.meta.spatial.toolkit.Grabbable:
+          {}
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:ballBlue/Main.metaspatialobj
+        com.meta.components.Name:
+          name: ball1
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 0.200000003
+            - 0.200000003
+            - 0.200000003
+          translation:
+            - 1.20000005
+            - 2.38000011
+            - 2.13876486
+      tag: ball1
+    - components:
+        com.meta.spatial.samples.physicssample.Trigger:
+          size:
+            - 0.0399999991
+            - 0.0399999991
+            - 0.0399999991
+        com.meta.spatial.physics.Physics:
+          restitution: 0.01
+          dimensions:
+            - 0.0399999991
+            - 0.0399999991
+            - 0.0399999991
+          frictionInternal:
+            - 0
+            - 0
+            - 0
+          shape: sphere
+          densityInternal: 50
+          state: 1
+        com.meta.spatial.toolkit.Grabbable:
+          {}
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:ballGreen/Main.metaspatialobj
+        com.meta.components.Name:
+          name: ball2
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 0.200000003
+            - 0.200000003
+            - 0.200000003
+          translation:
+            - 1.20000005
+            - 2.38000011
+            - 2.25
+      tag: ball2
+    - components:
+        com.meta.spatial.toolkit.Panel:
+          panel: "@layout/ui_info"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: true
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: InfoPanel
+        com.meta.components.SceneNode:
+          scale:
+            - 0.800000012
+            - 0.200000003
+            - 1
+          translation:
+            - -0.393686354
+            - 1.76591182
+            - 1.35805571
+      tag: InfoPanel
+    - components:
+        com.meta.spatial.samples.physicssample.TriggerArea:
+          eventName: speed_up
+          size:
+            - 1
+            - 0.25
+            - 0.300000012
+          value: 70
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:cubePrimitive/Main.metaspatialobj
+        com.meta.components.Name:
+          name: triggerArea0
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.761159301
+            - 0
+            - -0.648564994
+            - 0
+          rotation.format: 1
+          scale:
+            - 1
+            - 0.25
+            - 0.300000012
+          translation:
+            - -0.555736065
+            - 1.83244526
+            - 2.1440146
+      tag: triggerArea01
+    - components:
+        com.meta.spatial.samples.physicssample.Button:
+          eventName: start
+          downOffset:
+            - 0
+            - -0.0120000001
+            - 0
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:button/Main.metaspatialobj
+        com.meta.components.Name:
+          name: button
+        com.meta.components.SceneNode:
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.396609545
+            - 1.60354686
+            - 1.34796953
+      tag: button1
+    - components:
+        com.meta.spatial.samples.physicssample.TriggerArea:
+          eventName: speed_up
+          size:
+            - 1
+            - 0.25
+            - 0.300000012
+          value: 110
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:cubePrimitive/Main.metaspatialobj
+        com.meta.components.Name:
+          name: triggerArea1
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.700485766
+            - 0
+            - 0.713666379
+            - 0
+          rotation.format: 1
+          scale:
+            - 1
+            - 0.25
+            - 0.300000012
+          translation:
+            - -0.545801878
+            - 1.59150541
+            - 1.64545465
+      tag: triggerArea1
+    - components:
+        com.meta.spatial.samples.physicssample.TriggerArea:
+          eventName: finish
+          size:
+            - 1
+            - 0.25
+            - 0.5
+          value: 0
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:cubePrimitive/Main.metaspatialobj
+        com.meta.components.Name:
+          name: triggerArea4
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 1
+            - 0.25
+            - 0.5
+          translation:
+            - -0.759775043
+            - 0.189125776
+            - 0.239514321
+      tag: triggerArea4
+    - components:
+        com.meta.spatial.samples.physicssample.TriggerArea:
+          value: 80
+          eventName: speed_up
+          size:
+            - 1
+            - 0.25
+            - 0.5
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:cubePrimitive/Main.metaspatialobj
+        com.meta.components.Name:
+          name: triggerArea2
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.688876092
+            - -3.211834e-08
+            - -0.724879146
+            - 9.46350553e-08
+          rotation.format: 1
+          scale:
+            - 1
+            - 0.25
+            - 0.5
+          translation:
+            - -0.348231375
+            - 0.314254284
+            - -1.24815714
+      tag: triggerArea2
+    - components:
+        com.meta.spatial.samples.physicssample.Spinner:
+          {}
+        com.meta.spatial.physics.Physics:
+          frictionInternal:
+            - 0
+            - 0
+            - 0
+          shape: box
+          linearVelocity:
+            - 0
+            - 0
+            - 0
+          dimensions:
+            - 0.140000001
+            - 0.00999999978
+            - 0.0299999993
+          state: 2
+          restitution: 0
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:blockRotating/Main.metaspatialobj
+        com.meta.components.Name:
+          name: rotatingBlock
+        com.meta.components.SceneNode:
+          rotation.data:
+            - -0.17453292
+            - 0
+            - 0
+            - 0
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 1.38971519
+            - 1.01999998
+            - -0.541150033
+      tag: rotatingBlock
+    - components:
+        com.meta.spatial.samples.physicssample.UpAndDown:
+          offset: 0
+        com.meta.spatial.physics.Physics:
+          state: 2
+          dimensions:
+            - 0.0500000007
+            - 0.0399999991
+            - 0.0700000003
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:block/Main.metaspatialobj
+        com.meta.components.Name:
+          name: block0
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.17453292
+            - 0
+            - 0
+            - 0
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.284147024
+            - 0.209999993
+            - 0.241951585
+      tag: block0
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: blocks
+        com.meta.components.SceneNode:
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.37365818
+            - 0.0172368288
+            - -1.20899975
+          children:
+            - ref:block0
+            - ref:block1
+            - ref:block2
+            - ref:block3
+            - ref:block4
+      tag: blocks
+    - components:
+        com.meta.spatial.samples.physicssample.UpAndDown:
+          offset: 0.20000000000000001
+        com.meta.spatial.physics.Physics:
+          dimensions:
+            - 0.0500000007
+            - 0.0399999991
+            - 0.0700000003
+          state: 2
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:block/Main.metaspatialobj
+        com.meta.components.Name:
+          name: block1
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.17453292
+            - 0
+            - 0
+            - 0
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.477880239
+            - 0.209999993
+            - 0.241951585
+      tag: block1
+    - components:
+        com.meta.spatial.samples.physicssample.UpAndDown:
+          offset: 0.40000000000000002
+        com.meta.spatial.physics.Physics:
+          linearVelocity:
+            - 0
+            - 0
+            - 0
+          dimensions:
+            - 0.0500000007
+            - 0.0399999991
+            - 0.0700000003
+          state: 2
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:block/Main.metaspatialobj
+        com.meta.components.Name:
+          name: block2
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.17453292
+            - 0
+            - 0
+            - 0
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.383126259
+            - 0.170000002
+            - 0.427457571
+      tag: block2
+    - components:
+        com.meta.spatial.samples.physicssample.UpAndDown:
+          offset: 0.59999999999999998
+        com.meta.spatial.physics.Physics:
+          dimensions:
+            - 0.0500000007
+            - 0.0399999991
+            - 0.0700000003
+          state: 2
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:block/Main.metaspatialobj
+        com.meta.components.Name:
+          name: block3
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.17453292
+            - 0
+            - 0
+            - 0
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.49000001
+            - 0.129999995
+            - 0.610000014
+      tag: block3
+    - components:
+        com.meta.spatial.samples.physicssample.UpAndDown:
+          offset: 0.80000000000000004
+        com.meta.spatial.physics.Physics:
+          state: 2
+          dimensions:
+            - 0.0500000007
+            - 0.0399999991
+            - 0.0700000003
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          documentReference: projref:block/Main.metaspatialobj
+        com.meta.components.Name:
+          name: block4
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.17453292
+            - 0
+            - 0
+            - 0
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.284147024
+            - 0.129999995
+            - 0.611506104
+      tag: block4
+metadata:
+  version: 1.0

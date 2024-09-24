@@ -1,0 +1,25 @@
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:layout_width="456dp"
+  android:layout_height="96dp"
+  android:gravity="center"
+  android:background="@drawable/popup_bg"
+  android:clipToOutline="true"
+  android:scaleY="-1"
+>
+
+  <TextView
+    android:gravity="center"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:lineHeight="48sp"
+    android:padding="16dp"
+    android:text="Grab the orb and move it around to fly the drone."
+    android:textColor="#F1F4F7"
+    android:textSize="38sp"
+    android:scaleY="-1"
+  />
+
+</LinearLayout>

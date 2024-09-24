@@ -1,0 +1,548 @@
+{
+    "components": [
+        {
+            "attributes": [
+                {
+                    "keyString": "panel",
+                    "name": "panelRegistrationId",
+                    "type": {
+                        "attributeType": "Int"
+                    }
+                },
+                {
+                    "keyString": "hittable",
+                    "name": "hittable",
+                    "type": {
+                        "attributeType": "com.meta.spatial.toolkit.MeshCollision"
+                    }
+                }
+            ],
+            "name": "com.meta.spatial.toolkit.Panel"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "\n The relative offset of the bottom corner (furthest in the -x, -y, -z direction) of the box from\n the center\n",
+                    "keyString": "min",
+                    "name": "min",
+                    "type": {
+                        "attributeType": "Vector3"
+                    }
+                },
+                {
+                    "description": "\n The relative offset of the top corner (furthest in the +x, +y, +z direction) of the box from\n the center\n",
+                    "keyString": "max",
+                    "name": "max",
+                    "type": {
+                        "attributeType": "Vector3"
+                    }
+                },
+                {
+                    "description": "\n The radii of the rounded edges of the box, where the radii corresponds to the edges along that\n plane. (i.e radius.x corresponds to the edges running along in the x axis)\n",
+                    "keyString": "radius",
+                    "name": "radius",
+                    "type": {
+                        "attributeType": "Vector3"
+                    }
+                }
+            ],
+            "description": "\n Defines the dimensions of a box shape with rounded edges by the relative offset of two opposite\n corners and a Vector3 of radii to modify the roundedness of the edges\n",
+            "name": "com.meta.spatial.toolkit.RoundedBox"
+        },
+        {
+            "attributes": [],
+            "description": "\n Maps joints found in BodyJoint to a Pose in world space. If a bone is not present in the map, it\n means that the tracking is not currently valid for that pose.\n\n Will be present locally if the XR_FB_body_tracking is able to be loaded.\n",
+            "name": "com.meta.spatial.toolkit.TrackedBody"
+        },
+        {
+            "attributes": [
+                {
+                    "keyString": "head",
+                    "name": "head",
+                    "type": {
+                        "attributeType": "Entity"
+                    }
+                },
+                {
+                    "keyString": "leftHand",
+                    "name": "leftHand",
+                    "type": {
+                        "attributeType": "Entity"
+                    }
+                },
+                {
+                    "keyString": "rightHand",
+                    "name": "rightHand",
+                    "type": {
+                        "attributeType": "Entity"
+                    }
+                },
+                {
+                    "keyString": "root",
+                    "name": "root",
+                    "type": {
+                        "attributeType": "Entity"
+                    }
+                },
+                {
+                    "keyString": "isPlayerControlled",
+                    "name": "isPlayerControlled",
+                    "type": {
+                        "attributeType": "Boolean"
+                    }
+                }
+            ],
+            "name": "com.meta.spatial.toolkit.AvatarBody"
+        },
+        {
+            "attributes": [
+                {
+                    "keyString": "width",
+                    "name": "width",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                },
+                {
+                    "keyString": "depth",
+                    "name": "depth",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                }
+            ],
+            "description": "Defines the dimensions of a horizontal plane ",
+            "name": "com.meta.spatial.toolkit.Plane"
+        },
+        {
+            "attributes": [
+                {
+                    "keyString": "dimensions",
+                    "name": "dimensions",
+                    "type": {
+                        "attributeType": "Vector2"
+                    }
+                }
+            ],
+            "name": "com.meta.spatial.toolkit.PanelDimensions"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "The Uri String of the audio file to be used ",
+                    "keyString": "audioInternal",
+                    "name": "audio",
+                    "type": {
+                        "attributeType": "String"
+                    }
+                },
+                {
+                    "keyString": "volume",
+                    "name": "volume",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                }
+            ],
+            "description": "Plays audio \u201cfrom\u201d an entity ",
+            "name": "com.meta.spatial.toolkit.Audio"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "The radius of the dome in meters ",
+                    "keyString": "radius",
+                    "name": "radius",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                }
+            ],
+            "description": "Defines the dimensions of a dome shape by a radius. This can be used for skyboxes ",
+            "name": "com.meta.spatial.toolkit.Dome"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "\n Which part of the avatar the entity is meant to represent (i.e. \u201chead\u201d, \u201cbody\u201d, \u201cright_hand\u201d,\n \u201cleft_controller\u201d)\n",
+                    "keyString": "type",
+                    "name": "type",
+                    "type": {
+                        "attributeType": "String"
+                    }
+                }
+            ],
+            "description": "\n Defines what part of an Avatar the entity is meant to represent. (head, body, controller, etc.)\n",
+            "name": "com.meta.spatial.toolkit.AvatarAttachment"
+        },
+        {
+            "attributes": [
+                {
+                    "keyString": "name",
+                    "name": "name",
+                    "type": {
+                        "attributeType": "String"
+                    }
+                },
+                {
+                    "keyString": "type",
+                    "name": "type",
+                    "type": {
+                        "attributeType": "String"
+                    }
+                },
+                {
+                    "keyString": "offset",
+                    "name": "offset",
+                    "type": {
+                        "attributeType": "Vector3"
+                    }
+                },
+                {
+                    "keyString": "extents",
+                    "name": "extents",
+                    "type": {
+                        "attributeType": "Vector3"
+                    }
+                }
+            ],
+            "name": "com.meta.spatial.toolkit.ScenePlane"
+        },
+        {
+            "attributes": [
+                {
+                    "keyString": "clickStateInternal",
+                    "name": "clickStateInternal",
+                    "type": {
+                        "attributeType": "Int"
+                    }
+                }
+            ],
+            "name": "com.meta.spatial.toolkit.PanelClickState"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "The radius of the sphere in meters ",
+                    "keyString": "radius",
+                    "name": "radius",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                }
+            ],
+            "description": "Defines the dimensions of a sphere by the radius ",
+            "name": "com.meta.spatial.toolkit.Sphere"
+        },
+        {
+            "attributes": [],
+            "description": "When added to an entity with a mesh, allows for default locomotion on the mesh ",
+            "name": "com.meta.spatial.toolkit.SupportsLocomotion"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "\n The relative offset of the bottom corner (furthest in the -x, -y, -z direction) of the box from\n the center\n",
+                    "keyString": "min",
+                    "name": "min",
+                    "type": {
+                        "attributeType": "Vector3"
+                    }
+                },
+                {
+                    "description": "\n The relative offset of the top corner (furthest in the +x, +y, +z direction) of the box from\n the center\n",
+                    "keyString": "max",
+                    "name": "max",
+                    "type": {
+                        "attributeType": "Vector3"
+                    }
+                }
+            ],
+            "description": "\n Defines the dimensions of a box shape by the relative offset of two opposite corners. A box of\n max=Vector3(1,1,1) and min=Vector3(-1,-1,-1) will result in a 2x2x2 box\n",
+            "name": "com.meta.spatial.toolkit.Box"
+        },
+        {
+            "attributes": [
+                {
+                    "keyString": "min",
+                    "name": "min",
+                    "type": {
+                        "attributeType": "Vector2"
+                    }
+                },
+                {
+                    "keyString": "max",
+                    "name": "max",
+                    "type": {
+                        "attributeType": "Vector2"
+                    }
+                }
+            ],
+            "name": "com.meta.spatial.toolkit.Quad"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "The current state of the buttons being pressed represented by integer bits ",
+                    "keyString": "buttonState",
+                    "name": "buttonState",
+                    "type": {
+                        "attributeType": "Int"
+                    }
+                },
+                {
+                    "description": "\n Which buttons (represented by integer bits) have been changed (pressed or unpressed since the\n last frame)\n",
+                    "keyString": "changedButtons",
+                    "name": "changedButtons",
+                    "type": {
+                        "attributeType": "Int"
+                    }
+                },
+                {
+                    "keyString": "isActive",
+                    "name": "isActive",
+                    "type": {
+                        "attributeType": "Boolean"
+                    }
+                },
+                {
+                    "description": "What type of controller it is: 0->controller 1->hand 2->eye ",
+                    "keyString": "type",
+                    "name": "type",
+                    "type": {
+                        "attributeType": "Int"
+                    }
+                },
+                {
+                    "keyString": "directTouchEnabled",
+                    "name": "directTouchEnabled",
+                    "type": {
+                        "attributeType": "Boolean"
+                    }
+                },
+                {
+                    "description": "The state of the direct touch buttons ",
+                    "keyString": "directTouchButtonState",
+                    "name": "directTouchButtonState",
+                    "type": {
+                        "attributeType": "Int"
+                    }
+                },
+                {
+                    "keyString": "laserEnabled",
+                    "name": "laserEnabled",
+                    "type": {
+                        "attributeType": "Boolean"
+                    }
+                }
+            ],
+            "description": "Represents Controller Data and properties that can be used to facilitate input ",
+            "name": "com.meta.spatial.toolkit.Controller"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "\n Different states of CreatorVisibility, such as only visible to the creator, or only invisible\n to the creator\n",
+                    "keyString": "state",
+                    "name": "state",
+                    "type": {
+                        "attributeType": "com.meta.spatial.toolkit.CreatorVisibilityState"
+                    }
+                }
+            ],
+            "name": "com.meta.spatial.toolkit.CreatorVisibility"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "The mesh\u2019s current visibility state. ",
+                    "keyString": "isVisible",
+                    "name": "isVisible",
+                    "type": {
+                        "attributeType": "Boolean"
+                    }
+                }
+            ],
+            "description": "Gives the ability to change mesh between being visible and invisible. ",
+            "name": "com.meta.spatial.toolkit.Visible"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "World time at which animation started (ms since epoch) ",
+                    "keyString": "startTime",
+                    "name": "startTime",
+                    "type": {
+                        "attributeType": "Long"
+                    }
+                },
+                {
+                    "description": "Paused location/time (sec) within animation track ",
+                    "keyString": "pausedTime",
+                    "name": "pausedTime",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                },
+                {
+                    "description": "State of the animation (playing or paused) ",
+                    "keyString": "playbackState",
+                    "name": "playbackState",
+                    "type": {
+                        "attributeType": "com.meta.spatial.toolkit.PlaybackState"
+                    }
+                },
+                {
+                    "description": "The type of animation playback to be used ",
+                    "keyString": "playbackType",
+                    "name": "playbackType",
+                    "type": {
+                        "attributeType": "com.meta.spatial.toolkit.PlaybackType"
+                    }
+                },
+                {
+                    "description": "which animation track of the glTF to play ",
+                    "keyString": "track",
+                    "name": "track",
+                    "type": {
+                        "attributeType": "Int"
+                    }
+                }
+            ],
+            "description": "Plays animation for a glTF asset. Also configures different settings for animation. ",
+            "name": "com.meta.spatial.toolkit.Animated"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "Defines whether the object can be grabbed or not. ",
+                    "keyString": "enabled",
+                    "name": "enabled",
+                    "type": {
+                        "attributeType": "Boolean"
+                    }
+                },
+                {
+                    "description": "Whether the object is currently grabbed or not ",
+                    "keyString": "isGrabbed",
+                    "name": "isGrabbed",
+                    "type": {
+                        "attributeType": "Boolean"
+                    }
+                },
+                {
+                    "description": "The type of behavior an object has when grabbed (faces user, pivots on y axis, etc.) ",
+                    "keyString": "type",
+                    "name": "type",
+                    "type": {
+                        "attributeType": "com.meta.spatial.toolkit.GrabbableType"
+                    }
+                },
+                {
+                    "description": "the minimum height an object can be held when grabbed ",
+                    "keyString": "minHeight",
+                    "name": "minHeight",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                },
+                {
+                    "description": "the maximum height an object can be held when grabbed ",
+                    "keyString": "maxHeight",
+                    "name": "maxHeight",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                }
+            ],
+            "description": "\n Grabbable is a component that allows an object to be grabbed by a controller. It requires the\n Mesh Component to be present.\n",
+            "name": "com.meta.spatial.toolkit.Grabbable"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "The type of behavior the object can be hit using ",
+                    "keyString": "hittable",
+                    "name": "hittable",
+                    "type": {
+                        "attributeType": "com.meta.spatial.toolkit.MeshCollision"
+                    }
+                }
+            ],
+            "description": "Defines whether an object is hittable or not ",
+            "name": "com.meta.spatial.toolkit.Hittable"
+        },
+        {
+            "attributes": [
+                {
+                    "keyString": "name",
+                    "name": "name",
+                    "type": {
+                        "attributeType": "String"
+                    }
+                },
+                {
+                    "keyString": "type",
+                    "name": "type",
+                    "type": {
+                        "attributeType": "String"
+                    }
+                },
+                {
+                    "keyString": "offset",
+                    "name": "offset",
+                    "type": {
+                        "attributeType": "Vector3"
+                    }
+                },
+                {
+                    "keyString": "extents",
+                    "name": "extents",
+                    "type": {
+                        "attributeType": "Vector3"
+                    }
+                }
+            ],
+            "name": "com.meta.spatial.toolkit.SceneVolume"
+        }
+    ],
+    "enums": [
+        {
+            "name": "com.meta.spatial.toolkit.MeshCollision",
+            "values": [
+                "NoCollision",
+                "LineTest",
+                "LineTest_IgnoreVisible"
+            ]
+        },
+        {
+            "name": "com.meta.spatial.toolkit.CreatorVisibilityState",
+            "values": [
+                "CREATOR_ONLY_VISIBLE",
+                "CREATOR_ONLY_INVISIBLE"
+            ]
+        },
+        {
+            "name": "com.meta.spatial.toolkit.PlaybackType",
+            "values": [
+                "LOOP",
+                "CLAMP",
+                "BOUNCE"
+            ]
+        },
+        {
+            "name": "com.meta.spatial.toolkit.GrabbableType",
+            "values": [
+                "FACE",
+                "PIVOT_Y"
+            ]
+        },
+        {
+            "name": "com.meta.spatial.toolkit.PlaybackState",
+            "values": [
+                "PLAYING",
+                "PAUSED"
+            ]
+        }
+    ]
+}

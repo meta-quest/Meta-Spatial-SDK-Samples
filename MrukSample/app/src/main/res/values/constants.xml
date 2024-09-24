@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <integer name="floor_id">1</integer>
+  <integer name="ui_mruk_id">2</integer>
+  <string-array name="json_rooms_array">
+    <item>MeshBedroom1</item>
+    <item>MeshBedroom2</item>
+    <item>MeshBedroom3</item>
+    <item>MeshLivingRoom1</item>
+    <item>MeshLivingRoom2</item>
+    <item>MeshLivingRoom3</item>
+    <item>MeshOffice1</item>
+    <item>MeshOffice2</item>
+  </string-array>
+</resources>

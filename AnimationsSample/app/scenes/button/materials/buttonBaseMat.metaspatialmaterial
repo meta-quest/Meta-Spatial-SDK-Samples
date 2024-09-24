@@ -1,0 +1,32 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: buttonBaseMat
+    com.meta.components.PbrMaterial:
+      alphaCutoff: 0.5
+      baseColorFactor:
+        - 0.799154997
+        - 0.0709894076
+        - 0.030320406
+        - 1
+      clearcoatNormalTexture.scale: 1
+      emissiveStrength: 1
+      ior: 1.5
+      metallicFactor: 1
+      normalTexture.scale: 1
+      occlusionTexture.textureStrength: 1
+      roughnessFactor: 0.2590909
+      specularColorFactor:
+        - 1
+        - 1
+        - 1
+      specularFactor: 1
+      volumeAttenuationColor:
+        - 1
+        - 1
+        - 1
+      volumeAttenuationDistance: 3.40282347e+38
+    com.meta.components.StandardMaterial:
+      isDoubleSided: true
+metadata:
+  version: 1.0

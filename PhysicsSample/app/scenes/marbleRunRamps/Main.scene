@@ -1,0 +1,99 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:ramp_03_geo1
+            - ref:ramp_01_geo1
+            - ref:ramp_02_geo
+            - ref:ramp_04_geo
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: ramp_01_geo
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:ramp_01_geo
+      tag: ramp_01_geo1
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: ramp_04_geo
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.339999974
+            - -0.311216831
+            - -0.239999771
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:ramp_04_geo1
+      tag: ramp_04_geo
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: ramp_02_geo
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:ramp_02_geo1
+      tag: ramp_02_geo
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: ramp_03_geo
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.339999974
+            - -0.311216831
+            - -0.239999771
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:ramp_03_geo
+      tag: ramp_03_geo1
+metadata:
+  version: 1.0

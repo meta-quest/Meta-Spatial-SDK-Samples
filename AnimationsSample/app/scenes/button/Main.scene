@@ -1,0 +1,51 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:buttonTriggerGeo
+            - ref:buttonBaseGeo
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: buttonTriggerGeo
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:buttongGeo
+      tag: buttonTriggerGeo
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: buttonBaseGeo
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:buttongGeo1
+      tag: buttonBaseGeo
+metadata:
+  version: 1.0

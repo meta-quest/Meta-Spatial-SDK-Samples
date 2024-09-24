@@ -1,0 +1,31 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: buttonTriggerMat
+    com.meta.components.PbrMaterial:
+      alphaCutoff: 0.5
+      baseColorFactor:
+        - 0.791460752
+        - 0.159474194
+        - 0.0108901542
+        - 1
+      clearcoatNormalTexture.scale: 1
+      emissiveStrength: 1
+      ior: 1.5
+      normalTexture.scale: 1
+      occlusionTexture.textureStrength: 1
+      roughnessFactor: 0.100000001
+      specularColorFactor:
+        - 1
+        - 1
+        - 1
+      specularFactor: 1
+      volumeAttenuationColor:
+        - 1
+        - 1
+        - 1
+      volumeAttenuationDistance: 3.40282347e+38
+    com.meta.components.StandardMaterial:
+      isDoubleSided: true
+metadata:
+  version: 1.0

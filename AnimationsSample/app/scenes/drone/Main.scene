@@ -1,0 +1,411 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:dronearmature
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: BladeBL
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.996985793
+            - 1.13061247e-07
+            - -0.0775846466
+            - -5.48934516e-08
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1.00000012
+            - 1
+          translation:
+            - 0.0476412512
+            - 0.102905042
+            - 0.15287739
+      tag: BladeBL
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: BladeBR
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.995679438
+            - -0.0159695763
+            - 0.0390475281
+            - 0.0827202573
+          rotation.format: Quaternion
+          scale:
+            - 0.99999994
+            - 1.00000012
+            - 1
+          translation:
+            - -0.167870194
+            - 0.14334166
+            - -0.0118508898
+      tag: BladeBR
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: BladeFR
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.988365769
+            - 0.00184941548
+            - -0.148137838
+            - 0.0344231836
+          rotation.format: Quaternion
+          scale:
+            - 0.99999994
+            - 1
+            - 1
+          translation:
+            - 0.191124201
+            - 0.155202836
+            - 0.0192370992
+      tag: BladeFR
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: FR_motor
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.00613249559
+            - 0.0606833324
+            - -0.719611764
+            - -0.69169277
+          rotation.format: Quaternion
+          scale:
+            - 0.999999881
+            - 1.00000024
+            - 1
+          translation:
+            - 0.00123560848
+            - 1.6563803
+            - 0.100455664
+          children:
+            - ref:BladeBR
+      tag: FR_motor
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: BL_arm
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.0263271481
+            - -0.0263270214
+            - 0.706616521
+            - 0.706616461
+          rotation.format: Quaternion
+          scale:
+            - 1.00000012
+            - 1.00000012
+            - 1
+          translation:
+            - 0.0521512292
+            - 0.164678723
+            - 1.13101959
+          children:
+            - ref:BL_motor
+      tag: BL_arm
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: eyeCam
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.312502831
+            - 0.318487763
+            - -0.62678355
+            - 0.638787806
+          rotation.format: Quaternion
+          scale:
+            - 1.00000024
+            - 1.00000036
+            - 1.00000012
+          translation:
+            - -1.87290978
+            - 0.403974086
+            - -1.21834445
+      tag: eyeCam
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: FL_arm
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.39422968
+            - -0.394230038
+            - 0.587011933
+            - 0.587011635
+          rotation.format: Quaternion
+          scale:
+            - 1.00000024
+            - 1.00000024
+            - 1.00000012
+          translation:
+            - -1.36248887
+            - 0.868523836
+            - 0.134575292
+          children:
+            - ref:FL_motor
+      tag: FL_arm
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: FR_arm
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.706238031
+            - -0.706238091
+            - -0.0350397602
+            - -0.0350406356
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.352124333
+            - 0.868523598
+            - -1.10628068
+          children:
+            - ref:FR_motor
+      tag: FR_arm
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: BladeFL
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.996270716
+            - 0.0375042073
+            - -0.0776993111
+            - 0.00093004579
+          rotation.format: Quaternion
+          scale:
+            - 0.999999881
+            - 0.99999994
+            - 0.999999881
+          translation:
+            - 0.0687685534
+            - 0.161596954
+            - 0.136747926
+      tag: BladeFL
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: BR_motor
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.577329516
+            - 0.577329516
+            - 0.40827769
+            - 0.40827772
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.00518730888
+            - 1.56704044
+            - 0.253157258
+          children:
+            - ref:BladeFR
+      tag: BR_motor
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: FL_motor
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.394229144
+            - 0.394230455
+            - -0.587012291
+            - -0.587011397
+          rotation.format: Quaternion
+          scale:
+            - 0.999999881
+            - 1
+            - 1
+          translation:
+            - 0.0166076999
+            - 1.64951634
+            - 0.0989689007
+          children:
+            - ref:BladeBL
+      tag: FL_motor
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: CArotate
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 2.98023224e-08
+            - 1.11022302e-16
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -1.68358779
+            - 0.423353463
+            - -1.07558632
+      tag: CArotate
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: BR_arm
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.577329457
+            - -0.577329457
+            - -0.40827775
+            - -0.40827778
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.870031238
+            - 0.164678693
+            - -0.0404384769
+          children:
+            - ref:BR_motor
+      tag: BR_arm
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: drone
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          skin: ref:dronearmature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:drone_geo
+      tag: drone1
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Drone
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.446197808
+            - 1.26678854e-08
+            - 0.894934356
+            - -3.00077403e-08
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.154132485
+            - -0.803974271
+            - -0.3420645
+          children:
+            - ref:BL_arm
+            - ref:FL_arm
+            - ref:FR_arm
+            - ref:BR_arm
+            - ref:CArotate
+            - ref:eyeCam
+      tag: Drone
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: dronearmature
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 0.100000001
+            - 0.100000001
+            - 0.100000001
+          children:
+            - ref:drone1
+            - ref:droneTag
+            - ref:Drone
+      tag: dronearmature
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: BL_motor
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.00351299252
+            - 0.0486562625
+            - -0.712608814
+            - -0.699863434
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 0.999999642
+            - 1
+          translation:
+            - 0.0101080397
+            - 1.53879774
+            - 0.222968102
+          children:
+            - ref:BladeFL
+      tag: BL_motor
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: droneTag
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          skin: ref:dronearmature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:droneTag_geo
+      tag: droneTag
+metadata:
+  version: 1.0

@@ -1,0 +1,213 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:MergedBake_BakeA_PBR_Diffuse
+            - ref:MergedBake_BakeB_PBR_Diffuse
+            - ref:rampA_mat_Normal
+            - ref:rampA_mat_ORM
+            - ref:rampB_mat_Normal
+            - ref:rampB_mat_ORM
+            - ref:rampA_mat
+            - ref:rampB_mat
+            - ref:ramp_01_geo
+            - ref:ramp_02_geo1
+            - ref:ramp_03_geo
+            - ref:ramp_04_geo1
+        com.meta.components.Name:
+          name: marbleRun_ramps
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry3.bin
+      tag: Geometry3
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry2.bin
+      tag: Geometry2
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry1.bin
+      tag: Geometry1
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+      tag: Geometry
+  com.meta.models.Image:
+    - components:
+        com.meta.components.Asset:
+          path: assets/rampB_mat_Normal.png
+        com.meta.components.Image:
+          height: 1024
+          mimeType: image/png
+          width: 1024
+        com.meta.components.Name:
+          name: rampB_mat_Normal
+      tag: rampB_mat_Normal
+    - components:
+        com.meta.components.Asset:
+          path: assets/MergedBake_BakeB_PBR_Diffuse.png
+        com.meta.components.Image:
+          height: 1024
+          mimeType: image/png
+          width: 1024
+        com.meta.components.Name:
+          name: MergedBake_BakeB_PBR_Diffuse
+      tag: MergedBake_BakeB_PBR_Diffuse
+    - components:
+        com.meta.components.Asset:
+          path: assets/rampA_mat_ORM.png
+        com.meta.components.Image:
+          height: 1024
+          mimeType: image/png
+          width: 1024
+        com.meta.components.Name:
+          name: rampA_mat_ORM
+      tag: rampA_mat_ORM
+    - components:
+        com.meta.components.Asset:
+          path: assets/MergedBake_BakeA_PBR_Diffuse.png
+        com.meta.components.Image:
+          height: 1024
+          mimeType: image/png
+          width: 1024
+        com.meta.components.Name:
+          name: MergedBake_BakeA_PBR_Diffuse
+      tag: MergedBake_BakeA_PBR_Diffuse
+    - components:
+        com.meta.components.Asset:
+          path: assets/rampB_mat_ORM.png
+        com.meta.components.Image:
+          height: 1024
+          mimeType: image/png
+          width: 1024
+        com.meta.components.Name:
+          name: rampB_mat_ORM
+      tag: rampB_mat_ORM
+    - components:
+        com.meta.components.Asset:
+          path: assets/rampA_mat_Normal.png
+        com.meta.components.Image:
+          height: 1024
+          mimeType: image/png
+          width: 1024
+        com.meta.components.Name:
+          name: rampA_mat_Normal
+      tag: rampA_mat_Normal
+  com.meta.models.Material:
+    - uri: docref:materials/rampB_mat.metaspatialmaterial
+      tag: rampB_mat
+    - uri: docref:materials/rampA_mat.metaspatialmaterial
+      tag: rampA_mat
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive1
+        com.meta.components.Name:
+          name: ramp_04_geo
+      tag: ramp_04_geo1
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive2
+        com.meta.components.Name:
+          name: ramp_02_geo
+      tag: ramp_02_geo1
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive3
+        com.meta.components.Name:
+          name: ramp_03_geo
+      tag: ramp_03_geo
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive
+        com.meta.components.Name:
+          name: ramp_01_geo
+      tag: ramp_01_geo
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry2
+          material: ref:rampB_mat
+      tag: Primitive3
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry3
+          material: ref:rampB_mat
+      tag: Primitive2
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry
+          material: ref:rampB_mat
+      tag: Primitive1
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry1
+          material: ref:rampA_mat
+      tag: Primitive
+  com.meta.models.Sampler:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Sampler:
+          magFilter: 2
+          minFilter: 2
+      tag: Sampler
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Sampler:
+          magFilter: 2
+          minFilter: 2
+      tag: Sampler1
+  com.meta.models.Texture:
+    - uri: docref:textures/texture6.metaspatialtexture
+    - uri: docref:textures/texture4.metaspatialtexture
+      tag: texture4
+    - uri: docref:textures/texture5.metaspatialtexture
+      tag: texture5
+    - uri: docref:textures/texture1.metaspatialtexture
+      tag: texture1
+    - uri: docref:textures/texture2.metaspatialtexture
+      tag: texture2
+    - uri: docref:textures/texture3.metaspatialtexture
+    - uri: docref:textures/New Texture.metaspatialtexture
+      tag: New Texture
+    - uri: docref:textures/New Texture1.metaspatialtexture
+      tag: New Texture1
+metadata:
+  version: 1.0

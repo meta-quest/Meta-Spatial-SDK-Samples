@@ -1,0 +1,47 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:DefaultMaterial
+            - ref:sphere_primitive1
+        com.meta.components.Name:
+          name: sphere_primitive
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+      tag: Geometry
+  com.meta.models.Material:
+    - uri: docref:materials/DefaultMaterial.metaspatialmaterial
+      tag: DefaultMaterial
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive
+        com.meta.components.Name:
+          name: sphere_primitive
+      tag: sphere_primitive1
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry
+          material: ref:DefaultMaterial
+      tag: Primitive
+metadata:
+  version: 1.0

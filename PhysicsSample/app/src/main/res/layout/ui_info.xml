@@ -1,0 +1,24 @@
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:orientation="vertical"
+  android:layout_width="456dp"
+  android:layout_height="96dp"
+  android:gravity="center"
+  android:background="@drawable/popup_bg"
+  android:clipToOutline="true"
+>
+
+  <!--Body text-->
+  <TextView
+    android:gravity="center_vertical"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:lineHeight="32sp"
+    android:padding="16dp"
+    android:text="Press the button to start the marbles rolling.\nPress it again to reset."
+    android:textColor="#F1F4F7"
+    android:textSize="26sp"
+  />
+
+</LinearLayout>

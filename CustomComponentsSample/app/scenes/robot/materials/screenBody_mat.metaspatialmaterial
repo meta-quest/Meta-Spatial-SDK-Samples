@@ -1,0 +1,38 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: screenBody_mat
+    com.meta.components.PbrMaterial:
+      alphaCutoff: 0.5
+      baseColorFactor:
+        - 1
+        - 1
+        - 1
+        - 1
+      clearcoatNormalTexture.scale: 1
+      emissiveFactor:
+        - 1
+        - 1
+        - 1
+        - 0
+      emissiveStrength: 1
+      ior: 1.5
+      normalTexture.scale: 1
+      occlusionTexture.textureStrength: 1
+      roughnessFactor: 0.0500000007
+      specularColorFactor:
+        - 1
+        - 1
+        - 1
+      specularFactor: 1
+      volumeAttenuationColor:
+        - 1
+        - 1
+        - 1
+      volumeAttenuationDistance: 3.40282347e+38
+      baseColorTexture.texture: ref:texture9
+      emissiveTexture.texture: ref:texture8
+    com.meta.components.StandardMaterial:
+      isDoubleSided: true
+metadata:
+  version: 1.0

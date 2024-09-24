@@ -1,0 +1,62 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: DefaultMaterial
+    com.meta.components.PbrMaterial:
+      alphaCutoff: 0.5
+      alphaMode: Blend
+      baseColorFactor.colorspace: RGB
+      baseColorFactor.data:
+        - 0
+        - 0.407843143
+        - 1
+        - 0.649999976
+      baseColorFactor.type: color4
+      baseColorTexture.coord: -1
+      clearcoatNormalTexture.coord: -1
+      clearcoatNormalTexture.scale: 1
+      clearcoatRoughnessTexture.coord: -1
+      clearcoatTexture.coord: -1
+      emissiveFactor.colorspace: RGB
+      emissiveFactor.data:
+        - 0
+        - 0.407843143
+        - 1
+        - 0.330000013
+      emissiveFactor.type: color4
+      emissiveStrength: 1
+      emissiveTexture.coord: -1
+      ior: 1.5
+      metallicFactor: 1
+      metallicRoughnessTexture.coord: -1
+      normalTexture.coord: -1
+      normalTexture.scale: 1
+      occlusionTexture.coord: -1
+      occlusionTexture.textureStrength: 1
+      roughnessFactor: 1
+      sheenColorFactor.colorspace: RGB
+      sheenColorFactor.type: color3
+      sheenColorTexture.coord: -1
+      sheenRoughnessTexture.coord: -1
+      specularColorFactor.colorspace: RGB
+      specularColorFactor.data:
+        - 1
+        - 1
+        - 1
+      specularColorFactor.type: color3
+      specularColorTexture.coord: -1
+      specularFactor: 1
+      specularTexture.coord: -1
+      transmissionTexture.coord: -1
+      volumeAttenuationColor.colorspace: RGB
+      volumeAttenuationColor.data:
+        - 1
+        - 1
+        - 1
+      volumeAttenuationColor.type: color3
+      volumeAttenuationDistance: 3.40282347e+38
+      volumeThicknessTexture.coord: -1
+    com.meta.components.StandardMaterial:
+      {}
+metadata:
+  version: 1.0

@@ -1,0 +1,32 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: mediaroom_mat
+    com.meta.components.PbrMaterial:
+      alphaCutoff: 0.5
+      alphaMode: 1
+      baseColorFactor:
+        - 1
+        - 1
+        - 1
+        - 1
+      clearcoatNormalTexture.scale: 1
+      ior: 1.5
+      normalTexture.scale: 1
+      occlusionTexture.textureStrength: 1
+      roughnessFactor: 0.5
+      specularColorFactor:
+        - 1
+        - 1
+        - 1
+      specularFactor: 1
+      volumeAttenuationColor:
+        - 1
+        - 1
+        - 1
+      volumeAttenuationDistance: 3.40282347e+38
+      baseColorTexture.texture: ref:New Texture1
+    com.meta.components.StandardMaterial:
+      {}
+metadata:
+  version: 1.0

@@ -1,0 +1,47 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:button_mat
+            - ref:buttong_geo1
+        com.meta.components.Name:
+          name: button
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+      tag: Geometry
+  com.meta.models.Material:
+    - uri: docref:materials/button_mat.metaspatialmaterial
+      tag: button_mat
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive
+        com.meta.components.Name:
+          name: buttong_geo
+      tag: buttong_geo1
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry
+          material: ref:button_mat
+      tag: Primitive
+metadata:
+  version: 1.0

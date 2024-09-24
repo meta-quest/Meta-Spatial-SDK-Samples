@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <integer name="floor_id">
+    1
+  </integer>
+  <integer name="spatialized_video_panel">
+    2
+  </integer>
+  <integer name="video_selector_panel">
+    3
+  </integer>
+  <integer name="controls_id">
+    4
+  </integer>
+  <integer name="mr_panel">
+    5
+  </integer>
+  <integer name="debug_panel">
+    6
+  </integer>
+</resources>

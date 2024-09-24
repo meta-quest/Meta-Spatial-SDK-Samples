@@ -1,0 +1,46 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: ceilingBake_mat
+    com.meta.components.PbrMaterial:
+      alphaCutoff: 0.5
+      baseColorFactor:
+        - 1
+        - 1
+        - 1
+        - 1
+      baseColorTexture.coord: 1
+      clearcoatNormalTexture.coord: -1
+      clearcoatNormalTexture.scale: 1
+      clearcoatRoughnessTexture.coord: -1
+      clearcoatTexture.coord: -1
+      emissiveStrength: 1
+      emissiveTexture.coord: -1
+      ior: 1.5
+      metallicRoughnessTexture.coord: -1
+      normalTexture.coord: -1
+      normalTexture.scale: 1
+      occlusionTexture.coord: -1
+      occlusionTexture.textureStrength: 1
+      roughnessFactor: 0.5
+      sheenColorTexture.coord: -1
+      sheenRoughnessTexture.coord: -1
+      specularColorFactor:
+        - 1
+        - 1
+        - 1
+      specularColorTexture.coord: -1
+      specularFactor: 1
+      specularTexture.coord: -1
+      transmissionTexture.coord: -1
+      volumeAttenuationColor:
+        - 1
+        - 1
+        - 1
+      volumeAttenuationDistance: 3.40282347e+38
+      volumeThicknessTexture.coord: -1
+      baseColorTexture.texture: ref:texture2
+    com.meta.components.StandardMaterial:
+      isDoubleSided: true
+metadata:
+  version: 1.0

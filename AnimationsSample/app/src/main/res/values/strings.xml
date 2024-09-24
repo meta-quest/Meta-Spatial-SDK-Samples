@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="drone_class" translatable="false">drone_class</string>
+  <string name="drone_enabled" translatable="false">drone_enabled</string>
+  <string
+    name="drone_rotation_speed"
+    translatable="false"
+  >drone_rotation_speed</string>
+  <string
+    name="drone_tilt_factor"
+    translatable="false"
+  >drone_tilt_factor</string>
+  <string name="follower_class" translatable="false">follower_class</string>
+  <string
+    name="follower_exp_decay"
+    translatable="false"
+  >follower_exp_decay</string>
+  <string
+    name="follower_target_name"
+    translatable="false"
+  >follower_target_name</string>
+  <string
+    name="follower_target_class"
+    translatable="false"
+  >follower_target_class</string>
+  <string name="follower_enabled" translatable="false">follower_enabled</string>
+  <string
+    name="follower_follow_offset"
+    translatable="false"
+  >follower_follow_offset</string>
+  <string
+    name="follower_follow_distance"
+    translatable="false"
+  >follower_follow_distance</string>
+
+</resources>

@@ -1,0 +1,31 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:ramp4_block_geo1
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: ramp4_block_geo
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:ramp4_block_geo
+      tag: ramp4_block_geo1
+metadata:
+  version: 1.0

@@ -1,0 +1,2303 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.Animation:
+    - components:
+        com.meta.components.Animation:
+          endTime: 3.4666667
+          channels:
+            - ref:AnimationChannel117
+            - ref:AnimationChannel119
+            - ref:AnimationChannel113
+            - ref:AnimationChannel110
+            - ref:AnimationChannel109
+            - ref:AnimationChannel108
+            - ref:AnimationChannel70
+            - ref:AnimationChannel159
+            - ref:AnimationChannel107
+            - ref:AnimationChannel102
+            - ref:AnimationChannel97
+            - ref:AnimationChannel142
+            - ref:AnimationChannel100
+            - ref:AnimationChannel7
+            - ref:AnimationChannel95
+            - ref:AnimationChannel104
+            - ref:AnimationChannel29
+            - ref:AnimationChannel68
+            - ref:AnimationChannel45
+            - ref:AnimationChannel93
+            - ref:AnimationChannel91
+            - ref:AnimationChannel90
+            - ref:AnimationChannel61
+            - ref:AnimationChannel85
+            - ref:AnimationChannel89
+            - ref:AnimationChannel36
+            - ref:AnimationChannel59
+            - ref:AnimationChannel170
+            - ref:AnimationChannel84
+            - ref:AnimationChannel35
+            - ref:AnimationChannel23
+            - ref:AnimationChannel12
+            - ref:AnimationChannel81
+            - ref:AnimationChannel64
+            - ref:AnimationChannel11
+            - ref:AnimationChannel17
+            - ref:AnimationChannel79
+            - ref:AnimationChannel78
+            - ref:AnimationChannel73
+            - ref:AnimationChannel92
+            - ref:AnimationChannel146
+            - ref:AnimationChannel74
+            - ref:AnimationChannel67
+            - ref:AnimationChannel9
+            - ref:AnimationChannel63
+        com.meta.components.Name:
+          name: openarm
+      tag: openarm
+    - components:
+        com.meta.components.Animation:
+          endTime: 4.66666651
+          channels:
+            - ref:AnimationChannel179
+            - ref:AnimationChannel98
+            - ref:AnimationChannel178
+            - ref:AnimationChannel160
+            - ref:AnimationChannel177
+            - ref:AnimationChannel13
+            - ref:AnimationChannel176
+            - ref:AnimationChannel125
+            - ref:AnimationChannel106
+            - ref:AnimationChannel1
+            - ref:AnimationChannel175
+            - ref:AnimationChannel139
+            - ref:AnimationChannel75
+            - ref:AnimationChannel143
+            - ref:AnimationChannel174
+            - ref:AnimationChannel173
+            - ref:AnimationChannel112
+            - ref:AnimationChannel153
+            - ref:AnimationChannel19
+            - ref:AnimationChannel101
+            - ref:AnimationChannel87
+            - ref:AnimationChannel169
+            - ref:AnimationChannel163
+            - ref:AnimationChannel31
+            - ref:AnimationChannel168
+            - ref:AnimationChannel99
+            - ref:AnimationChannel167
+            - ref:AnimationChannel120
+            - ref:AnimationChannel122
+            - ref:AnimationChannel41
+            - ref:AnimationChannel165
+            - ref:AnimationChannel83
+            - ref:AnimationChannel42
+            - ref:AnimationChannel15
+            - ref:AnimationChannel129
+            - ref:AnimationChannel164
+            - ref:AnimationChannel161
+            - ref:AnimationChannel65
+            - ref:AnimationChannel158
+            - ref:AnimationChannel172
+            - ref:AnimationChannel171
+            - ref:AnimationChannel157
+            - ref:AnimationChannel54
+            - ref:AnimationChannel37
+            - ref:AnimationChannel156
+        com.meta.components.Name:
+          name: fancyflyaround
+      tag: fancyflyaround
+    - components:
+        com.meta.components.Animation:
+          endTime: 2.0333333
+          channels:
+            - ref:AnimationChannel154
+            - ref:AnimationChannel128
+            - ref:AnimationChannel152
+            - ref:AnimationChannel57
+            - ref:AnimationChannel149
+            - ref:AnimationChannel46
+            - ref:AnimationChannel151
+            - ref:AnimationChannel52
+            - ref:AnimationChannel138
+            - ref:AnimationChannel40
+            - ref:AnimationChannel8
+            - ref:AnimationChannel72
+            - ref:AnimationChannel150
+            - ref:AnimationChannel148
+            - ref:AnimationChannel145
+            - ref:AnimationChannel147
+            - ref:AnimationChannel144
+            - ref:AnimationChannel141
+            - ref:AnimationChannel56
+            - ref:AnimationChannel140
+            - ref:AnimationChannel137
+            - ref:AnimationChannel136
+            - ref:AnimationChannel82
+            - ref:AnimationChannel135
+            - ref:AnimationChannel116
+            - ref:AnimationChannel22
+            - ref:AnimationChannel103
+            - ref:AnimationChannel134
+            - ref:AnimationChannel133
+            - ref:AnimationChannel132
+            - ref:AnimationChannel130
+            - ref:AnimationChannel127
+            - ref:AnimationChannel27
+            - ref:AnimationChannel126
+            - ref:AnimationChannel77
+            - ref:AnimationChannel166
+            - ref:AnimationChannel115
+            - ref:AnimationChannel50
+            - ref:AnimationChannel49
+            - ref:AnimationChannel14
+            - ref:AnimationChannel124
+            - ref:AnimationChannel123
+            - ref:AnimationChannel121
+            - ref:AnimationChannel80
+            - ref:AnimationChannel118
+        com.meta.components.Name:
+          name: idleground
+      tag: idleground
+    - components:
+        com.meta.components.Animation:
+          endTime: 3.0999999
+          channels:
+            - ref:AnimationChannel32
+            - ref:AnimationChannel162
+            - ref:AnimationChannel43
+            - ref:AnimationChannel25
+            - ref:AnimationChannel62
+            - ref:AnimationChannel131
+            - ref:AnimationChannel18
+            - ref:AnimationChannel55
+            - ref:AnimationChannel58
+            - ref:AnimationChannel66
+            - ref:AnimationChannel53
+            - ref:AnimationChannel51
+            - ref:AnimationChannel76
+            - ref:AnimationChannel47
+            - ref:AnimationChannel5
+            - ref:AnimationChannel39
+            - ref:AnimationChannel38
+            - ref:AnimationChannel155
+            - ref:AnimationChannel24
+            - ref:AnimationChannel16
+            - ref:AnimationChannel114
+            - ref:AnimationChannel33
+            - ref:AnimationChannel28
+            - ref:AnimationChannel3
+            - ref:AnimationChannel4
+            - ref:AnimationChannel26
+            - ref:AnimationChannel2
+            - ref:AnimationChannel105
+            - ref:AnimationChannel10
+            - ref:AnimationChannel60
+            - ref:AnimationChannel
+            - ref:AnimationChannel21
+            - ref:AnimationChannel111
+            - ref:AnimationChannel96
+            - ref:AnimationChannel6
+            - ref:AnimationChannel86
+            - ref:AnimationChannel34
+            - ref:AnimationChannel48
+            - ref:AnimationChannel20
+            - ref:AnimationChannel88
+            - ref:AnimationChannel44
+            - ref:AnimationChannel30
+            - ref:AnimationChannel71
+            - ref:AnimationChannel94
+            - ref:AnimationChannel69
+        com.meta.components.Name:
+          name: takeoff
+      tag: takeoff
+  com.meta.models.AnimationChannel:
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel179.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel179
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel178.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel178
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel177.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel177
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel176.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel176
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel175.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel175
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel174.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel174
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel173.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel173
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel172.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel172
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel171.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel171
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel170.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel170
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel169.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel169
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel168.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel168
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel167.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel167
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel166.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel166
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel165.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel165
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel164.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel164
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel163.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel163
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel162.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel162
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel161.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel161
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel160.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel160
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel159.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel159
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel158.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel158
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel157.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel157
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel156.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel156
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel155.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel155
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel154.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel154
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel153.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel153
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel152.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel152
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel151.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel151
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel150.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel150
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel149.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel149
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel148.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel148
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel147.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel147
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel146.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel146
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel145.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel145
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel144.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel144
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel143.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel143
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel142.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel142
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel141.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel141
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel140.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel140
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel139.bin
+          interpolation: Linear
+          targetPath: Scale
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel139
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel138.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel138
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel137.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel137
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel136.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel136
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel135.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel135
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel134.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel134
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel133.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel133
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel132.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel132
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel131.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel131
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel130.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel130
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel129.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel129
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel128.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel128
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel127.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel127
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel126.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel126
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel125.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel125
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel124.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel124
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel123.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel123
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel122.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel122
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel121.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel121
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel120.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel120
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel119.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel119
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel118.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel118
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel117.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel117
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel116.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel116
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel115.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel115
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel114.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel114
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel113.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel113
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel112.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel112
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel111.bin
+          interpolation: Linear
+          targetPath: Scale
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel111
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel110.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel110
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel109.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel109
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel108.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel108
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel107.bin
+          interpolation: Linear
+          targetPath: Scale
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel107
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel106.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel106
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel105.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel105
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel104.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel104
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel103.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel103
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel102.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel102
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel101.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel101
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel100.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel100
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel99.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel99
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel98.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel98
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel97.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel97
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel96.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel96
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel95.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel95
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel94.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel94
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel93.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel93
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel92.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel92
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel91.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel91
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel90.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel90
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel89.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel89
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel88.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel88
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel87.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel87
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel86.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel86
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel85.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel85
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel84.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel84
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel83.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel83
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel82.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel82
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel81.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel81
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel80.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel80
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel79.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel79
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel78.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel78
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel77.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel77
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel76.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel76
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel75.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel75
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel74.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel74
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel73.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel73
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel72.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel72
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel71.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel71
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel70.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel70
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel69.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel69
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel68.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel68
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel67.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel67
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel66.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel66
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel65.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel65
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel64.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel64
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel63.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel63
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel62.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel62
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel61.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel61
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel60.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel60
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel59.bin
+          interpolation: Linear
+          targetPath: Scale
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel59
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel58.bin
+          interpolation: Linear
+          targetPath: Scale
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel58
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel57.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel57
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel56.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel56
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel55.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel55
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel54.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel54
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel53.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel53
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel52.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel52
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel51.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel51
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel50.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel50
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel49.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel49
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel48.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel48
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel47.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel47
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel46.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel46
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel45.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel45
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel44.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel44
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel43.bin
+          interpolation: Linear
+          targetPath: Scale
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel43
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel42.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel42
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel41.bin
+          interpolation: Linear
+          targetPath: Scale
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel41
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel40.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel40
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel39.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel39
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel38.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel38
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel37.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel37
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel36.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel36
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel35.bin
+          interpolation: Linear
+          targetPath: Scale
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel35
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel34.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel34
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel33.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel33
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel32.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:Drone
+          targetComponent: ref:Drone
+      tag: AnimationChannel32
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel31.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel31
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel30.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel30
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel29.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FL_motor
+          targetComponent: ref:FL_motor
+      tag: AnimationChannel29
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel28.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel28
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel27.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel27
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel26.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel26
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel25.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel25
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel24.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel24
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel23.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel23
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel22.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel22
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel21.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel21
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel20.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BladeFR
+          targetComponent: ref:BladeFR
+      tag: AnimationChannel20
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel19.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel19
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel18.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BL_motor
+          targetComponent: ref:BL_motor
+      tag: AnimationChannel18
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel17.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel17
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel16.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BladeBL
+          targetComponent: ref:BladeBL
+      tag: AnimationChannel16
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel15.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel15
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel14.bin
+          interpolation: Step
+          targetPath: Translation
+          target: ref:CArotate
+          targetComponent: ref:CArotate
+      tag: AnimationChannel14
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel13.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:BL_arm
+          targetComponent: ref:BL_arm
+      tag: AnimationChannel13
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel12.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel12
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel11.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel11
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel10.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BladeBR
+          targetComponent: ref:BladeBR
+      tag: AnimationChannel10
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel9.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:eyeCam
+          targetComponent: ref:eyeCam
+      tag: AnimationChannel9
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel8.bin
+          interpolation: Step
+          targetPath: Rotation
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel8
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel7.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel7
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel6.bin
+          interpolation: Linear
+          targetPath: Rotation
+          target: ref:BR_motor
+          targetComponent: ref:BR_motor
+      tag: AnimationChannel6
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel5.bin
+          interpolation: Linear
+          targetPath: Scale
+          target: ref:FL_arm
+          targetComponent: ref:FL_arm
+      tag: AnimationChannel5
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel4.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel4
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel3.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FR_arm
+          targetComponent: ref:FR_arm
+      tag: AnimationChannel3
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel2.bin
+          interpolation: Step
+          targetPath: Scale
+          target: ref:FR_motor
+          targetComponent: ref:FR_motor
+      tag: AnimationChannel2
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel1.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BladeFL
+          targetComponent: ref:BladeFL
+      tag: AnimationChannel1
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel.bin
+          interpolation: Linear
+          targetPath: Translation
+          target: ref:BR_arm
+          targetComponent: ref:BR_arm
+      tag: AnimationChannel
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:droneTagl_Color
+            - ref:droneAccent_mat
+            - ref:droneBase_mat
+            - ref:droneCam_mat
+            - ref:droneTag_mat
+            - ref:droneTag_geo
+            - ref:drone_geo
+            - ref:fancyflyaround
+            - ref:idleground
+            - ref:openarm
+            - ref:takeoff
+        com.meta.components.Name:
+          name: drone
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry3.bin
+      tag: Geometry3
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry2.bin
+      tag: Geometry2
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry1.bin
+      tag: Geometry1
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+      tag: Geometry
+  com.meta.models.Image:
+    - components:
+        com.meta.components.Asset:
+          path: assets/droneTagl_Color.png
+        com.meta.components.Image:
+          height: 256
+          mimeType: image/png
+          width: 256
+        com.meta.components.Name:
+          name: droneTagl_Color
+      tag: droneTagl_Color
+  com.meta.models.Material:
+    - uri: docref:materials/droneTag_mat.metaspatialmaterial
+      tag: droneTag_mat
+    - uri: docref:materials/droneAccent_mat.metaspatialmaterial
+      tag: droneAccent_mat
+    - uri: docref:materials/droneBase_mat.metaspatialmaterial
+      tag: droneBase_mat
+    - uri: docref:materials/droneCam_mat.metaspatialmaterial
+      tag: droneCam_mat
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive
+        com.meta.components.Name:
+          name: droneTag_geo
+      tag: droneTag_geo
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive2
+            - ref:Primitive3
+            - ref:Primitive1
+        com.meta.components.Name:
+          name: drone_geo
+      tag: drone_geo
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry2
+          material: ref:droneCam_mat
+      tag: Primitive3
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry3
+          material: ref:droneBase_mat
+      tag: Primitive2
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry
+          material: ref:droneAccent_mat
+      tag: Primitive1
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry1
+          material: ref:droneTag_mat
+      tag: Primitive
+  com.meta.models.Skin:
+    - components:
+        com.meta.components.Name:
+          name: dronearmature
+        com.meta.components.Skin:
+          inverseBindMatrices:
+            -
+              - -6.01815081
+              - 6.49826575e-07
+              - 7.9863553
+              - -0
+              - 2.9425534e-08
+              - 10
+              - -5.0879629e-07
+              - 0
+              - -7.9863553
+              - -4.5283474e-07
+              - -6.01815081
+              - 0
+              - -0.365944147
+              - 0.803974271
+              - -0.0827639475
+              - 1
+            -
+              - 5.40717936
+              - 8.4120388
+              - -7.52473284e-07
+              - -0
+              - 1.76140225e-06
+              - 8.58657359e-07
+              - 10
+              - 0
+              - 8.4120388
+              - -5.40717936
+              - -1.59237504e-06
+              - -0
+              - 0.507257223
+              - -1.17930675
+              - 0.639295578
+              - 1
+            -
+              - -6.00614643
+              - -0.216752008
+              - 7.99244595
+              - -0
+              - -0.630988657
+              - 9.97799969
+              - -0.20357509
+              - 0
+              - -7.97044706
+              - -0.62658453
+              - -6.00660801
+              - 0
+              - -0.319198072
+              - 0.340849996
+              - -2.75508833
+              - 1
+            -
+              - -4.69481325
+              - 0.426102757
+              - 8.81913567
+              - -0
+              - -0.694562376
+              - 9.9395771
+              - -0.849984229
+              - 0
+              - -8.80206203
+              - -1.01159561
+              - -4.6368494
+              - -0
+              - -0.831907272
+              - -0.0339566618
+              - -2.80216837
+              - 1
+            -
+              - -5.11587572
+              - 8.59230995
+              - -2.344726e-06
+              - -0
+              - -6.51133223e-06
+              - 5.38320215e-08
+              - 9.99999809
+              - 0
+              - 8.59230995
+              - 5.11587477
+              - 5.74172236e-06
+              - -0
+              - -0.175839514
+              - -1.0046978
+              - -0.064549759
+              - 1
+            -
+              - -6.0181489
+              - 9.8240389e-06
+              - 7.9863553
+              - -0
+              - -5.46465299e-06
+              - 9.99999905
+              - -1.54698682e-05
+              - 0
+              - -7.9863553
+              - -1.32927516e-05
+              - -6.0181489
+              - -0
+              - 2.52973628
+              - -0.163518429
+              - -0.826029956
+              - 1
+            -
+              - -4.71019602
+              - 1.11393729e-05
+              - 8.82122612
+              - -0
+              - -9.06207333e-06
+              - 9.99999809
+              - -1.66074715e-05
+              - 0
+              - -8.82122612
+              - -1.54347945e-05
+              - -4.71019602
+              - -0
+              - 2.30077481
+              - -0.266423434
+              - -1.35110641
+              - 1
+            -
+              - -5.19804955
+              - -8.54284954
+              - -7.03690193e-06
+              - 0
+              - -1.238609e-05
+              - -9.50661683e-09
+              - 10
+              - 0
+              - -8.54284954
+              - 5.19804955
+              - -1.02907425e-05
+              - -0
+              - 0.0875627995
+              - -1.019858
+              - -0.0645493418
+              - 1
+            -
+              - 5.97795582
+              - 0.104406118
+              - -8.01580524
+              - -0
+              - -0.751211584
+              - 9.96244526
+              - -0.430468351
+              - 0
+              - 7.98121166
+              - 0.859489262
+              - 5.9633503
+              - -0
+              - 0.183148816
+              - -0.266887724
+              - -2.66311049
+              - 1
+            -
+              - 6.53945255
+              - -0.686124921
+              - -7.53424025
+              - -0
+              - 0.924615264
+              - 9.95661259
+              - -0.104188703
+              - -0
+              - 7.50870562
+              - -0.628494024
+              - 6.5745225
+              - -0
+              - 0.491241336
+              - -0.395479709
+              - -2.6311512
+              - 1
+            -
+              - 5.52440786
+              - -8.33552265
+              - -1.16494325e-08
+              - -0
+              - -1.56212138e-07
+              - -7.0380429e-07
+              - 10
+              - 0
+              - -8.3355217
+              - -5.52440786
+              - -5.33697232e-07
+              - -0
+              - -0.451779097
+              - -1.15122652
+              - 0.639295578
+              - 1
+            -
+              - -6.01814938
+              - 8.72291537e-07
+              - 7.98635626
+              - -0
+              - -1.29556057e-07
+              - 10
+              - 4.87674612e-08
+              - 0
+              - -7.98635626
+              - -4.65946925e-07
+              - -6.01814842
+              - -0
+              - -2.71517706
+              - 0.386138499
+              - 0.474980414
+              - 1
+            -
+              - -3.40010047
+              - 0.360551357
+              - 9.39730167
+              - -0
+              - 0.674974442
+              - 9.97623062
+              - -0.138545424
+              - 0
+              - -9.37996387
+              - 0.587186635
+              - -3.41635418
+              - 0
+              - -2.62275624
+              - 0.426757663
+              - 1.28321683
+              - 1
+            -
+              - -6.01815128
+              - 6.49826575e-07
+              - 7.9863553
+              - -0
+              - 2.94255891e-08
+              - 10
+              - -5.0879629e-07
+              - 0
+              - -7.9863553
+              - -4.5283474e-07
+              - -6.01815128
+              - 0
+              - 1.31764352
+              - 0.380620837
+              - 0.992822528
+              - 1
+            -
+              - 9.99999809
+              - -2.98989562e-07
+              - -4.81173323e-08
+              - -0
+              - 1.60756997e-06
+              - -0.189685673
+              - -9.99819946
+              - 0
+              - -1.75796117e-06
+              - 9.9981966
+              - -0.18968676
+              - -0
+              - 6.34435537e-07
+              - -1.89417279
+              - -0.364135623
+              - 1
+          jointMatrices:
+            -
+              - 1
+              - 1.55300306e-08
+              - 4.46225954e-08
+              - 0
+              - 7.04748171e-09
+              - 1
+              - -1.41350558e-08
+              - 0
+              - -3.26467671e-08
+              - -2.87832069e-09
+              - 1
+              - 0
+              - -9.31322575e-10
+              - 0
+              - 0
+              - 1
+            -
+              - 0.99999994
+              - 7.02529448e-08
+              - 2.00146388e-09
+              - 0
+              - 1.07070562e-07
+              - 0.99999994
+              - -8.64467538e-08
+              - 0
+              - -8.00825219e-08
+              - -3.40057014e-08
+              - 0.99999994
+              - 0
+              - -7.4505806e-09
+              - 0
+              - 1.49011612e-08
+              - 1
+            -
+              - 0.999999702
+              - 3.55179886e-08
+              - -5.75516559e-08
+              - 0
+              - 1.47592587e-07
+              - 0.999999821
+              - -1.53624825e-07
+              - 0
+              - -2.08415258e-07
+              - 1.5938435e-09
+              - 0.999999702
+              - 0
+              - 2.98023224e-08
+              - 0
+              - -1.49011612e-08
+              - 1
+            -
+              - 0.999999702
+              - 3.28103127e-08
+              - -8.85195277e-08
+              - 0
+              - 1.48888233e-07
+              - 0.999999821
+              - -1.59835793e-07
+              - 0
+              - -2.51573454e-07
+              - 6.64846755e-09
+              - 0.999999642
+              - -0
+              - 0
+              - 1.86264515e-09
+              - 0
+              - 1
+            -
+              - 1
+              - 1.02711923e-07
+              - 4.42381882e-08
+              - 0
+              - -5.8490361e-08
+              - 1
+              - -2.06523421e-09
+              - 0
+              - -2.02196333e-07
+              - 8.37146388e-08
+              - 1
+              - 0
+              - 7.4505806e-09
+              - -1.07102096e-08
+              - 7.4505806e-09
+              - 1
+            -
+              - 1.00000012
+              - 1.08095939e-07
+              - 1.04278072e-07
+              - 0
+              - -1.5934819e-07
+              - 1.00000024
+              - 1.55021218e-09
+              - 0
+              - -2.68560655e-07
+              - 1.38054929e-07
+              - 1.00000024
+              - -0
+              - -2.98023224e-08
+              - -2.42143869e-08
+              - -2.98023224e-08
+              - 1
+            -
+              - 1.00000012
+              - 1.08096103e-07
+              - 7.88129384e-08
+              - 0
+              - -1.5934819e-07
+              - 1.00000024
+              - 1.55012969e-09
+              - 0
+              - -2.67014542e-07
+              - 1.38054617e-07
+              - 1.00000012
+              - -0
+              - 0
+              - -2.42143869e-08
+              - 1.49011612e-08
+              - 1
+            -
+              - 1
+              - -1.03476046e-08
+              - 8.92644678e-08
+              - 0
+              - -5.24647419e-08
+              - 1
+              - 2.45011478e-08
+              - 0
+              - -5.10299074e-08
+              - 4.75950701e-09
+              - 0.99999994
+              - 0
+              - 1.49011612e-08
+              - 5.12227416e-09
+              - 7.4505806e-09
+              - 1
+            -
+              - 1
+              - 5.04949291e-08
+              - 3.59916825e-08
+              - 0
+              - -7.87286822e-08
+              - 1
+              - 9.49270031e-08
+              - 0
+              - -2.42045246e-08
+              - -1.02959973e-07
+              - 0.99999994
+              - 0
+              - 1.49011612e-08
+              - 3.53902578e-08
+              - -1.49011612e-08
+              - 1
+            -
+              - 0.999999881
+              - 4.71380268e-08
+              - 1.17633441e-08
+              - 0
+              - -9.57378958e-08
+              - 0.999999881
+              - 7.88956882e-08
+              - 0
+              - -5.59476696e-08
+              - -1.07697986e-07
+              - 0.99999994
+              - 0
+              - -1.49011612e-08
+              - 3.7252903e-08
+              - -1.49011612e-08
+              - 1
+            -
+              - 1.00000012
+              - 3.22855911e-08
+              - 1.76701022e-07
+              - 0
+              - 8.15531038e-08
+              - 1
+              - -1.43042262e-08
+              - 0
+              - -1.08011392e-07
+              - 7.97332902e-08
+              - 0.99999994
+              - -0
+              - 1.49011612e-08
+              - 1.49011612e-08
+              - 7.4505806e-09
+              - 1
+            -
+              - 1.00000024
+              - -1.03960502e-08
+              - 1.06184203e-07
+              - 0
+              - 1.09647885e-07
+              - 1.00000012
+              - 5.67452076e-08
+              - 0
+              - -2.15920295e-08
+              - 1.10647861e-07
+              - 0.99999994
+              - -0
+              - 2.98023224e-08
+              - 1.86264515e-08
+              - 0
+              - 1
+            -
+              - 0.99999994
+              - -3.25550964e-09
+              - 1.63011819e-07
+              - 0
+              - 1.03206219e-07
+              - 0.99999994
+              - 4.83817111e-08
+              - 0
+              - 6.84602384e-08
+              - 1.07526134e-07
+              - 0.999999881
+              - 0
+              - 4.47034836e-08
+              - 1.67638063e-08
+              - -2.98023224e-08
+              - 1
+            -
+              - 1.00000012
+              - 1.55300235e-08
+              - 4.46734276e-08
+              - 0
+              - 7.04747816e-09
+              - 1
+              - -1.41350576e-08
+              - 0
+              - -4.09263521e-08
+              - -2.87832114e-09
+              - 1.00000012
+              - 0
+              - 7.85985321e-09
+              - 3.7252903e-09
+              - -1.49011612e-08
+              - 1
+            -
+              - 1
+              - 1.94343968e-07
+              - -5.66452627e-08
+              - 0
+              - -2.50051801e-08
+              - 0.99999994
+              - 8.66276366e-08
+              - 0
+              - -2.32521785e-07
+              - 1.37717265e-07
+              - 0.999999881
+              - 0
+              - 2.10819735e-08
+              - -2.60770321e-08
+              - 1.49011612e-08
+              - 1
+          joints:
+            - ref:Drone
+            - ref:BL_arm
+            - ref:BL_motor
+            - ref:BladeFL
+            - ref:FL_arm
+            - ref:FL_motor
+            - ref:BladeBL
+            - ref:FR_arm
+            - ref:FR_motor
+            - ref:BladeBR
+            - ref:BR_arm
+            - ref:BR_motor
+            - ref:BladeFR
+            - ref:CArotate
+            - ref:eyeCam
+      tag: dronearmature1
+  com.meta.models.Texture:
+    - uri: docref:textures/texture1.metaspatialtexture
+      tag: texture1
+metadata:
+  version: 1.0

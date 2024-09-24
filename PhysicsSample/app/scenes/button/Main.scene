@@ -1,0 +1,35 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:buttong_geo
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: buttong_geo
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: 1
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0
+            - 0.0128688477
+            - 0
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:buttong_geo1
+      tag: buttong_geo
+metadata:
+  version: 1.0
