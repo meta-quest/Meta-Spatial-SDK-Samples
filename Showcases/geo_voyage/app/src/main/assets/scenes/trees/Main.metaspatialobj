@@ -1,0 +1,160 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:Material.001
+            - ref:Material.002
+            - ref:Circle.003
+            - ref:Circle.005
+            - ref:Circle.006
+            - ref:Circle.007
+        com.meta.components.Name:
+          name: trees
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry7.bin
+      tag: Geometry7
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry6.bin
+      tag: Geometry6
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry5.bin
+      tag: Geometry5
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry4.bin
+      tag: Geometry4
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry3.bin
+      tag: Geometry3
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry2.bin
+      tag: Geometry2
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry1.bin
+      tag: Geometry1
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+      tag: Geometry
+  com.meta.models.Material:
+    - uri: docref:materials/Material.metaspatialmaterial
+      tag: Material.002
+    - uri: docref:materials/Material.metaspatialmaterial
+      tag: Material.001
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive4
+            - ref:Primitive3
+        com.meta.components.Name:
+          name: Circle.007
+      tag: Circle.007
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive6
+            - ref:Primitive5
+        com.meta.components.Name:
+          name: Circle.005
+      tag: Circle.005
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive7
+            - ref:Primitive1
+        com.meta.components.Name:
+          name: Circle.006
+      tag: Circle.006
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive2
+            - ref:Primitive
+        com.meta.components.Name:
+          name: Circle.003
+      tag: Circle.003
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry4
+          material: ref:Material.002
+      tag: Primitive7
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry
+          material: ref:Material.002
+      tag: Primitive6
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry6
+          material: ref:Material.001
+      tag: Primitive5
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry2
+          material: ref:Material.002
+      tag: Primitive4
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry3
+          material: ref:Material.001
+      tag: Primitive3
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry5
+          material: ref:Material.002
+      tag: Primitive2
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry7
+          material: ref:Material.001
+      tag: Primitive1
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry1
+          material: ref:Material.001
+      tag: Primitive
+metadata:
+  version: 1.0

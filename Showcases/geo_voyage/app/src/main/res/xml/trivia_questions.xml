@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<questions>
+    <!-- Easy (30) -->
+    <question>
+        <query>What is the capitol of France?</query>
+        <answer>Paris</answer>
+        <option2>Lyon</option2>
+        <option3>Marseille</option3>
+        <difficulty>1</difficulty>
+        <latitude>48.8566</latitude>
+        <longitude>2.3522</longitude>
+    </question>
+    <question>
+        <query>Which country is known as the Land of the Rising Sun?</query>
+        <answer>Japan</answer>
+        <option2>China</option2>
+        <option3>South Korea</option3>
+        <difficulty>1</difficulty>
+        <latitude>36.2048</latitude>
+        <longitude>138.2529</longitude>
+    </question>
+    <question>
+        <query>What river runs through Egypt?</query>
+        <answer>Nile</answer>
+        <option2>Amazon</option2>
+        <option3>Yangtze</option3>
+        <difficulty>1</difficulty>
+        <latitude>30.0444</latitude>
+        <longitude>31.2357</longitude>
+    </question>
+    <question>
+        <query>Which continent is the Sahara Desert located on?</query>
+        <answer>Africa</answer>
+        <option2>Asia</option2>
+        <option3>Australia</option3>
+        <difficulty>1</difficulty>
+        <latitude>23.4162</latitude>
+        <longitude>25.6628</longitude>
+    </question>
+    <question>
+        <query>What is the largest ocean on Earth?</query>
+        <answer>Pacific Ocean</answer>
+        <option2>Atlantic Ocean</option2>
+        <option3>Indian Ocean</option3>
+        <difficulty>1</difficulty>
+        <latitude>0.0000</latitude>
+        <longitude>-160.0000</longitude>
+    </question>
+    <question>
+        <query>In which country would you find the Great Wall of China?</query>
+        <answer>China</answer>
+        <option2>Mongolia</option2>
+        <option3>India</option3>
+        <difficulty>1</difficulty>
+        <latitude>40.4319</latitude>
+        <longitude>116.5704</longitude>
+    </question>
+    <question>
+        <query>What is the smallest country in the world by land area?</query>
+        <answer>Vatican City</answer>
+        <option2>Monaco</option2>
+        <option3>San Marino</option3>
+        <difficulty>1</difficulty>
+        <latitude>41.9029</latitude>
+        <longitude>12.4534</longitude>
+    </question>
+    <question>
+        <query>Which country has the most natural lakes?</query>
+        <answer>Canada</answer>
+        <option2>Russia</option2>
+        <option3>United States</option3>
+        <difficulty>1</difficulty>
+        <latitude>56.1304</latitude>
+        <longitude>-106.3468</longitude>
+    </question>
+    <question>
+        <query>What mountain range separates Europe from Asia?</query>
+        <answer>Ural Mountains</answer>
+        <option2>Alps</option2>
+        <option3>Carpathians</option3>
+        <difficulty>1</difficulty>
+        <latitude>60.0000</latitude>
+        <longitude>60.0000</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Japan?</query>
+        <answer>Tokyo</answer>
+        <option2>Osaka</option2>
+        <option3>Kyoto</option3>
+        <difficulty>1</difficulty>
+        <latitude>35.6895</latitude>
+        <longitude>139.6917</longitude>
+    </question>
+    <question>
+        <query>Which country is famous for its pyramids?</query>
+        <answer>Egypt</answer>
+        <option2>Mexico</option2>
+        <option3>Peru</option3>
+        <difficulty>1</difficulty>
+        <latitude>26.8206</latitude>
+        <longitude>30.8025</longitude>
+    </question>
+    <question>
+        <query>What is the longest river in the world?</query>
+        <answer>Nile River</answer>
+        <option2>Amazon River</option2>
+        <option3>Yangtze River</option3>
+        <difficulty>1</difficulty>
+        <latitude>30.0444</latitude>
+        <longitude>31.2357</longitude>
+    </question>
+    <question>
+        <query>What is the capitol city of Australia?</query>
+        <answer>Canberra</answer>
+        <option2>Sydney</option2>
+        <option3>Melbourne</option3>
+        <difficulty>1</difficulty>
+        <latitude>-35.2809</latitude>
+        <longitude>149.1300</longitude>
+    </question>
+    <question>
+        <query>Which continent has the most countries?</query>
+        <answer>Africa</answer>
+        <option2>Asia</option2>
+        <option3>Europe</option3>
+        <difficulty>1</difficulty>
+        <latitude>9.1021</latitude>
+        <longitude>18.2812</longitude>
+    </question>
+    <question>
+        <query>Which country is both an island and a continent?</query>
+        <answer>Australia</answer>
+        <option2>Greenland</option2>
+        <option3>Madagascar</option3>
+        <difficulty>1</difficulty>
+        <latitude>-25.2744</latitude>
+        <longitude>133.7751</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Canada?</query>
+        <answer>Ottawa</answer>
+        <option2>Toronto</option2>
+        <option3>Vancouver</option3>
+        <difficulty>1</difficulty>
+        <latitude>45.4215</latitude>
+        <longitude>-75.6972</longitude>
+    </question>
+    <question>
+        <query
+    >Which European country is known for its canals and windmills?</query>
+        <answer>Netherlands</answer>
+        <option2>Belgium</option2>
+        <option3>Denmark</option3>
+        <difficulty>1</difficulty>
+        <latitude>52.1326</latitude>
+        <longitude>5.2913</longitude>
+    </question>
+    <question>
+        <query>What is the largest desert in the world?</query>
+        <answer>Antarctica</answer>
+        <option2>Sahara Desert</option2>
+        <option3>Arabian Desert</option3>
+        <difficulty>1</difficulty>
+        <latitude>-82.8628</latitude>
+        <longitude>135.0000</longitude>
+    </question>
+    <question>
+        <query>Which country is home to the Amazon Rainforest?</query>
+        <answer>Brazil</answer>
+        <option2>Colombia</option2>
+        <option3>Venezuela</option3>
+        <difficulty>1</difficulty>
+        <latitude>-3.4653</latitude>
+        <longitude>-62.2159</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Italy?</query>
+        <answer>Rome</answer>
+        <option2>Milan</option2>
+        <option3>Venice</option3>
+        <difficulty>1</difficulty>
+        <latitude>41.9028</latitude>
+        <longitude>12.4964</longitude>
+    </question>
+    <question>
+        <query>Which country is known for its fjords?</query>
+        <answer>Norway</answer>
+        <option2>Sweden</option2>
+        <option3>Denmark</option3>
+        <difficulty>1</difficulty>
+        <latitude>60.4720</latitude>
+        <longitude>8.4689</longitude>
+    </question>
+    <question>
+        <query>In which U.S. state is the Grand Canyon located?</query>
+        <answer>Arizona</answer>
+        <option2>Nevada</option2>
+        <option3>Utah</option3>
+        <difficulty>1</difficulty>
+        <latitude>36.1069</latitude>
+        <longitude>-112.1129</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Spain?</query>
+        <answer>Madrid</answer>
+        <option2>Barcelona</option2>
+        <option3>Seville</option3>
+        <difficulty>1</difficulty>
+        <latitude>40.4168</latitude>
+        <longitude>-3.7038</longitude>
+    </question>
+    <question>
+        <query>Which country has the largest population in the world?</query>
+        <answer>China</answer>
+        <option2>India</option2>
+        <option3>United States</option3>
+        <difficulty>1</difficulty>
+        <latitude>35.8617</latitude>
+        <longitude>104.1954</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Germany?</query>
+        <answer>Berlin</answer>
+        <option2>Munich</option2>
+        <option3>Frankfurt</option3>
+        <difficulty>1</difficulty>
+        <latitude>52.5200</latitude>
+        <longitude>13.4050</longitude>
+    </question>
+    <question>
+        <query>Which country is famous for its maple syrup?</query>
+        <answer>Canada</answer>
+        <option2>United States</option2>
+        <option3>Norway</option3>
+        <difficulty>1</difficulty>
+        <latitude>56.1304</latitude>
+        <longitude>-106.3468</longitude>
+    </question>
+    <question>
+        <query>What is the highest mountain in Africa?</query>
+        <answer>Mount Kilimanjaro</answer>
+        <option2>Mount Kenya</option2>
+        <option3>Mount Elgon</option3>
+        <difficulty>1</difficulty>
+        <latitude>-3.0674</latitude>
+        <longitude>37.3556</longitude>
+    </question>
+    <question>
+        <query>What is the official language of Brazil?</query>
+        <answer>Portuguese</answer>
+        <option2>Spanish</option2>
+        <option3>English</option3>
+        <difficulty>1</difficulty>
+        <latitude>-14.2350</latitude>
+        <longitude>-51.9253</longitude>
+    </question>
+    <question>
+        <query>Which city is known as the Big Apple?</query>
+        <answer>New York City</answer>
+        <option2>Los Angeles</option2>
+        <option3>Chicago</option3>
+        <difficulty>1</difficulty>
+        <latitude>40.7128</latitude>
+        <longitude>-74.0060</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Russia?</query>
+        <answer>Moscow</answer>
+        <option2>Saint Petersburg</option2>
+        <option3>Novosibirsk</option3>
+        <difficulty>1</difficulty>
+        <latitude>55.7558</latitude>
+        <longitude>37.6173</longitude>
+    </question>
+
+    <!-- Medium (45) -->
+    <question>
+        <query>Which African country was never colonized?</query>
+        <answer>Ethiopia</answer>
+        <option2>Kenya</option2>
+        <option3>Zimbabwe</option3>
+        <difficulty>2</difficulty>
+        <latitude>9.1450</latitude>
+        <longitude>40.4897</longitude>
+    </question>
+    <question>
+        <query>What is the currency of Japan?</query>
+        <answer>Yen</answer>
+        <option2>Won</option2>
+        <option3>Rupee</option3>
+        <difficulty>2</difficulty>
+        <latitude>35.6895</latitude>
+        <longitude>139.6917</longitude>
+    </question>
+    <question>
+        <query>Which country is famous for the Eiffel Tower?</query>
+        <answer>France</answer>
+        <option2>Italy</option2>
+        <option3>Spain</option3>
+        <difficulty>2</difficulty>
+        <latitude>48.8566</latitude>
+        <longitude>2.3522</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of South Korea?</query>
+        <answer>Seoul</answer>
+        <option2>Busan</option2>
+        <option3>Incheon</option3>
+        <difficulty>2</difficulty>
+        <latitude>37.5665</latitude>
+        <longitude>126.9780</longitude>
+    </question>
+    <question>
+        <query>Which country is the largest by land area?</query>
+        <answer>Russia</answer>
+        <option2>Canada</option2>
+        <option3>China</option3>
+        <difficulty>2</difficulty>
+        <latitude>61.5240</latitude>
+        <longitude>105.3188</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of the United Kingdom?</query>
+        <answer>London</answer>
+        <option2>Edinburgh</option2>
+        <option3>Dublin</option3>
+        <difficulty>2</difficulty>
+        <latitude>51.5074</latitude>
+        <longitude>-0.1278</longitude>
+    </question>
+    <question>
+        <query>Which country is known for inventing pizza?</query>
+        <answer>Italy</answer>
+        <option2>Greece</option2>
+        <option3>France</option3>
+        <difficulty>2</difficulty>
+        <latitude>41.9028</latitude>
+        <longitude>12.4964</longitude>
+    </question>
+    <question>
+        <query>What is the main religion in Thailand?</query>
+        <answer>Buddhism</answer>
+        <option2>Islam</option2>
+        <option3>Christianity</option3>
+        <difficulty>2</difficulty>
+        <latitude>15.8700</latitude>
+        <longitude>100.9925</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Mexico?</query>
+        <answer>Mexico City</answer>
+        <option2>Guadalajara</option2>
+        <option3>Monterrey</option3>
+        <difficulty>2</difficulty>
+        <latitude>19.4326</latitude>
+        <longitude>-99.1332</longitude>
+    </question>
+    <question>
+        <query>Which country is known for its kangaroos and koalas?</query>
+        <answer>Australia</answer>
+        <option2>New Zealand</option2>
+        <option3>South Africa</option3>
+        <difficulty>2</difficulty>
+        <latitude>25.2744</latitude>
+        <longitude>133.7751</longitude>
+    </question>
+    <question>
+        <query>Which U.S. state is known as the Sunshine State?</query>
+        <answer>Florida</answer>
+        <option2>California</option2>
+        <option3>Hawaii</option3>
+        <difficulty>2</difficulty>
+        <latitude>27.9944</latitude>
+        <longitude>-81.7603</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of India?</query>
+        <answer>New Delhi</answer>
+        <option2>Mumbai</option2>
+        <option3>Kolkata</option3>
+        <difficulty>2</difficulty>
+        <latitude>28.6139</latitude>
+        <longitude>77.2090</longitude>
+    </question>
+    <question>
+        <query
+    >Which European country is known for its tulips and cheese?</query>
+        <answer>Netherlands</answer>
+        <option2>Belgium</option2>
+        <option3>France</option3>
+        <difficulty>2</difficulty>
+        <latitude>52.1326</latitude>
+        <longitude>5.2913</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Argentina?</query>
+        <answer>Buenos Aires</answer>
+        <option2>Cordoba</option2>
+        <option3>Rosario</option3>
+        <difficulty>2</difficulty>
+        <latitude>-34.6037</latitude>
+        <longitude>-58.3816</longitude>
+    </question>
+    <question>
+        <query>Which country is known as the land of ice and fire?</query>
+        <answer>Iceland</answer>
+        <option2>Norway</option2>
+        <option3>Greenland</option3>
+        <difficulty>2</difficulty>
+        <latitude>64.9631</latitude>
+        <longitude>-19.0208</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Egypt?</query>
+        <answer>Cairo</answer>
+        <option2>Alexandria</option2>
+        <option3>Luxor</option3>
+        <difficulty>2</difficulty>
+        <latitude>30.0444</latitude>
+        <longitude>31.2357</longitude>
+    </question>
+    <question>
+        <query>Which country has a maple leaf on its flag?</query>
+        <answer>Canada</answer>
+        <option2>United States</option2>
+        <option3>Australia</option3>
+        <difficulty>2</difficulty>
+        <latitude>56.1304</latitude>
+        <longitude>-106.3468</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Greece?</query>
+        <answer>Athens</answer>
+        <option2>Thessaloniki</option2>
+        <option3>Patras</option3>
+        <difficulty>2</difficulty>
+        <latitude>37.9838</latitude>
+        <longitude>23.7275</longitude>
+    </question>
+    <question>
+        <query>Which country is known for its tango dance?</query>
+        <answer>Argentina</answer>
+        <option2>Brazil</option2>
+        <option3>Colombia</option3>
+        <difficulty>2</difficulty>
+        <latitude>-34.6037</latitude>
+        <longitude>-58.3816</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Portugal?</query>
+        <answer>Lisbon</answer>
+        <option2>Porto</option2>
+        <option3>Coimbra</option3>
+        <difficulty>2</difficulty>
+        <latitude>38.7223</latitude>
+        <longitude>-9.1393</longitude>
+    </question>
+    <question>
+        <query>Which island country is located southeast of India?</query>
+        <answer>Sri Lanka</answer>
+        <option2>Maldives</option2>
+        <option3>Comoros</option3>
+        <difficulty>2</difficulty>
+        <latitude>7.8731</latitude>
+        <longitude>80.7718</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of China?</query>
+        <answer>Beijing</answer>
+        <option2>Shanghai</option2>
+        <option3>Hong Kong</option3>
+        <difficulty>2</difficulty>
+        <latitude>39.9042</latitude>
+        <longitude>116.4074</longitude>
+    </question>
+    <question>
+        <query>Which country is known for the Acropolis?</query>
+        <answer>Greece</answer>
+        <option2>Italy</option2>
+        <option3>Turkey</option3>
+        <difficulty>2</difficulty>
+        <latitude>37.9838</latitude>
+        <longitude>23.7275</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Norway?</query>
+        <answer>Oslo</answer>
+        <option2>Bergen</option2>
+        <option3>Stavanger</option3>
+        <difficulty>2</difficulty>
+        <latitude>59.9139</latitude>
+        <longitude>10.7522</longitude>
+    </question>
+    <question>
+        <query>Which country has the largest Muslim population?</query>
+        <answer>Indonesia</answer>
+        <option2>Pakistan</option2>
+        <option3>India</option3>
+        <difficulty>2</difficulty>
+        <latitude>-0.7893</latitude>
+        <longitude>113.9213</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Brazil?</query>
+        <answer>Brasilia</answer>
+        <option2>Rio de Janeiro</option2>
+        <option3>Sao Paulo</option3>
+        <difficulty>2</difficulty>
+        <latitude>-15.8267</latitude>
+        <longitude>-47.9218</longitude>
+    </question>
+    <question>
+        <query>Which country is known for its red buses and black cabs?</query>
+        <answer>United Kingdom</answer>
+        <option2>United States</option2>
+        <option3>Canada</option3>
+        <difficulty>2</difficulty>
+        <latitude>51.5074</latitude>
+        <longitude>-0.1278</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Sweden?</query>
+        <answer>Stockholm</answer>
+        <option2>Gothenburg</option2>
+        <option3>Malmö</option3>
+        <difficulty>2</difficulty>
+        <latitude>59.3293</latitude>
+        <longitude>18.0686</longitude>
+    </question>
+    <question>
+        <query>Which African country is famous for its wildlife safaris?</query>
+        <answer>Kenya</answer>
+        <option2>Tanzania</option2>
+        <option3>South Africa</option3>
+        <difficulty>2</difficulty>
+        <latitude>-1.2921</latitude>
+        <longitude>36.8219</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Turkey?</query>
+        <answer>Ankara</answer>
+        <option2>Istanbul</option2>
+        <option3>Izmir</option3>
+        <difficulty>2</difficulty>
+        <latitude>39.9334</latitude>
+        <longitude>32.8597</longitude>
+    </question>
+    <question>
+        <query>Which country is known for its samurai warriors?</query>
+        <answer>Japan</answer>
+        <option2>China</option2>
+        <option3>Korea</option3>
+        <difficulty>2</difficulty>
+        <latitude>36.2048</latitude>
+        <longitude>138.2529</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Thailand?</query>
+        <answer>Bangkok</answer>
+        <option2>Chiang Mai</option2>
+        <option3>Phuket</option3>
+        <difficulty>2</difficulty>
+        <latitude>13.7563</latitude>
+        <longitude>100.5018</longitude>
+    </question>
+    <question>
+        <query>Which country is known for the Leaning Tower of Pisa?</query>
+        <answer>Italy</answer>
+        <option2>France</option2>
+        <option3>Spain</option3>
+        <difficulty>2</difficulty>
+        <latitude>43.7228</latitude>
+        <longitude>10.4017</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Kenya?</query>
+        <answer>Nairobi</answer>
+        <option2>Mombasa</option2>
+        <option3>Kisumu</option3>
+        <difficulty>2</difficulty>
+        <latitude>-1.2921</latitude>
+        <longitude>36.8219</longitude>
+    </question>
+    <question>
+        <query>Which country is famous for its chocolate and watches?</query>
+        <answer>Switzerland</answer>
+        <option2>Belgium</option2>
+        <option3>France</option3>
+        <difficulty>2</difficulty>
+        <latitude>46.8182</latitude>
+        <longitude>8.2275</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Indonesia?</query>
+        <answer>Jakarta</answer>
+        <option2>Bali</option2>
+        <option3>Bandung</option3>
+        <difficulty>2</difficulty>
+        <latitude>-6.2088</latitude>
+        <longitude>106.8456</longitude>
+    </question>
+    <question>
+        <query>Which country is known for its blue and white porcelain?</query>
+        <answer>China</answer>
+        <option2>Japan</option2>
+        <option3>Korea</option3>
+        <difficulty>2</difficulty>
+        <latitude>35.8617</latitude>
+        <longitude>104.1954</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Chile?</query>
+        <answer>Santiago</answer>
+        <option2>Valparaiso</option2>
+        <option3>Antofagasta</option3>
+        <difficulty>2</difficulty>
+        <latitude>-33.4489</latitude>
+        <longitude>-70.6693</longitude>
+    </question>
+    <question>
+        <query>Which country is known for the Great Barrier Reef?</query>
+        <answer>Australia</answer>
+        <option2>New Zealand</option2>
+        <option3>Fiji</option3>
+        <difficulty>2</difficulty>
+        <latitude>-18.2871</latitude>
+        <longitude>147.6992</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of the Netherlands?</query>
+        <answer>Amsterdam</answer>
+        <option2>Rotterdam</option2>
+        <option3>The Hague</option3>
+        <difficulty>2</difficulty>
+        <latitude>52.3676</latitude>
+        <longitude>4.9041</longitude>
+    </question>
+    <question>
+        <query
+    >Which country is known for the ancient ruins of Machu Picchu?</query>
+        <answer>Peru</answer>
+        <option2>Bolivia</option2>
+        <option3>Chile</option3>
+        <difficulty>2</difficulty>
+        <latitude>-13.1631</latitude>
+        <longitude>-72.5450</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of New Zealand?</query>
+        <answer>Wellington</answer>
+        <option2>Auckland</option2>
+        <option3>Christchurch</option3>
+        <difficulty>2</difficulty>
+        <latitude>-41.2865</latitude>
+        <longitude>174.7762</longitude>
+    </question>
+    <question>
+        <query>Which country is known for the Statue of Liberty?</query>
+        <answer>United States</answer>
+        <option2>France</option2>
+        <option3>England</option3>
+        <difficulty>2</difficulty>
+        <latitude>40.6892</latitude>
+        <longitude>-74.0445</longitude>
+    </question>
+    <question>
+        <query>What is the capitol of Vietnam?</query>
+        <answer>Hanoi</answer>
+        <option2>Ho Chi Minh City</option2>
+        <option3>Da Nang</option3>
+        <difficulty>2</difficulty>
+        <latitude>21.0285</latitude>
+        <longitude>105.8542</longitude>
+    </question>
+    <question>
+        <query>Which country is known for its samba dance?</query>
+        <answer>Brazil</answer>
+        <option2>Argentina</option2>
+        <option3>Cuba</option3>
+        <difficulty>2</difficulty>
+        <latitude>-14.2350</latitude>
+        <longitude>-51.9253</longitude>
+    </question>
+
+    <!-- Hard (25) -->
+    <question>
+        <query>What is the capital of Saudi Arabia?</query>
+        <answer>Riyadh</answer>
+        <option2>Jeddah</option2>
+        <option3>Mecca</option3>
+        <difficulty>3</difficulty>
+        <latitude>24.7136</latitude>
+        <longitude>46.6753</longitude>
+    </question>
+    <question>
+        <query>Which country is known for Mount Everest?</query>
+        <answer>Nepal</answer>
+        <option2>Tibet</option2>
+        <option3>India</option3>
+        <difficulty>3</difficulty>
+        <latitude>27.9881</latitude>
+        <longitude>86.9250</longitude>
+    </question>
+    <question>
+        <query>What is the capital of Malaysia?</query>
+        <answer>Kuala Lumpur</answer>
+        <option2>Penang</option2>
+        <option3>Johor Bahru</option3>
+        <difficulty>3</difficulty>
+        <latitude>3.1390</latitude>
+        <longitude>101.6869</longitude>
+    </question>
+    <question>
+        <query>Which country is known for the Bollywood film industry?</query>
+        <answer>India</answer>
+        <option2>Pakistan</option2>
+        <option3>Sri Lanka</option3>
+        <difficulty>3</difficulty>
+        <latitude>19.0760</latitude>
+        <longitude>72.8777</longitude>
+    </question>
+    <question>
+        <query>What is the capital of the Philippines?</query>
+        <answer>Manila</answer>
+        <option2>Quezon City</option2>
+        <option3>Cebu City</option3>
+        <difficulty>3</difficulty>
+        <latitude>14.5995</latitude>
+        <longitude>120.9842</longitude>
+    </question>
+    <question>
+        <query>Which country is known for its ancient Roman Colosseum?</query>
+        <answer>Italy</answer>
+        <option2>Greece</option2>
+        <option3>Turkey</option3>
+        <difficulty>3</difficulty>
+        <latitude>41.9028</latitude>
+        <longitude>12.4964</longitude>
+    </question>
+    <question>
+        <query>Which city is known as the "City of Canals" in Italy?</query>
+        <answer>Venice</answer>
+        <option2>Florence</option2>
+        <option3>Rome</option3>
+        <difficulty>3</difficulty>
+        <latitude>45.4408</latitude>
+        <longitude>12.3155</longitude>
+    </question>
+    <question>
+        <query>Which country is known for its whisky and kilts?</query>
+        <answer>Scotland</answer>
+        <option2>Ireland</option2>
+        <option3>Wales</option3>
+        <difficulty>3</difficulty>
+        <latitude>56.4907</latitude>
+        <longitude>-4.2026</longitude>
+    </question>
+    <question>
+        <query>What is the capital of Singapore?</query>
+        <answer>Singapore</answer>
+        <option2>Kuala Lumpur</option2>
+        <option3>Bangkok</option3>
+        <difficulty>3</difficulty>
+        <latitude>1.3521</latitude>
+        <longitude>103.8198</longitude>
+    </question>
+    <question>
+        <query>Which country is known for the Outback?</query>
+        <answer>Australia</answer>
+        <option2>New Zealand</option2>
+        <option3>South Africa</option3>
+        <difficulty>3</difficulty>
+        <latitude>-25.2744</latitude>
+        <longitude>133.7751</longitude>
+    </question>
+    <question>
+        <query>What is the capital of Austria?</query>
+        <answer>Vienna</answer>
+        <option2>Salzburg</option2>
+        <option3>Innsbruck</option3>
+        <difficulty>3</difficulty>
+        <latitude>48.2082</latitude>
+        <longitude>16.3738</longitude>
+    </question>
+    <question>
+        <query>Which country is known for its Viking history?</query>
+        <answer>Norway</answer>
+        <option2>Sweden</option2>
+        <option3>Denmark</option3>
+        <difficulty>3</difficulty>
+        <latitude>60.4720</latitude>
+        <longitude>8.4689</longitude>
+    </question>
+    <question>
+        <query>What is the capital of Finland?</query>
+        <answer>Helsinki</answer>
+        <option2>Tampere</option2>
+        <option3>Espoo</option3>
+        <difficulty>3</difficulty>
+        <latitude>60.1695</latitude>
+        <longitude>24.9354</longitude>
+    </question>
+    <question>
+        <query>Which country is famous for its Carnival festival?</query>
+        <answer>Brazil</answer>
+        <option2>Colombia</option2>
+        <option3>Mexico</option3>
+        <difficulty>3</difficulty>
+        <latitude>-14.2350</latitude>
+        <longitude>-51.9253</longitude>
+    </question>
+    <question>
+        <query>What is the capital of Morocco?</query>
+        <answer>Rabat</answer>
+        <option2>Casablanca</option2>
+        <option3>Fez</option3>
+        <difficulty>3</difficulty>
+        <latitude>34.0209</latitude>
+        <longitude>-6.8416</longitude>
+    </question>
+    <question>
+        <query>Which country is known for the Kremlin?</query>
+        <answer>Russia</answer>
+        <option2>Ukraine</option2>
+        <option3>Belarus</option3>
+        <difficulty>3</difficulty>
+        <latitude>55.7558</latitude>
+        <longitude>37.6173</longitude>
+    </question>
+    <question>
+        <query>What is the capital of Switzerland?</query>
+        <answer>Bern</answer>
+        <option2>Zurich</option2>
+        <option3>Geneva</option3>
+        <difficulty>3</difficulty>
+        <latitude>46.9481</latitude>
+        <longitude>7.4474</longitude>
+    </question>
+    <question>
+        <query>Which country is known for its beaches and samba music?</query>
+        <answer>Brazil</answer>
+        <option2>Argentina</option2>
+        <option3>Portugal</option3>
+        <difficulty>3</difficulty>
+        <latitude>-14.2350</latitude>
+        <longitude>-51.9253</longitude>
+    </question>
+    <question>
+        <query>What is the capital of Poland?</query>
+        <answer>Warsaw</answer>
+        <option2>Kraków</option2>
+        <option3>Wrocław</option3>
+        <difficulty>3</difficulty>
+        <latitude>52.2297</latitude>
+        <longitude>21.0122</longitude>
+    </question>
+    <question>
+        <query>Which country is famous for its Oktoberfest celebration?</query>
+        <answer>Germany</answer>
+        <option2>Austria</option2>
+        <option3>Switzerland</option3>
+        <difficulty>3</difficulty>
+        <latitude>48.1351</latitude>
+        <longitude>11.5820</longitude>
+    </question>
+    <question>
+        <query>What is the capital of Hungary?</query>
+        <answer>Budapest</answer>
+        <option2>Debrecen</option2>
+        <option3>Szeged</option3>
+        <difficulty>3</difficulty>
+        <latitude>47.4979</latitude>
+        <longitude>19.0402</longitude>
+    </question>
+    <question>
+        <query>Which country is known for the Galapagos Islands?</query>
+        <answer>Ecuador</answer>
+        <option2>Peru</option2>
+        <option3>Colombia</option3>
+        <difficulty>3</difficulty>
+        <latitude>0.9538</latitude>
+        <longitude>-90.9656</longitude>
+    </question>
+    <question>
+        <query>What is the capital of Denmark?</query>
+        <answer>Copenhagen</answer>
+        <option2>Aarhus</option2>
+        <option3>Odense</option3>
+        <difficulty>3</difficulty>
+        <latitude>55.6761</latitude>
+        <longitude>12.5683</longitude>
+    </question>
+    <question>
+        <query
+    >Which country is famous for its red phone boxes and afternoon tea?</query>
+        <answer>United Kingdom</answer>
+        <option2>France</option2>
+        <option3>Italy</option3>
+        <difficulty>3</difficulty>
+        <latitude>51.5074</latitude>
+        <longitude>-0.1278</longitude>
+    </question>
+    <question>
+        <query>What is the capital of Ireland?</query>
+        <answer>Dublin</answer>
+        <option2>Cork</option2>
+        <option3>Limerick</option3>
+        <difficulty>3</difficulty>
+        <latitude>53.3498</latitude>
+        <longitude>-6.2603</longitude>
+    </question>
+</questions>

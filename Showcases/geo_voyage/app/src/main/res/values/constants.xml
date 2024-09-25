@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <!-- panel types -->
+    <integer name="panel_id">0</integer>
+
+    <integer name="skybox_id">20</integer>
+</resources>

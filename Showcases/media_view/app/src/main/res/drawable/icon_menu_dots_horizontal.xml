@@ -1,0 +1,23 @@
+<!--
+  ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+  -->
+<vector
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:width="32dp"
+  android:height="32dp"
+  android:viewportWidth="32"
+  android:viewportHeight="32"
+>
+  <path
+    android:pathData="M13.332,15.726a2.667,2.735 0,1 0,5.333 0a2.667,2.735 0,1 0,-5.333 0z"
+    android:fillColor="#DBE4EB"
+  />
+  <path
+    android:pathData="M4,15.726a2.667,2.735 0,1 0,5.333 0a2.667,2.735 0,1 0,-5.333 0z"
+    android:fillColor="#DBE4EB"
+  />
+  <path
+    android:pathData="M22.668,15.726a2.667,2.735 0,1 0,5.333 0a2.667,2.735 0,1 0,-5.333 0z"
+    android:fillColor="#DBE4EB"
+  />
+</vector>

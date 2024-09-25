@@ -1,0 +1,153 @@
+<resources>
+    <string name="app_name">Geo Voyage</string>
+    <string name="ask_btn">Ask Earth</string>
+    <string name="ask_prompt">Tap the button below to Ask Earth</string>
+    <string name="ask_query">In a short answer, why is the sky blue?</string>
+    <string name="loading_msg">Loading…</string>
+    <string name="listening_msg">Listening…</string>
+    <string name="speak_prompt">Speak now…</string>
+    <string name="error_speech_not_recognized">No speech recognized.</string>
+    <string
+    name="error_speech_not_supported"
+  >Error: speech recognition is not supported on your device.</string>
+    <string
+    name="error_speech_no_app_available"
+  >Error: no application available to handle speech recognition.</string>
+
+    <!-- App messages -->
+    <string name="notice">
+        This application uses generative AI to respond to queries, and those responses may be inaccurate or inappropriate. [Learn More](https://www.facebook.com/privacy/guide/genai/). Your queries and the generative AI responses are not retained by Meta.
+    </string>
+    <string name="permissions">
+        When you enable microphone access, we convert your voice recordings to a written transcript to provide this service and improve our products in accordance with our [Supplemental Privacy Policy](https://www.meta.com/legal/privacy-policy/). This data will be retained for 90 days and will not be associated with your account. By enabling access, you agree to our collection and use of this data as described above.
+    </string>
+    <string name="intro">
+        ### Ahoy Geo Voyager, let’s explore the globe!\n
+        Press A while pointing at the globe to spin it, and use the forward trigger while in Explore mode to drop a pin and learn more.\n\n
+        Geo Voyage lets you challenge yourself with daily quizzes, discover historical events, and explore the world by asking the globe questions. You can even go VR Mode to immerse yourself in global travel.\n\n
+        **Bon Voyage!**
+    </string>
+
+    <!-- Ask Earth -->
+    <string name="ask">Ask</string>
+    <string name="finished_speaking">Finished Speaking</string>
+    <string name="thinking">Thinking…</string>
+    <string name="ask_another_question">ASK ANOTHER QUESTION</string>
+    <string name="ellipses">…</string>
+    <string
+    name="rejected_screen_default_query_failure_message"
+  >Sorry I can\'t answer that. I can answer questions\nabout Earth geography and culture. Try asking…</string>
+    <string name="default_error_title">Whoops</string>
+
+    <string name="_continue">Continue</string>
+    <string name="close">Close</string>
+
+    <!-- Explore -->
+    <string name="explore">Explore</string>
+    <string
+    name="explore_screen_placeholder_message"
+  >_Tap the trigger while pointing the controller at the Earth to drop a pin_</string>
+    <string name="explore_copyright">Copyright</string>
+    <string
+    name="explore_report_problem"
+  >Report a problem with this image</string>
+
+    <!-- Today in History -->
+    <string name="today">Today</string>
+    <string name="today_show_another">Show Me Another</string>
+
+    <!-- Daily Quiz -->
+    <string name="quiz">Quiz</string>
+    <string
+    name="quiz_welcome"
+  >Welcome to the Geo Voyage Quiz.\nCome back every day for a new challenge!</string>
+    <string name="quiz_start">Show Me Today\'s First Question</string>
+    <string name="quiz_answer_correct">That\'s correct!</string>
+    <string name="quiz_answer_incorrect">Sorry, that\'s incorrect!</string>
+    <string name="quiz_result_0">Better luck next time!</string>
+    <string name="quiz_result_1">Nice try!</string>
+    <string name="quiz_result_2">Not bad!</string>
+    <string name="quiz_result_3">Well done!</string>
+    <string name="quiz_result_4">Great job!</string>
+    <string name="quiz_result_5">You nailed it!</string>
+    <string name="quiz_result_tally">%1$s/%2$s Questions Correct.</string>
+    <string
+    name="quiz_result_reminder"
+  >%1$s Check back tomorrow for a new quiz!</string>
+
+    <!-- Content Descriptions -->
+    <string name="content_description_close_button">Close button</string>
+
+    <!-- Llama3 Queries -->
+    <string
+    name="base_query_template"
+  >In a short response formatted with markdown, answer the following question. %1$s</string>
+    <string
+    name="explore_screen_base_query"
+  >What is one notable city or landmark near the coordinates %1$s in %2$s?</string>
+    <string
+    name="today_in_history_base_query"
+  >What is one notable event in history that occurred on %1$s?</string>
+
+    <!--Grabbables-->
+    <string
+    name="GrabbableNoRotation_enabled"
+    translatable="false"
+  >GrabbableNoRotation:enabled</string>
+    <string
+    name="GrabbableNoRotation_isGrabbed"
+    translatable="false"
+  >GrabbableNoRotation:isGrabbed</string>
+    <string
+    name="GrabbableNoRotation_class"
+    translatable="false"
+  >GrabbableNoRotation_class:class</string>
+    <!--Spin System-->
+    <string name="Spinnable_size" translatable="false">Spinnable:size</string>
+    <string name="Spinnable_drag" translatable="false">Spinnable:drag</string>
+    <string
+    name="Spinnable_isGrabbed"
+    translatable="false"
+  >Spinnable:isGrabbed</string>
+    <string
+    name="Spinnable_isSpinning"
+    translatable="false"
+  >Spinnable:isSpinning</string>
+    <string name="Spinnable_pitch" translatable="false">Spinnable:pitch</string>
+    <string
+    name="Spinnable_class"
+    translatable="false"
+  >Spinnable_class:class</string>
+    <!-- Pin Drop-->
+    <string
+    name="Pinnable_meshName"
+    translatable="false"
+  >Pinnable:meshName</string>
+    <string
+    name="Pinnable_class"
+    translatable="false"
+  >Pinnable_class:class</string>
+    <!-- Spin system -->
+    <string name="Spin_axis" translatable="false">Spin:axis</string>
+    <string name="Spin_speed" translatable="false">Spin:speed</string>
+    <string name="Spin_class" translatable="false">Spin_class:class</string>
+    <!-- Tether system -->
+    <string name="Tether_entity" translatable="false">Tether:entity</string>
+    <string
+    name="Tether_rotateAround"
+    translatable="false"
+  >Tether:rotateAround</string>
+    <string
+    name="Tether_yawOffset"
+    translatable="false"
+  >Tether:yawOffset</string>
+    <string name="Tether_zOffset" translatable="false">Tether:zOffset</string>
+    <string name="Tether_yOffset" translatable="false">Tether:yOffset</string>
+    <string name="Tether_class" translatable="false">Tether_class:class</string>
+
+    <!--Preview Test Strings-->
+    <string
+    name="test_input_text_field"
+    translatable="false"
+  >Test input text</string>
+</resources>

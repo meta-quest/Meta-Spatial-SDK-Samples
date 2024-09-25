@@ -1,0 +1,90 @@
+<!--
+  ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+  -->
+<resources>
+    <string name="app_name">Media View</string>
+    <!-- General -->
+    <string name="default_error_title">Woops something went wrong.</string>
+    <string name="default_error_description">Please try again later.</string>
+    <string name="refresh">Refresh</string>
+    <string name="close">Close</string>
+    <!-- Permission -->
+    <string
+    name="storage_permission_rationale_title"
+  >Grant access to the device storage.</string>
+    <string
+    name="storage_permission_rationale_description"
+  >This app needs access to your storage to display your media files.</string>
+    <string
+    name="storage_permission_rationale_denied"
+  >You have not granted access to your storage. Please grant access to continue.</string>
+    <string name="storage_permission_rationale_button">Grant Access</string>
+    <string
+    name="storage_saving_samples_loading"
+  >Loading sample media. This may take a minute, please wait…</string>
+    <!-- Gallery -->
+    <string name="viewing_n_files">Viewing %1$d files</string>
+    <string name="sort_by">Sort By</string>
+    <string name="sort_by_date_desc">Date Added: Earliest</string>
+    <string name="sort_by_date_asc">Date Added: Oldest</string>
+    <string name="sort_by_size_asc">File Size: Smallest</string>
+    <string name="sort_by_size_desc">File Size: Largest</string>
+    <string name="sort_by_name_asc">Name: A to Z</string>
+    <string name="sort_by_name_desc">Name: Z to A</string>
+    <plurals name="n_files_open">
+        <item quantity="one">1 File in your Environment</item>
+        <item quantity="other">%1$d Files in your Environment</item>
+    </plurals>
+    <string name="max_files_open">Max Files in your Environment (%1$d)</string>
+    <string name="files_close_all_button">Close All</string>
+    <!-- Media Types -->
+    <string name="media_filter_all">View All</string>
+    <string name="media_filter_2d">Photos/Videos</string>
+    <string name="media_filter_rayban">POV Media</string>
+    <string name="media_filter_panoramas">Panoramas</string>
+    <string name="media_filter_360">360° Media</string>
+    <string name="media_filter_spatial">Spatial Media</string>
+    <string name="media_filter_3d_objects">3D Objects</string>
+    <!-- Upload -->
+    <string name="upload_failed_error">Failed to upload file</string>
+    <string name="download_wait_label">Downloading, please wait…</string>
+
+
+    // JW added - is this needed?
+    <string
+    name="SpatialDebugComponent_class"
+    translatable="false"
+  >SpatialDebugComponent:class</string>
+    <string
+    name="SpatialDebugComponent_axis"
+    translatable="false"
+  >SpatialDebugComponent:axis</string>
+    <string
+    name="SpatialDebugComponent_rotationSpeed"
+    translatable="false"
+  >SpatialDebugComponent:rotationSpeed</string>
+    <string
+    name="SpatialDebugComponent_followSpeed"
+    translatable="false"
+  >SpatialDebugComponent:followSpeed</string>
+    <string
+    name="SpatialDebugComponent_rotationOffset"
+    translatable="false"
+  >SpatialDebugComponent:rotationOffset</string>
+    <string
+    name="SpatialDebugComponent_followOffset"
+    translatable="false"
+  >SpatialDebugComponent:followOffset</string>
+    <string
+    name="SpatialDebugComponent_followCamera"
+    translatable="false"
+  >SpatialDebugComponent:followCamera</string>
+    <string
+    name="SpatialDebugComponent_billboard"
+    translatable="false"
+  >SpatialDebugComponent:billboard</string>
+    <string
+    name="SpatialDebugComponent_distance"
+    translatable="false"
+  >SpatialDebugComponent:distance</string>
+</resources>

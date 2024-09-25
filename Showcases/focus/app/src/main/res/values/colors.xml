@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+
+    <!--General-->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="baseGrey">#D1D1D1</color>
+    <color name="gray20">#E2E2E7</color>
+    <color name="gray100">#EEEEEE</color>
+
+    <!--Home-->
+    <color name="home_grayBackground">#F1F0F3</color>
+    <color name="home_purpleButton">#6153FF</color>
+    <color name="home_purpleDisabledButton">#BFBAFF</color>\
+    <color name="home_purplePressedButton">#28226D</color>
+    <color name="home_projectButton">#F1F0F3</color>
+    <color name="home_projectPressedButton">#E8E7FF</color>
+
+    <!--Tasks Panel-->
+    <color name="tasks_blueButton">#42A4FF</color>
+    <color name="tasks_bluePressedButton">#004281</color>
+    <color name="tasks_blueDisabledButton">#A3D3FF</color>
+
+    <!--Ai Exchange Panel-->
+    <color name="exchangeBackground">#EFEEFF</color>
+    <color name="exchangeTextColor">#340087</color>
+    <color name="userTextView">#DFDCFF</color>
+    <color name="aiTextView">#EADCFF</color>
+    <color name="exchangeGrey">#F1F0F3</color>
+
+    <!--Sticky Notes-->
+    <color name="stickyYellowBody">#FFFDDC</color>
+    <color name="stickyYellowTop">#FFF874</color>
+    <color name="stickyGreenBody">#E2FFF5</color>
+    <color name="stickyGreenTop">#8DFFD9</color>
+    <color name="stickyPinkBody">#FFDFED</color>
+    <color name="stickyPinkTop">#FFA0C9</color>
+    <color name="stickyOrangeBody">#FFE7E1</color>
+    <color name="stickyOrangeTop">#FFAA97</color>
+    <color name="stickyBlueBody">#DEF0FF</color>
+    <color name="stickyBlueTop">#8DCCFF</color>
+    <color name="stickyPurpleBody">#E9DFFF</color>
+    <color name="stickyPurpleTop">#B390FF</color>
+
+</resources>

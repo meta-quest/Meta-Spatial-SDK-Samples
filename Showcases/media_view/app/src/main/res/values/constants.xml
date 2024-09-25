@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+  -->
+<resources>
+    <integer name="panel_id_gallery_activity">1</integer>
+    <integer name="panel_id_media_filter_activity">2</integer>
+    <integer name="panel_id_upload_activity">4</integer>
+    <integer name="panel_id_gallery_menu">5</integer>
+</resources>

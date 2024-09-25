@@ -1,0 +1,210 @@
+<!--
+  ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Picker API Quickstart</title>
+    <meta charset="utf-8"/>
+    <style>
+        html, body {
+          height: 100%;
+        }
+        .picker-dialog {
+           border: 0;
+           box-shadow: none;
+           left: 0 !important;
+           top: 0 !important;
+           width: 100%;
+           height: 100%;
+        }
+        .centeredContainer {
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+        }
+        #app-text {
+        }
+    </style>
+</head>
+<body>
+
+<!-- Page Content -->
+<div class="centeredContainer">
+    <p id="app-text">Loading, please wait...</p>
+    <progress id="progress-bar" aria-label="Content loading…"></progress>
+</div>
+
+<!-- GDrive Script -->
+<script type="text/javascript">
+    /* exported gapiLoaded */
+    /* exported gisLoaded */
+
+    // Authorization scopes required by the API; separated by spaces.
+    let SCOPES = AndroidConfig.getScopes();
+
+    // Client ID and API key from the Developer Console
+    let CLIENT_ID = AndroidConfig.getClientId();
+    let API_KEY = AndroidConfig.getApiKey();
+
+    // Project number from console.developers.google.com.
+    let APP_ID = AndroidConfig.getAppId();
+
+    let tokenClient;
+    let accessToken = null;
+    let pickerInited = false;
+    let gisInited = false;
+
+    /**
+     * Callback after api.js is loaded.
+     */
+    function gapiLoaded() {
+      console.log('gapiLoaded');
+      gapi.load('client:picker', initializePicker);
+    }
+
+    /**
+     * Callback after the API client is loaded. Loads the
+     * discovery doc to initialize the API.
+     */
+    async function initializePicker() {
+      await gapi.client.load('https://www.googleapis.com/discovery/v1/apis/drive/v3/rest');
+      pickerInited = true;
+      maybePerformAuth();
+    }
+
+    /**
+     * Callback after Google Identity Services are loaded.
+     */
+    function gisLoaded() {
+      tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: CLIENT_ID,
+        scope: SCOPES,
+        callback: '', // defined later
+      });
+      gisInited = true;
+      maybePerformAuth();
+    }
+
+    /**
+     * Enables user interaction after all libraries are loaded.
+     */
+    function maybePerformAuth() {
+      if (pickerInited && gisInited) {
+        performAuth();
+      }
+    }
+
+    /**
+     *  Sign in the user.
+     */
+    function performAuth() {
+      tokenClient.callback = async (response) => {
+        if (response.error !== undefined) {
+          throw (response);
+        }
+        accessToken = response.access_token;
+        Android.onAccessTokenReceived(accessToken);
+        await createPicker();
+      };
+
+      if (accessToken === null) {
+        // Prompt the user to select a Google Account and ask for consent to share their data
+        // when establishing a new session.
+        tokenClient.requestAccessToken({prompt: 'consent'});
+      } else {
+        // Skip display of account chooser and consent dialog for an existing session.
+        tokenClient.requestAccessToken({prompt: ''});
+      }
+    }
+
+    /**
+     *  Sign out the user.
+     */
+    function performSignout() {
+      if (accessToken) {
+        accessToken = null;
+        google.accounts.oauth2.revoke(accessToken);
+      }
+    }
+
+    /**
+     *  Create and render a Picker object for searching images.
+     */
+    function createPicker() {
+      const view = new google.picker.DocsView(google.picker.ViewId.DOCS) // https://issuetracker.google.com/issues/311256289?pli=1
+        .setMode(google.picker.DocsViewMode.LIST);
+      view.setMimeTypes('image/png,image/jpeg,image/jpg,image/heic,video/mp4,video/mpeg,video/ogg');
+      const picker = new google.picker.PickerBuilder()
+          .enableFeature(google.picker.Feature.NAV_HIDDEN)
+          .enableFeature(google.picker.Feature.MULTISELECT_ENABLED) // https://issuetracker.google.com/issues/334994030
+          .setDeveloperKey(API_KEY)
+          .setAppId(APP_ID)
+          .setOAuthToken(accessToken)
+          .addView(view)
+          .addView(new google.picker.DocsUploadView())
+          .setCallback(pickerCallback)
+          .build();
+      picker.setVisible(true);
+    }
+
+    /**
+     * Displays the file details of the user's selection.
+     * @param {object} data - Containers the user selection from the picker
+     */
+    async function pickerCallback(data) {
+      if (data.action === google.picker.Action.PICKED) {
+        const document = data[google.picker.Response.DOCUMENTS][0];
+        const fileId = document[google.picker.Document.ID];
+        let mimeType = document[google.picker.Document.MIME_TYPE];
+        let fileName = document[google.picker.Document.NAME];
+        let sizeBytes = document["sizeBytes"];
+        // console.log('Selected file: ' + JSON.stringify(document, null, 2));
+        console.log('Selected file: ' + fileId + ' ' + mimeType + ' ' + fileName + ' ' + sizeBytes);
+        try {
+            // Request in chunks
+            const sizeChunkBytes = 10 * 1024 * 1024; // 10MB
+            const totalChunks = Math.ceil(sizeBytes / sizeChunkBytes);
+            for (var i=0; i<totalChunks; i++) {
+                const range = `bytes=${i*sizeChunkBytes}-${(i+1)*sizeChunkBytes-1}`;
+                const url = `https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`;
+                console.log("Chunk " + i + "/" + totalChunks + ". Range: " + range);
+                const res = await fetch(url, {
+                    headers: { "Authorization": `Bearer ${accessToken}`, "Range": range },
+                });
+                console.log("Response status: " + res.status);
+                // Convert response to blob
+                const blob = await res.blob();
+                // Convert to base64 and notify Android
+                console.log("Blob length: " + blob.size);
+                const base64 = await blobToBase64(blob);
+                console.log('Chunk ' + i + '/' + totalChunks + ' done');
+                Android.downloadFile(fileId, base64, mimeType, fileName, i+1, totalChunks);
+            }
+        } catch (e) {
+            console.log("Failed to get file: " + e);
+            console.log("Failed to get file: " + JSON.stringify(e, null, 2));
+            Android.onGetFileFailed(e.message);
+        }
+      } else if (data.action === google.picker.Action.CANCEL) {
+        Android.onGetFiledCanceled();
+      }
+    }
+
+    function blobToBase64(blob) {
+      return new Promise((resolve, _) => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+      });
+    }
+</script>
+<!--<script type="text/javascript" src="gapi.js" onload="gapiLoaded()"></script>-->
+<!--<script type="text/javascript" src="gis.js" onload="gisLoaded()"></script>-->
+<script async defer src="https://apis.google.com/js/api.js" onload="gapiLoaded()"></script>
+<script async defer src="https://accounts.google.com/gsi/client" onload="gisLoaded()"></script>
+</body>
+</html>

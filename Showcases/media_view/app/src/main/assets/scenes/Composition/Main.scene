@@ -1,0 +1,73 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:gallery
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: gallery
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.779999971
+            - 0.449999988
+            - 1
+          children:
+            - ref:mediaTypesFilter
+            - ref:galleryMenu
+        com.meta.spatial.toolkit.Grabbable:
+          {}
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/panel_id_gallery_activity"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: gallery
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: mediaTypesFilter
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.174999997
+            - 0.449999988
+            - 1
+          translation:
+            - -0.48453939
+            - 0
+            - 0
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/panel_id_media_filter_activity"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: mediaTypesFilter
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: galleryMenu
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.5
+            - 0.100000001
+            - 1
+          translation:
+            - 0
+            - 0.28212285
+            - 0
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/panel_id_gallery_menu"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: galleryMenu
+metadata:
+  version: 1.0

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+  -->
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="meta_blue">#FF1C65C1</color>
+</resources>

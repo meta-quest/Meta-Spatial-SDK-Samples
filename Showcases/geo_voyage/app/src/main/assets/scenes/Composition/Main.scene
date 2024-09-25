@@ -1,0 +1,93 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:earth
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:earth/Main.metaspatialobj
+        com.meta.components.Name:
+          name: earth
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 0.17453292
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0
+            - 1
+            - 1.5
+          children:
+            - ref:trees
+            - ref:pin
+            - ref:clouds
+        com.meta.pixelandtexel.geovoyage.ecs.grabbablenorotation.GrabbableNoRotation:
+          enabled: true
+        com.meta.pixelandtexel.geovoyage.ecs.pinnable.Pinnable:
+          meshName: pin.glb
+        com.meta.pixelandtexel.geovoyage.ecs.spinnable.Spinnable:
+          size: 0.73499999999999999
+          drag: 1.8
+          pitch: 0
+      tag: earth
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:pin/Main.metaspatialobj
+        com.meta.components.Name:
+          name: pin
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: pin
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:trees/Main.metaspatialobj
+        com.meta.components.Name:
+          name: trees
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+      tag: trees
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:clouds/Main.metaspatialobj
+        com.meta.components.Name:
+          name: clouds
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.pixelandtexel.geovoyage.ecs.spin.Spin:
+          speed: 1
+      tag: clouds
+metadata:
+  version: 1.0

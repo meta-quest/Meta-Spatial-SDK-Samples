@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/fragmentFirstLayout"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/rounded_corners_bg"
+  android:orientation="vertical"
+  android:gravity="center"
+  android:padding="30dp"
+  tools:context=".FirstFragment"
+>
+
+    <Button
+    android:id="@+id/buttonNewProject"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@drawable/rounded_corners_box"
+    android:backgroundTint="@color/focus_mode_button_selector"
+    android:text="+ New Project"
+    android:textSize="@dimen/text_size"
+    android:textColor="@color/white"
+    android:textAllCaps="false"
+    android:fontFamily="@font/onest_medium"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+  />
+
+    <ImageView
+    android:id="@+id/line5"
+    android:layout_width="match_parent"
+    android:layout_height="3dp"
+    android:background="@drawable/rounded_corners_bg"
+    android:backgroundTint="@color/gray20"
+    android:layout_marginTop="40dp"
+    android:layout_marginBottom="40dp"
+    app:layout_constraintTop_toBottomOf="@+id/buttonNewProject"
+  />
+
+    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="800dp"
+    android:layout_marginTop="30dp"
+    app:layout_constraintTop_toBottomOf="@+id/line5"
+  >
+
+        <TableLayout
+      android:id="@+id/projectsTable"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="horizontal"
+    >
+
+        </TableLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

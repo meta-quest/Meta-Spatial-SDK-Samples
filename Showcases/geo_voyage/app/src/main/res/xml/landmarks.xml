@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<landmarks>
+    <landmark>
+        <name>Great Egyptian Pyramids</name>
+        <description
+    >Three majestic pyramids in Giza, built around 2580 BC, served as ancient tombs for Pharaohs Khufu, Khafre, and Menkaure. They are engineering marvels of limestone and granite, showcasing the architectural genius of ancient Egypt.</description>
+        <latitude>29.9780391</latitude>
+        <longitude>31.1313252</longitude>
+        <model>pyramid.glb</model>
+        <scale>1.0</scale>
+        <yaw>0</yaw>
+        <zOffset>0.37</zOffset>
+    </landmark>
+    <landmark>
+        <name>Eiffel Tower</name>
+        <description
+    >The Eiffel Tower, built in 1889, is an iconic iron lattice tower in Paris, France, standing 324 meters (1,063 feet) tall. It was originally constructed as a temporary entrance arch for the World's Fair, but it has become a permanent symbol of French culture and engineering ingenuity.</description>
+        <latitude>48.858222</latitude>
+        <longitude>2.2945</longitude>
+        <model>eiffel_tower.glb</model>
+        <scale>0.9</scale>
+        <yaw>45</yaw>
+        <zOffset>0.37</zOffset>
+    </landmark>
+    <landmark>
+        <name>Chichén Itzá</name>
+        <description
+    >Chichén Itzá is an ancient Mayan city on Mexico's Yucatán Peninsula, built by the Itza civilization in the 10th century AD. This UNESCO World Heritage Site features the Pyramid of Kukulcán, temples, and ball courts, showcasing the advanced knowledge and sophisticated architecture of the Mayan civilization.</description>
+        <latitude>20.683056</latitude>
+        <longitude>-88.568611</longitude>
+        <model>chichen_itza.glb</model>
+        <scale>1.0</scale>
+        <yaw>25</yaw>
+        <zOffset>0.36</zOffset>
+    </landmark>
+    <landmark>
+        <name>Sydney Opera House</name>
+        <description
+    >The Sydney Opera House is an iconic performing arts center in Sydney, Australia, renowned for its distinctive sail-like design and stunning harbor location. Opened in 1973, it hosts various cultural events, including opera, ballet, and theater performances, and has become a symbol of Australia's vibrant cultural scene.</description>
+        <latitude>-33.85681</latitude>
+        <longitude>151.21514</longitude>
+        <model>opera_house.glb</model>
+        <scale>1.0</scale>
+        <yaw>15</yaw>
+        <zOffset>0.355</zOffset>
+    </landmark>
+    <landmark>
+        <name>Taj Mahal</name>
+        <description
+    >The Taj Mahal, in Agra, India, is a breathtaking white marble mausoleum built by Mughal Emperor Shah Jahan in 1653 as a tribute to his beloved wife, Mumtaz Mahal. Its intricate inlays, calligraphy, and symmetrical design make it a stunning example of Mughal architecture and a symbol of eternal love.</description>
+        <latitude>27.1739324</latitude>
+        <longitude>78.0422423</longitude>
+        <model>taj_mahal.glb</model>
+        <scale>1.0</scale>
+        <yaw>0</yaw>
+        <zOffset>0.378</zOffset>
+    </landmark>
+    <landmark>
+        <name>Christ the Redeemer</name>
+        <description
+    >Christ the Redeemer, in Rio de Janeiro, Brazil, is a colossal Art Deco statue of Jesus Christ, erected in 1931. Designed by Paul Landowski and Heitor da Silva Costa, its outstretched arms span 28 meters (92 feet), overlooking the city and Sugarloaf Mountain, symbolizing peace and unity.</description>
+        <latitude>-22.951795</latitude>
+        <longitude>-43.2095583</longitude>
+        <model>christ_the_redeemer.glb</model>
+        <scale>1.0</scale>
+        <yaw>-95</yaw>
+        <zOffset>0.356</zOffset>
+    </landmark>
+    <landmark>
+        <name>The Colosseum</name>
+        <description
+    >The Colosseum, in Rome, Italy, is an ancient elliptical amphitheater built in 80 AD under Emperor Titus. This iconic symbol of Roman engineering and architecture hosted gladiator battles, public spectacles, and events for up to 50,000 spectators, showcasing the grandeur of the Roman Empire.</description>
+        <latitude>41.890278</latitude>
+        <longitude>12.492222</longitude>
+        <model>colosseum.glb</model>
+        <scale>0.9</scale>
+        <yaw>20</yaw>
+        <zOffset>0.356</zOffset>
+    </landmark>
+    <landmark>
+        <name>Mount Vinson</name>
+        <description
+    >Vinson Massif, located in Antarctica, is the continent's highest peak, standing at 4,892 meters (16,050 feet). This remote, ice-covered mountain was first ascended in 1966 and remains a challenging climb due to its harsh, subzero climate and isolated location.</description>
+        <latitude>-78.525556</latitude>
+        <longitude>-85.617222</longitude>
+        <model>mount_vinson.glb</model>
+        <scale>1.0</scale>
+        <yaw>0</yaw>
+        <zOffset>0.37</zOffset>
+    </landmark>
+    <landmark>
+        <name>Victoria Falls</name>
+        <description
+    >Victoria Falls, on the Zambia-Zimbabwe border, is one of the world's largest waterfalls, with a staggering 1.7 kilometers (1.06 miles) width and 108 meters (354 feet) drop. The falls' immense power and spray create a breathtaking spectacle, earning it the local name "Mosi-oa-Tunya" (The Smoke that Thunders).</description>
+        <latitude>-17.9242993</latitude>
+        <longitude>25.8572003</longitude>
+        <model>victoria_falls.glb</model>
+        <scale>1.0</scale>
+        <yaw>0</yaw>
+        <zOffset>0.377</zOffset>
+    </landmark>
+</landmarks>

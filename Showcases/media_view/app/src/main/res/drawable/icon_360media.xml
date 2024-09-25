@@ -1,0 +1,29 @@
+<!--
+  ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+  -->
+<vector
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:width="32dp"
+  android:height="32dp"
+  android:viewportWidth="32"
+  android:viewportHeight="32"
+>
+  <path
+    android:pathData="M16,16m-11.125,0a11.125,11.125 0,1 1,22.25 0a11.125,11.125 0,1 1,-22.25 0"
+    android:strokeWidth="1.75"
+    android:fillColor="#00000000"
+    android:strokeColor="#DBE4EB"
+  />
+  <path
+    android:pathData="M16,27.125C14.979,27.125 13.787,26.212 12.799,24.113C11.843,22.082 11.228,19.214 11.228,16C11.228,12.786 11.843,9.918 12.799,7.887C13.787,5.788 14.979,4.875 16,4.875C17.022,4.875 18.214,5.788 19.202,7.887C20.157,9.918 20.772,12.786 20.772,16C20.772,19.214 20.157,22.082 19.202,24.113C18.214,26.212 17.022,27.125 16,27.125Z"
+    android:strokeWidth="1.75"
+    android:fillColor="#00000000"
+    android:strokeColor="#DBE4EB"
+  />
+  <path
+    android:pathData="M4.875,16C4.875,14.979 5.788,13.787 7.887,12.799C9.918,11.843 12.786,11.228 16,11.228C19.214,11.228 22.082,11.843 24.113,12.799C26.212,13.787 27.125,14.979 27.125,16C27.125,17.021 26.212,18.213 24.113,19.201C22.082,20.157 19.214,20.772 16,20.772C12.786,20.772 9.918,20.157 7.887,19.201C5.788,18.213 4.875,17.021 4.875,16Z"
+    android:strokeWidth="1.75"
+    android:fillColor="#00000000"
+    android:strokeColor="#DBE4EB"
+  />
+</vector>

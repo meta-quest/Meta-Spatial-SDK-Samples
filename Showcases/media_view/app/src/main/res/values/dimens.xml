@@ -1,0 +1,6 @@
+<!--
+  ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+  -->
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>

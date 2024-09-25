@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+>
+
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+  >
+
+        <ImageView
+      android:id="@+id/panelTitle"
+      android:layout_width="230dp"
+      android:layout_height="@dimen/button_height"
+      android:src="@drawable/title_ai"
+      android:backgroundTint="@android:color/transparent"
+      android:gravity="center"
+      android:scaleType="fitCenter"
+    />
+
+        <ImageButton
+      android:id="@+id/closeAIButton"
+      android:layout_width="@dimen/button_height"
+      android:layout_height="@dimen/button_height"
+      android:background="@drawable/close"
+      android:scaleType="fitCenter"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+    />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/scrollParent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="110dp"
+    android:background="@drawable/rounded_corners_bg"
+    android:backgroundTint="@color/exchangeBackground"
+    android:orientation="vertical"
+  >
+
+        <ScrollView
+      android:id="@+id/aiScrollView"
+      android:layout_width="match_parent"
+      android:layout_height="880dp"
+      android:backgroundTint="@color/baseGrey"
+    >
+
+            <TableLayout
+        android:id="@+id/aiScrollViewTable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="30dp"
+        android:paddingBottom="210dp"
+      >
+
+            </TableLayout>
+        </ScrollView>
+
+        <TextView
+      android:id="@+id/disclaimer"
+      android:layout_width="500dp"
+      android:layout_height="600dp"
+      android:gravity="center"
+      android:text="This application uses generative AI to respond to queries, and those responses may be inaccurate or inappropriate. Learn More. \n\n Your queries and the generative AI responses are not retained by Meta."
+      android:textAlignment="center"
+      android:textColor="#BFBAFF"
+      android:textSize="30sp"
+      app:layout_constraintBottom_toTopOf="@+id/buttonStickyAI"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+    />
+
+        <Button
+      android:id="@+id/buttonStickyAI"
+      android:layout_width="370dp"
+      android:layout_height="@dimen/button_height"
+      android:layout_marginBottom="30dp"
+      android:background="@drawable/rounded_corners_button"
+      android:backgroundTint="@color/sticky_ai_button_selector"
+      android:text="Sticky note last message"
+      android:textAllCaps="false"
+      android:textColor="@color/white"
+      android:textSize="@dimen/text_size"
+      android:drawableLeft="@drawable/sticky_note_icon"
+      android:paddingStart="30dp"
+      android:drawablePadding="-20dp"
+      app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+    />
+
+        <LinearLayout
+      android:id="@+id/linearLayout"
+      android:layout_width="match_parent"
+      android:layout_height="200dp"
+      android:background="@drawable/bottom_rounded_corners_bg"
+      android:backgroundTint="@color/white"
+      android:orientation="horizontal"
+      app:layout_constraintBottom_toBottomOf="parent"
+    >
+
+            <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+      >
+
+                <LinearLayout
+          android:layout_width="480dp"
+          android:layout_height="@dimen/button_height"
+          android:background="@drawable/rounded_corners_button"
+          android:backgroundTint="@color/exchangeGrey"
+          android:layout_margin="@dimen/toolbar_button_margin"
+        >
+
+                    <EditText
+            android:id="@+id/textPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/onest_medium"
+            android:gravity="center_vertical"
+            android:hint="Write a message"
+            android:textColor="@color/black"
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:textSize="25dp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+          />
+
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+          android:layout_width="@dimen/button_height"
+          android:layout_height="@dimen/button_height"
+          android:layout_marginStart="10dp"
+          app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+        >
+
+                    <ImageButton
+            android:id="@+id/buttonSend"
+            android:layout_width="@dimen/button_height"
+            android:layout_height="@dimen/button_height"
+            android:background="@drawable/send"
+            android:text="Sticky note last"
+            android:textSize="@dimen/text_size"
+          />
+
+                    <ImageView
+            android:id="@+id/loadingBackground"
+            android:layout_width="@dimen/button_height"
+            android:layout_height="@dimen/button_height"
+            android:background="@drawable/loading_background"
+            android:focusable="false"
+          />
+
+                    <ImageView
+            android:id="@+id/loading"
+            android:layout_width="@dimen/button_height"
+            android:layout_height="@dimen/button_height"
+            android:src="@drawable/loading"
+            android:background="@android:color/transparent"
+            android:focusable="false"
+          />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

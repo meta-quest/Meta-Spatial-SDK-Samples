@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+>
+
+    <LinearLayout
+    android:id="@+id/linearLayout3"
+    android:layout_width="match_parent"
+    android:layout_height="110dp"
+    android:gravity="center"
+    android:orientation="horizontal"
+    app:layout_constraintBottom_toTopOf="@+id/templateTask"
+  >
+
+        <ImageView
+      android:id="@+id/textView"
+      android:layout_width="150dp"
+      android:layout_height="@dimen/button_height"
+      android:src="@drawable/title_tasks"
+      android:backgroundTint="@android:color/transparent"
+      android:gravity="center"
+      android:text="Tasks"
+      android:fontFamily="@font/onest_medium"
+      android:textAlignment="center"
+      android:textSize="@dimen/text_size"
+    />
+
+        <ImageButton
+      android:id="@+id/closeTasksButton"
+      android:layout_width="@dimen/button_height"
+      android:layout_height="@dimen/button_height"
+      android:background="@drawable/close"
+      android:scaleType="fitCenter"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+    />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/templateTask"
+    android:layout_width="match_parent"
+    android:layout_height="430dp"
+    android:layout_marginBottom="20dp"
+    android:background="@drawable/rounded_corners_bg"
+    android:padding="35dp"
+    app:layout_constraintBottom_toTopOf="@+id/linearLayoutBottom"
+  >
+
+        <ImageButton
+      android:id="@+id/templateLabel1"
+      android:layout_width="@dimen/min_label1_size"
+      android:layout_height="@dimen/label_height"
+      android:layout_marginTop="5dp"
+      android:background="@android:color/transparent"
+      android:scaleType="fitStart"
+      android:src="@drawable/label_to_do"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+    />
+
+        <ImageButton
+      android:id="@+id/templateLabel2"
+      android:layout_width="@dimen/label2_size"
+      android:layout_height="@dimen/label_height"
+      android:layout_marginStart="15dp"
+      android:layout_marginTop="5dp"
+      android:background="@android:color/transparent"
+      android:scaleType="fitStart"
+      android:src="@drawable/label_low"
+      app:layout_constraintStart_toEndOf="@+id/templateLabel1"
+      app:layout_constraintTop_toTopOf="parent"
+    />
+
+        <EditText
+      android:id="@+id/templateEditTaskTitle"
+      android:layout_width="match_parent"
+      android:layout_height="50dp"
+      android:layout_marginTop="30dp"
+      android:background="@android:color/transparent"
+      android:fontFamily="@font/onest_medium"
+      android:gravity="top"
+      android:hint="Task title"
+      android:imeOptions="actionDone"
+      android:inputType="text"
+      android:textColorHint="#A8A7B8"
+      android:textSize="35dp"
+      app:layout_constraintTop_toBottomOf="@+id/templateLabel2"
+    />
+
+        <EditText
+      android:id="@+id/templateEditTaskBody"
+      android:layout_width="match_parent"
+      android:layout_height="130dp"
+      android:background="@android:color/transparent"
+      android:fontFamily="@font/onest_medium"
+      android:gravity="top"
+      android:hint="Add text"
+      android:imeOptions="actionDone"
+      android:textColorHint="#A8A7B8"
+      android:textSize="25dp"
+      app:layout_constraintTop_toBottomOf="@+id/templateEditTaskTitle"
+      tools:layout_editor_absoluteX="20dp"
+    />
+
+        <Button
+      android:id="@+id/buttonCreateTask"
+      android:layout_width="match_parent"
+      android:layout_height="70dp"
+      android:background="@drawable/rounded_corners_button"
+      android:backgroundTint="@color/tasks_button_selector"
+      android:text="+ Create task"
+      android:textColor="@color/white"
+      android:textSize="@dimen/text_size"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+    />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+    android:id="@+id/linearLayoutBottom"
+    android:layout_width="match_parent"
+    android:layout_height="750dp"
+    android:padding="15dp"
+    android:background="@drawable/rounded_corners_bg"
+    app:layout_constraintBottom_toBottomOf="parent"
+  >
+
+        <ScrollView
+      android:id="@+id/scrollView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:backgroundTint="@color/baseGrey"
+    >
+
+            <TableLayout
+        android:id="@+id/scrollViewTable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+      >
+
+            </TableLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

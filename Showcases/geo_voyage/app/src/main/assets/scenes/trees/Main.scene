@@ -1,0 +1,91 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:TREE1
+            - ref:TREE4
+            - ref:TREE3
+            - ref:TREE2
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: TREE4
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Circle.007
+      tag: TREE4
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: TREE2
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Circle.005
+      tag: TREE2
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: TREE3
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Circle.006
+      tag: TREE3
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: TREE1
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Circle.003
+      tag: TREE1
+metadata:
+  version: 1.0
