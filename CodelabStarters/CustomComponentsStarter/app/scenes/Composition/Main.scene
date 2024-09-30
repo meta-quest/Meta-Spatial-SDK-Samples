@@ -1,0 +1,55 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:Environment
+            - ref:Panel
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:environment/Main.metaspatialobj
+        com.meta.components.Name:
+          name: Environment
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+        com.meta.spatial.toolkit.SupportsLocomotion:
+          {}
+      tag: Environment
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Panel
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 6.12323426e-17
+            - 6.12323426e-17
+            - 1
+            - -3.74939976e-33
+          rotation.format: Quaternion
+          scale:
+            - 2
+            - 1.5
+            - 1
+          translation:
+            - -5.40345346e-16
+            - 1.10000002
+            - 2.65985823
+        com.meta.spatial.toolkit.Panel:
+          panel: "@layout/ui_example"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: Panel
+metadata:
+  version: 1.0

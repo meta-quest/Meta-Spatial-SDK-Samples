@@ -1,0 +1,178 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:Robot_mat_Color
+            - ref:Robot_mat_Emissive
+            - ref:Robot_mat_ORM
+            - ref:Screen_1_Color
+            - ref:Screen_2_Color
+            - ref:propellers_mat
+            - ref:robotBase_mat
+            - ref:robotColor_mat
+            - ref:screenBody_mat
+            - ref:screenFace_mat
+            - ref:robot_geo
+        com.meta.components.Name:
+          name: robot
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry4.bin
+      tag: Geometry4
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry3.bin
+      tag: Geometry3
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry2.bin
+      tag: Geometry2
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry1.bin
+      tag: Geometry1
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+      tag: Geometry
+  com.meta.models.Image:
+    - components:
+        com.meta.components.Asset:
+          path: assets/Screen_1_Color.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: Screen_1_Color
+      tag: Screen_1_Color
+    - components:
+        com.meta.components.Asset:
+          path: assets/Robot_mat_Emissive.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: Robot_mat_Emissive
+      tag: Robot_mat_Emissive
+    - components:
+        com.meta.components.Asset:
+          path: assets/Robot_mat_Color.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: Robot_mat_Color
+      tag: Robot_mat_Color
+    - components:
+        com.meta.components.Asset:
+          path: assets/Robot_mat_ORM.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: Robot_mat_ORM
+      tag: Robot_mat_ORM
+    - components:
+        com.meta.components.Asset:
+          path: assets/Screen_2_Color.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: Screen_2_Color
+      tag: Screen_2_Color
+  com.meta.models.Material:
+    - uri: docref:materials/robotBase_mat.metaspatialmaterial
+      tag: robotBase_mat
+    - uri: docref:materials/propellers_mat.metaspatialmaterial
+      tag: propellers_mat
+    - uri: docref:materials/robotColor_mat.metaspatialmaterial
+      tag: robotColor_mat
+    - uri: docref:materials/screenBody_mat.metaspatialmaterial
+      tag: screenBody_mat
+    - uri: docref:materials/screenFace_mat.metaspatialmaterial
+      tag: screenFace_mat
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive2
+            - ref:Primitive4
+            - ref:Primitive
+            - ref:Primitive3
+            - ref:Primitive1
+        com.meta.components.Name:
+          name: robot_geo
+      tag: robot_geo
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry4
+          material: ref:robotColor_mat
+      tag: Primitive4
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry1
+          material: ref:screenBody_mat
+      tag: Primitive3
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry2
+          material: ref:robotBase_mat
+      tag: Primitive2
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry
+          material: ref:propellers_mat
+      tag: Primitive1
+    - components:
+        com.meta.components.Primitive:
+          mode: 4
+          geometry: ref:Geometry3
+          material: ref:screenFace_mat
+      tag: Primitive
+  com.meta.models.Texture:
+    - uri: docref:textures/texture1.metaspatialtexture
+      tag: texture1
+    - uri: docref:textures/texture2.metaspatialtexture
+      tag: texture2
+    - uri: docref:textures/texture4.metaspatialtexture
+      tag: texture4
+    - uri: docref:textures/texture5.metaspatialtexture
+      tag: texture5
+    - uri: docref:textures/texture8.metaspatialtexture
+      tag: texture8
+    - uri: docref:textures/texture6.metaspatialtexture
+      tag: texture6
+    - uri: docref:textures/texture7.metaspatialtexture
+      tag: texture7
+    - uri: docref:textures/texture3.metaspatialtexture
+      tag: texture3
+    - uri: docref:textures/texture9.metaspatialtexture
+      tag: texture9
+metadata:
+  version: 1.0
