@@ -166,6 +166,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
 
       disableCollisionFor(composition.getNodeByName("clouds").entity)
       disableCollisionFor(composition.getNodeByName("trees").entity)
+      disableCollisionFor(composition.getNodeByName("pin").entity)
       disableCollisionFor(Entity(R.integer.skybox_id))
 
       // Wait until the scene is inflated, then register/notify relevant systems
