@@ -57,11 +57,7 @@
   <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <!-- Volume Control -->
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-  <application
-    android:allowBackup="false"
-    android:label="Spatial Video Sample"
-    
-  >
+  <application android:allowBackup="false" android:label="Spatial Video Sample">
     <meta-data
       android:name="com.oculus.ossplash.background"
       android:value="passthrough-contextual"

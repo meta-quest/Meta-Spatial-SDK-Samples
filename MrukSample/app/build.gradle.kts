@@ -92,5 +92,5 @@ dependencies {
   ksp("com.google.code.gson:gson:2.11.0")
   ksp("com.meta.spatial.plugin:com.meta.spatial.plugin.gradle.plugin:$metaSpatialSdkVersion")
 }
-spatial {
-}
+
+spatial {}

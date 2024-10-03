@@ -101,6 +101,7 @@ afterEvaluate {
 }
 
 val sceneProjectPath = "app/scenes"
+
 spatial {
   allowUsageDataCollection.set(true)
   scenes {
@@ -114,10 +115,9 @@ spatial {
     }
     componentGeneration {
       outputPath.set(sceneProjectPath)
-      // We attempt to auto-detect where your "custom_components.json" is placed but if this does not
-      // work then you can uncomment the following line and force it to a specific location.
+      // We attempt to auto-detect where your "custom_components.json" is placed but if this does
+      // not work then you can uncomment the following line and force it to a specific location.
       // customComponentsPath.set("app/build/generated/ksp/debug/resources/custom_components.json")
     }
   }
-
 }

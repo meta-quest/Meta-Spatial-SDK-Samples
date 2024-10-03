@@ -54,11 +54,7 @@
   <uses-permission android:name="com.oculus.permission.USE_ANCHOR_API" />
   <uses-permission android:name="com.oculus.permission.USE_SCENE" />
 
-  <application
-    android:allowBackup="false"
-    android:label="Mixed Reality Sample"
-    
-  >
+  <application android:allowBackup="false" android:label="Mixed Reality Sample">
     <meta-data
       android:name="com.oculus.supportedDevices"
       android:value="quest2|questpro|quest3"

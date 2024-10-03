@@ -58,11 +58,7 @@
   <!-- Volume Control -->
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
-  <application
-    android:allowBackup="false"
-    android:label="Starter Sample"
-    
-  >
+  <application android:allowBackup="false" android:label="Starter Sample">
     <meta-data
       android:name="com.oculus.supportedDevices"
       android:value="quest2|questpro|quest3"

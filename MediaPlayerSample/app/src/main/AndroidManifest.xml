@@ -57,11 +57,7 @@
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
   <uses-permission android:name="com.oculus.permission.USE_SCENE" />
 
-  <application
-    android:allowBackup="false"
-    android:label="Media Player Sample"
-    
-  >
+  <application android:allowBackup="false" android:label="Media Player Sample">
     <meta-data android:name="com.oculus.supportedDevices" android:value="all" />
     <meta-data
       android:name="com.oculus.handtracking.version"

@@ -60,7 +60,6 @@
   <application
     android:allowBackup="false"
     android:label="Custom Components Sample"
-    
   >
     <meta-data
       android:name="com.oculus.supportedDevices"
