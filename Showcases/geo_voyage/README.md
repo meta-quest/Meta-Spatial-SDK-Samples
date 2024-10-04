@@ -43,7 +43,7 @@ This document also serves as a guide for setting up the app to build and run loc
 - [Other Scenes](#other-scenes)
 - [Dependencies](#dependencies)
   - [Cloud Services](#cloud-services)
-  - [Android Depenencies](#android-depenencies)
+  - [Android Dependencies](#android-dependencies)
 - [License](#license)
 - [Attributions](#attributions)
 
@@ -114,7 +114,7 @@ In order to build and run this application, ensure that you have one of the Ques
 
 # Key Components
 
-The main features of this application can be divided into the following 4 areas. Each of these areas has detailed documentation on thier implementation and usage in the pages respectively linked.
+The main features of this application can be divided into the following 4 areas. Each of these areas has detailed documentation on their implementation and usage in the pages respectively linked.
 
 1. [Wit.ai Integration](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-process-audio)
 2. [Llama 3 Querying](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-query-llama)
@@ -136,7 +136,7 @@ As per the Meta Quest [documentation](https://developer.oculus.com/resources/pub
 
 > Note: even though we are targeting API level 32, the `compileSdk` version has been set to 34 to enable support for some Jetpack Compose and Material 3 dependencies.
 
-These SDK versions can be downloaded and installed via the Android Studio SDK Manager window, accessible by through `Tools/SDK Manager` menu item. Note that these SDK version numbers are specified in the `app/build.gradle.kts` gradle script, and the app `AndroidManifest.xml`.
+These SDK versions can be downloaded and installed via the Android Studio SDK Manager window, accessible through the `Tools/SDK Manager` menu item. Note that these SDK version numbers are specified in the `app/build.gradle.kts` gradle script, and the app `AndroidManifest.xml`.
 
 ![Android SDK Manager](media/targetSdkVersion-34.png 'Android SDK Manager')
 
@@ -144,17 +144,17 @@ These SDK versions can be downloaded and installed via the Android Studio SDK Ma
 
 [Wit.ai](https://wit.ai/) is used by this application to perform speech to text transcription, as well as understand what the user is intending. Follow these steps to ensure that Wit.ai integration will properly function.
 
-1. **Follow the Quickstart guide** [here](https://wit.ai/docs/quickstart) to setup your Wit.ai app and train it. Note that the Wit.ai intents, entities, and traits used by this application are defined as enumerations in the Android project files located in the `:app/com.meta.pixelandtexel.geovoyage/services/witai/enums` directory. You may choose to name the intents, entities, and traits defined in your Wit.ai app to match the names of the enumeration values in those code files, or rename the values in the code. To learn more about this application's integration of Wit.ai and its usage, see [this documentation](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-process-audio).
+1. **Follow the Quickstart guide** [here](https://wit.ai/docs/quickstart) to set up your Wit.ai app and train it. Note that the Wit.ai intents, entities, and traits used by this application are defined as enumerations in the Android project files located in the `:app/com.meta.pixelandtexel.geovoyage/services/witai/enums` directory. You may choose to name the intents, entities, and traits defined in your Wit.ai app to match the names of the enumeration values in those code files, or rename the values in the code. To learn more about this application's integration of Wit.ai and its usage, see [this documentation](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-process-audio).
 2. **Get your Wit.ai app Client Access Token** from the Settings page of your app in the Wit.ai web dashboard. This can be accessed by selecting the `Management/Settings` menu item on the left side. Once you've opened the Settings page, you should see the Client Access Token value there. You'll need it in the below step on [adding your app secrets](#adding-your-app-secrets) to the Android project. The Wit.ai HTTP API uses OAuth2 to authenticate requests via a bearer token in the `Authorization` header value. Note that access tokens are app and user specific, and should not be shared or posted publicly. More info on Wit.ai HTTP API can be found [here](https://wit.ai/docs/http/20240304/).
 
 ## Setup AWS Bedrock (or Ollama server)
 
-A core part of this application is its ability to prompt Meta's Llama 3 8B LLM. This is used for several purposed throughout the application. To read more detail about that, see [this page](/Documentation/Llama3.md). In order to build and run this application, you'll need to take these steps to ensure Llama querying functions.
+A core part of this application is its ability to prompt Meta's Llama 3 8B LLM. This is used for several purposes throughout the application. To read more detail about that, see [this page](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-query-llama). In order to build and run this application, you'll need to take these steps to ensure Llama querying functions.
 
 This application has built-in support for invoking the Llama via two different methods:
 
 - [AWS Bedrock](https://aws.amazon.com/bedrock/) – AWS's solution for invoking various LLM models, as well as the capability to train and upload your own model for querying. This option has a [cost](https://aws.amazon.com/bedrock/pricing/) associated with it which should be considered.
-- [Ollama](https://ollama.com/) is a free option, but requires you to setup a server to run the tool. You could also run ollama locally on a device on your network and connect to it using the device's IP address and port number – an option we found useful during development. See [the instruction below](#running-ollama-locally-via-docker) on running ollama via docker. Alternatively, you can use the executable available on the ollama website.
+- [Ollama](https://ollama.com/) is a free option, but requires you to set up a server to run the tool. You could also run ollama locally on a device on your network and connect to it using the device's IP address and port number – an option we found useful during development. See [the instruction below](#running-ollama-locally-via-docker) on running ollama via docker. Alternatively, you can use the executable available on the ollama website.
 
 ### AWS Bedrock Setup
 
@@ -213,7 +213,7 @@ This will download the latest llama3 model locally in the `data` folder and expo
 
 1. Sign up or in to the [Google Cloud Platform](https://console.cloud.google.com/).
 2. Navigate to your Google Maps Platform [APIs & Services page](https://console.cloud.google.com/google/maps-apis/api-list), and enable the "Geocoding API" and "Map Tiles API".
-3. Navigate to the Google Maps Playform [Credentials page](https://console.cloud.google.com/google/maps-apis/credentials) and create a new API key by selecting the "Create Credentials" dropdown at the top menu bar, and selecting the "API key" option.
+3. Navigate to the Google Maps Platform [Credentials page](https://console.cloud.google.com/google/maps-apis/credentials) and create a new API key by selecting the "Create Credentials" dropdown at the top menu bar, and selecting the "API key" option.
    1. After creating it, select the "Edit API key" option from the Actions list which becomes visible after clicking on the kebab button on the right side of your new API key in the "API Keys" list in the middle of the webpage.
    2. Name the key something meaningful – e.g. "Geo Voyage Maps API Key"
    3. Restrict the key to the APIs you enabled in the previous steps.
@@ -333,14 +333,12 @@ Optional:
 
 - [Ollama](https://ollama.com/) – an alternative to AWS Bedrock, for serving your Llama 3 model over local network, or for connecting to a remote server running ollama.
 
-## Android Depenencies
+## Android Dependencies
 
-These dependencies and there corresponding versions can be found in the `app/build.gradle.kts` and `libs.versions.toml` files in the Android project.
+These dependencies and their corresponding versions can be found in the `app/build.gradle.kts` and `libs.versions.toml` files in the Android project.
 
 - Kotlin 2.0.0
-- Meta's Spatial Framework
-  - [OkHttp3](https://square.github.io/okhttp/) – for executing HTTP requests
-  - [SoLoader](https://github.com/facebook/SoLoader) – for loading native code
+- [Meta's Spatial Framework](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-overview)
 - [gson](https://github.com/google/gson) – for deserializing JSON response objects from the aforementioned cloud services
 - [compose-markdown](https://github.com/jeziellago/compose-markdown) – for displaying markdown-formatted responses from Llama3 in Jetpack Compose
 - [AWS Kotlin SDK](https://github.com/awslabs/aws-sdk-kotlin) – for integrating AWS Bedrock for Llama 3 querying
