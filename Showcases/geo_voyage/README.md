@@ -12,7 +12,7 @@ Some of the goals of this project are to:
 2. Create an open source project that demonstrates best practices and clean development.
 3. Provide documentation that helps developers navigate the project and understand the intricacies of the development – including detailed breakdowns of how different aspects of the project have been implemented, how they were optimized for Quest, and best practices for content creation.
 
-This document also serves as a guide for setting up the app to build and run locally on your machine, and provide a high-level overview of the application architecture and features. More in-depth documentation on the integration of cloud services and implementation of core systems within the app can be found [here](/Documentation/README.md).
+This document also serves as a guide for setting up the app to build and run locally on your machine, and provide a high-level overview of the application architecture and features. More in-depth documentation on the integration of cloud services and implementation of core systems within the app can be found in the official Horizon documentation [here](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-overview).
 
 # Table of Contents
 
@@ -114,13 +114,12 @@ In order to build and run this application, ensure that you have one of the Ques
 
 # Key Components
 
-The main features of this application can be divided into the following 5 areas. Each of these areas has detailed documentation on thier implementation and usage in the pages respectively linked.
+The main features of this application can be divided into the following 4 areas. Each of these areas has detailed documentation on thier implementation and usage in the pages respectively linked.
 
-1. [Custom Components & Systems](/Documentation/CustomECS.md)
-2. [Wit.ai Integration](/Documentation/WitAi.md)
-3. [Llama 3 Querying](/Documentation/Llama3.md)
-4. [Google Maps API Integration](/Documentation/GoogleMapsAPI.md)
-5. [MR to VR Transition](/Documentation/GoogleMapsAPI.md#map-tiles-imagery-for-mr-to-vr-transition)
+1. [Wit.ai Integration](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-process-audio)
+2. [Llama 3 Querying](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-query-llama)
+3. [Custom Components & Systems](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-component-system)
+4. [VR & Google Maps API Integration](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-transport-users)
 
 # Getting Started
 
@@ -145,7 +144,7 @@ These SDK versions can be downloaded and installed via the Android Studio SDK Ma
 
 [Wit.ai](https://wit.ai/) is used by this application to perform speech to text transcription, as well as understand what the user is intending. Follow these steps to ensure that Wit.ai integration will properly function.
 
-1. **Follow the Quickstart guide** [here](https://wit.ai/docs/quickstart) to setup your Wit.ai app and train it. Note that the Wit.ai intents, entities, and traits used by this application are defined as enumerations in the Android project files located in the `:app/com.meta.pixelandtexel.geovoyage/services/witai/enums` directory. You may choose to name the intents, entities, and traits defined in your Wit.ai app to match the names of the enumeration values in those code files, or rename the values in the code. To learn more about this application's integration of Wit.ai and its usage, see [this documentation](/Documentation/WitAi.md).
+1. **Follow the Quickstart guide** [here](https://wit.ai/docs/quickstart) to setup your Wit.ai app and train it. Note that the Wit.ai intents, entities, and traits used by this application are defined as enumerations in the Android project files located in the `:app/com.meta.pixelandtexel.geovoyage/services/witai/enums` directory. You may choose to name the intents, entities, and traits defined in your Wit.ai app to match the names of the enumeration values in those code files, or rename the values in the code. To learn more about this application's integration of Wit.ai and its usage, see [this documentation](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-process-audio).
 2. **Get your Wit.ai app Client Access Token** from the Settings page of your app in the Wit.ai web dashboard. This can be accessed by selecting the `Management/Settings` menu item on the left side. Once you've opened the Settings page, you should see the Client Access Token value there. You'll need it in the below step on [adding your app secrets](#adding-your-app-secrets) to the Android project. The Wit.ai HTTP API uses OAuth2 to authenticate requests via a bearer token in the `Authorization` header value. Note that access tokens are app and user specific, and should not be shared or posted publicly. More info on Wit.ai HTTP API can be found [here](https://wit.ai/docs/http/20240304/).
 
 ## Setup AWS Bedrock (or Ollama server)
@@ -312,7 +311,7 @@ This panel floats to the right of the globe, and is the main navigation means fo
 
 ![Pin model](media/pin-model.png 'Pin model')
 
-**Landmark Entities** – In addition to the 3D mesh and panel entities listed above, a number of mesh entities are created when the app first begins in the `LandmarkSpawnSystem.kt` file (more info on that [here](/Documentation/CustomECS.md)). Each of these entities represent different iconic landmarks around the world, and appear across all of the continents.
+**Landmark Entities** – In addition to the 3D mesh and panel entities listed above, a number of mesh entities are created when the app first begins in the `LandmarkSpawnSystem.kt` file (more info on that [here](https://developers.meta.com/horizon/documentation/spatial-sdk/geo-voyage-component-system#landmarkspawn)). Each of these entities represent different iconic landmarks around the world, and appear across all of the continents.
 
 # Other Scenes
 
