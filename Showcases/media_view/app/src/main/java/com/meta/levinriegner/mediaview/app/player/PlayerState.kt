@@ -14,5 +14,7 @@ sealed class PlayerState {
 
   data class Video2D(val uri: Uri) : PlayerState()
 
+  data class Video360(val uri: Uri) : PlayerState()
+
   data class Error(val reason: String) : PlayerState()
 }

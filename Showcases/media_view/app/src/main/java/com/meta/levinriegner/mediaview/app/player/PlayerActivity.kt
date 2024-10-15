@@ -79,7 +79,11 @@ class PlayerActivity : ComponentActivity() {
             }
 
             is PlayerState.Video2D -> {
-              VideoView(uri = state.uri)
+              VideoView(uri = state.uri, is360Video = false)
+            }
+
+            is PlayerState.Video360 -> {
+              VideoView(uri = state.uri, is360Video = true)
             }
 
             is PlayerState.Error -> {
