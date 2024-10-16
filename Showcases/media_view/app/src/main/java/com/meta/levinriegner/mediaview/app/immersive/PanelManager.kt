@@ -92,9 +92,9 @@ class PanelManager(
                         Pose(
                             Vector3(
                                 0f,
-                                (0.45f / 2) +
+                                (0.49f / 2) +
                                     0.1f +
-                                    (0.45f) +
+                                    (0.49f) +
                                     (dpToPx(Dimens.medium.value.toInt()) * PIXELS_TO_METERS * 2),
                                 0f), // Gallery height / 2
                             Quaternion(0f, 0f, 0f))))
@@ -116,7 +116,7 @@ class PanelManager(
                                   Pose(
                                       Vector3(
                                           0f,
-                                          (0.45f / 2) +
+                                          (0.49f / 2) +
                                               (0.1f / 2) +
                                               (dpToPx(Dimens.medium.value.toInt()) *
                                                   PIXELS_TO_METERS),
@@ -151,8 +151,6 @@ class PanelManager(
   private fun createGalleryPanel(ent: Entity): PanelSceneObject {
     val config =
         PanelConfigOptions(
-            width = 0.78f,
-            height = 0.45f,
             enableLayer = true,
             enableTransparent = false,
             includeGlass = false,
@@ -163,8 +161,6 @@ class PanelManager(
   private fun createMediaFilterPanel(ent: Entity): PanelSceneObject {
     val config =
         PanelConfigOptions(
-            width = 0.175f,
-            height = 0.45f,
             enableLayer = true,
             enableTransparent = false,
             includeGlass = false,
@@ -188,8 +184,6 @@ class PanelManager(
   private fun createGalleryMenuPanel(ent: Entity): PanelSceneObject {
     val config =
         PanelConfigOptions(
-            width = 0.5f,
-            height = 0.1f,
             enableLayer = true,
             enableTransparent = false,
             includeGlass = false,

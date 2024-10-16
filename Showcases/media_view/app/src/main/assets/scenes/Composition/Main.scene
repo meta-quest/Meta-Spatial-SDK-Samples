@@ -17,7 +17,7 @@ entities:
           rotation.format: Euler
           scale:
             - 0.779999971
-            - 0.449999988
+            - 0.49000001
             - 1
           children:
             - ref:mediaTypesFilter
@@ -38,7 +38,7 @@ entities:
           rotation.format: Euler
           scale:
             - 0.174999997
-            - 0.449999988
+            - 0.49000001
             - 1
           translation:
             - -0.48453939
@@ -62,7 +62,7 @@ entities:
             - 1
           translation:
             - 0
-            - 0.28212285
+            - 0.300000012
             - 0
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/panel_id_gallery_menu"

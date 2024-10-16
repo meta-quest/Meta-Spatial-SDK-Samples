@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -227,9 +228,9 @@ private fun MediaGrid(
     modifier: Modifier = Modifier,
     onItemClicked: (MediaModel) -> Unit,
 ) {
-  LazyVerticalGrid(
+  LazyHorizontalGrid(
       modifier = modifier,
-      columns = GridCells.FixedSize(Dimens.galleryItemSize),
+      rows = GridCells.FixedSize(Dimens.galleryItemSize),
       contentPadding = PaddingValues(Dimens.large),
       verticalArrangement = Arrangement.spacedBy(Dimens.small),
       horizontalArrangement = Arrangement.spacedBy(Dimens.small),
