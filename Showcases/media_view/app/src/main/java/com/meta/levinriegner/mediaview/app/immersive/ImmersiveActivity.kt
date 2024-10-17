@@ -144,6 +144,11 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
       Timber.w("Upload panel is already open")
       return
     }
+
+    // Register Panel
+    registerPanel(panelManager.provideUploadPanelRegistration())
+
+    // Create Entity
     val ent = panelManager.createUploadEntity()
     uploadPanelEntityId = ent.id
   }

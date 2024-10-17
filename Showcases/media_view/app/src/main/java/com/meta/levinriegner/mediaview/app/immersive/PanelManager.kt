@@ -46,6 +46,7 @@ import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
 import com.meta.spatial.toolkit.createPanelEntity
 import timber.log.Timber
+import java.util.Vector
 
 class PanelManager(
     private val panelTransformations: PanelTransformations,
@@ -56,6 +57,8 @@ class PanelManager(
 
   private val playerPanelDistance = 0.8f
   private val immersiveMenuHeight = 0.1f
+    // TODO: Tweak this number
+    private val uploadPanelDistance = 0.8f
 
   fun providePanelRegistrations(): List<PanelRegistration> {
     return listOf(
@@ -90,6 +93,14 @@ class PanelManager(
         },
     )
   }
+
+    fun provideUploadPanelRegistration(): PanelRegistration {
+        return PanelCreator(R.integer.panel_id_upload_activity) { ent ->
+            // TODO: Tweak these numbers
+            panelTransformations.applyTransform(ent, uploadPanelDistance, Vector3(0f, 0f, 0.8f))
+            createUploadPanel(ent)
+        }
+    }
 
   fun providePlayerPanelRegistration(mediaModel: MediaModel): PanelRegistration {
     return PanelCreator(mediaModel.panelId()) { ent ->
