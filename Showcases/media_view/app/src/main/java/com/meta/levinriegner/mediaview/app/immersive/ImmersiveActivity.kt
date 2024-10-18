@@ -26,21 +26,25 @@ import timber.log.Timber
 
 class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
 
-  companion object {
-    const val MAX_OPEN_MEDIA = 5
-  }
+    companion object {
+        const val MAX_OPEN_MEDIA = 5
+    }
 
-  // Dependencies
-  private val panelManager: PanelManager by lazy {
-    PanelManager(PanelTransformations(EnvironmentEntities(), systemManager), scene, spatialContext)
-  }
+    // Dependencies
+    private val panelManager: PanelManager by lazy {
+        PanelManager(
+            PanelTransformations(EnvironmentEntities(), systemManager),
+            scene,
+            spatialContext
+        )
+    }
 
-  // State
-  private var _openMedia =
-      MutableStateFlow<Map<Long, MediaModel>>(emptyMap()) // Uses MediaModel.id as key
-  val openMedia = _openMedia.asStateFlow()
-  private var uploadPanelEntityId: Long? = null
-  private val activityScope = CoroutineScope(Dispatchers.Main)
+    // State
+    private var _openMedia =
+        MutableStateFlow<Map<Long, MediaModel>>(emptyMap()) // Uses MediaModel.id as key
+    val openMedia = _openMedia.asStateFlow()
+    private var uploadPanelEntityId: Long? = null
+    private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
     val features = mutableListOf<SpatialFeature>(VRFeature(this))
@@ -50,15 +54,15 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     return features
   }
 
-  override fun registerPanels(): List<PanelRegistration> {
-    return panelManager.providePanelRegistrations()
-  }
+    override fun registerPanels(): List<PanelRegistration> {
+        return panelManager.providePanelRegistrations()
+    }
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    // Disable Locomotion
-    systemManager.unregisterSystem<LocomotionSystem>()
-  }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        // Disable Locomotion
+        systemManager.unregisterSystem<LocomotionSystem>()
+    }
 
   override fun onSceneReady() {
     super.onSceneReady()
@@ -90,68 +94,68 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
 
   // region PanelDelegate
 
-  override fun openMediaPanel(mediaModel: MediaModel) {
-    Timber.i("Opening media with id: ${mediaModel.id}")
-    if (_openMedia.value.containsKey(mediaModel.id)) {
-      Timber.w("Media panel is already open")
-      return
-    }
-    if (_openMedia.value.size >= MAX_OPEN_MEDIA) {
-      Timber.w("Max media panels open")
-      return
-    }
+    override fun openMediaPanel(mediaModel: MediaModel) {
+        Timber.i("Opening media with id: ${mediaModel.id}")
+        if (_openMedia.value.containsKey(mediaModel.id)) {
+            Timber.w("Media panel is already open")
+            return
+        }
+        if (_openMedia.value.size >= MAX_OPEN_MEDIA) {
+            Timber.w("Max media panels open")
+            return
+        }
 
-    // Register Panel
-    registerPanel(panelManager.providePlayerPanelRegistration(mediaModel))
-    registerPanel(panelManager.providePlayerMenuRegistration(mediaModel))
-    // Create Entity
-    val playerEntity = panelManager.createPlayerEntity(mediaModel)
-    panelManager.createPlayerMenuEntity(mediaModel, playerEntity)
+        // Register Panel
+        registerPanel(panelManager.providePlayerPanelRegistration(mediaModel))
+        registerPanel(panelManager.providePlayerMenuRegistration(mediaModel))
+        // Create Entity
+        val playerEntity = panelManager.createPlayerEntity(mediaModel)
+        panelManager.createPlayerMenuEntity(mediaModel, playerEntity)
 
-    _openMedia.value = _openMedia.value.toMutableMap().apply { put(mediaModel.id, mediaModel) }
-  }
-
-  override fun closeMediaPanel(mediaModel: MediaModel) {
-    Timber.i("Closing media with id ${mediaModel.id}")
-    panelManager.closeMediaPanel(mediaModel)
-
-    _openMedia.value = _openMedia.value.toMutableMap().apply { remove(mediaModel.id) }
-  }
-
-  override fun closeAllMedia() {
-    Timber.i("Closing all media panels")
-    panelManager.closeAllMediaPanels(_openMedia.value.values.toList())
-    _openMedia.value = emptyMap()
-  }
-
-  override fun maximizeMedia(mediaModel: MediaModel) {
-    Timber.i("Maximizing media with id ${mediaModel.id}")
-    registerPanel(panelManager.provideImmersiveMenuRegistration(mediaModel))
-    panelManager.maximizePlayerPanel(mediaModel)
-  }
-
-  override fun minimizeMedia(mediaModel: MediaModel, close: Boolean) {
-    Timber.i("Minimizing media with id ${mediaModel.id}")
-    panelManager.minimizePlayerPanel(mediaModel)
-    if (close) {
-      closeMediaPanel(mediaModel)
-    }
-  }
-
-  override fun openUploadPanel() {
-    Timber.i("Opening upload panel")
-    if (uploadPanelEntityId != null) {
-      Timber.w("Upload panel is already open")
-      return
+        _openMedia.value = _openMedia.value.toMutableMap().apply { put(mediaModel.id, mediaModel) }
     }
 
-    // Register Panel
-    registerPanel(panelManager.provideUploadPanelRegistration())
+    override fun closeMediaPanel(mediaModel: MediaModel) {
+        Timber.i("Closing media with id ${mediaModel.id}")
+        panelManager.closeMediaPanel(mediaModel)
 
-    // Create Entity
-    val ent = panelManager.createUploadEntity()
-    uploadPanelEntityId = ent.id
-  }
+        _openMedia.value = _openMedia.value.toMutableMap().apply { remove(mediaModel.id) }
+    }
+
+    override fun closeAllMedia() {
+        Timber.i("Closing all media panels")
+        panelManager.closeAllMediaPanels(_openMedia.value.values.toList())
+        _openMedia.value = emptyMap()
+    }
+
+    override fun maximizeMedia(mediaModel: MediaModel) {
+        Timber.i("Maximizing media with id ${mediaModel.id}")
+        registerPanel(panelManager.provideImmersiveMenuRegistration(mediaModel))
+        panelManager.maximizePlayerPanel(mediaModel)
+    }
+
+    override fun minimizeMedia(mediaModel: MediaModel, close: Boolean) {
+        Timber.i("Minimizing media with id ${mediaModel.id}")
+        panelManager.minimizePlayerPanel(mediaModel)
+        if (close) {
+            closeMediaPanel(mediaModel)
+        }
+    }
+
+    override fun openUploadPanel() {
+        Timber.i("Opening upload panel")
+        if (uploadPanelEntityId != null) {
+            Timber.w("Upload panel is already open")
+            return
+        }
+
+        // Register Panel
+        registerPanel(panelManager.provideUploadPanelRegistration())
+
+        // Create Entity
+        val ent = panelManager.createUploadEntity()
+        uploadPanelEntityId = ent.id
+    }
 
   override fun closeUploadPanel() {
     Timber.i("Closing upload panel")
