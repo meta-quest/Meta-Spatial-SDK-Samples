@@ -23,26 +23,6 @@ class PanelTransformations(
     private val systemManager: SystemManager,
 ) {
 
-  fun setScale(entity: Entity, scaleValues: Vector3) {
-    if (entity.hasComponent<Scale>()) {
-      val scale = entity.getComponent<Scale>()
-      scale.scale = scaleValues
-      entity.setComponent(scale)
-    }
-  }
-
-  // Delay the position offset to wait for the accurate head pose to be available
-  fun applyTransformWithDelay(
-      entity: Entity,
-      distance: Float,
-      positionOffset: Vector3,
-      applyTilt: Boolean = false
-  ) {
-    val delayMillis: Long = 500
-    Handler(Looper.getMainLooper())
-        .postDelayed({ applyTransform(entity, distance, positionOffset, applyTilt) }, delayMillis)
-  }
-
   fun applyTransform(
       entity: Entity,
       distance: Float,

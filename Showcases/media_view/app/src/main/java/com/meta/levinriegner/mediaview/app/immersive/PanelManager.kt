@@ -54,16 +54,12 @@ class PanelManager(
 ) {
   private val zIndexMenu = 99
 
-  private val galleryPanelDistance = 0.9f
   private val playerPanelDistance = 0.8f
   private val immersiveMenuHeight = 0.1f
 
   fun providePanelRegistrations(): List<PanelRegistration> {
     return listOf(
         PanelCreator(R.integer.panel_id_gallery_activity) { ent ->
-          // Set initial transform based on head pose
-          panelTransformations.applyTransformWithDelay(
-              ent, galleryPanelDistance, Vector3(0f, -0.5f, 0f), applyTilt = true)
           createGalleryPanel(ent)
         },
         PanelCreator(R.integer.panel_id_media_filter_activity) { ent ->
@@ -113,7 +109,7 @@ class PanelManager(
     }
   }
 
-  private fun createGalleryPanel(ent: Entity): PanelSceneObject {
+  fun createGalleryPanel(ent: Entity): PanelSceneObject {
     val config =
         PanelConfigOptions(
             enableLayer = true,
