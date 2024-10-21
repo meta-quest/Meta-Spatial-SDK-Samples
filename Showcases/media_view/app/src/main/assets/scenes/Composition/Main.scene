@@ -41,7 +41,7 @@ entities:
             - 0.49000001
             - 1
           translation:
-            - -0.48453939
+            - 0.49000001
             - 0
             - 0
         com.meta.spatial.toolkit.Panel:
@@ -62,7 +62,7 @@ entities:
             - 1
           translation:
             - 0
-            - 0.300000012
+            - 0.270000011
             - 0
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/panel_id_gallery_menu"

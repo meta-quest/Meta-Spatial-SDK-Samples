@@ -67,18 +67,6 @@ class PanelManager(
           createGalleryPanel(ent)
         },
         PanelCreator(R.integer.panel_id_media_filter_activity) { ent ->
-          // Parent the media filter to the gallery
-          Handler(Looper.getMainLooper())
-              .postDelayed(
-                  {
-                    Query.where { has(Panel.id) }
-                        .eval()
-                        .firstOrNull { it.id.toInt() == R.integer.panel_id_gallery_activity }
-                        ?.let { ent.setComponent(TransformParent(it)) }
-                    ent.setComponent(
-                        Transform(Pose(Vector3(-0.49f, 0f, 0f), Quaternion(0f, 0f, 0f))))
-                  },
-                  1000)
           createMediaFilterPanel(ent)
         },
         PanelCreator(R.integer.panel_id_upload_activity) { ent ->
@@ -102,29 +90,6 @@ class PanelManager(
           createUploadPanel(ent)
         },
         PanelCreator(R.integer.panel_id_gallery_menu) { ent ->
-          // Parent the menu to the gallery
-          Handler(Looper.getMainLooper())
-              .postDelayed(
-                  {
-                    Query.where { has(Panel.id) }
-                        .eval()
-                        .firstOrNull { it.id.toInt() == R.integer.panel_id_gallery_activity }
-                        ?.let {
-                          ent.setComponent(TransformParent(it))
-                          ent.setComponent(
-                              Transform(
-                                  Pose(
-                                      Vector3(
-                                          0f,
-                                          (0.49f / 2) +
-                                              (0.1f / 2) +
-                                              (dpToPx(Dimens.medium.value.toInt()) *
-                                                  PIXELS_TO_METERS),
-                                          0f), // Gallery height /2
-                                      Quaternion(0f, 0f, 0f))))
-                        }
-                  },
-                  1000)
           createGalleryMenuPanel(ent)
         },
     )
