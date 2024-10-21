@@ -4,12 +4,15 @@ package com.meta.levinriegner.mediaview.app.immersive
 
 import android.net.Uri
 import android.os.Bundle
+import com.meta.levinriegner.mediaview.BuildConfig
+import com.meta.levinriegner.mediaview.R
 import com.meta.levinriegner.mediaview.app.immersive.compose.ComponentAppSystemActivity
 import com.meta.levinriegner.mediaview.app.immersive.entity.EnvironmentEntities
 import com.meta.levinriegner.mediaview.app.immersive.entity.PanelTransformations
-import com.meta.levinriegner.mediaview.app.immersive.system.TransformAtHead
+import com.meta.levinriegner.mediaview.app.immersive.system.TransformAtHeadSystem
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
+import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.toolkit.PanelRegistration
@@ -41,7 +44,11 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
-    return listOf(VRFeature(this))
+    val features = mutableListOf<SpatialFeature>(VRFeature(this))
+    if (BuildConfig.DEBUG) {
+      features.add(CastInputForwardFeature(this))
+    }
+    return features
   }
 
   override fun registerPanels(): List<PanelRegistration> {
