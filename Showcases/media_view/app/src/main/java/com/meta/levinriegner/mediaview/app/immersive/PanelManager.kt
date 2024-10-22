@@ -109,7 +109,7 @@ class PanelManager(
     }
   }
 
-  fun createGalleryPanel(ent: Entity): PanelSceneObject {
+    private fun createGalleryPanel(ent: Entity): PanelSceneObject {
     val config =
         PanelConfigOptions(
             enableLayer = true,

@@ -15,7 +15,7 @@ import com.meta.spatial.toolkit.Visible
 
 // Position the panel in front of the avatar's head
 // once it becomes available
-class TransformAtHead(
+class TransformAtHeadSystem(
     private val compositionName: String,
     private val panelNodeName: String,
     private val zOffset: Float,
