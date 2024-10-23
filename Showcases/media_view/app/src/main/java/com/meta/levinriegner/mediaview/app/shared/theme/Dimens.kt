@@ -23,6 +23,6 @@ class Dimens {
     const val playerMenuTotalWidth = 204
     const val playerMenuTotalHeight = 172 + playerMenuButtonSize + 16
 
-    val galleryItemSize = 122.dp
+    val galleryItemSize = 120.dp
   }
 }

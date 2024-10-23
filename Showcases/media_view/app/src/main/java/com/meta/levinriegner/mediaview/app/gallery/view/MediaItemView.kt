@@ -43,6 +43,7 @@ import kotlinx.coroutines.flow.map
 @Composable
 fun MediaItemView(
     item: MediaModel,
+    showMetadata: Boolean,
     modifier: Modifier = Modifier,
     onItemClicked: (MediaModel) -> Unit,
 ) {
@@ -56,10 +57,10 @@ fun MediaItemView(
           .collectAsState(emptySet())
   Box(
       modifier =
-          modifier
-              .size(Dimens.galleryItemSize)
-              .clip(RoundedCornerShape(Dimens.radiusMedium))
-              .clickable { onItemClicked(item) }) {
+      modifier
+          .size(Dimens.galleryItemSize)
+          .clip(RoundedCornerShape(Dimens.radiusMedium))
+          .clickable { onItemClicked(item) }) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier) {
           AsyncImage(
               model =
@@ -103,21 +104,41 @@ fun MediaItemView(
           }
         }
 
+      // TODO: Style
+      if (showMetadata) {
+          Box(
+              modifier =
+              Modifier
+                  .matchParentSize()
+                  .background(AppColor.GradientInEnvironmentStart)
+                  .blur(radius = 16.dp)
+                  .clip(RoundedCornerShape(5.dp)),
+          )
+          Column {
+              Text(text = "Name: ${item.name}")
+          }
+      }
+
         if (openMediaIds.value.contains(item.id)) {
           Box(
               contentAlignment = Alignment.Center,
               modifier =
-                  Modifier.matchParentSize()
-                      .background(AppColor.GradientInEnvironmentStart)
-                      .blur(radius = 16.dp)
-                      .clip(RoundedCornerShape(5.dp)),
+              Modifier
+                  .matchParentSize()
+                  .background(AppColor.GradientInEnvironmentStart)
+                  .blur(radius = 16.dp)
+                  .clip(RoundedCornerShape(5.dp)),
           ) {}
           Box(
               contentAlignment = Alignment.Center,
-              modifier = Modifier.matchParentSize().clip(RoundedCornerShape(5.dp)),
+              modifier = Modifier
+                  .matchParentSize()
+                  .clip(RoundedCornerShape(5.dp)),
           ) {
             Text(
-                modifier = Modifier.padding(horizontal = 5.dp).fillMaxWidth(),
+                modifier = Modifier
+                    .padding(horizontal = 5.dp)
+                    .fillMaxWidth(),
                 text = "Media in\nEnvironment",
                 fontSize = 10.sp,
                 fontWeight = FontWeight.Bold,
