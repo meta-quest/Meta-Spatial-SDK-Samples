@@ -69,6 +69,23 @@ android {
             ?: "\"XXXXXXXXXXXX\"")
   }
 
+  signingConfigs {
+    getByName("debug") {
+      keyAlias = "androiddebugkey"
+      keyPassword = "android"
+      storeFile = file("../.debug/debug.jks")
+      storePassword = "android"
+    }
+    if (keystoreProperties["keystoreFile"] != null) {
+      create("release") {
+        keyAlias = keystoreProperties.getProperty("keyAlias")
+        keyPassword = keystoreProperties.getProperty("keyPassword")
+        storeFile = file(keystoreProperties.getProperty("keystoreFile"))
+        storePassword = keystoreProperties.getProperty("keystorePassword")
+      }
+    }
+  }
+
   buildTypes {
     debug {
       isMinifyEnabled = false
