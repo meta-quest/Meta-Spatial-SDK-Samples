@@ -13,6 +13,7 @@ plugins {
   id("com.google.dagger.hilt.android")
   id("kotlin-parcelize")
   id("com.meta.spatial.plugin")
+  id("com.datadoghq.dd-sdk-android-gradle-plugin")
 }
 
 // Signing
@@ -46,9 +47,10 @@ android {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }
 
-    // Google Drive Keys
+    // API Keys
     val properties = Properties()
     properties.load(project.rootProject.file("local.properties").inputStream())
+    // Google Drive Keys
     buildConfigField(
         "String",
         "DRIVE_CLIENT_ID",
@@ -67,6 +69,19 @@ android {
         System.getenv("DRIVE_APP_ID")
             ?: properties.getProperty("DRIVE_APP_ID")
             ?: "\"XXXXXXXXXXXX\"")
+    // Datadog Keys
+    buildConfigField(
+      "String",
+      "DATADOG_CLIENT_TOKEN",
+      System.getenv("DATADOG_CLIENT_TOKEN")
+        ?: properties.getProperty("DATADOG_CLIENT_TOKEN")
+        ?: "\"XXXXXXXXXXXX\"")
+    buildConfigField(
+      "String",
+      "DATADOG_APPLICATION_ID",
+      System.getenv("DATADOG_APPLICATION_ID")
+        ?: properties.getProperty("DATADOG_APPLICATION_ID")
+        ?: "\"XXXXXXXXXXXX\"")
   }
 
   signingConfigs {
@@ -172,6 +187,10 @@ dependencies {
   androidTestImplementation("androidx.compose.ui:ui-test-junit4")
   debugImplementation("androidx.compose.ui:ui-tooling")
   debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+  // Monitoring
+  implementation("com.datadoghq:dd-sdk-android-rum:2.14.0")
+  implementation("com.datadoghq:dd-sdk-android-logs:2.14.0")
 }
 
 val sceneProjectPath = "app/src/main/assets/scenes"

@@ -55,6 +55,7 @@ import androidx.media3.ui.PlayerView
 import com.meta.levinriegner.mediaview.app.shared.theme.AppColor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
+import timber.log.Timber
 import java.util.Locale
 import java.util.concurrent.TimeUnit
 
@@ -148,10 +149,12 @@ fun VideoView(
                 when {
                     exoPlayer.isPlaying -> {
                         // pause the video
+                        Timber.i("Pause pressed")
                         exoPlayer.pause()
                     }
 
                     !exoPlayer.isPlaying && playbackState == STATE_ENDED -> {
+                        Timber.i("Replay pressed")
                         exoPlayer.seekTo(0)
                         exoPlayer.playWhenReady = true
                         shouldShowControls = false
@@ -160,6 +163,7 @@ fun VideoView(
                     else -> {
                         // play the video
                         // it's already paused
+                        Timber.i("Play pressed")
                         exoPlayer.play()
                         shouldShowControls = false
                     }
