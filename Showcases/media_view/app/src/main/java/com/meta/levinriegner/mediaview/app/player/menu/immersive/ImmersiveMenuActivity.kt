@@ -61,16 +61,16 @@ class ImmersiveMenuActivity : ComponentActivity() {
                             listOf(AppColor.GradientStart, AppColor.GradientEnd))),
             horizontalArrangement = Arrangement.SpaceBetween) {
               Column(
-                  modifier = Modifier.align(Alignment.CenterVertically),
+                  modifier = Modifier.padding(horizontal = 15.dp).align(Alignment.CenterVertically),
               ) {
                 Text(
-                    modifier = Modifier.offset(15.dp, 0.dp),
+                    modifier = Modifier,
                     text = "You are in Immersive View",
                     color = AppColor.White)
               }
 
               Column(
-                  modifier = Modifier.align(Alignment.CenterVertically),
+                  modifier = Modifier.padding(horizontal = 15.dp).align(Alignment.CenterVertically),
               ) {
                 OutlinedButton(
                     colors =
@@ -85,25 +85,6 @@ class ImmersiveMenuActivity : ComponentActivity() {
                             contentDescription = "Minimize")
                         Spacer(modifier = Modifier.size(Dimens.xSmall))
                         Text("Minimize")
-                      }
-                    }
-              }
-              Column(
-                  modifier = Modifier.offset((-20).dp, 0.dp).align(Alignment.CenterVertically),
-              ) {
-                OutlinedButton(
-                    colors =
-                        ButtonDefaults.buttonColors(
-                            contentColor = AppColor.White,
-                            containerColor = Color.Transparent,
-                        ),
-                    onClick = { viewModel.closeImmersiveMedia() }) {
-                      Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.icon_close),
-                            contentDescription = "Close")
-                        Spacer(modifier = Modifier.size(Dimens.xSmall))
-                        Text("Close")
                       }
                     }
               }
