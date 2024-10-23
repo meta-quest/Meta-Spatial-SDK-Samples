@@ -2,34 +2,31 @@
 <!--
   ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
   -->
-<RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-  android:orientation="vertical"
->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/layout_activity_upload_bg">
 
     <RelativeLayout
     android:id="@+id/webViewContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_below="@id/toolbar"
-  >
+        android:layout_marginHorizontal="@dimen/upload_web_view_horizontal_padding"
+        android:layout_marginBottom="@dimen/upload_web_view_panel_radius"
 
+  >
         <WebView
       android:id="@+id/webView"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
     />
-
     </RelativeLayout>
 
     <Toolbar
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:navigationIcon="@android:drawable/ic_menu_close_clear_cancel"
-  />
+    android:navigationIcon="@android:drawable/ic_menu_close_clear_cancel" />
 </RelativeLayout>

@@ -3,4 +3,8 @@
   -->
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="rounded_panel_border_width">3dp</dimen>
+    <dimen name="upload_web_view_vertical_padding">16dp</dimen>
+    <dimen name="upload_web_view_horizontal_padding">16dp</dimen>
+    <dimen name="upload_web_view_panel_radius">20dp</dimen>
 </resources>
