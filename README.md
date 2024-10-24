@@ -66,6 +66,43 @@ The [Showcases](/Showcases) folder contains three apps which are deployed to the
 
 The documentation for Meta Spatial SDK can be found [here](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-overview).
 
+## 0.5.1 Updates
+
+### Breaking Changes
+
+- Removed the old Anchor Systems in toolkit, please use MRUK(Mixed Reality Utility Kit) in Meta Spatial SDK
+
+### Improvements
+
+- Added support for Secure layers
+Layers can now be marked as secure making them appear black while recording. This is possible at a global level or an individual layer level.
+
+```kotlin
+// globally enable
+scene.setSecureLayers(true)
+
+// individually enable
+myLayerConfig.secure = true
+```
+
+In addition, this value can be set on a global level using your AndroidManifest
+
+```xml
+<meta-data
+      android:name="com.meta.spatial.SECURE_LAYERS"
+      android:value="true"
+/>
+```
+
+- Init order issue for FeatureManager
+An overridden registerFeatures() was not able to reference the top level class variables. This was because the initialization was happening very early in the creation of a Feature. This was resolved by moving initialization later in activity startup.
+- Memory leak on panel destruction
+Destroy the activity panel by calling lifecycle events onPause, onStop, onDestroy sequentially.
+Release the panel scene texture and mesh as panel destruction, which reclaims the resource early.
+- Fixed the issue that the panel faced the user backwards when grabbed from behind. The panel will now always face the user correctly, regardless of the angle of grabbing.
+- Fix the grabbable bug for the cylinder panel when the user is close to the panel. When the user is very close to the panel, i.e., the center of the cylinder is behind the user, the grabbable system does not work well for rotation.
+- Fix compatibility issues with Android Studio Ladybug
+
 ## License
 
 The Meta Spatial SDK Samples package is multi-licensed.
