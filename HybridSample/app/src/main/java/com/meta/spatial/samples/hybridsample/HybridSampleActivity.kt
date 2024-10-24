@@ -19,6 +19,7 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.runtime.NetworkedAssetLoader
+import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Material
@@ -64,6 +65,8 @@ class HybridSampleActivity : AppSystemActivity() {
 
   override fun onSceneReady() {
     super.onSceneReady()
+
+    scene.setReferenceSpace(ReferenceSpace.LOCAL_FLOOR)
 
     scene.setLightingEnvironment(
         ambientColor = Vector3(0f),

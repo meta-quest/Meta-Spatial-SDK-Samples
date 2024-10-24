@@ -8,7 +8,9 @@ plugins {
   id("org.jetbrains.kotlin.android")
   id("org.jetbrains.kotlin.plugin.serialization")
   id("com.meta.spatial.plugin")
-  id("com.google.devtools.ksp") version "1.8.10-1.0.9" apply true
+  // plugin.compose version must match your Kotlin version
+  id("org.jetbrains.kotlin.plugin.compose") version "2.0.0"
+  id("com.google.devtools.ksp") version "2.0.20-1.0.24" apply true
 }
 
 android {
@@ -42,7 +44,6 @@ android {
     compose = true
     buildConfig = true
   }
-  composeOptions { kotlinCompilerExtensionVersion = "1.4.4" }
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -51,29 +52,30 @@ android {
 }
 
 dependencies {
-  implementation("androidx.core:core-ktx:1.9.0")
-  implementation("androidx.appcompat:appcompat:1.6.1")
-  implementation("com.google.android.material:material:1.11.0")
+  implementation("androidx.core:core-ktx:1.13.1")
+  implementation("androidx.appcompat:appcompat:1.7.0")
+  implementation("com.google.android.material:material:1.12.0")
   testImplementation("junit:junit:4.13.2")
-  androidTestImplementation("androidx.test.ext:junit:1.1.5")
-  androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+  androidTestImplementation("androidx.test.ext:junit:1.2.1")
+  androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
   implementation("androidx.constraintlayout:constraintlayout:2.1.4")
   implementation("androidx.media3:media3-exoplayer:1.4.1")
   implementation("androidx.media3:media3-ui:1.4.1")
-  implementation("androidx.navigation:navigation-compose:2.8.0")
-  implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
-  implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
+  implementation("androidx.navigation:navigation-compose:2.8.2")
+  implementation("androidx.navigation:navigation-fragment-ktx:2.8.2")
+  implementation("androidx.navigation:navigation-ui-ktx:2.8.2")
 
-  implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-  implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0")
-  implementation("androidx.activity:activity-compose:1.9.0")
-  implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+  implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.6")
+  implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.6")
+  implementation("androidx.activity:activity-compose:1.9.2")
+  implementation(platform("androidx.compose:compose-bom:2024.09.03"))
   implementation("androidx.compose.ui:ui")
   implementation("androidx.compose.ui:ui-graphics")
   implementation("androidx.compose.ui:ui-tooling-preview")
   implementation("androidx.compose.material:material")
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.1")
+  implementation("androidx.compose.material:material-icons-core:1.7.4")
 
   // Meta Spatial SDK libs
   implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
@@ -84,7 +86,7 @@ dependencies {
   implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:$metaSpatialSdkVersion")
 
-  androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
+  androidTestImplementation(platform("androidx.compose:compose-bom:2024.09.03"))
   androidTestImplementation("androidx.compose.ui:ui-test-junit4")
   debugImplementation("androidx.compose.ui:ui-tooling")
   debugImplementation("androidx.compose.ui:ui-test-manifest")
