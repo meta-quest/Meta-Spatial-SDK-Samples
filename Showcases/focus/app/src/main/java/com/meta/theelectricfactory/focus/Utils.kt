@@ -3,7 +3,6 @@
 package com.meta.theelectricfactory.focus
 
 import android.app.Activity
-import android.content.pm.PackageManager
 import android.os.Handler
 import android.os.Looper
 import android.text.Editable
@@ -53,19 +52,6 @@ fun getNewUUID(): Int {
 
   Log.i("Focus", "Focus> NEW UUID GENERATED: ${uuid + 1}")
   return (uuid + 1)
-}
-
-// Request permissions to use spatial data the first time the app opens
-fun requestScenePermissionIfNeeded() {
-  val PERMISSION_USE_SCENE: String = "com.oculus.permission.USE_SCENE"
-  val REQUEST_CODE_PERMISSION_USE_SCENE: Int = 1
-  while (ImmersiveActivity.instance.get()?.checkSelfPermission(PERMISSION_USE_SCENE) !=
-      PackageManager.PERMISSION_GRANTED) {
-    Log.i("Focus", "Permission has not been granted, request " + PERMISSION_USE_SCENE)
-    ImmersiveActivity.instance
-        .get()
-        ?.requestPermissions(arrayOf(PERMISSION_USE_SCENE), REQUEST_CODE_PERMISSION_USE_SCENE)
-  }
 }
 
 // This function adds an input listener to an entity, to detect when has been selected and show the

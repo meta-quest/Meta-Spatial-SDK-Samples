@@ -117,8 +117,6 @@ class ImmersiveActivity : AppSystemActivity() {
     Log.i("Focus", "Focus> onCreate")
 
     instance = WeakReference(this)
-    // Request permissions to use spatial data the first time the app opens
-    requestScenePermissionIfNeeded()
 
     // Register custom systems and components
     componentManager.registerComponent<UniqueAssetComponent>(UniqueAssetComponent.Companion)
