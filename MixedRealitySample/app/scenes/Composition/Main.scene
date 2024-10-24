@@ -8,6 +8,9 @@ entities:
             - ref:defaultFloor
             - ref:BasketBall
             - ref:Panel
+            - ref:target0
+            - ref:target1
+            - ref:target2
       tag: Scene
   com.meta.models.SceneNode:
     - components:
@@ -24,24 +27,12 @@ entities:
           rotation.format: Quaternion
           scale:
             - 2
-            - 1.29999995
+            - 1.5
             - 1
           translation:
             - 0
             - 1.10000002
             - -1.70000005
-        com.meta.spatial.physics.Physics:
-          angularVelocity:
-            - 0
-            - 0
-            - 0
-          dimensions:
-            - 1
-            - 0.649999976
-            - 0.00999999978
-          restitution: 0.90000000000000002
-          state: 0
-          shape: box
         com.meta.spatial.toolkit.Grabbable:
           enabled: true
           type: 0
@@ -86,15 +77,105 @@ entities:
             - -0.0500000007
             - 0
         com.meta.spatial.physics.Physics:
-          shape: box
-          restitution: 0.80000000000000004
-          state: 0
           dimensions:
             - 10
             - 0.00999999978
             - 10
+          state: 0
+          restitution: 0.80000000000000004
+          shape: box
         com.meta.spatial.toolkit.Visible:
           isVisible: false
       tag: defaultFloor
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:target/Main.metaspatialobj
+        com.meta.components.Name:
+          name: target0
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.863767862
+            - -1.02826052e-15
+            - -0.503889918
+            - -5.0378592e-08
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -1.8855685
+            - 1.25126576
+            - 1.13587368
+        com.meta.spatial.physics.Physics:
+          shape: target.glb
+          restitution: 0.80000000000000004
+          state: 0
+        com.meta.spatial.toolkit.Grabbable:
+          type: 0
+      tag: target0
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:target/Main.metaspatialobj
+        com.meta.components.Name:
+          name: target1
+        com.meta.components.SceneNode:
+          rotation.data:
+            - -0.325533599
+            - -0.125351667
+            - 0.89979279
+            - 0.262083471
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -1.8855685
+            - 1.96000004
+            - -1.31692994
+        com.meta.spatial.physics.Physics:
+          state: 0
+          restitution: 0.80000000000000004
+          shape: target.glb
+        com.meta.spatial.toolkit.Grabbable:
+          type: 0
+      tag: target1
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:target/Main.metaspatialobj
+        com.meta.components.Name:
+          name: target2
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.520660996
+            - -0.284600586
+            - 0.802814603
+            - 0.058337491
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 1.90848315
+            - 1.96000004
+            - -0.800049663
+        com.meta.spatial.physics.Physics:
+          shape: target.glb
+          restitution: 0.80000000000000004
+          state: 0
+        com.meta.spatial.toolkit.Grabbable:
+          type: 0
+      tag: target2
 metadata:
   version: 1.0

@@ -76,7 +76,6 @@
 
     <activity
       android:name="com.meta.spatial.samples.startersample.StarterSampleActivity"
-      android:theme="@style/Theme.Transparent"
       android:launchMode="singleTask"
       android:excludeFromRecents="false"
       android:screenOrientation="landscape"

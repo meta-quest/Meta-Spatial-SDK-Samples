@@ -49,6 +49,8 @@ We have 10 sample apps, demonstrating various features of Meta Spatial SDK:
 - [SpatialVideoSample](/SpatialVideoSample)
 - [StarterSample](/StarterSample)
 
+We also have a starter app [CustomComponentsStarter](/CodelabStarters/CustomComponentsStarter), which only contains the boilerplate code of [CustomComponentsSample](/CustomComponentsSample). You can download this starter app and follow [this](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-editor-create-app-content) tutorial to build a LookAt app with Meta Spatial Editor and SDK.
+
 ## Showcases
 
 The [Showcases](/Showcases) folder contains three apps which are deployed to the Meta Horizon Store. These are fully-featured applications built with Meta Spatial SDK, and are open-sourced here in this repository.

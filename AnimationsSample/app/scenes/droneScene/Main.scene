@@ -80,19 +80,19 @@ entities:
             - 0.956133604
             - 2.10795021
         com.meta.spatial.samples.animationssample.DroneComponent:
-          rotationSpeed: 0.050000000000000003
-          targetName: droneTarget
-          enabled: false
           tiltFactor: 0.25
-        com.meta.spatial.samples.animationssample.FollowerComponent:
-          targetName: droneTarget
-          followDistance: 0.5
           enabled: false
-          expDecay: 1
+          targetName: droneTarget
+          rotationSpeed: 0.050000000000000003
+        com.meta.spatial.samples.animationssample.FollowerComponent:
           followOffset:
             - 0
             - 0
             - 0
+          expDecay: 1
+          enabled: false
+          followDistance: 0.5
+          targetName: droneTarget
       tag: drone
     - components:
         com.meta.components.Animatable:
@@ -144,7 +144,7 @@ entities:
           rotation.format: Euler
           scale:
             - 2
-            - 1.14999998
+            - 1.20000005
             - 1
           translation:
             - 0

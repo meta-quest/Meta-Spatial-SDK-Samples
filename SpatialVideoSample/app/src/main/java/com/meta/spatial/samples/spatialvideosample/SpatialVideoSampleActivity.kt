@@ -178,6 +178,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
     loadGLXF().invokeOnCompletion {
       val composition = glXFManager.getGLXFInfo("example_key_name")
       environmentGLXF = composition.getNodeByName("MediaRoom").entity
+      setMrMode(scene.isSystemPassthroughEnabled())
     }
   }
 
@@ -510,20 +511,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
             }
 
         playerView.setOnClickListener { togglePlay() }
-        playerView.setOnHoverListener { v, event ->
-          val action = event.action
-          when (action) {
-            MotionEvent.ACTION_HOVER_ENTER -> {
-              animateControllerVisibility(true)
-              resetControllerFadeOutTimer()
-            }
-            MotionEvent.ACTION_HOVER_MOVE -> {
-              resetControllerFadeOutTimer()
-            }
-            MotionEvent.ACTION_HOVER_EXIT -> {}
-          }
-          true
-        }
+        setupHoverAndTouchListeners(playerView)
 
         val handler = Handler(Looper.getMainLooper())
         handler.postDelayed(
@@ -598,70 +586,46 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
         val playPauseButtonLocal = rootView?.findViewById<Button>(R.id.play_pause_button)!!
         playPauseButton.complete(playPauseButtonLocal)
         playPauseButtonLocal.setOnClickListener { togglePlay() }
-
+        setupHoverAndTouchListeners(playPauseButtonLocal)
         val backButton = rootView?.findViewById<Button>(R.id.back_button)!!
         backButton.setOnClickListener { setUri?.let { MoviePanel.viewModel.previousVideo(it) } }
+        setupHoverAndTouchListeners(backButton)
         val forwardButton = rootView?.findViewById<Button>(R.id.forward_button)!!
         forwardButton.setOnClickListener { setUri?.let { MoviePanel.viewModel.nextVideo(it) } }
-
+        setupHoverAndTouchListeners(forwardButton)
         controllerView = rootView!!
-        controllerView.setOnHoverListener { v, event ->
-          val action = event.action
-          when (action) {
-            MotionEvent.ACTION_HOVER_ENTER -> {
-              animateControllerVisibility(true)
-              resetControllerFadeOutTimer()
-            }
-            MotionEvent.ACTION_HOVER_MOVE -> {
-              resetControllerFadeOutTimer()
-            }
-            MotionEvent.ACTION_HOVER_EXIT -> {}
-          }
-          true
-        }
-        // Ensure that buttons on the controller view don't "eat" the hover event and
-        // make the controller view think the user is not hovering anymore.
-        playPauseButtonLocal.setOnHoverListener { v, event ->
-          val action = event.action
-          when (action) {
-            MotionEvent.ACTION_HOVER_ENTER -> {
-              resetControllerFadeOutTimer()
-            }
-            MotionEvent.ACTION_HOVER_MOVE -> {
-              resetControllerFadeOutTimer()
-            }
-            MotionEvent.ACTION_HOVER_EXIT -> {}
-          }
-          true
-        }
-        backButton.setOnHoverListener { v, event ->
-          val action = event.action
-          when (action) {
-            MotionEvent.ACTION_HOVER_ENTER -> {
-              resetControllerFadeOutTimer()
-            }
-            MotionEvent.ACTION_HOVER_MOVE -> {
-              resetControllerFadeOutTimer()
-            }
-            MotionEvent.ACTION_HOVER_EXIT -> {}
-          }
-          true
-        }
-        forwardButton.setOnHoverListener { v, event ->
-          val action = event.action
-          when (action) {
-            MotionEvent.ACTION_HOVER_ENTER -> {
-              resetControllerFadeOutTimer()
-            }
-            MotionEvent.ACTION_HOVER_MOVE -> {
-              resetControllerFadeOutTimer()
-            }
-            MotionEvent.ACTION_HOVER_EXIT -> {}
-          }
-          true
-        }
+        setupHoverAndTouchListeners(controllerView)
         controllerView.alpha = 1.0f
       }
+    }
+  }
+
+  private fun setupHoverAndTouchListeners(view: View) {
+    view.setOnTouchListener { v, event ->
+      val action = event.action
+      when (action) {
+        MotionEvent.ACTION_DOWN -> {}
+        MotionEvent.ACTION_MOVE -> {
+          resetControllerFadeOutTimer()
+        }
+        MotionEvent.ACTION_UP -> {}
+        MotionEvent.ACTION_CANCEL -> {}
+      }
+      false
+    }
+    view.setOnHoverListener { v, event ->
+      val action = event.action
+      when (action) {
+        MotionEvent.ACTION_HOVER_ENTER -> {
+          animateControllerVisibility(true)
+          resetControllerFadeOutTimer()
+        }
+        MotionEvent.ACTION_HOVER_MOVE -> {
+          resetControllerFadeOutTimer()
+        }
+        MotionEvent.ACTION_HOVER_EXIT -> {}
+      }
+      true
     }
   }
 
@@ -778,11 +742,14 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
 
   public fun setMrMode(isMrMode: Boolean) {
     if (!isMrMode) {
-      mrPanelPose = Entity(R.integer.spatialized_video_panel).getComponent<Transform>().transform
+      mrPanelPose =
+          Entity(R.integer.spatialized_video_panel).tryGetComponent<Transform>()?.transform
+              ?: Pose()
       environmentGLXF?.setComponent(Visible(true))
       skydome?.setComponent(Visible(true))
     }
-    val grabbable = Entity(R.integer.spatialized_video_panel).getComponent<Grabbable>()
+    val grabbable =
+        Entity(R.integer.spatialized_video_panel).tryGetComponent<Grabbable>() ?: Grabbable()
     grabbable.enabled = isMrMode
     Entity(R.integer.spatialized_video_panel).setComponent(grabbable)
 

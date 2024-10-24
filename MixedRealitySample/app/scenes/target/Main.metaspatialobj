@@ -1,0 +1,72 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:target
+            - ref:target1
+            - ref:Circle
+        com.meta.components.Name:
+          name: target
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+      tag: Geometry
+  com.meta.models.Image:
+    - components:
+        com.meta.components.Asset:
+          path: assets/target.png
+        com.meta.components.Image:
+          height: 1024
+          mimeType: image/png
+          width: 1024
+        com.meta.components.Name:
+          name: target
+      tag: target
+  com.meta.models.Material:
+    - uri: docref:materials/target1.metaspatialmaterial
+      tag: target1
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive
+        com.meta.components.Name:
+          name: Circle
+      tag: Circle
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          mode: Triangles
+          geometry: ref:Geometry
+          material: ref:target1
+      tag: Primitive
+  com.meta.models.Sampler:
+    - components:
+        com.meta.components.Name:
+          name: sampler0
+        com.meta.components.Sampler:
+          magFilter: Linear
+          minFilter: LinearMipmapLinear
+          wrapS: Repeat
+          wrapT: Repeat
+      tag: sampler0
+  com.meta.models.Texture:
+    - uri: docref:textures/texture1.metaspatialtexture
+      tag: texture1
+metadata:
+  version: 1.0
