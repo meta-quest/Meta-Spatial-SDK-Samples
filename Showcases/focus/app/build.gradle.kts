@@ -15,8 +15,8 @@ android {
     minSdk = 28
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 10
-    versionName = "0.10"
+    versionCode = 13
+    versionName = "0.13"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -54,7 +54,6 @@ dependencies {
   implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:$metaSpatialSdkVersion")
 
   // AI Integration dependencies
   implementation("com.google.code.gson:gson:2.8.9")
