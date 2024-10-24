@@ -61,26 +61,14 @@ class PanelManager(
 
     private lateinit var galleryEntity: Entity
 
-  fun providePanelRegistrations(): List<PanelRegistration> {
-    return listOf(
-        PanelCreator(R.integer.panel_id_gallery_activity) { ent ->
-          galleryEntity = ent
+    fun providePanelRegistrations(): List<PanelRegistration> {
+        return listOf(
+            PanelCreator(R.integer.panel_id_gallery_activity) { ent ->
+                galleryEntity = ent
 
-          createGalleryPanel(ent)
-        },
-        PanelCreator(R.integer.panel_id_media_filter_activity) { ent ->
-          createMediaFilterPanel(ent)
-        },
-        PanelCreator(R.integer.panel_id_upload_activity) { ent ->
-          Query.where { has(Panel.id) }
-              .eval()
-              .firstOrNull { it.id.toInt() == R.integer.panel_id_gallery_activity }
-              ?.let {
-                ent.setComponent(TransformParent(it))
-                ent.setComponent(
-                    Transform(Pose(Vector3(-0.49f, 0f, 0f), Quaternion(0f, 0f, 0f)))
-                )
-
+                createGalleryPanel(ent)
+            },
+            PanelCreator(R.integer.panel_id_media_filter_activity) { ent ->
                 createMediaFilterPanel(ent)
             },
             PanelCreator(R.integer.panel_id_gallery_menu) { ent ->
@@ -164,24 +152,24 @@ class PanelManager(
     }
 
     private fun createGalleryPanel(ent: Entity): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            enableLayer = true,
-            enableTransparent = false,
-            includeGlass = false,
-        )
-    return PanelSceneObject(scene, spatialContext, GalleryActivity::class.java, ent, config)
-  }
+        val config =
+            PanelConfigOptions(
+                enableLayer = true,
+                enableTransparent = false,
+                includeGlass = false,
+            )
+        return PanelSceneObject(scene, spatialContext, GalleryActivity::class.java, ent, config)
+    }
 
-  private fun createMediaFilterPanel(ent: Entity): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            enableLayer = true,
-            enableTransparent = false,
-            includeGlass = false,
-        )
-    return PanelSceneObject(scene, spatialContext, MediaFilterActivity::class.java, ent, config)
-  }
+    private fun createMediaFilterPanel(ent: Entity): PanelSceneObject {
+        val config =
+            PanelConfigOptions(
+                enableLayer = true,
+                enableTransparent = false,
+                includeGlass = false,
+            )
+        return PanelSceneObject(scene, spatialContext, MediaFilterActivity::class.java, ent, config)
+    }
 
     private fun createUploadPanel(ent: Entity): PanelSceneObject {
         val config =
@@ -197,15 +185,15 @@ class PanelManager(
         return PanelSceneObject(scene, spatialContext, UploadActivity::class.java, ent, config)
     }
 
-  private fun createGalleryMenuPanel(ent: Entity): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            enableLayer = true,
-            enableTransparent = false,
-            includeGlass = false,
-        )
-    return PanelSceneObject(scene, spatialContext, GalleryMenuActivity::class.java, ent, config)
-  }
+    private fun createGalleryMenuPanel(ent: Entity): PanelSceneObject {
+        val config =
+            PanelConfigOptions(
+                enableLayer = true,
+                enableTransparent = false,
+                includeGlass = false,
+            )
+        return PanelSceneObject(scene, spatialContext, GalleryMenuActivity::class.java, ent, config)
+    }
 
     private fun createPlayerPanel(ent: Entity, mediaModel: MediaModel): PanelSceneObject {
         val config = mediaModel.minimizedPanelConfigOptions()
@@ -346,7 +334,6 @@ class PanelManager(
     }
 
     fun createUploadEntity(): Entity {
-        // TODO: Add and tweak RoundedBox component
         return Entity.createPanelEntity(
             R.integer.panel_id_upload_activity, Transform.build { move(0f, 0f, 0f) },
         )
