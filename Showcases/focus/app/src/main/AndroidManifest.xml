@@ -11,10 +11,6 @@
     android:name="com.oculus.feature.RENDER_MODEL"
     android:required="false"
   />
-
-    <uses-permission
-    android:name="com.oculus.permission.RENDER_MODEL"
-  /> <!-- Support Quest keyboard -->
     <uses-feature
     android:name="com.oculus.feature.VIRTUAL_KEYBOARD"
     android:required="false"
@@ -36,6 +32,9 @@
     android:required="false"
   />
 
+    <uses-permission
+    android:name="com.oculus.permission.RENDER_MODEL"
+  /> <!-- Support Quest keyboard -->
     <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
     <uses-permission
     android:name="com.oculus.permission.ACCESS_MR_SENSOR_DATA"
@@ -49,7 +48,6 @@
     android:name="com.oculus.permission.SCENE_RECONSTRUCTION_TRACKING"
   />
     <uses-permission android:name="com.oculus.permission.USE_SCENE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
