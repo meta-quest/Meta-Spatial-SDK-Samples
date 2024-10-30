@@ -189,7 +189,7 @@ dependencies {
   debugImplementation("androidx.compose.ui:ui-test-manifest")
 
   // Monitoring
-  implementation("com.datadoghq:dd-sdk-android-rum:2.14.0")
+  implementation("com.datadoghq:dd-sdk-android-ndk:2.14.0")
   implementation("com.datadoghq:dd-sdk-android-logs:2.14.0")
 }
 

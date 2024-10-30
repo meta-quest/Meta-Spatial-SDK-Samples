@@ -55,7 +55,7 @@ constructor(
   }
 
   fun onMediaSelected(mediaModel: MediaModel) {
-    Timber.i("Opening media: $mediaModel")
+    Timber.i("Opening media: ${mediaModel.debugPrint()}")
     panelDelegate.openMediaPanel(mediaModel)
   }
 

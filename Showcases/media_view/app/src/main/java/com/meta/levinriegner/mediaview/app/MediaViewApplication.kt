@@ -13,12 +13,11 @@ import com.datadog.android.core.configuration.Configuration
 import com.datadog.android.log.Logger
 import com.datadog.android.log.Logs
 import com.datadog.android.log.LogsConfiguration
+import com.datadog.android.ndk.NdkCrashReports
 import com.datadog.android.privacy.TrackingConsent
-import com.datadog.android.rum.Rum
-import com.datadog.android.rum.RumConfiguration
-import com.datadog.android.rum.tracking.ActivityViewTrackingStrategy
 import com.meta.levinriegner.mediaview.BuildConfig
 import com.meta.levinriegner.mediaview.app.logging.DatadogTree
+import com.meta.levinriegner.mediaview.app.logging.LogEventMapper
 import com.meta.levinriegner.mediaview.app.logging.MediaViewDebugTree
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
@@ -55,24 +54,21 @@ class MediaViewApplication : Application() {
             .build()
         Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
-        // RUM
-        val rumConfiguration = RumConfiguration.Builder(BuildConfig.DATADOG_APPLICATION_ID)
-            .trackUserInteractions()
-            .trackLongTasks()
-            .useViewTrackingStrategy(ActivityViewTrackingStrategy(true))
-            .build()
-        Rum.enable(rumConfiguration)
+        // NDK
+        NdkCrashReports.enable()
 
         // Logs
-        val logsConfig = LogsConfiguration.Builder().build()
+        val logsConfig = LogsConfiguration.Builder()
+            .setEventMapper(LogEventMapper())
+            .build()
         Logs.enable(logsConfig)
         val logger = Logger.Builder()
-            .setNetworkInfoEnabled(true)
-            .setLogcatLogsEnabled(true)
-            .setBundleWithTraceEnabled(true)
+            .setNetworkInfoEnabled(false)
+            .setLogcatLogsEnabled(false)
+            .setBundleWithTraceEnabled(false)
+            .setBundleWithRumEnabled(false)
             .setName("MediaView")
             .setRemoteLogThreshold(Log.INFO)
-            .setLogcatLogsEnabled(false)
             .build()
         Timber.plant(DatadogTree(logger))
     }
