@@ -12,6 +12,7 @@ import com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead
 import com.meta.levinriegner.mediaview.app.immersive.entity.PanelTransformations
 import com.meta.levinriegner.mediaview.app.immersive.panel.PanelRegistrationIds
 import com.meta.levinriegner.mediaview.app.immersive.panel.model.AppPanelRegistration
+import com.meta.levinriegner.mediaview.app.onboarding.OnboardingActivity
 import com.meta.levinriegner.mediaview.app.player.PlayerActivity
 import com.meta.levinriegner.mediaview.app.player.menu.immersive.ImmersiveMenuActivity
 import com.meta.levinriegner.mediaview.app.player.menu.minimized.MinimizedMenuActivity

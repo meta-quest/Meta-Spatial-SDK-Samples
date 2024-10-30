@@ -11,6 +11,14 @@ constructor(
     private val sharedPreferences: SharedPreferences,
 ) {
 
+    fun setOnboardingCompleted() {
+        sharedPreferences.edit().putBoolean(KEY_IS_ONBOARDING_COMPLETED, true).apply()
+    }
+
+    fun isOnboardingCompleted(): Boolean {
+        return sharedPreferences.getBoolean(KEY_IS_ONBOARDING_COMPLETED, false)
+    }
+
     fun isPrivacyPolicyAccepted(): Boolean {
         return sharedPreferences.getBoolean(KEY_IS_PRIVACY_POLICY_ACCEPTED, false)
     }
@@ -30,5 +38,6 @@ constructor(
     companion object {
         private const val KEY_IS_PRIVACY_POLICY_ACCEPTED = "is_privacy_policy_accepted"
         private const val KEY_SAMPLE_MEDIA_VERSION = "sample_media_version"
+        private const val KEY_IS_ONBOARDING_COMPLETED = "is_onboarding_completed"
     }
 }

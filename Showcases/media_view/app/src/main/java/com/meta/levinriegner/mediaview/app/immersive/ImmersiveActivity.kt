@@ -47,13 +47,13 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
   private var uploadPanelEntityId: Long? = null
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
-  override fun registerFeatures(): List<SpatialFeature> {
-    val features = mutableListOf<SpatialFeature>(VRFeature(this))
-    if (BuildConfig.DEBUG) {
-      features.add(CastInputForwardFeature(this))
+    override fun registerFeatures(): List<SpatialFeature> {
+        val features = mutableListOf<SpatialFeature>(VRFeature(this))
+        if (BuildConfig.DEBUG) {
+            features.add(CastInputForwardFeature(this))
+        }
+        return features
     }
-    return features
-  }
 
   override fun registerPanels(): List<PanelRegistration> {
     return panelManager.providePanelRegistrations()
@@ -70,15 +70,15 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     loadGLXF()
   }
 
-  override fun onSceneReady() {
-    super.onSceneReady()
-    // Position the user when they launch into the app
-    scene.setViewOrigin(0.0f, 0.0f, -1.0f, 0.0f)
-    // Enable better panel rendering (default)
-    scene.enableHolePunching(true)
-    // Set Mixed Reality passthrough mode
-    scene.enablePassthrough(true)
-  }
+    override fun onSceneReady() {
+        super.onSceneReady()
+        // Position the user when they launch into the app
+        scene.setViewOrigin(0.0f, 0.0f, -1.0f, 0.0f)
+        // Enable better panel rendering (default)
+        scene.enableHolePunching(true)
+        // Set Mixed Reality passthrough mode
+        scene.enablePassthrough(true)
+    }
 
   private fun loadGLXF() {
     activityScope.launch {
@@ -90,13 +90,13 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     }
   }
 
-  private fun registerComponents() {
-    componentManager.registerComponent<LookAtHead>(LookAtHead.Companion)
-  }
+    private fun registerComponents() {
+        componentManager.registerComponent<LookAtHead>(LookAtHead.Companion)
+    }
 
-  private fun registerSystems() {
-    systemManager.registerSystem(LookAtHeadSystem())
-  }
+    private fun registerSystems() {
+        systemManager.registerSystem(LookAtHeadSystem())
+    }
 
   // region PanelDelegate
   override fun openMediaPanel(mediaModel: MediaModel) {
@@ -164,13 +164,18 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     uploadPanelEntityId = ent.id
   }
 
-  override fun closeUploadPanel() {
-    Timber.i("Closing upload panel")
-    uploadPanelEntityId?.let {
-      panelManager.destroyUploadEntity(it)
-      uploadPanelEntityId = null
-    } ?: Timber.w("Upload panel is not open")
-  }
+    override fun closeUploadPanel() {
+        Timber.i("Closing upload panel")
+        uploadPanelEntityId?.let {
+            panelManager.destroyUploadEntity(it)
+            uploadPanelEntityId = null
+        } ?: Timber.w("Upload panel is not open")
+    }
+
+    fun openOnboardingPanel() {
+        Timber.i("Opening Onboarding panel")
+        panelManager.createOnboardingEntity()
+    }
 
   override fun togglePrivacyPolicy(show: Boolean) {
     Timber.i("Toggling privacy policy. Show: $show")

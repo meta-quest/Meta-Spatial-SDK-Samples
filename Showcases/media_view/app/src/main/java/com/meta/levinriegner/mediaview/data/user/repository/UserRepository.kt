@@ -26,4 +26,12 @@ constructor(
     fun setSampleMediaVersion(version: Int) {
         userPreferencesService.setSampleMediaVersion(version)
     }
+
+    fun isOnboardingCompleted(): Boolean {
+        return userPreferencesService.isOnboardingCompleted()
+    }
+
+    fun setOnboardingCompleted() {
+        userPreferencesService.setOnboardingCompleted()
+    }
 }
