@@ -6,6 +6,7 @@ entities:
         com.meta.components.Scene:
           nodes:
             - ref:gallery
+            - ref:privacyPopup
       tag: Scene
   com.meta.models.SceneNode:
     - components:
@@ -22,12 +23,18 @@ entities:
           children:
             - ref:mediaTypesFilter
             - ref:galleryMenu
+        com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead:
+          zOffset: 0.90000000000000002
+          once: true
+          hasLooked: false
         com.meta.spatial.toolkit.Grabbable:
           {}
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/panel_id_gallery_activity"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
       tag: gallery
     - components:
         com.meta.components.Animatable:
@@ -48,6 +55,8 @@ entities:
           panel: "@integer/panel_id_media_filter_activity"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
       tag: mediaTypesFilter
     - components:
         com.meta.components.Animatable:
@@ -69,5 +78,31 @@ entities:
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: galleryMenu
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: privacyPopup
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.200000003
+            - 0.200000003
+            - 1
+          translation:
+            - 0
+            - 0
+            - 0.0591268539
+        com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead:
+          hasLooked: false
+          once: false
+          zOffset: 0.69999999999999996
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/panel_id_privacy_policy"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: privacyPopup
 metadata:
   version: 1.0

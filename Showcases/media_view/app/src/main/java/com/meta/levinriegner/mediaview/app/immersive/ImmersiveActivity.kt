@@ -5,10 +5,11 @@ package com.meta.levinriegner.mediaview.app.immersive
 import android.net.Uri
 import android.os.Bundle
 import com.meta.levinriegner.mediaview.BuildConfig
+import com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead
 import com.meta.levinriegner.mediaview.app.immersive.compose.ComponentAppSystemActivity
 import com.meta.levinriegner.mediaview.app.immersive.entity.EnvironmentEntities
 import com.meta.levinriegner.mediaview.app.immersive.entity.PanelTransformations
-import com.meta.levinriegner.mediaview.app.immersive.system.TransformAtHeadSystem
+import com.meta.levinriegner.mediaview.app.immersive.system.LookAtHeadSystem
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
 import com.meta.spatial.castinputforward.CastInputForwardFeature
@@ -35,7 +36,7 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
         PanelManager(
             PanelTransformations(EnvironmentEntities(), systemManager),
             scene,
-            spatialContext
+            spatialContext,
         )
     }
 
@@ -62,6 +63,10 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
         super.onCreate(savedInstanceState)
         // Disable Locomotion
         systemManager.unregisterSystem<LocomotionSystem>()
+        // Register elements
+        loadGLXF()
+        registerComponents()
+        registerSystems()
     }
 
   override fun onSceneReady() {
@@ -72,24 +77,24 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     scene.enableHolePunching(true)
     // Set Mixed Reality passthrough mode
     scene.enablePassthrough(true)
-    // Create the panels
-    activityScope.launch {
-      // Inflate the scene from Meta Spatial Editor
-      glXFManager.inflateGLXF(
-          Uri.parse("scenes/Composition.glxf"), rootEntity = Entity.create(), keyName = "scene")
-      // Register Systems
-      registerSystems()
+  }
+
+    private fun loadGLXF() {
+        activityScope.launch {
+            glXFManager.inflateGLXF(
+                Uri.parse(GLXFConstants.URI_STRING),
+                rootEntity = Entity.create(),
+                keyName = GLXFConstants.COMPOSITION_NAME,
+            )
+        }
     }
+
+  private fun registerComponents() {
+    componentManager.registerComponent<LookAtHead>(LookAtHead.Companion)
   }
 
   private fun registerSystems() {
-    // Place the gallery panel in front of the user
-    val transformAtHeadSystem = TransformAtHeadSystem(
-      compositionName = "scene",
-      panelNodeName = "gallery",
-      zOffset = 0.9f,
-    )
-    systemManager.registerSystem(transformAtHeadSystem)
+    systemManager.registerSystem(LookAtHeadSystem())
   }
 
   // region PanelDelegate
@@ -164,6 +169,13 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
       uploadPanelEntityId = null
     } ?: Timber.w("Upload panel is not open")
   }
+
+    override fun togglePrivacyPolicy(show: Boolean) {
+        Timber.i("Toggling privacy policy. Show: $show")
+        panelManager.togglePrivacyPolicy(show)
+        panelManager.toggleGallery(!show)
+    }
   // endregion
+
 
 }

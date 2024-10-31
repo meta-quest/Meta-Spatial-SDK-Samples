@@ -7,6 +7,32 @@
         {
             "attributes": [
                 {
+                    "keyString": "zOffset",
+                    "name": "zOffset",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                },
+                {
+                    "keyString": "once",
+                    "name": "once",
+                    "type": {
+                        "attributeType": "Boolean"
+                    }
+                },
+                {
+                    "keyString": "hasLooked",
+                    "name": "hasLooked",
+                    "type": {
+                        "attributeType": "Boolean"
+                    }
+                }
+            ],
+            "name": "com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead"
+        },
+        {
+            "attributes": [
+                {
                     "keyString": "audioInternal",
                     "name": "audioInternal",
                     "type": {

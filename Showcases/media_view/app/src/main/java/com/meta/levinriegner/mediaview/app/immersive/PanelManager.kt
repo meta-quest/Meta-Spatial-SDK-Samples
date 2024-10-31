@@ -13,6 +13,7 @@ import com.meta.levinriegner.mediaview.app.immersive.entity.PanelTransformations
 import com.meta.levinriegner.mediaview.app.player.PlayerActivity
 import com.meta.levinriegner.mediaview.app.player.menu.immersive.ImmersiveMenuActivity
 import com.meta.levinriegner.mediaview.app.player.menu.minimized.MinimizedMenuActivity
+import com.meta.levinriegner.mediaview.app.privacy.PrivacyPolicyActivity
 import com.meta.levinriegner.mediaview.app.shared.model.immersiveMenuPanelId
 import com.meta.levinriegner.mediaview.app.shared.model.maximizedBottomCenterPanelVector3
 import com.meta.levinriegner.mediaview.app.shared.model.maximizedPanelConfigOptions
@@ -36,14 +37,18 @@ import com.meta.spatial.runtime.PanelConfigOptions.Companion.DEFAULT_DPI
 import com.meta.spatial.runtime.PanelSceneObject
 import com.meta.spatial.runtime.QuadLayerConfig
 import com.meta.spatial.runtime.Scene
+import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Panel
 import com.meta.spatial.toolkit.PanelCreator
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.toolkit.Scale
+import com.meta.spatial.toolkit.SpatialActivityManager
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
+import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.toolkit.createPanelEntity
 import timber.log.Timber
 
@@ -101,6 +106,9 @@ class PanelManager(
                         1000
                     )
                 createGalleryMenuPanel(ent)
+            },
+            PanelCreator(R.integer.panel_id_privacy_policy) { ent ->
+                createPrivacyPolicyPanel(ent)
             },
         )
     }
@@ -193,6 +201,16 @@ class PanelManager(
                 includeGlass = false,
             )
         return PanelSceneObject(scene, spatialContext, GalleryMenuActivity::class.java, ent, config)
+    }
+
+    private fun createPrivacyPolicyPanel(ent: Entity): PanelSceneObject {
+        val config =
+            PanelConfigOptions(
+                enableLayer = true,
+                enableTransparent = false,
+                includeGlass = false,
+            )
+        return PanelSceneObject(scene, spatialContext, PrivacyPolicyActivity::class.java, ent, config)
     }
 
     private fun createPlayerPanel(ent: Entity, mediaModel: MediaModel): PanelSceneObject {
@@ -431,6 +449,33 @@ class PanelManager(
             .eval()
             .filter { it.id != mediaModel.entityId }
             .forEach { panelTransformations.setPanelVisibility(it, true) }
+    }
+
+    private fun getComposition(): GLXFInfo {
+        val activity = SpatialActivityManager.getVrActivity<AppSystemActivity>()
+        return activity.glXFManager.getGLXFInfo(GLXFConstants.COMPOSITION_NAME)
+    }
+
+    fun togglePrivacyPolicy(show: Boolean) {
+        val panel = getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_PRIVACY)
+        if (panel?.entity == null) {
+            Timber.w("Privacy policy panel entity not found")
+            return
+        }
+        panel.entity.setComponent(Visible(show))
+    }
+
+    fun toggleGallery(show: Boolean) {
+        val panel = getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_GALLERY)
+        if (panel?.entity == null) {
+            Timber.w("Gallery panel entity not found")
+            return
+        }
+        panel.entity.setComponent(Visible(show))
+        // Set media filters visibility
+        getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_MEDIA_FILTERS)
+            ?.entity
+            ?.setComponent(Visible(show))
     }
 
     companion object {

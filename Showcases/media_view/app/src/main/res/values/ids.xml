@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?><!--
+  ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+  -->
+<resources>
+    <item name="LookAtHead_class" type="id" />
+    <item name="LookAtHead_zOffset" type="id" />
+    <item name="LookAtHead_once" type="id" />
+    <item name="LookAtHead_hasLooked" type="id" />
+</resources>

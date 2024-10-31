@@ -18,4 +18,6 @@ interface PanelDelegate {
   fun openUploadPanel()
 
   fun closeUploadPanel()
+
+  fun togglePrivacyPolicy(show: Boolean)
 }
