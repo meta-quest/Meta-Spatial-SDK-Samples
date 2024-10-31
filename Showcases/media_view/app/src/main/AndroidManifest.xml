@@ -74,17 +74,21 @@
       android:theme="@style/Theme.MediaView"
     />
         <activity
-      android:name=".app.gallery.filter.MediaFilterActivity"
-      android:allowEmbedded="true"
-      android:exported="true"
-      android:theme="@style/Theme.MediaView"
-    />
+            android:name=".app.gallery.filter.MediaFilterActivity"
+            android:allowEmbedded="true"
+            android:exported="true"
+            android:theme="@style/Theme.MediaView" />
         <activity
-      android:name=".app.gallery.GalleryActivity"
-      android:allowEmbedded="true"
-      android:exported="true"
-      android:theme="@style/Theme.MediaView"
-    />
+            android:name=".app.onboarding.OnboardingActivity"
+            android:allowEmbedded="true"
+            android:exported="true"
+            android:launchMode="standard"
+            android:theme="@style/Theme.MediaView" />
+        <activity
+            android:name=".app.gallery.GalleryActivity"
+            android:allowEmbedded="true"
+            android:exported="true"
+            android:theme="@style/Theme.MediaView" />
         <activity
       android:name=".app.upload.UploadActivity"
       android:allowEmbedded="true"
