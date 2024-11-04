@@ -179,7 +179,7 @@ object WitAiService {
                     val silenceThreshold = noiseLevelAdjuster.getSilenceThreshold()
                     val isSilent = AudioUtils.isSilence(noiseLevel, silenceThreshold)
 
-                    // Log.v(TAG, "%.0f < %.0f ? $isPaused".format(noiseLevel, silenceThreshold))
+                    // Log.v(TAG, "%.0f < %.0f ? $isSilent".format(noiseLevel, silenceThreshold))
 
                     if (isSilenceDetectionEnabled && userStartedSpeaking && isSilent) {
                       if (System.currentTimeMillis() - silenceStartTime > SILENCE_DURATION) {
@@ -248,6 +248,14 @@ object WitAiService {
                   if (depth == 0) {
                     val witAiResponse: WitAiStreamingResponse =
                         gson.fromJson(chunk, WitAiStreamingResponse::class.java)
+
+                    Log.d(TAG, chunk)
+
+                    // in case wit.ai returns an error
+                    if (witAiResponse.error != null) {
+                      throw Exception(
+                          "chunk:\ncode: '${witAiResponse.code}'\nerror: '${witAiResponse.error}'")
+                    }
 
                     var understoodResponse: WitAiUnderstoodResponse? = null
                     if (witAiResponse.type == WitAiResponseType.FINAL_UNDERSTANDING) {
