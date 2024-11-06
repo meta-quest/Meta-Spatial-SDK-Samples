@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.meta.levinriegner.mediaview.R
 import com.meta.levinriegner.mediaview.app.gallery.filter.titleResId
+import com.meta.levinriegner.mediaview.app.onboarding.view.OnboardingButton
 import com.meta.levinriegner.mediaview.app.shared.model.UiState
 import com.meta.levinriegner.mediaview.app.shared.theme.AppColor
 import com.meta.levinriegner.mediaview.app.shared.theme.Dimens
@@ -73,6 +74,7 @@ fun GalleryView(
     onMediaSelected: (MediaModel) -> Unit,
     onSortBy: (MediaSortBy) -> Unit,
     onToggleMetadata: (Boolean) -> Unit,
+    onOnboardingButtonPressed: () -> Unit,
 ) {
     MediaViewTheme {
         Scaffold(
@@ -102,6 +104,7 @@ fun GalleryView(
                             fileCount = uiState.data.size,
                             showMetadata = showMetadata,
                             onToggleMetadata = onToggleMetadata,
+                            onOnboardingButtonPressed = onOnboardingButtonPressed,
                         )
                         MediaGrid(
                             media = uiState.data,
@@ -130,6 +133,7 @@ private fun Header(
     fileCount: Int,
     showMetadata: Boolean,
     onToggleMetadata: (Boolean) -> Unit,
+    onOnboardingButtonPressed: () -> Unit,
 ) {
     var sortExpanded by remember { mutableStateOf(false) }
     Column {
@@ -152,6 +156,12 @@ private fun Header(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
+
+                    OnboardingButton(
+                        onPressed = onOnboardingButtonPressed
+                    )
+                    Box(modifier = Modifier.size(Dimens.medium))
+
                     Column(horizontalAlignment = Alignment.End, modifier = Modifier) {
                         OutlinedButton(
                             onClick = { sortExpanded = true },

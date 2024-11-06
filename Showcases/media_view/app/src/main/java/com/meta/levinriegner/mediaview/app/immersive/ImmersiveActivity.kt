@@ -40,12 +40,13 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     )
   }
 
-  // State
-  private var _openMedia =
-      MutableStateFlow<Map<Long, MediaModel>>(emptyMap()) // Uses MediaModel.id as key
-  val openMedia = _openMedia.asStateFlow()
-  private var uploadPanelEntityId: Long? = null
-  private val activityScope = CoroutineScope(Dispatchers.Main)
+    // State
+    private var _openMedia =
+        MutableStateFlow<Map<Long, MediaModel>>(emptyMap()) // Uses MediaModel.id as key
+    val openMedia = _openMedia.asStateFlow()
+    private var uploadPanelEntityId: Long? = null
+    private var onboardingPanelEntityId: Long? = null
+    private val activityScope = CoroutineScope(Dispatchers.Main)
 
     override fun registerFeatures(): List<SpatialFeature> {
         val features = mutableListOf<SpatialFeature>(VRFeature(this))
@@ -167,14 +168,32 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     override fun closeUploadPanel() {
         Timber.i("Closing upload panel")
         uploadPanelEntityId?.let {
-            panelManager.destroyUploadEntity(it)
+            panelManager.destroyEntity(it)
             uploadPanelEntityId = null
         } ?: Timber.w("Upload panel is not open")
     }
 
-    fun openOnboardingPanel() {
+    override fun openOnboardingPanel() {
         Timber.i("Opening Onboarding panel")
-        panelManager.createOnboardingEntity()
+        if (onboardingPanelEntityId != null) {
+            Timber.w("Onboarding panel is already open")
+            return
+        }
+
+        // Register panel
+        registerPanel(panelManager.provideOnboardingPanelRegistration())
+
+        val ent = panelManager.createOnboardingEntity()
+        onboardingPanelEntityId = ent.id
+
+    }
+
+    override fun closeOnboardingPanel() {
+        Timber.i("Closing Onboarding panel")
+        onboardingPanelEntityId?.let {
+            panelManager.destroyEntity(it)
+            onboardingPanelEntityId = null
+        } ?: Timber.w("Onboarding panel is not open")
     }
 
   override fun togglePrivacyPolicy(show: Boolean) {

@@ -431,10 +431,10 @@ class PanelManager(
         }
     }
 
-    fun destroyUploadEntity(entityId: Long) {
+    fun destroyEntity(entityId: Long) {
         val panels = Query.where { has(Panel.id) }.eval()
         val uploadPanel = panels.firstOrNull { it.id == entityId }
-        uploadPanel?.destroy() ?: Timber.w("Upload panel not found")
+        uploadPanel?.destroy() ?: Timber.w("Panel not found")
     }
 
     private fun destroyImmersiveMenuEntity(entityId: Long) {

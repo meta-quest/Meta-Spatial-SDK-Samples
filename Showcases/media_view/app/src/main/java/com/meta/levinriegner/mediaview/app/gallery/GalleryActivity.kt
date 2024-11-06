@@ -112,6 +112,7 @@ class GalleryActivity : ComponentActivity() {
                     onMediaSelected = { viewModel.onMediaSelected(it) },
                     onSortBy = { viewModel.onSortBy(it) },
                     onToggleMetadata = { viewModel.onToggleMetadata(it) },
+                    onOnboardingButtonPressed = { viewModel.onOnboardingButtonPressed() },
                 )
                 if (samplesState.value != UiSamplesState.Idle && filter.value == MediaFilter.SAMPLE_MEDIA)
                     SamplesStateView(
