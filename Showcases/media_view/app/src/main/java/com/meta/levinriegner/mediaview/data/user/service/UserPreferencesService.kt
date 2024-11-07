@@ -34,10 +34,27 @@ constructor(
     fun setSampleMediaVersion(version: Int) {
         sharedPreferences.edit().putInt(KEY_SAMPLE_MEDIA_VERSION, version).apply()
     }
+    
+    fun areReleaseNotesEnabled(): Boolean {
+        return sharedPreferences.getBoolean(KEY_ARE_RELEASE_NOTES_ENABLED, true)
+    }
+
+    fun setReleaseNotesEnabled(enabled: Boolean) {
+        sharedPreferences.edit().putBoolean(KEY_ARE_RELEASE_NOTES_ENABLED, enabled).apply()
+    }
+
+    fun areReleaseNotesSeenFor(version: String): Boolean {
+        return sharedPreferences.getBoolean(version, false)
+    }
+
+    fun setReleaseNotesSeenFor(version: String) {
+        sharedPreferences.edit().putBoolean(version, true).apply()
+    }
 
     companion object {
         private const val KEY_IS_PRIVACY_POLICY_ACCEPTED = "is_privacy_policy_accepted"
         private const val KEY_SAMPLE_MEDIA_VERSION = "sample_media_version"
         private const val KEY_IS_ONBOARDING_COMPLETED = "is_onboarding_completed"
+        private const val KEY_ARE_RELEASE_NOTES_ENABLED = "are_release_notes_enabled"
     }
 }

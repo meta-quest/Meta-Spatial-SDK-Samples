@@ -3,9 +3,6 @@
 package com.meta.levinriegner.mediaview.app.onboarding
 
 import android.net.Uri
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.pager.PagerState
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.lifecycle.ViewModel
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.data.onboarding.model.StepModel
@@ -18,7 +15,6 @@ import okhttp3.internal.immutableListOf
 import timber.log.Timber
 import javax.inject.Inject
 
-@ExperimentalFoundationApi
 @HiltViewModel
 class OnboardingViewModel
 @Inject
@@ -33,43 +29,25 @@ constructor(
         val isCompleted = userRepository.isOnboardingCompleted()
 
         if (isCompleted) {
-            Timber.i("Onboarding already completed")
+            Timber.tag("Onboarding").i("Onboarding already completed")
         } else {
-            Timber.i("Starting Onboarding for the first time")
+            Timber.tag("Onboarding").i("Starting Onboarding for the first time")
+            panelDelegate.toggleOnboarding(true)
             userRepository.setOnboardingCompleted()
         }
 
         _state.update {
-            OnboardingState.OnboardingStarted(!isCompleted, stepList, 0)
-        }
-    }
-
-    fun goToNextPage() {
-        _state.update {
-            OnboardingState.OnboardingStarted(
-                isFirstTime = it.isFirstTime,
-                currentPage = if (it is OnboardingState.OnboardingStarted) ++it.currentPage else 0,
-                steps = stepList
-            )
-        }
-    }
-
-    fun goToPreviousPage() {
-        _state.update {
-            OnboardingState.OnboardingStarted(
-                isFirstTime = it.isFirstTime,
-                currentPage = if (it is OnboardingState.OnboardingStarted) --it.currentPage else 0,
-                steps = stepList
-            )
+            OnboardingState.OnboardingStarted(true, stepList, 0)
         }
     }
 
     fun close() {
-        panelDelegate.closeOnboardingPanel()
+        panelDelegate.toggleOnboarding(false)
     }
 
     companion object {
-        private val stepList = immutableListOf<StepModel>(
+        private val stepList = immutableListOf(
+            // TODO: Set proper image URIs
             StepModel(
                 1,
                 Uri.EMPTY,

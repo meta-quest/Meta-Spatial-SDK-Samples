@@ -19,9 +19,9 @@ interface PanelDelegate {
 
   fun closeUploadPanel()
 
-  fun openOnboardingPanel()
-
-  fun closeOnboardingPanel()
-
   fun togglePrivacyPolicy(show: Boolean)
+
+  fun toggleOnboarding(show: Boolean)
+
+  fun toggleWhatsNew(show: Boolean)
 }

@@ -35,7 +35,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.meta.levinriegner.mediaview.R
-import com.meta.levinriegner.mediaview.app.events.EventBus
 import com.meta.levinriegner.mediaview.app.onboarding.view.OnboardingControls
 import com.meta.levinriegner.mediaview.app.onboarding.view.OnboardingSlide
 import com.meta.levinriegner.mediaview.app.shared.theme.AppColor
@@ -47,6 +46,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+// TODO: Consider a safe rememberPagerState replacement to avoid this experimental opt-in
 @OptIn(ExperimentalFoundationApi::class)
 @AndroidEntryPoint
 class OnboardingActivity : ComponentActivity() {
@@ -62,7 +62,6 @@ class OnboardingActivity : ComponentActivity() {
         buildUi()
     }
 
-    @OptIn(ExperimentalFoundationApi::class)
     private fun buildUi() {
         setContent {
             // UI
@@ -130,13 +129,23 @@ class OnboardingActivity : ComponentActivity() {
                                             )
                                         ) {
                                             CloseButton(
-                                                onPressed = { viewModel.close() }
+                                                onPressed = {
+                                                    pagerCoroutineScope.launch {
+                                                        pagerState.scrollToPage(0)
+                                                    }
+                                                    viewModel.close()
+                                                }
                                             )
                                         }
 
                                         val onFinishButtonPressed =
                                             if (!pagerState.canScrollForward) {
-                                                { viewModel.close() }
+                                                {
+                                                    pagerCoroutineScope.launch {
+                                                        pagerState.scrollToPage(0)
+                                                    }
+                                                    viewModel.close()
+                                                }
                                             } else {
                                                 null
                                             }

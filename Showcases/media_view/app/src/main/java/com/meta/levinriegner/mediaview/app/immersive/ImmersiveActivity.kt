@@ -45,7 +45,6 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
         MutableStateFlow<Map<Long, MediaModel>>(emptyMap()) // Uses MediaModel.id as key
     val openMedia = _openMedia.asStateFlow()
     private var uploadPanelEntityId: Long? = null
-    private var onboardingPanelEntityId: Long? = null
     private val activityScope = CoroutineScope(Dispatchers.Main)
 
     override fun registerFeatures(): List<SpatialFeature> {
@@ -173,34 +172,21 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
         } ?: Timber.w("Upload panel is not open")
     }
 
-    override fun openOnboardingPanel() {
-        Timber.i("Opening Onboarding panel")
-        if (onboardingPanelEntityId != null) {
-            Timber.w("Onboarding panel is already open")
-            return
-        }
-
-        // Register panel
-        registerPanel(panelManager.provideOnboardingPanelRegistration())
-
-        val ent = panelManager.createOnboardingEntity()
-        onboardingPanelEntityId = ent.id
-
+    override fun togglePrivacyPolicy(show: Boolean) {
+        Timber.i("Toggling privacy policy. Show: $show")
+        panelManager.togglePrivacyPolicy(show)
+        panelManager.toggleGallery(!show)
     }
 
-    override fun closeOnboardingPanel() {
-        Timber.i("Closing Onboarding panel")
-        onboardingPanelEntityId?.let {
-            panelManager.destroyEntity(it)
-            onboardingPanelEntityId = null
-        } ?: Timber.w("Onboarding panel is not open")
+    override fun toggleOnboarding(show: Boolean) {
+        Timber.i("Toggling Onboarding. Show: $show")
+        panelManager.toggleOnboarding(show)
     }
 
-  override fun togglePrivacyPolicy(show: Boolean) {
-    Timber.i("Toggling privacy policy. Show: $show")
-    panelManager.togglePrivacyPolicy(show)
-    panelManager.toggleGallery(!show)
-  }
-  // endregion
+    override fun toggleWhatsNew(show: Boolean) {
+        Timber.i("Toggling Whats New. Show: $show")
+        panelManager.toggleWhatsNew(show)
+    }
+    // endregion
 
 }

@@ -20,7 +20,13 @@ entities:
             - 0.779999971
             - 0.49000001
             - 1
+          translation:
+            - 0
+            - 0
+            - -0.100000001
           children:
+            - ref:onboarding
+            - ref:whatsNew
             - ref:mediaTypesFilter
             - ref:galleryMenu
         com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead:
@@ -106,5 +112,49 @@ entities:
         com.meta.spatial.toolkit.Visible:
           isVisible: false
       tag: privacyPopup
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: onboarding
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.899999976
+            - 0.449999988
+            - 1
+          translation:
+            - 0.100000001
+            - -0.00407040119
+            - -0.0199999996
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/6"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: onboarding
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: whatsNew
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.899999976
+            - 0.449999988
+            - 1
+          translation:
+            - 0.100000001
+            - -0.00407040119
+            - -0.0250000004
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/7"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: whatsNew
 metadata:
   version: 1.0

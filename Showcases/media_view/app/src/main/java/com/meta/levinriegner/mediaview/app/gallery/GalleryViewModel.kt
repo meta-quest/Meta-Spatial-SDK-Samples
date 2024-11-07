@@ -56,7 +56,7 @@ constructor(
   }
 
   fun onOnboardingButtonPressed() {
-    panelDelegate.openOnboardingPanel()
+    panelDelegate.toggleOnboarding(true)
   }
 
   fun onMediaSelected(mediaModel: MediaModel) {
