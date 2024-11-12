@@ -447,7 +447,11 @@ class PanelManager(
         // Display other panels
         Query.where { has(Panel.id) }
             .eval()
-            .filter { it.id != mediaModel.entityId }
+            .filter {
+                val privacyPolicyPanel = getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_PRIVACY)
+
+                it.id != mediaModel.entityId && it.id != privacyPolicyPanel?.entity?.id
+            }
             .forEach { panelTransformations.setPanelVisibility(it, true) }
     }
 
