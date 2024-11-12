@@ -279,12 +279,12 @@ private fun MediaGrid(
     showMetadata: Boolean,
     onItemClicked: (MediaModel) -> Unit,
 ) {
-    LazyHorizontalGrid(
+    LazyVerticalGrid (
         modifier = modifier,
-        rows = GridCells.FixedSize(Dimens.galleryItemSize),
         contentPadding = PaddingValues(Dimens.large),
         verticalArrangement = Arrangement.spacedBy(Dimens.small),
         horizontalArrangement = Arrangement.spacedBy(Dimens.small),
+        columns = GridCells.Adaptive(Dimens.galleryItemSize)
     ) {
         items(media.size) { index ->
             MediaItemView(
