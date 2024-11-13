@@ -250,21 +250,22 @@ private fun Header(
                             }
                         }
                     }
-                    Box(modifier = Modifier.size(Dimens.medium))
-                    // TODO: Style
+                    /** Box(modifier = Modifier.size(Dimens.medium))
+                     * Hidden for 0.0.13
+                     * TODO: Style
                     Switch(
-                        colors = SwitchDefaults.colors().copy(
-                            uncheckedThumbColor = AppColor.White60,
-                            uncheckedBorderColor = AppColor.White60,
-                            uncheckedTrackColor = AppColor.GradientStart,
-                            checkedThumbColor = AppColor.GradientStart,
-                            checkedBorderColor = AppColor.White,
-                            checkedTrackColor = AppColor.White,
-                        ),
-                        checked = showMetadata,
-                        onCheckedChange = {
-                            onToggleMetadata(it)
-                        })
+                    colors = SwitchDefaults.colors().copy(
+                    uncheckedThumbColor = AppColor.White60,
+                    uncheckedBorderColor = AppColor.White60,
+                    uncheckedTrackColor = AppColor.GradientStart,
+                    checkedThumbColor = AppColor.GradientStart,
+                    checkedBorderColor = AppColor.White,
+                    checkedTrackColor = AppColor.White,
+                    ),
+                    checked = showMetadata,
+                    onCheckedChange = {
+                    onToggleMetadata(it)
+                    })**/
                 }
             }
         }
