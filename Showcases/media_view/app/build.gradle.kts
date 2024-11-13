@@ -178,8 +178,8 @@ dependencies {
     kapt("com.github.bumptech.glide:compiler:4.16.0")
 
     // ExoPlayer
-    implementation("androidx.media3:media3-exoplayer:1.4.0")
-    implementation("androidx.media3:media3-ui:1.4.0")
+    implementation("androidx.media3:media3-exoplayer:1.4.1")
+    implementation("androidx.media3:media3-ui:1.4.1")
 
     // Dependency injection
     implementation("com.google.dagger:hilt-android:2.51")

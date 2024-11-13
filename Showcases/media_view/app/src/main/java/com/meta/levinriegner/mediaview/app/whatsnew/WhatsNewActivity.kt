@@ -1,3 +1,5 @@
+// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+
 package com.meta.levinriegner.mediaview.app.whatsnew
 
 import android.os.Bundle
@@ -5,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -40,7 +43,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.rememberAsyncImagePainter
 import com.meta.levinriegner.mediaview.BuildConfig
+import com.meta.levinriegner.mediaview.R
 import com.meta.levinriegner.mediaview.app.shared.Constants
 import com.meta.levinriegner.mediaview.app.shared.theme.AppColor
 import com.meta.levinriegner.mediaview.app.shared.theme.Dimens
@@ -103,8 +108,12 @@ class WhatsNewActivity : ComponentActivity() {
                                         modifier = Modifier
                                             .fillMaxSize()
                                     ) {
-                                        // TODO: Replace with logo when provided
-                                        Icon(Icons.Filled.Image, "")
+                                        Image(
+                                            rememberAsyncImagePainter(
+                                                R.drawable.logo
+                                            ),
+                                            "logo",
+                                        )
                                         Box(
                                             modifier = Modifier.height(Dimens.small)
                                         )

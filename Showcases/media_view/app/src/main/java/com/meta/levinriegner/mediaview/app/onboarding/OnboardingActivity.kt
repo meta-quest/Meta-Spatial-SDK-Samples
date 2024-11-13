@@ -2,6 +2,8 @@
 
 package com.meta.levinriegner.mediaview.app.onboarding
 
+import android.content.ContentResolver
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -25,18 +27,26 @@ import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.ExoPlayer
 import coil.compose.rememberAsyncImagePainter
 import com.meta.levinriegner.mediaview.R
 import com.meta.levinriegner.mediaview.app.onboarding.view.OnboardingControls
 import com.meta.levinriegner.mediaview.app.onboarding.view.OnboardingSlide
+import com.meta.levinriegner.mediaview.app.onboarding.view.OnboardingVideo
 import com.meta.levinriegner.mediaview.app.shared.theme.AppColor
 import com.meta.levinriegner.mediaview.app.shared.theme.Dimens
 import com.meta.levinriegner.mediaview.app.shared.theme.MediaViewTheme
@@ -48,12 +58,14 @@ import kotlinx.coroutines.launch
 
 // TODO: Consider a safe rememberPagerState replacement to avoid this experimental opt-in
 @OptIn(ExperimentalFoundationApi::class)
+@androidx.annotation.OptIn(UnstableApi::class)
 @AndroidEntryPoint
 class OnboardingActivity : ComponentActivity() {
     private val viewModel: OnboardingViewModel by viewModels()
 
     private lateinit var pagerState: PagerState
     private lateinit var pagerCoroutineScope: CoroutineScope
+    private lateinit var exoPlayer: ExoPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +100,8 @@ class OnboardingActivity : ComponentActivity() {
                             OnboardingState.Idle -> Box(Modifier)
 
                             is OnboardingState.OnboardingStarted -> {
+                                val context = LocalContext.current
+
                                 pagerState = rememberPagerState(
                                     pageCount = {
                                         state.steps.count()
@@ -95,23 +109,64 @@ class OnboardingActivity : ComponentActivity() {
                                 )
                                 pagerCoroutineScope = rememberCoroutineScope()
 
-                                Row(modifier = Modifier.fillMaxSize()) {
-                                    Crossfade(
-                                        targetState = pagerState.currentPage,
-                                        label = "Onboarding images"
-                                    ) { currentPage ->
-                                        Image(
-                                            modifier = Modifier
-                                                .fillMaxWidth(fraction = .65f)
-                                                .fillMaxHeight(),
-                                            contentScale = ContentScale.FillBounds,
-                                            painter = rememberAsyncImagePainter(
-                                                "https://picsum.photos/id/$currentPage/1000/1000",
-                                                contentScale = ContentScale.FillBounds
-                                            ),
-                                            contentDescription = "Image"
-                                        )
+                                exoPlayer = remember {
+                                    ExoPlayer.Builder(context).build().apply {
+                                        repeatMode = Player.REPEAT_MODE_ONE
+                                        playWhenReady = true
                                     }
+                                }
+
+                                LaunchedEffect(pagerState.currentPage) {
+                                    val resourceId =
+                                        state.steps[pagerState.currentPage].resourceId
+
+                                    val mediaItem = MediaItem.fromUri(
+                                        Uri
+                                            .Builder()
+                                            .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
+                                            .path(resourceId.toString())
+                                            .build()
+                                    )
+
+                                    exoPlayer.setMediaItem(mediaItem)
+                                    exoPlayer.prepare()
+
+
+                                }
+
+                                DisposableEffect(Unit) {
+                                    onDispose {
+                                        exoPlayer.release()
+                                    }
+                                }
+
+                                Row(modifier = Modifier.fillMaxSize()) {
+                                    val currentStep = state.steps[pagerState.currentPage]
+
+                                    Crossfade(
+                                        targetState = currentStep,
+                                        label = currentStep.title
+                                    ) { step ->
+                                        if (step.isVideo) {
+                                            OnboardingVideo(
+                                                exoPlayer,
+                                                modifier = Modifier
+                                                    .fillMaxHeight()
+                                                    .fillMaxWidth(.75f)
+                                            )
+                                        } else {
+                                            Image(
+                                                rememberAsyncImagePainter(
+                                                    step.resourceId,
+                                                ),
+                                                "${step.title} image",
+                                                modifier = Modifier
+                                                    .fillMaxWidth(.75f)
+                                                    .background(AppColor.DarkBackgroundSweep)
+                                            )
+                                        }
+                                    }
+
                                     Column(
                                         horizontalAlignment = Alignment.CenterHorizontally,
                                         verticalArrangement = Arrangement.SpaceBetween,
@@ -154,12 +209,11 @@ class OnboardingActivity : ComponentActivity() {
                                             userScrollEnabled = false,
                                             state = pagerState
                                         ) { index ->
-                                            val currentStep = state.steps[index]
+                                            val step = state.steps[index]
 
                                             OnboardingSlide(
-                                                imageUri = currentStep.imageUri,
-                                                title = currentStep.title,
-                                                description = currentStep.description,
+                                                title = step.title,
+                                                description = step.description,
                                             )
                                         }
 
