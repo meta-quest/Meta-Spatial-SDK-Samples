@@ -176,6 +176,9 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
         Timber.i("Toggling privacy policy. Show: $show")
         panelManager.togglePrivacyPolicy(show)
         panelManager.toggleGallery(!show)
+        // TODO: Workaround. Migrate to enhanced navigation
+        panelManager.toggleWhatsNew(!show)
+        panelManager.toggleOnboarding(!show)
     }
 
     override fun toggleOnboarding(show: Boolean) {

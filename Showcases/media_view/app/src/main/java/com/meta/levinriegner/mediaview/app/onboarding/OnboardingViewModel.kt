@@ -51,7 +51,7 @@ constructor(
                 1,
                 R.drawable.logo_and_name,
                 "Free and Open Source",
-                "Media View is a free and open-source spatial application designed to view various media types on the Meta Quest.\nIt was built using the Meta Spatial SDK to contribute to the developer community as a resource for spatialized media viewing experiences within VR",
+                "Media View is a free and open-source spatial application designed to view various media types on the Meta Quest.\n\nIt was built using the Meta Spatial SDK to contribute to the developer community as a resource for spatialized media viewing experiences within VR",
                 false,
             ),
             StepModel(

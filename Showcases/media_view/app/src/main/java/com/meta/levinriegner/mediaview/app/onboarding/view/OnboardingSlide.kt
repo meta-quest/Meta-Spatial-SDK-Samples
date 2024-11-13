@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.meta.levinriegner.mediaview.app.shared.theme.AppColor
@@ -31,13 +32,14 @@ fun OnboardingSlide(
             title,
             color = AppColor.White,
             textAlign = TextAlign.Start,
+            fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.titleSmall
         )
         Text(
             description,
             color = AppColor.White60,
             textAlign = TextAlign.Start,
-            style = MaterialTheme.typography.labelSmall,
+            lineHeight = 11.5.sp,
             fontSize = 10.sp,
         )
     }
