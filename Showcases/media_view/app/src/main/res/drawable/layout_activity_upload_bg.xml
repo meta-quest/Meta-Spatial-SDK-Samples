@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/background_light" />
+    <stroke
+    android:width="@dimen/rounded_panel_border_width"
+    android:color="@color/meta_blue"
+  />
+    <corners android:radius="@dimen/upload_web_view_panel_radius" />
+</shape>

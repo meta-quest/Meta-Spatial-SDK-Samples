@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -61,16 +60,14 @@ class ImmersiveMenuActivity : ComponentActivity() {
                             listOf(AppColor.GradientStart, AppColor.GradientEnd))),
             horizontalArrangement = Arrangement.SpaceBetween) {
               Column(
-                  modifier = Modifier.align(Alignment.CenterVertically),
+                  modifier = Modifier.padding(horizontal = 15.dp).align(Alignment.CenterVertically),
               ) {
                 Text(
-                    modifier = Modifier.offset(15.dp, 0.dp),
-                    text = "You are in Immersive View",
-                    color = AppColor.White)
+                    modifier = Modifier, text = "You are in Immersive View", color = AppColor.White)
               }
 
               Column(
-                  modifier = Modifier.align(Alignment.CenterVertically),
+                  modifier = Modifier.padding(horizontal = 15.dp).align(Alignment.CenterVertically),
               ) {
                 OutlinedButton(
                     colors =
@@ -85,25 +82,6 @@ class ImmersiveMenuActivity : ComponentActivity() {
                             contentDescription = "Minimize")
                         Spacer(modifier = Modifier.size(Dimens.xSmall))
                         Text("Minimize")
-                      }
-                    }
-              }
-              Column(
-                  modifier = Modifier.offset((-20).dp, 0.dp).align(Alignment.CenterVertically),
-              ) {
-                OutlinedButton(
-                    colors =
-                        ButtonDefaults.buttonColors(
-                            contentColor = AppColor.White,
-                            containerColor = Color.Transparent,
-                        ),
-                    onClick = { viewModel.closeImmersiveMedia() }) {
-                      Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.icon_close),
-                            contentDescription = "Close")
-                        Spacer(modifier = Modifier.size(Dimens.xSmall))
-                        Text("Close")
                       }
                     }
               }

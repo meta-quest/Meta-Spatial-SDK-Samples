@@ -34,5 +34,9 @@ data class MediaModel(
     return Triple(hours, minutes, seconds)
   }
 
+  fun debugPrint(): String {
+    return "MediaModel(id=$id, size=$size, mimeType=$mimeType, durationMs=$durationMs, width=$width, height=$height, mediaType=$mediaType, mediaFilter=$mediaFilter)"
+  }
+
   companion object {}
 }

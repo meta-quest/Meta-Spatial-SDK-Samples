@@ -13,6 +13,7 @@ plugins {
   id("com.google.dagger.hilt.android")
   id("kotlin-parcelize")
   id("com.meta.spatial.plugin")
+  id("com.datadoghq.dd-sdk-android-gradle-plugin")
 }
 
 // Signing
@@ -40,15 +41,16 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 12
-    versionName = "0.0.12"
+    versionCode = 14
+    versionName = "0.0.13"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }
 
-    // Google Drive Keys
+    // API Keys
     val properties = Properties()
     properties.load(project.rootProject.file("local.properties").inputStream())
+    // Google Drive Keys
     buildConfigField(
         "String",
         "DRIVE_CLIENT_ID",
@@ -67,6 +69,36 @@ android {
         System.getenv("DRIVE_APP_ID")
             ?: properties.getProperty("DRIVE_APP_ID")
             ?: "\"XXXXXXXXXXXX\"")
+    // Datadog Keys
+    buildConfigField(
+        "String",
+        "DATADOG_CLIENT_TOKEN",
+        System.getenv("DATADOG_CLIENT_TOKEN")
+            ?: properties.getProperty("DATADOG_CLIENT_TOKEN")
+            ?: "\"XXXXXXXXXXXX\"")
+    buildConfigField(
+        "String",
+        "DATADOG_APPLICATION_ID",
+        System.getenv("DATADOG_APPLICATION_ID")
+            ?: properties.getProperty("DATADOG_APPLICATION_ID")
+            ?: "\"XXXXXXXXXXXX\"")
+  }
+
+  signingConfigs {
+    getByName("debug") {
+      keyAlias = "androiddebugkey"
+      keyPassword = "android"
+      storeFile = file("../.debug/debug.jks")
+      storePassword = "android"
+    }
+    if (keystoreProperties["keystoreFile"] != null) {
+      create("release") {
+        keyAlias = keystoreProperties.getProperty("keyAlias")
+        keyPassword = keystoreProperties.getProperty("keyPassword")
+        storeFile = file(keystoreProperties.getProperty("keystoreFile"))
+        storePassword = keystoreProperties.getProperty("keystorePassword")
+      }
+    }
   }
 
   buildTypes {
@@ -116,6 +148,7 @@ dependencies {
   implementation("androidx.compose.ui:ui-graphics")
   implementation("androidx.compose.ui:ui-tooling-preview")
   implementation("androidx.compose.material3:material3")
+  implementation("androidx.compose.material:material-icons-extended:1.7.2")
   implementation("io.coil-kt:coil-compose:2.7.0")
   implementation("io.coil-kt:coil-video:2.7.0")
 
@@ -154,6 +187,10 @@ dependencies {
   androidTestImplementation("androidx.compose.ui:ui-test-junit4")
   debugImplementation("androidx.compose.ui:ui-tooling")
   debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+  // Monitoring
+  implementation("com.datadoghq:dd-sdk-android-ndk:2.14.0")
+  implementation("com.datadoghq:dd-sdk-android-logs:2.14.0")
 }
 
 val sceneProjectPath = "app/src/main/assets/scenes"

@@ -65,9 +65,11 @@ fun GalleryView(
     uiState: UiState<List<MediaModel>>,
     filter: MediaFilter,
     sortBy: MediaSortBy,
+    showMetadata: Boolean,
     onRefresh: () -> Unit,
     onMediaSelected: (MediaModel) -> Unit,
     onSortBy: (MediaSortBy) -> Unit,
+    onToggleMetadata: (Boolean) -> Unit,
 ) {
   MediaViewTheme {
     Scaffold(
@@ -90,9 +92,12 @@ fun GalleryView(
                       sortBy = sortBy,
                       onSortBy = onSortBy,
                       fileCount = uiState.data.size,
+                      showMetadata = showMetadata,
+                      onToggleMetadata = onToggleMetadata,
                   )
                   MediaGrid(
                       media = uiState.data,
+                      showMetadata = showMetadata,
                       modifier = Modifier.padding(innerPadding),
                       onItemClicked = onMediaSelected,
                   )
@@ -113,11 +118,13 @@ fun GalleryView(
 private fun Header(
     filter: MediaFilter,
     sortBy: MediaSortBy,
-    fileCount: Int,
     onSortBy: (MediaSortBy) -> Unit,
+    fileCount: Int,
+    showMetadata: Boolean,
+    onToggleMetadata: (Boolean) -> Unit,
 ) {
   var sortExpanded by remember { mutableStateOf(false) }
-  Column() {
+  Column {
     Box(modifier = Modifier.padding(Dimens.medium)) {
       Row(
           modifier = Modifier.fillMaxWidth(),
@@ -134,86 +141,100 @@ private fun Header(
               style = MaterialTheme.typography.bodySmall.copy(color = AppColor.White60),
           )
         }
-        Column(horizontalAlignment = Alignment.End, modifier = Modifier) {
-          OutlinedButton(
-              onClick = { sortExpanded = true },
-              modifier = Modifier.height(40.dp).width(90.dp),
-              contentPadding = PaddingValues(start = 30.dp, end = 0.dp),
-              shape = RoundedCornerShape(20.dp),
-              colors =
-                  ButtonDefaults.buttonColors(
-                      contentColor = AppColor.White,
-                      containerColor = Color.Transparent,
-                  ),
-          ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Absolute.Left,
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Column(horizontalAlignment = Alignment.End, modifier = Modifier) {
+            OutlinedButton(
+                onClick = { sortExpanded = true },
+                modifier = Modifier.height(40.dp).width(90.dp),
+                contentPadding = PaddingValues(start = 30.dp, end = 0.dp),
+                shape = RoundedCornerShape(20.dp),
+                colors =
+                    ButtonDefaults.buttonColors(
+                        contentColor = AppColor.White,
+                        containerColor = Color.Transparent,
+                    ),
             ) {
-              Icon(
-                  painter = painterResource(id = R.drawable.icon_sortby),
-                  contentDescription = "Button Icon",
-                  modifier = Modifier.size(20.dp).offset(x = (-20).dp, y = 0.dp))
-              Text(
-                  modifier = Modifier.fillMaxWidth().offset(x = (-17).dp, y = 0.dp),
-                  text = stringResource(id = R.string.sort_by),
-                  // style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
-                  color = Color.White,
-                  fontSize = 11.sp,
-                  fontWeight = FontWeight.Bold,
-                  textAlign = TextAlign.Left,
-              )
+              Row(
+                  verticalAlignment = Alignment.CenterVertically,
+                  horizontalArrangement = Arrangement.Absolute.Left,
+              ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.icon_sortby),
+                    contentDescription = "Button Icon",
+                    modifier = Modifier.size(20.dp).offset(x = (-20).dp, y = 0.dp))
+                Text(
+                    modifier = Modifier.fillMaxWidth().offset(x = (-17).dp, y = 0.dp),
+                    text = stringResource(id = R.string.sort_by),
+                    // style = MaterialTheme.typography.bodyMedium.copy(fontWeight =
+                    // FontWeight.Bold),
+                    color = Color.White,
+                    fontSize = 11.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Left,
+                )
+              }
             }
-          }
 
-          MaterialTheme(
-              shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(16.dp))) {
-                DropdownMenu(
-                    expanded = sortExpanded,
-                    onDismissRequest = { sortExpanded = false },
-                    modifier =
-                        Modifier.shadow(2.dp)
-                            .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(16.dp))
-                            .background(
-                                Brush.verticalGradient(
-                                    listOf(AppColor.GradientStart, AppColor.GradientEnd))),
-                ) {
-                  for (option in MediaSortBy.entries) {
-                    DropdownMenuItem(
-                        contentPadding = PaddingValues(10.dp),
-                        trailingIcon =
-                            if (option == sortBy)
-                                ({
-                                  Icon(
-                                      imageVector = Icons.Default.Check,
-                                      contentDescription = null,
-                                      modifier = Modifier.size(15.dp))
-                                })
-                            else null,
-                        text = {
-                          Text(
-                              fontSize = 10.sp,
-                              text =
-                                  stringResource(
-                                      when (option) {
-                                        MediaSortBy.DateDesc -> R.string.sort_by_date_desc
-                                        MediaSortBy.DateAsc -> R.string.sort_by_date_asc
-                                        MediaSortBy.SizeAsc -> R.string.sort_by_size_asc
-                                        MediaSortBy.SizeDesc -> R.string.sort_by_size_desc
-                                        MediaSortBy.NameAsc -> R.string.sort_by_name_asc
-                                        MediaSortBy.NameDesc -> R.string.sort_by_name_desc
-                                      }))
-                        },
-                        onClick = {
-                          sortExpanded = false
-                          onSortBy(option)
-                        },
-                    )
-                    if (option != MediaSortBy.NameDesc)
-                        HorizontalDivider(color = AppColor.White15, thickness = 1.dp)
+            MaterialTheme(
+                shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(16.dp))) {
+                  DropdownMenu(
+                      expanded = sortExpanded,
+                      onDismissRequest = { sortExpanded = false },
+                      modifier =
+                          Modifier.shadow(2.dp)
+                              .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(16.dp))
+                              .background(
+                                  Brush.verticalGradient(
+                                      listOf(AppColor.GradientStart, AppColor.GradientEnd))),
+                  ) {
+                    for (option in MediaSortBy.entries) {
+                      DropdownMenuItem(
+                          contentPadding = PaddingValues(10.dp),
+                          trailingIcon =
+                              if (option == sortBy)
+                                  ({
+                                    Icon(
+                                        imageVector = Icons.Default.Check,
+                                        contentDescription = null,
+                                        modifier = Modifier.size(15.dp))
+                                  })
+                              else null,
+                          text = {
+                            Text(
+                                fontSize = 10.sp,
+                                text =
+                                    stringResource(
+                                        when (option) {
+                                          MediaSortBy.DateDesc -> R.string.sort_by_date_desc
+                                          MediaSortBy.DateAsc -> R.string.sort_by_date_asc
+                                          MediaSortBy.SizeAsc -> R.string.sort_by_size_asc
+                                          MediaSortBy.SizeDesc -> R.string.sort_by_size_desc
+                                          MediaSortBy.NameAsc -> R.string.sort_by_name_asc
+                                          MediaSortBy.NameDesc -> R.string.sort_by_name_desc
+                                        }))
+                          },
+                          onClick = {
+                            sortExpanded = false
+                            onSortBy(option)
+                          },
+                      )
+                      if (option != MediaSortBy.NameDesc)
+                          HorizontalDivider(color = AppColor.White15, thickness = 1.dp)
+                    }
                   }
                 }
-              }
+          }
+          /**
+           * Box(modifier = Modifier.size(Dimens.medium)) Hidden for 0.0.13
+           *
+           * TODO: Style Switch( colors = SwitchDefaults.colors().copy( uncheckedThumbColor =
+           *   AppColor.White60, uncheckedBorderColor = AppColor.White60, uncheckedTrackColor =
+           *   AppColor.GradientStart, checkedThumbColor = AppColor.GradientStart,
+           *   checkedBorderColor = AppColor.White, checkedTrackColor = AppColor.White, ), checked =
+           *   showMetadata, onCheckedChange = { onToggleMetadata(it) })*
+           */
         }
       }
     }
@@ -225,20 +246,21 @@ private fun Header(
 private fun MediaGrid(
     media: List<MediaModel>,
     modifier: Modifier = Modifier,
+    showMetadata: Boolean,
     onItemClicked: (MediaModel) -> Unit,
 ) {
   LazyVerticalGrid(
       modifier = modifier,
-      columns = GridCells.FixedSize(Dimens.galleryItemSize),
       contentPadding = PaddingValues(Dimens.large),
       verticalArrangement = Arrangement.spacedBy(Dimens.small),
       horizontalArrangement = Arrangement.spacedBy(Dimens.small),
-  ) {
-    items(media.size) { index ->
-      MediaItemView(
-          media[index],
-          onItemClicked = onItemClicked,
-      )
-    }
-  }
+      columns = GridCells.Adaptive(Dimens.galleryItemSize)) {
+        items(media.size) { index ->
+          MediaItemView(
+              media[index],
+              showMetadata,
+              onItemClicked = onItemClicked,
+          )
+        }
+      }
 }

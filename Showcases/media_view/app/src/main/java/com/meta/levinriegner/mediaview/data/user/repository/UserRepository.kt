@@ -18,4 +18,12 @@ constructor(
   fun setSampleMediaSaved(saved: Boolean) {
     userPreferencesService.setSampleMediaSaved(saved)
   }
+
+  fun isPrivacyPolicyAccepted(): Boolean {
+    return userPreferencesService.isPrivacyPolicyAccepted()
+  }
+
+  fun setPrivacyPolicyAccepted(accepted: Boolean) {
+    userPreferencesService.setPrivacyPolicyAccepted(accepted)
+  }
 }

@@ -45,6 +45,9 @@ constructor(
   private val _sortBy = MutableStateFlow(MediaSortBy.DateDesc)
   val sortBy = _sortBy.asStateFlow()
 
+  private val _showMetadata = MutableStateFlow(false)
+  val showMetadata = _showMetadata.asStateFlow()
+
   init {
     // Will trigger the initial load
     subscribeToFilterChanges()
@@ -52,7 +55,7 @@ constructor(
   }
 
   fun onMediaSelected(mediaModel: MediaModel) {
-    Timber.i("Opening media: $mediaModel")
+    Timber.i("Opening media: ${mediaModel.debugPrint()}")
     panelDelegate.openMediaPanel(mediaModel)
   }
 
@@ -60,6 +63,11 @@ constructor(
     Timber.i("Sorting by: $sortBy")
     _sortBy.value = sortBy
     loadMedia()
+  }
+
+  fun onToggleMetadata(show: Boolean) {
+    Timber.i("Toggling metadata to $show")
+    _showMetadata.value = show
   }
 
   fun loadMedia(

@@ -13,6 +13,7 @@ import com.meta.levinriegner.mediaview.app.immersive.entity.PanelTransformations
 import com.meta.levinriegner.mediaview.app.player.PlayerActivity
 import com.meta.levinriegner.mediaview.app.player.menu.immersive.ImmersiveMenuActivity
 import com.meta.levinriegner.mediaview.app.player.menu.minimized.MinimizedMenuActivity
+import com.meta.levinriegner.mediaview.app.privacy.PrivacyPolicyActivity
 import com.meta.levinriegner.mediaview.app.shared.model.immersiveMenuPanelId
 import com.meta.levinriegner.mediaview.app.shared.model.maximizedBottomCenterPanelVector3
 import com.meta.levinriegner.mediaview.app.shared.model.maximizedPanelConfigOptions
@@ -36,14 +37,18 @@ import com.meta.spatial.runtime.PanelConfigOptions.Companion.DEFAULT_DPI
 import com.meta.spatial.runtime.PanelSceneObject
 import com.meta.spatial.runtime.QuadLayerConfig
 import com.meta.spatial.runtime.Scene
+import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Panel
 import com.meta.spatial.toolkit.PanelCreator
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.toolkit.Scale
+import com.meta.spatial.toolkit.SpatialActivityManager
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
+import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.toolkit.createPanelEntity
 import timber.log.Timber
 
@@ -57,49 +62,19 @@ class PanelManager(
   private val galleryPanelDistance = 0.9f
   private val playerPanelDistance = 0.8f
   private val immersiveMenuHeight = 0.1f
+  private val uploadPanelDistance = 0.7f
+
+  private lateinit var galleryEntity: Entity
 
   fun providePanelRegistrations(): List<PanelRegistration> {
     return listOf(
         PanelCreator(R.integer.panel_id_gallery_activity) { ent ->
-          // Set initial transform based on head pose
-          panelTransformations.applyTransformWithDelay(
-              ent, galleryPanelDistance, Vector3(0f, -0.5f, 0f), applyTilt = true)
+          galleryEntity = ent
+
           createGalleryPanel(ent)
         },
         PanelCreator(R.integer.panel_id_media_filter_activity) { ent ->
-          // Parent the media filter to the gallery
-          Handler(Looper.getMainLooper())
-              .postDelayed(
-                  {
-                    Query.where { has(Panel.id) }
-                        .eval()
-                        .firstOrNull { it.id.toInt() == R.integer.panel_id_gallery_activity }
-                        ?.let { ent.setComponent(TransformParent(it)) }
-                    ent.setComponent(
-                        Transform(Pose(Vector3(-0.49f, 0f, 0f), Quaternion(0f, 0f, 0f))))
-                  },
-                  1000)
           createMediaFilterPanel(ent)
-        },
-        PanelCreator(R.integer.panel_id_upload_activity) { ent ->
-          Query.where { has(Panel.id) }
-              .eval()
-              .firstOrNull { it.id.toInt() == R.integer.panel_id_gallery_activity }
-              ?.let {
-                ent.setComponent(TransformParent(it))
-                ent.setComponent(
-                    Transform(
-                        Pose(
-                            Vector3(
-                                0f,
-                                (0.45f / 2) +
-                                    0.1f +
-                                    (0.45f) +
-                                    (dpToPx(Dimens.medium.value.toInt()) * PIXELS_TO_METERS * 2),
-                                0f), // Gallery height / 2
-                            Quaternion(0f, 0f, 0f))))
-              }
-          createUploadPanel(ent)
         },
         PanelCreator(R.integer.panel_id_gallery_menu) { ent ->
           // Parent the menu to the gallery
@@ -127,7 +102,21 @@ class PanelManager(
                   1000)
           createGalleryMenuPanel(ent)
         },
+        PanelCreator(R.integer.panel_id_privacy_policy) { ent -> createPrivacyPolicyPanel(ent) },
     )
+  }
+
+  fun provideUploadPanelRegistration(): PanelRegistration {
+    return PanelCreator(R.integer.panel_id_upload_activity) { ent ->
+      // Set gallery as parent
+      ent.setComponent(TransformParent(galleryEntity))
+
+      ent.setComponent(
+          // Transform relative to the parent
+          Transform(Pose(Vector3(0f, 0f, -0.025f), Quaternion(0f, 0f, 0f))))
+
+      createUploadPanel(ent)
+    }
   }
 
   fun providePlayerPanelRegistration(mediaModel: MediaModel): PanelRegistration {
@@ -151,8 +140,6 @@ class PanelManager(
   private fun createGalleryPanel(ent: Entity): PanelSceneObject {
     val config =
         PanelConfigOptions(
-            width = 0.78f,
-            height = 0.45f,
             enableLayer = true,
             enableTransparent = false,
             includeGlass = false,
@@ -163,8 +150,6 @@ class PanelManager(
   private fun createMediaFilterPanel(ent: Entity): PanelSceneObject {
     val config =
         PanelConfigOptions(
-            width = 0.175f,
-            height = 0.45f,
             enableLayer = true,
             enableTransparent = false,
             includeGlass = false,
@@ -175,10 +160,10 @@ class PanelManager(
   private fun createUploadPanel(ent: Entity): PanelSceneObject {
     val config =
         PanelConfigOptions(
-            width = 1f,
-            height = 0.9f,
+            width = 0.6f,
+            height = 0.40f,
             enableLayer = true,
-            enableTransparent = false,
+            enableTransparent = true,
             includeGlass = false,
         )
 
@@ -188,13 +173,21 @@ class PanelManager(
   private fun createGalleryMenuPanel(ent: Entity): PanelSceneObject {
     val config =
         PanelConfigOptions(
-            width = 0.5f,
-            height = 0.1f,
             enableLayer = true,
             enableTransparent = false,
             includeGlass = false,
         )
     return PanelSceneObject(scene, spatialContext, GalleryMenuActivity::class.java, ent, config)
+  }
+
+  private fun createPrivacyPolicyPanel(ent: Entity): PanelSceneObject {
+    val config =
+        PanelConfigOptions(
+            enableLayer = true,
+            enableTransparent = false,
+            includeGlass = false,
+        )
+    return PanelSceneObject(scene, spatialContext, PrivacyPolicyActivity::class.java, ent, config)
   }
 
   private fun createPlayerPanel(ent: Entity, mediaModel: MediaModel): PanelSceneObject {
@@ -326,7 +319,9 @@ class PanelManager(
 
   fun createUploadEntity(): Entity {
     return Entity.createPanelEntity(
-        R.integer.panel_id_upload_activity, Transform.build { move(0f, 0f, 0f) }, Grabbable())
+        R.integer.panel_id_upload_activity,
+        Transform.build { move(0f, 0f, 0f) },
+    )
   }
 
   fun destroyUploadEntity(entityId: Long) {
@@ -412,8 +407,41 @@ class PanelManager(
     // Display other panels
     Query.where { has(Panel.id) }
         .eval()
-        .filter { it.id != mediaModel.entityId }
+        .filter {
+          val privacyPolicyPanel =
+              getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_PRIVACY)
+
+          it.id != mediaModel.entityId && it.id != privacyPolicyPanel?.entity?.id
+        }
         .forEach { panelTransformations.setPanelVisibility(it, true) }
+  }
+
+  private fun getComposition(): GLXFInfo {
+    val activity = SpatialActivityManager.getVrActivity<AppSystemActivity>()
+    return activity.glXFManager.getGLXFInfo(GLXFConstants.COMPOSITION_NAME)
+  }
+
+  fun togglePrivacyPolicy(show: Boolean) {
+    val panel = getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_PRIVACY)
+    if (panel?.entity == null) {
+      Timber.w("Privacy policy panel entity not found")
+      return
+    }
+    panel.entity.setComponent(Visible(show))
+  }
+
+  fun toggleGallery(show: Boolean) {
+    val panel = getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_GALLERY)
+    if (panel?.entity == null) {
+      Timber.w("Gallery panel entity not found")
+      return
+    }
+    panel.entity.setComponent(Visible(show))
+    // Set media filters visibility
+    getComposition()
+        .tryGetNodeByName(GLXFConstants.NODE_NAME_MEDIA_FILTERS)
+        ?.entity
+        ?.setComponent(Visible(show))
   }
 
   companion object {

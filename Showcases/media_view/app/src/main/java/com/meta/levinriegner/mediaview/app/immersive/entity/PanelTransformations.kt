@@ -2,8 +2,6 @@
 
 package com.meta.levinriegner.mediaview.app.immersive.entity
 
-import android.os.Handler
-import android.os.Looper
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
@@ -13,7 +11,6 @@ import com.meta.spatial.runtime.PanelConfigOptions
 import com.meta.spatial.runtime.PanelSceneObject
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
-import com.meta.spatial.toolkit.Scale
 import com.meta.spatial.toolkit.SceneObjectSystem
 import com.meta.spatial.toolkit.Transform
 import timber.log.Timber
@@ -22,26 +19,6 @@ class PanelTransformations(
     private val environmentEntities: EnvironmentEntities,
     private val systemManager: SystemManager,
 ) {
-
-  fun setScale(entity: Entity, scaleValues: Vector3) {
-    if (entity.hasComponent<Scale>()) {
-      val scale = entity.getComponent<Scale>()
-      scale.scale = scaleValues
-      entity.setComponent(scale)
-    }
-  }
-
-  // Delay the position offset to wait for the accurate head pose to be available
-  fun applyTransformWithDelay(
-      entity: Entity,
-      distance: Float,
-      positionOffset: Vector3,
-      applyTilt: Boolean = false
-  ) {
-    val delayMillis: Long = 500
-    Handler(Looper.getMainLooper())
-        .postDelayed({ applyTransform(entity, distance, positionOffset, applyTilt) }, delayMillis)
-  }
 
   fun applyTransform(
       entity: Entity,

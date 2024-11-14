@@ -48,6 +48,16 @@
     <!-- Upload -->
     <string name="upload_failed_error">Failed to upload file</string>
     <string name="download_wait_label">Downloading, please wait…</string>
+    <!-- Privacy Policy -->
+    <string
+    name="privacy_policy_dialog_title"
+  >Terms &amp; Privacy Policy Agreement</string>
+    <string
+    name="privacy_policy_dialog_description"
+  >By clicking \'%1$s\' you agree to our %2$s and %3$s.</string>
+    <string name="privacy_policy_dialog_terms">Terms of Service</string>
+    <string name="privacy_policy_dialog_privacy">Privacy Policy</string>
+    <string name="privacy_policy_accept_button">Continue</string>
 
 
     // JW added - is this needed?

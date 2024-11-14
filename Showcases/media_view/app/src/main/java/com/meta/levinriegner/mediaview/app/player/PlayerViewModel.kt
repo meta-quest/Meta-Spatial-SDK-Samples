@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @HiltViewModel
 class PlayerViewModel
@@ -39,6 +40,7 @@ constructor(
 
   init {
     _state.value = buildState(mediaModel)
+    Timber.i("Initializing player with state: ${state.value.javaClass.simpleName}")
     eventBus.register(this)
   }
 
@@ -48,7 +50,7 @@ constructor(
       MediaType.VIDEO_2D -> PlayerState.Video2D(mediaModel.uri)
       MediaType.IMAGE_PANORAMA -> PlayerState.ImagePanorama(mediaModel.uri)
       MediaType.IMAGE_360 -> PlayerState.Image2D(mediaModel.uri)
-      MediaType.VIDEO_360 -> PlayerState.Video2D(mediaModel.uri)
+      MediaType.VIDEO_360 -> PlayerState.Video360(mediaModel.uri)
       MediaType.VIDEO_SPATIAL -> PlayerState.Video2D(mediaModel.uri)
       null -> PlayerState.Error("Unknown media type for mime ${mediaModel.mimeType}")
     }

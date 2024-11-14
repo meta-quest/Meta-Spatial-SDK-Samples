@@ -59,14 +59,17 @@ class GalleryActivity : ComponentActivity() {
       val uiState = viewModel.state.collectAsState()
       val filter = viewModel.filter.collectAsState()
       val sortBy = viewModel.sortBy.collectAsState()
+      val showMetadata = viewModel.showMetadata.collectAsState()
       // UI
       GalleryView(
           uiState = uiState.value,
           filter = filter.value,
           sortBy = sortBy.value,
+          showMetadata = showMetadata.value,
           onRefresh = { viewModel.loadMedia() },
           onMediaSelected = { viewModel.onMediaSelected(it) },
           onSortBy = { viewModel.onSortBy(it) },
+          onToggleMetadata = { viewModel.onToggleMetadata(it) },
       )
     }
   }

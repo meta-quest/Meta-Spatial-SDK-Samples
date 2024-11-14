@@ -93,6 +93,13 @@
       android:theme="@style/Theme.MediaView"
     />
         <activity
+      android:name=".app.privacy.PrivacyPolicyActivity"
+      android:allowEmbedded="true"
+      android:exported="true"
+      android:launchMode="standard"
+      android:theme="@style/Theme.MediaView"
+    />
+        <activity
       android:name=".app.immersive.ImmersiveActivity"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
       android:excludeFromRecents="true"
@@ -109,6 +116,12 @@
                 <category android:name="com.oculus.intent.category.VR" />
             </intent-filter>
         </activity>
+
+        <!--suppress AndroidElementNotAllowed: https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-tooling-castinputforward#adding-input-forwarding -->
+        <uses-native-library
+      android:name="libossdk.oculus.so"
+      android:required="true"
+    />
     </application>
 
     <meta-data android:name="com.oculus.vr.focusaware" android:value="true" />

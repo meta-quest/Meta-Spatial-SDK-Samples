@@ -43,6 +43,7 @@ import kotlinx.coroutines.flow.map
 @Composable
 fun MediaItemView(
     item: MediaModel,
+    showMetadata: Boolean,
     modifier: Modifier = Modifier,
     onItemClicked: (MediaModel) -> Unit,
 ) {
@@ -101,6 +102,18 @@ fun MediaItemView(
               }
             }
           }
+        }
+
+        // TODO: Style
+        if (showMetadata) {
+          Box(
+              modifier =
+                  Modifier.matchParentSize()
+                      .background(AppColor.GradientInEnvironmentStart)
+                      .blur(radius = 16.dp)
+                      .clip(RoundedCornerShape(5.dp)),
+          )
+          Column { Text(text = "Name: ${item.name}") }
         }
 
         if (openMediaIds.value.contains(item.id)) {

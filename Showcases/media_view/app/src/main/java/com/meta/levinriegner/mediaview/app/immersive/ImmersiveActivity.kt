@@ -4,11 +4,15 @@ package com.meta.levinriegner.mediaview.app.immersive
 
 import android.net.Uri
 import android.os.Bundle
+import com.meta.levinriegner.mediaview.BuildConfig
+import com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead
 import com.meta.levinriegner.mediaview.app.immersive.compose.ComponentAppSystemActivity
 import com.meta.levinriegner.mediaview.app.immersive.entity.EnvironmentEntities
 import com.meta.levinriegner.mediaview.app.immersive.entity.PanelTransformations
+import com.meta.levinriegner.mediaview.app.immersive.system.LookAtHeadSystem
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
+import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.toolkit.PanelRegistration
@@ -29,7 +33,11 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
 
   // Dependencies
   private val panelManager: PanelManager by lazy {
-    PanelManager(PanelTransformations(EnvironmentEntities(), systemManager), scene, spatialContext)
+    PanelManager(
+        PanelTransformations(EnvironmentEntities(), systemManager),
+        scene,
+        spatialContext,
+    )
   }
 
   // State
@@ -40,7 +48,11 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
-    return listOf(VRFeature(this))
+    val features = mutableListOf<SpatialFeature>(VRFeature(this))
+    if (BuildConfig.DEBUG) {
+      features.add(CastInputForwardFeature(this))
+    }
+    return features
   }
 
   override fun registerPanels(): List<PanelRegistration> {
@@ -51,6 +63,10 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     super.onCreate(savedInstanceState)
     // Disable Locomotion
     systemManager.unregisterSystem<LocomotionSystem>()
+    // Register elements
+    loadGLXF()
+    registerComponents()
+    registerSystems()
   }
 
   override fun onSceneReady() {
@@ -61,14 +77,27 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     scene.enableHolePunching(true)
     // Set Mixed Reality passthrough mode
     scene.enablePassthrough(true)
-    // Create the panels
+  }
+
+  private fun loadGLXF() {
     activityScope.launch {
       glXFManager.inflateGLXF(
-          Uri.parse("scenes/Composition.glxf"), rootEntity = Entity.create(), keyName = "scene")
+          Uri.parse(GLXFConstants.URI_STRING),
+          rootEntity = Entity.create(),
+          keyName = GLXFConstants.COMPOSITION_NAME,
+      )
     }
   }
 
-  // #region PanelDelegate
+  private fun registerComponents() {
+    componentManager.registerComponent<LookAtHead>(LookAtHead.Companion)
+  }
+
+  private fun registerSystems() {
+    systemManager.registerSystem(LookAtHeadSystem())
+  }
+
+  // region PanelDelegate
 
   override fun openMediaPanel(mediaModel: MediaModel) {
     Timber.i("Opening media with id: ${mediaModel.id}")
@@ -124,6 +153,11 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
       Timber.w("Upload panel is already open")
       return
     }
+
+    // Register Panel
+    registerPanel(panelManager.provideUploadPanelRegistration())
+
+    // Create Entity
     val ent = panelManager.createUploadEntity()
     uploadPanelEntityId = ent.id
   }
@@ -135,6 +169,12 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
       uploadPanelEntityId = null
     } ?: Timber.w("Upload panel is not open")
   }
-  // #endregion
+
+  override fun togglePrivacyPolicy(show: Boolean) {
+    Timber.i("Toggling privacy policy. Show: $show")
+    panelManager.togglePrivacyPolicy(show)
+    panelManager.toggleGallery(!show)
+  }
+  // endregion
 
 }
