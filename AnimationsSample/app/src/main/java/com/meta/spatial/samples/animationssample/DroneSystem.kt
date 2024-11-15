@@ -12,6 +12,7 @@ import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.Query
 import com.meta.spatial.core.SystemBase
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.toolkit.Followable
 import com.meta.spatial.toolkit.Transform
 
 /** This system handles drone rotations */
@@ -43,6 +44,23 @@ class DroneSystem(val droneSceneController: DroneSceneController?) : SystemBase(
               .firstOrNull()
 
       if (target == null) return
+
+      // There are two types of followable in this Sample. The built-in Followable component in
+      // toolkit and the custom one here. We use the custom one to allow for faster rotation
+      // mimicing a real drone, but this also shows how you can add a followable component to an
+      // entity without extra work.
+      val followable = droneEnt.getComponent<Followable>()
+      if (target.getComponent<FollowerTarget>().isBuiltInFollower) {
+        followable.target = target
+        followable.offset = Pose(Vector3(0f, 0f, 1f), Quaternion(1f, 0f, 0f, 0f))
+        if (followable.active) return
+        followable.active = true
+        droneEnt.setComponent(followable)
+        return
+      } else if (followable.active) {
+        followable.active = false
+        droneEnt.setComponent(followable)
+      }
 
       // get references
       val droneTransform = droneEnt.getComponent<Transform>()

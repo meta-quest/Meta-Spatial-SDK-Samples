@@ -94,4 +94,13 @@
     android:background="@android:color/white"
     android:text="Clear scene"
   />
+
+  <TextView
+    android:id="@+id/mruk_current_room"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text=""
+    android:textSize="24sp"
+    android:gravity="center"
+  />
 </LinearLayout>

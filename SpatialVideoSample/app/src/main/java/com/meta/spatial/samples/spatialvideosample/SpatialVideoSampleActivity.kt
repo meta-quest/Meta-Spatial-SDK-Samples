@@ -52,7 +52,7 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.runtime.AlphaMode
 import com.meta.spatial.runtime.ButtonBits
-import com.meta.spatial.runtime.QuadLayerConfig
+import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneMaterial
@@ -323,7 +323,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
         includeGlass = false
         width = MR_SCREEN_WIDTH
         height = MR_SCREEN_HEIGHT
-        layerConfig = QuadLayerConfig()
+        layerConfig = LayerConfig()
         // want to disable left hand pinch so we can drag the panel around with hands
         clickButtons =
             (ButtonBits.ButtonA or ButtonBits.ButtonTriggerL or ButtonBits.ButtonTriggerR)
@@ -507,7 +507,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
         }
             ?: run {
               // have something to show besides blank void
-              Movie.fromRawVideo("mediagiant", "Media Giant")?.let { movie -> setVideo(movie.uri) }
+              Movie.fromRawVideo("doggie", "Doggie")?.let { movie -> setVideo(movie.uri) }
             }
 
         playerView.setOnClickListener { togglePlay() }
@@ -535,7 +535,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
         height = 1f
         width = 0.6f
         includeGlass = false
-        enableLayer = true
+        layerConfig = LayerConfig()
         enableTransparent = true
         themeResourceId = R.style.PanelAppThemeTransparent
       }
@@ -574,7 +574,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
         pivotOffsetWidth = 0.5f
         pivotOffsetHeight = 1.05f
         includeGlass = false
-        enableLayer = true
+        layerConfig = LayerConfig()
         enableTransparent = true
         layoutDpi = 600
         themeResourceId = R.style.PanelAppThemeTransparent
@@ -712,7 +712,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
         width = 0.6f
         layoutDpi = 800
         includeGlass = false
-        enableLayer = true
+        layerConfig = LayerConfig()
         enableTransparent = true
         // want to disable left hand pinch so we can drag the panel around with hands
         clickButtons =
@@ -733,7 +733,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
         height = .2f
         width = .6f
         layoutDpi = 400
-        enableLayer = true
+        layerConfig = LayerConfig()
         enableTransparent = true
         includeGlass = false
       }

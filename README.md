@@ -66,42 +66,42 @@ The [Showcases](/Showcases) folder contains three apps which are deployed to the
 
 The documentation for Meta Spatial SDK can be found [here](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-overview).
 
-## 0.5.1 Updates
+## 0.5.2 Updates
 
-### Breaking Changes
+Our full update list can be found in our `CHANGELOG.md` file.
 
-- Removed the old Anchor Systems in toolkit, please use MRUK(Mixed Reality Utility Kit) in Meta Spatial SDK
+### Added
 
-### Improvements
+- Added `Followable` Component and `FollowableSystem` which allows devs to easily tether objects together. See Animations Sample for an example use.
+- **Hot Reload**: Adds the ability to reload your `glb`/`gltf`/`glxf` and Meta Spatial Editor scenes while running your app via the Gradle plugin.
+  - Auto Export from Meta Spatial Editor: Saving in Spatial Editor automatically exports to the app and pushes to the headset for hot reload
+  - Two Reload Types:
+    - Delete all entities and recreate them: more stable but does not work for all apps
+    - Keep entities and reload meshes only: works for all apps, but less stable and does not reload components
 
-- Added support for Secure layers
-Layers can now be marked as secure making them appear black while recording. This is possible at a global level or an individual layer level.
+### Changed
 
-```kotlin
-// globally enable
-scene.setSecureLayers(true)
+- `SamplerConfig`s now also apply to layers instead of just non-layer panels
+- Cylinder panels now have a transparent back applied to them (instead of just being invisible)
+- **Gradle Plugin**: References to string paths in plugin configuration are replaced with file references.
+  - **NOTE:** This requires changes to your `build.gradle.kts`. Example new usage can be found in the sample `build.gradle.kts` files.
+- **Gradle Plugin**: Telemetry now reports out simple usage statistics.
 
-// individually enable
-myLayerConfig.secure = true
-```
+### Deprecated
 
-In addition, this value can be set on a global level using your AndroidManifest
+- Deprecated `QuadLayerConfig`/`CylinderLayerConfig`/`EquirectLayerConfig`. Use `LayerConfig` instead for panel's layer configuration.
 
-```xml
-<meta-data
-      android:name="com.meta.spatial.SECURE_LAYERS"
-      android:value="true"
-/>
-```
+### Fixed
 
-- Init order issue for FeatureManager
-An overridden registerFeatures() was not able to reference the top level class variables. This was because the initialization was happening very early in the creation of a Feature. This was resolved by moving initialization later in activity startup.
-- Memory leak on panel destruction
-Destroy the activity panel by calling lifecycle events onPause, onStop, onDestroy sequentially.
-Release the panel scene texture and mesh as panel destruction, which reclaims the resource early.
-- Fixed the issue that the panel faced the user backwards when grabbed from behind. The panel will now always face the user correctly, regardless of the angle of grabbing.
-- Fix the grabbable bug for the cylinder panel when the user is close to the panel. When the user is very close to the panel, i.e., the center of the cylinder is behind the user, the grabbable system does not work well for rotation.
-- Fix compatibility issues with Android Studio Ladybug
+- Fixed a crash when garbage collecting a panel.
+- Fixed a crash when updating the `Panel` component on an entity that already had a `Panel` component.
+- Crash fixed in Focus showcase
+
+## Spatial SDK Gradle Plugin
+
+The samples all include the Spatial SDK Gradle Plugin in their build files. This plugin is used for the [Spatial Editor integration](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-editor#use-the-spatial-sdk-gradle-plugin) and for build-related features like [custom shaders](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-custom-shaders).
+
+Meta collects telemetry data from the Spatial SDK Gradle Plugin to help improve MPT Products. You can read the [Supplemental Meta Platforms Technologies Privacy Policy](https://www.meta.com/legal/privacy-policy/) to learn more.
 
 ## License
 

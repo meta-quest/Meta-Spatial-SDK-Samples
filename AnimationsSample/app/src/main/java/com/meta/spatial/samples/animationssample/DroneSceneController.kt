@@ -8,6 +8,7 @@
 package com.meta.spatial.samples.animationssample
 
 import android.animation.ValueAnimator
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
@@ -15,17 +16,22 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.runtime.AlphaMode
 import com.meta.spatial.runtime.ButtonDownEventArgs
 import com.meta.spatial.runtime.ControllerButton
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneAudioPlayer
 import com.meta.spatial.runtime.SceneObject
 import com.meta.spatial.toolkit.Animated
+import com.meta.spatial.toolkit.Color4
+import com.meta.spatial.toolkit.Material
+import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.PlaybackState
 import com.meta.spatial.toolkit.PlaybackType
 import com.meta.spatial.toolkit.Scale
 import com.meta.spatial.toolkit.SceneObjectSystem
 import com.meta.spatial.toolkit.SpatialActivityManager
+import com.meta.spatial.toolkit.Sphere
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.Visible
 import java.util.Timer
@@ -44,6 +50,20 @@ class DroneSceneController() {
   private val pulseAnim = ValueAnimator.ofFloat(.95f, 1.05f)
   private val droneSound = SceneAudioAsset.loadLocalFile("drone.ogg")
   private val audioPlayer = SceneAudioPlayer(activity.scene, droneSound)
+  private val defaultTargetMaterial =
+      Material().apply {
+        baseColor = Color4(red = .05f, green = .4f, blue = 1.0f, alpha = .8f)
+        metallic = 0.6f
+        roughness = 0.7f
+        alphaMode = AlphaMode.TRANSLUCENT.ordinal
+      }
+  private val selectedTargetMaterial =
+      Material().apply {
+        baseColor = Color4(red = 1.0f, green = .6f, blue = .2f, alpha = .8f)
+        metallic = 0.6f
+        roughness = 0.7f
+        alphaMode = AlphaMode.TRANSLUCENT.ordinal
+      }
 
   init {
     val button = ButtonController(activity, "startButton")
@@ -158,8 +178,12 @@ class DroneSceneController() {
 
     // hide the instructions panel on first sphere grab
     var firstGrab = true
-    glxf.getNodeByName("droneTarget").entity.registerEventListener(
-        ButtonDownEventArgs.EVENT_NAME) { entity: Entity, eventArgs: ButtonDownEventArgs ->
+    glxf
+        .getNodeByName("droneTarget")
+        .entity
+        .registerEventListener(ButtonDownEventArgs.EVENT_NAME) {
+            entity: Entity,
+            eventArgs: ButtonDownEventArgs ->
           if (firstGrab) {
             if (eventArgs.button == ControllerButton.RightSqueeze ||
                 eventArgs.button == ControllerButton.LeftSqueeze) {
@@ -167,7 +191,17 @@ class DroneSceneController() {
               grabPanel.setComponent(Visible(false))
             }
           }
+          if (eventArgs.button == ControllerButton.RightTrigger ||
+              eventArgs.button == ControllerButton.LeftTrigger) {
+            val followerTarget = entity.getComponent<FollowerTarget>()
+            followerTarget.isBuiltInFollower = !followerTarget.isBuiltInFollower
+            val newMaterial =
+                if (followerTarget.isBuiltInFollower) selectedTargetMaterial
+                else defaultTargetMaterial
+            entity.setComponents(newMaterial, followerTarget)
+          }
         }
+        .setComponents(Mesh(Uri.parse("mesh://sphere")), Sphere(0.2f), defaultTargetMaterial)
   }
 
   private fun delayAction(action: () -> Unit, duration: Long): TimerTask {

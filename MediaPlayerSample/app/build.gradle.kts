@@ -85,6 +85,7 @@ dependencies {
   implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-hotreload:$metaSpatialSdkVersion")
 
   androidTestImplementation(platform("androidx.compose:compose-bom:2024.09.03"))
   androidTestImplementation("androidx.compose.ui:ui-test-junit4")
@@ -102,7 +103,8 @@ afterEvaluate {
   }
 }
 
-val sceneProjectPath = "app/scenes"
+val projectDir = layout.projectDirectory
+val sceneDirectory = projectDir.dir("scenes")
 
 spatial {
   allowUsageDataCollection.set(true)
@@ -111,15 +113,20 @@ spatial {
     // cliPath.set("/Applications/Meta Spatial Editor.app/Contents/MacOS/CLI")
     exportItems {
       item {
-        projectPath.set("$sceneProjectPath/Main.metaspatial")
-        outputPath.set("app/src/main/assets/scenes")
+        projectPath.set(sceneDirectory.file("Main.metaspatial"))
+        outputPath.set(projectDir.dir("src/main/assets/scenes"))
       }
     }
     componentGeneration {
-      outputPath.set(sceneProjectPath)
+      outputPath.set(sceneDirectory)
       // We attempt to auto-detect where your "custom_components.json" is placed but if this does
       // not work then you can uncomment the following line and force it to a specific location.
-      // customComponentsPath.set("app/build/generated/ksp/debug/resources/custom_components.json")
+      // customComponentsPath.set(projectDir.dir("build/generated/ksp/debug/resources"))
+    }
+    hotReload {
+      appPackage.set("com.meta.spatial.samples.mediaplayersample")
+      appMainActivity.set(".MediaPlayerSampleActivity")
+      assetsDir.set(File("src/main/assets"))
     }
   }
 

@@ -13,6 +13,7 @@ import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
+import android.widget.TextView
 import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
@@ -26,7 +27,9 @@ import com.meta.spatial.mruk.MRUKAnchor
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKLabel
 import com.meta.spatial.mruk.MRUKLoadDeviceResult
-import com.meta.spatial.mruk.MRUKSystem
+import com.meta.spatial.mruk.MRUKRoom
+import com.meta.spatial.mruk.MRUKSceneEventListener
+import com.meta.spatial.mruk.getHmd
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.runtime.NetworkedAssetLoader
@@ -34,7 +37,6 @@ import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.PanelRegistration
-import com.meta.spatial.toolkit.PlayerBodyAttachmentSystem
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.toolkit.createPanelEntity
@@ -43,11 +45,12 @@ import com.meta.spatial.vr.VRFeature
 import java.io.File
 
 // default activity
-class MrukSampleActivity : AppSystemActivity() {
-  public lateinit var mrukSystem: MRUKSystem
+class MrukSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
+  lateinit var mrukFeature: MRUKFeature
   private lateinit var meshSpawner: AnchorMeshSpawner
   private lateinit var procMeshSpawner: AnchorProceduralMesh
   private var globalMeshSpawner: AnchorProceduralMesh? = null
+  public var currentRoomTextView: TextView? = null
 
   private var sceneDataLoaded = false
   public var uiPositionInitialized = false
@@ -55,9 +58,12 @@ class MrukSampleActivity : AppSystemActivity() {
   private var showColliders = false
 
   override fun registerFeatures(): List<SpatialFeature> {
-    var features =
-        mutableListOf<SpatialFeature>(
-            VRFeature(this), PhysicsFeature(spatial), MRUKFeature(this, systemManager))
+    // Register the features that are needed for that sample. Note that in addition to the
+    // MRUKFeature the PhysicsFeature gets enabled as well. This is needed for having the physics
+    // colliders on the AnchorProceduralMesh working.
+    mrukFeature = MRUKFeature(this, systemManager)
+    val features =
+        mutableListOf<SpatialFeature>(VRFeature(this), PhysicsFeature(spatial), mrukFeature)
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
     }
@@ -68,15 +74,19 @@ class MrukSampleActivity : AppSystemActivity() {
     super.onCreate(savedInstanceState)
 
     systemManager.findSystem<LocomotionSystem>().enableLocomotion(false)
-    mrukSystem = systemManager.findSystem<MRUKSystem>()
     systemManager.registerSystem(UIPositionSystem(this))
     systemManager.registerSystem(MrukInputSystem(this))
+    systemManager.registerSystem(UpdateRoomSystem(this))
 
     scene.enablePassthrough(true)
 
+    // Setup the AnchorMeshSpawner. The AnchorMeshSpawner is able to spawn glb/gltf meshes in place
+    // of scene anchors.
+    // See the documentation AnchorMeshSpawner for more information.
+
     meshSpawner =
         AnchorMeshSpawner(
-            mrukSystem,
+            mrukFeature,
             mutableMapOf(
                 MRUKLabel.TABLE to AnchorMeshSpawner.AnchorMeshGroup(listOf("Furniture/Table.glb")),
                 MRUKLabel.COUCH to AnchorMeshSpawner.AnchorMeshGroup(listOf("Furniture/Couch.glb")),
@@ -103,12 +113,16 @@ class MrukSampleActivity : AppSystemActivity() {
                     AnchorMeshSpawner.AnchorMeshGroup(listOf("Furniture/WallArt.glb")),
             ))
 
+    // Setup the AnchorProceduralMesh. The AnchorProceduralMesh will generate meshes in place of
+    // scene anchors. For example floor, ceiling, and walls.
+    // For more information see the documentation on AnchorProceduralMesh.
+
     val floorMaterial =
         Material().apply { baseTextureAndroidResourceId = R.drawable.carpet_texture }
     val wallMaterial = Material().apply { baseTextureAndroidResourceId = R.drawable.wall1 }
     procMeshSpawner =
         AnchorProceduralMesh(
-            mrukSystem,
+            mrukFeature,
             mapOf(
                 MRUKLabel.TABLE to AnchorProceduralMeshConfig(null, true),
                 MRUKLabel.SCREEN to AnchorProceduralMeshConfig(null, true),
@@ -122,43 +136,57 @@ class MrukSampleActivity : AppSystemActivity() {
                 MRUKLabel.WALL_FACE to AnchorProceduralMeshConfig(wallMaterial, true),
                 MRUKLabel.CEILING to AnchorProceduralMeshConfig(wallMaterial, true)))
 
-    NetworkedAssetLoader.init(
-        File(applicationContext.getCacheDir().canonicalPath), OkHttpAssetFetcher())
+    NetworkedAssetLoader.init(File(applicationContext.cacheDir.canonicalPath), OkHttpAssetFetcher())
 
-    // Attach listeners
-    mrukSystem.addOnRoomAddedListener({ room ->
-      Log.d("MRUK", "Activity: Room added: ${room.anchor}")
-    })
+    mrukFeature.addSceneEventListener(this)
 
-    mrukSystem.addOnRoomUpdatedListener({ room ->
-      Log.d("MRUK", "Activity: Room updated: ${room.anchor}")
-    })
-
-    mrukSystem.addOnRoomRemovedListener({ room ->
-      Log.d("MRUK", "Activity: Room removed: ${room.anchor}")
-    })
-
-    mrukSystem.addOnAnchorAddedListener({ room, anchor ->
-      val anchorUuid = anchor.getComponent<MRUKAnchor>().uuid
-      Log.d("MRUK", "Activity: Anchor ${anchorUuid} added to room ${room.anchor}")
-    })
-
-    mrukSystem.addOnAnchorUpdatedListener({ room, anchor ->
-      val anchorUuid = anchor.getComponent<MRUKAnchor>().uuid
-      Log.d("MRUK", "Activity: Anchor ${anchorUuid} updated to room ${room.anchor}")
-    })
-
-    mrukSystem.addOnAnchorRemovedListener({ room, anchor ->
-      val anchorUuid = anchor.getComponent<MRUKAnchor>().uuid
-      Log.d("MRUK", "Activity: Anchor ${anchorUuid} removed from room ${room.anchor}")
-    })
+    // Request the user to give the app scene permission if not already granted.
+    // Otherwise, the app will not be able to access the device scene data.
 
     if (checkSelfPermission(PERMISSION_USE_SCENE) != PackageManager.PERMISSION_GRANTED) {
-      Log.i(TAG, "Scene permission has not been granted, requesting " + PERMISSION_USE_SCENE)
+
+      // Request the scene permission if it hasn't already been granted. Make sure to hook into
+      // onRequestPermissionsResult()
+      // to try to load the scene again.
+
+      Log.i(TAG, "Scene permission has not been granted, requesting $PERMISSION_USE_SCENE")
       requestPermissions(arrayOf(PERMISSION_USE_SCENE), REQUEST_CODE_PERMISSION_USE_SCENE)
     } else {
+
+      // Load the scene data from the device. If scene data was found and loaded successfully the
+      // AnchorMeshSpawner and AnchorProceduralMesh will populate the room with virtual objects.
+
       loadScene(true)
     }
+  }
+
+  // Implement listeners that get called whenever rooms and anchors get updated, added or removed.
+  // Hooking into these events can be useful to keep your app in sync with the loaded anchors.
+  override fun onRoomAdded(room: MRUKRoom) {
+    Log.d("MRUK", "Activity: Room added: ${room.anchor}")
+  }
+
+  override fun onRoomRemoved(room: MRUKRoom) {
+    Log.d("MRUK", "Activity: Room removed: ${room.anchor}")
+  }
+
+  override fun onRoomUpdated(room: MRUKRoom) {
+    Log.d("MRUK", "Activity: Room updated: ${room.anchor}")
+  }
+
+  override fun onAnchorAdded(room: MRUKRoom, anchor: Entity) {
+    val anchorUuid = anchor.getComponent<MRUKAnchor>().uuid
+    Log.d("MRUK", "Activity: Anchor $anchorUuid added to room ${room.anchor}")
+  }
+
+  override fun onAnchorRemoved(room: MRUKRoom, anchor: Entity) {
+    val anchorUuid = anchor.getComponent<MRUKAnchor>().uuid
+    Log.d("MRUK", "Activity: Anchor $anchorUuid removed from room ${room.anchor}")
+  }
+
+  override fun onAnchorUpdated(room: MRUKRoom, anchor: Entity) {
+    val anchorUuid = anchor.getComponent<MRUKAnchor>().uuid
+    Log.d("MRUK", "Activity: Anchor $anchorUuid updated to room ${room.anchor}")
   }
 
   override fun onRequestPermissionsResult(
@@ -200,6 +228,7 @@ class MrukSampleActivity : AppSystemActivity() {
   }
 
   override fun onDestroy() {
+    mrukFeature.removeSceneEventListener(this)
     meshSpawner.destroy()
     procMeshSpawner.destroy()
     globalMeshSpawner?.destroy()
@@ -207,6 +236,12 @@ class MrukSampleActivity : AppSystemActivity() {
   }
 
   private fun loadScene(scenePermissionsGranted: Boolean) {
+    // MRUK has support for loading scene data from JSON files in addition to loading the scene data
+    // from device.
+    // We fallback here to JSON rooms in case the user hasn't given any scene permission just to
+    // show something.
+    // JSON rooms can be useful to accelerate development or testing different room layouts.
+
     if (!sceneDataLoaded) {
       sceneDataLoaded = true
 
@@ -222,31 +257,33 @@ class MrukSampleActivity : AppSystemActivity() {
     Log.i(TAG, "Loading fallback scene from JSON")
     val file = applicationContext.assets.open("MeshBedroom3.json")
     val text = file.bufferedReader().use { it.readText() }
-    mrukSystem.loadSceneFromJsonString(text)
+    mrukFeature.loadSceneFromJsonString(text)
   }
 
   private fun loadSceneFromDevice() {
     Log.i(TAG, "Loading scene from device")
-    var future = mrukSystem.loadSceneFromDevice()
+    val future = mrukFeature.loadSceneFromDevice()
 
     future.whenComplete { result: MRUKLoadDeviceResult, _ ->
       if (result != MRUKLoadDeviceResult.SUCCESS) {
-        Log.e(TAG, "Error loading scene from device: ${result}")
+        Log.e(TAG, "Error loading scene from device: $result")
         loadFallbackScene()
       }
     }
   }
 
+  override fun onRecenter() {
+    super.onRecenter()
+    updateUiPanelPosition()
+  }
+
   public fun updateUiPanelPosition(): Boolean {
-    var head = getHmd()
-    if (head == null) {
-      return false
-    }
-    var headPose = head.tryGetComponent<Transform>()?.transform
+    val head = getHmd(systemManager) ?: return false
+    val headPose = head.tryGetComponent<Transform>()?.transform
     if (headPose == null || headPose == Pose()) {
       return false
     }
-    var forward = headPose.q * Vector3(0f, 0f, 1f)
+    val forward = headPose.q * Vector3(0f, 0f, 1f)
     forward.y = 0f
     headPose.q = Quaternion.lookRotation(forward)
     val uiEntity = Entity(R.integer.ui_mruk_id)
@@ -258,19 +295,12 @@ class MrukSampleActivity : AppSystemActivity() {
     return true
   }
 
-  private fun getHmd(): Entity? {
-    return systemManager
-        .tryFindSystem<PlayerBodyAttachmentSystem>()
-        ?.tryGetLocalPlayerAvatarBody()
-        ?.head
-  }
-
   private fun toggleGlobalMesh() {
     if (globalMeshSpawner == null) {
       val wallMaterial = Material().apply { baseTextureAndroidResourceId = R.drawable.wall1 }
       globalMeshSpawner =
           AnchorProceduralMesh(
-              mrukSystem,
+              mrukFeature,
               mapOf(MRUKLabel.GLOBAL_MESH to AnchorProceduralMeshConfig(wallMaterial, false)))
     } else {
       globalMeshSpawner?.destroy()
@@ -295,6 +325,8 @@ class MrukSampleActivity : AppSystemActivity() {
           panel {
             requireNotNull(rootView)
 
+            currentRoomTextView = rootView?.findViewById<TextView>(R.id.mruk_current_room)
+
             val jsonFileSpinner =
                 requireNotNull(rootView?.findViewById<Spinner>(R.id.json_file_spinner))
             ArrayAdapter.createFromResource(
@@ -309,19 +341,19 @@ class MrukSampleActivity : AppSystemActivity() {
             val loadSceneFromJSONButton = rootView?.findViewById<Button>(R.id.load_scene_from_json)
             loadSceneFromJSONButton?.setOnClickListener {
               // Get selection from spinner
-              jsonFileSpinner.selectedItem?.let {
-                val file = applicationContext.assets.open("${it}.json")
-                val text = file.bufferedReader().use { it.readText() }
-                mrukSystem.loadSceneFromJsonString(text)
+              jsonFileSpinner.selectedItem?.let { item ->
+                val file = applicationContext.assets.open("${item}.json")
+                val text = file.bufferedReader().use { reader -> reader.readText() }
+                mrukFeature.loadSceneFromJsonString(text)
               }
             }
 
             val clearSceneButton = rootView?.findViewById<Button>(R.id.clear_scene)
-            clearSceneButton?.setOnClickListener { mrukSystem.clearRooms() }
+            clearSceneButton?.setOnClickListener { mrukFeature.clearRooms() }
 
             val loadSceneFromDeviceButton =
                 rootView?.findViewById<Button>(R.id.load_scene_from_device)
-            loadSceneFromDeviceButton?.setOnClickListener { mrukSystem.loadSceneFromDevice() }
+            loadSceneFromDeviceButton?.setOnClickListener { mrukFeature.loadSceneFromDevice() }
 
             val showGlobalMeshButton = rootView?.findViewById<Button>(R.id.show_global_mesh)
             showGlobalMeshButton?.setOnClickListener { toggleGlobalMesh() }
@@ -330,13 +362,13 @@ class MrukSampleActivity : AppSystemActivity() {
             showCollidersButton?.setOnClickListener { toggleShowColliders() }
 
             val launchSceneCaptureButton = rootView?.findViewById<Button>(R.id.launch_scene_capture)
-            launchSceneCaptureButton?.setOnClickListener { mrukSystem.requestSceneCapture() }
+            launchSceneCaptureButton?.setOnClickListener { mrukFeature.requestSceneCapture() }
           }
         })
   }
 
   companion object {
-    const val TAG = "MrukSampleActivity"
+    const val TAG: String = "MrukSampleActivity"
     const val PERMISSION_USE_SCENE: String = "com.oculus.permission.USE_SCENE"
     const val REQUEST_CODE_PERMISSION_USE_SCENE: Int = 1
   }

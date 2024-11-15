@@ -29,6 +29,7 @@ import com.meta.spatial.core.Vector4
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.runtime.AlphaMode
 import com.meta.spatial.runtime.BlendMode
+import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.PanelConfigOptions
 import com.meta.spatial.runtime.ReferenceSpace
@@ -270,7 +271,7 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
             fractionOfScreen = 0.15f
             height = .2f
             width = .6f
-            enableLayer = true
+            layerConfig = LayerConfig()
             enableTransparent = true
             includeGlass = false
           }

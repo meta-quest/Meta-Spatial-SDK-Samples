@@ -23,7 +23,8 @@ import com.meta.spatial.mruk.AnchorProceduralMeshConfig
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKLabel
 import com.meta.spatial.mruk.MRUKLoadDeviceResult
-import com.meta.spatial.mruk.MRUKSystem
+import com.meta.spatial.mruk.MRUKRoom
+import com.meta.spatial.mruk.MRUKSceneEventListener
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.physics.PhysicsOutOfBoundsSystem
 import com.meta.spatial.toolkit.AppSystemActivity
@@ -44,12 +45,13 @@ class MixedRealitySampleActivity : AppSystemActivity() {
   private var ballShooter: BallShooter? = null
   private var gotAllAnchors = false
   private var debug = false
+  private lateinit var mrukFeature: MRUKFeature
+  private lateinit var sceneEventListener: MRUKSceneEventListener
   private lateinit var procMeshSpawner: AnchorProceduralMesh
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf<SpatialFeature>(
-            PhysicsFeature(spatial), VRFeature(this), MRUKFeature(this, systemManager))
+    mrukFeature = MRUKFeature(this, systemManager)
+    val features = mutableListOf(PhysicsFeature(spatial), VRFeature(this), mrukFeature)
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
     }
@@ -64,13 +66,11 @@ class MixedRealitySampleActivity : AppSystemActivity() {
         PhysicsOutOfBoundsSystem(spatial).apply { setBounds(minY = -100.0f) })
     systemManager.registerSystem(UiPanelUpdateSystem())
 
-    val mrukSystem = systemManager.findSystem<MRUKSystem>()
-
     // NOTE: Here a material could be set as well to visualize the walls, ceiling, etc
     //       It is also possible to spawn procedural meshes for volumes
     procMeshSpawner =
         AnchorProceduralMesh(
-            mrukSystem,
+            mrukFeature,
             mapOf(
                 MRUKLabel.FLOOR to AnchorProceduralMeshConfig(null, true),
                 MRUKLabel.WALL_FACE to AnchorProceduralMeshConfig(null, true),
@@ -90,11 +90,15 @@ class MixedRealitySampleActivity : AppSystemActivity() {
       ballShooter = BallShooter(mesh)
       systemManager.registerSystem(ballShooter!!)
 
-      mrukSystem.addOnRoomAddedListener { room ->
-        // If a room exists, it has a floor. Remove the default floor.
-        val floor = composition.tryGetNodeByName("defaultFloor")
-        floor!!.entity.destroy()
-      }
+      sceneEventListener =
+          object : MRUKSceneEventListener {
+            override fun onRoomAdded(room: MRUKRoom) {
+              // If a room exists, it has a floor. Remove the default floor.
+              val floor = composition.tryGetNodeByName("defaultFloor")
+              floor!!.entity.destroy()
+            }
+          }
+      mrukFeature.addSceneEventListener(sceneEventListener)
 
       if (checkSelfPermission(PERMISSION_USE_SCENE) != PackageManager.PERMISSION_GRANTED) {
         log("Scene permission has not been granted, requesting " + PERMISSION_USE_SCENE)
@@ -107,9 +111,8 @@ class MixedRealitySampleActivity : AppSystemActivity() {
   }
 
   private fun loadSceneFromDevice() {
-    val mrukSystem = systemManager.findSystem<MRUKSystem>()
     log("Loading scene from device...")
-    mrukSystem.loadSceneFromDevice().whenComplete { result: MRUKLoadDeviceResult, _ ->
+    mrukFeature.loadSceneFromDevice().whenComplete { result: MRUKLoadDeviceResult, _ ->
       if (result != MRUKLoadDeviceResult.SUCCESS) {
         log("Error loading scene from device: ${result}")
       } else {
@@ -121,6 +124,7 @@ class MixedRealitySampleActivity : AppSystemActivity() {
   override fun onDestroy() {
     super.onDestroy()
     procMeshSpawner.destroy()
+    mrukFeature.removeSceneEventListener(sceneEventListener)
   }
 
   override fun onSceneReady() {

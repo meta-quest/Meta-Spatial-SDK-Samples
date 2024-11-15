@@ -81,6 +81,13 @@
                     "type": {
                         "attributeType": "String"
                     }
+                },
+                {
+                    "keyString": "isBuiltInFollower",
+                    "name": "isBuiltInFollower",
+                    "type": {
+                        "attributeType": "Boolean"
+                    }
                 }
             ],
             "name": "com.meta.spatial.samples.animationssample.FollowerTarget"
@@ -88,6 +95,7 @@
         {
             "attributes": [
                 {
+                    "description": "World time at which animation started (ms since epoch) ",
                     "keyString": "startTime",
                     "name": "startTime",
                     "type": {
@@ -95,6 +103,7 @@
                     }
                 },
                 {
+                    "description": "Paused location/time (sec) within animation track ",
                     "keyString": "pausedTime",
                     "name": "pausedTime",
                     "type": {
@@ -102,6 +111,7 @@
                     }
                 },
                 {
+                    "description": "State of the animation (playing or paused) ",
                     "keyString": "playbackState",
                     "name": "playbackState",
                     "type": {
@@ -109,6 +119,7 @@
                     }
                 },
                 {
+                    "description": "The type of animation playback to be used ",
                     "keyString": "playbackType",
                     "name": "playbackType",
                     "type": {
@@ -116,6 +127,7 @@
                     }
                 },
                 {
+                    "description": "which animation track of the glTF to play ",
                     "keyString": "track",
                     "name": "track",
                     "type": {
@@ -123,11 +135,13 @@
                     }
                 }
             ],
+            "description": "\n Plays animation for a glTF asset. Also configures different settings for animation.\n\n @param startTime World time at which animation started (ms since epoch)\n @param pausedTime Paused location/time (sec) within animation track\n @param playbackState Playback state of the animated entity\n @param playbackType Playback type of the animated entity\n @param track the animation track of the glTF to play\n",
             "name": "com.meta.spatial.toolkit.Animated"
         },
         {
             "attributes": [
                 {
+                    "description": "The Uri String of the audio file to be used ",
                     "keyString": "audioInternal",
                     "name": "audio",
                     "type": {
@@ -142,11 +156,13 @@
                     }
                 }
             ],
+            "description": "\n Audio component that can be attached to an entity. This component will play audio spatially from\n the entity.\n\n @param file The Uri String of the audio file to be used\n @param volume The volume of the audio to be played, default is 1.0f\n @property audio The Uri String of the audio file to be used\n @property volume The volume of the audio to be played, default is 1.0f\n",
             "name": "com.meta.spatial.toolkit.Audio"
         },
         {
             "attributes": [
                 {
+                    "description": "\n Which part of the avatar the entity is meant to represent (i.e. \u201chead\u201d, \u201cbody\u201d, \u201cright_hand\u201d,\n \u201cleft_controller\u201d)\n",
                     "keyString": "type",
                     "name": "type",
                     "type": {
@@ -154,6 +170,7 @@
                     }
                 }
             ],
+            "description": "\n Defines what part of an Avatar the entity is meant to represent. (head, body, controller, etc.)\n",
             "name": "com.meta.spatial.toolkit.AvatarAttachment"
         },
         {
@@ -194,11 +211,13 @@
                     }
                 }
             ],
+            "description": "\n AvatarBody is a component that represents the body of an avatar. It contains references to the\n head, left hand, right hand, and root of the avatar. It also contains a boolean flag to indicate\n whether the avatar is player controlled.\n\n @param head The head Entity of the avatar.\n @param leftHand The left hand Entity of the avatar.\n @param rightHand The right hand Entity of the avatar.\n @param root The root Entity of the avatar.\n @param isPlayerControlled A boolean flag to indicate whether the avatar is player controlled.\n",
             "name": "com.meta.spatial.toolkit.AvatarBody"
         },
         {
             "attributes": [
                 {
+                    "description": "\n The relative offset of the bottom corner (furthest in the -x, -y, -z direction) of the box from\n the center\n",
                     "keyString": "min",
                     "name": "min",
                     "type": {
@@ -206,6 +225,7 @@
                     }
                 },
                 {
+                    "description": "\n The relative offset of the top corner (furthest in the +x, +y, +z direction) of the box from\n the center\n",
                     "keyString": "max",
                     "name": "max",
                     "type": {
@@ -213,11 +233,13 @@
                     }
                 }
             ],
+            "description": "\n Defines the dimensions of a box shape by the relative offset of two opposite corners. A box of\n max=Vector3(1,1,1) and min=Vector3(-1,-1,-1) will result in a 2x2x2 box. This is to be used with\n the `mesh://box` `Mesh` URI.\n\n @property min The relative offset of the bottom corner (furthest in the -x, -y, -z direction)\n @property max The relative offset of the top corner (furthest in the +x, +y, +z direction)\n",
             "name": "com.meta.spatial.toolkit.Box"
         },
         {
             "attributes": [
                 {
+                    "description": "The current state of the buttons being pressed represented by integer bits ",
                     "keyString": "buttonState",
                     "name": "buttonState",
                     "type": {
@@ -225,6 +247,7 @@
                     }
                 },
                 {
+                    "description": "\n Which buttons (represented by integer bits) have been changed (pressed or unpressed since the\n last frame)\n",
                     "keyString": "changedButtons",
                     "name": "changedButtons",
                     "type": {
@@ -239,6 +262,7 @@
                     }
                 },
                 {
+                    "description": "What type of controller it is: 0->controller 1->hand 2->eye ",
                     "keyString": "type",
                     "name": "type",
                     "type": {
@@ -253,6 +277,7 @@
                     }
                 },
                 {
+                    "description": "The state of the direct touch buttons ",
                     "keyString": "directTouchButtonState",
                     "name": "directTouchButtonState",
                     "type": {
@@ -267,11 +292,13 @@
                     }
                 }
             ],
+            "description": "\n Represents Controller Data and properties that can be used to facilitate input.\n\n @param buttonState The current state of the buttons being pressed represented by integer bits\n @param changedButtons Which buttons (represented by integer bits) have been changed (pressed or\n   unpressed)\n @param isActive Whether the controller is active or not\n @param type What type of controller it is: 0->controller 1->hand\n @param directTouchEnabled Whether direct touch is enabled or not\n @param directTouchButtonState The state of the direct touch buttons\n @param laserEnabled Whether the laser is enabled or not\n",
             "name": "com.meta.spatial.toolkit.Controller"
         },
         {
             "attributes": [
                 {
+                    "description": "\n Different states of CreatorVisibility, such as only visible to the creator, or only invisible\n to the creator\n",
                     "keyString": "state",
                     "name": "state",
                     "type": {
@@ -284,6 +311,7 @@
         {
             "attributes": [
                 {
+                    "description": "The radius of the dome in meters ",
                     "keyString": "radius",
                     "name": "radius",
                     "type": {
@@ -291,7 +319,78 @@
                     }
                 }
             ],
+            "description": "\n Defines the dimensions of a dome shape by a radius. This can be used for skyboxes.\n\n @param radius The radius of the dome in meters\n @property radius The radius of the dome in meters\n",
             "name": "com.meta.spatial.toolkit.Dome"
+        },
+        {
+            "attributes": [
+                {
+                    "description": "Target Entity to follow ",
+                    "keyString": "parent",
+                    "name": "target",
+                    "type": {
+                        "attributeType": "Entity"
+                    }
+                },
+                {
+                    "description": "Pose offset to keep from target. Defining a quaternion will rotate the Entity ",
+                    "keyString": "offset",
+                    "name": "offset",
+                    "type": {
+                        "attributeType": "Pose"
+                    }
+                },
+                {
+                    "description": "\n Minimum Y angle offset a followable will keep from target, 0 is straight ahead, positive values\n are up, negative values are down\n",
+                    "keyString": "minHeight",
+                    "name": "minAngle",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                },
+                {
+                    "description": "\n Maximum Y angle offset a followable will keep from target, 0 is straight ahead, positive values\n are up, negative values are down\n",
+                    "keyString": "maxHeight",
+                    "name": "maxAngle",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                },
+                {
+                    "description": "This is the change in distance needed to start moving ",
+                    "keyString": "tolerance",
+                    "name": "tolerance",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                },
+                {
+                    "description": "\n How fast followable tracks to its desired location. Float value is a percent of default speed\n",
+                    "keyString": "speed",
+                    "name": "speed",
+                    "type": {
+                        "attributeType": "Float"
+                    }
+                },
+                {
+                    "description": "The type of behavior an object has when following (faces user, pivots on y axis, etc.) ",
+                    "keyString": "type",
+                    "name": "type",
+                    "type": {
+                        "attributeType": "com.meta.spatial.toolkit.FollowableType"
+                    }
+                },
+                {
+                    "description": "Whether entity is actively following or not ",
+                    "keyString": "active",
+                    "name": "active",
+                    "type": {
+                        "attributeType": "Boolean"
+                    }
+                }
+            ],
+            "description": "\n Followable is a component that enables an entity to stay in front of another entity. Followable\n will track the orientation of the parent and move itself to stay in front.\n\n @param target Target Entity to follow\n @param offset Pose offset to keep from target. Defining a quaternion will rotate the Entity\n @param minAngle Minimum Y angle offset a followable will keep from target, 0 is straight ahead,\n   positive values are up, negative values are down\n @param maxAngle Maximum Y angle offset a followable will keep from target, 0 is straight ahead,\n   positive values are up, negative values are down\n @param type The behavior an object has when following (faces user, pivots on y axis, etc.)\n @param tolerance This is the change in distance needed to start moving\n @param speed How fast followable tracks to its desired location. Float value is a percent of\n   default speed\n @param active Whether entity is actively following or not\n",
+            "name": "com.meta.spatial.toolkit.Followable"
         },
         {
             "attributes": [
@@ -304,6 +403,7 @@
                     }
                 },
                 {
+                    "description": "Whether the object is currently grabbed or not ",
                     "keyString": "isGrabbed",
                     "name": "isGrabbed",
                     "type": {
@@ -311,6 +411,7 @@
                     }
                 },
                 {
+                    "description": "The type of behavior an object has when grabbed (faces user, pivots on y axis, etc.) ",
                     "keyString": "type",
                     "name": "type",
                     "type": {
@@ -318,6 +419,7 @@
                     }
                 },
                 {
+                    "description": "the minimum height an object can be held when grabbed ",
                     "keyString": "minHeight",
                     "name": "minHeight",
                     "type": {
@@ -325,6 +427,7 @@
                     }
                 },
                 {
+                    "description": "the maximum height an object can be held when grabbed ",
                     "keyString": "maxHeight",
                     "name": "maxHeight",
                     "type": {
@@ -332,12 +435,13 @@
                     }
                 }
             ],
-            "description": "\n Grabbable is a component that allows an object to be grabbed by a controller. It requires the\n Mesh Component to be present.\n",
+            "description": "\n Grabbable is a component that allows an object to be grabbed by a controller. It requires the\n Mesh Component to be present.\n\n @param enabled Defines whether the object can be grabbed or not.\n @param type The type of behavior an object has when grabbed (faces user, pivots on y axis, etc.)\n @param isGrabbed Whether the object is currently grabbed or not\n @param minHeight the minimum height an object can be held when grabbed\n @param maxHeight the maximum height an object can be held when grabbed\n",
             "name": "com.meta.spatial.toolkit.Grabbable"
         },
         {
             "attributes": [
                 {
+                    "description": "The type of behavior the object can be hit using ",
                     "keyString": "hittable",
                     "name": "hittable",
                     "type": {
@@ -345,6 +449,7 @@
                     }
                 }
             ],
+            "description": "\n Defines whether an object is hittable or not.\n\n @param hittable The type of behavior the object can be hit using\n @property hittable The type of behavior the object can be hit using\n",
             "name": "com.meta.spatial.toolkit.Hittable"
         },
         {
@@ -364,6 +469,7 @@
                     }
                 }
             ],
+            "description": "\n Panel is a component that can be attached to a scene object to indicate that it is a panel.\n\n @param panelRegistrationId The id of the panel. This is used to identify the @PanelRegistration\n   when creating the panel.\n @param hittable hit test type for the panel, @see MeshCollision\n",
             "name": "com.meta.spatial.toolkit.Panel"
         },
         {
@@ -376,6 +482,7 @@
                     }
                 }
             ],
+            "description": "\n PanelClickState is a component that is used to track the state of a panel click. It is used\n in @see PanelClickSystem, and passes the state to the @see Panel component.\n\n @param clickState The current state of the panel click.\n @constructor Creates a new PanelClickState component with the specified click state.\n",
             "name": "com.meta.spatial.toolkit.PanelClickState"
         },
         {
@@ -388,6 +495,7 @@
                     }
                 }
             ],
+            "description": "\n PanelDimensions is a component that holds the dimensions of a panel. This is used to override the\n height and width of a panel when creating the panel. Without it, the panel's height and width\n will be the values from @see PanelRegistration.\n\n @param dimensions The dimensions of the panel.\n @property dimensions The dimensions of the panel.\n",
             "name": "com.meta.spatial.toolkit.PanelDimensions"
         },
         {
@@ -407,6 +515,7 @@
                     }
                 }
             ],
+            "description": "\n Defines the dimensions of a horizontal plane.\n\n @param width The width of the plane\n @param depth The depth of the plane\n @property width The width of the plane\n @property depth The depth of the plane\n @constructor Creates a plane with default width and depth of 1.0f\n",
             "name": "com.meta.spatial.toolkit.Plane"
         },
         {
@@ -426,11 +535,13 @@
                     }
                 }
             ],
+            "description": "\n A Quad is a 2D shape that can be used to represent a 2D surface in 3D space. It is defined by its\n minimum and maximum coordinates.\n\n @param min The minimum coordinates of the Quad.\n @param max The maximum coordinates of the Quad.\n @property min The minimum coordinates of the Quad.\n @property max The maximum coordinates of the Quad.\n @constructor Creates a new Quad with the given minimum and maximum coordinates.\n",
             "name": "com.meta.spatial.toolkit.Quad"
         },
         {
             "attributes": [
                 {
+                    "description": "\n The relative offset of the bottom corner (furthest in the -x, -y, -z direction) of the box from\n the center\n",
                     "keyString": "min",
                     "name": "min",
                     "type": {
@@ -438,6 +549,7 @@
                     }
                 },
                 {
+                    "description": "\n The relative offset of the top corner (furthest in the +x, +y, +z direction) of the box from\n the center\n",
                     "keyString": "max",
                     "name": "max",
                     "type": {
@@ -445,6 +557,7 @@
                     }
                 },
                 {
+                    "description": "\n The radii of the rounded edges of the box, where the radii corresponds to the edges along that\n plane. (i.e radius.x corresponds to the edges running along in the x axis)\n",
                     "keyString": "radius",
                     "name": "radius",
                     "type": {
@@ -452,6 +565,7 @@
                     }
                 }
             ],
+            "description": "\n Defines the dimensions of a box shape with rounded edges by the relative offset of two opposite\n corners and a Vector3 of radii to modify the roundedness of the edges\n",
             "name": "com.meta.spatial.toolkit.RoundedBox"
         },
         {
@@ -485,6 +599,7 @@
                     }
                 }
             ],
+            "description": "\n A ScenePlane is a 2D plane in the scene. It has a name, type, offset, and extents.\n\n @param name The name of the plane.\n @param type The type of the plane.\n @param offset The offset of the plane.\n @param extents The extents of the plane.\n",
             "name": "com.meta.spatial.toolkit.ScenePlane"
         },
         {
@@ -518,11 +633,13 @@
                     }
                 }
             ],
+            "description": "\n A SceneVolume is a 3D volume that can be used to represent a physical object in the scene.\n\n @param name The name of the volume, identifier for the volume.\n @param type The type of the volume, it will be used to determine a Anchor is belong to the volume\n   or not.\n @param offset The offset of the volume, all the Entity belongs to the volume will be offset by\n   this value.\n @param extents The extents of the volume\n",
             "name": "com.meta.spatial.toolkit.SceneVolume"
         },
         {
             "attributes": [
                 {
+                    "description": "The radius of the sphere in meters ",
                     "keyString": "radius",
                     "name": "radius",
                     "type": {
@@ -530,20 +647,22 @@
                     }
                 }
             ],
+            "description": "\n The component that defines the dimensions of a sphere by the radius. To be used with the\n `mesh://sphere` `Mesh` URI.\n\n @param radius The radius of the sphere in meters\n @property radius The radius of the sphere in meters\n @constructor Creates a sphere with the given radius\n",
             "name": "com.meta.spatial.toolkit.Sphere"
         },
         {
             "attributes": [],
+            "description": "\n This component is used to indicate that an entity supports locomotion. When added to an entity\n with a mesh, it allows for default locomotion on the mesh\n",
             "name": "com.meta.spatial.toolkit.SupportsLocomotion"
         },
         {
             "attributes": [],
-            "description": "\n Maps joints found in BodyJoint to a Pose in world space. If a bone is not present in the map, it\n means that the tracking is not currently valid for that pose.\n\n Will be present locally if the XR_FB_body_tracking is able to be loaded.\n",
             "name": "com.meta.spatial.toolkit.TrackedBody"
         },
         {
             "attributes": [
                 {
+                    "description": "The mesh\u2019s current visibility state. ",
                     "keyString": "isVisible",
                     "name": "isVisible",
                     "type": {
@@ -551,6 +670,7 @@
                     }
                 }
             ],
+            "description": "\n Gives the ability to change mesh between being visible and invisible.\n\n @param isVisible The mesh\u2019s current visibility state.\n",
             "name": "com.meta.spatial.toolkit.Visible"
         }
     ],
@@ -560,6 +680,13 @@
             "values": [
                 "CREATOR_ONLY_VISIBLE",
                 "CREATOR_ONLY_INVISIBLE"
+            ]
+        },
+        {
+            "name": "com.meta.spatial.toolkit.FollowableType",
+            "values": [
+                "FACE",
+                "PIVOT_Y"
             ]
         },
         {
@@ -589,7 +716,8 @@
             "values": [
                 "LOOP",
                 "CLAMP",
-                "BOUNCE"
+                "BOUNCE",
+                "REVERSE_LOOP"
             ]
         }
     ]

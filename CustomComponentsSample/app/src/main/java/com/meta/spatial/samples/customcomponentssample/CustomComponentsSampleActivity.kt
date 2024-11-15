@@ -14,6 +14,7 @@ import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.debugtools.HotReloadFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
@@ -21,6 +22,7 @@ import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.PanelRegistration
@@ -41,6 +43,7 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
     val features =
         mutableListOf<SpatialFeature>(
             VRFeature(this),
+            HotReloadFeature(this),
             OVRMetricsFeature(
                 this,
                 OVRMetricsDataModel() {
@@ -68,8 +71,7 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
     componentManager.registerComponent<LookAt>(LookAt.Companion)
     systemManager.registerSystem(LookAtSystem())
 
-    loadGLXF().invokeOnCompletion {
-      val composition = glXFManager.getGLXFInfo("example_key_name")
+    loadGLXF { composition ->
 
       // set the environment to be unlit
       val environmentEntity: Entity = composition.getNodeByName("Environment").entity
@@ -123,13 +125,14 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
   }
 
-  private fun loadGLXF(): Job {
+  private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          keyName = "example_key_name")
+          keyName = "example_key_name",
+          onLoaded = onLoaded)
     }
   }
 }

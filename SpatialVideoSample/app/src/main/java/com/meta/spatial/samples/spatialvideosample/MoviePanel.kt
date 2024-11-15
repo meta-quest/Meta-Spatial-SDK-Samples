@@ -94,8 +94,8 @@ class MovieViewModel : ViewModel() {
     viewModelScope.launch {
       _movies.value =
           listOf(
-                  Movie.fromRawVideo("mediagiant", "Media Giant"),
                   Movie.fromRawVideo("doggie", "Doggie"),
+                  Movie.fromRawVideo("mediagiant", "Media Giant"),
                   Movie.fromRawVideo("carousel", "Carousel"),
                   Movie.fromRawVideo("salmon", "Salmon"))
               .filterNotNull()

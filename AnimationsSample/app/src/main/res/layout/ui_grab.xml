@@ -16,7 +16,7 @@
     android:layout_width="match_parent"
     android:lineHeight="48sp"
     android:padding="16dp"
-    android:text="Grab the orb and move it around to fly the drone."
+    android:text="Grab the orb and move it around to fly the drone. If you click the orb, it will change from custom follow mode to the built in Followable system."
     android:textColor="#F1F4F7"
     android:textSize="38sp"
     android:scaleY="-1"

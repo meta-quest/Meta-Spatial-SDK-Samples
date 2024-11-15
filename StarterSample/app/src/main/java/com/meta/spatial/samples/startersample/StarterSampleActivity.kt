@@ -15,6 +15,7 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
+import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
@@ -92,7 +93,7 @@ class StarterSampleActivity : AppSystemActivity() {
             includeGlass = false
             width = 2.0f
             height = 1.5f
-            enableLayer = true
+            layerConfig = LayerConfig()
             enableTransparent = true
           }
         })

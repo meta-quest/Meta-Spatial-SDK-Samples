@@ -80,19 +80,22 @@ entities:
             - 0.956133604
             - 2.10795021
         com.meta.spatial.samples.animationssample.DroneComponent:
-          tiltFactor: 0.25
-          enabled: false
-          targetName: droneTarget
           rotationSpeed: 0.050000000000000003
+          targetName: droneTarget
+          enabled: false
+          tiltFactor: 0.25
         com.meta.spatial.samples.animationssample.FollowerComponent:
+          targetName: droneTarget
+          followDistance: 0.5
+          enabled: false
+          expDecay: 1
           followOffset:
             - 0
             - 0
             - 0
-          expDecay: 1
-          enabled: false
-          followDistance: 0.5
-          targetName: droneTarget
+        com.meta.spatial.toolkit.Followable:
+          speed: 0.050000000000000003
+          active: false
       tag: drone
     - components:
         com.meta.components.Animatable:
@@ -169,12 +172,12 @@ entities:
           rotation.format: Euler
           scale:
             - 1.60000002
-            - 0.400000006
+            - 0.800000012
             - 1
           translation:
-            - -2.24933839
-            - 2.15159369
-            - 1.50564277
+            - -2.34168649
+            - 2.02099371
+            - 1.59799087
         com.meta.spatial.toolkit.Panel:
           panel: "@layout/ui_grab"
         com.meta.spatial.toolkit.PanelDimensions:

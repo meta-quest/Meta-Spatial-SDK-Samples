@@ -50,6 +50,9 @@ class FollowerTarget(
 
   var targetName: String by StringAttribute("name", R.string.follower_target_name, this, targetName)
 
+  var isBuiltInFollower: Boolean by
+      BooleanAttribute("isBuiltInFollower", R.id.is_built_in, this, false)
+
   override fun typeID(): Int {
     return FollowerTarget.id
   }

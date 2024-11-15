@@ -85,6 +85,7 @@ dependencies {
   implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-hotreload:$metaSpatialSdkVersion")
 
   androidTestImplementation(platform("androidx.compose:compose-bom:2024.09.03"))
   androidTestImplementation("androidx.compose.ui:ui-test-junit4")
