@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.sharp.Info
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -30,6 +31,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -71,47 +74,52 @@ fun GalleryView(
     onSortBy: (MediaSortBy) -> Unit,
     onToggleMetadata: (Boolean) -> Unit,
 ) {
-  MediaViewTheme {
-    Scaffold(
-        modifier =
-            Modifier.fillMaxSize()
+    MediaViewTheme {
+        Scaffold(
+            modifier =
+            Modifier
+                .fillMaxSize()
                 .border(
                     width = 1.dp,
                     color = AppColor.MetaBlu,
-                    shape = RoundedCornerShape(Dimens.radiusMedium))
-                .clip(RoundedCornerShape(Dimens.radiusMedium))) { innerPadding ->
-          when (uiState) {
-            UiState.Idle -> Box(Modifier)
-            UiState.Loading -> LoadingView(modifier = Modifier.fillMaxSize())
-            is UiState.Success ->
-                Column(
-                    modifier = Modifier.fillMaxSize().background(AppColor.BackgroundSweep),
-                ) {
-                  Header(
-                      filter = filter,
-                      sortBy = sortBy,
-                      onSortBy = onSortBy,
-                      fileCount = uiState.data.size,
-                      showMetadata = showMetadata,
-                      onToggleMetadata = onToggleMetadata,
-                  )
-                  MediaGrid(
-                      media = uiState.data,
-                      showMetadata = showMetadata,
-                      modifier = Modifier.padding(innerPadding),
-                      onItemClicked = onMediaSelected,
-                  )
-                }
-
-            is UiState.Error ->
-                ErrorView(
-                    modifier = Modifier.fillMaxSize(),
-                    description = uiState.message,
-                    onActionButtonPressed = onRefresh,
+                    shape = RoundedCornerShape(Dimens.radiusMedium)
                 )
-          }
+                .clip(RoundedCornerShape(Dimens.radiusMedium))
+        ) { innerPadding ->
+            when (uiState) {
+                UiState.Idle -> Box(Modifier)
+                UiState.Loading -> LoadingView(modifier = Modifier.fillMaxSize())
+                is UiState.Success ->
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(AppColor.BackgroundSweep),
+                    ) {
+                        Header(
+                            filter = filter,
+                            sortBy = sortBy,
+                            onSortBy = onSortBy,
+                            fileCount = uiState.data.size,
+                            showMetadata = showMetadata,
+                            onToggleMetadata = onToggleMetadata,
+                        )
+                        MediaGrid(
+                            media = uiState.data,
+                            showMetadata = showMetadata,
+                            modifier = Modifier.padding(innerPadding),
+                            onItemClicked = onMediaSelected,
+                        )
+                    }
+
+                is UiState.Error ->
+                    ErrorView(
+                        modifier = Modifier.fillMaxSize(),
+                        description = uiState.message,
+                        onActionButtonPressed = onRefresh,
+                    )
+            }
         }
-  }
+    }
 }
 
 @Composable
@@ -123,123 +131,152 @@ private fun Header(
     showMetadata: Boolean,
     onToggleMetadata: (Boolean) -> Unit,
 ) {
-  var sortExpanded by remember { mutableStateOf(false) }
-  Column {
-    Box(modifier = Modifier.padding(Dimens.medium)) {
-      Row(
-          modifier = Modifier.fillMaxWidth(),
-          horizontalArrangement = Arrangement.SpaceBetween,
-      ) {
-        Column {
-          Text(
-              text = stringResource(filter.titleResId()),
-              style = MaterialTheme.typography.titleMedium,
-          )
-          Spacer(Modifier.size(Dimens.xSmall))
-          Text(
-              text = stringResource(R.string.viewing_n_files, fileCount),
-              style = MaterialTheme.typography.bodySmall.copy(color = AppColor.White60),
-          )
-        }
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-          Column(horizontalAlignment = Alignment.End, modifier = Modifier) {
-            OutlinedButton(
-                onClick = { sortExpanded = true },
-                modifier = Modifier.height(40.dp).width(90.dp),
-                contentPadding = PaddingValues(start = 30.dp, end = 0.dp),
-                shape = RoundedCornerShape(20.dp),
-                colors =
-                    ButtonDefaults.buttonColors(
-                        contentColor = AppColor.White,
-                        containerColor = Color.Transparent,
-                    ),
+    var sortExpanded by remember { mutableStateOf(false) }
+    Column {
+        Box(modifier = Modifier.padding(Dimens.medium)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-              Row(
-                  verticalAlignment = Alignment.CenterVertically,
-                  horizontalArrangement = Arrangement.Absolute.Left,
-              ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.icon_sortby),
-                    contentDescription = "Button Icon",
-                    modifier = Modifier.size(20.dp).offset(x = (-20).dp, y = 0.dp))
-                Text(
-                    modifier = Modifier.fillMaxWidth().offset(x = (-17).dp, y = 0.dp),
-                    text = stringResource(id = R.string.sort_by),
-                    // style = MaterialTheme.typography.bodyMedium.copy(fontWeight =
-                    // FontWeight.Bold),
-                    color = Color.White,
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Left,
-                )
-              }
-            }
-
-            MaterialTheme(
-                shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(16.dp))) {
-                  DropdownMenu(
-                      expanded = sortExpanded,
-                      onDismissRequest = { sortExpanded = false },
-                      modifier =
-                          Modifier.shadow(2.dp)
-                              .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(16.dp))
-                              .background(
-                                  Brush.verticalGradient(
-                                      listOf(AppColor.GradientStart, AppColor.GradientEnd))),
-                  ) {
-                    for (option in MediaSortBy.entries) {
-                      DropdownMenuItem(
-                          contentPadding = PaddingValues(10.dp),
-                          trailingIcon =
-                              if (option == sortBy)
-                                  ({
-                                    Icon(
-                                        imageVector = Icons.Default.Check,
-                                        contentDescription = null,
-                                        modifier = Modifier.size(15.dp))
-                                  })
-                              else null,
-                          text = {
-                            Text(
-                                fontSize = 10.sp,
-                                text =
-                                    stringResource(
-                                        when (option) {
-                                          MediaSortBy.DateDesc -> R.string.sort_by_date_desc
-                                          MediaSortBy.DateAsc -> R.string.sort_by_date_asc
-                                          MediaSortBy.SizeAsc -> R.string.sort_by_size_asc
-                                          MediaSortBy.SizeDesc -> R.string.sort_by_size_desc
-                                          MediaSortBy.NameAsc -> R.string.sort_by_name_asc
-                                          MediaSortBy.NameDesc -> R.string.sort_by_name_desc
-                                        }))
-                          },
-                          onClick = {
-                            sortExpanded = false
-                            onSortBy(option)
-                          },
-                      )
-                      if (option != MediaSortBy.NameDesc)
-                          HorizontalDivider(color = AppColor.White15, thickness = 1.dp)
-                    }
-                  }
+                Column {
+                    Text(
+                        text = stringResource(filter.titleResId()),
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+                    Spacer(Modifier.size(Dimens.xSmall))
+                    Text(
+                        text = stringResource(R.string.viewing_n_files, fileCount),
+                        style = MaterialTheme.typography.bodySmall.copy(color = AppColor.White60),
+                    )
                 }
-          }
-          /**
-           * Box(modifier = Modifier.size(Dimens.medium)) Hidden for 0.0.13
-           *
-           * TODO: Style Switch( colors = SwitchDefaults.colors().copy( uncheckedThumbColor =
-           *   AppColor.White60, uncheckedBorderColor = AppColor.White60, uncheckedTrackColor =
-           *   AppColor.GradientStart, checkedThumbColor = AppColor.GradientStart,
-           *   checkedBorderColor = AppColor.White, checkedTrackColor = AppColor.White, ), checked =
-           *   showMetadata, onCheckedChange = { onToggleMetadata(it) })*
-           */
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Column(horizontalAlignment = Alignment.End, modifier = Modifier) {
+                        OutlinedButton(
+                            onClick = { sortExpanded = true },
+                            modifier = Modifier
+                                .height(40.dp)
+                                .width(90.dp),
+                            contentPadding = PaddingValues(start = 30.dp, end = 0.dp),
+                            shape = RoundedCornerShape(20.dp),
+                            colors =
+                            ButtonDefaults.buttonColors(
+                                contentColor = AppColor.White,
+                                containerColor = Color.Transparent,
+                            ),
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.Absolute.Left,
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.icon_sortby),
+                                    contentDescription = "Button Icon",
+                                    modifier = Modifier
+                                        .size(20.dp)
+                                        .offset(x = (-20).dp, y = 0.dp)
+                                )
+                                Text(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .offset(x = (-17).dp, y = 0.dp),
+                                    text = stringResource(id = R.string.sort_by),
+                                    // style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
+                                    color = Color.White,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    textAlign = TextAlign.Left,
+                                )
+                            }
+                        }
+
+                        MaterialTheme(
+                            shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(16.dp))
+                        ) {
+                            DropdownMenu(
+                                expanded = sortExpanded,
+                                onDismissRequest = { sortExpanded = false },
+                                modifier =
+                                Modifier
+                                    .shadow(2.dp)
+                                    .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(16.dp))
+                                    .background(
+                                        Brush.verticalGradient(
+                                            listOf(AppColor.GradientStart, AppColor.GradientEnd)
+                                        )
+                                    ),
+                            ) {
+                                for (option in MediaSortBy.entries) {
+                                    DropdownMenuItem(
+                                        contentPadding = PaddingValues(10.dp),
+                                        trailingIcon =
+                                        if (option == sortBy)
+                                            ({
+                                                Icon(
+                                                    imageVector = Icons.Default.Check,
+                                                    contentDescription = null,
+                                                    modifier = Modifier.size(15.dp)
+                                                )
+                                            })
+                                        else null,
+                                        text = {
+                                            Text(
+                                                fontSize = 10.sp,
+                                                text =
+                                                stringResource(
+                                                    when (option) {
+                                                        MediaSortBy.DateDesc -> R.string.sort_by_date_desc
+                                                        MediaSortBy.DateAsc -> R.string.sort_by_date_asc
+                                                        MediaSortBy.SizeAsc -> R.string.sort_by_size_asc
+                                                        MediaSortBy.SizeDesc -> R.string.sort_by_size_desc
+                                                        MediaSortBy.NameAsc -> R.string.sort_by_name_asc
+                                                        MediaSortBy.NameDesc -> R.string.sort_by_name_desc
+                                                    }
+                                                )
+                                            )
+                                        },
+                                        onClick = {
+                                            sortExpanded = false
+                                            onSortBy(option)
+                                        },
+                                    )
+                                    if (option != MediaSortBy.NameDesc)
+                                        HorizontalDivider(
+                                            color = AppColor.White15,
+                                            thickness = 1.dp
+                                        )
+                                }
+                            }
+                        }
+                    }
+
+                    Box(modifier = Modifier.size(Dimens.medium))
+                    Switch(
+                        thumbContent = {
+                            Icon(
+                                Icons.Sharp.Info,
+                                "Toggle media info",
+                            )
+                        },
+                        colors = SwitchDefaults.colors().copy(
+                            uncheckedThumbColor = AppColor.White60,
+                            uncheckedBorderColor = Color.Transparent,
+                            uncheckedTrackColor = AppColor.White15,
+                            checkedThumbColor = Color.White,
+                            checkedBorderColor = Color.Transparent,
+                            checkedTrackColor = AppColor.White15,
+                            checkedIconColor = AppColor.MetaBlu,
+                        ),
+                        checked = showMetadata,
+                        onCheckedChange = {
+                            onToggleMetadata(it)
+                        })
+                }
+            }
         }
-      }
+        HorizontalDivider(color = AppColor.White15, thickness = 1.dp)
     }
-    HorizontalDivider(color = AppColor.White15, thickness = 1.dp)
-  }
 }
 
 @Composable
@@ -249,18 +286,19 @@ private fun MediaGrid(
     showMetadata: Boolean,
     onItemClicked: (MediaModel) -> Unit,
 ) {
-  LazyVerticalGrid(
-      modifier = modifier,
-      contentPadding = PaddingValues(Dimens.large),
-      verticalArrangement = Arrangement.spacedBy(Dimens.small),
-      horizontalArrangement = Arrangement.spacedBy(Dimens.small),
-      columns = GridCells.Adaptive(Dimens.galleryItemSize)) {
+    LazyVerticalGrid(
+        modifier = modifier,
+        contentPadding = PaddingValues(Dimens.large),
+        verticalArrangement = Arrangement.spacedBy(Dimens.small),
+        horizontalArrangement = Arrangement.spacedBy(Dimens.small),
+        columns = GridCells.Adaptive(Dimens.galleryItemSize)
+    ) {
         items(media.size) { index ->
-          MediaItemView(
-              media[index],
-              showMetadata,
-              onItemClicked = onItemClicked,
-          )
+            MediaItemView(
+                media[index],
+                showMetadata,
+                onItemClicked = onItemClicked,
+            )
         }
-      }
+    }
 }

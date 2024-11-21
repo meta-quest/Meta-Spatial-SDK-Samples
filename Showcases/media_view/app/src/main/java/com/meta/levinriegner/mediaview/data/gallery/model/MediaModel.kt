@@ -4,8 +4,8 @@ package com.meta.levinriegner.mediaview.data.gallery.model
 
 import android.net.Uri
 import android.os.Parcelable
-import java.util.Date
 import kotlinx.parcelize.Parcelize
+import java.util.Date
 
 @Parcelize
 data class MediaModel(
@@ -25,18 +25,45 @@ data class MediaModel(
     var minimizedMenuEntityId: Long? = null,
     var immersiveMenuEntityId: Long? = null,
 ) : Parcelable {
+    fun durationHMS(): Triple<Int, Int, Int>? {
+        val duration = durationMs ?: return null
+        val hours = duration / 3600000
+        val minutes = (duration % 3600000) / 60000
+        val seconds = (duration % 60000) / 1000
+        return Triple(hours, minutes, seconds)
+    }
 
-  fun durationHMS(): Triple<Int, Int, Int>? {
-    val duration = durationMs ?: return null
-    val hours = duration / 3600000
-    val minutes = (duration % 3600000) / 60000
-    val seconds = (duration % 60000) / 1000
-    return Triple(hours, minutes, seconds)
-  }
+    fun nameLabel(): String? {
+        return name?.substringBeforeLast(".")
+    }
+
+    fun mimeTypeLabel(): String? {
+        return mimeType?.split("/")?.last()?.uppercase()
+    }
+
+    fun sizeLabel(): String? {
+        size?.let {
+            val sizeInMb = it.div((1024.0 * 1024.0))
+            val sizeInGb = it.div((1024.0 * 1024.0 * 1024.0))
+
+            if (sizeInGb >= 1) {
+                return String.format("%.2f GB", sizeInGb)
+            } else {
+                if (sizeInMb >= 1) {
+                    return String.format("%.2f MB", sizeInMb)
+                } else {
+                    return "$it bytes"
+                }
+
+            }
+        }
+
+        return null
+    }
 
   fun debugPrint(): String {
     return "MediaModel(id=$id, size=$size, mimeType=$mimeType, durationMs=$durationMs, width=$width, height=$height, mediaType=$mediaType, mediaFilter=$mediaFilter)"
   }
 
-  companion object {}
+    companion object {}
 }
