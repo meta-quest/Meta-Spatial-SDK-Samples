@@ -125,7 +125,8 @@ fun getLocalProperty(key: String, project: Project): String {
   return localProperties.getProperty(key, "")
 }
 
-val sceneProjectPath = "app/src/main/assets/scenes"
+val projectDir = layout.projectDirectory
+val sceneDirectory = projectDir.dir("src/main/assets/scenes")
 
 spatial {
   scenes {
@@ -133,13 +134,11 @@ spatial {
     // cliPath.set("/Applications/Meta Spatial Editor.app/Contents/MacOS/CLI")
     exportItems {
       item {
-        projectPath.set("$sceneProjectPath/Main.metaspatial")
-        outputPath.set("app/src/main/assets/scenes")
+        projectPath.set(sceneDirectory.file("Main.metaspatial"))
+        outputPath.set(sceneDirectory)
       }
     }
 
-    componentGeneration {
-      outputPath = project.projectDir.absolutePath + sceneProjectPath.substring(3)
-    }
+    componentGeneration { outputPath.set(sceneDirectory) }
   }
 }

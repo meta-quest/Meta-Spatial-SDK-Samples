@@ -193,7 +193,8 @@ dependencies {
   implementation("com.datadoghq:dd-sdk-android-logs:2.14.0")
 }
 
-val sceneProjectPath = "app/src/main/assets/scenes"
+val projectDir = layout.projectDirectory
+val sceneDirectory = projectDir.dir("src/main/assets/scenes")
 
 spatial {
   allowUsageDataCollection.set(true)
@@ -202,8 +203,8 @@ spatial {
     // cliPath.set("/Applications/Meta Spatial Editor.app/Contents/MacOS/CLI")
     exportItems {
       item {
-        projectPath.set("$sceneProjectPath/Main.metaspatial")
-        outputPath.set("app/src/main/assets/scenes")
+        projectPath.set(sceneDirectory.file("Main.metaspatial"))
+        outputPath.set(sceneDirectory)
       }
     }
   }
