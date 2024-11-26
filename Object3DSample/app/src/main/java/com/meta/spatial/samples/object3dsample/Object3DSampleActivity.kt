@@ -23,8 +23,8 @@ import com.meta.spatial.core.Vector3
 import com.meta.spatial.physics.Physics
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.physics.PhysicsMaterial
+import com.meta.spatial.physics.PhysicsOutOfBoundsSystem
 import com.meta.spatial.physics.PhysicsState
-import com.meta.spatial.physics.PhysicsWorldBounds
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.toolkit.Animated
@@ -60,10 +60,7 @@ class Object3DSampleActivity : AppSystemActivity() {
   private var skybox: Entity? = null
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf<SpatialFeature>(
-            PhysicsFeature(spatial, worldBounds = PhysicsWorldBounds(minY = -100.0f)),
-            VRFeature(this))
+    val features = mutableListOf<SpatialFeature>(PhysicsFeature(spatial), VRFeature(this))
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
     }
@@ -88,6 +85,9 @@ class Object3DSampleActivity : AppSystemActivity() {
       environmentMesh?.defaultShaderOverride = SceneMaterial.UNLIT_SHADER
       environmentEntity?.setComponent(environmentMesh!!)
     }
+    // Add a system to remove objects that fall out of bounds
+    systemManager.registerSystem(
+        PhysicsOutOfBoundsSystem(spatial).apply { setBounds(minY = -100.0f) })
   }
 
   override fun onSceneReady() {

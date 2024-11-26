@@ -26,7 +26,7 @@ import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.mruk.MRUKRoom
 import com.meta.spatial.mruk.MRUKSceneEventListener
 import com.meta.spatial.physics.PhysicsFeature
-import com.meta.spatial.physics.PhysicsWorldBounds
+import com.meta.spatial.physics.PhysicsOutOfBoundsSystem
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.PanelRegistration
@@ -51,11 +51,7 @@ class MixedRealitySampleActivity : AppSystemActivity() {
 
   override fun registerFeatures(): List<SpatialFeature> {
     mrukFeature = MRUKFeature(this, systemManager)
-    val features =
-        mutableListOf(
-            PhysicsFeature(spatial, worldBounds = PhysicsWorldBounds(minY = -100.0f)),
-            VRFeature(this),
-            mrukFeature)
+    val features = mutableListOf(PhysicsFeature(spatial), VRFeature(this), mrukFeature)
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
     }
@@ -65,6 +61,9 @@ class MixedRealitySampleActivity : AppSystemActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
+    // Add a system to remove objects that fall 100 meters below the floor
+    systemManager.registerSystem(
+        PhysicsOutOfBoundsSystem(spatial).apply { setBounds(minY = -100.0f) })
     systemManager.registerSystem(UiPanelUpdateSystem())
 
     // NOTE: Here a material could be set as well to visualize the walls, ceiling, etc
