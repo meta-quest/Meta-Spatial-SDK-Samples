@@ -41,8 +41,8 @@ android {
         minSdk = 29
         //noinspection ExpiredTargetSdkVersion
         targetSdk = 32
-        versionCode = 14
-        versionName = "0.0.13"
+        versionCode = 15
+        versionName = "0.0.14-rc"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
