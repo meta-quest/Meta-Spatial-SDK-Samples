@@ -28,7 +28,7 @@ import timber.log.Timber
 class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
 
   companion object {
-    const val MAX_OPEN_MEDIA = 5
+    const val MAX_OPEN_MEDIA = 3
   }
 
   // Dependencies
