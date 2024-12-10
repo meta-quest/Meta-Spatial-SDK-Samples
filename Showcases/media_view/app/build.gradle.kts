@@ -119,6 +119,7 @@ android {
         signingConfig = signingConfigs.getByName("release")
       }
     }
+<<<<<<< HEAD
   }
   kotlinOptions { jvmTarget = "1.8" }
   buildFeatures {
@@ -134,6 +135,16 @@ android {
   }
   // Allow references to generated code (Hilt)
   kapt { correctErrorTypes = true }
+=======
+    composeOptions { kotlinCompilerExtensionVersion = "1.5.15" }
+    packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    // Allow references to generated code (Hilt)
+    kapt { correctErrorTypes = true }
+>>>>>>> 6db6fda (build(media_view): update compatibility to android studio 2024.2.1 Patch 3)
 }
 
 dependencies {
