@@ -30,7 +30,7 @@ entities:
         com.meta.spatial.toolkit.Grabbable:
           {}
         com.meta.spatial.toolkit.Panel:
-          panel: "@integer/panel_id_gallery_activity"
+          panel: "@integer/1"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
         com.meta.spatial.toolkit.Visible:
@@ -52,7 +52,7 @@ entities:
             - 0
             - 0
         com.meta.spatial.toolkit.Panel:
-          panel: "@integer/panel_id_media_filter_activity"
+          panel: "@integer/3"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
         com.meta.spatial.toolkit.Visible:
@@ -74,7 +74,7 @@ entities:
             - 0.270000011
             - 0
         com.meta.spatial.toolkit.Panel:
-          panel: "@integer/panel_id_gallery_menu"
+          panel: "@integer/2"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: galleryMenu
@@ -98,7 +98,7 @@ entities:
           once: false
           zOffset: 0.69999999999999996
         com.meta.spatial.toolkit.Panel:
-          panel: "@integer/panel_id_privacy_policy"
+          panel: "@integer/5"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
         com.meta.spatial.toolkit.Visible:
