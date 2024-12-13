@@ -2,7 +2,6 @@
   ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
   -->
 <resources>
-    <string name="app_name">Media View</string>
     <!-- General -->
     <string name="default_error_title">Woops something went wrong.</string>
     <string name="default_error_description">Please try again later.</string>
