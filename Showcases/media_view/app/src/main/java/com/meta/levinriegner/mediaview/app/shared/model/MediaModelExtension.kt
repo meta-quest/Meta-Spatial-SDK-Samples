@@ -19,18 +19,12 @@ import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneMesh
 import com.meta.spatial.runtime.SceneTexture
 import kotlin.math.min
-import timber.log.Timber
 
 private const val PIXELS_TO_METERS = 0.0254f / 100f
 private const val defaultTextureDp = 1280
 private const val maxResolutionInPx = 20 * 1000 * 1000 // 20M, exploratory value
 
 private const val mediaPanelSpacingOffsetDp = 0
-
-// Prefixes must range between 0 and 20 and be followed by a 7 digit id to form the panelId
-private const val mediaPanelIdPrefix = 10
-private const val mediaMenuPanelIdPrefix = 11
-private const val immersiveMenuPanelIdPrefix = 11
 
 private fun normalizeForMaxResolution(width: Int, height: Int): Pair<Int, Int> {
   val currentResolution = width * height
@@ -79,43 +73,6 @@ fun MediaModel.textureWidthAndHeight(): Pair<Int, Int> {
       dpToPx(
           (defaultTextureDp * (panelHeight / panelWidth)).toInt() +
               dpToPx(mediaPanelSpacingOffsetDp)))
-}
-
-fun MediaModel.panelId(): Int {
-  return MediaModel.panelId(id)
-}
-
-fun MediaModel.Companion.panelId(mediaId: Long): Int {
-  var mediaIdStr = mediaId.toString()
-  if (mediaIdStr.length > 7) {
-    Timber.i("Media ID is too long: $mediaIdStr, trimming to first 7 characters")
-    mediaIdStr = mediaIdStr.substring(0, 7)
-  } else {
-    mediaIdStr = mediaIdStr.padStart(7, '0')
-  }
-  return (mediaPanelIdPrefix.toString() + mediaIdStr).toInt()
-}
-
-fun MediaModel.menuPanelId(): Int {
-  var mediaIdStr = id.toString()
-  if (mediaIdStr.length > 7) {
-    Timber.i("Media ID is too long: $mediaIdStr, trimming to first 7 characters")
-    mediaIdStr = mediaIdStr.substring(0, 7)
-  } else {
-    mediaIdStr = mediaIdStr.padStart(7, '0')
-  }
-  return (mediaMenuPanelIdPrefix.toString() + mediaIdStr).toInt()
-}
-
-fun MediaModel.immersiveMenuPanelId(): Int {
-  var mediaIdStr = id.toString()
-  if (mediaIdStr.length > 7) {
-    Timber.i("Media ID is too long: $mediaIdStr, trimming to first 7 characters")
-    mediaIdStr = mediaIdStr.substring(0, 7)
-  } else {
-    mediaIdStr = mediaIdStr.padStart(7, '0')
-  }
-  return (immersiveMenuPanelIdPrefix.toString() + mediaIdStr).toInt()
 }
 
 fun MediaModel.minimizedPanelConfigOptions(): PanelConfigOptions {
@@ -279,6 +236,7 @@ fun MediaModel.maximizedBottomCenterPanelVector3(): Vector3 {
         IMAGE_2D,
         VIDEO_2D,
         VIDEO_SPATIAL -> -panelHeight / 2 - immersiveMenuHeight / 2 - mediumSpacing
+
         IMAGE_PANORAMA -> -panelHeight - immersiveMenuHeight / 2 - mediumSpacing
         IMAGE_360,
         VIDEO_360,

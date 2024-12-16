@@ -64,9 +64,10 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     // Disable Locomotion
     systemManager.unregisterSystem<LocomotionSystem>()
     // Register elements
-    loadGLXF()
     registerComponents()
     registerSystems()
+    // Inflate scene
+    loadGLXF()
   }
 
   override fun onSceneReady() {
@@ -98,7 +99,6 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
   }
 
   // region PanelDelegate
-
   override fun openMediaPanel(mediaModel: MediaModel) {
     Timber.i("Opening media with id: ${mediaModel.id}")
     if (_openMedia.value.containsKey(mediaModel.id)) {
@@ -113,6 +113,8 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     // Register Panel
     registerPanel(panelManager.providePlayerPanelRegistration(mediaModel))
     registerPanel(panelManager.providePlayerMenuRegistration(mediaModel))
+    registerPanel(panelManager.provideImmersiveMenuRegistration(mediaModel))
+
     // Create Entity
     val playerEntity = panelManager.createPlayerEntity(mediaModel)
     panelManager.createPlayerMenuEntity(mediaModel, playerEntity)

@@ -24,6 +24,7 @@ import com.meta.levinriegner.mediaview.app.upload.js.DriveJavaScriptInterface
 import com.meta.levinriegner.mediaview.app.upload.js.DriveMedia
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import timber.log.Timber
 
 @AndroidEntryPoint
@@ -195,20 +196,22 @@ class UploadActivity : AppCompatActivity() {
 
   private fun setDownloadProgress(fileName: String?, progress: Pair<Int, Int>?) = runOnUiThread {
     if (progress != null) {
+      val escapedFileName = JSONObject.quote(fileName ?: "")
+
       webView.evaluateJavascript(
           """
-            (function() {
-                document.getElementById("app-text").innerText = "${if (fileName != null) "Downloading $fileName..." else "Downloading..."}";
-                document.getElementById("progress-bar").value = ${progress.first};
-                document.getElementById("progress-bar").max = ${progress.second};
-            })()
+            (function(fileName, progressValue, progressMax) {
+                document.getElementById("app-text").innerText = fileName ? "Downloading " + fileName + "..." : "Downloading...";
+                document.getElementById("progress-bar").value = progressValue;
+                document.getElementById("progress-bar").max = progressMax;
+            })($escapedFileName, ${progress.first}, ${progress.second})
         """
               .trimIndent()) {}
     } else {
       webView.evaluateJavascript(
           """
             (function() {
-                document.getElementById("app-text").innerText ="Loading, please wait...";
+                document.getElementById("app-text").innerText = "Loading, please wait...";
                 document.getElementById("progress-bar").removeAttribute("value");
                 document.getElementById("progress-bar").removeAttribute("max");
             })()

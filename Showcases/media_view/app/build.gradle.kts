@@ -41,8 +41,8 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 14
-    versionName = "0.0.13"
+    versionCode = 16
+    versionName = "0.0.14"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }
@@ -140,15 +140,15 @@ dependencies {
   // Android presentation
   implementation("androidx.core:core-ktx:1.13.1")
   implementation("com.google.android.material:material:1.12.0")
-  implementation("androidx.navigation:navigation-compose:2.7.7")
-  implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
-  implementation("androidx.activity:activity-compose:1.9.0")
-  implementation(platform("androidx.compose:compose-bom:2024.06.00"))
+  implementation("androidx.navigation:navigation-compose:2.8.4")
+  implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
+  implementation("androidx.activity:activity-compose:1.9.3")
+  implementation(platform("androidx.compose:compose-bom:2024.11.00"))
   implementation("androidx.compose.ui:ui")
   implementation("androidx.compose.ui:ui-graphics")
   implementation("androidx.compose.ui:ui-tooling-preview")
   implementation("androidx.compose.material3:material3")
-  implementation("androidx.compose.material:material-icons-extended:1.7.2")
+  implementation("androidx.compose.material:material-icons-extended:1.7.5")
   implementation("io.coil-kt:coil-compose:2.7.0")
   implementation("io.coil-kt:coil-video:2.7.0")
 
@@ -181,9 +181,9 @@ dependencies {
   implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:$metaSpatialSdkVersion")
 
   // Meta Spatial SDK dependencies
-  implementation("com.squareup.okhttp3:okhttp:4.11.0")
+  implementation("com.squareup.okhttp3:okhttp:4.12.0")
   implementation("com.facebook.soloader:soloader:0.11.0")
-  androidTestImplementation(platform("androidx.compose:compose-bom:2024.06.00"))
+  androidTestImplementation(platform("androidx.compose:compose-bom:2024.11.00"))
   androidTestImplementation("androidx.compose.ui:ui-test-junit4")
   debugImplementation("androidx.compose.ui:ui-tooling")
   debugImplementation("androidx.compose.ui:ui-test-manifest")
@@ -193,8 +193,7 @@ dependencies {
   implementation("com.datadoghq:dd-sdk-android-logs:2.14.0")
 }
 
-val projectDir = layout.projectDirectory
-val sceneDirectory = projectDir.dir("src/main/assets/scenes")
+val sceneProjectPath = "app/src/main/assets/scenes"
 
 spatial {
   allowUsageDataCollection.set(true)
@@ -203,8 +202,8 @@ spatial {
     // cliPath.set("/Applications/Meta Spatial Editor.app/Contents/MacOS/CLI")
     exportItems {
       item {
-        projectPath.set(sceneDirectory.file("Main.metaspatial"))
-        outputPath.set(sceneDirectory)
+        projectPath.set(File("$sceneProjectPath/Main.metaspatial"))
+        outputPath.set(File("app/src/main/assets/scenes"))
       }
     }
   }
