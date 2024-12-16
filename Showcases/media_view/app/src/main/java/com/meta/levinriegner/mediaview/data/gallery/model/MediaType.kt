@@ -22,7 +22,7 @@ enum class MediaType {
     const val raybanVideoHeight = 2064
 
     // Panorama
-    const val panoramaAspectRatioMin = 3.0f
+    const val panoramaAspectRatioMin = 2.75f
 
     // 360
     const val media360ExactAspectRatio = 2f
