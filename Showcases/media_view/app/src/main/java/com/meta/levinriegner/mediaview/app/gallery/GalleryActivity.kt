@@ -68,6 +68,23 @@ class GalleryActivity : ComponentActivity() {
                 samplesViewModel.checkNewSamples()
             }
         }
+        // Refresh media as new samples are downloaded
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                var previousState: UiSamplesState? = null
+                samplesViewModel.state.collect { state ->
+                    Timber.i("Samples state: $state")
+                    if (state is UiSamplesState.DownloadingSamples && previousState is UiSamplesState.DownloadingSamples) {
+                        if (state.current > (previousState as UiSamplesState.DownloadingSamples).current) {
+                            if (viewModel.filter.value == MediaFilter.SAMPLE_MEDIA) {
+                                viewModel.loadMedia()
+                            }
+                        }
+                    }
+                    previousState = state
+                }
+            }
+        }
     }
 
     private fun buildUi() {

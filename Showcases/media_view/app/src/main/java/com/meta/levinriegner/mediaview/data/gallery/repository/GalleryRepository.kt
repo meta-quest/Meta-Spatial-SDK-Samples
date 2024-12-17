@@ -51,4 +51,7 @@ constructor(
 
     suspend fun deleteSampleMedia(exceptRelativePath: String? = null) =
         withContext(dispatcher) { galleryService.deleteSampleMedia(exceptRelativePath) }
+
+    suspend fun deleteSampleMediaSubFolder(relativePath: String) =
+        withContext(dispatcher) { galleryService.deleteSampleMediaSubFolder(relativePath) }
 }

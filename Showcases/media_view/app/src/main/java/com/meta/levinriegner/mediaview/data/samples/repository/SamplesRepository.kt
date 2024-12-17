@@ -1,12 +1,16 @@
+// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+
 package com.meta.levinriegner.mediaview.data.samples.repository
 
 import com.meta.levinriegner.mediaview.data.di.IoDispatcher
 import com.meta.levinriegner.mediaview.data.samples.model.SamplesList
 import com.meta.levinriegner.mediaview.data.samples.service.DriveSamplesService
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 import timber.log.Timber
-import java.io.FileOutputStream
+import java.io.InputStream
 import javax.inject.Inject
 
 class SamplesRepository @Inject constructor(
@@ -18,10 +22,10 @@ class SamplesRepository @Inject constructor(
         driveSamplesService.getSamplesList()
     }
 
-    suspend fun downloadFile(
+    fun downloadFile(
         fileId: String,
-    ) = withContext(dispatcher) {
+    ): Flow<InputStream> {
         Timber.i("Downloading file: $fileId")
-        driveSamplesService.downloadFile(fileId)
+        return driveSamplesService.downloadFile(fileId).flowOn(dispatcher)
     }
 }

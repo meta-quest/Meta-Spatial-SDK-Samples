@@ -59,6 +59,7 @@
     <string name="privacy_policy_dialog_privacy">Privacy Policy</string>
     <string name="privacy_policy_accept_button">Continue</string>
     <!-- Sample Media -->
+    <string name="sample_media_no_internet">No internet connection available</string>
     <string name="sample_media_loading">Loading sample media, please wait…</string>
     <string name="sample_media_available">New sample media available for download</string>
     <string name="sample_media_downloading">Downloading samples (%1$d/%2$d), please wait…</string>

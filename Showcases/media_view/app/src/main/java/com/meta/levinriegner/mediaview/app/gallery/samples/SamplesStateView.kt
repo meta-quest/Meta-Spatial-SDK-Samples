@@ -52,6 +52,39 @@ fun SamplesStateView(
                 Box(Modifier)
             }
 
+            is UiSamplesState.NoInternet -> {
+                Row(
+                    modifier = Modifier.padding(Dimens.medium),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = stringResource(R.string.sample_media_no_internet),
+                        modifier = Modifier.weight(1f),
+                        color = AppColor.White,
+                    )
+                    Box(Modifier.padding(Dimens.medium))
+                    OutlinedButton(
+                        colors = ButtonDefaults.buttonColors(
+                            contentColor = AppColor.White,
+                            containerColor = Color.Transparent,
+                        ),
+                        onClick = onRefresh,
+                    ) {
+                        Text(
+                            text = stringResource(R.string.retry),
+                            color = AppColor.White,
+                        )
+                    }
+                    Box(Modifier.padding(Dimens.small))
+                    TextButton(onClick = { onDismiss() }) {
+                        Text(
+                            text = stringResource(R.string.dismiss),
+                            color = AppColor.White,
+                        )
+                    }
+                }
+            }
+
             is UiSamplesState.Loading -> {
                 Row(
                     modifier = Modifier.padding(Dimens.medium),

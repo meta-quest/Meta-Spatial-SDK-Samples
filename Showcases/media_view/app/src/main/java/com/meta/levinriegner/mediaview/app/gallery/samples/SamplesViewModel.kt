@@ -3,27 +3,31 @@
 package com.meta.levinriegner.mediaview.app.gallery.samples
 
 import android.content.ContentValues
-import android.media.MediaMetadataRetriever
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.meta.levinriegner.mediaview.app.shared.InternetAvailability
 import com.meta.levinriegner.mediaview.data.gallery.model.StorageType
 import com.meta.levinriegner.mediaview.data.gallery.repository.GalleryRepository
 import com.meta.levinriegner.mediaview.data.samples.model.SamplesList
 import com.meta.levinriegner.mediaview.data.samples.repository.SamplesRepository
 import com.meta.levinriegner.mediaview.data.user.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectIndexed
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
+import kotlin.random.Random
 
 @HiltViewModel
 class SamplesViewModel @Inject constructor(
     private val samplesRepository: SamplesRepository,
     private val userRepository: UserRepository,
     private val galleryRepository: GalleryRepository,
+    private val internetAvailability: InternetAvailability,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<UiSamplesState>(UiSamplesState.Idle)
@@ -33,22 +37,25 @@ class SamplesViewModel @Inject constructor(
         Timber.i("Checking for new media samples")
         _state.value = UiSamplesState.Loading
         viewModelScope.launch {
+            if (!internetAvailability.isInternetAvailable()) {
+                Timber.w("No internet connection")
+                delay(1000L) // Delay to feel like we're trying to get online
+                _state.value = UiSamplesState.NoInternet
+                return@launch
+            }
             try {
                 val samples = samplesRepository.getSamplesList()
-                Timber.i("Remote samples version: ${samples.version}")
                 val currentVersion = userRepository.getSampleMediaVersion()
-                Timber.i("Local samples version: $currentVersion")
+                Timber.i("Samples versions: remote=v${samples.version}, local=v$currentVersion")
                 if (currentVersion == null || currentVersion == 0) {
                     downloadSamples(samples)
                 } else if ((samples.version ?: 0) > currentVersion) {
-                    Timber.i("New samples available")
                     _state.value = UiSamplesState.NewSamplesAvailable(samples)
                 } else {
-                    Timber.i("No new samples available")
                     _state.value = UiSamplesState.Idle
                 }
             } catch (e: Exception) {
-                Timber.w(e, "Failed to get samples list")
+                Timber.w(e, "Failed to get samples list: ${e.message}")
                 _state.value = UiSamplesState.DownloadError(e.message ?: "Unknown error")
             }
         }
@@ -61,10 +68,14 @@ class SamplesViewModel @Inject constructor(
             _state.value = UiSamplesState.Idle
             return
         }
+        if (!internetAvailability.isInternetAvailable()) {
+            Timber.w("No internet connection")
+            _state.value = UiSamplesState.NoInternet
+            return
+        }
         // Download files
         val relativePath = samplesDirectory(samples.version ?: 0)
         viewModelScope.launch {
-            var failedDownloadCount = 0
             for (i in 0..<samples.items.size) {
                 val item = samples.items[i]
                 _state.value = UiSamplesState.DownloadingSamples(i + 1, samples.items.size)
@@ -74,8 +85,7 @@ class SamplesViewModel @Inject constructor(
                     if (item.driveId == null) {
                         throw IllegalStateException("Sample media has no drive ID: ${item.name}")
                     }
-                    val inputStream = samplesRepository.downloadFile(item.driveId)
-                    Timber.i("Saving sample media: ${item.name}")
+                    // Create file
                     mediaFile = galleryRepository.createMediaFile(
                         displayFileName = item.name,
                         mimeType = null,
@@ -83,29 +93,29 @@ class SamplesViewModel @Inject constructor(
                         storageType = StorageType.Sample,
                     )
                     mediaFile.second?.let { uri ->
-                        galleryRepository.writeMediaFile(uri) { outputStream ->
-                            inputStream.use { inputStream -> inputStream.copyTo(outputStream) }
-                        }
+                        samplesRepository.downloadFile(item.driveId)
+                            .collectIndexed { index, inputStream ->
+                                Timber.d("Saving chunk $index")
+                                galleryRepository.writeMediaFile(uri) { outputStream ->
+                                    inputStream.use { inputStream -> inputStream.copyTo(outputStream) }
+                                }
+                            }
                         galleryRepository.setMediaFileReady(mediaFile.first, uri)
                     } ?: throw IllegalStateException("Failed to create media file (null URI)")
                     Timber.i("Success saving sample media: ${item.name}")
                 } catch (e: Exception) {
-                    Timber.w(
-                        e,
-                        "Failed to download sample media: ${item.name}. Failed count: $failedDownloadCount"
-                    )
-                    failedDownloadCount++
-                    // Maybe clear pending file
+                    Timber.w(e, "Failed to download sample media: ${item.name}.")
+                    // Clean up
                     mediaFile?.second?.let {
                         galleryRepository.setMediaFileDeleted(it)
                     }
-                    // Abort if 1/3 of downloads fail
-                    if (failedDownloadCount >= samples.items.size / 3) {
-                        _state.value =
-                            UiSamplesState.DownloadError(e.message ?: "Failed to download samples")
-                        return@launch
-                    }
+                    galleryRepository.deleteSampleMediaSubFolder(relativePath)
+                    // Error and stop
+                    _state.value =
+                        UiSamplesState.DownloadError(e.message ?: "Failed to download samples")
+                    return@launch
                 }
+                delay(Random.nextLong(1000L)) // Be nice to the server
             }
             // Delete previous media
             Timber.i("Deleting previous sample media")

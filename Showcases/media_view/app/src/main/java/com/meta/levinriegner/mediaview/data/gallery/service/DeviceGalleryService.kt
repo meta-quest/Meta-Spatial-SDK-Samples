@@ -143,6 +143,19 @@ constructor(
         }
     }
 
+    fun deleteSampleMediaSubFolder(relativePath: String) {
+        val file = File(sampleMediaFolderPath())
+        if (file.exists()) {
+            file.listFiles()?.forEach {
+                if (it.isDirectory && it.name == relativePath) {
+                    it.deleteRecursively()
+                }
+            }
+        } else {
+            Timber.i("No sample folder to delete")
+        }
+    }
+
     companion object {
         private const val DUMP_CURSOR_TO_CSV = false
         private const val SAVED_MEDIA_FOLDER_NAME = "Media Viewer"
