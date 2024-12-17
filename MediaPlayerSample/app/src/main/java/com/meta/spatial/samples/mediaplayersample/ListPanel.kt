@@ -62,15 +62,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.meta.spatial.toolkit.SpatialActivityManager
 import kotlinx.coroutines.launch
-
-data class MovieResponse(val results: List<Movie>)
 
 data class Movie(
     val id: Int,
@@ -79,8 +76,6 @@ data class Movie(
     val youtubeId: String = "",
     val overview: String = "",
 )
-
-data class VideoResponse(val id: Int, val results: List<Video>)
 
 data class Video(val key: String, val type: String, val official: Boolean, val site: String)
 

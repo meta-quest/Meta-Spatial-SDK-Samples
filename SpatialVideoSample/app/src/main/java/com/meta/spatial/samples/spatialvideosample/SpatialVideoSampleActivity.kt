@@ -178,6 +178,11 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
     loadGLXF().invokeOnCompletion {
       val composition = glXFManager.getGLXFInfo("example_key_name")
       environmentGLXF = composition.getNodeByName("MediaRoom").entity
+      environmentGLXF?.let {
+        val environmentMesh = it.getComponent<Mesh>()
+        it.setComponent(
+            environmentMesh.apply { defaultShaderOverride = SceneMaterial.UNLIT_SHADER })
+      }
       setMrMode(scene.isSystemPassthroughEnabled())
     }
   }
@@ -327,8 +332,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
         // want to disable left hand pinch so we can drag the panel around with hands
         clickButtons =
             (ButtonBits.ButtonA or ButtonBits.ButtonTriggerL or ButtonBits.ButtonTriggerR)
-        effectShader = "data/shaders/effect/copy.frag"
-        forceSceneTexture = true
+        // force efficient copy of video texture
+        mips = 1
         sceneMeshCreator = { texture: SceneTexture ->
           val halfHeight = height / 2f
           val halfWidth = width / 2f

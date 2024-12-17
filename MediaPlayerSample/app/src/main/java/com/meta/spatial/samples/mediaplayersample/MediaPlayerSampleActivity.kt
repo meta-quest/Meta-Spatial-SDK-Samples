@@ -21,6 +21,8 @@ import android.view.animation.DecelerateInterpolator
 import android.webkit.WebView
 import android.widget.VideoView
 import com.meta.spatial.castinputforward.CastInputForwardFeature
+import com.meta.spatial.compose.ComposeFeature
+import com.meta.spatial.compose.composePanel
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
@@ -186,7 +188,7 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
   }
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features = mutableListOf<SpatialFeature>(VRFeature(this))
+    val features = mutableListOf<SpatialFeature>(VRFeature(this), ComposeFeature())
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
     }
@@ -266,7 +268,6 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
           }
         },
         PanelRegistration(R.integer.mr_panel) {
-          activityClass = MRPanel::class.java
           config {
             fractionOfScreen = 0.15f
             height = .2f
@@ -274,7 +275,9 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
             layerConfig = LayerConfig()
             enableTransparent = true
             includeGlass = false
+            themeResourceId = R.style.ThemeTransparent
           }
+          composePanel { setContent { MRApp() } }
         })
   }
 

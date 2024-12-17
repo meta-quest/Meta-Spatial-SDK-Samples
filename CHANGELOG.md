@@ -2,6 +2,28 @@
 
 This format is roughly based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 0.5.3 - 2024-12-16
+
+### Added
+
+- The `meta-spatial-sdk-compose` package is now available, enabling View-based panels to render Jetpack Compose UI
+- Javadocs are now available for Maven Central released packages (starting with 0.5.3)
+- MRUK
+  - Added Scene Raycasting functionality (and a raycast demo in the MrukSample project)
+  - Optimized scene loading
+
+### Changed
+
+- None
+
+### Deprecated
+
+- None
+
+### Fixed
+
+- Hot reload is now more reliable (previously has issues with parallelization)
+
 ## 0.5.2 - 2024-11-14
 
 ### Added

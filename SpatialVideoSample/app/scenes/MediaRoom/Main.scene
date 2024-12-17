@@ -21,7 +21,7 @@ entities:
             - 0
             - 0
             - 0
-          rotation.format: 1
+          rotation.format: Quaternion
           scale:
             - 1
             - 1
@@ -40,7 +40,7 @@ entities:
             - 0
             - 0
             - 0
-          rotation.format: 1
+          rotation.format: Quaternion
           scale:
             - 1
             - 1
@@ -59,7 +59,7 @@ entities:
             - 0
             - 0
             - 0
-          rotation.format: 1
+          rotation.format: Quaternion
           scale:
             - 1
             - 1

@@ -86,14 +86,7 @@
     </activity>
     <activity
       android:name=".ListPanel"
-      android:theme="@style/Theme.Transparent"
-      android:allowEmbedded="true"
-      android:exported="false"
-    >
-    </activity>
-    <activity
-      android:name=".MRPanel"
-      android:theme="@style/Theme.Transparent"
+      android:theme="@style/ThemeTransparent"
       android:allowEmbedded="true"
       android:exported="false"
     >

@@ -7,9 +7,6 @@
 
 package com.meta.spatial.samples.mediaplayersample
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,10 +20,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Switch
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -36,7 +31,7 @@ import com.meta.spatial.toolkit.SpatialActivityManager
 
 @Composable
 fun MRApp() {
-  val (MRCheckedState, setMRCheckedState) = remember { mutableStateOf(false) }
+  val (mrCheckedState, setMRCheckedState) = remember { mutableStateOf(false) }
 
   Row(
       verticalAlignment = Alignment.CenterVertically,
@@ -46,17 +41,15 @@ fun MRApp() {
               .clip(RoundedCornerShape(10.dp))
               .background(Color(0xFF0f0f0f))
               .padding(8.dp)) {
-        MRSwitch(
-            MRCheckedState,
-            { state ->
-              setMRCheckedState(state)
-              SpatialActivityManager.executeOnVrActivity<MediaPlayerSampleActivity> { activity ->
-                activity.scene.enablePassthrough(state)
-                activity.scene.enableEnvironmentDepth(state)
+        MRSwitch(mrCheckedState) { state ->
+          setMRCheckedState(state)
+          SpatialActivityManager.executeOnVrActivity<MediaPlayerSampleActivity> { activity ->
+            activity.scene.enablePassthrough(state)
+            activity.scene.enableEnvironmentDepth(state)
 
-                activity.mrState = state
-              }
-            })
+            activity.mrState = state
+          }
+        }
       }
 }
 
@@ -72,12 +65,5 @@ fun MRSwitch(MRCheckedState: Boolean, onMR: (state: Boolean) -> Unit) {
       Spacer(modifier = Modifier.width(8.dp))
       Switch(checked = MRCheckedState, onCheckedChange = { onMR(it) })
     }
-  }
-}
-
-class MRPanel : ComponentActivity() {
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContent { MRApp() }
   }
 }

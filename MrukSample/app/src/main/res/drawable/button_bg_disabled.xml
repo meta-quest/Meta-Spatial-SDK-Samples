@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+  -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="#0F0F0F" />
+    <solid android:color="#ACABAB" />
     <corners android:radius="16dp" />
     <padding
     android:left="0dp"

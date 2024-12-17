@@ -16,8 +16,6 @@ import android.widget.Spinner
 import android.widget.TextView
 import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
-import com.meta.spatial.core.Pose
-import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.mruk.AnchorMeshSpawner
@@ -29,7 +27,6 @@ import com.meta.spatial.mruk.MRUKLabel
 import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.mruk.MRUKRoom
 import com.meta.spatial.mruk.MRUKSceneEventListener
-import com.meta.spatial.mruk.getHmd
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.runtime.NetworkedAssetLoader
@@ -45,25 +42,25 @@ import com.meta.spatial.vr.VRFeature
 import java.io.File
 
 // default activity
-class MrukSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
-  lateinit var mrukFeature: MRUKFeature
+class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
+  private lateinit var mrukFeature: MRUKFeature
   private lateinit var meshSpawner: AnchorMeshSpawner
   private lateinit var procMeshSpawner: AnchorProceduralMesh
   private var globalMeshSpawner: AnchorProceduralMesh? = null
-  public var currentRoomTextView: TextView? = null
+  private var currentRoomTextView: TextView? = null
 
   private var sceneDataLoaded = false
-  public var uiPositionInitialized = false
-  public var showUiPanel = false
+  private var showUiPanel = false
   private var showColliders = false
+
+  private val panelId = 2
 
   override fun registerFeatures(): List<SpatialFeature> {
     // Register the features that are needed for that sample. Note that in addition to the
     // MRUKFeature the PhysicsFeature gets enabled as well. This is needed for having the physics
     // colliders on the AnchorProceduralMesh working.
     mrukFeature = MRUKFeature(this, systemManager)
-    val features =
-        mutableListOf<SpatialFeature>(VRFeature(this), PhysicsFeature(spatial), mrukFeature)
+    val features = mutableListOf(VRFeature(this), PhysicsFeature(spatial), mrukFeature)
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
     }
@@ -74,9 +71,9 @@ class MrukSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
     super.onCreate(savedInstanceState)
 
     systemManager.findSystem<LocomotionSystem>().enableLocomotion(false)
-    systemManager.registerSystem(UIPositionSystem(this))
-    systemManager.registerSystem(MrukInputSystem(this))
-    systemManager.registerSystem(UpdateRoomSystem(this))
+    systemManager.registerSystem(UIPositionSystem(::setUIPanelVisibility))
+    systemManager.registerSystem(MrukInputSystem(::toggleUiPanelVisibility))
+    systemManager.registerSystem(UpdateRoomSystem(mrukFeature, ::currentRoomTextView))
 
     scene.enablePassthrough(true)
 
@@ -217,14 +214,7 @@ class MrukSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
         environmentIntensity = 0.3f)
 
     Entity.createPanelEntity(
-        R.integer.ui_mruk_id,
-        R.layout.ui_mruk,
-        Transform.build {
-          move(0.0f, 1.0f, -2.0f)
-          rotateY(180.0f)
-        },
-        Visible(showUiPanel),
-        Grabbable())
+        panelId, R.layout.ui_anchor_mesh_menu, Transform(), Visible(showUiPanel), Grabbable())
   }
 
   override fun onDestroy() {
@@ -274,25 +264,20 @@ class MrukSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
 
   override fun onRecenter() {
     super.onRecenter()
-    updateUiPanelPosition()
+    recenterElementInView(getHmd(systemManager), Entity(panelId))
   }
 
-  public fun updateUiPanelPosition(): Boolean {
-    val head = getHmd(systemManager) ?: return false
-    val headPose = head.tryGetComponent<Transform>()?.transform
-    if (headPose == null || headPose == Pose()) {
-      return false
+  fun toggleUiPanelVisibility() {
+    setUIPanelVisibility(!showUiPanel)
+  }
+
+  private fun setUIPanelVisibility(visible: Boolean) {
+    showUiPanel = visible
+    val panel = Entity(panelId)
+    panel.setComponent(Visible(showUiPanel))
+    if (showUiPanel) {
+      recenterElementInView(getHmd(systemManager), panel)
     }
-    val forward = headPose.q * Vector3(0f, 0f, 1f)
-    forward.y = 0f
-    headPose.q = Quaternion.lookRotation(forward)
-    val uiEntity = Entity(R.integer.ui_mruk_id)
-    // Rotate it to face away from the hmd
-    headPose.q *= Quaternion(-20f, 180f, 0f)
-    // Bring it away from the hmd
-    headPose.t -= headPose.q * Vector3(0f, 0f, 0.8f)
-    uiEntity.setComponent(Transform(headPose))
-    return true
   }
 
   private fun toggleGlobalMesh() {
@@ -315,7 +300,7 @@ class MrukSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
 
   override fun registerPanels(): List<PanelRegistration> {
     return listOf(
-        PanelRegistration(R.layout.ui_mruk) {
+        PanelRegistration(R.layout.ui_anchor_mesh_menu) {
           config {
             height = 0.5f
             width = 0.5f
@@ -363,12 +348,20 @@ class MrukSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
 
             val launchSceneCaptureButton = rootView?.findViewById<Button>(R.id.launch_scene_capture)
             launchSceneCaptureButton?.setOnClickListener { mrukFeature.requestSceneCapture() }
+
+            val closeSampleButton = rootView?.findViewById<Button>(R.id.close_sample)
+            closeSampleButton?.setOnClickListener {
+              returnTo2DActivity(
+                  this@MrukAnchorMeshSampleActivity,
+                  applicationContext,
+                  MrukSampleStartMenuActivity::class.java)
+            }
           }
         })
   }
 
   companion object {
-    const val TAG: String = "MrukSampleActivity"
+    const val TAG: String = "MrukAnchorMeshSample"
     const val PERMISSION_USE_SCENE: String = "com.oculus.permission.USE_SCENE"
     const val REQUEST_CODE_PERMISSION_USE_SCENE: Int = 1
   }

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+>
+
+  <TextView
+    android:id="@+id/mruk_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Raycast Sample"
+    android:textSize="30sp"
+    android:textStyle="bold"
+    android:gravity="center"
+  />
+
+  <TextView
+    android:id="@+id/mruk_sample_description"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="This sample showcases raycasting from your right controller to the scene. Use your captured scene or load an example from a json file.You can toggle between showing the first or all hits."
+    android:textSize="18sp"
+    android:gravity="start"
+  />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
+  >
+
+    <TextView
+      android:id="@+id/json_file_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="5dp"
+      android:text="Select JSON file:"
+    />
+
+    <Spinner
+      android:id="@+id/json_file_spinner"
+      android:layout_width="0dp"
+      android:layout_height="40dp"
+      android:layout_margin="5dp"
+      android:layout_weight="1"
+      android:background="@android:color/white"
+    />
+  </LinearLayout>
+
+  <Button
+    android:id="@+id/load_scene_from_json"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:text="Load scene from JSON"
+  />
+
+  <Button
+    android:id="@+id/launch_scene_capture"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:text="Launch scene capture"
+  />
+
+  <Button
+    android:id="@+id/load_scene_from_device"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:text="Load scene from device"
+  />
+
+  <Button
+    android:id="@+id/toggle_all_hits"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:text="Toggle All/Single Hits"
+  />
+
+  <Button
+    android:id="@+id/clear_scene"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:text="Clear scene"
+  />
+
+   <Button
+    android:id="@+id/close_sample"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:text="Close Sample"
+  />
+
+  <TextView
+    android:id="@+id/mruk_current_room"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text=""
+    android:textSize="24sp"
+    android:gravity="center"
+  />
+</LinearLayout>

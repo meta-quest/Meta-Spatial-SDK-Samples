@@ -7,24 +7,30 @@
 
 package com.meta.spatial.samples.mruksample
 
-import com.meta.spatial.core.Entity
+import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SystemBase
-import com.meta.spatial.toolkit.Visible
+import com.meta.spatial.toolkit.Transform
 
 class UIPositionSystem(
-    var mrukSampleActivity: MrukSampleActivity,
+    private val setUIPanelVisibility: (Boolean) -> Unit,
 ) : SystemBase() {
+
+  private var uiPositionInitialized = false
 
   override fun execute() {
     // We need to wait until the HMD pose is initialized before we can position the UI panel.
     // Keep trying until it succeeds.
-    if (!mrukSampleActivity.uiPositionInitialized) {
-      mrukSampleActivity.uiPositionInitialized = mrukSampleActivity.updateUiPanelPosition()
-      if (mrukSampleActivity.uiPositionInitialized) {
-        mrukSampleActivity.showUiPanel = true
-        val uiEntity = Entity(R.integer.ui_mruk_id)
-        uiEntity.setComponent(Visible(mrukSampleActivity.showUiPanel))
+    if (!uiPositionInitialized) {
+      if (isHDMPoseInitialized()) {
+        uiPositionInitialized = true
+        setUIPanelVisibility(true)
       }
     }
+  }
+
+  private fun isHDMPoseInitialized(): Boolean {
+    val head = getHmd(systemManager) ?: return false
+    val headPose = head.tryGetComponent<Transform>()?.transform
+    return !(headPose == null || headPose == Pose())
   }
 }

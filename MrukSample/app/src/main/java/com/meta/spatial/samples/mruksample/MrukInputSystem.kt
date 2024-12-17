@@ -7,18 +7,17 @@
 
 package com.meta.spatial.samples.mruksample
 
-import com.meta.spatial.core.Entity
+import android.util.Log
 import com.meta.spatial.core.Query
 import com.meta.spatial.core.SystemBase
 import com.meta.spatial.runtime.ButtonBits
 import com.meta.spatial.toolkit.AvatarBody
 import com.meta.spatial.toolkit.Controller
-import com.meta.spatial.toolkit.Visible
 
-class MrukInputSystem(var mrukSampleActivity: MrukSampleActivity) : SystemBase() {
+class MrukInputSystem(private val onMenuButtonPressed: () -> Unit) : SystemBase() {
 
   override fun execute() {
-    val leftController: Controller? =
+    val leftController =
         Query.where { has(AvatarBody.id) }
             .eval()
             .toMutableList()
@@ -27,15 +26,22 @@ class MrukInputSystem(var mrukSampleActivity: MrukSampleActivity) : SystemBase()
             .leftHand
             .tryGetComponent<Controller>()
 
-    if (leftController != null &&
-        (leftController.buttonState and leftController.changedButtons and ButtonBits.ButtonMenu) !=
-            0) {
-      mrukSampleActivity.showUiPanel = !mrukSampleActivity.showUiPanel
-      val uiEntity = Entity(R.integer.ui_mruk_id)
-      uiEntity.setComponent(Visible(mrukSampleActivity.showUiPanel))
-      if (mrukSampleActivity.showUiPanel) {
-        mrukSampleActivity.updateUiPanelPosition()
-      }
+    if (leftController != null && leftController.getPressed(ButtonBits.ButtonMenu)) {
+      onMenuButtonPressed()
+    }
+
+    if (leftController != null && leftController.getReleased(ButtonBits.ButtonMenu)) {
+      Log.i("MrukInputSystem", "Menu button released")
     }
   }
+}
+
+/** returns true if the button was pressed this frame */
+fun Controller.getPressed(button: Int): Boolean {
+  return (buttonState and changedButtons and button) != 0
+}
+
+/** returns true if the button was released this frame */
+fun Controller.getReleased(button: Int): Boolean {
+  return buttonState and button == 0 && changedButtons and button != 0
 }

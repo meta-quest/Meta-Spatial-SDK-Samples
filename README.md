@@ -66,36 +66,21 @@ The [Showcases](/Showcases) folder contains three apps which are deployed to the
 
 The documentation for Meta Spatial SDK can be found [here](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-overview).
 
-## 0.5.2 Updates
+## 0.5.3 Updates
 
 Our full update list can be found in our `CHANGELOG.md` file.
 
 ### Added
 
-- Added `Followable` Component and `FollowableSystem` which allows devs to easily tether objects together. See Animations Sample for an example use.
-- **Hot Reload**: Adds the ability to reload your `glb`/`gltf`/`glxf` and Meta Spatial Editor scenes while running your app via the Gradle plugin.
-  - Auto Export from Meta Spatial Editor: Saving in Spatial Editor automatically exports to the app and pushes to the headset for hot reload
-  - Two Reload Types:
-    - Delete all entities and recreate them: more stable but does not work for all apps
-    - Keep entities and reload meshes only: works for all apps, but less stable and does not reload components
-
-### Changed
-
-- `SamplerConfig`s now also apply to layers instead of just non-layer panels
-- Cylinder panels now have a transparent back applied to them (instead of just being invisible)
-- **Gradle Plugin**: References to string paths in plugin configuration are replaced with file references.
-  - **NOTE:** This requires changes to your `build.gradle.kts`. Example new usage can be found in the sample `build.gradle.kts` files.
-- **Gradle Plugin**: Telemetry now reports out simple usage statistics.
-
-### Deprecated
-
-- Deprecated `QuadLayerConfig`/`CylinderLayerConfig`/`EquirectLayerConfig`. Use `LayerConfig` instead for panel's layer configuration.
+- The `meta-spatial-sdk-compose` package is now available, enabling View-based panels to render Jetpack Compose UI
+- Javadocs are now available for Maven Central released packages (starting with 0.5.3)
+- MRUK
+  - Added Scene Raycasting functionality (and a raycast demo in the MrukSample project)
+  - Optimized scene loading
 
 ### Fixed
 
-- Fixed a crash when garbage collecting a panel.
-- Fixed a crash when updating the `Panel` component on an entity that already had a `Panel` component.
-- Crash fixed in Focus showcase
+- Hot reload is now more reliable (previously has issues with parallelization)
 
 ## Spatial SDK Gradle Plugin
 

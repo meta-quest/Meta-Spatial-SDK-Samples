@@ -7,22 +7,28 @@
 
 package com.meta.spatial.samples.mruksample
 
+import android.widget.TextView
 import com.meta.spatial.core.SystemBase
+import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKRoom
 
-class UpdateRoomSystem(var mrukSampleActivity: MrukSampleActivity) : SystemBase() {
+class UpdateRoomSystem(
+    private val mrukFeature: MRUKFeature,
+    private val getRoomTextView: () -> TextView?
+) : SystemBase() {
 
   private var prevRoom: MRUKRoom? = null
   private var prevRoomCount = -1
 
   override fun execute() {
-    val roomsCount = mrukSampleActivity.mrukFeature.rooms.size
-    val currentRoom = mrukSampleActivity.mrukFeature.getCurrentRoom()
+    val roomsCount = mrukFeature.rooms.size
+    val currentRoom = mrukFeature.getCurrentRoom()
     if (roomsCount != prevRoomCount || currentRoom != prevRoom) {
       prevRoom = currentRoom
       prevRoomCount = roomsCount
-      mrukSampleActivity.currentRoomTextView?.setText(
-          "Number of rooms: $roomsCount\nCurrent room: ${currentRoom?.anchor?.uuid ?: "None"}")
+      getRoomTextView()
+          ?.setText(
+              "Number of rooms: $roomsCount\nCurrent room: ${currentRoom?.anchor?.uuid ?: "None"}")
     }
   }
 }

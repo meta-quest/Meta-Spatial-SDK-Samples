@@ -79,6 +79,7 @@ dependencies {
 
   // Meta Spatial SDK libs
   implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-compose:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-ovrmetrics:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-physics:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")

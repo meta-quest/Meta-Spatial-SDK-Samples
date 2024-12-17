@@ -111,28 +111,67 @@ entities:
   com.meta.models.Primitive:
     - components:
         com.meta.components.Primitive:
-          mode: 4
+          mode: Triangles
           geometry: ref:Geometry1
           material: ref:plants_mat
       tag: Primitive2
     - components:
         com.meta.components.Primitive:
-          mode: 4
+          mode: Triangles
           geometry: ref:Geometry
           material: ref:mediaroom_mat
       tag: Primitive1
     - components:
         com.meta.components.Primitive:
-          mode: 4
+          mode: Triangles
           geometry: ref:Geometry2
           material: ref:evironment_mat
       tag: Primitive
+  com.meta.models.Sampler:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Sampler:
+          magFilter: Linear
+          minFilter: Linear
+          wrapS: Repeat
+          wrapT: Repeat
+      tag: Sampler
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Sampler:
+          magFilter: Linear
+          minFilter: Linear
+          wrapS: Repeat
+          wrapT: Repeat
+      tag: Sampler1
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Sampler:
+          magFilter: Linear
+          minFilter: Linear
+          wrapS: Repeat
+          wrapT: Repeat
+      tag: Sampler2
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Sampler:
+          magFilter: Linear
+          minFilter: Linear
+          wrapS: Repeat
+          wrapT: Repeat
+      tag: Sampler3
   com.meta.models.Texture:
     - uri: docref:textures/texture1.metaspatialtexture
-      tag: texture1
     - uri: docref:textures/texture3.metaspatialtexture
-      tag: texture3
     - uri: docref:textures/texture2.metaspatialtexture
       tag: texture2
+    - uri: docref:textures/NewTexture.metaspatialtexture
+      tag: NewTexture
+    - uri: docref:textures/NewTexture1.metaspatialtexture
+      tag: NewTexture1
 metadata:
   version: 1.0

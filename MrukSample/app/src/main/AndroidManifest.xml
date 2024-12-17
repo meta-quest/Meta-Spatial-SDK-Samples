@@ -81,18 +81,62 @@
     />
 
     <activity
-      android:name="com.meta.spatial.samples.mruksample.MrukSampleActivity"
+      android:name="com.meta.spatial.samples.mruksample.MrukSampleStartMenuActivity"
+      android:exported="true"
+      android:resizeableActivity="true"
+    >
+      <meta-data
+        android:name="com.oculus.vrshell.supports_free_resizing"
+        maxSizeX="1600"
+        maxSizeY="1000"
+        minSizeX="800"
+        minSizeY="500"
+        android:value="true"
+      />
+      <meta-data
+        android:name="com.oculus.vrshell.free_resizing_lock_aspect_ratio"
+        android:value="true"
+      />
+      <layout android:defaultHeight="550dp" android:defaultWidth="800dp" />
+      <meta-data
+        android:name="com.oculus.vrdesktop.control_bar_config"
+        android:value="{'show_title':false,'show_report_bug':false,'with_back_button':false, 'use_activity_label':false}"
+      />
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="com.oculus.intent.category.2D" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+
+    <activity
+      android:name="com.meta.spatial.samples.mruksample.MrukAnchorMeshSampleActivity"
       android:launchMode="singleTask"
       android:excludeFromRecents="false"
       android:screenOrientation="landscape"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
       android:exported="true"
     >
-      <!-- This filter lets the apk show up as a launchable icon. -->
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="com.oculus.intent.category.VR" />
-        <category android:name="android.intent.category.LAUNCHER" />
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name="com.meta.spatial.samples.mruksample.RaycastSampleActivity"
+      android:launchMode="singleTask"
+      android:excludeFromRecents="false"
+      android:screenOrientation="landscape"
+      android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
+      android:exported="true"
+    >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="com.oculus.intent.category.VR" />
+        <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </activity>
   </application>

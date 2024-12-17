@@ -10,7 +10,7 @@
     android:id="@+id/mruk_title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="MR Utility Kit Sample"
+    android:text="Anchor Mesh Sample"
     android:textSize="30sp"
     android:textStyle="bold"
     android:gravity="center"
@@ -93,6 +93,15 @@
     android:layout_margin="5dp"
     android:background="@android:color/white"
     android:text="Clear scene"
+  />
+
+  <Button
+    android:id="@+id/close_sample"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:text="Close Sample"
   />
 
   <TextView
