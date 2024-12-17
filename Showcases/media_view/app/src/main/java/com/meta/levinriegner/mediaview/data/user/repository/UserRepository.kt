@@ -11,19 +11,19 @@ constructor(
     private val userPreferencesService: UserPreferencesService,
 ) {
 
-  fun isSampleMediaSaved(): Boolean {
-    return userPreferencesService.isSampleMediaSaved()
-  }
+    fun isPrivacyPolicyAccepted(): Boolean {
+        return userPreferencesService.isPrivacyPolicyAccepted()
+    }
 
-  fun setSampleMediaSaved(saved: Boolean) {
-    userPreferencesService.setSampleMediaSaved(saved)
-  }
+    fun setPrivacyPolicyAccepted(accepted: Boolean) {
+        userPreferencesService.setPrivacyPolicyAccepted(accepted)
+    }
 
-  fun isPrivacyPolicyAccepted(): Boolean {
-    return userPreferencesService.isPrivacyPolicyAccepted()
-  }
+    fun getSampleMediaVersion(): Int? {
+        return userPreferencesService.getSampleMediaVersion()
+    }
 
-  fun setPrivacyPolicyAccepted(accepted: Boolean) {
-    userPreferencesService.setPrivacyPolicyAccepted(accepted)
-  }
+    fun setSampleMediaVersion(version: Int) {
+        userPreferencesService.setSampleMediaVersion(version)
+    }
 }

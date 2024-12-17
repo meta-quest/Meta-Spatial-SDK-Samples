@@ -44,6 +44,7 @@
     <string name="media_filter_360">360° Media</string>
     <string name="media_filter_spatial">Spatial Media</string>
     <string name="media_filter_3d_objects">3D Objects</string>
+    <string name="media_filter_samples">Sample Media</string>
     <!-- Upload -->
     <string name="upload_failed_error">Failed to upload file</string>
     <string name="download_wait_label">Downloading, please wait…</string>
@@ -57,6 +58,15 @@
     <string name="privacy_policy_dialog_terms">Terms of Service</string>
     <string name="privacy_policy_dialog_privacy">Privacy Policy</string>
     <string name="privacy_policy_accept_button">Continue</string>
+    <!-- Sample Media -->
+    <string name="sample_media_loading">Loading sample media, please wait…</string>
+    <string name="sample_media_available">New sample media available for download</string>
+    <string name="sample_media_downloading">Downloading samples (%1$d/%2$d), please wait…</string>
+    <string name="sample_media_error">Failed to download sample media. Reason:\n%1$s</string>
+    <string name="sample_media_success">Sample media downloaded successfully!</string>
+    <string name="retry">Retry</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="download">Download</string>
 
 
     // JW added - is this needed?

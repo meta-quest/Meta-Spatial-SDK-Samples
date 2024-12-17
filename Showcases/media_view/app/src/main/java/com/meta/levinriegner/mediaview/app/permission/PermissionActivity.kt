@@ -60,163 +60,153 @@ import timber.log.Timber
 @AndroidEntryPoint
 class PermissionActivity : ComponentActivity() {
 
-  private val viewModel: PermissionViewModel by viewModels()
+    private val viewModel: PermissionViewModel by viewModels()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    enableEdgeToEdge()
-    super.onCreate(savedInstanceState)
-    initObservers()
-    buildUi()
-  }
-
-  private fun initObservers() {
-    lifecycleScope.launch {
-      repeatOnLifecycle(Lifecycle.State.CREATED) {
-        viewModel.state.collect { state ->
-          when (state) {
-            PermissionState.CheckPermissionState -> {
-              checkStoragePermissionStatus()
-            }
-
-            PermissionState.RequestPermission -> {
-              // Do nothing, handle in UI
-            }
-
-            PermissionState.PermissionDenied -> {
-              // Do nothing, handle in UI
-            }
-
-            PermissionState.LoadingSampleAssets -> {
-              // Do nothing, handle in UI
-            }
-
-            PermissionState.SampleAssetsLoaded -> {
-              Timber.i("Navigating to Immersive Activity")
-              // Navigate to Immersive Activity
-              val immersiveIntent =
-                  Intent(this@PermissionActivity, ImmersiveActivity::class.java).apply {
-                    action = Intent.ACTION_MAIN
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                  }
-              startActivity(immersiveIntent)
-              finish()
-            }
-          }
-        }
-      }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
+        super.onCreate(savedInstanceState)
+        initObservers()
+        buildUi()
     }
-  }
 
-  private fun buildUi() {
-    setContent {
-      // Observables
-      val uiState = viewModel.state.collectAsState()
-      // UI
-      MediaViewTheme {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-          Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            when (uiState.value) {
-              PermissionState.CheckPermissionState -> {
-                LoadingView(modifier = Modifier.fillMaxSize())
-              }
+    private fun initObservers() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.state.collect { state ->
+                    when (state) {
+                        PermissionState.CheckPermissionState -> {
+                            checkStoragePermissionStatus()
+                        }
 
-              PermissionState.RequestPermission -> {
-                RequestPermissionRationale(
-                    modifier = Modifier.padding(innerPadding), denied = false) {
-                      requestStoragePermission()
+                        PermissionState.RequestPermission -> {
+                            // Do nothing, handle in UI
+                        }
+
+                        PermissionState.PermissionDenied -> {
+                            // Do nothing, handle in UI
+                        }
+
+                        PermissionState.PermissionAccepted -> {
+                            Timber.i("Navigating to Immersive Activity")
+                            // Navigate to Immersive Activity
+                            val immersiveIntent =
+                                Intent(
+                                    this@PermissionActivity,
+                                    ImmersiveActivity::class.java
+                                ).apply {
+                                    action = Intent.ACTION_MAIN
+                                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                }
+                            startActivity(immersiveIntent)
+                            finish()
+                        }
                     }
-              }
-
-              PermissionState.PermissionDenied -> {
-                RequestPermissionRationale(
-                    modifier = Modifier.padding(innerPadding), denied = true) {
-                      requestStoragePermission()
-                    }
-              }
-
-              PermissionState.LoadingSampleAssets -> {
-                Column(
-                    modifier = Modifier.fillMaxSize().padding(Dimens.medium),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                  Text(
-                      text = stringResource(id = R.string.storage_saving_samples_loading),
-                      textAlign = TextAlign.Center,
-                  )
-                  Spacer(modifier = Modifier.height(Dimens.large))
-                  LoadingView()
                 }
-              }
-
-              PermissionState.SampleAssetsLoaded -> {
-                // Do nothing, navigate to Immersive Activity
-                Box(Modifier)
-              }
             }
-          }
         }
-      }
     }
-  }
 
-  // # region Permission
-  private fun checkStoragePermissionStatus() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-      viewModel.onCheckPermissionResult(Environment.isExternalStorageManager())
-    } else {
-      viewModel.onCheckPermissionResult(
-          ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) ==
-              PackageManager.PERMISSION_GRANTED)
+    private fun buildUi() {
+        setContent {
+            // Observables
+            val uiState = viewModel.state.collectAsState()
+            // UI
+            MediaViewTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        when (uiState.value) {
+                            PermissionState.CheckPermissionState -> {
+                                LoadingView(modifier = Modifier.fillMaxSize())
+                            }
+
+                            PermissionState.RequestPermission -> {
+                                RequestPermissionRationale(
+                                    modifier = Modifier.padding(innerPadding), denied = false
+                                ) {
+                                    requestStoragePermission()
+                                }
+                            }
+
+                            PermissionState.PermissionDenied -> {
+                                RequestPermissionRationale(
+                                    modifier = Modifier.padding(innerPadding), denied = true
+                                ) {
+                                    requestStoragePermission()
+                                }
+                            }
+
+                            PermissionState.PermissionAccepted -> {
+                                // Do nothing, navigate to Immersive Activity
+                                Box(Modifier)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
 
-  private val storagePermissionActivityResult =
-      registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { _ ->
+    // # region Permission
+    private fun checkStoragePermissionStatus() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-          if (Environment.isExternalStorageManager()) {
-            viewModel.onStoragePermissionGranted()
-          } else {
-            viewModel.onStoragePermissionDenied()
-          }
+            viewModel.onCheckPermissionResult(Environment.isExternalStorageManager())
         } else {
-          // Ignore unrecognized activity result
-          Timber.w("Unexpected activity result for API < 30")
+            viewModel.onCheckPermissionResult(
+                ContextCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) ==
+                        PackageManager.PERMISSION_GRANTED
+            )
         }
-      }
-
-  private val storageRuntimePermissionResult =
-      registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
-        if (isGranted) {
-          viewModel.onStoragePermissionGranted()
-        } else {
-          viewModel.onStoragePermissionDenied()
-        }
-      }
-
-  private fun requestStoragePermission() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-      // Android API 30+ requires manual approval through system settings
-      try {
-        // Launch intent to open system settings
-        val intent =
-            Intent(
-                    Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
-                    Uri.fromParts("package", packageName, null),
-                )
-                .addCategory(Intent.CATEGORY_DEFAULT)
-        startActivity(intent)
-        storagePermissionActivityResult.launch(intent)
-      } catch (e: Exception) {
-        Timber.e(e, "Failed to launch permission request")
-        viewModel.onStoragePermissionDenied()
-      }
-    } else {
-      // Regular permission request for API < 30
-      storageRuntimePermissionResult.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
     }
-  }
-  // # endregion
+
+    private val storagePermissionActivityResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { _ ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (Environment.isExternalStorageManager()) {
+                    viewModel.onStoragePermissionGranted()
+                } else {
+                    viewModel.onStoragePermissionDenied()
+                }
+            } else {
+                // Ignore unrecognized activity result
+                Timber.w("Unexpected activity result for API < 30")
+            }
+        }
+
+    private val storageRuntimePermissionResult =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                viewModel.onStoragePermissionGranted()
+            } else {
+                viewModel.onStoragePermissionDenied()
+            }
+        }
+
+    private fun requestStoragePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // Android API 30+ requires manual approval through system settings
+            try {
+                // Launch intent to open system settings
+                val intent =
+                    Intent(
+                        Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+                        Uri.fromParts("package", packageName, null),
+                    )
+                        .addCategory(Intent.CATEGORY_DEFAULT)
+                startActivity(intent)
+                storagePermissionActivityResult.launch(intent)
+            } catch (e: Exception) {
+                Timber.e(e, "Failed to launch permission request")
+                viewModel.onStoragePermissionDenied()
+            }
+        } else {
+            // Regular permission request for API < 30
+            storageRuntimePermissionResult.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+    }
+    // # endregion
 
 }
 
@@ -226,50 +216,57 @@ private fun RequestPermissionRationale(
     denied: Boolean,
     onRequest: () -> Unit,
 ) {
-  Box(
-      contentAlignment = Alignment.Center,
-      modifier =
-          Modifier.size(300.dp, 250.dp)
-              .clip(RoundedCornerShape(40.dp))
-              .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(40.dp))
-              .background(
-                  Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd))),
-  ) {
-    Column(
-        modifier = modifier.fillMaxSize().padding(Dimens.medium),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier =
+        Modifier
+            .size(300.dp, 250.dp)
+            .clip(RoundedCornerShape(40.dp))
+            .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(40.dp))
+            .background(
+                Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd))
+            ),
     ) {
-      Text(
-          text = stringResource(id = R.string.storage_permission_rationale_title),
-          textAlign = TextAlign.Center,
-          style = MaterialTheme.typography.titleMedium)
-      Spacer(modifier = Modifier.height(Dimens.small))
-      Text(
-          text =
-              stringResource(
-                  id =
-                      if (denied) R.string.storage_permission_rationale_denied
-                      else R.string.storage_permission_rationale_description),
-          textAlign = TextAlign.Center,
-          style = MaterialTheme.typography.bodyMedium)
-      Spacer(modifier = Modifier.height(Dimens.large))
-      OutlinedButton(
-          onClick = onRequest,
-          colors =
-              ButtonDefaults.buttonColors(
-                  contentColor = AppColor.White,
-                  containerColor = Color.Transparent,
-              ),
-      ) {
-        Text(text = stringResource(id = R.string.storage_permission_rationale_button))
-      }
+        Column(
+            modifier = modifier
+                .fillMaxSize()
+                .padding(Dimens.medium),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                text = stringResource(id = R.string.storage_permission_rationale_title),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(modifier = Modifier.height(Dimens.small))
+            Text(
+                text =
+                stringResource(
+                    id =
+                    if (denied) R.string.storage_permission_rationale_denied
+                    else R.string.storage_permission_rationale_description
+                ),
+                textAlign = TextAlign.Center,
+                style = MaterialTheme.typography.bodyMedium
+            )
+            Spacer(modifier = Modifier.height(Dimens.large))
+            OutlinedButton(
+                onClick = onRequest,
+                colors =
+                ButtonDefaults.buttonColors(
+                    contentColor = AppColor.White,
+                    containerColor = Color.Transparent,
+                ),
+            ) {
+                Text(text = stringResource(id = R.string.storage_permission_rationale_button))
+            }
+        }
     }
-  }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview3() {
-  MediaViewTheme { Text("Android") }
+    MediaViewTheme { Text("Android") }
 }

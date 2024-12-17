@@ -22,6 +22,7 @@ fun MediaFilter.titleResId(): Int {
     MediaFilter.MEDIA_360 -> R.string.media_filter_360
     MediaFilter.MEDIA_SPATIAL -> R.string.media_filter_spatial
     MediaFilter.MEDIA_POV -> R.string.media_filter_rayban
+    MediaFilter.SAMPLE_MEDIA -> R.string.media_filter_samples
   }
 }
 
@@ -34,5 +35,6 @@ fun MediaFilter.iconResId(): Int {
     MediaFilter.MEDIA_360 -> R.drawable.icon_360media
     MediaFilter.MEDIA_SPATIAL -> R.drawable.icon_spatialmedia
     MediaFilter.MEDIA_POV -> R.drawable.icon_pov
+    MediaFilter.SAMPLE_MEDIA -> R.drawable.icon_sample_media
   }
 }
