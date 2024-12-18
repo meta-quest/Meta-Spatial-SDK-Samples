@@ -74,8 +74,14 @@ class GalleryActivity : ComponentActivity() {
                 var previousState: UiSamplesState? = null
                 samplesViewModel.state.collect { state ->
                     Timber.i("Samples state: $state")
-                    if (state is UiSamplesState.DownloadingSamples && previousState is UiSamplesState.DownloadingSamples) {
-                        if (state.current > (previousState as UiSamplesState.DownloadingSamples).current) {
+                    if (previousState is UiSamplesState.DownloadingSamples) {
+                        if (state is UiSamplesState.DownloadingSamples) {
+                            if (state.current > (previousState as UiSamplesState.DownloadingSamples).current) {
+                                if (viewModel.filter.value == MediaFilter.SAMPLE_MEDIA) {
+                                    viewModel.loadMedia()
+                                }
+                            }
+                        } else if (state is UiSamplesState.DownloadError) {
                             if (viewModel.filter.value == MediaFilter.SAMPLE_MEDIA) {
                                 viewModel.loadMedia()
                             }
