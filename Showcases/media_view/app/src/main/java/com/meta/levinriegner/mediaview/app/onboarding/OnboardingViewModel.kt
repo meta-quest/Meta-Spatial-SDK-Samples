@@ -29,9 +29,9 @@ constructor(
         val isCompleted = userRepository.isOnboardingCompleted()
 
         if (isCompleted) {
-            Timber.tag("Onboarding").i("Onboarding already completed")
+            Timber.i("Onboarding already completed")
         } else {
-            Timber.tag("Onboarding").i("Starting Onboarding for the first time")
+            Timber.i("Starting Onboarding for the first time")
             panelDelegate.toggleOnboarding(true)
             userRepository.setOnboardingCompleted()
         }
