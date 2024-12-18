@@ -24,9 +24,9 @@ entities:
             - ref:mediaTypesFilter
             - ref:galleryMenu
         com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead:
-          hasLooked: false
-          once: true
           zOffset: 1.1000000000000001
+          once: true
+          hasLooked: false
         com.meta.spatial.toolkit.Grabbable:
           {}
         com.meta.spatial.toolkit.Panel:
@@ -71,12 +71,14 @@ entities:
             - 1
           translation:
             - 0
-            - 0.270000011
+            - 0.297750771
             - 0
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/2"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
       tag: galleryMenu
     - components:
         com.meta.components.Animatable:
@@ -94,9 +96,9 @@ entities:
             - 0
             - 0.0591268539
         com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead:
-          zOffset: 0.69999999999999996
-          once: false
           hasLooked: false
+          once: false
+          zOffset: 0.69999999999999996
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/5"
         com.meta.spatial.toolkit.PanelDimensions:
