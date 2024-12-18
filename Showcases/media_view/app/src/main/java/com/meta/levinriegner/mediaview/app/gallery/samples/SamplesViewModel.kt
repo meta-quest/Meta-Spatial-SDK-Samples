@@ -115,7 +115,7 @@ class SamplesViewModel @Inject constructor(
                         UiSamplesState.DownloadError(e.message ?: "Failed to download samples")
                     return@launch
                 }
-                delay(Random.nextLong(1000L)) // Be nice to the server
+                delay(500 + Random.nextLong(500)) // Be nice to the server
             }
             // Delete previous media
             Timber.i("Deleting previous sample media")

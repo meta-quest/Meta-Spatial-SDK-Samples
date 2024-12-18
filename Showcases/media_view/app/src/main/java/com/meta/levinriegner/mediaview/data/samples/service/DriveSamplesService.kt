@@ -63,7 +63,7 @@ class DriveSamplesService @Inject constructor(
             val start = i * chunkSize
             val end = if (i == totalChunks - 1) fileSize - 1 else (i + 1) * chunkSize - 1
             val range = "bytes=$start-$end"
-            Timber.d("Downloading chunk ${i+1}/$totalChunks: range=$range")
+            Timber.d("Downloading chunk ${i + 1}/$totalChunks: range=$range")
             val chunkRequest = Request.Builder()
                 .url(url)
                 .header("Range", range)
@@ -75,7 +75,7 @@ class DriveSamplesService @Inject constructor(
             }
             emit(response.body?.byteStream() ?: throw RuntimeException("Empty file response"))
         }
-        delay(Random.nextLong(200L)) // Be nice to the server
+        delay(500 + Random.nextLong(500)) // Be nice to the server
     }
 
     companion object {
