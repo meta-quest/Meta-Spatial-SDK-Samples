@@ -18,8 +18,6 @@ fun OnboardingVideo(
             PlayerView(ctx).apply {
                 player = exoPlayer
                 useController = false
-                // TODO: Unstable and not the best fit. Request for design team.
-                // resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FILL
             }
         },
         modifier = modifier

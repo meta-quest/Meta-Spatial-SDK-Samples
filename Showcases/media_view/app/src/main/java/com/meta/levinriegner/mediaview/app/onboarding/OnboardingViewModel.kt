@@ -62,13 +62,6 @@ constructor(
                 true,
             ),
             StepModel(
-                3,
-                R.raw.downloading_media,
-                "Add Media to Media View",
-                "Media View comes with sample content for you, though you can currently add content by connecting your Google Drive account and downloading it to your Meta Quest.",
-                true,
-            ),
-            StepModel(
                 4,
                 R.raw.placing_media,
                 "Place Media in your Environment",
@@ -87,13 +80,6 @@ constructor(
                 R.raw.enter_immersive_mode,
                 "Enter Immersive View",
                 "To fully immerse yourself in a piece of media, select the three dots (...) in the top right corner of the media in your environment to open the action menu. Then, choose 'Immersive View' from the options. You'll be surrounded by the media for a more engaging experience.",
-                true,
-            ),
-            StepModel(
-                7,
-                R.raw.delete_media,
-                "Delete Media",
-                "To delete media, click the 'Select' button on the Browse Panel and choose the file(s) you want to delete. Deleting these files will remove them from your device. You can select one or multiple files to delete at once.",
                 true,
             ),
             StepModel(

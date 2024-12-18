@@ -57,7 +57,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 // TODO: Consider a safe rememberPagerState replacement to avoid this experimental opt-in
-@OptIn(ExperimentalFoundationApi::class)
 @androidx.annotation.OptIn(UnstableApi::class)
 @AndroidEntryPoint
 class OnboardingActivity : ComponentActivity() {

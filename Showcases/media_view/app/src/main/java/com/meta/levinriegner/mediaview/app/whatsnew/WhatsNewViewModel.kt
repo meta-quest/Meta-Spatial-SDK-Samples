@@ -23,7 +23,6 @@ constructor(
     private val _areReleaseNotesEnabled = MutableStateFlow(true)
     val areReleaseNotesEnabled = _areReleaseNotesEnabled.asStateFlow()
 
-    // TODO: This could be fetched via Remote Config
     private val _releaseNotes = MutableStateFlow(whatsNew)
     val releaseNotes = _releaseNotes.asStateFlow()
 
@@ -70,7 +69,6 @@ constructor(
 
     companion object {
         private val whatsNew = immutableListOf(
-            // TODO: Set proper image URIs
             NewFeature(
                 1,
                 "Free and Open Source",
