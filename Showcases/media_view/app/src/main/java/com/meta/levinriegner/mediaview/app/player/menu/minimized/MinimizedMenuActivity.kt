@@ -13,25 +13,29 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MinimizedMenuActivity : ComponentActivity() {
 
-  private val viewModel by viewModels<MinimizedMenuViewModel>()
+    private val viewModel by viewModels<MinimizedMenuViewModel>()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    enableEdgeToEdge()
-    buildUi()
-  }
-
-  private fun buildUi() {
-    setContent {
-      MediaViewTheme {
-        MinimizedMenuView(
-            onMaximize = { viewModel.maximize() },
-            onClose = {
-              viewModel.close()
-              finish()
-            },
-        )
-      }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        buildUi()
     }
-  }
+
+    private fun buildUi() {
+        setContent {
+            MediaViewTheme {
+                MinimizedMenuView(
+                    onMaximize = { viewModel.maximize() },
+                    onClose = {
+                        viewModel.close()
+                        finish()
+                    },
+                    onDelete = {
+                        viewModel.delete()
+                        finish()
+                    },
+                )
+            }
+        }
+    }
 }

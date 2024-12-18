@@ -8,6 +8,7 @@ import com.meta.levinriegner.mediaview.app.events.AppEvent
 import com.meta.levinriegner.mediaview.app.events.AppEventListener
 import com.meta.levinriegner.mediaview.app.events.EventBus
 import com.meta.levinriegner.mediaview.app.events.FilterAppEvent
+import com.meta.levinriegner.mediaview.app.events.MediaPlayerEvent
 import com.meta.levinriegner.mediaview.app.events.UploadAppEvent
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.app.shared.model.UiState
@@ -99,6 +100,14 @@ constructor(
       }
 
       is FilterAppEvent.FilterChanged -> _filter.value = event.filter
+
+      is MediaPlayerEvent.Deleted -> {
+        if (state.value is UiState.Success) {
+          val media = (state.value as UiState.Success<List<MediaModel>>).data
+          val updatedMedia = media.filter { it.id != event.mediaId }
+          _state.value = UiState.Success(updatedMedia)
+        }
+      }
     }
   }
 

@@ -21,7 +21,7 @@ class Dimens {
     // View-specific dimensions
     const val playerMenuButtonSize = 54
     const val playerMenuTotalWidth = 204
-    const val playerMenuTotalHeight = 172 + playerMenuButtonSize + 16
+    const val playerMenuTotalHeight = playerMenuButtonSize + 16 + (86 * 3)
 
     val galleryItemSize = 120.dp
   }

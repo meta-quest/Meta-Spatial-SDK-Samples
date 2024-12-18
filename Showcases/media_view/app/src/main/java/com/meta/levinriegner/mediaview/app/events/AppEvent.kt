@@ -18,6 +18,7 @@ sealed class FilterAppEvent : AppEvent() {
 
 sealed class MediaPlayerEvent : AppEvent() {
   data class Close(val mediaId: Long) : MediaPlayerEvent()
+  data class Deleted(val mediaId: Long) : MediaPlayerEvent()
 
   data object CloseAll : MediaPlayerEvent()
 }

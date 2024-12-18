@@ -3,6 +3,7 @@
 package com.meta.levinriegner.mediaview.data.gallery.service
 
 import android.content.ContentResolver
+import android.content.ContentUris
 import android.content.ContentValues
 import android.net.Uri
 import android.os.Environment
@@ -18,6 +19,7 @@ import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import javax.inject.Inject
+
 
 class DeviceGalleryService
 @Inject
@@ -115,6 +117,7 @@ constructor(
     }
 
     fun setMediaFileDeleted(uri: Uri) {
+        Timber.d("Deleting media: $uri")
         contentResolver.delete(uri, null, null)
     }
 

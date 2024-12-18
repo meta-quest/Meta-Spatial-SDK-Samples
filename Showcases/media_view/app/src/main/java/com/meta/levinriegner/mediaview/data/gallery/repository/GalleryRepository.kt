@@ -46,8 +46,7 @@ constructor(
     suspend fun setMediaFileReady(contentValues: ContentValues, uri: Uri) =
         withContext(dispatcher) { galleryService.setMediaFileReady(contentValues, uri) }
 
-    suspend fun setMediaFileDeleted(uri: Uri) =
-        withContext(dispatcher) { galleryService.setMediaFileDeleted(uri) }
+    fun setMediaFileDeleted(uri: Uri) = galleryService.setMediaFileDeleted(uri)
 
     suspend fun deleteSampleMedia(exceptRelativePath: String? = null) =
         withContext(dispatcher) { galleryService.deleteSampleMedia(exceptRelativePath) }
