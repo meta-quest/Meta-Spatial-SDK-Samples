@@ -2,7 +2,6 @@
 
 package com.meta.levinriegner.mediaview.data.samples.service
 
-import com.meta.levinriegner.mediaview.BuildConfig
 import com.meta.levinriegner.mediaview.data.samples.model.SamplesList
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -15,8 +14,7 @@ import java.io.InputStream
 import javax.inject.Inject
 import kotlin.random.Random
 
-
-class DriveSamplesService @Inject constructor(
+class SamplesApiService @Inject constructor(
     private val httpClient: OkHttpClient,
 ) {
     private val json = Json {
@@ -27,7 +25,7 @@ class DriveSamplesService @Inject constructor(
 
     suspend fun getSamplesList(): SamplesList {
         val request = Request.Builder()
-            .url(driveDownloadUrl(DRIVE_SAMPLES_INDEX_FILE_ID))
+            .url(FILE_INDEX_URL)
             .build()
         httpClient.newCall(request).execute().use { response ->
             if (!response.isSuccessful) {
@@ -41,10 +39,8 @@ class DriveSamplesService @Inject constructor(
     }
 
     fun downloadFile(
-        fileId: String,
+        url: String,
     ): Flow<InputStream> = flow {
-        val url = driveDownloadUrl(fileId)
-
         // Get file size
         val sizeRequest = Request.Builder()
             .url(url)
@@ -79,10 +75,6 @@ class DriveSamplesService @Inject constructor(
     }
 
     companion object {
-        private const val DRIVE_SAMPLES_INDEX_FILE_ID = "12AjUR1LS8RfqgBMmI3csiCi-AAUp-vbi"
-        private fun driveDownloadUrl(fileId: String): String {
-            return "https://www.googleapis.com/drive/v3/files/$fileId?alt=media&key=${BuildConfig.DRIVE_API_KEY}"
-//            return "https://drive.usercontent.google.com/download?id=$fileId&export=download&authuser=0"
-        }
+        private const val FILE_INDEX_URL = "https://sample-media.mediaviewxr.com"
     }
 }

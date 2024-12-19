@@ -4,7 +4,7 @@ package com.meta.levinriegner.mediaview.data.samples.repository
 
 import com.meta.levinriegner.mediaview.data.di.IoDispatcher
 import com.meta.levinriegner.mediaview.data.samples.model.SamplesList
-import com.meta.levinriegner.mediaview.data.samples.service.DriveSamplesService
+import com.meta.levinriegner.mediaview.data.samples.service.SamplesApiService
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class SamplesRepository @Inject constructor(
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
-    private val driveSamplesService: DriveSamplesService,
+    private val driveSamplesService: SamplesApiService,
 ) {
     suspend fun getSamplesList(): SamplesList = withContext(dispatcher) {
         Timber.i("Getting samples list")
@@ -23,9 +23,9 @@ class SamplesRepository @Inject constructor(
     }
 
     fun downloadFile(
-        fileId: String,
+        url: String,
     ): Flow<InputStream> {
-        Timber.i("Downloading file: $fileId")
-        return driveSamplesService.downloadFile(fileId).flowOn(dispatcher)
+        Timber.i("Downloading file: $url")
+        return driveSamplesService.downloadFile(url).flowOn(dispatcher)
     }
 }

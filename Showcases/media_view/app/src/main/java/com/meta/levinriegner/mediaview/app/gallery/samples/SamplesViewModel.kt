@@ -73,16 +73,18 @@ class SamplesViewModel @Inject constructor(
             _state.value = UiSamplesState.NoInternet
             return
         }
-        // Download files
         val relativePath = samplesDirectory(samples.version ?: 0)
         viewModelScope.launch {
+            // Delete previous folder if it exists
+            galleryRepository.deleteSampleMediaSubFolder(relativePath)
+            // Download files
             for (i in 0..<samples.items.size) {
                 val item = samples.items[i]
                 _state.value = UiSamplesState.DownloadingSamples(i + 1, samples.items.size)
                 var mediaFile: Pair<ContentValues, Uri?>? = null
                 try {
                     Timber.i("Downloading sample media: ${item.name} (${i + 1}/${samples.items.size})")
-                    if (item.driveId == null) {
+                    if (item.url == null) {
                         throw IllegalStateException("Sample media has no drive ID: ${item.name}")
                     }
                     // Create file
@@ -93,7 +95,7 @@ class SamplesViewModel @Inject constructor(
                         storageType = StorageType.Sample,
                     )
                     mediaFile.second?.let { uri ->
-                        samplesRepository.downloadFile(item.driveId)
+                        samplesRepository.downloadFile(item.url)
                             .collectIndexed { index, inputStream ->
                                 Timber.d("Saving chunk $index")
                                 galleryRepository.writeMediaFile(uri) { outputStream ->
@@ -115,7 +117,7 @@ class SamplesViewModel @Inject constructor(
                         UiSamplesState.DownloadError(e.message ?: "Failed to download samples")
                     return@launch
                 }
-                delay(500 + Random.nextLong(500)) // Be nice to the server
+                delay(Random.nextLong(500)) // Be nice to the server
             }
             // Delete previous media
             Timber.i("Deleting previous sample media")

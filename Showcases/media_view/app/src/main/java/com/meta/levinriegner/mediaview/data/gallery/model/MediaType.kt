@@ -25,7 +25,7 @@ enum class MediaType {
     const val panoramaAspectRatioMin = 2.75f
 
     // 360
-    const val media360ExactAspectRatio = 2f
+    const val media360ExactAspectRatio = 2f // Monoscopic
     const val video360MinBitrate = 30 * 1024 * 1024
   }
 }
