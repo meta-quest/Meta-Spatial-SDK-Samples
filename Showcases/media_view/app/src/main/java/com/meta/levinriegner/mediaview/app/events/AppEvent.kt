@@ -22,3 +22,7 @@ sealed class MediaPlayerEvent : AppEvent() {
 
   data object CloseAll : MediaPlayerEvent()
 }
+
+sealed class NavigationEvent: AppEvent() {
+  data object PrivacyPolicyAccepted : NavigationEvent()
+}

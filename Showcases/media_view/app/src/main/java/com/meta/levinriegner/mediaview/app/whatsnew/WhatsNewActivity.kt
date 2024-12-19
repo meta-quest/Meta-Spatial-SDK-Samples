@@ -61,7 +61,6 @@ class WhatsNewActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        viewModel.init()
         buildUi()
     }
 

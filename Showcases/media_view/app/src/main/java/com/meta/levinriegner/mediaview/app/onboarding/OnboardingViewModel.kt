@@ -4,6 +4,10 @@ package com.meta.levinriegner.mediaview.app.onboarding
 
 import androidx.lifecycle.ViewModel
 import com.meta.levinriegner.mediaview.R
+import com.meta.levinriegner.mediaview.app.events.AppEvent
+import com.meta.levinriegner.mediaview.app.events.AppEventListener
+import com.meta.levinriegner.mediaview.app.events.EventBus
+import com.meta.levinriegner.mediaview.app.events.NavigationEvent
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.data.onboarding.model.StepModel
 import com.meta.levinriegner.mediaview.data.user.repository.UserRepository
@@ -21,11 +25,16 @@ class OnboardingViewModel
 constructor(
     private val userRepository: UserRepository,
     private val panelDelegate: PanelDelegate,
-) : ViewModel() {
+    eventBus: EventBus,
+) : ViewModel(), AppEventListener {
     private val _state = MutableStateFlow<OnboardingState>(OnboardingState.Idle)
     val state = _state.asStateFlow()
 
-    fun init() {
+    init {
+        eventBus.register(this)
+    }
+
+    private fun refreshShouldShow() {
         val isCompleted = userRepository.isOnboardingCompleted()
 
         if (isCompleted) {
@@ -36,13 +45,19 @@ constructor(
             userRepository.setOnboardingCompleted()
         }
 
-        _state.update {
-            OnboardingState.OnboardingStarted(true, stepList, 0)
-        }
+        _state.value = OnboardingState.OnboardingStarted(true, stepList, 0)
     }
 
     fun close() {
         panelDelegate.toggleOnboarding(false)
+    }
+
+    override fun onEvent(event: AppEvent) {
+        when(event) {
+            is NavigationEvent.PrivacyPolicyAccepted -> {
+                refreshShouldShow()
+            }
+        }
     }
 
     companion object {

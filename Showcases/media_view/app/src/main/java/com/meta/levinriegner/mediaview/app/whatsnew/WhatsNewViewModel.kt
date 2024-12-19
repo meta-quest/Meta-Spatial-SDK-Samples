@@ -4,6 +4,10 @@ package com.meta.levinriegner.mediaview.app.whatsnew
 
 import androidx.lifecycle.ViewModel
 import com.meta.levinriegner.mediaview.BuildConfig
+import com.meta.levinriegner.mediaview.app.events.AppEvent
+import com.meta.levinriegner.mediaview.app.events.AppEventListener
+import com.meta.levinriegner.mediaview.app.events.EventBus
+import com.meta.levinriegner.mediaview.app.events.NavigationEvent
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.data.user.repository.UserRepository
 import com.meta.levinriegner.mediaview.data.whatsnew.model.NewFeature
@@ -21,7 +25,8 @@ class WhatsNewViewModel
 constructor(
     private val userRepository: UserRepository,
     private val panelDelegate: PanelDelegate,
-) : ViewModel() {
+    eventBus: EventBus,
+) : ViewModel(), AppEventListener {
     private val _areReleaseNotesEnabled = MutableStateFlow(true)
     val areReleaseNotesEnabled = _areReleaseNotesEnabled.asStateFlow()
 
@@ -31,7 +36,11 @@ constructor(
     private val _isDontShowAgainChecked = MutableStateFlow(false)
     val isDontShowAgainChecked = _isDontShowAgainChecked.asStateFlow()
 
-    fun init() {
+    init {
+        eventBus.register(this)
+    }
+
+    private fun refreshShouldShow() {
         val areReleaseNotesEnabled = userRepository.areReleaseNotesEnabled()
 
         if (!areReleaseNotesEnabled) {
@@ -46,22 +55,18 @@ constructor(
             }
         }
 
-        _areReleaseNotesEnabled.update {
-            areReleaseNotesEnabled
-        }
+        _areReleaseNotesEnabled.value = areReleaseNotesEnabled
     }
 
     fun checkDontShowAgain() {
-        _isDontShowAgainChecked.update {
-            true
-        }
+        Timber.i("Disabling Release Notes.")
+        _isDontShowAgainChecked.value = true
         userRepository.disableReleaseNotes()
     }
 
     fun uncheckDontShowAgain() {
-        _isDontShowAgainChecked.update {
-            false
-        }
+        Timber.i("Re-enabling Release Notes.")
+        _isDontShowAgainChecked.value = false
         userRepository.enableReleaseNotes()
     }
 
@@ -97,5 +102,13 @@ constructor(
                 "Media in your environment can be viewed, edited and placed all around you. Move it closer to inspect or position it anywhere in your space. To adjust placement, aim your controller at the media and hold the side button to grab and move it to your desired spot."
             ),
         )
+    }
+
+    override fun onEvent(event: AppEvent) {
+        when(event) {
+            is NavigationEvent.PrivacyPolicyAccepted -> {
+                refreshShouldShow()
+            }
+        }
     }
 }

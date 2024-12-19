@@ -9,6 +9,7 @@ import com.meta.levinriegner.mediaview.app.events.AppEventListener
 import com.meta.levinriegner.mediaview.app.events.EventBus
 import com.meta.levinriegner.mediaview.app.events.FilterAppEvent
 import com.meta.levinriegner.mediaview.app.events.MediaPlayerEvent
+import com.meta.levinriegner.mediaview.app.events.NavigationEvent
 import com.meta.levinriegner.mediaview.app.events.UploadAppEvent
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.app.shared.model.UiState
@@ -111,6 +112,10 @@ constructor(
           val updatedMedia = media.filter { it.id != event.mediaId }
           _state.value = UiState.Success(updatedMedia)
         }
+      }
+
+      is NavigationEvent.PrivacyPolicyAccepted -> {
+        panelDelegate.toggleGallery(true)
       }
     }
   }
