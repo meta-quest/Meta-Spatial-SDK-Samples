@@ -26,18 +26,6 @@ constructor(
     fun setSampleMediaVersion(version: Int) {
         userPreferencesService.setSampleMediaVersion(version)
     }
-    
-    fun areReleaseNotesEnabled(): Boolean {
-        return userPreferencesService.areReleaseNotesEnabled()
-    }
-
-    fun enableReleaseNotes() {
-        userPreferencesService.setReleaseNotesEnabled(true)
-    }
-
-    fun disableReleaseNotes() {
-        userPreferencesService.setReleaseNotesEnabled(false)
-    }
 
     fun areReleaseNotesSeenFor(version: String): Boolean {
         return userPreferencesService.areReleaseNotesSeenFor(version)

@@ -14,7 +14,6 @@ import com.meta.levinriegner.mediaview.data.whatsnew.model.NewFeature
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import okhttp3.internal.immutableListOf
 import timber.log.Timber
 import javax.inject.Inject
@@ -27,47 +26,30 @@ constructor(
     private val panelDelegate: PanelDelegate,
     eventBus: EventBus,
 ) : ViewModel(), AppEventListener {
-    private val _areReleaseNotesEnabled = MutableStateFlow(true)
-    val areReleaseNotesEnabled = _areReleaseNotesEnabled.asStateFlow()
 
     private val _releaseNotes = MutableStateFlow(whatsNew)
     val releaseNotes = _releaseNotes.asStateFlow()
-
-    private val _isDontShowAgainChecked = MutableStateFlow(false)
-    val isDontShowAgainChecked = _isDontShowAgainChecked.asStateFlow()
 
     init {
         eventBus.register(this)
     }
 
     private fun refreshShouldShow() {
-        val areReleaseNotesEnabled = userRepository.areReleaseNotesEnabled()
+        val currentVersion = BuildConfig.VERSION_NAME
+        val areReleaseNotesSeenForCurrentVersion =
+            userRepository.areReleaseNotesSeenFor(currentVersion)
 
-        if (!areReleaseNotesEnabled) {
-            Timber.i("User has opted-out of viewing Release Notes.")
-        } else {
-            val currentVersion = BuildConfig.VERSION_NAME
-            val areReleaseNotesSeenForCurrentVersion = userRepository.areReleaseNotesSeenFor(currentVersion)
-
-            if (!areReleaseNotesSeenForCurrentVersion) {
+        if (!areReleaseNotesSeenForCurrentVersion) {
+            if (whatsNew.isEmpty()) {
+                Timber.i("No release notes available for version $currentVersion")
+            } else {
+                Timber.i("Showing Whats New for version $currentVersion")
                 panelDelegate.toggleWhatsNew(true)
-                userRepository.setReleaseNotesSeenFor(currentVersion)
             }
+            userRepository.setReleaseNotesSeenFor(currentVersion)
+        } else {
+            Timber.i("Release notes already seen for version $currentVersion")
         }
-
-        _areReleaseNotesEnabled.value = areReleaseNotesEnabled
-    }
-
-    fun checkDontShowAgain() {
-        Timber.i("Disabling Release Notes.")
-        _isDontShowAgainChecked.value = true
-        userRepository.disableReleaseNotes()
-    }
-
-    fun uncheckDontShowAgain() {
-        Timber.i("Re-enabling Release Notes.")
-        _isDontShowAgainChecked.value = false
-        userRepository.enableReleaseNotes()
     }
 
     fun close() {
@@ -105,7 +87,7 @@ constructor(
     }
 
     override fun onEvent(event: AppEvent) {
-        when(event) {
+        when (event) {
             is NavigationEvent.PrivacyPolicyAccepted -> {
                 refreshShouldShow()
             }

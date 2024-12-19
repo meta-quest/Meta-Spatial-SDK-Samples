@@ -8,12 +8,6 @@ pluginManagement {
     google()
     mavenCentral()
     gradlePluginPortal()
-    maven {
-      url = uri("https://s01.oss.sonatype.org/content/repositories/commeta-1086")
-    }
-    maven {
-      url = uri("https://s01.oss.sonatype.org/content/repositories/commeta-1087")
-    }
   }
   plugins { id("com.meta.spatial.plugin") version metaSpatialSdkVersion }
 }
@@ -23,12 +17,6 @@ dependencyResolutionManagement {
   repositories {
     google()
     mavenCentral()
-    maven {
-      url = uri("https://s01.oss.sonatype.org/content/repositories/commeta-1086")
-    }
-    maven {
-      url = uri("https://s01.oss.sonatype.org/content/repositories/commeta-1087")
-    }
   }
 }
 

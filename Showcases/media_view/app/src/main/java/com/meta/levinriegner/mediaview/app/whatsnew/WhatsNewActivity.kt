@@ -25,12 +25,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Image
-import androidx.compose.material3.Checkbox
-import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -80,175 +75,140 @@ class WhatsNewActivity : ComponentActivity() {
                             shape = RoundedCornerShape(Dimens.radiusMedium)
                         )
                 ) {
-                    when (viewModel.areReleaseNotesEnabled.collectAsState().value) {
-                        false -> Box(Modifier)
-                        true -> {
-                            val uriHandler = LocalUriHandler.current
+                    val uriHandler = LocalUriHandler.current
 
-                            val whatsNew = viewModel.releaseNotes.collectAsState().value
-                            val isDontShowAgainChecked =
-                                viewModel.isDontShowAgainChecked.collectAsState().value
+                    val whatsNew = viewModel.releaseNotes.collectAsState().value
 
-                            Row(
-                                modifier = Modifier.fillMaxSize()
+                    Row(
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth(fraction = .30f)
+                                .fillMaxHeight()
+                                .background(AppColor.DarkBackgroundSweep)
+                                .padding(
+                                    horizontal = Dimens.small,
+                                )
+                        ) {
+                            Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center,
+                                modifier = Modifier
+                                    .fillMaxSize()
                             ) {
+                                Image(
+                                    rememberAsyncImagePainter(
+                                        R.drawable.logo
+                                    ),
+                                    "logo",
+                                )
                                 Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth(fraction = .30f)
-                                        .fillMaxHeight()
-                                        .background(AppColor.DarkBackgroundSweep)
-                                        .padding(
-                                            horizontal = Dimens.small,
-                                        )
-                                ) {
-                                    Column(
-                                        horizontalAlignment = Alignment.CenterHorizontally,
-                                        verticalArrangement = Arrangement.Center,
-                                        modifier = Modifier
-                                            .fillMaxSize()
-                                    ) {
-                                        Image(
-                                            rememberAsyncImagePainter(
-                                                R.drawable.logo
-                                            ),
-                                            "logo",
-                                        )
-                                        Box(
-                                            modifier = Modifier.height(Dimens.small)
-                                        )
-                                        RoundedButton(
-                                            onClick = { uriHandler.openUri(Constants.WEBSITE_URL) },
-                                            title = "Visit Our Website"
-                                        )
-                                    }
-                                }
+                                    modifier = Modifier.height(Dimens.small)
+                                )
+                                RoundedButton(
+                                    onClick = { uriHandler.openUri(Constants.WEBSITE_URL) },
+                                    title = "Visit Our Website"
+                                )
+                            }
+                        }
 
-                                Column(
-                                    modifier = Modifier
-                                        .fillMaxSize()
-                                        .background(AppColor.BackgroundSweep)
-                                        .padding(Dimens.small)
+                        Column(
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .background(AppColor.BackgroundSweep)
+                                .padding(Dimens.small)
 
-                                ) {
-                                    // Top bar with close button
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .wrapContentHeight(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                        verticalAlignment = Alignment.Top
-                                    ) {
-                                        Text(
-                                            "V ${BuildConfig.VERSION_NAME} Updates",
-                                            color = AppColor.White,
-                                            textAlign = TextAlign.Start,
-                                            style = MaterialTheme.typography.titleMedium
-                                        )
-                                        CloseButton(
-                                            onPressed = { viewModel.close() }
-                                        )
+                        ) {
+                            // Top bar with close button
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.Top
+                            ) {
+                                Text(
+                                    "V ${BuildConfig.VERSION_NAME} Updates",
+                                    color = AppColor.White,
+                                    textAlign = TextAlign.Start,
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                                CloseButton(
+                                    onPressed = { viewModel.close() }
+                                )
 
-                                    }
+                            }
 
-                                    Box(
-                                        modifier = Modifier
-                                            .height(Dimens.small)
+                            Box(
+                                modifier = Modifier
+                                    .height(Dimens.small)
+                            )
+
+                            HorizontalDivider()
+
+
+                            // Content
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .fillMaxHeight(.80f)
+                            ) {
+                                LazyVerticalStaggeredGrid(
+                                    columns = StaggeredGridCells.Fixed(2),
+                                    horizontalArrangement = Arrangement.spacedBy(
+                                        Dimens.small,
+                                    ),
+                                    verticalItemSpacing = Dimens.small,
+                                    contentPadding = PaddingValues(
+                                        vertical = Dimens.small,
                                     )
-
-                                    HorizontalDivider()
-
-
-                                    // Content
-                                    Box(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .fillMaxHeight(.80f)
-                                    ) {
-                                        LazyVerticalStaggeredGrid(
-                                            columns = StaggeredGridCells.Fixed(2),
-                                            horizontalArrangement = Arrangement.spacedBy(
-                                                Dimens.small,
-                                            ),
-                                            verticalItemSpacing = Dimens.small,
-                                            contentPadding = PaddingValues(
-                                                vertical = Dimens.small,
-                                            )
-                                        ) {
-                                            items(
-                                                items = whatsNew
-                                            ) { releaseNote ->
-                                                Column {
-                                                    Text(
-                                                        releaseNote.title,
-                                                        color = AppColor.White,
-                                                        textAlign = TextAlign.Start,
-                                                        fontWeight = FontWeight.Bold,
-                                                        style = MaterialTheme.typography.bodyMedium,
-                                                    )
-                                                    Text(
-                                                        releaseNote.description,
-                                                        color = AppColor.White60,
-                                                        textAlign = TextAlign.Start,
-                                                        style = MaterialTheme.typography.bodySmall,
-                                                        fontSize = 10.sp,
-                                                    )
-                                                }
-                                            }
-                                        }
-                                    }
-
-
-                                    HorizontalDivider()
-
-                                    // Bottom bar with Checkbox
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .fillMaxHeight(),
-                                        horizontalArrangement = Arrangement.End,
-                                        verticalAlignment = Alignment.CenterVertically,
-                                    ) {
-                                        Row(
-                                            verticalAlignment = Alignment.CenterVertically,
-                                        ) {
-                                            Checkbox(
-                                                colors = CheckboxDefaults.colors(
-                                                    checkedColor = AppColor.MetaBlu,
-                                                    uncheckedColor = AppColor.White,
-                                                    checkmarkColor = AppColor.White,
-
-                                                    ),
-                                                onCheckedChange = {
-                                                    if (it) {
-                                                        viewModel.checkDontShowAgain()
-                                                    } else {
-                                                        viewModel.uncheckDontShowAgain()
-                                                    }
-                                                },
-                                                checked = isDontShowAgainChecked
-                                            )
+                                ) {
+                                    items(
+                                        items = whatsNew
+                                    ) { releaseNote ->
+                                        Column {
                                             Text(
-                                                "Don't Show Again",
+                                                releaseNote.title,
                                                 color = AppColor.White,
                                                 textAlign = TextAlign.Start,
                                                 fontWeight = FontWeight.Bold,
+                                                style = MaterialTheme.typography.bodyMedium,
+                                            )
+                                            Text(
+                                                releaseNote.description,
+                                                color = AppColor.White60,
+                                                textAlign = TextAlign.Start,
                                                 style = MaterialTheme.typography.bodySmall,
                                                 fontSize = 10.sp,
                                             )
                                         }
-
-                                        Box(
-                                            modifier = Modifier.padding(
-                                                horizontal = Dimens.xSmall,
-                                            )
-                                        )
-
-                                        RoundedButton(
-                                            onClick = { viewModel.close() },
-                                            title = "Continue",
-                                        )
                                     }
                                 }
+                            }
+
+
+                            HorizontalDivider()
+
+                            // Bottom bar with Checkbox
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .fillMaxHeight(),
+                                horizontalArrangement = Arrangement.End,
+                                verticalAlignment = Alignment.CenterVertically,
+                            ) {
+
+                                Box(
+                                    modifier = Modifier.padding(
+                                        horizontal = Dimens.xSmall,
+                                    )
+                                )
+
+                                RoundedButton(
+                                    onClick = { viewModel.close() },
+                                    title = "Continue",
+                                )
                             }
                         }
                     }
