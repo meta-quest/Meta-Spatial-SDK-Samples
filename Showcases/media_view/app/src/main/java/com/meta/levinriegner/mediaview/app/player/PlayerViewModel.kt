@@ -7,9 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.meta.levinriegner.mediaview.app.events.AppEvent
 import com.meta.levinriegner.mediaview.app.events.AppEventListener
+import com.meta.levinriegner.mediaview.app.events.EditEvent
 import com.meta.levinriegner.mediaview.app.events.EventBus
 import com.meta.levinriegner.mediaview.app.events.MediaPlayerEvent
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
+import com.meta.levinriegner.mediaview.app.player.view.edit.CropState
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -46,10 +48,10 @@ constructor(
 
   private fun buildState(mediaModel: MediaModel): PlayerState {
     return when (mediaModel.mediaType) {
-      MediaType.IMAGE_2D -> PlayerState.Image2D(mediaModel.uri)
+      MediaType.IMAGE_2D -> PlayerState.Image2D(mediaModel.uri, cropState = CropState.NotSupported)
       MediaType.VIDEO_2D -> PlayerState.Video2D(mediaModel.uri)
       MediaType.IMAGE_PANORAMA -> PlayerState.ImagePanorama(mediaModel.uri)
-      MediaType.IMAGE_360 -> PlayerState.Image2D(mediaModel.uri)
+      MediaType.IMAGE_360 -> PlayerState.Image2D(mediaModel.uri, cropState = CropState.NotSupported)
       MediaType.VIDEO_360 -> PlayerState.Video360(mediaModel.uri)
       MediaType.VIDEO_SPATIAL -> PlayerState.Video2D(mediaModel.uri)
       null -> PlayerState.Error("Unknown media type for mime ${mediaModel.mimeType}")
@@ -69,6 +71,27 @@ constructor(
         }
       }
       is MediaPlayerEvent.CloseAll -> viewModelScope.launch { _event.emit(PlayerEvent.Close) }
+      is EditEvent.EnterCrop -> {
+        if (event.mediaId == mediaModel.id) {
+          _state.value = when (val state = state.value) {
+            is PlayerState.Image2D -> state.copy(cropState = CropState.Enabled)
+            else -> state
+          }
+        }
+      }
+      is EditEvent.ExitCrop -> {
+        if (event.mediaId == mediaModel.id) {
+          _state.value = when (val state = state.value) {
+            is PlayerState.Image2D -> state.copy(cropState = CropState.Disabled)
+            else -> state
+          }
+        }
+      }
+      is EditEvent.SaveImageRequest -> {
+        if (event.mediaId == mediaModel.id) {
+          // TODO: Implement saving
+        }
+      }
     }
   }
 

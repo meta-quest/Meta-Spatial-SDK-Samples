@@ -25,6 +25,17 @@ data class MediaModel(
     var minimizedMenuEntityId: Long? = null,
     var immersiveMenuEntityId: Long? = null,
 ) : Parcelable {
+
+    val editOptions: List<MediaEditOption> get() = when(mediaType) {
+        MediaType.IMAGE_2D -> emptyList()
+        MediaType.VIDEO_2D -> emptyList()
+        MediaType.IMAGE_PANORAMA -> emptyList()
+        MediaType.IMAGE_360 -> listOf(MediaEditOption.Crop)
+        MediaType.VIDEO_360 -> emptyList()
+        MediaType.VIDEO_SPATIAL -> emptyList()
+        null -> emptyList()
+    }
+
     fun durationHMS(): Triple<Int, Int, Int>? {
         val duration = durationMs ?: return null
         val hours = duration / 3600000

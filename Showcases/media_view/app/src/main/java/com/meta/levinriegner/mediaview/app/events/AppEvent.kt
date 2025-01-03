@@ -26,3 +26,10 @@ sealed class MediaPlayerEvent : AppEvent() {
 sealed class NavigationEvent: AppEvent() {
   data object PrivacyPolicyAccepted : NavigationEvent()
 }
+
+sealed class EditEvent : AppEvent() {
+  data class EnterCrop(val mediaId: Long) : EditEvent()
+  data class ExitCrop(val mediaId: Long) : EditEvent()
+  data class SaveImageRequest(val mediaId: Long) : EditEvent()
+  data class SaveImageCompleted(val mediaId: Long) : EditEvent()
+}

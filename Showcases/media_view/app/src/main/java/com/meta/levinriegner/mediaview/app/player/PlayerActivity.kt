@@ -13,6 +13,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -59,14 +60,14 @@ class PlayerActivity : ComponentActivity() {
   private fun buildUi() {
     setContent {
       // Observables
-      val mediaModel = viewModel.state.collectAsState()
+      val uiState by viewModel.state.collectAsState()
       // UI
       Surface(modifier = Modifier.fillMaxSize(), color = Color.Transparent) {
         Box(Modifier.fillMaxSize()) {
-          when (val state = mediaModel.value) {
+          when (val state = uiState) {
             PlayerState.Empty -> Box(Modifier)
             is PlayerState.Image2D -> {
-              ImageView(uri = state.uri)
+              ImageView(uri = state.uri, cropState = state.cropState)
             }
 
             is PlayerState.ImagePanorama -> {
