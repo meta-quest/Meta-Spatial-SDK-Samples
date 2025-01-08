@@ -39,6 +39,7 @@ import com.meta.levinriegner.mediaview.app.shared.theme.Dimens
 @Composable
 fun ImmersiveMenuView(
     state: ImmersiveMenuState,
+    onMinimize: () -> Unit,
     onEnterEdit: () -> Unit,
     onExitEdit: () -> Unit,
     onSaveAsNewImage: () -> Unit,
@@ -98,7 +99,7 @@ fun ImmersiveMenuView(
                             containerColor = Color.Transparent,
                         ),
                         border = BorderStroke(1.dp, AppColor.White30),
-                        onClick = { onEnterEdit() }) {
+                        onClick = { onMinimize() }) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Icon(
                                 painter = painterResource(id = R.drawable.icon_minimize),
