@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import coil.compose.AsyncImage
@@ -22,10 +23,10 @@ fun ImageView(
     uri: Uri,
     cropState: CropState,
 ) {
-    // https://github.com/MoyuruAizawa/Cropify
+    val framePercentage = 0.15f
     val state = rememberCropifyState()
     when (cropState) {
-        CropState.NotSupported, CropState.Disabled -> {
+        CropState.NotSupported -> {
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current).data(uri).build(),
                 contentDescription = "",
@@ -34,7 +35,7 @@ fun ImageView(
             )
         }
 
-        CropState.Enabled -> {
+        CropState.Disabled, CropState.Enabled -> {
             Cropify(
                 uri = uri,
                 state = state,
@@ -45,9 +46,19 @@ fun ImageView(
                 onFailedToLoadImage = {
                     Timber.w("Failed to load image")
                 },
-                option = CropifyOption(
-                    frameSize = PercentageSize(0.15f)
-                ),
+                option = when (cropState) {
+                    CropState.Enabled -> CropifyOption(
+                        frameSize = PercentageSize(framePercentage)
+                    )
+
+                    else -> CropifyOption(
+                        gridAlpha = 0f,
+                        maskAlpha = 0f,
+                        frameAlpha = 0f,
+                        backgroundColor = Color.Transparent,
+                        frameSize = PercentageSize(framePercentage)
+                    )
+                },
             )
         }
     }

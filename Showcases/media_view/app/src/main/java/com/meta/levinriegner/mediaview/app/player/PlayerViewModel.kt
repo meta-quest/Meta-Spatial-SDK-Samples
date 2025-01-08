@@ -51,7 +51,7 @@ constructor(
       MediaType.IMAGE_2D -> PlayerState.Image2D(mediaModel.uri, cropState = CropState.NotSupported)
       MediaType.VIDEO_2D -> PlayerState.Video2D(mediaModel.uri)
       MediaType.IMAGE_PANORAMA -> PlayerState.ImagePanorama(mediaModel.uri)
-      MediaType.IMAGE_360 -> PlayerState.Image2D(mediaModel.uri, cropState = CropState.NotSupported)
+      MediaType.IMAGE_360 -> PlayerState.Image2D(mediaModel.uri, cropState = CropState.Disabled)
       MediaType.VIDEO_360 -> PlayerState.Video360(mediaModel.uri)
       MediaType.VIDEO_SPATIAL -> PlayerState.Video2D(mediaModel.uri)
       null -> PlayerState.Error("Unknown media type for mime ${mediaModel.mimeType}")
