@@ -556,10 +556,11 @@ class PanelManager(
         Query.where { has(Panel.id) }
             .eval()
             .filter {
-                val privacyPolicyPanel =
-                    getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_PRIVACY)
+                it.id != mediaModel.entityId
+                        && it.id != getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_PRIVACY)?.entity?.id
+                        && it.id != getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_WHATS_NEW)?.entity?.id
+                        && it.id != getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_ONBOARDING)?.entity?.id
 
-                it.id != mediaModel.entityId && it.id != privacyPolicyPanel?.entity?.id
             }
             .forEach { panelTransformations.setPanelVisibility(it, true) }
     }
