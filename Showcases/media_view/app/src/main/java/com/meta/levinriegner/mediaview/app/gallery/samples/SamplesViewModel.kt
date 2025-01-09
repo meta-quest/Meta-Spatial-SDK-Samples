@@ -6,7 +6,7 @@ import android.content.ContentValues
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.meta.levinriegner.mediaview.app.shared.InternetAvailability
+import com.meta.levinriegner.mediaview.app.shared.util.InternetAvailability
 import com.meta.levinriegner.mediaview.data.gallery.model.StorageType
 import com.meta.levinriegner.mediaview.data.gallery.repository.GalleryRepository
 import com.meta.levinriegner.mediaview.data.samples.model.SamplesList

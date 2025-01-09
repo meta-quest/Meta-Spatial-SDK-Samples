@@ -14,7 +14,7 @@ import coil.request.ImageRequest
 import com.meta.levinriegner.mediaview.app.player.view.edit.CropState
 import io.moyuru.cropify.Cropify
 import io.moyuru.cropify.CropifyOption
-import io.moyuru.cropify.CropifySize.PercentageSize
+import io.moyuru.cropify.CropifySize
 import io.moyuru.cropify.rememberCropifyState
 import timber.log.Timber
 
@@ -48,7 +48,7 @@ fun ImageView(
                 },
                 option = when (cropState) {
                     CropState.Enabled -> CropifyOption(
-                        frameSize = PercentageSize(framePercentage)
+                        frameSize = CropifySize.PercentageSize(framePercentage)
                     )
 
                     else -> CropifyOption(
@@ -56,7 +56,7 @@ fun ImageView(
                         maskAlpha = 0f,
                         frameAlpha = 0f,
                         backgroundColor = Color.Transparent,
-                        frameSize = PercentageSize(framePercentage)
+                        frameSize = CropifySize.PercentageSize(framePercentage)
                     )
                 },
             )

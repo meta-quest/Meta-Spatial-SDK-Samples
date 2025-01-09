@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.levinriegner.mediaview.app.shared
+package com.meta.levinriegner.mediaview.app.shared.util
 
 import android.content.Context
 import android.net.ConnectivityManager

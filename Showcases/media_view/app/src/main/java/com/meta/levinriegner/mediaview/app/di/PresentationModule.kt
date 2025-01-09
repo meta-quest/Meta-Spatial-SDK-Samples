@@ -5,7 +5,7 @@ package com.meta.levinriegner.mediaview.app.di
 import android.content.Context
 import com.meta.levinriegner.mediaview.app.events.EventBus
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
-import com.meta.levinriegner.mediaview.app.shared.InternetAvailability
+import com.meta.levinriegner.mediaview.app.shared.util.InternetAvailability
 import com.meta.spatial.toolkit.SpatialActivityManager
 import dagger.Module
 import dagger.Provides

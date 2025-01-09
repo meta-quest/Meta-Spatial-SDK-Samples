@@ -35,75 +35,79 @@ import timber.log.Timber
 @AndroidEntryPoint
 class PlayerActivity : ComponentActivity() {
 
-  private val viewModel: PlayerViewModel by viewModels()
+    private val viewModel: PlayerViewModel by viewModels()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    enableEdgeToEdge()
-    initObservers()
-    buildUi()
-  }
-
-  private fun initObservers() {
-    lifecycleScope.launch {
-      repeatOnLifecycle(Lifecycle.State.STARTED) {
-        viewModel.event.collect { event ->
-          Timber.i("Event: $event")
-          when (event) {
-            PlayerEvent.Close -> finish()
-          }
-        }
-      }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        initObservers()
+        buildUi()
     }
-  }
 
-  private fun buildUi() {
-    setContent {
-      // Observables
-      val uiState by viewModel.state.collectAsState()
-      // UI
-      Surface(modifier = Modifier.fillMaxSize(), color = Color.Transparent) {
-        Box(Modifier.fillMaxSize()) {
-          when (val state = uiState) {
-            PlayerState.Empty -> Box(Modifier)
-            is PlayerState.Image2D -> {
-              ImageView(uri = state.uri, cropState = state.cropState)
+    private fun initObservers() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.event.collect { event ->
+                    Timber.i("Event: $event")
+                    when (event) {
+                        PlayerEvent.Close -> finish()
+                    }
+                }
             }
-
-            is PlayerState.ImagePanorama -> {
-              val context = LocalContext.current
-              PanoramaImageView(
-                  context = context,
-                  uri = state.uri,
-                  modifier = Modifier.fillMaxSize(),
-              )
-            }
-
-            is PlayerState.Video2D -> {
-              VideoView(uri = state.uri, is360Video = false)
-            }
-
-            is PlayerState.Video360 -> {
-              VideoView(uri = state.uri, is360Video = true)
-            }
-
-            is PlayerState.Error -> {
-              ErrorView(
-                  modifier = Modifier.fillMaxSize(),
-                  description = state.reason,
-                  actionButtonText = stringResource(id = R.string.close),
-                  onActionButtonPressed = { viewModel.onClose() },
-              )
-            }
-          }
         }
-      }
     }
-  }
+
+    private fun buildUi() {
+        setContent {
+            // Observables
+            val uiState by viewModel.state.collectAsState()
+            // UI
+            Surface(modifier = Modifier.fillMaxSize(), color = Color.Transparent) {
+                Box(Modifier.fillMaxSize()) {
+                    when (val state = uiState) {
+                        PlayerState.Empty -> Box(Modifier)
+                        is PlayerState.Image2D -> {
+                            ImageView(uri = state.uri, cropState = state.cropState)
+//                            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
+//                              ImageView(uri = state.uri, cropState = state.cropState)
+//                              TouchDebugGridView(count = 100)
+//                            }
+                        }
+
+                        is PlayerState.ImagePanorama -> {
+                            val context = LocalContext.current
+                            PanoramaImageView(
+                                context = context,
+                                uri = state.uri,
+                                modifier = Modifier.fillMaxSize(),
+                            )
+                        }
+
+                        is PlayerState.Video2D -> {
+                            VideoView(uri = state.uri, is360Video = false)
+                        }
+
+                        is PlayerState.Video360 -> {
+                            VideoView(uri = state.uri, is360Video = true)
+                        }
+
+                        is PlayerState.Error -> {
+                            ErrorView(
+                                modifier = Modifier.fillMaxSize(),
+                                description = state.reason,
+                                actionButtonText = stringResource(id = R.string.close),
+                                onActionButtonPressed = { viewModel.onClose() },
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun PlayerActivityPreview() {
-  MediaViewTheme { Text("PlayerActivityPreview") }
+    MediaViewTheme { Text("PlayerActivityPreview") }
 }
