@@ -20,6 +20,7 @@ data class MediaModel(
     val height: Int?,
     val mediaType: MediaType?,
     val mediaFilter: MediaFilter?,
+    val relativePath: String?,
     // Mutable fields
     var entityId: Long? = null,
     var minimizedMenuEntityId: Long? = null,

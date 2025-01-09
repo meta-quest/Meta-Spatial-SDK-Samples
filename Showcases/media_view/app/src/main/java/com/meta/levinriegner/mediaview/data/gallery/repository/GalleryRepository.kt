@@ -53,4 +53,8 @@ constructor(
 
     suspend fun deleteSampleMediaSubFolder(relativePath: String) =
         withContext(dispatcher) { galleryService.deleteSampleMediaSubFolder(relativePath) }
+
+    // Saves a cropped media file to the device gallery using JPEG format
+    suspend fun saveCroppedMediaFile(mediaModel: MediaModel, onWrite: (FileOutputStream) -> Unit) =
+        withContext(dispatcher) { galleryService.saveCroppedMediaFile(mediaModel, onWrite) }
 }

@@ -52,6 +52,10 @@ constructor(
     }
 
     fun onSaveImagePressed() {
+        if (_state.value is ImmersiveMenuState.Editing && (_state.value as ImmersiveMenuState.Editing).saveLoading) {
+            // Skip if already saving
+            return
+        }
         Timber.i("Save image pressed")
         _state.value = ImmersiveMenuState.Editing(saveLoading = true)
         eventBus.post(EditEvent.SaveImageRequest(mediaModel.id))

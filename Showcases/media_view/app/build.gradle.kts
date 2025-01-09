@@ -173,7 +173,8 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.7.5")
     implementation("io.coil-kt:coil-compose:2.7.0")
     implementation("io.coil-kt:coil-video:2.7.0")
-    implementation("com.github.moyuruaizawa:cropify:0.5.0")
+    // implementation("com.github.moyuruaizawa:cropify:0.5.0")
+    implementation("com.github.levin-riegner:cropify:master-SNAPSHOT")
 
     implementation("com.github.bumptech.glide:glide:4.16.0")
     kapt("com.github.bumptech.glide:compiler:4.16.0")

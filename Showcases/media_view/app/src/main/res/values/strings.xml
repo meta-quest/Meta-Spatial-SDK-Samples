@@ -74,6 +74,8 @@
     <string name="minimize">Minimize</string>
     <!-- Edit -->
     <string name="save_as_new_image">Save as New Image</string>
+    <string name="save_as_new_image_success">Image saved successfully</string>
+    <string name="save_as_new_image_error">Failed to save image, please try again</string>
 
     // JW added - is this needed?
     <string

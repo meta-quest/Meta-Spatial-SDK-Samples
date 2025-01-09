@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
@@ -24,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -34,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import com.meta.levinriegner.mediaview.R
 import com.meta.levinriegner.mediaview.app.shared.theme.AppColor
 import com.meta.levinriegner.mediaview.app.shared.theme.Dimens
+import com.meta.levinriegner.mediaview.app.shared.view.LoadingView
 
 
 @Composable
@@ -137,10 +140,16 @@ fun ImmersiveMenuView(
                         contentColor = AppColor.White,
                         containerColor = AppColor.MetaBlu,
                     ),
-                    onClick = { onSaveAsNewImage() }) {
-                    Text(
-                        stringResource(R.string.save_as_new_image)
-                    )
+                    onClick = { if (!state.saveLoading) onSaveAsNewImage() }) {
+                    Box(contentAlignment = Alignment.Center) {
+                        Text(
+                            stringResource(R.string.save_as_new_image),
+                            Modifier.alpha(if (state.saveLoading) 0.0f else 1f)
+                        )
+                        if (state.saveLoading) {
+                            LoadingView()
+                        }
+                    }
                 }
             }
         }

@@ -3,12 +3,13 @@
 package com.meta.levinriegner.mediaview.data.gallery.service
 
 import android.content.ContentResolver
-import android.content.ContentUris
 import android.content.ContentValues
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.media3.common.MimeTypes
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaFilter
+import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaSortBy
 import com.meta.levinriegner.mediaview.data.gallery.model.StorageType
 import com.meta.levinriegner.mediaview.data.gallery.service.model.MediaStoreFileDto
@@ -157,6 +158,36 @@ constructor(
         } else {
             Timber.i("No sample folder to delete")
         }
+    }
+
+    fun saveCroppedMediaFile(
+        mediaModel: MediaModel,
+        onWrite: (FileOutputStream) -> Unit,
+    ) {
+        // Create
+        val fileName =
+            "${mediaModel.name ?: mediaModel.id}_cropped_${System.currentTimeMillis()}"
+        val contentValues =
+            ContentValues().apply {
+                put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+                put(MediaStore.MediaColumns.MIME_TYPE, MimeTypes.IMAGE_JPEG)
+                mediaModel.relativePath?.let { put(MediaStore.MediaColumns.RELATIVE_PATH, it) }
+                put(MediaStore.MediaColumns.IS_PENDING, 1)
+            }
+        val uri =
+            contentResolver.insert(MediaStoreQueryBuilder.collectionUri, contentValues)
+                ?: throw IllegalStateException("Failed to create media file")
+        // Write
+        contentResolver.openFileDescriptor(uri, "wa", null).use { file ->
+            file?.let {
+                val fos = FileOutputStream(it.fileDescriptor)
+                fos.use { onWrite(fos) }
+            }
+        }
+        // Update
+        contentValues.clear()
+        contentValues.put(MediaStore.MediaColumns.IS_PENDING, 0)
+        contentResolver.update(uri, contentValues, null, null)
     }
 
     companion object {

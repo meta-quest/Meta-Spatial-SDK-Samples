@@ -31,5 +31,5 @@ sealed class EditEvent : AppEvent() {
   data class EnterCrop(val mediaId: Long) : EditEvent()
   data class ExitCrop(val mediaId: Long) : EditEvent()
   data class SaveImageRequest(val mediaId: Long) : EditEvent()
-  data class SaveImageCompleted(val mediaId: Long) : EditEvent()
+  data class SaveImageCompleted(val mediaId: Long, val success: Boolean) : EditEvent()
 }
