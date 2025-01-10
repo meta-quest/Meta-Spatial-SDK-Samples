@@ -604,6 +604,8 @@ class PanelManager(
             return
         }
         panel.entity.setComponent(Visible(show))
+        // Move to the front of the gallery
+        panel.entity.setComponent(Transform(Pose(Vector3(-0.09f, 0f, -0.05f), Quaternion(0f, 0f, 0f))))
     }
 
     fun toggleWhatsNew(show: Boolean) {
@@ -613,6 +615,8 @@ class PanelManager(
             return
         }
         panel.entity.setComponent(Visible(show))
+        // Move to the front of the gallery
+        panel.entity.setComponent(Transform(Pose(Vector3(-0.09f, 0f, -0.04f), Quaternion(0f, 0f, 0f))))
     }
 
     fun debugPrintNodes() {

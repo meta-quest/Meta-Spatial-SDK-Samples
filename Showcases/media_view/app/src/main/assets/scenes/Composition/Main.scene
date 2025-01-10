@@ -20,10 +20,6 @@ entities:
             - 0.779999971
             - 0.49000001
             - 1
-          translation:
-            - 0
-            - 0
-            - -0.100000001
           children:
             - ref:onboarding
             - ref:whatsNew
@@ -97,14 +93,10 @@ entities:
             - 0.200000003
             - 0.200000003
             - 1
-          translation:
-            - 0
-            - 0
-            - 0.0591268539
         com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead:
-          hasLooked: false
-          once: false
           zOffset: 0.69999999999999996
+          once: false
+          hasLooked: false
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/5"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -123,10 +115,6 @@ entities:
             - 0.899999976
             - 0.449999988
             - 1
-          translation:
-            - 0.100000001
-            - -0.00407040119
-            - -0.0199999996
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/6"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -146,9 +134,9 @@ entities:
             - 0.449999988
             - 1
           translation:
-            - 0.100000001
+            - 0
             - -0.00407040119
-            - -0.0250000004
+            - 0
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/7"
         com.meta.spatial.toolkit.PanelDimensions:
