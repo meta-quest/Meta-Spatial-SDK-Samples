@@ -5,6 +5,7 @@ package com.meta.levinriegner.mediaview.app.immersive
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
+import com.meta.levinriegner.mediaview.BuildConfig
 import com.meta.levinriegner.mediaview.app.gallery.GalleryActivity
 import com.meta.levinriegner.mediaview.app.gallery.filter.MediaFilterActivity
 import com.meta.levinriegner.mediaview.app.gallery.menu.GalleryMenuActivity
@@ -37,7 +38,6 @@ import com.meta.spatial.runtime.AlphaMode
 import com.meta.spatial.runtime.PanelConfigOptions
 import com.meta.spatial.runtime.PanelConfigOptions.Companion.DEFAULT_DPI
 import com.meta.spatial.runtime.PanelSceneObject
-import com.meta.spatial.runtime.PanelShapeType
 import com.meta.spatial.runtime.QuadLayerConfig
 import com.meta.spatial.runtime.Scene
 import com.meta.spatial.toolkit.AppSystemActivity
@@ -577,6 +577,7 @@ class PanelManager(
             return
         }
         panel.entity.setComponent(Visible(show))
+        panel.entity.setComponent(LookAtHead(hasLooked = !show, once = !show, zOffset = 0.7f))
     }
 
     fun toggleGallery(show: Boolean) {
@@ -612,6 +613,14 @@ class PanelManager(
             return
         }
         panel.entity.setComponent(Visible(show))
+    }
+
+    fun debugPrintNodes() {
+        if (!BuildConfig.DEBUG) return
+        Timber.i("Printing all nodes...")
+        getComposition().nodes.forEach {
+            Timber.i("Node name: ${it.name}, Entity Id: ${it.entity.id}")
+        }
     }
 
 

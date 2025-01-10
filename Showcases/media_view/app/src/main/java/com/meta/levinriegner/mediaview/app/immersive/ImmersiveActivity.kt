@@ -87,6 +87,9 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
           rootEntity = Entity.create(),
           keyName = GLXFConstants.COMPOSITION_NAME,
       )
+        if(BuildConfig.DEBUG) {
+            panelManager.debugPrintNodes()
+        }
     }
   }
 
