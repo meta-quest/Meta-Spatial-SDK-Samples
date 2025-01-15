@@ -1,0 +1,11 @@
+<component name="CopyrightManager">
+  <settings default="Meta">
+    <module2copyright>
+      <element module="Project Files" copyright="Meta" />
+    </module2copyright>
+    <LanguageOptions name="Kotlin">
+      <option name="fileTypeOverride" value="3" />
+      <option name="block" value="false" />
+    </LanguageOptions>
+  </settings>
+</component>

@@ -1,3 +1,5 @@
+// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+
 package com.meta.levinriegner.mediaview.app.shared.util
 
 import androidx.compose.foundation.background
