@@ -41,117 +41,121 @@ import com.meta.levinriegner.mediaview.app.shared.view.LoadingView
 
 @Composable
 fun ImmersiveMenuView(
-    state: ImmersiveMenuState,
-    onMinimize: () -> Unit,
-    onEnterEdit: () -> Unit,
-    onExitEdit: () -> Unit,
-    onSaveAsNewImage: () -> Unit,
+  state: ImmersiveMenuState,
+  onMinimize: () -> Unit,
+  onEnterEdit: () -> Unit,
+  onExitEdit: () -> Unit,
+  onSaveAsNewImage: () -> Unit,
 ) {
-    return Row(
-        modifier =
-        Modifier
-            .fillMaxSize()
-            .padding(15.dp)
-            .border(
-                width = 1.dp, color = AppColor.MetaBlu, shape = RoundedCornerShape(64.dp)
-            )
-            .clip(RoundedCornerShape(64.dp))
-            .background(
-                Brush.verticalGradient(
-                    listOf(AppColor.GradientStart, AppColor.GradientEnd)
+  return Row(
+      modifier =
+      Modifier
+          .fillMaxSize()
+          .padding(15.dp)
+          .border(
+              width = 1.dp, color = AppColor.MetaBlu, shape = RoundedCornerShape(64.dp),
+          )
+          .clip(RoundedCornerShape(64.dp))
+          .background(
+              Brush.verticalGradient(
+                  listOf(AppColor.GradientStart, AppColor.GradientEnd),
+              ),
+          ),
+      verticalAlignment = Alignment.CenterVertically,
+      horizontalArrangement = Arrangement.SpaceBetween,
+  ) {
+    when (state) {
+      is ImmersiveMenuState.Initial -> {
+        Text(
+            modifier = Modifier
+                .padding(horizontal = Dimens.medium)
+                .weight(1f),
+            text = stringResource(R.string.immersive_mode_active_label),
+            textAlign = TextAlign.Center,
+            color = AppColor.White,
+        )
+        Row {
+          if (state.canEdit)
+            OutlinedButton(
+                modifier = Modifier.padding(end = Dimens.medium),
+                colors =
+                ButtonDefaults.buttonColors(
+                    contentColor = AppColor.White,
+                    containerColor = Color.Transparent,
+                ),
+                border = BorderStroke(1.dp, AppColor.White30),
+                onClick = { onEnterEdit() },
+            ) {
+              Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    imageVector = Icons.Outlined.Crop,
+                    contentDescription = "Crop",
                 )
-            ),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
-        when (state) {
-            is ImmersiveMenuState.Initial -> {
-                Text(
-                    modifier = Modifier
-                        .padding(horizontal = Dimens.medium)
-                        .weight(1f),
-                    text = stringResource(R.string.immersive_mode_active_label),
-                    textAlign = TextAlign.Center,
-                    color = AppColor.White
-                )
-                Row {
-                    if (state.canEdit)
-                        OutlinedButton(
-                            modifier = Modifier.padding(end = Dimens.medium),
-                            colors =
-                            ButtonDefaults.buttonColors(
-                                contentColor = AppColor.White,
-                                containerColor = Color.Transparent,
-                            ),
-                            border = BorderStroke(1.dp, AppColor.White30),
-                            onClick = { onEnterEdit() }) {
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(
-                                    imageVector = Icons.Outlined.Crop,
-                                    contentDescription = "Crop"
-                                )
-                                Spacer(modifier = Modifier.size(Dimens.xSmall))
-                                Text(stringResource(R.string.crop))
-                            }
-                        }
-                    OutlinedButton(
-                        modifier = Modifier.padding(end = Dimens.medium),
-                        colors =
-                        ButtonDefaults.buttonColors(
-                            contentColor = AppColor.White,
-                            containerColor = Color.Transparent,
-                        ),
-                        border = BorderStroke(1.dp, AppColor.White30),
-                        onClick = { onMinimize() }) {
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.icon_minimize),
-                                contentDescription = "Minimize"
-                            )
-                            Spacer(modifier = Modifier.size(Dimens.xSmall))
-                            Text(stringResource(R.string.minimize))
-                        }
-                    }
-                }
-
+                Spacer(modifier = Modifier.size(Dimens.xSmall))
+                Text(stringResource(R.string.crop))
+              }
             }
-
-            is ImmersiveMenuState.Editing -> {
-                OutlinedIconButton(
-                    modifier = Modifier
-                        .padding(Dimens.medium)
-                        .aspectRatio(1f),
-                    colors =
-                    IconButtonDefaults.iconButtonColors(
-                        contentColor = AppColor.White,
-                        containerColor = Color.Transparent,
-                    ),
-                    border = BorderStroke(1.dp, AppColor.White30),
-                    onClick = { onExitEdit() }) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
-                        contentDescription = "Back"
-                    )
-                }
-                ElevatedButton(
-                    modifier = Modifier.padding(end = Dimens.medium),
-                    colors =
-                    ButtonDefaults.buttonColors(
-                        contentColor = AppColor.White,
-                        containerColor = AppColor.MetaBlu,
-                    ),
-                    onClick = { if (!state.saveLoading) onSaveAsNewImage() }) {
-                    Box(contentAlignment = Alignment.Center) {
-                        Text(
-                            stringResource(R.string.save_as_new_image),
-                            Modifier.alpha(if (state.saveLoading) 0.0f else 1f)
-                        )
-                        if (state.saveLoading) {
-                            LoadingView()
-                        }
-                    }
-                }
+          OutlinedButton(
+              modifier = Modifier.padding(end = Dimens.medium),
+              colors =
+              ButtonDefaults.buttonColors(
+                  contentColor = AppColor.White,
+                  containerColor = Color.Transparent,
+              ),
+              border = BorderStroke(1.dp, AppColor.White30),
+              onClick = { onMinimize() },
+          ) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+              Icon(
+                  painter = painterResource(id = R.drawable.icon_minimize),
+                  contentDescription = "Minimize",
+              )
+              Spacer(modifier = Modifier.size(Dimens.xSmall))
+              Text(stringResource(R.string.minimize))
             }
+          }
         }
+
+      }
+
+      is ImmersiveMenuState.Editing -> {
+        OutlinedIconButton(
+            modifier = Modifier
+                .padding(Dimens.medium)
+                .aspectRatio(1f),
+            colors =
+            IconButtonDefaults.iconButtonColors(
+                contentColor = AppColor.White,
+                containerColor = Color.Transparent,
+            ),
+            border = BorderStroke(1.dp, AppColor.White30),
+            onClick = { onExitEdit() },
+        ) {
+          Icon(
+              imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+              contentDescription = "Back",
+          )
+        }
+        ElevatedButton(
+            modifier = Modifier.padding(end = Dimens.medium),
+            colors =
+            ButtonDefaults.buttonColors(
+                contentColor = AppColor.White,
+                containerColor = AppColor.MetaBlu,
+            ),
+            onClick = { if (!state.saveLoading) onSaveAsNewImage() },
+        ) {
+          Box(contentAlignment = Alignment.Center) {
+            Text(
+                stringResource(R.string.save_as_new_image),
+                Modifier.alpha(if (state.saveLoading) 0.0f else 1f),
+            )
+            if (state.saveLoading) {
+              LoadingView()
+            }
+          }
+        }
+      }
     }
+  }
 }

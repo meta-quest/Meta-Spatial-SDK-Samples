@@ -14,25 +14,25 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ImmersiveMenuActivity : ComponentActivity() {
 
-    private val viewModel by viewModels<ImmersiveMenuViewModel>()
+  private val viewModel by viewModels<ImmersiveMenuViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        buildUi()
-    }
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    enableEdgeToEdge()
+    buildUi()
+  }
 
-    private fun buildUi() {
-        setContent {
-            MediaViewTheme {
-                ImmersiveMenuView(
-                    state = viewModel.state.collectAsState().value,
-                    onMinimize = { viewModel.exitImmersiveMedia() },
-                    onEnterEdit = { viewModel.onEditPressed() },
-                    onExitEdit = { viewModel.onExitEditPressed() },
-                    onSaveAsNewImage = { viewModel.onSaveImagePressed() }
-                )
-            }
-        }
+  private fun buildUi() {
+    setContent {
+      MediaViewTheme {
+        ImmersiveMenuView(
+            state = viewModel.state.collectAsState().value,
+            onMinimize = { viewModel.exitImmersiveMedia() },
+            onEnterEdit = { viewModel.onEditPressed() },
+            onExitEdit = { viewModel.onExitEditPressed() },
+            onSaveAsNewImage = { viewModel.onSaveImagePressed() },
+        )
+      }
     }
+  }
 }

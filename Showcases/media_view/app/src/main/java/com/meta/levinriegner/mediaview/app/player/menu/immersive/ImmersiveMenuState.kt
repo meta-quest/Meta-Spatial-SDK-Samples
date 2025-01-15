@@ -1,6 +1,6 @@
 package com.meta.levinriegner.mediaview.app.player.menu.immersive
 
 sealed class ImmersiveMenuState {
-    data class Initial(val canEdit: Boolean) : ImmersiveMenuState()
-    data class Editing(val saveLoading: Boolean) : ImmersiveMenuState()
+  data class Initial(val canEdit: Boolean) : ImmersiveMenuState()
+  data class Editing(val saveLoading: Boolean) : ImmersiveMenuState()
 }
