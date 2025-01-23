@@ -11,19 +11,35 @@ constructor(
     private val userPreferencesService: UserPreferencesService,
 ) {
 
-  fun isSampleMediaSaved(): Boolean {
-    return userPreferencesService.isSampleMediaSaved()
-  }
-
-  fun setSampleMediaSaved(saved: Boolean) {
-    userPreferencesService.setSampleMediaSaved(saved)
-  }
-
   fun isPrivacyPolicyAccepted(): Boolean {
     return userPreferencesService.isPrivacyPolicyAccepted()
   }
 
   fun setPrivacyPolicyAccepted(accepted: Boolean) {
     userPreferencesService.setPrivacyPolicyAccepted(accepted)
+  }
+
+  fun getSampleMediaVersion(): Int? {
+    return userPreferencesService.getSampleMediaVersion()
+  }
+
+  fun setSampleMediaVersion(version: Int) {
+    userPreferencesService.setSampleMediaVersion(version)
+  }
+
+  fun areReleaseNotesSeenFor(version: String): Boolean {
+    return userPreferencesService.areReleaseNotesSeenFor(version)
+  }
+
+  fun setReleaseNotesSeenFor(version: String) {
+    userPreferencesService.setReleaseNotesSeenFor(version)
+  }
+
+  fun isOnboardingCompleted(): Boolean {
+    return userPreferencesService.isOnboardingCompleted()
+  }
+
+  fun setOnboardingCompleted() {
+    userPreferencesService.setOnboardingCompleted()
   }
 }

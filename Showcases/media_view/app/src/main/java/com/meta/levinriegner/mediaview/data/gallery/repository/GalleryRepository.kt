@@ -46,8 +46,15 @@ constructor(
   suspend fun setMediaFileReady(contentValues: ContentValues, uri: Uri) =
       withContext(dispatcher) { galleryService.setMediaFileReady(contentValues, uri) }
 
-  suspend fun sampleMediaExists(): Boolean =
-      withContext(dispatcher) { galleryService.sampleMediaExists() }
+  fun setMediaFileDeleted(uri: Uri) = galleryService.setMediaFileDeleted(uri)
 
-  suspend fun deleteSampleMedia() = withContext(dispatcher) { galleryService.deleteSampleMedia() }
+  suspend fun deleteSampleMedia(exceptRelativePath: String? = null) =
+      withContext(dispatcher) { galleryService.deleteSampleMedia(exceptRelativePath) }
+
+  suspend fun deleteSampleMediaSubFolder(relativePath: String) =
+      withContext(dispatcher) { galleryService.deleteSampleMediaSubFolder(relativePath) }
+
+  // Saves a cropped media file to the device gallery using JPEG format
+  suspend fun saveCroppedMediaFile(mediaModel: MediaModel, onWrite: (FileOutputStream) -> Unit) =
+      withContext(dispatcher) { galleryService.saveCroppedMediaFile(mediaModel, onWrite) }
 }

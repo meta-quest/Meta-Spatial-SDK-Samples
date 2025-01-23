@@ -3,6 +3,7 @@
 package com.meta.levinriegner.mediaview.app.player
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -13,6 +14,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -35,6 +38,7 @@ import timber.log.Timber
 class PlayerActivity : ComponentActivity() {
 
   private val viewModel: PlayerViewModel by viewModels()
+  private val cropRequested = mutableStateOf(false)
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -50,6 +54,27 @@ class PlayerActivity : ComponentActivity() {
           Timber.i("Event: $event")
           when (event) {
             PlayerEvent.Close -> finish()
+            PlayerEvent.OnCropImageRequested -> {
+              cropRequested.value = true
+            }
+
+            is PlayerEvent.OnImageSaved -> {
+              if (event.success) {
+                Toast.makeText(
+                        this@PlayerActivity,
+                        getString(R.string.save_as_new_image_success),
+                        Toast.LENGTH_LONG,
+                    )
+                    .show()
+              } else {
+                Toast.makeText(
+                        this@PlayerActivity,
+                        event.error ?: getString(R.string.save_as_new_image_error),
+                        Toast.LENGTH_LONG,
+                    )
+                    .show()
+              }
+            }
           }
         }
       }
@@ -59,14 +84,24 @@ class PlayerActivity : ComponentActivity() {
   private fun buildUi() {
     setContent {
       // Observables
-      val mediaModel = viewModel.state.collectAsState()
+      val uiState by viewModel.state.collectAsState()
       // UI
       Surface(modifier = Modifier.fillMaxSize(), color = Color.Transparent) {
         Box(Modifier.fillMaxSize()) {
-          when (val state = mediaModel.value) {
+          when (val state = uiState) {
             PlayerState.Empty -> Box(Modifier)
             is PlayerState.Image2D -> {
-              ImageView(uri = state.uri)
+              ImageView(
+                  uri = state.uri,
+                  cropState = state.cropState,
+                  cropRequested = cropRequested,
+                  onImageCropped = { viewModel.onImageCropped(it) },
+              )
+              //              Box(contentAlignment = Alignment.Center, modifier =
+              // Modifier.fillMaxSize()) {
+              //                ImageView(uri = state.uri, cropState = state.cropState)
+              //                TouchDebugGridView(count = 100)
+              //              }
             }
 
             is PlayerState.ImagePanorama -> {

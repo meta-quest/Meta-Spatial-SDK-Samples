@@ -19,5 +19,21 @@ sealed class FilterAppEvent : AppEvent() {
 sealed class MediaPlayerEvent : AppEvent() {
   data class Close(val mediaId: Long) : MediaPlayerEvent()
 
+  data class Deleted(val mediaId: Long) : MediaPlayerEvent()
+
   data object CloseAll : MediaPlayerEvent()
+}
+
+sealed class NavigationEvent : AppEvent() {
+  data object PrivacyPolicyAccepted : NavigationEvent()
+}
+
+sealed class EditEvent : AppEvent() {
+  data class EnterCrop(val mediaId: Long) : EditEvent()
+
+  data class ExitCrop(val mediaId: Long) : EditEvent()
+
+  data class SaveImageRequest(val mediaId: Long) : EditEvent()
+
+  data class SaveImageCompleted(val mediaId: Long, val success: Boolean) : EditEvent()
 }

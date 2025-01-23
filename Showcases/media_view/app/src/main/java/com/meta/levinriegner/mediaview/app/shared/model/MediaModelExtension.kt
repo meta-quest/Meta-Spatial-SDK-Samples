@@ -204,14 +204,7 @@ fun MediaModel.maximizedPanelConfigOptions(): PanelConfigOptions {
             panelShader = "data/shaders/punch/punch",
             alphaMode = AlphaMode.HOLE_PUNCH,
             includeGlass = false,
-            sceneMeshCreator = { texture: SceneTexture ->
-              SceneMesh.equirectSurface(
-                  2.0f,
-                  (Math.PI * 2.0).toFloat(),
-                  (Math.PI).toFloat(),
-                  (Math.PI).toFloat(),
-                  SceneMaterial(texture))
-            })
+        )
 
     VIDEO_360 ->
         PanelConfigOptions(

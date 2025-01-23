@@ -80,6 +80,7 @@ data class MediaStoreFileDto(
         height = height,
         mediaType = mediaType,
         mediaFilter = mediaFilter,
+        relativePath = relativePath,
     )
   }
 

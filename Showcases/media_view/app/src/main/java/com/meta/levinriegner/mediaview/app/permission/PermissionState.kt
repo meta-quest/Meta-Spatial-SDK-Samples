@@ -10,8 +10,5 @@ sealed class PermissionState {
 
   data object PermissionDenied : PermissionState()
 
-  // Sample Assets Storage
-  data object LoadingSampleAssets : PermissionState()
-
-  data object SampleAssetsLoaded : PermissionState()
+  data object PermissionAccepted : PermissionState()
 }

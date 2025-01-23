@@ -30,6 +30,10 @@ class MinimizedMenuActivity : ComponentActivity() {
               viewModel.close()
               finish()
             },
+            onDelete = {
+              viewModel.delete()
+              finish()
+            },
         )
       }
     }

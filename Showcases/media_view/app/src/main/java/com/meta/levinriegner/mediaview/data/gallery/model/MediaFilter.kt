@@ -9,6 +9,7 @@ enum class MediaFilter {
   MEDIA_360,
   MEDIA_SPATIAL,
   MEDIA_POV,
+  SAMPLE_MEDIA,
   ;
 
   companion object {

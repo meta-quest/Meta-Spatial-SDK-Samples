@@ -5,12 +5,15 @@ package com.meta.levinriegner.mediaview.app.immersive
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
+import com.meta.levinriegner.mediaview.BuildConfig
 import com.meta.levinriegner.mediaview.app.gallery.GalleryActivity
 import com.meta.levinriegner.mediaview.app.gallery.filter.MediaFilterActivity
 import com.meta.levinriegner.mediaview.app.gallery.menu.GalleryMenuActivity
+import com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead
 import com.meta.levinriegner.mediaview.app.immersive.entity.PanelTransformations
 import com.meta.levinriegner.mediaview.app.immersive.panel.PanelRegistrationIds
 import com.meta.levinriegner.mediaview.app.immersive.panel.model.AppPanelRegistration
+import com.meta.levinriegner.mediaview.app.onboarding.OnboardingActivity
 import com.meta.levinriegner.mediaview.app.player.PlayerActivity
 import com.meta.levinriegner.mediaview.app.player.menu.immersive.ImmersiveMenuActivity
 import com.meta.levinriegner.mediaview.app.player.menu.minimized.MinimizedMenuActivity
@@ -21,7 +24,9 @@ import com.meta.levinriegner.mediaview.app.shared.model.minimizedPanelConfigOpti
 import com.meta.levinriegner.mediaview.app.shared.model.panelWidthAndHeight
 import com.meta.levinriegner.mediaview.app.shared.theme.Dimens
 import com.meta.levinriegner.mediaview.app.upload.UploadActivity
+import com.meta.levinriegner.mediaview.app.whatsnew.WhatsNewActivity
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
+import com.meta.levinriegner.mediaview.data.gallery.model.MediaType.IMAGE_360
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaType.VIDEO_360
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
@@ -57,7 +62,6 @@ class PanelManager(
 ) {
   private val zIndexMenu = 99
 
-  private val galleryPanelDistance = 0.9f
   private val playerPanelDistance = 0.8f
   private val immersiveMenuHeight = 0.1f
 
@@ -75,10 +79,11 @@ class PanelManager(
             },
             PanelCreator(PanelRegistrationIds.MEDIA_FILTER) { ent -> createMediaFilterPanel(ent) },
             PanelCreator(PanelRegistrationIds.GALLERY_MENU) { ent -> createGalleryMenuPanel(ent) },
+            PanelCreator(PanelRegistrationIds.ONBOARDING) { ent -> createOnboardingPanel(ent) },
+            PanelCreator(PanelRegistrationIds.WHATS_NEW) { ent -> createWhatsNewPanel(ent) },
             PanelCreator(PanelRegistrationIds.PRIVACY_POLICY) { ent ->
               createPrivacyPolicyPanel(ent)
-            },
-        )
+            })
 
     panelRegistrations.forEach { panelRegistration ->
       registeredPanels[panelRegistration.registrationId] =
@@ -89,6 +94,28 @@ class PanelManager(
     }
 
     return panelRegistrations
+  }
+
+  private fun createWhatsNewPanel(ent: Entity): PanelSceneObject {
+    val config =
+        PanelConfigOptions(
+            enableLayer = true,
+            enableTransparent = false,
+            includeGlass = false,
+        )
+
+    return PanelSceneObject(scene, spatialContext, WhatsNewActivity::class.java, ent, config)
+  }
+
+  private fun createOnboardingPanel(ent: Entity): PanelSceneObject {
+    val config =
+        PanelConfigOptions(
+            enableLayer = true,
+            enableTransparent = false,
+            includeGlass = false,
+        )
+
+    return PanelSceneObject(scene, spatialContext, OnboardingActivity::class.java, ent, config)
   }
 
   fun provideUploadPanelRegistration(): PanelRegistration {
@@ -396,10 +423,10 @@ class PanelManager(
     }
   }
 
-  fun destroyUploadEntity(entityId: Long) {
+  fun destroyEntity(entityId: Long) {
     val panels = Query.where { has(Panel.id) }.eval()
     val uploadPanel = panels.firstOrNull { it.id == entityId }
-    uploadPanel?.destroy() ?: Timber.w("Upload panel not found")
+    uploadPanel?.destroy() ?: Timber.w("Panel not found")
   }
 
   private fun destroyImmersiveMenuEntity(entityId: Long) {
@@ -438,18 +465,31 @@ class PanelManager(
         .filter { it.id != mediaModel.entityId }
         .forEach { panelTransformations.setPanelVisibility(it, false) }
 
-    // Show menu centerBottom from the player panel
+    // Save entity id to media model
     val immersiveMenu = createImmersiveMenuEntity(mediaModel)
     mediaModel.immersiveMenuEntityId = immersiveMenu.id
-    Handler(Looper.getMainLooper())
-        .postDelayed(
-            {
-              immersiveMenu.setComponent(TransformParent(entity))
-              immersiveMenu.setComponent(
-                  Transform(
-                      Pose(mediaModel.maximizedBottomCenterPanelVector3(), Quaternion(0f, 0f, 0f))))
-            },
-            100)
+    // Position the immersive menu
+    when (mediaModel.mediaType) {
+      VIDEO_360,
+      IMAGE_360 -> {
+        immersiveMenu.setComponent(LookAtHead(once = true))
+        immersiveMenu.setComponent(Grabbable())
+      }
+
+      else -> {
+        Handler(Looper.getMainLooper())
+            .postDelayed(
+                {
+                  immersiveMenu.setComponent(TransformParent(entity))
+                  immersiveMenu.setComponent(
+                      Transform(
+                          Pose(
+                              mediaModel.maximizedBottomCenterPanelVector3(),
+                              Quaternion(0f, 0f, 0f))))
+                },
+                100)
+      }
+    }
   }
 
   fun minimizePlayerPanel(mediaModel: MediaModel) {
@@ -480,10 +520,16 @@ class PanelManager(
     Query.where { has(Panel.id) }
         .eval()
         .filter {
-          val privacyPolicyPanel =
-              getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_PRIVACY)
-
-          it.id != mediaModel.entityId && it.id != privacyPolicyPanel?.entity?.id
+          it.id != mediaModel.entityId &&
+              it.id !=
+                  getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_PRIVACY)?.entity?.id &&
+              it.id !=
+                  getComposition()
+                      .tryGetNodeByName(GLXFConstants.NODE_NAME_WHATS_NEW)
+                      ?.entity
+                      ?.id &&
+              it.id !=
+                  getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_ONBOARDING)?.entity?.id
         }
         .forEach { panelTransformations.setPanelVisibility(it, true) }
   }
@@ -500,6 +546,7 @@ class PanelManager(
       return
     }
     panel.entity.setComponent(Visible(show))
+    panel.entity.setComponent(LookAtHead(hasLooked = !show, once = !show, zOffset = 0.7f))
   }
 
   fun toggleGallery(show: Boolean) {
@@ -514,6 +561,39 @@ class PanelManager(
         .tryGetNodeByName(GLXFConstants.NODE_NAME_MEDIA_FILTERS)
         ?.entity
         ?.setComponent(Visible(show))
+    // Set gallery menu visibility
+    getComposition()
+        .tryGetNodeByName(GLXFConstants.NODE_NAME_GALLERY_MENU)
+        ?.entity
+        ?.setComponent(Visible(show))
+  }
+
+  fun toggleOnboarding(show: Boolean) {
+    val panel = getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_ONBOARDING)
+    if (panel?.entity == null) {
+      Timber.w("Onboarding panel entity not found")
+      return
+    }
+    panel.entity.setComponent(Visible(show))
+    // Move to the front of the gallery
+    panel.entity.setComponent(Transform(Pose(Vector3(-0.09f, 0f, -0.05f), Quaternion(0f, 0f, 0f))))
+  }
+
+  fun toggleWhatsNew(show: Boolean) {
+    val panel = getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_WHATS_NEW)
+    if (panel?.entity == null) {
+      Timber.w("Whats New panel entity not found")
+      return
+    }
+    panel.entity.setComponent(Visible(show))
+    // Move to the front of the gallery
+    panel.entity.setComponent(Transform(Pose(Vector3(-0.09f, 0f, -0.04f), Quaternion(0f, 0f, 0f))))
+  }
+
+  fun debugPrintNodes() {
+    if (!BuildConfig.DEBUG) return
+    Timber.i("Printing all nodes...")
+    getComposition().nodes.forEach { Timber.i("Node name: ${it.name}, Entity Id: ${it.entity.id}") }
   }
 
   companion object {

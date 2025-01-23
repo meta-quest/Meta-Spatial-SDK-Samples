@@ -3,12 +3,13 @@
 package com.meta.levinriegner.mediaview.app.player
 
 import android.net.Uri
+import com.meta.levinriegner.mediaview.app.player.view.edit.CropState
 
 sealed class PlayerState {
 
   data object Empty : PlayerState()
 
-  data class Image2D(val uri: Uri) : PlayerState()
+  data class Image2D(val uri: Uri, val cropState: CropState) : PlayerState()
 
   data class ImagePanorama(val uri: Uri) : PlayerState()
 

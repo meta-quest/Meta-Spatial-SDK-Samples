@@ -86,11 +86,7 @@ class PermissionActivity : ComponentActivity() {
               // Do nothing, handle in UI
             }
 
-            PermissionState.LoadingSampleAssets -> {
-              // Do nothing, handle in UI
-            }
-
-            PermissionState.SampleAssetsLoaded -> {
+            PermissionState.PermissionAccepted -> {
               Timber.i("Navigating to Immersive Activity")
               // Navigate to Immersive Activity
               val immersiveIntent =
@@ -134,22 +130,7 @@ class PermissionActivity : ComponentActivity() {
                     }
               }
 
-              PermissionState.LoadingSampleAssets -> {
-                Column(
-                    modifier = Modifier.fillMaxSize().padding(Dimens.medium),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                  Text(
-                      text = stringResource(id = R.string.storage_saving_samples_loading),
-                      textAlign = TextAlign.Center,
-                  )
-                  Spacer(modifier = Modifier.height(Dimens.large))
-                  LoadingView()
-                }
-              }
-
-              PermissionState.SampleAssetsLoaded -> {
+              PermissionState.PermissionAccepted -> {
                 // Do nothing, navigate to Immersive Activity
                 Box(Modifier)
               }

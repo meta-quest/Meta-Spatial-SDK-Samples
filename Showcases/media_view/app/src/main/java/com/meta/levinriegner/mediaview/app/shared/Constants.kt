@@ -3,6 +3,7 @@
 package com.meta.levinriegner.mediaview.app.shared
 
 object Constants {
-  const val TERMS_AND_CONDITIONS_URL = "https://mediaviewxr.com/terms"
-  const val PRIVACY_POLICY_URL = "https://mediaviewxr.com/privacy-policy"
+  const val WEBSITE_URL = "https://mediaviewxr.com"
+  const val TERMS_AND_CONDITIONS_URL = "$WEBSITE_URL/terms"
+  const val PRIVACY_POLICY_URL = "$WEBSITE_URL/privacy-policy"
 }

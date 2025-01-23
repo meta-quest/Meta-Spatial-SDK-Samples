@@ -15,7 +15,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.AutoDelete
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.outlined.AutoDelete
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.HorizontalDivider
@@ -35,14 +38,17 @@ import androidx.compose.ui.unit.sp
 import com.meta.levinriegner.mediaview.R
 import com.meta.levinriegner.mediaview.app.shared.theme.AppColor
 import com.meta.levinriegner.mediaview.app.shared.theme.Dimens
+import timber.log.Timber
 
 @Composable
 fun MinimizedMenuView(
     modifier: Modifier = Modifier,
+    onDelete: () -> Unit,
     onMaximize: () -> Unit,
     onClose: () -> Unit,
 ) {
   val isMenuVisible = remember { mutableStateOf(false) }
+  val confirmingDelete = remember { mutableStateOf(false) }
   return Column(
       modifier = modifier,
   ) {
@@ -98,7 +104,30 @@ fun MinimizedMenuView(
         DropdownMenuItem(
             leadingIcon = {
               (Icon(
-                  imageVector = Icons.Default.Close,
+                  imageVector =
+                      if (!confirmingDelete.value) Icons.Outlined.Delete
+                      else Icons.Outlined.AutoDelete,
+                  contentDescription = null,
+                  modifier = Modifier.size(30.dp)))
+            },
+            text = {
+              Text(
+                  fontSize = 17.sp,
+                  text = if (!confirmingDelete.value) "Delete" else "Confirm Delete?")
+            },
+            onClick = {
+              if (confirmingDelete.value) {
+                onDelete()
+              } else {
+                Timber.i("Confirming delete")
+              }
+              confirmingDelete.value = !confirmingDelete.value
+            })
+        HorizontalDivider(color = AppColor.White15, thickness = 1.dp)
+        DropdownMenuItem(
+            leadingIcon = {
+              (Icon(
+                  painter = painterResource(id = R.drawable.icon_close),
                   contentDescription = null,
                   modifier = Modifier.size(30.dp)))
             },

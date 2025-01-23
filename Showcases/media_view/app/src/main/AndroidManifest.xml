@@ -21,7 +21,7 @@
     android:dataExtractionRules="@xml/data_extraction_rules"
     android:fullBackupContent="@xml/backup_rules"
     android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
+    android:label="${applicationLabel}"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/Theme.MediaView"
@@ -77,6 +77,20 @@
       android:name=".app.gallery.filter.MediaFilterActivity"
       android:allowEmbedded="true"
       android:exported="true"
+      android:theme="@style/Theme.MediaView"
+    />
+        <activity
+      android:name=".app.onboarding.OnboardingActivity"
+      android:allowEmbedded="true"
+      android:exported="true"
+      android:launchMode="standard"
+      android:theme="@style/Theme.MediaView"
+    />
+        <activity
+      android:name=".app.whatsnew.WhatsNewActivity"
+      android:allowEmbedded="true"
+      android:exported="true"
+      android:launchMode="standard"
       android:theme="@style/Theme.MediaView"
     />
         <activity

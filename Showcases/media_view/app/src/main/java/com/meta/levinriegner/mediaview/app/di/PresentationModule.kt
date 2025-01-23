@@ -2,12 +2,15 @@
 
 package com.meta.levinriegner.mediaview.app.di
 
+import android.content.Context
 import com.meta.levinriegner.mediaview.app.events.EventBus
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
+import com.meta.levinriegner.mediaview.app.shared.util.InternetAvailability
 import com.meta.spatial.toolkit.SpatialActivityManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -26,5 +29,11 @@ object PresentationModule {
   @Provides
   fun provideEventBus(): EventBus {
     return EventBus()
+  }
+
+  @Singleton
+  @Provides
+  fun internetChecker(@ApplicationContext appContext: Context): InternetAvailability {
+    return InternetAvailability(appContext)
   }
 }

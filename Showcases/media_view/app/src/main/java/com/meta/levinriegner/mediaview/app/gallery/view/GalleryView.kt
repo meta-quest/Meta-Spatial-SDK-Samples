@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.sharp.Info
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -30,6 +31,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -50,6 +53,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.meta.levinriegner.mediaview.R
 import com.meta.levinriegner.mediaview.app.gallery.filter.titleResId
+import com.meta.levinriegner.mediaview.app.onboarding.view.OnboardingButton
 import com.meta.levinriegner.mediaview.app.shared.model.UiState
 import com.meta.levinriegner.mediaview.app.shared.theme.AppColor
 import com.meta.levinriegner.mediaview.app.shared.theme.Dimens
@@ -70,6 +74,7 @@ fun GalleryView(
     onMediaSelected: (MediaModel) -> Unit,
     onSortBy: (MediaSortBy) -> Unit,
     onToggleMetadata: (Boolean) -> Unit,
+    onOnboardingButtonPressed: () -> Unit,
 ) {
   MediaViewTheme {
     Scaffold(
@@ -94,6 +99,7 @@ fun GalleryView(
                       fileCount = uiState.data.size,
                       showMetadata = showMetadata,
                       onToggleMetadata = onToggleMetadata,
+                      onOnboardingButtonPressed = onOnboardingButtonPressed,
                   )
                   MediaGrid(
                       media = uiState.data,
@@ -122,6 +128,7 @@ private fun Header(
     fileCount: Int,
     showMetadata: Boolean,
     onToggleMetadata: (Boolean) -> Unit,
+    onOnboardingButtonPressed: () -> Unit,
 ) {
   var sortExpanded by remember { mutableStateOf(false) }
   Column {
@@ -144,6 +151,9 @@ private fun Header(
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
+          OnboardingButton(onPressed = onOnboardingButtonPressed)
+          Box(modifier = Modifier.size(Dimens.medium))
+
           Column(horizontalAlignment = Alignment.End, modifier = Modifier) {
             OutlinedButton(
                 onClick = { sortExpanded = true },
@@ -226,15 +236,28 @@ private fun Header(
                   }
                 }
           }
-          /**
-           * Box(modifier = Modifier.size(Dimens.medium)) Hidden for 0.0.13
-           *
-           * TODO: Style Switch( colors = SwitchDefaults.colors().copy( uncheckedThumbColor =
-           *   AppColor.White60, uncheckedBorderColor = AppColor.White60, uncheckedTrackColor =
-           *   AppColor.GradientStart, checkedThumbColor = AppColor.GradientStart,
-           *   checkedBorderColor = AppColor.White, checkedTrackColor = AppColor.White, ), checked =
-           *   showMetadata, onCheckedChange = { onToggleMetadata(it) })*
-           */
+
+          Box(modifier = Modifier.size(Dimens.medium))
+          Switch(
+              thumbContent = {
+                Icon(
+                    Icons.Sharp.Info,
+                    "Toggle media info",
+                )
+              },
+              colors =
+                  SwitchDefaults.colors()
+                      .copy(
+                          uncheckedThumbColor = AppColor.White60,
+                          uncheckedBorderColor = Color.Transparent,
+                          uncheckedTrackColor = AppColor.White15,
+                          checkedThumbColor = Color.White,
+                          checkedBorderColor = Color.Transparent,
+                          checkedTrackColor = AppColor.White15,
+                          checkedIconColor = AppColor.MetaBlu,
+                      ),
+              checked = showMetadata,
+              onCheckedChange = { onToggleMetadata(it) })
         }
       }
     }

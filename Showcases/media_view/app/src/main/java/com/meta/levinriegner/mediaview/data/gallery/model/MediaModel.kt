@@ -20,11 +20,24 @@ data class MediaModel(
     val height: Int?,
     val mediaType: MediaType?,
     val mediaFilter: MediaFilter?,
+    val relativePath: String?,
     // Mutable fields
     var entityId: Long? = null,
     var minimizedMenuEntityId: Long? = null,
     var immersiveMenuEntityId: Long? = null,
 ) : Parcelable {
+
+  val editOptions: List<MediaEditOption>
+    get() =
+        when (mediaType) {
+          MediaType.IMAGE_2D -> emptyList()
+          MediaType.VIDEO_2D -> emptyList()
+          MediaType.IMAGE_PANORAMA -> emptyList()
+          MediaType.IMAGE_360 -> listOf(MediaEditOption.Crop)
+          MediaType.VIDEO_360 -> emptyList()
+          MediaType.VIDEO_SPATIAL -> emptyList()
+          null -> emptyList()
+        }
 
   fun durationHMS(): Triple<Int, Int, Int>? {
     val duration = durationMs ?: return null
@@ -32,6 +45,33 @@ data class MediaModel(
     val minutes = (duration % 3600000) / 60000
     val seconds = (duration % 60000) / 1000
     return Triple(hours, minutes, seconds)
+  }
+
+  fun nameLabel(): String? {
+    return name?.substringBeforeLast(".")
+  }
+
+  fun mimeTypeLabel(): String? {
+    return mimeType?.split("/")?.last()?.uppercase()
+  }
+
+  fun sizeLabel(): String? {
+    size?.let {
+      val sizeInMb = it.div((1024.0 * 1024.0))
+      val sizeInGb = it.div((1024.0 * 1024.0 * 1024.0))
+
+      if (sizeInGb >= 1) {
+        return String.format("%.2f GB", sizeInGb)
+      } else {
+        if (sizeInMb >= 1) {
+          return String.format("%.2f MB", sizeInMb)
+        } else {
+          return "$it bytes"
+        }
+      }
+    }
+
+    return null
   }
 
   fun debugPrint(): String {

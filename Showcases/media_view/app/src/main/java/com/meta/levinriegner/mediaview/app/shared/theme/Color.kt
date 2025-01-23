@@ -22,5 +22,6 @@ class AppColor {
 
     val BackgroundSweep =
         Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd))
+    val DarkBackgroundSweep = Brush.verticalGradient(listOf(Black, GradientStart))
   }
 }

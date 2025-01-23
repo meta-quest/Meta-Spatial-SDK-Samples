@@ -7,7 +7,9 @@ import android.content.ContentValues
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.media3.common.MimeTypes
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaFilter
+import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaSortBy
 import com.meta.levinriegner.mediaview.data.gallery.model.StorageType
 import com.meta.levinriegner.mediaview.data.gallery.service.model.MediaStoreFileDto
@@ -47,6 +49,15 @@ constructor(
       while (cursor.moveToNext()) {
         val dto = MediaStoreFileDto.fromCursor(cursor)
         if (dto.mimeType == null) continue
+        // Check if the media is a sample
+        if (dto.relativePath?.startsWith(
+            "$SAVED_MEDIA_FOLDER_NAME/$SAMPLES_DEVICE_SUBFOLDER_NAME") == true) {
+          if (filter == MediaFilter.SAMPLE_MEDIA) {
+            media.add(dto)
+          } else {
+            continue
+          }
+        }
         if (filter != MediaFilter.ALL) {
           // Check if the media is of the correct type
           if (dto.mediaFilter == filter) {
@@ -106,22 +117,76 @@ constructor(
     contentResolver.update(uri, contentValues, null, null)
   }
 
+  fun setMediaFileDeleted(uri: Uri) {
+    Timber.d("Deleting media: $uri")
+    contentResolver.delete(uri, null, null)
+  }
+
   private fun sampleMediaFolderPath(): String {
     return Environment.getExternalStorageDirectory().absolutePath +
         "/$SAVED_MEDIA_FOLDER_NAME" +
         "/$SAMPLES_DEVICE_SUBFOLDER_NAME"
   }
 
-  fun sampleMediaExists(): Boolean {
-    val file = File(sampleMediaFolderPath())
-    return file.exists()
-  }
-
-  fun deleteSampleMedia() {
+  fun deleteSampleMedia(exceptRelativePath: String?) {
     val file = File(sampleMediaFolderPath())
     if (file.exists()) {
-      file.deleteRecursively()
+      if (exceptRelativePath != null) {
+        file.listFiles()?.forEach {
+          if (it.isDirectory && it.name == exceptRelativePath) {
+            // Skip
+          } else {
+            it.deleteRecursively()
+          }
+        }
+      } else {
+        file.deleteRecursively()
+      }
+    } else {
+      Timber.i("No sample folder to delete")
     }
+  }
+
+  fun deleteSampleMediaSubFolder(relativePath: String) {
+    val file = File(sampleMediaFolderPath())
+    if (file.exists()) {
+      file.listFiles()?.forEach {
+        if (it.isDirectory && it.name == relativePath) {
+          it.deleteRecursively()
+        }
+      }
+    } else {
+      Timber.i("No sample folder to delete")
+    }
+  }
+
+  fun saveCroppedMediaFile(
+      mediaModel: MediaModel,
+      onWrite: (FileOutputStream) -> Unit,
+  ) {
+    // Create
+    val fileName = "${mediaModel.name ?: mediaModel.id}_cropped_${System.currentTimeMillis()}"
+    val contentValues =
+        ContentValues().apply {
+          put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+          put(MediaStore.MediaColumns.MIME_TYPE, MimeTypes.IMAGE_JPEG)
+          mediaModel.relativePath?.let { put(MediaStore.MediaColumns.RELATIVE_PATH, it) }
+          put(MediaStore.MediaColumns.IS_PENDING, 1)
+        }
+    val uri =
+        contentResolver.insert(MediaStoreQueryBuilder.collectionUri, contentValues)
+            ?: throw IllegalStateException("Failed to create media file")
+    // Write
+    contentResolver.openFileDescriptor(uri, "wa", null).use { file ->
+      file?.let {
+        val fos = FileOutputStream(it.fileDescriptor)
+        fos.use { onWrite(fos) }
+      }
+    }
+    // Update
+    contentValues.clear()
+    contentValues.put(MediaStore.MediaColumns.IS_PENDING, 0)
+    contentResolver.update(uri, contentValues, null, null)
   }
 
   companion object {

@@ -8,6 +8,8 @@ object PanelRegistrationIds {
   const val MEDIA_FILTER = 3
   const val UPLOAD_MEDIA = 4
   const val PRIVACY_POLICY = 5
+  const val ONBOARDING = 6
+  const val WHATS_NEW = 7
 
   private const val MEDIA_PREFIX = "00"
   private const val MEDIA_POPUP_PREFIX = "11"

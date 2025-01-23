@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.meta.levinriegner.mediaview.app.events.AppEvent
 import com.meta.levinriegner.mediaview.app.events.AppEventListener
+import com.meta.levinriegner.mediaview.app.events.EditEvent
 import com.meta.levinriegner.mediaview.app.events.EventBus
 import com.meta.levinriegner.mediaview.app.events.FilterAppEvent
+import com.meta.levinriegner.mediaview.app.events.MediaPlayerEvent
+import com.meta.levinriegner.mediaview.app.events.NavigationEvent
 import com.meta.levinriegner.mediaview.app.events.UploadAppEvent
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.app.shared.model.UiState
@@ -39,7 +42,7 @@ constructor(
   private val _events = MutableSharedFlow<GalleryEvent>()
   val events = _events.asSharedFlow()
 
-  private val _filter = MutableStateFlow(MediaFilter.initial)
+  private val _filter = MutableStateFlow(MediaFilter.ALL)
   val filter = _filter.asStateFlow()
 
   private val _sortBy = MutableStateFlow(MediaSortBy.DateDesc)
@@ -54,8 +57,13 @@ constructor(
     eventBus.register(this)
   }
 
+  fun onOnboardingButtonPressed() {
+    panelDelegate.toggleOnboarding(true)
+  }
+
   fun onMediaSelected(mediaModel: MediaModel) {
     Timber.i("Opening media: ${mediaModel.debugPrint()}")
+    Timber.d("With name: ${mediaModel.name}")
     panelDelegate.openMediaPanel(mediaModel)
   }
 
@@ -81,6 +89,11 @@ constructor(
           val media = galleryRepository.getMedia(filter, sortBy)
           Timber.i("Got media: ${media.size}")
           _state.value = UiState.Success(media)
+          // DEV: Use to navigate while developing
+          //                val devModel = media[0]
+          //                onMediaSelected(devModel)
+          //                delay(200L)
+          //                panelDelegate.maximizeMedia(devModel)
         } catch (t: Throwable) {
           Timber.w("Failed to get media: ${t.message}")
           _state.value = UiState.Error("Failed to get media: ${t.message}")
@@ -98,6 +111,24 @@ constructor(
       }
 
       is FilterAppEvent.FilterChanged -> _filter.value = event.filter
+
+      is MediaPlayerEvent.Deleted -> {
+        if (state.value is UiState.Success) {
+          val media = (state.value as UiState.Success<List<MediaModel>>).data
+          val updatedMedia = media.filter { it.id != event.mediaId }
+          _state.value = UiState.Success(updatedMedia)
+        }
+      }
+
+      is NavigationEvent.PrivacyPolicyAccepted -> {
+        panelDelegate.toggleGallery(true)
+      }
+
+      is EditEvent.SaveImageCompleted -> {
+        if (event.success) {
+          loadMedia()
+        }
+      }
     }
   }
 

@@ -14,6 +14,7 @@ plugins {
   id("kotlin-parcelize")
   id("com.meta.spatial.plugin")
   id("com.datadoghq.dd-sdk-android-gradle-plugin")
+  id("org.jetbrains.kotlin.plugin.serialization")
 }
 
 // Signing
@@ -41,8 +42,8 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 16
-    versionName = "0.0.14"
+    versionCode = 18
+    versionName = "0.0.16"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }
@@ -120,13 +121,26 @@ android {
       }
     }
   }
+  // Environments
+  productFlavors {
+    create("qa") {
+      dimension = "app"
+      applicationIdSuffix = ".qa"
+      manifestPlaceholders["applicationLabel"] = "MediaView QA"
+    }
+    create("production") {
+      dimension = "app"
+      manifestPlaceholders["applicationLabel"] = "MediaView"
+    }
+  }
   kotlinOptions { jvmTarget = "1.8" }
   buildFeatures {
     viewBinding = true
     compose = true
     buildConfig = true
+    flavorDimensions += "app"
   }
-  composeOptions { kotlinCompilerExtensionVersion = "1.5.1" }
+  composeOptions { kotlinCompilerExtensionVersion = "1.5.15" }
   packaging { resources { excludes += "/META-INF/{AL2.0,LGPL2.1}" } }
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -137,6 +151,9 @@ android {
 }
 
 dependencies {
+  // Kotlin
+  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
+
   // Android presentation
   implementation("androidx.core:core-ktx:1.13.1")
   implementation("com.google.android.material:material:1.12.0")
@@ -151,13 +168,15 @@ dependencies {
   implementation("androidx.compose.material:material-icons-extended:1.7.5")
   implementation("io.coil-kt:coil-compose:2.7.0")
   implementation("io.coil-kt:coil-video:2.7.0")
+  // implementation("com.github.moyuruaizawa:cropify:0.5.0")
+  implementation("com.github.levin-riegner:cropify:master-SNAPSHOT")
 
   implementation("com.github.bumptech.glide:glide:4.16.0")
   kapt("com.github.bumptech.glide:compiler:4.16.0")
 
   // ExoPlayer
-  implementation("androidx.media3:media3-exoplayer:1.4.0")
-  implementation("androidx.media3:media3-ui:1.4.0")
+  implementation("androidx.media3:media3-exoplayer:1.4.1")
+  implementation("androidx.media3:media3-ui:1.4.1")
 
   // Dependency injection
   implementation("com.google.dagger:hilt-android:2.51")
@@ -191,6 +210,11 @@ dependencies {
   // Monitoring
   implementation("com.datadoghq:dd-sdk-android-ndk:2.14.0")
   implementation("com.datadoghq:dd-sdk-android-logs:2.14.0")
+
+  // Network
+  implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
+  implementation("com.squareup.okhttp3:okhttp")
+  implementation("com.squareup.okhttp3:logging-interceptor")
 }
 
 val sceneProjectPath = "app/src/main/assets/scenes"

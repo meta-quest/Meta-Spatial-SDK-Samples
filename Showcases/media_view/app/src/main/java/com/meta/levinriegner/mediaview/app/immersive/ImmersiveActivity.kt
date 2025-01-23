@@ -28,7 +28,7 @@ import timber.log.Timber
 class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
 
   companion object {
-    const val MAX_OPEN_MEDIA = 5
+    const val MAX_OPEN_MEDIA = 3
   }
 
   // Dependencies
@@ -87,6 +87,9 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
           rootEntity = Entity.create(),
           keyName = GLXFConstants.COMPOSITION_NAME,
       )
+      if (BuildConfig.DEBUG) {
+        panelManager.debugPrintNodes()
+      }
     }
   }
 
@@ -167,7 +170,7 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
   override fun closeUploadPanel() {
     Timber.i("Closing upload panel")
     uploadPanelEntityId?.let {
-      panelManager.destroyUploadEntity(it)
+      panelManager.destroyEntity(it)
       uploadPanelEntityId = null
     } ?: Timber.w("Upload panel is not open")
   }
@@ -175,7 +178,21 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
   override fun togglePrivacyPolicy(show: Boolean) {
     Timber.i("Toggling privacy policy. Show: $show")
     panelManager.togglePrivacyPolicy(show)
-    panelManager.toggleGallery(!show)
+  }
+
+  override fun toggleGallery(show: Boolean) {
+    Timber.i("Toggling gallery. Show: $show")
+    panelManager.toggleGallery(show)
+  }
+
+  override fun toggleOnboarding(show: Boolean) {
+    Timber.i("Toggling Onboarding. Show: $show")
+    panelManager.toggleOnboarding(show)
+  }
+
+  override fun toggleWhatsNew(show: Boolean) {
+    Timber.i("Toggling Whats New. Show: $show")
+    panelManager.toggleWhatsNew(show)
   }
   // endregion
 
