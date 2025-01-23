@@ -12,6 +12,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.CheckBox
+import android.widget.RadioButton
 import android.widget.Spinner
 import android.widget.TextView
 import com.meta.spatial.castinputforward.CastInputForwardFeature
@@ -20,14 +22,23 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.core.Vector4
 import com.meta.spatial.mruk.AnchorProceduralMesh
 import com.meta.spatial.mruk.AnchorProceduralMeshConfig
+import com.meta.spatial.mruk.MRUKAnchorTexCoordMode
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKLabel
+import com.meta.spatial.mruk.MRUKSpawnMode
+import com.meta.spatial.mruk.MRUKWallTexCoordModeU
+import com.meta.spatial.mruk.MRUKWallTexCoordModeV
 import com.meta.spatial.physics.PhysicsFeature
-import com.meta.spatial.runtime.AlphaMode
+import com.meta.spatial.runtime.BlendMode
+import com.meta.spatial.runtime.DepthWrite
+import com.meta.spatial.runtime.MaterialSidedness
+import com.meta.spatial.runtime.SceneMaterial
+import com.meta.spatial.runtime.SceneMaterialAttribute
+import com.meta.spatial.runtime.SceneMaterialDataType
 import com.meta.spatial.toolkit.AppSystemActivity
-import com.meta.spatial.toolkit.Color4
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.PanelRegistration
@@ -41,7 +52,9 @@ class RaycastSampleActivity : AppSystemActivity() {
 
   private lateinit var mrukFeature: MRUKFeature
   private var currentRoomTextView: TextView? = null
-  private lateinit var procMeshSpawner: AnchorProceduralMesh
+  private var procMeshSpawner: AnchorProceduralMesh? = null
+  private var globalMeshSpawner: AnchorProceduralMesh? = null
+  private lateinit var roomOutlineMaterial: SceneMaterial
   private var showUiPanel = false
   private val panelId = 2
   private val arrowEntities: MutableList<Entity> = mutableListOf()
@@ -73,31 +86,45 @@ class RaycastSampleActivity : AppSystemActivity() {
 
     scene.enablePassthrough(true)
 
-    // Basic material to show outlines of objects from the scene
-    val material =
-        Material().apply {
-          alphaMode = AlphaMode.TRANSLUCENT.ordinal
-          baseColor = Color4(0.6f, 0.6f, 0.8f, 0.7f)
-          unlit = false
-        }
-    val floorMaterial =
-        Material().apply { baseTextureAndroidResourceId = R.drawable.carpet_texture }
+    roomOutlineMaterial =
+        SceneMaterial.custom(
+                "data/shaders/custom/outline",
+                arrayOf<SceneMaterialAttribute>(
+                    SceneMaterialAttribute("roughnessMetallicUnlit", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute("minAlphaAlphaCutoff", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute("stereoParams", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute("emissiveFactor", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute("albedoFactor", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute("albedoUVTransformM00", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute("albedoUVTransformM10", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute(
+                        "roughnessMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute(
+                        "roughnessMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute(
+                        "emissiveMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute(
+                        "emissiveMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute(
+                        "occlusionMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute(
+                        "occlusionMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute(
+                        "normalMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                    SceneMaterialAttribute(
+                        "normalMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                ),
+            )
+            .apply {
+              setAttribute("albedoUVTransformM00", Vector4(1f, 0f, 0f, 0f))
+              setAttribute("albedoUVTransformM10", Vector4(0f, 1f, 0f, 0f))
+              setAttribute("stereoParams", Vector4(0f, 0f, 1f, 1f))
+            }
+    roomOutlineMaterial.setSidedness(MaterialSidedness.DOUBLE_SIDED)
+    roomOutlineMaterial.setBlendMode(BlendMode.TRANSLUCENT)
+    roomOutlineMaterial.setDepthWrite(DepthWrite.DISABLE)
 
-    procMeshSpawner =
-        AnchorProceduralMesh(
-            mrukFeature,
-            mapOf(
-                MRUKLabel.TABLE to AnchorProceduralMeshConfig(material, true),
-                MRUKLabel.SCREEN to AnchorProceduralMeshConfig(material, true),
-                MRUKLabel.LAMP to AnchorProceduralMeshConfig(material, true),
-                MRUKLabel.OTHER to AnchorProceduralMeshConfig(material, true),
-                MRUKLabel.COUCH to AnchorProceduralMeshConfig(material, true),
-                MRUKLabel.PLANT to AnchorProceduralMeshConfig(material, true),
-                MRUKLabel.STORAGE to AnchorProceduralMeshConfig(material, true),
-                MRUKLabel.BED to AnchorProceduralMeshConfig(material, true),
-                MRUKLabel.FLOOR to AnchorProceduralMeshConfig(floorMaterial, true),
-                MRUKLabel.WALL_FACE to AnchorProceduralMeshConfig(material, true),
-                MRUKLabel.CEILING to AnchorProceduralMeshConfig(material, true)))
+    setProcMeshVisibility(true)
 
     if (checkSelfPermission(PERMISSION_USE_SCENE) != PackageManager.PERMISSION_GRANTED) {
       requestPermissions(arrayOf(PERMISSION_USE_SCENE), REQUEST_CODE_PERMISSION_USE_SCENE)
@@ -117,6 +144,46 @@ class RaycastSampleActivity : AppSystemActivity() {
 
     Entity.createPanelEntity(
         panelId, R.layout.ui_raycast_menu, Transform(), Visible(showUiPanel), Grabbable())
+  }
+
+  private fun setProcMeshVisibility(visible: Boolean) {
+    procMeshSpawner?.destroy()
+    procMeshSpawner = null
+    if (visible) {
+      procMeshSpawner =
+          AnchorProceduralMesh(
+              mrukFeature,
+              mapOf(
+                  MRUKLabel.TABLE to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+                  MRUKLabel.SCREEN to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+                  MRUKLabel.LAMP to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+                  MRUKLabel.OTHER to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+                  MRUKLabel.COUCH to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+                  MRUKLabel.PLANT to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+                  MRUKLabel.STORAGE to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+                  MRUKLabel.BED to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+                  MRUKLabel.FLOOR to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+                  MRUKLabel.WALL_FACE to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+                  MRUKLabel.CEILING to AnchorProceduralMeshConfig(roomOutlineMaterial, true)),
+              MRUKSpawnMode.CURRENT_ROOM_ONLY,
+              MRUKWallTexCoordModeU.STRETCH_SECTION,
+              MRUKWallTexCoordModeV.STRETCH,
+              MRUKAnchorTexCoordMode.STRETCH,
+          )
+    }
+  }
+
+  private fun setGlobalMeshVisibility(visible: Boolean) {
+    globalMeshSpawner?.destroy()
+    globalMeshSpawner = null
+
+    if (visible) {
+      val wallMaterial = Material().apply { baseTextureAndroidResourceId = R.drawable.wall1 }
+      globalMeshSpawner =
+          AnchorProceduralMesh(
+              mrukFeature,
+              mapOf(MRUKLabel.GLOBAL_MESH to AnchorProceduralMeshConfig(wallMaterial, false)))
+    }
   }
 
   override fun registerPanels(): List<PanelRegistration> {
@@ -163,9 +230,24 @@ class RaycastSampleActivity : AppSystemActivity() {
             val launchSceneCaptureButton = rootView?.findViewById<Button>(R.id.launch_scene_capture)
             launchSceneCaptureButton?.setOnClickListener { mrukFeature.requestSceneCapture() }
 
-            val showAllHitsButton = rootView?.findViewById<Button>(R.id.toggle_all_hits)
-            showAllHitsButton?.setOnClickListener {
-              updateRaycastSystem.showAllHits = !updateRaycastSystem.showAllHits
+            val allHitsRadioButton = rootView?.findViewById<RadioButton>(R.id.raycast_hits_all)
+            allHitsRadioButton?.setOnCheckedChangeListener { _, isChecked ->
+              updateRaycastSystem.showAllHits = isChecked
+            }
+
+            val singleHitRadioButton = rootView?.findViewById<RadioButton>(R.id.raycast_hits_single)
+            singleHitRadioButton?.setOnCheckedChangeListener { _, isChecked ->
+              updateRaycastSystem.showAllHits = !isChecked
+            }
+
+            val checkBoxSceneObjects = rootView?.findViewById<CheckBox>(R.id.checkbox_scene_objects)
+            checkBoxSceneObjects?.setOnCheckedChangeListener { _, isChecked ->
+              setProcMeshVisibility(isChecked)
+            }
+
+            val checkBoxGlobalMesh = rootView?.findViewById<CheckBox>(R.id.checkbox_global_mesh)
+            checkBoxGlobalMesh?.setOnCheckedChangeListener { _, isChecked ->
+              setGlobalMeshVisibility(isChecked)
             }
 
             val clearSceneButton = rootView?.findViewById<Button>(R.id.clear_scene)
@@ -241,7 +323,7 @@ class RaycastSampleActivity : AppSystemActivity() {
   }
 
   override fun onDestroy() {
-    procMeshSpawner.destroy()
+    procMeshSpawner?.destroy()
 
     super.onDestroy()
   }

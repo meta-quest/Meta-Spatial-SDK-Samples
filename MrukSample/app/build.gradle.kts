@@ -20,14 +20,15 @@ android {
   defaultConfig {
     applicationId = "com.meta.spatial.samples.mruksample"
     minSdk = 28
-    targetSdk = 34
+    //noinspection ExpiredTargetSdkVersion
+    targetSdk = 32
     versionCode = 1
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     // Update the ndkVersion to the right version for your app
-    // ndkVersion = "27.0.12077973"
+    ndkVersion = "27.0.12077973"
   }
 
   packaging { resources.excludes.add("META-INF/LICENSE") }
@@ -97,4 +98,4 @@ dependencies {
   ksp("com.meta.spatial.plugin:com.meta.spatial.plugin.gradle.plugin:$metaSpatialSdkVersion")
 }
 
-spatial {}
+spatial { shaders { sources.add(project.layout.projectDirectory.dir("src/shaders")) } }

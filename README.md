@@ -38,16 +38,16 @@ Then, to build and run a sample:
 
 We have 10 sample apps, demonstrating various features of Meta Spatial SDK:
 
-- [AnimationsSample](/AnimationsSample)
-- [HybridSample](/HybridSample)
-- [CustomComponentsSample](/CustomComponentsSample)
-- [MediaPlayerSample](/MediaPlayerSample)
-- [MixedRealitySample](/MixedRealitySample)
-- [MrukSample](/MrukSample)
-- [Object3DSample](/Object3DSample)
-- [PhysicsSample](/PhysicsSample)
-- [SpatialVideoSample](/SpatialVideoSample)
-- [StarterSample](/StarterSample)
+- [AnimationsSample](/AnimationsSample) shows how to play animation clips, create reusable animation drivers, and demonstrates frame-based procedural animation.
+- [HybridSample](/HybridSample) shows how to begin with a standard Android-based 2D panel experience and switch between an immersive experience that hosts the same panel.
+- [CustomComponentsSample](/CustomComponentsSample) shows how to create a custom component that embodies the data shared across various instances of an application.
+- [MediaPlayerSample](/MediaPlayerSample) shows how to build an immersive video playback experience.
+- [MixedRealitySample](/MixedRealitySample) shows an immersive experience that interacts with the user's physical surroundings.
+- [MrukSample](/MrukSample) shows an immersive experience influenced by the user's physical surroundings.
+- [Object3DSample](/Object3DSample) shows inserting 3D objects into a scene and adjusting their properties in Meta Spatial Editor.
+- [PhysicsSample](/PhysicsSample) shows adding a physics component and adjusting its properties in Meta Spatial Editor.
+- [SpatialVideoSample](/SpatialVideoSample) shows how to play video with spatialized audio.
+- [StarterSample](/StarterSample) is a starter project that is part of [Getting Started](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-helloworld) with Meta Spatial SDK.
 
 We also have a starter app [CustomComponentsStarter](/CodelabStarters/CustomComponentsStarter), which only contains the boilerplate code of [CustomComponentsSample](/CustomComponentsSample). You can download this starter app and follow [this](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-editor-create-app-content) tutorial to build a LookAt app with Meta Spatial Editor and SDK.
 
@@ -66,21 +66,26 @@ The [Showcases](/Showcases) folder contains three apps which are deployed to the
 
 The documentation for Meta Spatial SDK can be found [here](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-overview).
 
-## 0.5.3 Updates
+## 0.5.4 Updates
 
 Our full update list can be found in our `CHANGELOG.md` file.
 
 ### Added
 
-- The `meta-spatial-sdk-compose` package is now available, enabling View-based panels to render Jetpack Compose UI
-- Javadocs are now available for Maven Central released packages (starting with 0.5.3)
-- MRUK
-  - Added Scene Raycasting functionality (and a raycast demo in the MrukSample project)
-  - Optimized scene loading
+- Added `onHeadsetMounted` and `onHeadsetUnmounted` APIs for detecting when a user puts on or takes off their headset.
+
+### Changed
+
+- None
+
+### Deprecated
+
+- None
 
 ### Fixed
 
-- Hot reload is now more reliable (previously has issues with parallelization)
+- Fixed Windows specific hot reload bug with "Read-only filesystem" error in Gradle task.
+- Fixed crash where a `SceneLayer` was being destroyed twice due to garbage collection.
 
 ## Spatial SDK Gradle Plugin
 

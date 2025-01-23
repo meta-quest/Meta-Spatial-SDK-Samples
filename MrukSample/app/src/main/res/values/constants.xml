@@ -10,5 +10,8 @@
     <item>MeshLivingRoom3</item>
     <item>MeshOffice1</item>
     <item>MeshOffice2</item>
+    <item>Bedroom00</item>
+    <item>Bedroom01</item>
+    <item>Livingroom01</item>
   </string-array>
 </resources>
