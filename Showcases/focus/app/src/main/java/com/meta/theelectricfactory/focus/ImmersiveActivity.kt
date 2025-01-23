@@ -441,7 +441,7 @@ class ImmersiveActivity : AppSystemActivity() {
     if (currentProject == null) {
       Log.i("Focus", "Focus> New project created")
 
-      val project = Project(getNewUUID(), projectName, mrMode, 1)
+      val project = Project(getNewUUID(), projectName, mrMode, currentEnvironment)
       currentProject = project
       DB.createProject(project)
 
