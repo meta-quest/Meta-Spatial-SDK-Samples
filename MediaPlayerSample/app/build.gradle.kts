@@ -20,7 +20,8 @@ android {
   defaultConfig {
     applicationId = "com.meta.spatial.samples.mediaplayersample"
     minSdk = 28
-    targetSdk = 34
+    //noinspection ExpiredTargetSdkVersion
+    targetSdk = 32
     versionCode = 1
     versionName = "1.0"
 

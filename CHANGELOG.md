@@ -2,6 +2,25 @@
 
 This format is roughly based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 0.5.4 - 2025-01-23
+
+### Added
+
+- Added `onHeadsetMounted` and `onHeadsetUnmounted` APIs for detecting when a user puts on or takes off their headset.
+
+### Changed
+
+- None
+
+### Deprecated
+
+- None
+
+### Fixed
+
+- Fixed Windows specific hot reload bug with "Read-only filesystem" error in Gradle task.
+- Fixed crash where a `SceneLayer` was being destroyed twice due to garbage collection.
+
 ## 0.5.3 - 2024-12-16
 
 ### Added

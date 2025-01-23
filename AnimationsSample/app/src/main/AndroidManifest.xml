@@ -65,7 +65,7 @@
 
     <uses-native-library
       android:name="libossdk.oculus.so"
-      android:required="true"
+      android:required="false"
     />
 
     <activity
