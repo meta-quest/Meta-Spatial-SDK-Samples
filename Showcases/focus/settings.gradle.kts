@@ -11,6 +11,12 @@ pluginManagement {
     }
     mavenCentral()
     gradlePluginPortal()
+    maven {
+      url = uri("https://s01.oss.sonatype.org/content/repositories/commeta-1098")
+    }
+    maven {
+      url = uri("https://s01.oss.sonatype.org/content/repositories/commeta-1101")
+    }
   }
 }
 
@@ -19,6 +25,12 @@ dependencyResolutionManagement {
   repositories {
     google()
     mavenCentral()
+    maven {
+      url = uri("https://s01.oss.sonatype.org/content/repositories/commeta-1098")
+    }
+    maven {
+      url = uri("https://s01.oss.sonatype.org/content/repositories/commeta-1101")
+    }
   }
 }
 
