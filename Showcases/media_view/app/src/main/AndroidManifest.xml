@@ -114,6 +114,13 @@
       android:theme="@style/Theme.MediaView"
     />
         <activity
+            android:name=".app.gallery.media_select.delete_confirm.MediaDeleteConfirmActivity"
+            android:allowEmbedded="true"
+            android:exported="true"
+            android:launchMode="standard"
+            android:theme="@style/Theme.MediaView"
+            />
+        <activity
       android:name=".app.immersive.ImmersiveActivity"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
       android:excludeFromRecents="true"

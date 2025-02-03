@@ -7,6 +7,7 @@
     <string name="default_error_description">Please try again later.</string>
     <string name="refresh">Refresh</string>
     <string name="close">Close</string>
+    <string name="cancel">Cancel</string>
     <!-- Permission -->
     <string
     name="storage_permission_rationale_title"
@@ -22,6 +23,8 @@
     name="storage_saving_samples_loading"
   >Loading sample media. This may take a minute, please wait…</string>
     <!-- Gallery -->
+    <string name="n_selected">%1$d of %2$d Selected</string>
+    <string name="select">Select</string>
     <string name="viewing_n_files">Viewing %1$d files</string>
     <string name="sort_by">Sort By</string>
     <string name="sort_by_date_desc">Date Added: Earliest</string>
@@ -48,6 +51,14 @@
     <!-- Upload -->
     <string name="upload_failed_error">Failed to upload file</string>
     <string name="download_wait_label">Downloading, please wait…</string>
+    <!-- Media Select & Delete -->
+    <string name="media_limit_reached">Max Files Selected (%1$d)</string>
+    <plurals name="n_files_delete_confirmation">
+        <item quantity="one">Are you sure you want to delete these files?</item>
+        <item quantity="other">Are you sure you want to delete these files?</item>
+    </plurals>
+    <string name="delete_confirm_rationale">This item will be deleted immediately.\nYou can’t undo this action.</string>
+    <string name="delete_confirm_button">Delete File/s</string>
     <!-- Privacy Policy -->
     <string
     name="privacy_policy_dialog_title"

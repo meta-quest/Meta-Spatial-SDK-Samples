@@ -2,8 +2,10 @@
 
 package com.meta.levinriegner.mediaview.app.gallery.view
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.border
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,6 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,12 +50,16 @@ import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
 import com.meta.spatial.toolkit.SpatialActivityManager
 import kotlinx.coroutines.flow.map
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MediaItemView(
-    item: MediaModel,
-    showMetadata: Boolean,
-    modifier: Modifier = Modifier,
-    onItemClicked: (MediaModel) -> Unit,
+  item: MediaModel,
+  showMetadata: Boolean,
+  modifier: Modifier = Modifier,
+  onItemClicked: (MediaModel) -> Unit,
+  onItemLongPressed: (MediaModel) -> Unit,
+  isSelected: Boolean,
+  isMediaSelectModeEnabled: Boolean,
 ) {
   val icon = item.mediaFilter?.iconResId() ?: R.drawable.icon_viewall
 
@@ -63,169 +71,211 @@ fun MediaItemView(
 
   Box(
       modifier =
-          modifier
-              .size(Dimens.galleryItemSize)
-              .clip(RoundedCornerShape(Dimens.radiusMedium))
-              .clickable { onItemClicked(item) }) {
-        Box(contentAlignment = Alignment.Center, modifier = Modifier) {
-          AsyncImage(
-              model =
-                  ImageRequest.Builder(LocalContext.current)
-                      .data(item.uri)
-                      .size(Size(1000, 1000))
-                      .crossfade(true)
-                      .build(),
-              contentDescription = item.name,
-              modifier = Modifier.fillMaxSize(),
-              contentScale = ContentScale.Crop,
-              alignment = Alignment.Center)
+      modifier
+          .size(Dimens.galleryItemSize)
+          .clip(RoundedCornerShape(Dimens.radiusMedium))
+          .combinedClickable(
+              onClick = { onItemClicked(item) },
+              onLongClick = { onItemLongPressed(item) },
+          ),
+  ) {
+    Box(contentAlignment = Alignment.Center, modifier = Modifier) {
+      AsyncImage(
+          model =
+          ImageRequest.Builder(LocalContext.current)
+              .data(item.uri)
+              .size(Size(1000, 1000))
+              .crossfade(true)
+              .build(),
+          contentDescription = item.name,
+          modifier = Modifier.fillMaxSize(),
+          contentScale = ContentScale.Crop,
+          alignment = Alignment.Center,
+      )
 
-          AnimatedOpacity(visible = !showMetadata) {
-            Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
-              Row(
-                  modifier =
-                      Modifier.wrapContentSize()
-                          .padding(
-                              vertical = 6.dp,
-                              horizontal = 8.dp,
-                          ),
-                  horizontalArrangement = Arrangement.SpaceBetween,
-                  verticalAlignment = Alignment.CenterVertically,
-              ) {
-                Icon(
-                    painter = painterResource(id = icon),
-                    contentDescription = "Button Icon",
-                    modifier = Modifier.size(18.dp))
+      AnimatedOpacity(visible = !showMetadata) {
+        Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
+          Row(
+              modifier =
+              Modifier
+                  .wrapContentSize()
+                  .padding(
+                      vertical = 6.dp,
+                      horizontal = 8.dp,
+                  ),
+              horizontalArrangement = Arrangement.SpaceBetween,
+              verticalAlignment = Alignment.CenterVertically,
+          ) {
+            Icon(
+                painter = painterResource(id = icon),
+                contentDescription = "Button Icon",
+                modifier = Modifier.size(18.dp),
+            )
 
-                item.durationHMS()?.let {
-                  val duration =
-                      (it.first.takeIf { it > 0 }?.let { h -> "${h}:" } ?: "") +
-                          it.second.let { m -> "${m}:" } +
-                          it.third.let { s -> "$s".padStart(2, '0') }
+            item.durationHMS()?.let {
+              val duration =
+                  (it.first.takeIf { it > 0 }?.let { h -> "${h}:" } ?: "") +
+                      it.second.let { m -> "${m}:" } +
+                      it.third.let { s -> "$s".padStart(2, '0') }
 
-                  Text(
-                      modifier = Modifier.fillMaxWidth(),
-                      text = duration,
-                      fontSize = 9.sp,
-                      fontWeight = FontWeight.Bold,
-                      textAlign = TextAlign.Right,
-                  )
-                }
-              }
+              Text(
+                  modifier = Modifier.fillMaxWidth(),
+                  text = duration,
+                  fontSize = 9.sp,
+                  fontWeight = FontWeight.Bold,
+                  textAlign = TextAlign.Right,
+              )
             }
           }
         }
+      }
+    }
 
-        AnimatedOpacity(visible = showMetadata) {
-          Column(
-              modifier =
-                  Modifier.fillMaxSize()
-                      .padding(
-                          vertical = 6.dp,
-                          horizontal = 8.dp,
-                      ),
-              horizontalAlignment = Alignment.Start,
-              verticalArrangement = Arrangement.SpaceBetween,
-          ) {
-            Column {
-              Text(
-                  text = "Name: ${item.nameLabel()}",
-                  style =
-                      TextStyle(
-                          fontSize = 9.sp,
-                          fontWeight = FontWeight.Bold,
-                          color = Color.White,
-                      ),
-                  maxLines = 3,
-                  overflow = TextOverflow.Ellipsis,
-              )
-              Text(
-                  text = "Date: ${item.dateAdded}",
-                  style =
-                      TextStyle(
-                          fontSize = 9.sp,
-                          fontWeight = FontWeight.Bold,
-                          color = Color.White,
-                      ),
-                  maxLines = 1,
-                  overflow = TextOverflow.Visible,
-              )
-              Text(
-                  text = "Kind: ${item.mimeTypeLabel()}",
-                  style =
-                      TextStyle(
-                          fontSize = 9.sp,
-                          fontWeight = FontWeight.Bold,
-                          color = Color.White,
-                      ),
-                  maxLines = 1)
-              Text(
-                  text = "Size: ${item.sizeLabel()}",
-                  style =
-                      TextStyle(
-                          fontSize = 9.sp,
-                          fontWeight = FontWeight.Bold,
-                          color = Color.White,
-                      ),
-                  maxLines = 1)
-            }
-
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-              Icon(
-                  painter = painterResource(id = icon),
-                  contentDescription = "Button Icon",
-                  modifier = Modifier.size(18.dp))
-
-              item.durationHMS()?.let {
-                val duration =
-                    (it.first.takeIf { it > 0 }?.let { h -> "${h}:" } ?: "") +
-                        it.second.let { m -> "${m}:" } +
-                        it.third.let { s -> "$s".padStart(2, '0') }
-
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = duration,
-                    fontSize = 9.sp,
-                    fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Right,
-                )
-              }
-            }
-          }
-
-          Box(
-              modifier =
-                  Modifier.fillMaxSize()
-                      .background(Color.Black.copy(alpha = .5f))
-                      .blur(100.dp)
-                      .zIndex(-1f))
+    AnimatedOpacity(visible = showMetadata) {
+      Column(
+          modifier =
+          Modifier
+              .fillMaxSize()
+              .padding(
+                  vertical = 6.dp,
+                  horizontal = 8.dp,
+              ),
+          horizontalAlignment = Alignment.Start,
+          verticalArrangement = Arrangement.SpaceBetween,
+      ) {
+        Column {
+          Text(
+              text = "Name: ${item.nameLabel()}",
+              style =
+              TextStyle(
+                  fontSize = 9.sp,
+                  fontWeight = FontWeight.Bold,
+                  color = Color.White,
+              ),
+              maxLines = 3,
+              overflow = TextOverflow.Ellipsis,
+          )
+          Text(
+              text = "Date: ${item.dateAdded}",
+              style =
+              TextStyle(
+                  fontSize = 9.sp,
+                  fontWeight = FontWeight.Bold,
+                  color = Color.White,
+              ),
+              maxLines = 1,
+              overflow = TextOverflow.Visible,
+          )
+          Text(
+              text = "Kind: ${item.mimeTypeLabel()}",
+              style =
+              TextStyle(
+                  fontSize = 9.sp,
+                  fontWeight = FontWeight.Bold,
+                  color = Color.White,
+              ),
+              maxLines = 1,
+          )
+          Text(
+              text = "Size: ${item.sizeLabel()}",
+              style =
+              TextStyle(
+                  fontSize = 9.sp,
+                  fontWeight = FontWeight.Bold,
+                  color = Color.White,
+              ),
+              maxLines = 1,
+          )
         }
 
-        if (openMediaIds.value.contains(item.id)) {
-          Box(
-              contentAlignment = Alignment.Center,
-              modifier =
-                  Modifier.matchParentSize()
-                      .background(AppColor.GradientInEnvironmentStart)
-                      .blur(radius = 16.dp)
-                      .clip(RoundedCornerShape(5.dp)),
-          ) {}
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Icon(
+              painter = painterResource(id = icon),
+              contentDescription = "Button Icon",
+              modifier = Modifier.size(18.dp),
+          )
 
-          Box(
-              contentAlignment = Alignment.Center,
-              modifier = Modifier.matchParentSize().clip(RoundedCornerShape(5.dp)),
-          ) {
+          item.durationHMS()?.let {
+            val duration =
+                (it.first.takeIf { it > 0 }?.let { h -> "${h}:" } ?: "") +
+                    it.second.let { m -> "${m}:" } +
+                    it.third.let { s -> "$s".padStart(2, '0') }
+
             Text(
-                modifier = Modifier.padding(horizontal = 5.dp).fillMaxWidth(),
-                text = "Media in\nEnvironment",
-                fontSize = 10.sp,
+                modifier = Modifier.fillMaxWidth(),
+                text = duration,
+                fontSize = 9.sp,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
+                textAlign = TextAlign.Right,
             )
           }
         }
       }
+
+      Box(
+          modifier =
+          Modifier
+              .fillMaxSize()
+              .background(Color.Black.copy(alpha = .5f))
+              .blur(100.dp)
+              .zIndex(-1f),
+      )
+    }
+
+    AnimatedOpacity(
+        visible = isSelected && isMediaSelectModeEnabled,
+        modifier = Modifier.align(Alignment.TopEnd),
+    ) {
+      Checkbox(
+          checked = true,
+          onCheckedChange = { onItemClicked(item) },
+          modifier = Modifier
+              .align(Alignment.TopEnd),
+          colors = CheckboxDefaults.colors(
+              checkedColor = AppColor.MetaBlu,
+              checkmarkColor = AppColor.White,
+          ),
+      )
+      Box(
+          modifier =
+          Modifier
+              .fillMaxSize()
+              .background(Color.White.copy(alpha = .3f))
+              .blur(100.dp)
+              .zIndex(-1f),
+      )
+    }
+
+    if (openMediaIds.value.contains(item.id)) {
+      Box(
+          contentAlignment = Alignment.Center,
+          modifier =
+          Modifier
+              .matchParentSize()
+              .background(AppColor.GradientInEnvironmentStart)
+              .blur(radius = 16.dp)
+              .clip(RoundedCornerShape(5.dp)),
+      ) {}
+
+      Box(
+          contentAlignment = Alignment.Center,
+          modifier = Modifier
+              .matchParentSize()
+              .clip(RoundedCornerShape(5.dp)),
+      ) {
+        Text(
+            modifier = Modifier
+                .padding(horizontal = 5.dp)
+                .fillMaxWidth(),
+            text = "Media in\nEnvironment",
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+        )
+      }
+    }
+  }
 }

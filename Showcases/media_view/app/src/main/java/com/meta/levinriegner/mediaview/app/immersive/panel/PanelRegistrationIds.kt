@@ -10,6 +10,7 @@ object PanelRegistrationIds {
   const val PRIVACY_POLICY = 5
   const val ONBOARDING = 6
   const val WHATS_NEW = 7
+  const val DELETE_CONFIRM = 8
 
   private const val MEDIA_PREFIX = "00"
   private const val MEDIA_POPUP_PREFIX = "11"

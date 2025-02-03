@@ -44,7 +44,11 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
   private var _openMedia =
       MutableStateFlow<Map<Long, MediaModel>>(emptyMap()) // Uses MediaModel.id as key
   val openMedia = _openMedia.asStateFlow()
+  private var _mediaToDelete = MutableStateFlow<List<MediaModel>>(emptyList())
+  val mediaToDelete = _mediaToDelete.asStateFlow()
+
   private var uploadPanelEntityId: Long? = null
+  private var deleteConfirmationEntityId: Long? = null
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
@@ -136,6 +140,29 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     Timber.i("Closing all media panels")
     panelManager.closeAllMediaPanels(_openMedia.value.values.toList())
     _openMedia.value = emptyMap()
+  }
+
+  override fun openDeleteConfirmationPanel() {
+    Timber.i("Opening delete confirmation panel")
+    if (deleteConfirmationEntityId != null) {
+      Timber.w("Delete confirmation panel is already open")
+      return
+    }
+
+    // Register Panel
+    registerPanel(panelManager.provideDeleteConfirmPanelRegistration(mediaToDelete.value))
+
+    // Create Entity
+    val ent = panelManager.createDeleteConfirmEntity()
+    deleteConfirmationEntityId = ent.id
+  }
+
+  override fun closeDeleteConfirmationPanel() {
+    Timber.i("Closing delete confirmation panel")
+    deleteConfirmationEntityId?.let {
+      panelManager.destroyEntity(it)
+      deleteConfirmationEntityId = null
+    } ?: Timber.w("Delete confirmation is not open")
   }
 
   override fun maximizeMedia(mediaModel: MediaModel) {

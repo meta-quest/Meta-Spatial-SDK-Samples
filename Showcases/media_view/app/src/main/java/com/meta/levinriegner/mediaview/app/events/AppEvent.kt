@@ -3,6 +3,7 @@
 package com.meta.levinriegner.mediaview.app.events
 
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaFilter
+import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
 
 open class AppEvent
 
@@ -14,6 +15,11 @@ sealed class UploadAppEvent : AppEvent() {
 
 sealed class FilterAppEvent : AppEvent() {
   data class FilterChanged(val filter: MediaFilter) : FilterAppEvent()
+}
+
+sealed class MediaSelectionEvent : AppEvent() {
+  data class Deleted(val deletedMediaIds: List<Long>) : MediaSelectionEvent()
+  data object DeleteConfirmation : MediaSelectionEvent()
 }
 
 sealed class MediaPlayerEvent : AppEvent() {

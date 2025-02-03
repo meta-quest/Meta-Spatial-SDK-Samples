@@ -9,6 +9,7 @@ import com.meta.levinriegner.mediaview.BuildConfig
 import com.meta.levinriegner.mediaview.LookAtHead
 import com.meta.levinriegner.mediaview.app.gallery.GalleryActivity
 import com.meta.levinriegner.mediaview.app.gallery.filter.MediaFilterActivity
+import com.meta.levinriegner.mediaview.app.gallery.media_select.delete_confirm.MediaDeleteConfirmActivity
 import com.meta.levinriegner.mediaview.app.gallery.menu.GalleryMenuActivity
 import com.meta.levinriegner.mediaview.app.immersive.entity.PanelTransformations
 import com.meta.levinriegner.mediaview.app.immersive.panel.PanelRegistrationIds
@@ -54,6 +55,7 @@ import com.meta.spatial.toolkit.TransformParent
 import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.toolkit.createPanelEntity
 import timber.log.Timber
+import java.util.ArrayList
 
 class PanelManager(
     private val panelTransformations: PanelTransformations,
@@ -129,6 +131,32 @@ class PanelManager(
               Transform(Pose(Vector3(0f, 0f, -0.025f), Quaternion(0f, 0f, 0f))))
 
           createUploadPanel(ent)
+        }
+
+    registeredPanels[registration.registrationId] =
+        AppPanelRegistration(
+            registrationId = registration.registrationId,
+            registration = registration,
+        )
+
+    return registration
+  }
+
+  // TODO: Can't come up with a right approach
+  // to pass mediaToDelete to build a custom title
+  // for the delete confirmation dialog.
+  // Using a placeholder title for now in the view. See [MediaDeleteConfirmView.kt]
+  fun provideDeleteConfirmPanelRegistration(mediaToDelete: List<MediaModel>): PanelRegistration {
+    val registration =
+        PanelCreator(PanelRegistrationIds.DELETE_CONFIRM) { ent ->
+          // Set gallery as parent
+          ent.setComponent(TransformParent(galleryEntity))
+
+          ent.setComponent(
+              // Transform relative to the parent
+              Transform(Pose(Vector3(0f, 0f, -0.025f), Quaternion(0f, 0f, 0f))))
+
+          createDeleteConfirmPanel(ent, mediaToDelete)
         }
 
     registeredPanels[registration.registrationId] =
@@ -225,6 +253,26 @@ class PanelManager(
         )
 
     return PanelSceneObject(scene, spatialContext, UploadActivity::class.java, ent, config)
+  }
+
+  private fun createDeleteConfirmPanel(ent: Entity, mediaToDelete: List<MediaModel>): PanelSceneObject {
+    val config =
+        PanelConfigOptions(
+            width = 0.6f,
+            height = 0.40f,
+            enableLayer = true,
+            enableTransparent = true,
+            includeGlass = false,
+        )
+
+    return PanelSceneObject(scene,
+        spatialContext,
+        Intent(spatialContext, MediaDeleteConfirmActivity::class.java).apply {
+          putParcelableArrayListExtra("mediaToDelete", ArrayList(mediaToDelete))
+        },
+        ent,
+        config
+    )
   }
 
   private fun createGalleryMenuPanel(ent: Entity): PanelSceneObject {
@@ -420,6 +468,18 @@ class PanelManager(
     } else {
       throw RuntimeException(
           "No panel registered for Download Media. Please register it before trying to create an associated Entity.")
+    }
+  }
+
+  fun createDeleteConfirmEntity(): Entity {
+    val appPanelRegistration = registeredPanels[PanelRegistrationIds.DELETE_CONFIRM]
+
+    if (appPanelRegistration != null) {
+      return Entity.createPanelEntity(
+          appPanelRegistration.registrationId, transform = Transform.createDefaultInstance())
+    } else {
+      throw RuntimeException(
+          "No panel registered for Delete Confirmation. Please register it before trying to create an associated Entity.")
     }
   }
 

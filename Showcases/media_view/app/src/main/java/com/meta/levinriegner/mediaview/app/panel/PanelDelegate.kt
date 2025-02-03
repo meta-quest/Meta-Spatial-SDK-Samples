@@ -26,4 +26,8 @@ interface PanelDelegate {
   fun toggleOnboarding(show: Boolean)
 
   fun toggleWhatsNew(show: Boolean)
+
+  fun openDeleteConfirmationPanel()
+
+  fun closeDeleteConfirmationPanel()
 }

@@ -20,6 +20,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.meta.levinriegner.mediaview.R
+import com.meta.levinriegner.mediaview.app.gallery.media_select.MediaSelectViewModel
 import com.meta.levinriegner.mediaview.app.gallery.samples.SamplesStateView
 import com.meta.levinriegner.mediaview.app.gallery.samples.SamplesViewModel
 import com.meta.levinriegner.mediaview.app.gallery.samples.UiSamplesState
@@ -38,6 +39,8 @@ class GalleryActivity : ComponentActivity() {
 
   private val samplesViewModel: SamplesViewModel by viewModels()
 
+  private val mediaSelectViewModel: MediaSelectViewModel by viewModels()
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     enableEdgeToEdge()
@@ -53,9 +56,10 @@ class GalleryActivity : ComponentActivity() {
           when (event) {
             is GalleryEvent.UploadFailed -> {
               Toast.makeText(
-                      this@GalleryActivity,
-                      event.error ?: getString(R.string.upload_failed_error),
-                      Toast.LENGTH_LONG)
+                  this@GalleryActivity,
+                  event.error ?: getString(R.string.upload_failed_error),
+                  Toast.LENGTH_LONG,
+              )
                   .show()
             }
           }
@@ -98,6 +102,8 @@ class GalleryActivity : ComponentActivity() {
       val sortBy = viewModel.sortBy.collectAsState()
       val showMetadata = viewModel.showMetadata.collectAsState()
       val samplesState = samplesViewModel.state.collectAsState()
+      val mediaSelectState = mediaSelectViewModel.uiState.collectAsState()
+
       // UI
       Box(contentAlignment = Alignment.BottomCenter) {
         GalleryView(
@@ -106,19 +112,31 @@ class GalleryActivity : ComponentActivity() {
             sortBy = sortBy.value,
             showMetadata = showMetadata.value,
             onRefresh = { viewModel.loadMedia() },
-            onMediaSelected = { viewModel.onMediaSelected(it) },
+            onMediaSelected = {
+              if (mediaSelectState.value.isEnabled)
+                if (mediaSelectState.value.selectedMedia.size < 5 || mediaSelectState.value.selectedMedia.contains(it))
+                  mediaSelectViewModel.toggleMediaSelection(it)
+                else
+                  Toast.makeText(baseContext, getString(R.string.media_limit_reached, 5), Toast.LENGTH_SHORT).show()
+              else
+                viewModel.onMediaSelected(it)
+            },
+            onMediaLongPressed = { if (mediaSelectState.value.isEnabled) mediaSelectViewModel.disableSelectMode() else mediaSelectViewModel.enableSelectMode() },
             onSortBy = { viewModel.onSortBy(it) },
             onToggleMetadata = { viewModel.onToggleMetadata(it) },
             onOnboardingButtonPressed = { viewModel.onOnboardingButtonPressed() },
+            onSelectMediaButtonPressed = { if (mediaSelectState.value.isEnabled) mediaSelectViewModel.disableSelectMode() else mediaSelectViewModel.enableSelectMode() },
+            onDeleteButtonPressed = { mediaSelectViewModel.openConfirmationPanel() },
+            mediaSelectUiState = mediaSelectState.value,
         )
         if (samplesState.value != UiSamplesState.Idle && filter.value == MediaFilter.SAMPLE_MEDIA)
-            SamplesStateView(
-                modifier = Modifier.padding(Dimens.medium),
-                state = samplesState.value,
-                onDownload = { samplesViewModel.downloadSamples(it) },
-                onRefresh = { samplesViewModel.checkNewSamples() },
-                onDismiss = { samplesViewModel.dismissSamples() },
-            )
+          SamplesStateView(
+              modifier = Modifier.padding(Dimens.medium),
+              state = samplesState.value,
+              onDownload = { samplesViewModel.downloadSamples(it) },
+              onRefresh = { samplesViewModel.checkNewSamples() },
+              onDismiss = { samplesViewModel.dismissSamples() },
+          )
       }
     }
   }

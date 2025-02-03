@@ -10,6 +10,7 @@ import com.meta.levinriegner.mediaview.app.events.EditEvent
 import com.meta.levinriegner.mediaview.app.events.EventBus
 import com.meta.levinriegner.mediaview.app.events.FilterAppEvent
 import com.meta.levinriegner.mediaview.app.events.MediaPlayerEvent
+import com.meta.levinriegner.mediaview.app.events.MediaSelectionEvent
 import com.meta.levinriegner.mediaview.app.events.NavigationEvent
 import com.meta.levinriegner.mediaview.app.events.UploadAppEvent
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
@@ -127,6 +128,15 @@ constructor(
       is EditEvent.SaveImageCompleted -> {
         if (event.success) {
           loadMedia()
+        }
+      }
+
+      is MediaSelectionEvent.Deleted -> {
+        if (state.value is UiState.Success) {
+          val media = (state.value as UiState.Success<List<MediaModel>>).data
+          val updatedMedia = media.filterNot { it.id in event.deletedMediaIds }
+
+          _state.value = UiState.Success(updatedMedia)
         }
       }
     }
