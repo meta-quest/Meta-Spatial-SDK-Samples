@@ -19,6 +19,7 @@ sealed class FilterAppEvent : AppEvent() {
 
 sealed class MediaSelectionEvent : AppEvent() {
   data class Deleted(val deletedMediaIds: List<Long>) : MediaSelectionEvent()
+  data class DeleteConfirmationOpened(val mediaToDelete: List<MediaModel>) : MediaSelectionEvent()
   data object DeleteConfirmation : MediaSelectionEvent()
 }
 

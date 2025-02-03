@@ -1,7 +1,5 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
-
 package com.meta.levinriegner.mediaview.app.gallery.media_select.delete_confirm
 
 import androidx.compose.foundation.BorderStroke
@@ -11,8 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -30,18 +26,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.meta.levinriegner.mediaview.R
-import com.meta.levinriegner.mediaview.app.immersive.ImmersiveActivity
 import com.meta.levinriegner.mediaview.app.shared.theme.AppColor
 import com.meta.levinriegner.mediaview.app.shared.theme.Dimens
-import com.meta.spatial.toolkit.AppSystemActivity
-import com.meta.spatial.toolkit.SpatialActivityManager
+import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
 
 @Composable
 fun MediaDeleteConfirmView(
   modifier: Modifier = Modifier,
+  mediaToDelete: List<MediaModel>,
   onConfirmed: () -> Unit,
   onCanceled: () -> Unit,
 ) {
+  val isSingleFile = mediaToDelete.size == 1
+
   Column(
       horizontalAlignment = Alignment.CenterHorizontally,
       modifier = modifier
@@ -55,7 +52,10 @@ fun MediaDeleteConfirmView(
     )
     Spacer(modifier = Modifier.height(Dimens.small))
     Text(
-        text = pluralStringResource(R.plurals.n_files_delete_confirmation, 1),
+        text = if (isSingleFile)
+          stringResource(R.string.single_file_delete_confirmation)
+        else
+          stringResource(R.string.n_files_delete_confirmation, mediaToDelete.size),
         color = Color.White,
         fontSize = 18.sp,
         fontWeight = FontWeight.Bold,
@@ -65,7 +65,7 @@ fun MediaDeleteConfirmView(
     Spacer(modifier = Modifier.height(Dimens.xSmall))
 
     Text(
-        text = stringResource(R.string.delete_confirm_rationale),
+        text = pluralStringResource(R.plurals.n_files_delete_confirm_rationale, mediaToDelete.size),
         color = Color.Gray,
         fontSize = 14.sp,
         textAlign = TextAlign.Center
@@ -78,7 +78,10 @@ fun MediaDeleteConfirmView(
         colors = ButtonDefaults.buttonColors(containerColor = AppColor.MetaBlu),
         modifier = Modifier.fillMaxWidth()
     ) {
-      Text(text = stringResource(R.string.delete_confirm_button), color = AppColor.White)
+      Text(text = if (isSingleFile)
+        stringResource(R.string.single_file_delete_confirmation_button)
+      else
+        stringResource(R.string.n_files_delete_confirmation_button, mediaToDelete.size), color = AppColor.White)
     }
 
     Spacer(modifier = Modifier.height(Dimens.xSmall))

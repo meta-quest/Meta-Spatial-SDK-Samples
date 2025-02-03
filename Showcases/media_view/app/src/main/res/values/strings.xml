@@ -9,19 +9,11 @@
     <string name="close">Close</string>
     <string name="cancel">Cancel</string>
     <!-- Permission -->
-    <string
-    name="storage_permission_rationale_title"
-  >Grant access to the device storage.</string>
-    <string
-    name="storage_permission_rationale_description"
-  >This app needs access to your storage to display your media files.</string>
-    <string
-    name="storage_permission_rationale_denied"
-  >You have not granted access to your storage. Please grant access to continue.</string>
+    <string name="storage_permission_rationale_title">Grant access to the device storage.</string>
+    <string name="storage_permission_rationale_description">This app needs access to your storage to display your media files.</string>
+    <string name="storage_permission_rationale_denied">You have not granted access to your storage. Please grant access to continue.</string>
     <string name="storage_permission_rationale_button">Grant Access</string>
-    <string
-    name="storage_saving_samples_loading"
-  >Loading sample media. This may take a minute, please wait…</string>
+    <string name="storage_saving_samples_loading">Loading sample media. This may take a minute, please wait…</string>
     <!-- Gallery -->
     <string name="n_selected">%1$d of %2$d Selected</string>
     <string name="select">Select</string>
@@ -53,92 +45,47 @@
     <string name="download_wait_label">Downloading, please wait…</string>
     <!-- Media Select & Delete -->
     <string name="media_limit_reached">Max Files Selected (%1$d)</string>
-    <plurals name="n_files_delete_confirmation">
-        <item quantity="one">Are you sure you want to delete these files?</item>
-        <item quantity="other">Are you sure you want to delete these files?</item>
+    <string name="single_file_delete_confirmation">Are you sure you want to delete \"%1$s\"?</string>
+    <string name="single_file_delete_confirmation_button">Delete File</string>
+    <string name="n_files_delete_confirmation_button">Delete %1$d Files</string>
+    <string name="n_files_delete_confirmation">Are you sure you want to delete these files?</string>
+    <plurals name="n_files_delete_confirm_rationale">
+        <item quantity="one">This item will be deleted immediately.\nYou can\'t undo this action.</item>
+        <item quantity="other">These items will be deleted immediately.\nYou can\'t undo this action.</item>
     </plurals>
-    <string name="delete_confirm_rationale">This item will be deleted immediately.\nYou can’t undo this action.</string>
-    <string name="delete_confirm_button">Delete File/s</string>
     <!-- Privacy Policy -->
-    <string
-    name="privacy_policy_dialog_title"
-  >Terms &amp; Privacy Policy Agreement</string>
-    <string
-    name="privacy_policy_dialog_description"
-  >By clicking \'%1$s\' you agree to our %2$s and %3$s.</string>
+    <string name="privacy_policy_dialog_title">Terms &amp; Privacy Policy Agreement</string>
+    <string name="privacy_policy_dialog_description">By clicking \'%1$s\' you agree to our %2$s and %3$s.</string>
     <string name="privacy_policy_dialog_terms">Terms of Service</string>
     <string name="privacy_policy_dialog_privacy">Privacy Policy</string>
     <string name="privacy_policy_accept_button">Continue</string>
     <!-- Sample Media -->
-    <string
-    name="sample_media_no_internet"
-  >No internet connection available</string>
-    <string
-    name="sample_media_loading"
-  >Loading sample media, please wait…</string>
-    <string
-    name="sample_media_available"
-  >New sample media available for download</string>
-    <string
-    name="sample_media_downloading"
-  >Downloading samples (%1$d/%2$d), please wait…</string>
-    <string
-    name="sample_media_error"
-  >Failed to download sample media. Reason:\n%1$s</string>
-    <string
-    name="sample_media_success"
-  >Sample media downloaded successfully!</string>
+    <string name="sample_media_no_internet">No internet connection available</string>
+    <string name="sample_media_loading">Loading sample media, please wait…</string>
+    <string name="sample_media_available">New sample media available for download</string>
+    <string name="sample_media_downloading">Downloading samples (%1$d/%2$d), please wait…</string>
+    <string name="sample_media_error">Failed to download sample media. Reason:\n%1$s</string>
+    <string name="sample_media_success">Sample media downloaded successfully!</string>
     <string name="retry">Retry</string>
     <string name="dismiss">Dismiss</string>
     <string name="download">Download</string>
     <!-- Immersive -->
-    <string
-    name="immersive_mode_active_label"
-  >You are in Immersive View</string>
+    <string name="immersive_mode_active_label">You are in Immersive View</string>
     <string name="crop">Crop</string>
     <string name="minimize">Minimize</string>
     <!-- Edit -->
     <string name="save_as_new_image">Save as New Image</string>
     <string name="save_as_new_image_success">Image saved successfully</string>
-    <string
-    name="save_as_new_image_error"
-  >Failed to save image, please try again</string>
+    <string name="save_as_new_image_error">Failed to save image, please try again</string>
 
     // JW added - is this needed?
-    <string
-    name="SpatialDebugComponent_class"
-    translatable="false"
-  >SpatialDebugComponent:class</string>
-    <string
-    name="SpatialDebugComponent_axis"
-    translatable="false"
-  >SpatialDebugComponent:axis</string>
-    <string
-    name="SpatialDebugComponent_rotationSpeed"
-    translatable="false"
-  >SpatialDebugComponent:rotationSpeed</string>
-    <string
-    name="SpatialDebugComponent_followSpeed"
-    translatable="false"
-  >SpatialDebugComponent:followSpeed</string>
-    <string
-    name="SpatialDebugComponent_rotationOffset"
-    translatable="false"
-  >SpatialDebugComponent:rotationOffset</string>
-    <string
-    name="SpatialDebugComponent_followOffset"
-    translatable="false"
-  >SpatialDebugComponent:followOffset</string>
-    <string
-    name="SpatialDebugComponent_followCamera"
-    translatable="false"
-  >SpatialDebugComponent:followCamera</string>
-    <string
-    name="SpatialDebugComponent_billboard"
-    translatable="false"
-  >SpatialDebugComponent:billboard</string>
-    <string
-    name="SpatialDebugComponent_distance"
-    translatable="false"
-  >SpatialDebugComponent:distance</string>
+    <string name="SpatialDebugComponent_class" translatable="false">SpatialDebugComponent:class</string>
+    <string name="SpatialDebugComponent_axis" translatable="false">SpatialDebugComponent:axis</string>
+    <string name="SpatialDebugComponent_rotationSpeed" translatable="false">SpatialDebugComponent:rotationSpeed</string>
+    <string name="SpatialDebugComponent_followSpeed" translatable="false">SpatialDebugComponent:followSpeed</string>
+    <string name="SpatialDebugComponent_rotationOffset" translatable="false">SpatialDebugComponent:rotationOffset</string>
+    <string name="SpatialDebugComponent_followOffset" translatable="false">SpatialDebugComponent:followOffset</string>
+    <string name="SpatialDebugComponent_followCamera" translatable="false">SpatialDebugComponent:followCamera</string>
+    <string name="SpatialDebugComponent_billboard" translatable="false">SpatialDebugComponent:billboard</string>
+    <string name="SpatialDebugComponent_distance" translatable="false">SpatialDebugComponent:distance</string>
 </resources>

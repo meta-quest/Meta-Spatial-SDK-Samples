@@ -77,6 +77,7 @@ constructor(
   }
 
   fun openConfirmationPanel() {
+    eventBus.post(MediaSelectionEvent.DeleteConfirmationOpened(_uiState.value.selectedMedia))
     panelDelegate.openDeleteConfirmationPanel()
   }
 
