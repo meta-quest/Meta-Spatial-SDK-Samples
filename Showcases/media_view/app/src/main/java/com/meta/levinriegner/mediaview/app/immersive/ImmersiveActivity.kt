@@ -12,6 +12,7 @@ import com.meta.levinriegner.mediaview.app.immersive.entity.PanelTransformations
 import com.meta.levinriegner.mediaview.app.immersive.system.LookAtHeadSystem
 import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
+import com.meta.levinriegner.mediaview.data.gallery.model.MediaToDeleteModel
 import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
@@ -29,6 +30,7 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
 
   companion object {
     const val MAX_OPEN_MEDIA = 3
+    const val MAX_SELECT_MEDIA = 5
   }
 
   // Dependencies
@@ -44,8 +46,9 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
   private var _openMedia =
       MutableStateFlow<Map<Long, MediaModel>>(emptyMap()) // Uses MediaModel.id as key
   val openMedia = _openMedia.asStateFlow()
-  private var _mediaToDelete = MutableStateFlow<List<MediaModel>>(emptyList())
-  val mediaToDelete = _mediaToDelete.asStateFlow()
+
+  var mediaToDelete = MutableStateFlow<List<MediaToDeleteModel>>(emptyList())
+  val mediaToDeleteState = mediaToDelete.asStateFlow()
 
   private var uploadPanelEntityId: Long? = null
   private var deleteConfirmationEntityId: Long? = null
@@ -150,7 +153,7 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
     }
 
     // Register Panel
-    registerPanel(panelManager.provideDeleteConfirmPanelRegistration(mediaToDelete.value))
+    registerPanel(panelManager.provideDeleteConfirmPanelRegistration())
 
     // Create Entity
     val ent = panelManager.createDeleteConfirmEntity()

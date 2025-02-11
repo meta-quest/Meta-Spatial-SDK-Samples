@@ -45,7 +45,7 @@
     <string name="download_wait_label">Downloading, please wait…</string>
     <!-- Media Select & Delete -->
     <string name="media_limit_reached">Max Files Selected (%1$d)</string>
-    <string name="single_file_delete_confirmation">Are you sure you want to delete \"%1$s\"?</string>
+    <string name="single_file_delete_confirmation">Are you sure you want to delete \'%1$s\'?</string>
     <string name="single_file_delete_confirmation_button">Delete File</string>
     <string name="n_files_delete_confirmation_button">Delete %1$d Files</string>
     <string name="n_files_delete_confirmation">Are you sure you want to delete these files?</string>

@@ -5,6 +5,7 @@ package com.meta.levinriegner.mediaview.app.immersive
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
+import androidx.compose.ui.unit.dp
 import com.meta.levinriegner.mediaview.BuildConfig
 import com.meta.levinriegner.mediaview.LookAtHead
 import com.meta.levinriegner.mediaview.app.gallery.GalleryActivity
@@ -55,12 +56,11 @@ import com.meta.spatial.toolkit.TransformParent
 import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.toolkit.createPanelEntity
 import timber.log.Timber
-import java.util.ArrayList
 
 class PanelManager(
-    private val panelTransformations: PanelTransformations,
-    private val scene: Scene,
-    private val spatialContext: SpatialContext,
+  private val panelTransformations: PanelTransformations,
+  private val scene: Scene,
+  private val spatialContext: SpatialContext,
 ) {
   private val zIndexMenu = 99
 
@@ -85,7 +85,8 @@ class PanelManager(
             PanelCreator(PanelRegistrationIds.WHATS_NEW) { ent -> createWhatsNewPanel(ent) },
             PanelCreator(PanelRegistrationIds.PRIVACY_POLICY) { ent ->
               createPrivacyPolicyPanel(ent)
-            })
+            },
+        )
 
     panelRegistrations.forEach { panelRegistration ->
       registeredPanels[panelRegistration.registrationId] =
@@ -128,7 +129,8 @@ class PanelManager(
 
           ent.setComponent(
               // Transform relative to the parent
-              Transform(Pose(Vector3(0f, 0f, -0.025f), Quaternion(0f, 0f, 0f))))
+              Transform(Pose(Vector3(0f, 0f, -0.025f), Quaternion(0f, 0f, 0f))),
+          )
 
           createUploadPanel(ent)
         }
@@ -142,11 +144,7 @@ class PanelManager(
     return registration
   }
 
-  // TODO: Can't come up with a right approach
-  // to pass mediaToDelete to build a custom title
-  // for the delete confirmation dialog.
-  // Using a placeholder title for now in the view. See [MediaDeleteConfirmView.kt]
-  fun provideDeleteConfirmPanelRegistration(mediaToDelete: List<MediaModel>): PanelRegistration {
+  fun provideDeleteConfirmPanelRegistration(): PanelRegistration {
     val registration =
         PanelCreator(PanelRegistrationIds.DELETE_CONFIRM) { ent ->
           // Set gallery as parent
@@ -154,9 +152,10 @@ class PanelManager(
 
           ent.setComponent(
               // Transform relative to the parent
-              Transform(Pose(Vector3(0f, 0f, -0.025f), Quaternion(0f, 0f, 0f))))
+              Transform(Pose(Vector3(0f, 0f, -0.35f), Quaternion(0f, 0f, 0f))),
+          )
 
-          createDeleteConfirmPanel(ent, mediaToDelete)
+          createDeleteConfirmPanel(ent)
         }
 
     registeredPanels[registration.registrationId] =
@@ -255,23 +254,24 @@ class PanelManager(
     return PanelSceneObject(scene, spatialContext, UploadActivity::class.java, ent, config)
   }
 
-  private fun createDeleteConfirmPanel(ent: Entity, mediaToDelete: List<MediaModel>): PanelSceneObject {
+  private fun createDeleteConfirmPanel(ent: Entity): PanelSceneObject {
     val config =
         PanelConfigOptions(
-            width = 0.6f,
-            height = 0.40f,
+            width = dpToPx(Dimens.popupDialogTotalWidth) * PIXELS_TO_METERS,
+            height = dpToPx(Dimens.popupDialogTotalHeight) * PIXELS_TO_METERS,
+            layoutWidthInPx = dpToPx(Dimens.popupDialogTotalWidth),
+            layoutHeightInPx = dpToPx(Dimens.popupDialogTotalHeight),
             enableLayer = true,
             enableTransparent = true,
             includeGlass = false,
         )
 
-    return PanelSceneObject(scene,
+    return PanelSceneObject(
+        scene,
         spatialContext,
-        Intent(spatialContext, MediaDeleteConfirmActivity::class.java).apply {
-          putParcelableArrayListExtra("mediaToDelete", ArrayList(mediaToDelete))
-        },
+        Intent(spatialContext, MediaDeleteConfirmActivity::class.java),
         ent,
-        config
+        config,
     )
   }
 
@@ -307,7 +307,8 @@ class PanelManager(
           addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
         },
         ent,
-        config)
+        config,
+    )
   }
 
   fun createPlayerEntity(mediaModel: MediaModel): Entity {
@@ -325,14 +326,16 @@ class PanelManager(
                     .then(rotateY(135f))
               },
               Grabbable(),
-              Scale(0.5f))
+              Scale(0.5f),
+          )
 
       mediaModel.entityId = playerEntity.id
 
       return playerEntity
     } else {
       throw RuntimeException(
-          "No panel registered for media with id ${mediaModel.id}. Please register it before trying to create an associated Entity.")
+          "No panel registered for media with id ${mediaModel.id}. Please register it before trying to create an associated Entity.",
+      )
     }
   }
 
@@ -357,7 +360,8 @@ class PanelManager(
           addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
         },
         ent,
-        config)
+        config,
+    )
   }
 
   fun createPlayerMenuEntity(mediaModel: MediaModel, playerEntity: Entity): Entity {
@@ -368,15 +372,17 @@ class PanelManager(
       if (appPanelRegistration != null) {
         val popUpMenuButtonEntity =
             Entity.createPanelEntity(
-                    appPanelRegistration.registrationId,
-                    Transform.build { move(0f, 0f, 0f) },
-                    Scale(2f))
+                appPanelRegistration.registrationId,
+                Transform.build { move(0f, 0f, 0f) },
+                Scale(2f),
+            )
                 .also { mediaModel.minimizedMenuEntityId = it.id }
         val (playerWidth, playerHeight) = mediaModel.panelWidthAndHeight()
         val (menuWidth, menuHeight) =
             Pair(
                 dpToPx(Dimens.playerMenuTotalWidth) * PIXELS_TO_METERS,
-                dpToPx(Dimens.playerMenuTotalHeight) * PIXELS_TO_METERS)
+                dpToPx(Dimens.playerMenuTotalHeight) * PIXELS_TO_METERS,
+            )
 
         // Anchor the menu to the player panel
         popUpMenuButtonEntity.setComponent(TransformParent(playerEntity))
@@ -388,17 +394,23 @@ class PanelManager(
                             menuWidth +
                             (dpToPx(Dimens.medium.value.toInt()) * PIXELS_TO_METERS),
                         playerHeight / 4 - menuHeight / 2,
-                        0f),
-                    Quaternion(0f, 0f, 0f))))
+                        0f,
+                    ),
+                    Quaternion(0f, 0f, 0f),
+                ),
+            ),
+        )
 
         return popUpMenuButtonEntity
       } else {
         throw RuntimeException(
-            "No panel registered for media pop up button with id ${mediaModel.id}. Please register it before trying to create an associated Entity.")
+            "No panel registered for media pop up button with id ${mediaModel.id}. Please register it before trying to create an associated Entity.",
+        )
       }
     } else {
       throw RuntimeException(
-          "Can't create a Player Menu Entity without a Player Entity for the media with id ${mediaModel.id}. Please, register and create the Player Entity first")
+          "Can't create a Player Menu Entity without a Player Entity for the media with id ${mediaModel.id}. Please, register and create the Player Entity first",
+      )
     }
   }
 
@@ -422,7 +434,8 @@ class PanelManager(
           addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
         },
         ent,
-        config)
+        config,
+    )
   }
 
   private fun createImmersiveMenuEntity(mediaModel: MediaModel): Entity {
@@ -430,10 +443,12 @@ class PanelManager(
 
     if (appPanelRegistration != null) {
       return Entity.createPanelEntity(
-          PanelRegistrationIds.mediaImmersive(mediaModel.id), Transform.createDefaultInstance())
+          PanelRegistrationIds.mediaImmersive(mediaModel.id), Transform.createDefaultInstance(),
+      )
     } else {
       throw RuntimeException(
-          "No panel registered for immersive media with id ${mediaModel.id}. Please register it before trying to create an associated Entity.")
+          "No panel registered for immersive media with id ${mediaModel.id}. Please register it before trying to create an associated Entity.",
+      )
     }
   }
 
@@ -464,10 +479,12 @@ class PanelManager(
 
     if (appPanelRegistration != null) {
       return Entity.createPanelEntity(
-          appPanelRegistration.registrationId, transform = Transform.createDefaultInstance())
+          appPanelRegistration.registrationId, transform = Transform.createDefaultInstance(),
+      )
     } else {
       throw RuntimeException(
-          "No panel registered for Download Media. Please register it before trying to create an associated Entity.")
+          "No panel registered for Download Media. Please register it before trying to create an associated Entity.",
+      )
     }
   }
 
@@ -476,10 +493,12 @@ class PanelManager(
 
     if (appPanelRegistration != null) {
       return Entity.createPanelEntity(
-          appPanelRegistration.registrationId, transform = Transform.createDefaultInstance())
+          appPanelRegistration.registrationId, transform = Transform.createDefaultInstance(),
+      )
     } else {
       throw RuntimeException(
-          "No panel registered for Delete Confirmation. Please register it before trying to create an associated Entity.")
+          "No panel registered for Delete Confirmation. Please register it before trying to create an associated Entity.",
+      )
     }
   }
 
@@ -503,10 +522,10 @@ class PanelManager(
     // Update Player panel
     val entity =
         Query.where { has(Panel.id) }.eval().firstOrNull { it.id == mediaModel.entityId }
-            ?: run {
-              Timber.w("Player panel not found")
-              return
-            }
+          ?: run {
+            Timber.w("Player panel not found")
+            return
+          }
     val newPanelShapeConfig = mediaModel.maximizedPanelConfigOptions()
     // Apply new configuration
     panelTransformations.applyNewPanelConfiguration(entity, newPanelShapeConfig)
@@ -545,9 +564,13 @@ class PanelManager(
                       Transform(
                           Pose(
                               mediaModel.maximizedBottomCenterPanelVector3(),
-                              Quaternion(0f, 0f, 0f))))
+                              Quaternion(0f, 0f, 0f),
+                          ),
+                      ),
+                  )
                 },
-                100)
+                100,
+            )
       }
     }
   }
@@ -560,13 +583,14 @@ class PanelManager(
     // Update Player panel
     val entity =
         Query.where { has(Panel.id) }.eval().firstOrNull { it.id == mediaModel.entityId }
-            ?: run {
-              Timber.w("Player panel not found")
-              return
-            }
+          ?: run {
+            Timber.w("Player panel not found")
+            return
+          }
     // Reset the player panel configuration
     panelTransformations.applyNewPanelConfiguration(
-        entity, mediaModel.minimizedPanelConfigOptions())
+        entity, mediaModel.minimizedPanelConfigOptions(),
+    )
     // Enable grabbable
     panelTransformations.setGrabbable(entity, true)
 
@@ -582,14 +606,14 @@ class PanelManager(
         .filter {
           it.id != mediaModel.entityId &&
               it.id !=
-                  getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_PRIVACY)?.entity?.id &&
+              getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_PRIVACY)?.entity?.id &&
               it.id !=
-                  getComposition()
-                      .tryGetNodeByName(GLXFConstants.NODE_NAME_WHATS_NEW)
-                      ?.entity
-                      ?.id &&
+              getComposition()
+                  .tryGetNodeByName(GLXFConstants.NODE_NAME_WHATS_NEW)
+                  ?.entity
+                  ?.id &&
               it.id !=
-                  getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_ONBOARDING)?.entity?.id
+              getComposition().tryGetNodeByName(GLXFConstants.NODE_NAME_ONBOARDING)?.entity?.id
         }
         .forEach { panelTransformations.setPanelVisibility(it, true) }
   }

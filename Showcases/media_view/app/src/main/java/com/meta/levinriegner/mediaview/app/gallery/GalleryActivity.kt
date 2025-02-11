@@ -25,9 +25,11 @@ import com.meta.levinriegner.mediaview.app.gallery.samples.SamplesStateView
 import com.meta.levinriegner.mediaview.app.gallery.samples.SamplesViewModel
 import com.meta.levinriegner.mediaview.app.gallery.samples.UiSamplesState
 import com.meta.levinriegner.mediaview.app.gallery.view.GalleryView
+import com.meta.levinriegner.mediaview.app.immersive.ImmersiveActivity
 import com.meta.levinriegner.mediaview.app.shared.theme.Dimens
 import com.meta.levinriegner.mediaview.app.shared.theme.MediaViewTheme
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaFilter
+import com.meta.spatial.toolkit.SpatialActivityManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -104,6 +106,12 @@ class GalleryActivity : ComponentActivity() {
       val samplesState = samplesViewModel.state.collectAsState()
       val mediaSelectState = mediaSelectViewModel.uiState.collectAsState()
 
+      val mediaToDeleteState = (SpatialActivityManager.getAppSystemActivity() as ImmersiveActivity)
+          .mediaToDeleteState
+          .collectAsState()
+      val mediaToDelete = (SpatialActivityManager.getAppSystemActivity() as ImmersiveActivity)
+          .mediaToDelete
+
       // UI
       Box(contentAlignment = Alignment.BottomCenter) {
         GalleryView(
@@ -112,20 +120,54 @@ class GalleryActivity : ComponentActivity() {
             sortBy = sortBy.value,
             showMetadata = showMetadata.value,
             onRefresh = { viewModel.loadMedia() },
-            onMediaSelected = {
-              if (mediaSelectState.value.isEnabled)
-                if (mediaSelectState.value.selectedMedia.size < 5 || mediaSelectState.value.selectedMedia.contains(it))
-                  mediaSelectViewModel.toggleMediaSelection(it)
-                else
-                  Toast.makeText(baseContext, getString(R.string.media_limit_reached, 5), Toast.LENGTH_SHORT).show()
-              else
-                viewModel.onMediaSelected(it)
+            onMediaSelected = { selectedMedia ->
+              // Selection logic
+              if (mediaSelectState.value.isEnabled) {
+                // Track media to delete count to display at confirmation popup
+                if (mediaToDeleteState.value.any { fileToDelete -> selectedMedia.id == fileToDelete.id }) {
+                  mediaToDelete.value = mediaToDelete.value.toMutableList().apply {
+                    removeIf { fileToDelete -> selectedMedia.id == fileToDelete.id }
+                  }
+                } else {
+                  mediaToDelete.value = mediaToDelete.value.toMutableList().apply {
+                    add(selectedMedia.toMediaToDelete())
+                  }
+                }
+
+                if (mediaSelectState.value.selectedMedia.size < ImmersiveActivity.MAX_SELECT_MEDIA || mediaSelectState.value.selectedMedia.contains(
+                      selectedMedia,
+                  )) {
+                  mediaSelectViewModel.toggleMediaSelection(selectedMedia)
+                } else {
+                  Toast.makeText(
+                      baseContext,
+                      getString(R.string.media_limit_reached, ImmersiveActivity.MAX_SELECT_MEDIA),
+                      Toast.LENGTH_SHORT,
+                  ).show()
+                }
+              } else {
+                viewModel.onMediaSelected(selectedMedia)
+              }
             },
-            onMediaLongPressed = { if (mediaSelectState.value.isEnabled) mediaSelectViewModel.disableSelectMode() else mediaSelectViewModel.enableSelectMode() },
+            onMediaLongPressed = {
+              if (mediaSelectState.value.isEnabled) {
+                mediaToDelete.value = emptyList()
+                mediaSelectViewModel.disableSelectMode()
+              } else {
+                mediaSelectViewModel.enableSelectMode()
+              }
+            },
             onSortBy = { viewModel.onSortBy(it) },
             onToggleMetadata = { viewModel.onToggleMetadata(it) },
             onOnboardingButtonPressed = { viewModel.onOnboardingButtonPressed() },
-            onSelectMediaButtonPressed = { if (mediaSelectState.value.isEnabled) mediaSelectViewModel.disableSelectMode() else mediaSelectViewModel.enableSelectMode() },
+            onSelectMediaButtonPressed = {
+              if (mediaSelectState.value.isEnabled) {
+                mediaToDelete.value = emptyList()
+                mediaSelectViewModel.disableSelectMode()
+              } else {
+                mediaSelectViewModel.enableSelectMode()
+              }
+            },
             onDeleteButtonPressed = { mediaSelectViewModel.openConfirmationPanel() },
             mediaSelectUiState = mediaSelectState.value,
         )

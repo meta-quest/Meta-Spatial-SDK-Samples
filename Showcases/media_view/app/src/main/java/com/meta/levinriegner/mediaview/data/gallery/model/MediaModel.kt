@@ -78,5 +78,14 @@ data class MediaModel(
     return "MediaModel(id=$id, size=$size, mimeType=$mimeType, durationMs=$durationMs, width=$width, height=$height, mediaType=$mediaType, mediaFilter=$mediaFilter)"
   }
 
+  fun toMediaToDelete(): MediaToDeleteModel {
+    return MediaToDeleteModel(
+        id = this.id,
+        name = this.name ?: "",
+        uri = this.uri,
+
+    )
+  }
+
   companion object {}
 }

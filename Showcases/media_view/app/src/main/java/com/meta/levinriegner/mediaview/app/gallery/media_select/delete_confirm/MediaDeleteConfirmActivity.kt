@@ -13,21 +13,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
+import com.meta.levinriegner.mediaview.app.immersive.ImmersiveActivity
 import com.meta.levinriegner.mediaview.app.shared.theme.AppColor
 import com.meta.levinriegner.mediaview.app.shared.theme.Dimens
 import com.meta.levinriegner.mediaview.app.shared.theme.MediaViewTheme
+import com.meta.spatial.toolkit.SpatialActivityManager
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MediaDeleteConfirmActivity: ComponentActivity() {
+class MediaDeleteConfirmActivity : ComponentActivity() {
   private val mediaDeleteConfirmViewModel: MediaDeleteConfirmViewModel by viewModels()
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,19 +36,31 @@ class MediaDeleteConfirmActivity: ComponentActivity() {
   private fun buildUi() {
     setContent {
       // Observables
-      val mediaToDelete by mediaDeleteConfirmViewModel.mediaToDelete.collectAsState()
+      val mediaToDelete =
+          (SpatialActivityManager.getAppSystemActivity() as ImmersiveActivity)
+              .mediaToDelete
+              .collectAsState()
 
       MediaViewTheme {
         Box(
             modifier =
-            Modifier.fillMaxSize()
-                .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(Dimens.radiusMedium))
-                .clip(RoundedCornerShape(Dimens.radiusMedium))) {
-          MediaDeleteConfirmView (
-              modifier = Modifier.fillMaxSize().background(AppColor.BackgroundSweep),
-              onConfirmed = { mediaDeleteConfirmViewModel.confirm() },
+            Modifier
+                .fillMaxSize()
+                .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(Dimens.radiusLarge))
+                .clip(RoundedCornerShape(Dimens.radiusLarge)),
+        ) {
+          MediaDeleteConfirmView(
+              modifier = Modifier
+                  .fillMaxSize()
+                  .background(AppColor.BackgroundSweep),
+              onConfirmed = {
+                (SpatialActivityManager.getAppSystemActivity() as ImmersiveActivity)
+                    .mediaToDelete
+                    .value = emptyList()
+                mediaDeleteConfirmViewModel.confirm()
+              },
               onCanceled = { mediaDeleteConfirmViewModel.cancel() },
-              mediaToDelete = mediaToDelete,
+              mediaToDelete = mediaToDelete.value,
           )
         }
       }
