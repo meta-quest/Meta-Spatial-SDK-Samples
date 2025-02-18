@@ -20,6 +20,7 @@ import com.meta.spatial.runtime.HitInfo
 import com.meta.spatial.runtime.InputListener
 import com.meta.spatial.runtime.SceneObject
 import com.meta.spatial.toolkit.Controller
+import com.meta.spatial.toolkit.ControllerType
 import com.meta.spatial.toolkit.SceneObjectSystem
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.getAbsoluteTransform
@@ -129,8 +130,8 @@ class SpinnableSystem : SystemBase() {
 
                 // don't process any eye control
                 val controller = sourceOfInput.getComponent<Controller>()
-                if (controller.type != Controller.CONTROLLER_TYPE &&
-                    controller.type != Controller.HAND_TYPE) {
+                if (controller.type != ControllerType.CONTROLLER &&
+                    controller.type != ControllerType.HAND) {
                   return true
                 }
 
