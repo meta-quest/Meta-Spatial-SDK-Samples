@@ -1,0 +1,3 @@
+<ComponentSchema packageName="com.meta.spatial.samples.spatialvideosample">
+  <Component name="SpatializedAudioPanel" />
+</ComponentSchema>

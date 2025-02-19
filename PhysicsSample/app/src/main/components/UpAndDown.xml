@@ -1,0 +1,11 @@
+<ComponentSchema packageName="com.meta.spatial.samples.physicssample">
+  <Component name="UpAndDown">
+    <Description>
+A Component that animates a transform up and down.
+    </Description>
+    <FloatAttribute name="amount" defaultValue="0.1f" />
+    <FloatAttribute name="speed" defaultValue="0.5f" />
+    <FloatAttribute name="offset" defaultValue="0.0f" />
+    <Vector3Attribute name="startPosition" defaultValue="0f, 0f, 0f" />
+  </Component>
+</ComponentSchema>

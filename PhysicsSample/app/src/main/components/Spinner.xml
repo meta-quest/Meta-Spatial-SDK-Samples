@@ -1,0 +1,5 @@
+<ComponentSchema packageName="com.meta.spatial.samples.physicssample">
+  <Component name="Spinner" description="A Component that spins an object.">
+    <FloatAttribute name="speed" defaultValue="50.0f" />
+  </Component>
+</ComponentSchema>

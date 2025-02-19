@@ -12,6 +12,7 @@ entities:
             - ref:droneTarget
             - ref:drone
             - ref:environment
+            - ref:uiPanel
       tag: Scene
   com.meta.models.SceneNode:
     - components:
@@ -185,5 +186,30 @@ entities:
         com.meta.spatial.toolkit.Visible:
           isVisible: false
       tag: grabPanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: uiPanel
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.999971151
+            - -0.00485409237
+            - 0.00584763801
+            - 2.84210819e-05
+          rotation.format: Quaternion
+          scale:
+            - 1.5
+            - 0.899999976
+            - 1
+          translation:
+            - -0.217558056
+            - 1.77296293
+            - 2.82507014
+        com.meta.spatial.toolkit.Panel:
+          panel: "@layout/ui_panel"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: uiPanel
 metadata:
   version: 1.0

@@ -1,0 +1,11 @@
+<ComponentSchema packageName="com.meta.spatial.samples.physicssample">
+  <Component
+    name="Button"
+    description="A Component that makes an object act like a button."
+  >
+    <StringAttribute name="eventName" defaultValue="trigger" />
+    <BooleanAttribute name="isDown" defaultValue="false" />
+    <Vector3Attribute name="downOffset" defaultValue="0.0f, -0.012f, 0.0f" />
+    <Vector3Attribute name="startPosition" defaultValue="0.0f, 0.0f, 0.0f" />
+  </Component>
+</ComponentSchema>

@@ -1,0 +1,13 @@
+<ComponentSchema packageName="com.meta.spatial.samples.customcomponentssample">
+  <Enum name="LookAtAxis">
+    <EnumValue value="ALL" />
+    <EnumValue value="Y" />
+  </Enum>
+  <Component name="LookAt">
+    <EntityAttribute name="target" />
+    <BooleanAttribute name="lookAtHead" defaultValue="false" />
+    <EnumAttribute name="axis" defaultValue="LookAtAxis.ALL" />
+    <FloatAttribute name="speed" defaultValue="0.15f" />
+    <Vector3Attribute name="offset" defaultValue="0.0f, 0.0f, 0.0f" />
+  </Component>
+</ComponentSchema>

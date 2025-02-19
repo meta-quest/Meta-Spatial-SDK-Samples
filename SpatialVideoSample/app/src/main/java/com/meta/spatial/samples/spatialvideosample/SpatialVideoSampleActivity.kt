@@ -97,7 +97,6 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
   var isPlaying: Boolean = false
   var isSeeking: Boolean = false
   var isFirstReadyDone: Boolean = false
-  var startingUri: Uri? = null
   lateinit var locomotionSystem: LocomotionSystem
   lateinit var avatarSystem: AvatarSystem
   var setUri: Uri? = null
@@ -161,19 +160,6 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
             animateControllerVisibility(false)
           }
         }
-
-    intent?.let {
-      val uri: Uri = it.data ?: return@let
-      // handle if we launch with a URI
-      if (it.action == Intent.ACTION_VIEW && uri != null) {
-        val scheme = uri.scheme
-        if (scheme == "file" || scheme == "http" || scheme == "https") {
-          startingUri = uri
-        } else {
-          throw IllegalArgumentException("Unsupported URI scheme: $scheme")
-        }
-      }
-    }
 
     loadGLXF().invokeOnCompletion {
       val composition = glXFManager.getGLXFInfo("example_key_name")
@@ -505,15 +491,9 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                 }
               })
         }
-        // set + play the default video if we got one from the intent
-        startingUri?.let {
-          setVideo(it)
-          playVideo()
-        }
-            ?: run {
-              // have something to show besides blank void
-              Movie.fromRawVideo("doggie", "Doggie")?.let { movie -> setVideo(movie.uri) }
-            }
+
+        // Default media
+        Movie.fromRawVideo("doggie", "Doggie")?.let { movie -> setVideo(movie.uri) }
 
         playerView.setOnClickListener { togglePlay() }
         setupHoverAndTouchListeners(playerView)

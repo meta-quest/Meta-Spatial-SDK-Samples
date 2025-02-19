@@ -76,7 +76,7 @@
         {
             "attributes": [
                 {
-                    "keyString": "name",
+                    "keyString": "targetName",
                     "name": "targetName",
                     "type": {
                         "attributeType": "String"
@@ -135,14 +135,14 @@
                     }
                 }
             ],
-            "description": "\n Plays animation for a glTF asset. Also configures different settings for animation.\n\n @param startTime World time at which animation started (ms since epoch)\n @param pausedTime Paused location/time (sec) within animation track\n @param playbackState Playback state of the animated entity\n @param playbackType Playback type of the animated entity\n @param track the animation track of the glTF to play\n",
+            "description": "\n Plays animation for a glTF asset. Also configures different settings for animation.\n @param startTime World time at which animation started (ms since epoch)\n @param pausedTime Paused location/time (sec) within animation track\n @param playbackState Playback state of the animated entity\n @param playbackType Playback type of the animated entity\n @param track the animation track of the glTF to play\n",
             "name": "com.meta.spatial.toolkit.Animated"
         },
         {
             "attributes": [
                 {
                     "description": "The Uri String of the audio file to be used ",
-                    "keyString": "audioInternal",
+                    "keyString": "audio",
                     "name": "audio",
                     "type": {
                         "attributeType": "String"
@@ -156,7 +156,7 @@
                     }
                 }
             ],
-            "description": "\n Audio component that can be attached to an entity. This component will play audio spatially from\n the entity.\n\n @param file The Uri String of the audio file to be used\n @param volume The volume of the audio to be played, default is 1.0f\n @property audio The Uri String of the audio file to be used\n @property volume The volume of the audio to be played, default is 1.0f\n",
+            "description": "\n  Audio component that can be attached to an entity. This component will play audio spatially from the entity.\n  @param file The Uri String of the audio file to be used\n  @param volume The volume of the audio to be played, default is 1.0f\n  @property audio The Uri String of the audio file to be used\n  @property volume The volume of the audio to be played, default is 1.0f \n",
             "name": "com.meta.spatial.toolkit.Audio"
         },
         {
@@ -247,7 +247,7 @@
                     }
                 },
                 {
-                    "description": "\n Which buttons (represented by integer bits) have been changed (pressed or unpressed since the\n last frame)\n",
+                    "description": "Which buttons (represented by integer bits) have been changed (pressed or unpressed since the last frame) ",
                     "keyString": "changedButtons",
                     "name": "changedButtons",
                     "type": {
@@ -292,7 +292,7 @@
                     }
                 }
             ],
-            "description": "\n Represents Controller Data and properties that can be used to facilitate input.\n\n @param buttonState The current state of the buttons being pressed represented by integer bits\n @param changedButtons Which buttons (represented by integer bits) have been changed (pressed or\n   unpressed)\n @param isActive Whether the controller is active or not\n @param type What type of controller it is: 0->controller 1->hand\n @param directTouchEnabled Whether direct touch is enabled or not\n @param directTouchButtonState The state of the direct touch buttons\n @param laserEnabled Whether the laser is enabled or not\n",
+            "description": "\n Represents Controller Data and properties that can be used to facilitate input.\n \n @param buttonState The current state of the buttons being pressed represented by integer bits\n @param changedButtons Which buttons (represented by integer bits) have been changed (pressed or\n unpressed)\n @param isActive Whether the controller is active or not\n @param type What type of controller it is: 0->controller 1->hand\n @param directTouchEnabled Whether direct touch is enabled or not\n @param directTouchButtonState The state of the direct touch buttons\n @param laserEnabled Whether the laser is enabled or not\n",
             "name": "com.meta.spatial.toolkit.Controller"
         },
         {

@@ -9,11 +9,17 @@ package com.meta.spatial.samples.animationssample
 
 import android.net.Uri
 import android.os.Bundle
+import android.widget.Button
+import com.meta.spatial.animation.PanelAnimation
+import com.meta.spatial.animation.PanelAnimationFeature
+import com.meta.spatial.animation.PanelQuadCylinderAnimator
 import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.runtime.LayerConfig
+import com.meta.spatial.runtime.PanelShapeType
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneObject
@@ -25,6 +31,7 @@ import com.meta.spatial.toolkit.SceneObjectSystem
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.vr.VRFeature
 import java.util.concurrent.CompletableFuture
+import kotlin.random.Random
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -39,7 +46,7 @@ class AnimationsSampleActivity : AppSystemActivity() {
   private var droneSceneController: DroneSceneController? = null
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features = mutableListOf<SpatialFeature>(VRFeature(this))
+    val features = mutableListOf<SpatialFeature>(VRFeature(this), PanelAnimationFeature())
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
     }
@@ -70,6 +77,34 @@ class AnimationsSampleActivity : AppSystemActivity() {
 
   override fun registerPanels(): List<PanelRegistration> {
     return listOf(
+        PanelRegistration(R.layout.ui_panel) { ent ->
+          config {
+            themeResourceId = R.style.PanelAppThemeTransparent
+            includeGlass = false
+            layoutWidthInDp = 720f
+            layerConfig = LayerConfig()
+
+            // Defaults for panel config
+            panelShapeType = PanelShapeType.CYLINDER
+            radiusForCylinderOrSphere = 1.0f
+            enableTransparent = true
+          }
+          panel {
+            val button = rootView?.findViewById<Button>(R.id.transform_button)!!
+            button.setOnClickListener {
+              val shapeConfig = getPanelShapeConfig()
+              if (shapeConfig.panelShapeType == PanelShapeType.CYLINDER) {
+                button.text = "Change to Cylinder Shape"
+                ent.setComponent(PanelAnimation(PanelQuadCylinderAnimator()))
+              } else {
+                button.text = "Change to Quad Shape"
+                ent.setComponent(
+                    PanelAnimation(
+                        PanelQuadCylinderAnimator(targetRadius = Random.nextFloat() * 2f + 0.5f)))
+              }
+            }
+          }
+        },
         PanelRegistration(R.layout.ui_about) {
           config {
             themeResourceId = R.style.PanelAppThemeTransparent

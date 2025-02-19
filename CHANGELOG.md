@@ -2,6 +2,42 @@
 
 This format is roughly based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 0.5.5 - 2025-02-18
+
+### Added
+
+- Component XML
+  - Components can now be defined in XML instead of Kotlin, this is now the preferred way to write Components
+  - This makes it easier to define Components, and greatly improves the Spatial Editor integration with Components
+  - The build process will generate Kotlin code and resource files for the XML components
+- Panel Animation
+  - This new feature includes animation timing and callback APIs, enabling you to manipulate panel transitions seamlessly
+  - A panel zoom in and out animation is now available when creating and destroying panels
+  - These capabilities enhance the interactivity and aesthetic appeal of your panels, providing you with greater control and flexibility
+- Panel Native Transition between Quad and Cylinder Shapes
+  - We have implemented animations for transitions between Quad and Cylinder panels
+  - Check out the AnimationSample for an example
+- Refined Cylinder Panels
+  - We have conducted a comprehensive refinement of our Cylinder Panels to deliver enhanced performance and versatility. Key improvements include:
+    - Grabbable Bug Fix: We have resolved a bug with Grabbable and cylinder panels, grabbing cylinder panels will now be more reliable
+    - Backside Transparency: We have added transparency to the backside of the cylinder panels, staying consistent with quad panels
+
+### Changed
+
+- com.meta.spatial.toolkit.Controller.kt
+  - In the Controller class, property “type” is now an EnumAttribute that accepts Enum values of `com.meta.spatial.toolkit.ControllerType`. The ControllerType enum is defined in the Java package ControllerType and has three values: `ControllerType.CONTROLLER`, `ControllerType.HAND`, and `ControllerType.EYES`.
+  - The constants `com.meta.spatial.toolkit.Controller.CONTROLLER_TYPE`, `com.meta.spatial.toolkit.Controller.HAND_TYPE`, and `com.meta.spatial.toolkit.Controller.EYES_TYPE` are removed.
+- TimeAttribute has changed from Int->Long
+
+### Deprecated
+
+- Writing Components using Kotlin is now deprecated, please shift to using Component XML to define your Components
+
+### Fixed
+
+- Fixed bug with rotation with Locomotion + behavior with updateViewOrigin
+- Optimized panel update performance for large panels
+
 ## 0.5.4 - 2025-01-23
 
 ### Added

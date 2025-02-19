@@ -1,10 +1,3 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-	<item type="id" name="app_name" />
-	<item type="id" name="LookAt_class" />
-	<item type="id" name="LookAt_target" />
-	<item type="id" name="LookAt_axis" />
-	<item type="id" name="LookAt_lookAtHead" />
-	<item type="id" name="LookAt_speed" />
-	<item type="id" name="LookAt_offset" />
 </resources>

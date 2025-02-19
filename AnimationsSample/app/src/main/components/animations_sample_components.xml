@@ -1,0 +1,19 @@
+<ComponentSchema packageName="com.meta.spatial.samples.animationssample">
+  <Component name="FollowerComponent">
+    <FloatAttribute name="expDecay" defaultValue="8f" />
+    <StringAttribute name="targetName" defaultValue="" />
+    <BooleanAttribute name="enabled" defaultValue="true" />
+    <Vector3Attribute name="followOffset" defaultValue="0f, 0f, 0f" />
+    <FloatAttribute name="followDistance" defaultValue="0.5f" />
+  </Component>
+  <Component name="FollowerTarget">
+    <StringAttribute name="targetName" defaultValue="followerTarget" />
+    <BooleanAttribute name="isBuiltInFollower" defaultValue="false" />
+  </Component>
+  <Component name="DroneComponent">
+    <StringAttribute name="targetName" defaultValue="" />
+    <BooleanAttribute name="enabled" defaultValue="true" />
+    <FloatAttribute name="rotationSpeed" defaultValue=".05f" />
+    <FloatAttribute name="tiltFactor" defaultValue=".25f" />
+  </Component>
+</ComponentSchema>

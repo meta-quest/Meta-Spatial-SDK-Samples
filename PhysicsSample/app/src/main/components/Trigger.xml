@@ -1,0 +1,9 @@
+<ComponentSchema packageName="com.meta.spatial.samples.physicssample">
+  <Component
+    name="Trigger"
+    description="A Component that Triggers an event when it enters a TriggerArea component"
+  >
+    <Vector3Attribute name="size" defaultValue="0.1f, 0.1f, 0.1f" />
+    <LongAttribute name="insideAreaId" defaultValue="0L" />
+  </Component>
+</ComponentSchema>

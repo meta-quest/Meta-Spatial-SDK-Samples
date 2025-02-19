@@ -1,0 +1,10 @@
+<ComponentSchema packageName="com.meta.spatial.samples.physicssample">
+  <Component
+    name="TriggerArea"
+    description="A Component that is triggered when an entity with a Trigger component enters the trigger area."
+  >
+    <StringAttribute name="eventName" defaultValue="trigger" />
+    <FloatAttribute name="value" defaultValue="10.0f" />
+    <Vector3Attribute name="size" defaultValue="0.1f, 0.1f, 0.1f" />
+  </Component>
+</ComponentSchema>
