@@ -6,10 +6,10 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import com.meta.levinriegner.mediaview.BuildConfig
+import com.meta.levinriegner.mediaview.LookAtHead
 import com.meta.levinriegner.mediaview.app.gallery.GalleryActivity
 import com.meta.levinriegner.mediaview.app.gallery.filter.MediaFilterActivity
 import com.meta.levinriegner.mediaview.app.gallery.menu.GalleryMenuActivity
-import com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead
 import com.meta.levinriegner.mediaview.app.immersive.entity.PanelTransformations
 import com.meta.levinriegner.mediaview.app.immersive.panel.PanelRegistrationIds
 import com.meta.levinriegner.mediaview.app.immersive.panel.model.AppPanelRegistration

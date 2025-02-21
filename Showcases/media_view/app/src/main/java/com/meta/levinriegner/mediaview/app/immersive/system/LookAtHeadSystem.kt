@@ -2,7 +2,7 @@
 
 package com.meta.levinriegner.mediaview.app.immersive.system
 
-import com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead
+import com.meta.levinriegner.mediaview.LookAtHead
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.Query
@@ -40,7 +40,9 @@ class LookAtHeadSystem : SystemBase() {
 
       // Mark as looked
       if (!lookAtHead.hasLooked) {
-        entity.setComponent(lookAtHead.copyWith(hasLooked = true))
+        entity.setComponent(lookAtHead.apply {
+          hasLooked = true
+        })
       }
     }
   }

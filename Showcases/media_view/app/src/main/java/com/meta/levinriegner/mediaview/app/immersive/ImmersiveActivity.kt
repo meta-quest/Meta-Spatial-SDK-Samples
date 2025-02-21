@@ -5,7 +5,7 @@ package com.meta.levinriegner.mediaview.app.immersive
 import android.net.Uri
 import android.os.Bundle
 import com.meta.levinriegner.mediaview.BuildConfig
-import com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead
+import com.meta.levinriegner.mediaview.LookAtHead
 import com.meta.levinriegner.mediaview.app.immersive.compose.ComponentAppSystemActivity
 import com.meta.levinriegner.mediaview.app.immersive.entity.EnvironmentEntities
 import com.meta.levinriegner.mediaview.app.immersive.entity.PanelTransformations
