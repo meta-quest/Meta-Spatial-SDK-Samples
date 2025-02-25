@@ -1,0 +1,12 @@
+<ComponentSchema packageName="com.meta.theelectricfactory.focus">
+    <Component
+    name="TimeComponent"
+    description="Time Component allow us to identify and save properties of Clock and Timer tools, to update them later in UpdateTimeSystem.kt"
+  >
+        <EnumAttribute name="type" defaultValue="AssetType.CLOCK" />
+        <IntAttribute name="totalTime" defaultValue="0" />
+        <LongAttribute name="startTime" defaultValue="0L" />
+        <BooleanAttribute name="complete" defaultValue="false" />
+        <IntAttribute name="loop" defaultValue="0" />
+    </Component>
+</ComponentSchema>

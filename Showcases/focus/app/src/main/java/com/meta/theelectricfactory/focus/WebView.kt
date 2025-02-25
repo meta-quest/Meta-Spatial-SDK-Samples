@@ -23,7 +23,7 @@ class WebView(
     scene: Scene,
     ctx: SpatialContext,
     url: String = "https://www.google.com/",
-    var uuid: Int? = null,
+    var uuid: Int = -1,
     pose: Pose = Pose()
 ) {
 
@@ -142,7 +142,7 @@ class WebView(
         Entity.createPanelEntity(id, Transform(pose), Grabbable(true, GrabbableType.FACE))
 
     // If this is a new Web View, we create it in the database as well and place it in front of user
-    if (uuid == null) {
+    if (uuid == -1) {
       if (pose == Pose()) placeInFront(ent, bigPanel = true)
       uuid = getNewUUID()
       ImmersiveActivity.instance

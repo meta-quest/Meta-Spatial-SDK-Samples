@@ -31,7 +31,7 @@ enum class StickyColor {
 class StickyNote(
     scene: Scene,
     ctx: SpatialContext,
-    var uuid: Int? = null,
+    var uuid: Int = -1,
     var message: String = "",
     var color: StickyColor,
     var pose: Pose = Pose()
@@ -143,7 +143,7 @@ class StickyNote(
         Entity.createPanelEntity(id, Transform(pose), Grabbable(true, GrabbableType.PIVOT_Y))
 
     // If Sticky is new, we save it in database as well
-    if (uuid == null) {
+    if (uuid == -1) {
       placeInFront(sticky)
       uuid = getNewUUID()
       ImmersiveActivity.instance

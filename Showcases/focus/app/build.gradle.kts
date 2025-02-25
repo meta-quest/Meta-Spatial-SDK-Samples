@@ -5,6 +5,7 @@ val metaSpatialSdkVersion: String by project
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.jetbrains.kotlin.android)
+  id("com.meta.spatial.plugin")
 }
 
 android {
