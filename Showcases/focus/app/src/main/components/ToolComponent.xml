@@ -1,0 +1,10 @@
+<ComponentSchema packageName = "com.meta.theelectricfactory.focus" >
+    <Component
+        name="ToolComponent"
+        description="Tool Component allow us to identify and save properties of tool assets, as type of tool and position to show the delete button.
+            Uuid is also saved to identify the object later.">
+        <IntAttribute name="uuid" defaultValue="0" />
+        <EnumAttribute name="type" defaultValue="AssetType.STICKER" />
+        <Vector3Attribute name="deleteButtonPosition" defaultValue="0f, 0f, 0f" />
+    </Component>
+</ComponentSchema>

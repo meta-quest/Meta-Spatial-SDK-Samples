@@ -1,0 +1,8 @@
+<ComponentSchema packageName = "com.meta.theelectricfactory.focus" >
+    <Component
+        name="AttachableComponent"
+        description = "This Component allow us to detect if an object is attachable to a board, or is it a board itself.
+            In BoardParentingSystem.kt, we detect the distance between this objects and the boards, and give the sensation that we are sticking to them.">
+        <IntAttribute name="type" defaultValue="0" />
+    </Component>
+</ComponentSchema>

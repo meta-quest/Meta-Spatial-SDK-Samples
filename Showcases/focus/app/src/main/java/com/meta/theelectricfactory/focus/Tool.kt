@@ -20,7 +20,7 @@ class Tool(
     val type: AssetType?,
     val source: String = "",
     val size: Float = 1f,
-    var uuid: Int? = null,
+    var uuid: Int = -1,
     var pose: Pose = Pose(),
     var deleteButtonHeight: Float = 0.08f
 ) {
@@ -70,7 +70,7 @@ class Tool(
     }
 
     // If tool is new, we save it in database
-    if (uuid == null) {
+    if (uuid == -1) {
       if (type == AssetType.BOARD) placeInFront(obj, bigPanel = true) else placeInFront(obj)
       uuid = getNewUUID()
       ImmersiveActivity.instance

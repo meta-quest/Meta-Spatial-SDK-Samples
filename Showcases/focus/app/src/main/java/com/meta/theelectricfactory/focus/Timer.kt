@@ -65,7 +65,7 @@ class Timer(scene: Scene, ctx: SpatialContext, totalTime: Int) {
 
     // We add a TimeComponent to timer panel to be able to update it. More info in
     // UpdateTimeSystem.kt
-    timerPanel.setComponent(TimeComponent(AssetType.TIMER, totalTime))
+    timerPanel.setComponent(TimeComponent(type = AssetType.TIMER, totalTime = totalTime, startTime = System.currentTimeMillis()))
     // We make panel entity child to the timer model entity
     timerPanel.setComponent(TransformParent(timerObj))
 

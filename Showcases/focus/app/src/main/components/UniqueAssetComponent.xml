@@ -1,0 +1,8 @@
+<ComponentSchema packageName = "com.meta.theelectricfactory.focus" >
+    <Component
+        name="UniqueAssetComponent"
+        description="UniqueAsset Component allow us to identify all entities that are unique (Clock, Speaker, AI Exchange Panel, Tasks Panel) and save its uuid to identify it later." >
+        <IntAttribute name="uuid" defaultValue="0" />
+        <EnumAttribute name="type" defaultValue="AssetType.CLOCK" />
+    </Component>
+</ComponentSchema>
