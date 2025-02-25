@@ -25,29 +25,22 @@ All these elements need to be updated in the database any time they change state
 
 The core of Meta Spatial SDK is the **Entity Component System (ECS)**.
 To be able to identify different objects in Focus, we created three custom Components to attach to the Entities:
-- [UniqueAssetComponent](../app/src/main/java/com/meta/focus/UniqueAssetComponent.kt),
-- [ToolComponent](../app/src/main/java/com/meta/focus/ToolComponent.kt) and
-- [TimeComponent](../app/src/main/java/com/meta/focus/TimeComponent.kt)
+- [UniqueAssetComponent](../app/src/main/components/UniqueAssetComponent.xml),
+- [ToolComponent](../app/src/main/components/ToolComponent.xml) and
+- [TimeComponent](../app/src/main/components/TimeComponent.xml)
 
-To create a Component you need your class to inherit from *ComponentBase()*.
+Starting from Spatial SDK v0.5.5, you can define a component using an XML file under app/src/main/components. When you build your app, the Gradle plugin will pick up the XML files under app/src/main/components to generate Kotlin code first.
 
 Here is an example for a custom component:
-```kotlin
-class UniqueAssetComponent (
-    uuid: Int? = 0,
-    type: AssetType = AssetType.CLOCK ) : ComponentBase() {
-
-    var uuid by IntAttribute("uuid", R.id.UniqueAssetComponent_uuid, this, uuid)
-    var type by EnumAttribute("type", R.id.UniqueAssetComponent_type, this, AssetType::class.java,  type)
-
-    override fun typeID(): Int {
-        return UniqueAssetComponent.id
-    }
-    companion object : ComponentCompanion {
-        override val id = R.id.UniqueAssetComponent_class
-        override val createDefaultInstance = { UniqueAssetComponent() }
-    }
-}
+```xml
+<ComponentSchema packageName = "com.meta.theelectricfactory.focus" >
+    <Component
+        name="UniqueAssetComponent"
+        description="UniqueAsset Component allow us to identify all entities that are unique (Clock, Speaker, AI Exchange Panel, Tasks Panel) and save its uuid to identify it later." >
+        <IntAttribute name="uuid" defaultValue="0" />
+        <EnumAttribute name="type" defaultValue="AssetType.CLOCK" />
+    </Component>
+</ComponentSchema>
 ```
 
 Don't forget to register your component in your activity to be able to use it:
