@@ -28,7 +28,7 @@
                     }
                 }
             ],
-            "name": "com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead"
+            "name": "com.meta.levinriegner.mediaview.LookAtHead"
         },
         {
             "attributes": [

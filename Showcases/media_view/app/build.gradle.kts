@@ -43,7 +43,7 @@ android {
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
     versionCode = 19
-    versionName = "0.0.16"
+    versionName = "0.0.17"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }

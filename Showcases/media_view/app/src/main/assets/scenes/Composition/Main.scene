@@ -14,21 +14,23 @@ entities:
           {}
         com.meta.components.Name:
           name: gallery
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 0.779999971
             - 0.49000001
             - 1
+          componentVersion: 1
           children:
             - ref:onboarding
             - ref:whatsNew
             - ref:mediaTypesFilter
             - ref:galleryMenu
-        com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead:
+        com.meta.levinriegner.mediaview.LookAtHead:
           zOffset: 1.1000000000000001
           once: true
-          hasLooked: false
         com.meta.spatial.toolkit.Grabbable:
           {}
         com.meta.spatial.toolkit.Panel:
@@ -43,6 +45,8 @@ entities:
           {}
         com.meta.components.Name:
           name: mediaTypesFilter
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -53,6 +57,7 @@ entities:
             - 0.49000001
             - 0
             - 0
+          componentVersion: 1
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/3"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -65,6 +70,8 @@ entities:
           {}
         com.meta.components.Name:
           name: galleryMenu
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -75,6 +82,7 @@ entities:
             - 0
             - 0.297750771
             - 0
+          componentVersion: 1
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/2"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -87,16 +95,17 @@ entities:
           {}
         com.meta.components.Name:
           name: privacyPopup
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 0.200000003
             - 0.200000003
             - 1
-        com.meta.levinriegner.mediaview.app.immersive.component.LookAtHead:
+          componentVersion: 1
+        com.meta.levinriegner.mediaview.LookAtHead:
           zOffset: 0.69999999999999996
-          once: false
-          hasLooked: false
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/5"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -109,12 +118,15 @@ entities:
           {}
         com.meta.components.Name:
           name: onboarding
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 0.899999976
             - 0.449999988
             - 1
+          componentVersion: 1
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/6"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -127,6 +139,8 @@ entities:
           {}
         com.meta.components.Name:
           name: whatsNew
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -137,6 +151,7 @@ entities:
             - 0
             - -0.00407040119
             - 0
+          componentVersion: 1
         com.meta.spatial.toolkit.Panel:
           panel: "@integer/7"
         com.meta.spatial.toolkit.PanelDimensions:
@@ -145,4 +160,4 @@ entities:
           isVisible: false
       tag: whatsNew
 metadata:
-  version: 1.0
+  version: 1.29
