@@ -2,6 +2,7 @@
 
 package com.meta.pixelandtexel.geovoyage.ecs.grabbablenorotation
 
+import com.meta.pixelandtexel.geovoyage.GrabbableNoRotation
 import com.meta.pixelandtexel.geovoyage.utils.MathUtils
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose

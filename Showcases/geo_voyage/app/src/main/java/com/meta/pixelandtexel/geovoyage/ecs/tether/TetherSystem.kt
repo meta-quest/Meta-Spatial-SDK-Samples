@@ -2,6 +2,7 @@
 
 package com.meta.pixelandtexel.geovoyage.ecs.tether
 
+import com.meta.pixelandtexel.geovoyage.Tether
 import com.meta.pixelandtexel.geovoyage.utils.MathUtils.fromAxisAngle
 import com.meta.pixelandtexel.geovoyage.utils.MathUtils.lengthSq
 import com.meta.spatial.core.Entity
