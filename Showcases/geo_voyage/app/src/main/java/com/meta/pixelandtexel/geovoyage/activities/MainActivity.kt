@@ -35,7 +35,7 @@ import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.runtime.AlphaMode
 import com.meta.spatial.runtime.PanelConfigOptions
-import com.meta.spatial.runtime.QuadLayerConfig
+import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneObject
@@ -140,7 +140,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
         enableTransparent = true,
         forceSceneTexture = true,
         // Enable better looking panels
-        layerConfig = QuadLayerConfig(),
+        layerConfig = LayerConfig(),
         panelShader = SceneMaterial.HOLE_PUNCH_PANEL_SHADER,
         alphaMode = AlphaMode.HOLE_PUNCH)
   }
