@@ -3,6 +3,7 @@
 package com.meta.pixelandtexel.geovoyage.ecs.spin
 
 import com.meta.pixelandtexel.geovoyage.utils.MathUtils.fromAxisAngle
+import com.meta.pixelandtexel.geovoyage.Spin
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.Query

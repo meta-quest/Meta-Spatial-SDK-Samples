@@ -3,6 +3,7 @@
 package com.meta.pixelandtexel.geovoyage.ecs.pinnable
 
 import android.util.Log
+import com.meta.pixelandtexel.geovoyage.Pinnable
 import com.meta.pixelandtexel.geovoyage.activities.MainActivity
 import com.meta.pixelandtexel.geovoyage.models.GeoCoordinates
 import com.meta.pixelandtexel.geovoyage.utils.MathUtils

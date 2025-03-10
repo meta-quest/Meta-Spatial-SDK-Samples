@@ -1,0 +1,10 @@
+<ComponentSchema packageName="com.meta.pixelandtexel.geovoyage">
+    <Component name="Pinnable">
+        <Description>
+Component used by system to track where the user has dropped pins on the globe.
+
+@param meshName Currently unused, but demonstrates how you could define different pins to use on different Pinnables.
+        </Description>
+        <StringAttribute name="meshName" defaultValue="pin.glb" />
+    </Component>
+</ComponentSchema>
