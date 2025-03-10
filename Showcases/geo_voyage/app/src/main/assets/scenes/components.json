@@ -1,121 +1,130 @@
 {
   "components": [
     {
-      "name": "com.meta.pixelandtexel.geovoyage.ecs.grabbablenorotation.GrabbableNoRotation",
+      "name": "com.meta.pixelandtexel.geovoyage.GrabbableNoRotation",
       "attributes": [
         {
           "name": "enabled",
           "keyString": "enabled",
           "type": {
             "attributeType": "Boolean"
-          }
+          },
+          "description": "Whether or not the grabbable functionality is enabled."
         },
         {
           "name": "isGrabbed",
           "keyString": "isGrabbed",
           "type": {
             "attributeType": "Boolean"
-          }
+          },
+          "description": "Used by system to track component state. You should not set this manually, and always use the default value."
         }
-      ]
+      ],
+      "description": "Similar to the Grabbable component, but applies zero rotation. To be used in conjunction with the Spinnable component (which instead handles the rotation)."
     },
     {
-      "name": "com.meta.pixelandtexel.geovoyage.ecs.pinnable.Pinnable",
+      "name": "com.meta.pixelandtexel.geovoyage.Pinnable",
       "attributes": [
         {
           "name": "meshName",
           "keyString": "meshName",
           "type": {
             "attributeType": "String"
-          }
+          },
+          "description": "Currently unused, but demonstrates how you could define different pins to use on different Pinnables."
         }
-      ]
+      ],
+      "description": "Component used by system to track where the user has dropped pins on the globe."
     },
     {
-      "name": "com.meta.pixelandtexel.geovoyage.ecs.spin.Spin",
+      "name": "com.meta.pixelandtexel.geovoyage.Spin",
       "attributes": [
         {
           "name": "speed",
           "keyString": "speed",
           "type": {
             "attributeType": "Float"
-          }
+          },
+          "description": "Degrees per second."
+        },
+        {
+          "name": "axis",
+          "keyString": "axis",
+          "type": {
+            "attributeType": "Vector3"
+          },
+          "description": "The vector direction around which to rotate the object."
         }
       ],
-      "description": "\n A simple component to steadily rotate an entity around an axis\n\n @param speed degrees per second\n @param axis the vector direction around which to rotate the object\n"
+      "description": "A simple component to steadily rotate an entity around an axis."
     },
     {
-      "name": "com.meta.pixelandtexel.geovoyage.ecs.spinnable.Spinnable",
+      "name": "com.meta.pixelandtexel.geovoyage.Spinnable",
       "attributes": [
         {
           "name": "size",
           "keyString": "size",
           "type": {
             "attributeType": "Float"
-          }
+          },
+          "description": "The size measurement of the entity with which to calculate the yaw rotation."
         },
         {
           "name": "drag",
           "keyString": "drag",
           "type": {
             "attributeType": "Float"
-          }
-        },
-        {
-          "name": "isGrabbed",
-          "keyString": "isGrabbed",
-          "type": {
-            "attributeType": "Boolean"
-          }
-        },
-        {
-          "name": "isSpinning",
-          "keyString": "isSpinning",
-          "type": {
-            "attributeType": "Boolean"
-          }
-        },
-        {
-          "name": "pitch",
-          "keyString": "pitch",
-          "type": {
-            "attributeType": "Float"
-          }
+          },
+          "description": "How fast the entity rotation decelerates when the user stops manipulating."
         }
-      ]
+      ],
+      "description": "A component which allows the entity to be rotated around its yaw axis by the user, or pitched up and down relative to the user's location."
     },
     {
-      "name": "com.meta.pixelandtexel.geovoyage.ecs.tether.Tether",
+      "name": "com.meta.pixelandtexel.geovoyage.Tether",
       "attributes": [
+        {
+          "name": "target",
+          "keyString": "target",
+          "type": {
+            "attributeType": "Entity"
+          },
+          "description": "Entity to which this owning Entity is tethered to."
+        },
         {
           "name": "rotateAround",
           "keyString": "rotateAround",
           "type": {
             "attributeType": "Float"
-          }
+          },
+          "description": "How many degrees to rotate around the the entity, relative to the user."
         },
         {
           "name": "yawOffset",
           "keyString": "yawOffset",
           "type": {
             "attributeType": "Float"
-          }
+          },
+          "description": "After rotating around the entity, how much additional yaw to apply."
         },
         {
           "name": "zOffset",
           "keyString": "zOffset",
           "type": {
             "attributeType": "Float"
-          }
+          },
+          "description": "Z position offset."
         },
         {
           "name": "yOffset",
           "keyString": "yOffset",
           "type": {
             "attributeType": "Float"
-          }
+          },
+          "description": "Y position offset."
         }
-      ]
+      ],
+      "description": "A component which tethers one entity to another. The position can be adjusted, and the rotation is relative the the owning Entity's position and the user's head position."
     },
     {
       "name": "com.meta.spatial.mruk.AnchorProcMeshInfo",
