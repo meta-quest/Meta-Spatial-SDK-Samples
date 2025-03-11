@@ -3,7 +3,8 @@
 package com.meta.pixelandtexel.geovoyage.ecs.spinnable
 
 import android.util.Log
-import com.meta.pixelandtexel.geovoyage.ecs.grabbablenorotation.GrabbableNoRotation
+import com.meta.pixelandtexel.geovoyage.GrabbableNoRotation
+import com.meta.pixelandtexel.geovoyage.Spinnable
 import com.meta.pixelandtexel.geovoyage.utils.MathUtils
 import com.meta.pixelandtexel.geovoyage.utils.MathUtils.PIf
 import com.meta.pixelandtexel.geovoyage.utils.MathUtils.clamp
@@ -60,6 +61,7 @@ class SpinnableSystem : SystemBase() {
     private const val TAG: String = "SpinnableSystem"
 
     private const val ROTATION_SPEED: Float = .5f
+    private const val MAX_PITCH_RAD: Float = 45f * PIf / 180f
   }
 
   private val interactionButtons: Int = ButtonBits.ButtonA or ButtonBits.ButtonX
@@ -230,8 +232,7 @@ class SpinnableSystem : SystemBase() {
         // calculate our current pitch offset
         val pitchOffset = v1.pitchAngle(v2)
         val pitchDelta = (pitchOffset - info.initialPitchOffset) * 2f
-        val newPitch =
-            (spinnable.pitch + pitchDelta).clamp(-Spinnable.MAX_PITCH_RAD, Spinnable.MAX_PITCH_RAD)
+        val newPitch = (spinnable.pitch + pitchDelta).clamp(-MAX_PITCH_RAD, MAX_PITCH_RAD)
 
         /**
          * Find our "normalized" yaw delta, which is the yaw as a ratio of the arc length of the

@@ -89,62 +89,6 @@
     name="today_in_history_base_query"
   >What is one notable event in history that occurred on %1$s?</string>
 
-    <!--Grabbables-->
-    <string
-    name="GrabbableNoRotation_enabled"
-    translatable="false"
-  >GrabbableNoRotation:enabled</string>
-    <string
-    name="GrabbableNoRotation_isGrabbed"
-    translatable="false"
-  >GrabbableNoRotation:isGrabbed</string>
-    <string
-    name="GrabbableNoRotation_class"
-    translatable="false"
-  >GrabbableNoRotation_class:class</string>
-    <!--Spin System-->
-    <string name="Spinnable_size" translatable="false">Spinnable:size</string>
-    <string name="Spinnable_drag" translatable="false">Spinnable:drag</string>
-    <string
-    name="Spinnable_isGrabbed"
-    translatable="false"
-  >Spinnable:isGrabbed</string>
-    <string
-    name="Spinnable_isSpinning"
-    translatable="false"
-  >Spinnable:isSpinning</string>
-    <string name="Spinnable_pitch" translatable="false">Spinnable:pitch</string>
-    <string
-    name="Spinnable_class"
-    translatable="false"
-  >Spinnable_class:class</string>
-    <!-- Pin Drop-->
-    <string
-    name="Pinnable_meshName"
-    translatable="false"
-  >Pinnable:meshName</string>
-    <string
-    name="Pinnable_class"
-    translatable="false"
-  >Pinnable_class:class</string>
-    <!-- Spin system -->
-    <string name="Spin_axis" translatable="false">Spin:axis</string>
-    <string name="Spin_speed" translatable="false">Spin:speed</string>
-    <string name="Spin_class" translatable="false">Spin_class:class</string>
-    <!-- Tether system -->
-    <string name="Tether_entity" translatable="false">Tether:entity</string>
-    <string
-    name="Tether_rotateAround"
-    translatable="false"
-  >Tether:rotateAround</string>
-    <string
-    name="Tether_yawOffset"
-    translatable="false"
-  >Tether:yawOffset</string>
-    <string name="Tether_zOffset" translatable="false">Tether:zOffset</string>
-    <string name="Tether_yOffset" translatable="false">Tether:yOffset</string>
-    <string name="Tether_class" translatable="false">Tether_class:class</string>
-
     <!--Preview Test Strings-->
     <string
     name="test_input_text_field"

@@ -1,0 +1,16 @@
+<ComponentSchema packageName="com.meta.pixelandtexel.geovoyage">
+    <Component name="GrabbableNoRotation">
+        <Description
+    >Similar to the Grabbable component, but applies zero rotation. To be used in conjunction with the Spinnable component (which instead handles the rotation).</Description>
+        <BooleanAttribute
+      name="enabled"
+      defaultValue="true"
+      description="Whether or not the grabbable functionality is enabled."
+    />
+        <BooleanAttribute
+      name="isGrabbed"
+      defaultValue="false"
+      description="Used by system to track component state. You should not set this manually, and always use the default value."
+    />
+    </Component>
+</ComponentSchema>

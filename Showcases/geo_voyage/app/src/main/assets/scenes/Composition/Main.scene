@@ -35,14 +35,13 @@ entities:
             - ref:trees
             - ref:pin
             - ref:clouds
-        com.meta.pixelandtexel.geovoyage.ecs.grabbablenorotation.GrabbableNoRotation:
+        com.meta.pixelandtexel.geovoyage.GrabbableNoRotation:
           enabled: true
-        com.meta.pixelandtexel.geovoyage.ecs.pinnable.Pinnable:
+        com.meta.pixelandtexel.geovoyage.Pinnable:
           meshName: pin.glb
-        com.meta.pixelandtexel.geovoyage.ecs.spinnable.Spinnable:
+        com.meta.pixelandtexel.geovoyage.Spinnable:
           size: 0.73499999999999999
           drag: 1.8
-          pitch: 0
       tag: earth
     - components:
         com.meta.components.Animatable:
@@ -86,7 +85,11 @@ entities:
             - 1
             - 1
             - 1
-        com.meta.pixelandtexel.geovoyage.ecs.spin.Spin:
+        com.meta.pixelandtexel.geovoyage.Spin:
+          axis:
+            - 0
+            - 1
+            - 0
           speed: 1
       tag: clouds
 metadata:

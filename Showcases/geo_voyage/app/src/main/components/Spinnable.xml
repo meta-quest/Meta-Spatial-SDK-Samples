@@ -1,0 +1,31 @@
+<ComponentSchema packageName="com.meta.pixelandtexel.geovoyage">
+    <Component name="Spinnable">
+        <Description
+    >A component which allows the entity to be rotated around its yaw axis by the user, or pitched up and down relative to the user's location.</Description>
+        <FloatAttribute
+      name="size"
+      defaultValue="1f"
+      description="The size measurement of the entity with which to calculate the yaw rotation."
+    />
+        <FloatAttribute
+      name="drag"
+      defaultValue="1f"
+      description="How fast the entity rotation decelerates when the user stops manipulating."
+    />
+        <BooleanAttribute
+      name="isGrabbed"
+      defaultValue="false"
+      description="Used by system to track component state. You should not set this manually, and always use the default value."
+    />
+        <BooleanAttribute
+      name="isSpinning"
+      defaultValue="false"
+      description="Used by system to track component state. You should not set this manually, and always use the default value."
+    />
+        <FloatAttribute
+      name="pitch"
+      defaultValue="0f"
+      description="Used by system to track component state. You should not set this manually, and always use the default value."
+    />
+    </Component>
+</ComponentSchema>

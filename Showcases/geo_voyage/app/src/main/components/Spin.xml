@@ -1,0 +1,16 @@
+<ComponentSchema packageName="com.meta.pixelandtexel.geovoyage">
+    <Component name="Spin">
+        <Description
+    >A simple component to steadily rotate an entity around an axis.</Description>
+        <FloatAttribute
+      name="speed"
+      defaultValue="15f"
+      description="Degrees per second."
+    />
+        <Vector3Attribute
+      name="axis"
+      defaultValue="0f, 1f, 0f"
+      description="The vector direction around which to rotate the object."
+    />
+    </Component>
+</ComponentSchema>
