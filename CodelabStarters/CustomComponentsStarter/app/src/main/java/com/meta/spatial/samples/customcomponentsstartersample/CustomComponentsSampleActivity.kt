@@ -91,7 +91,9 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
             width = 2.0f
             height = 1.5f
           }
-        })
+        },
+        // TODO: add a second panel
+    )
   }
 
   override fun onSceneReady() {
