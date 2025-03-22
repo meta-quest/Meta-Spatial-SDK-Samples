@@ -41,7 +41,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
-import coil.compose.rememberAsyncImagePainter
+import coil3.compose.rememberAsyncImagePainter
 import com.meta.levinriegner.mediaview.R
 import com.meta.levinriegner.mediaview.app.onboarding.view.OnboardingControls
 import com.meta.levinriegner.mediaview.app.onboarding.view.OnboardingSlide

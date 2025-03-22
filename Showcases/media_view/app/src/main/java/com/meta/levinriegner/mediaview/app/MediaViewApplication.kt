@@ -4,9 +4,11 @@ package com.meta.levinriegner.mediaview.app
 
 import android.app.Application
 import android.util.Log
-import coil.Coil
-import coil.ImageLoader
-import coil.decode.VideoFrameDecoder
+import coil3.ImageLoader
+import coil3.PlatformContext
+import coil3.SingletonImageLoader
+import coil3.request.crossfade
+import coil3.video.VideoFrameDecoder
 import com.datadog.android.Datadog
 import com.datadog.android.DatadogSite
 import com.datadog.android.core.configuration.Configuration
@@ -23,7 +25,7 @@ import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
 @HiltAndroidApp
-class MediaViewApplication : Application() {
+class MediaViewApplication : Application(), SingletonImageLoader.Factory {
 
   override fun onCreate() {
     super.onCreate()
@@ -33,12 +35,6 @@ class MediaViewApplication : Application() {
     } else {
       initDatadog()
     }
-    // Coil
-    Coil.setImageLoader(
-        ImageLoader.Builder(this)
-            .components { add(VideoFrameDecoder.Factory()) }
-            .crossfade(true)
-            .build())
   }
 
   private fun initDatadog() {
@@ -47,9 +43,10 @@ class MediaViewApplication : Application() {
     val appVariantName = ""
     val configuration =
         Configuration.Builder(
-                clientToken = BuildConfig.DATADOG_CLIENT_TOKEN,
-                env = environmentName,
-                variant = appVariantName)
+            clientToken = BuildConfig.DATADOG_CLIENT_TOKEN,
+            env = environmentName,
+            variant = appVariantName,
+        )
             .useSite(DatadogSite.US1)
             .build()
     Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
@@ -70,5 +67,12 @@ class MediaViewApplication : Application() {
             .setRemoteLogThreshold(Log.INFO)
             .build()
     Timber.plant(DatadogTree(logger))
+  }
+
+  override fun newImageLoader(context: PlatformContext): ImageLoader {
+    return ImageLoader.Builder(context)
+        .components { add(VideoFrameDecoder.Factory()) }
+        .crossfade(true)
+        .build()
   }
 }
