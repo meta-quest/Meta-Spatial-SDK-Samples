@@ -38,7 +38,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.compose.rememberAsyncImagePainter
+import coil3.compose.rememberAsyncImagePainter
 import com.meta.levinriegner.mediaview.BuildConfig
 import com.meta.levinriegner.mediaview.R
 import com.meta.levinriegner.mediaview.app.shared.Constants

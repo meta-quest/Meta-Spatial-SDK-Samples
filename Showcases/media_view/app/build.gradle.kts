@@ -15,6 +15,7 @@ plugins {
   id("com.meta.spatial.plugin")
   id("com.datadoghq.dd-sdk-android-gradle-plugin")
   id("org.jetbrains.kotlin.plugin.serialization")
+  id("org.jetbrains.kotlin.plugin.compose")
 }
 
 // Signing
@@ -35,7 +36,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
   namespace = "com.meta.levinriegner.mediaview"
-  compileSdk = 34
+  compileSdk = 35
 
   defaultConfig {
     applicationId = "com.meta.levinriegner.mediaview"
@@ -166,8 +167,9 @@ dependencies {
   implementation("androidx.compose.ui:ui-tooling-preview")
   implementation("androidx.compose.material3:material3")
   implementation("androidx.compose.material:material-icons-extended:1.7.5")
-  implementation("io.coil-kt:coil-compose:2.7.0")
-  implementation("io.coil-kt:coil-video:2.7.0")
+  implementation("io.coil-kt.coil3:coil-compose:3.1.0")
+  implementation("io.coil-kt.coil3:coil-video:3.1.0")
+  implementation("io.coil-kt.coil3:coil-network-okhttp:3.1.0")
   // implementation("com.github.moyuruaizawa:cropify:0.5.0")
   implementation("com.github.levin-riegner:cropify:master-SNAPSHOT")
 
@@ -179,8 +181,8 @@ dependencies {
   implementation("androidx.media3:media3-ui:1.4.1")
 
   // Dependency injection
-  implementation("com.google.dagger:hilt-android:2.51")
-  kapt("com.google.dagger:hilt-android-compiler:2.51")
+  implementation("com.google.dagger:hilt-android:2.55")
+  kapt("com.google.dagger:hilt-android-compiler:2.55")
 
   // Utilities
   implementation("com.jakewharton.timber:timber:5.0.1")
