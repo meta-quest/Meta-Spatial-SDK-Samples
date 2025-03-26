@@ -12,18 +12,18 @@ import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.app.shared.util.FeatureFlags
 import com.meta.levinriegner.mediaview.data.gallery.model.MediaModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import timber.log.Timber
+import javax.inject.Inject
 
 @HiltViewModel
 class ImmersiveMenuViewModel
 @Inject
 constructor(
-    savedStateHandle: SavedStateHandle,
-    private val panelDelegate: PanelDelegate,
-    private val eventBus: EventBus,
+  savedStateHandle: SavedStateHandle,
+  private val panelDelegate: PanelDelegate,
+  private val eventBus: EventBus,
 ) : ViewModel(), AppEventListener {
 
   init {
@@ -58,7 +58,7 @@ constructor(
 
   fun onSaveImagePressed() {
     if (_state.value is ImmersiveMenuState.Editing &&
-        (_state.value as ImmersiveMenuState.Editing).saveLoading) {
+      (_state.value as ImmersiveMenuState.Editing).saveLoading) {
       // Skip if already saving
       return
     }
@@ -75,5 +75,10 @@ constructor(
         }
       }
     }
+  }
+
+  override fun onCleared() {
+    eventBus.unregister(this)
+    super.onCleared()
   }
 }
