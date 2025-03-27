@@ -14,7 +14,7 @@ import android.os.Looper
 import android.util.Log
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.OvershootInterpolator
-import com.meta.spatial.core.Color4
+import com.meta.spatial.toolkit.Color4
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.runtime.AlphaMode
