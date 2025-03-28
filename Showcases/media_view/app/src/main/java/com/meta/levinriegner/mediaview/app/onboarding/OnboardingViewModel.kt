@@ -12,19 +12,19 @@ import com.meta.levinriegner.mediaview.app.panel.PanelDelegate
 import com.meta.levinriegner.mediaview.data.onboarding.model.StepModel
 import com.meta.levinriegner.mediaview.data.user.repository.UserRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import okhttp3.internal.immutableListOf
 import timber.log.Timber
+import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel
 @Inject
 constructor(
-    private val userRepository: UserRepository,
-    private val panelDelegate: PanelDelegate,
-    eventBus: EventBus,
+  private val userRepository: UserRepository,
+  private val panelDelegate: PanelDelegate,
+  private val eventBus: EventBus,
 ) : ViewModel(), AppEventListener {
   private val _state = MutableStateFlow<OnboardingState>(OnboardingState.Idle)
   val state = _state.asStateFlow()
@@ -57,6 +57,11 @@ constructor(
         refreshShouldShow()
       }
     }
+  }
+
+  override fun onCleared() {
+    eventBus.unregister(this)
+    super.onCleared()
   }
 
   companion object {

@@ -82,7 +82,7 @@ constructor(
   }
 
   override fun onEvent(event: AppEvent) {
-    when(event) {
+    when (event) {
       is MediaSelectionEvent.DeleteConfirmation -> {
         val mediaToDelete = _uiState.value.selectedMedia
 
@@ -132,5 +132,10 @@ constructor(
         }
       }
     }
+  }
+
+  override fun onCleared() {
+    eventBus.unregister(this)
+    super.onCleared()
   }
 }
