@@ -14,7 +14,6 @@ import android.os.Looper
 import android.util.Log
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.OvershootInterpolator
-import com.meta.spatial.core.Color4
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.runtime.AlphaMode
@@ -24,6 +23,7 @@ import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneAudioPlayer
 import com.meta.spatial.runtime.SceneObject
 import com.meta.spatial.toolkit.Animated
+import com.meta.spatial.toolkit.Color4
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.PlaybackState
