@@ -816,6 +816,7 @@ class CustomRenderersFactory : DefaultRenderersFactory {
             audioRendererEventListener,
             audioSink_,
         )
+    rendererList.add(0, audioRenderer)
     return rendererList.toTypedArray()
   }
 }
