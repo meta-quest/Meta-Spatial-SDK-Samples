@@ -16,13 +16,19 @@ import com.meta.spatial.core.EventArgs
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
+import com.meta.spatial.debugtools.HotReloadFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
+import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
+import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.physics.Physics
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.physics.PhysicsState
+import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
+import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.GLXFNode
 import com.meta.spatial.toolkit.Material
@@ -77,6 +83,9 @@ class BallRunActivity : AppSystemActivity() {
     val features = mutableListOf<SpatialFeature>(PhysicsFeature(spatial), VRFeature(this))
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
+      features.add(HotReloadFeature(this))
+      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
+      features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
     return features
   }
@@ -109,6 +118,8 @@ class BallRunActivity : AppSystemActivity() {
             includeGlass = false
             width = 2.0f
             height = 1.5f
+            layerConfig = LayerConfig()
+            enableTransparent = true
           }
         },
         PanelRegistration(R.layout.ui_info) {
@@ -117,6 +128,8 @@ class BallRunActivity : AppSystemActivity() {
             includeGlass = false
             width = 0.5f
             height = 0.3f
+            layerConfig = LayerConfig()
+            enableTransparent = true
           }
         })
   }

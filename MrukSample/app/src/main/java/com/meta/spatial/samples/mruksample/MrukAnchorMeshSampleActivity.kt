@@ -7,8 +7,11 @@
 
 package com.meta.spatial.samples.mruksample
 
+import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -18,6 +21,8 @@ import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
+import com.meta.spatial.debugtools.HotReloadFeature
 import com.meta.spatial.mruk.AnchorMeshSpawner
 import com.meta.spatial.mruk.AnchorProceduralMesh
 import com.meta.spatial.mruk.AnchorProceduralMeshConfig
@@ -28,7 +33,10 @@ import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.mruk.MRUKRoom
 import com.meta.spatial.mruk.MRUKSceneEventListener
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
+import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
+import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.physics.PhysicsFeature
+import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Grabbable
@@ -40,6 +48,9 @@ import com.meta.spatial.toolkit.createPanelEntity
 import com.meta.spatial.vr.LocomotionSystem
 import com.meta.spatial.vr.VRFeature
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.util.UUID
 
 // default activity
 class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
@@ -63,6 +74,9 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
     val features = mutableListOf(VRFeature(this), PhysicsFeature(spatial), mrukFeature)
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
+      features.add(HotReloadFeature(this))
+      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
+      features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
     return features
   }
@@ -298,6 +312,35 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
     spatial.enablePhysicsDebugLines(showColliders)
   }
 
+  private fun writeStringToFile(context: Context, fileName: String, content: String) {
+    // Check if external storage is writable
+    if (isExternalStorageWritable()) {
+      // Get the external storage directory
+      val externalStorageDir = context.getExternalFilesDir(null)
+      if (externalStorageDir != null) {
+        // Create a new file in the external storage directory
+        val file = File(externalStorageDir, fileName)
+        try {
+          FileOutputStream(file).use { fos ->
+            fos.write(content.toByteArray())
+            Log.d(TAG, "File saved at: ${file.canonicalPath}")
+          }
+        } catch (e: IOException) {
+          Log.e(TAG, "Error writing to file", e)
+        }
+      } else {
+        Log.e(TAG, "External storage directory is null")
+      }
+    } else {
+      Log.e(TAG, "External storage is not writable")
+    }
+  }
+
+  // Helper method to check if external storage is writable
+  private fun isExternalStorageWritable(): Boolean {
+    return Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
+  }
+
   override fun registerPanels(): List<PanelRegistration> {
     return listOf(
         PanelRegistration(R.layout.ui_anchor_mesh_menu) {
@@ -306,6 +349,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
             width = 0.5f
             fractionOfScreen = 1f
             layoutDpi = 500
+            layerConfig = LayerConfig()
+            enableTransparent = true
           }
           panel {
             requireNotNull(rootView)
@@ -347,7 +392,24 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
             showCollidersButton?.setOnClickListener { toggleShowColliders() }
 
             val launchSceneCaptureButton = rootView?.findViewById<Button>(R.id.launch_scene_capture)
-            launchSceneCaptureButton?.setOnClickListener { mrukFeature.requestSceneCapture() }
+            launchSceneCaptureButton?.setOnClickListener {
+              mrukFeature.requestSceneCapture().whenComplete { _, _ ->
+                mrukFeature.loadSceneFromDevice()
+              }
+            }
+
+            val saveSceneToJsonButton = rootView?.findViewById<Button>(R.id.save_to_json)
+            saveSceneToJsonButton?.setOnClickListener {
+              if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                  PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE)
+              } else {
+                val fileName = "scene_${UUID.randomUUID()}.json"
+                writeStringToFile(applicationContext, fileName, mrukFeature.saveSceneToJsonString())
+              }
+            }
 
             val closeSampleButton = rootView?.findViewById<Button>(R.id.close_sample)
             closeSampleButton?.setOnClickListener {
@@ -364,5 +426,6 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
     const val TAG: String = "MrukAnchorMeshSample"
     const val PERMISSION_USE_SCENE: String = "com.oculus.permission.USE_SCENE"
     const val REQUEST_CODE_PERMISSION_USE_SCENE: Int = 1
+    const val REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 2
   }
 }

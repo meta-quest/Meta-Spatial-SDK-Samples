@@ -16,15 +16,17 @@ import com.meta.spatial.toolkit.Transform
 import kotlin.math.PI
 import kotlin.math.atan2
 import kotlin.math.cos
-import kotlin.math.pow
 import kotlin.math.sin
 
-class SpatialAudioSystem(val panner: ChannelMixingAudioProcessor) : SystemBase() {
+class SpatialAudioSystem(
+    val panner: ChannelMixingAudioProcessor,
+    val activity: SpatialVideoSampleActivity
+) : SystemBase() {
   override fun execute() {
     val head =
         Query.where { has(AvatarAttachment.id) }
+            .filter { by(AvatarAttachment.typeData).isEqualTo("head") }
             .eval()
-            .filter { it.getComponent<AvatarAttachment>().type == "head" }
             .first()
     val headPose = head.getComponent<Transform>().transform
     val q = Query.where { has(SpatializedAudioPanel.id) }
@@ -33,7 +35,9 @@ class SpatialAudioSystem(val panner: ChannelMixingAudioProcessor) : SystemBase()
       // get direction from head to panel
       val direction = panelPose.t - headPose.t
       val distance = direction.length()
-      val attenuation = 1.0f / (1.0f + distance).toFloat().pow(2.0f)
+
+      var attenuation = calculateAttenuation(distance)
+
       val local_direction = headPose.q.inverse() * direction
       val normalized_local_direction = local_direction.normalize()
 
@@ -62,5 +66,22 @@ class SpatialAudioSystem(val panner: ChannelMixingAudioProcessor) : SystemBase()
                   left_level.toFloat(),
                   right_level.toFloat())))
     }
+  }
+
+  /**
+   * Inverse relationship between distance and attenuation, where we maximize attenuation at ~1.67
+   * within 1.5m and minimize attenuation at 0.25 beyond 10m.
+   */
+  fun calculateAttenuation(distance: Float): Float {
+    if (!activity.inMrMode) {
+      return 1.0f
+    }
+    if (distance <= 1.5f) {
+      return 5f / 3f
+    }
+    if (distance >= 10f) {
+      return 0.25f
+    }
+    return 2.5f / distance
   }
 }

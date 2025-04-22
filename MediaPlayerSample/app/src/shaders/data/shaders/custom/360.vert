@@ -24,15 +24,11 @@ layout (std140, set = 3, binding = 0) uniform MaterialUniform {
 
 } g_MaterialUniform;
 
-vec2 stereo(vec2 uv) {
-  return getStereoPassId() * g_MaterialUniform.stereoParams.xy + uv * g_MaterialUniform.stereoParams.zw;
-}
-
 void main() {
   App2VertexUnpacked app = getApp2VertexUnpacked();
 
   vec4 wPos4 = g_PrimitiveUniform.worldFromObject * vec4(app.position, 1.0f);
-  vertexOut.albedoCoord = stereo(app.uv);
+  vertexOut.albedoCoord = app.uv;
   vertexOut.lighting = app.incomingLighting;
   vertexOut.worldPosition = wPos4.xyz;
   vertexOut.worldNormal = normalize((transpose(g_PrimitiveUniform.objectFromWorld) * vec4(app.normal, 0.0f) ).xyz);

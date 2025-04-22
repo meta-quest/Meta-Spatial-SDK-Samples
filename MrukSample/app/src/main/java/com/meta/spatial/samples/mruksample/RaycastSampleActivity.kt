@@ -23,17 +23,23 @@ import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.core.Vector4
+import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
+import com.meta.spatial.debugtools.HotReloadFeature
 import com.meta.spatial.mruk.AnchorProceduralMesh
 import com.meta.spatial.mruk.AnchorProceduralMeshConfig
 import com.meta.spatial.mruk.MRUKAnchorTexCoordMode
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKLabel
+import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.mruk.MRUKSpawnMode
 import com.meta.spatial.mruk.MRUKWallTexCoordModeU
 import com.meta.spatial.mruk.MRUKWallTexCoordModeV
+import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
+import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.runtime.BlendMode
 import com.meta.spatial.runtime.DepthWrite
+import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.MaterialSidedness
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneMaterialAttribute
@@ -59,6 +65,7 @@ class RaycastSampleActivity : AppSystemActivity() {
   private val panelId = 2
   private val arrowEntities: MutableList<Entity> = mutableListOf()
   private lateinit var updateRaycastSystem: UpdateRaycastSystem
+  private var sceneDataLoaded = false
 
   private val sampleDescription =
       "This sample showcases raycasting from your right controller to the scene." +
@@ -70,6 +77,9 @@ class RaycastSampleActivity : AppSystemActivity() {
     val features = mutableListOf(VRFeature(this), PhysicsFeature(spatial), mrukFeature)
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
+      features.add(HotReloadFeature(this))
+      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
+      features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
     return features
   }
@@ -129,7 +139,7 @@ class RaycastSampleActivity : AppSystemActivity() {
     if (checkSelfPermission(PERMISSION_USE_SCENE) != PackageManager.PERMISSION_GRANTED) {
       requestPermissions(arrayOf(PERMISSION_USE_SCENE), REQUEST_CODE_PERMISSION_USE_SCENE)
     } else {
-      mrukFeature.loadSceneFromDevice()
+      loadScene(true)
     }
   }
 
@@ -194,6 +204,8 @@ class RaycastSampleActivity : AppSystemActivity() {
             width = 0.5f
             fractionOfScreen = 1f
             layoutDpi = 500
+            layerConfig = LayerConfig()
+            enableTransparent = true
           }
           panel {
             requireNotNull(rootView)
@@ -228,7 +240,11 @@ class RaycastSampleActivity : AppSystemActivity() {
             loadSceneFromDeviceButton?.setOnClickListener { mrukFeature.loadSceneFromDevice() }
 
             val launchSceneCaptureButton = rootView?.findViewById<Button>(R.id.launch_scene_capture)
-            launchSceneCaptureButton?.setOnClickListener { mrukFeature.requestSceneCapture() }
+            launchSceneCaptureButton?.setOnClickListener {
+              mrukFeature.requestSceneCapture().whenComplete { _, _ ->
+                mrukFeature.loadSceneFromDevice()
+              }
+            }
 
             val allHitsRadioButton = rootView?.findViewById<RadioButton>(R.id.raycast_hits_all)
             allHitsRadioButton?.setOnCheckedChangeListener { _, isChecked ->
@@ -275,14 +291,10 @@ class RaycastSampleActivity : AppSystemActivity() {
       val granted = grantResults[0] == PackageManager.PERMISSION_GRANTED
       if (granted) {
         Log.i(TAG, "Use scene permission has been granted")
-        mrukFeature.loadSceneFromDevice()
       } else {
-        Log.i(TAG, "Use scene permission was DENIED! Loading fallback scene")
-        val item = resources.getStringArray(R.array.json_rooms_array).getOrNull(0)
-        val file = applicationContext.assets.open("${item}.json")
-        val text = file.bufferedReader().use { reader -> reader.readText() }
-        mrukFeature.loadSceneFromJsonString(text)
+        Log.i(TAG, "Use scene permission was DENIED!")
       }
+      loadScene(granted)
     }
   }
 
@@ -326,6 +338,43 @@ class RaycastSampleActivity : AppSystemActivity() {
     procMeshSpawner?.destroy()
 
     super.onDestroy()
+  }
+
+  private fun loadScene(scenePermissionsGranted: Boolean) {
+    // MRUK has support for loading scene data from JSON files in addition to loading the scene data
+    // from device.
+    // We fallback here to JSON rooms in case the user hasn't given any scene permission just to
+    // show something.
+    // JSON rooms can be useful to accelerate development or testing different room layouts.
+
+    if (!sceneDataLoaded) {
+      sceneDataLoaded = true
+
+      if (scenePermissionsGranted) {
+        loadSceneFromDevice()
+      } else {
+        loadFallbackScene()
+      }
+    }
+  }
+
+  private fun loadFallbackScene() {
+    Log.i(TAG, "Loading fallback scene from JSON")
+    val file = applicationContext.assets.open("MeshBedroom3.json")
+    val text = file.bufferedReader().use { it.readText() }
+    mrukFeature.loadSceneFromJsonString(text)
+  }
+
+  private fun loadSceneFromDevice() {
+    Log.i(TAG, "Loading scene from device")
+    val future = mrukFeature.loadSceneFromDevice()
+
+    future.whenComplete { result: MRUKLoadDeviceResult, _ ->
+      if (result != MRUKLoadDeviceResult.SUCCESS) {
+        Log.e(TAG, "Error loading scene from device: $result")
+        loadFallbackScene()
+      }
+    }
   }
 
   companion object {

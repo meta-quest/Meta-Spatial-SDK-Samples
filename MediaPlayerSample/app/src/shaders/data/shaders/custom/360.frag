@@ -35,11 +35,11 @@ void main() {
 
   //angular distance the vetex is from the direction, from -1 to 1
   float d = dot(vertexOut.worldNormal, direction);
-  d = (d+1.0)*0.5; //normalise the dot product to 0 to 1
 
-  float amount = clamp(1.0-g_MaterialUniform.customParams.x, 0.0, 1.0);
-  float feather = 0.05;
-  float alpha = smoothstep(d-feather, d+feather, amount);
+  // move to -1 to 1 range
+  float amount = clamp(g_MaterialUniform.customParams.x, 0.0, 1.0) * 2 - 1;
+  float feather = 0.1;
+  float alpha = 1.0f - smoothstep(d-feather, d+feather, amount * 1.1f);
 
   outColor.rgba = vec4(pixel.rgb, alpha);
 }
