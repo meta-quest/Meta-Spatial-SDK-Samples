@@ -32,12 +32,7 @@ entities:
         com.meta.components.Name:
           name: Panel
         com.meta.components.SceneNode:
-          rotation.data:
-            - 6.12323426e-17
-            - 6.12323426e-17
-            - 1
-            - -3.74939976e-33
-          rotation.format: Quaternion
+          rotation.format: Euler
           scale:
             - 2
             - 1.5

@@ -32,10 +32,12 @@ class DroneSystem(val droneSceneController: DroneSceneController?) : SystemBase(
     val deltaTime = (currentTime - prevTime) / 1000f
     prevTime = currentTime
 
-    val droneEntities = Query.where { has(DroneComponent.id, Transform.id) }.eval()
+    val droneEntities =
+        Query.where { has(DroneComponent.id, Transform.id) }
+            .filter { by(DroneComponent.enabledData).isEqualTo(true) }
+            .eval()
     droneEntities.forEach { droneEnt ->
       val droneComponent = droneEnt.getComponent<DroneComponent>()
-      if (!droneComponent.enabled) return
 
       // match target by name (there should only be one)
       val target =

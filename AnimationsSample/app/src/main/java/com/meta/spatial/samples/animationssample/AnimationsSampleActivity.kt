@@ -17,12 +17,23 @@ import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
+import com.meta.spatial.core.SpatialSDKExperimentalAPI
 import com.meta.spatial.core.Vector3
-import com.meta.spatial.runtime.LayerConfig
+import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
+import com.meta.spatial.debugtools.HotReloadFeature
+import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
+import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.runtime.PanelShapeType
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneObject
+import com.meta.spatial.runtime.panel.PanelConfigOptions2
+import com.meta.spatial.runtime.panel.cylinder
+import com.meta.spatial.runtime.panel.layer
+import com.meta.spatial.runtime.panel.onPanelCreation
+import com.meta.spatial.runtime.panel.resolution
+import com.meta.spatial.runtime.panel.shapeType
+import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
@@ -37,6 +48,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
+/**
+ * This sample uses experimental Panel Animation APIs that are subject to change. Please use at your
+ * own risk.
+ */
+@OptIn(SpatialSDKExperimentalAPI::class)
 class AnimationsSampleActivity : AppSystemActivity() {
   public val GLXF_DRONE_SCENE = "GLXF_DRONE_SCENE"
 
@@ -46,9 +62,13 @@ class AnimationsSampleActivity : AppSystemActivity() {
   private var droneSceneController: DroneSceneController? = null
 
   override fun registerFeatures(): List<SpatialFeature> {
+    @OptIn(SpatialSDKExperimentalAPI::class)
     val features = mutableListOf<SpatialFeature>(VRFeature(this), PanelAnimationFeature())
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
+      features.add(HotReloadFeature(this))
+      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
+      features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
     return features
   }
@@ -76,28 +96,20 @@ class AnimationsSampleActivity : AppSystemActivity() {
   }
 
   override fun registerPanels(): List<PanelRegistration> {
+    val defaultOptions =
+        PanelConfigOptions2.style(themeResourceId = R.style.PanelAppThemeTransparent).layer()
     return listOf(
-        PanelRegistration(R.layout.ui_panel) { ent ->
-          config {
-            themeResourceId = R.style.PanelAppThemeTransparent
-            includeGlass = false
-            layoutWidthInDp = 720f
-            layerConfig = LayerConfig()
-
-            // Defaults for panel config
-            panelShapeType = PanelShapeType.CYLINDER
-            radiusForCylinderOrSphere = 1.0f
-            enableTransparent = true
-          }
-          panel {
+        PanelRegistration(R.layout.ui_panel).fromConfigOptions2 { ent ->
+          defaultOptions.cylinder(1.0f).resolution(widthInDp = 720f).onPanelCreation { ent ->
             val button = rootView?.findViewById<Button>(R.id.transform_button)!!
             button.setOnClickListener {
-              val shapeConfig = getPanelShapeConfig()
-              if (shapeConfig.panelShapeType == PanelShapeType.CYLINDER) {
+              if (shapeType == PanelShapeType.CYLINDER) {
                 button.text = "Change to Cylinder Shape"
+                @OptIn(SpatialSDKExperimentalAPI::class)
                 ent.setComponent(PanelAnimation(PanelQuadCylinderAnimator()))
               } else {
                 button.text = "Change to Quad Shape"
+                @OptIn(SpatialSDKExperimentalAPI::class)
                 ent.setComponent(
                     PanelAnimation(
                         PanelQuadCylinderAnimator(targetRadius = Random.nextFloat() * 2f + 0.5f)))
@@ -105,24 +117,9 @@ class AnimationsSampleActivity : AppSystemActivity() {
             }
           }
         },
-        PanelRegistration(R.layout.ui_about) {
-          config {
-            themeResourceId = R.style.PanelAppThemeTransparent
-            includeGlass = false
-          }
-        },
-        PanelRegistration(R.layout.ui_info) {
-          config {
-            themeResourceId = R.style.PanelAppThemeTransparent
-            includeGlass = false
-          }
-        },
-        PanelRegistration(R.layout.ui_grab) {
-          config {
-            themeResourceId = R.style.PanelAppThemeTransparent
-            includeGlass = false
-          }
-        })
+        PanelRegistration(R.layout.ui_about).fromConfigOptions2 { defaultOptions },
+        PanelRegistration(R.layout.ui_info).fromConfigOptions2 { defaultOptions },
+        PanelRegistration(R.layout.ui_grab).fromConfigOptions2 { defaultOptions })
   }
 
   override fun onSceneReady() {

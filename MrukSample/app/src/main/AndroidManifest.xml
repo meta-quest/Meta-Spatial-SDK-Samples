@@ -59,6 +59,7 @@
 
   <uses-permission android:name="com.oculus.permission.USE_ANCHOR_API" />
   <uses-permission android:name="com.oculus.permission.USE_SCENE" />
+  <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
   <application android:allowBackup="false" android:label="MRUK Sample">
     <meta-data
