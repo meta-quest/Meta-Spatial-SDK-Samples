@@ -1,0 +1,30 @@
+<ComponentSchema packageName="com.meta.pixelandtexel.geovoyage">
+    <Component name="Tether">
+        <Description
+    >A component which tethers one entity to another. The position can be adjusted, and the rotation is relative the the owning Entity's position and the user's head position.</Description>
+        <EntityAttribute
+      name="target"
+      description="Entity to which this owning Entity is tethered to."
+    />
+        <FloatAttribute
+      name="rotateAround"
+      defaultValue="90f"
+      description="How many degrees to rotate around the the entity, relative to the user."
+    />
+        <FloatAttribute
+      name="yawOffset"
+      defaultValue="0f"
+      description="After rotating around the entity, how much additional yaw to apply."
+    />
+        <FloatAttribute
+      name="zOffset"
+      defaultValue="1f"
+      description="Z position offset."
+    />
+        <FloatAttribute
+      name="yOffset"
+      defaultValue="0f"
+      description="Y position offset."
+    />
+    </Component>
+</ComponentSchema>

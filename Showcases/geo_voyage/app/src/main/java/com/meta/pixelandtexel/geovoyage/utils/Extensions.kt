@@ -6,31 +6,30 @@ import com.meta.spatial.runtime.PanelConfigOptions
 
 /** Helper function to copy values from one PanelConfigOptions object to another */
 fun PanelConfigOptions.copyTo(other: PanelConfigOptions) {
-  other.alphaMode = this.alphaMode
-  other.clickButtons = this.clickButtons
-  other.effectShader = this.effectShader
-  other.enableLayer = this.enableLayer
-  other.enableTransparent = this.enableTransparent
-  other.forceSceneTexture = this.forceSceneTexture
-  other.fractionOfScreen = this.fractionOfScreen
-  other.height = this.height
-  other.includeGlass = this.includeGlass
-  other.layerConfig = this.layerConfig
-  other.layoutDpi = this.layoutDpi
-  other.layoutHeightInDp = this.layoutHeightInDp
   other.layoutHeightInPx = this.layoutHeightInPx
-  other.layoutWidthInDp = this.layoutWidthInDp
   other.layoutWidthInPx = this.layoutWidthInPx
-  other.mips = this.mips
-  other.panelShader = this.panelShader
-  other.panelShapeType = this.panelShapeType
+  other.layoutHeightInDp = this.layoutHeightInDp
+  other.layoutWidthInDp = this.layoutWidthInDp
+  other.layoutDpi = this.layoutDpi
+  other.height = this.height
+  other.width = this.width
+  other.radiusForCylinderOrSphere = this.radiusForCylinderOrSphere
   other.pivotOffsetHeight = this.pivotOffsetHeight
   other.pivotOffsetWidth = this.pivotOffsetWidth
-  other.radiusForCylinderOrSphere = this.radiusForCylinderOrSphere
+  other.fractionOfScreen = this.fractionOfScreen
+  other.mips = this.mips
   other.samplerConfig = this.samplerConfig
-  other.sceneMeshCreator = this.sceneMeshCreator
-  other.stereoMode = this.stereoMode
-  other.themeResourceId = this.themeResourceId
   other.unlit = this.unlit
-  other.width = this.width
+  other.includeGlass = this.includeGlass
+  other.stereoMode = this.stereoMode
+  other.alphaMode = this.alphaMode
+  other.forceSceneTexture = this.forceSceneTexture
+  other.clickButtons = this.clickButtons
+  other.panelShader = this.panelShader
+  other.effectShader = this.effectShader
+  other.sceneMeshCreator = this.sceneMeshCreator
+  other.layerConfig = this.layerConfig
+  other.panelShapeType = this.panelShapeType
+  other.enableTransparent = this.enableTransparent
+  other.themeResourceId = this.themeResourceId
 }

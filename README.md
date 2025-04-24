@@ -64,43 +64,58 @@ The [Showcases](/Showcases) folder contains three apps which are deployed to the
 
 ## Documentation
 
-The documentation for Meta Spatial SDK can be found [here](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-overview).
+The documentation for Meta Spatial SDK can be found [here](https://developers.meta.com/horizon/develop/spatial-sdk).
 
-## 0.5.5 Updates
+## Release Notes
+
+Find our official release notes [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
+
+## 0.6.0 Updates
+
+This release is a major version bump because it has a number of large improvements, new features, and a small number of breaking changes.
 
 ### Added
 
-- Component XML
-  - Components can now be defined in XML instead of Kotlin, this is now the preferred way to write Components
-  - This makes it easier to define Components, and greatly improves the Spatial Editor integration with Components
-  - The build process will generate Kotlin code and resource files for the XML components
-- Panel Animation
-  - This new feature includes animation timing and callback APIs, enabling you to manipulate panel transitions seamlessly
-  - A panel zoom in and out animation is now available when creating and destroying panels
-  - These capabilities enhance the interactivity and aesthetic appeal of your panels, providing you with greater control and flexibility
-- Panel Native Transition between Quad and Cylinder Shapes
-  - We have implemented animations for transitions between Quad and Cylinder panels
-  - Check out the AnimationSample for an example
-- Refined Cylinder Panels
-  - We have conducted a comprehensive refinement of our Cylinder Panels to deliver enhanced performance and versatility. Key improvements include:
-    - Grabbable Bug Fix: We have resolved a bug with Grabbable and cylinder panels, grabbing cylinder panels will now be more reliable
-    - Backside Transparency: We have added transparency to the backside of the cylinder panels, staying consistent with quad panels
+- Experimental Feature: [Interaction SDK](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-isdk-overview/)
+  - Using `IsdkFeature` automatically replaces built in toolkit components/systems like Grabbable with `Isdk` equivalents
+  - Provides interactions that are consistent with the Meta Horizon OS and brings parity between controller and hand interactions
+    - Interact with panels directly using hands or controllers
+    - Grab 3D objects with hands or controllers, directly or using a raycast
+    - Advanced grab customization (responsiveness, two-handed, constraints)
+  - The Object3DSampleIsdk sample app in the [samples repo](https://github.com/meta-quest/Meta-Spatial-SDK-Samples) demonstrates how to use the new IsdkFeature and other Isdk APIs
+- [Datamodel Inspector](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-android-studio-plugin)
+  - Using `DataModelInspectorFeature` launches a webserver at a specified port that provides a live table view of ECS.
+  - Connect to a running app via Data Model Inspector Tool Window in the new Meta Horizon Android Studio Plugin.
+- [Query filters and sorting](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-queries/)
+  - Add filtering API for queries so that developers can refine the entity query results by applying filters on attributes.
+  - Add sorting API for queries so that developers can sort the entity by criteria on attributes.
+- GLTF Animation Pointer Support
+  - Added the ability to modify material factors and UV transforms via `KHR_animation_pointer` support.
+  - This can allow you to do things like animate opacity or make moving textures and play them with the `Animated()` component.
+- DRM support for Activity based panels on v76
+  - Using an Activity based panel (not inflated view) along with a `LayerConfig` set to `secure=true` will allow you to display DRM content on v76+. Previously, you had to render directly to a secure swapchain.
 
 ### Changed
 
-- com.meta.spatial.toolkit.Controller.kt
-  - In the Controller class, property “type” is now an EnumAttribute that accepts Enum values of `com.meta.spatial.toolkit.ControllerType`. The ControllerType enum is defined in the Java package ControllerType and has three values: `ControllerType.CONTROLLER`, `ControllerType.HAND`, and `ControllerType.EYES`.
-  - The constants `com.meta.spatial.toolkit.Controller.CONTROLLER_TYPE`, `com.meta.spatial.toolkit.Controller.HAND_TYPE`, and `com.meta.spatial.toolkit.Controller.EYES_TYPE` are removed.
-- TimeAttribute has changed from Int->Long
-
-### Deprecated
-
-- Writing Components using Kotlin is now deprecated, please shift to using Component XML to define your Components
+- We now support Color4 as an Attribute Type for use directly in components. Because of this, Color4 has been moved packages from `com.meta.spatial.toolkit` -> `com.meta.spatial.core`
+- Uris are now supported as an Attribute Type for use in components
+- Component XML is now the preferred method for making Spatial SDK Components
+  - Using Components XML increases performance of components and queries.
+  - Components XML can be used in Spatial Editor.
+  - Components written in Kotlin (instead of XML) will no longer be able to be added to objects in Spatial Editor
+- `PanelAnimation` and `PanelConfigOptions2` are now marked as experimental
+  - These APIs may be unstable and/or subject to change in the future. If you want to use them now, you will need to use the `@SpatialSDKExperimentalAPI` annotation
+- Default cursor has been changed to more closely match the Quest Home environment cursor
+- Samples now use `libs.versions.toml` for version management (removing the need to set the version in the `gradle.properties` file)
+- Changed the behavior of the `Layer.setClip()` API
+  - If the area of the clip for the left or right eye is 0, there will be no layer submitted for that eye.
+  - This can allow you to have separate transforms for layers sharing a swapchain with the left and right eyes
+- Bundled shaders assets have been cleaned up and compressed, decreasing APK size.
+- Various performance and stability improvements.
 
 ### Fixed
 
-- Fixed bug with rotation with Locomotion + behavior with updateViewOrigin
-- Optimized panel update performance for large panels
+- Fixed bug where deleting an entity while grabbed causes a crash
 
 ## Spatial SDK Gradle Plugin
 

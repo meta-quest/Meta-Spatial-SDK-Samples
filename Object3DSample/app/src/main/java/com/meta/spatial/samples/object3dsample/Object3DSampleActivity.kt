@@ -20,13 +20,19 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
+import com.meta.spatial.debugtools.HotReloadFeature
+import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
+import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.physics.Physics
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.physics.PhysicsMaterial
 import com.meta.spatial.physics.PhysicsState
 import com.meta.spatial.physics.PhysicsWorldBounds
+import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
+import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.Animated
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Grabbable
@@ -66,6 +72,9 @@ class Object3DSampleActivity : AppSystemActivity() {
             VRFeature(this))
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
+      features.add(HotReloadFeature(this))
+      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
+      features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
     return features
   }
@@ -127,6 +136,8 @@ class Object3DSampleActivity : AppSystemActivity() {
             includeGlass = false
             width = 2.0f
             height = 1.5f
+            layerConfig = LayerConfig()
+            enableTransparent = true
           }
         },
         PanelRegistration(R.layout.library_panel) { ent ->
@@ -165,7 +176,7 @@ class Object3DSampleActivity : AppSystemActivity() {
       dimensions: Vector3 = Vector3(0.1f, 0.1f, 0.1f)
   ) {
 
-    val scale = entity?.getComponent<Scale>() ?: Scale(Vector3(1f, 1f, 1f))
+    val scale: Vector3 = entity?.getComponent<Scale>()?.scale?.copy() ?: Vector3(1f, 1f, 1f)
     val glb = entity?.getComponent<Mesh>()?.mesh?.toString()
     val createObject =
         View.OnClickListener {
@@ -176,7 +187,7 @@ class Object3DSampleActivity : AppSystemActivity() {
                           mesh = Uri.parse(glb),
                           defaultShaderOverride = SceneMaterial.PHYSICALLY_BASED_SHADER),
                       Grabbable(type = GrabbableType.PIVOT_Y),
-                      scale,
+                      Scale(scale),
                       Physics(
                               shape = collisionMesh,
                               density = 0.1f,
@@ -200,14 +211,14 @@ class Object3DSampleActivity : AppSystemActivity() {
     button?.setOnClickListener(createObject)
   }
 
-  private fun scaleUp(entity: Entity, scale: Scale) {
+  private fun scaleUp(entity: Entity, scale: Vector3) {
     ValueAnimator.ofFloat(0f, 1f)
         .apply {
           duration = 1000
           interpolator = OvershootInterpolator(1f)
           addUpdateListener { animation ->
             val v = animation.animatedValue as Float
-            entity.setComponent(Scale(scale.scale.multiply(v)))
+            entity.setComponent(Scale(scale.multiply(v)))
           }
         }
         .start()

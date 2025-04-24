@@ -43,33 +43,44 @@ import androidx.media3.exoplayer.mediacodec.MediaCodecSelector
 import androidx.media3.exoplayer.metadata.MetadataOutput
 import androidx.media3.exoplayer.text.TextOutput
 import androidx.media3.exoplayer.video.VideoRendererEventListener
-import androidx.media3.ui.PlayerView
 import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
+import com.meta.spatial.debugtools.HotReloadFeature
+import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
+import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.runtime.AlphaMode
 import com.meta.spatial.runtime.ButtonBits
+import com.meta.spatial.runtime.HitInfo
+import com.meta.spatial.runtime.InputListener
 import com.meta.spatial.runtime.LayerConfig
+import com.meta.spatial.runtime.PanelConfigOptions
+import com.meta.spatial.runtime.PanelSceneObject
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneMesh
+import com.meta.spatial.runtime.SceneObject
 import com.meta.spatial.runtime.SceneTexture
 import com.meta.spatial.runtime.StereoMode
 import com.meta.spatial.runtime.TriangleMesh
+import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.AvatarSystem
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableSystem
 import com.meta.spatial.toolkit.GrabbableType
+import com.meta.spatial.toolkit.Hittable
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.Panel
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.toolkit.Scale
+import com.meta.spatial.toolkit.SceneObjectSystem
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
 import com.meta.spatial.toolkit.Visible
@@ -86,7 +97,6 @@ fun lerp(start: Float, end: Float, fraction: Float): Float = start + (end - star
 // default activity
 class SpatialVideoSampleActivity : AppSystemActivity() {
 
-  lateinit var playerView: PlayerView
   lateinit var player: ExoPlayer
   lateinit var controllerView: View
   lateinit var controlsFadeOutTimer: CountDownTimer
@@ -107,6 +117,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
   var skydome: Entity? = null
   var skydomeMat: SceneMaterial? = null
   var environmentGLXF: Entity? = null
+  var inMrMode: Boolean = false
+    private set
 
   private var gltfxEntity: Entity? = null
   private val activityScope = CoroutineScope(Dispatchers.Main)
@@ -115,6 +127,9 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
     val features = mutableListOf<SpatialFeature>(VRFeature(this))
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
+      features.add(HotReloadFeature(this))
+      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
+      features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
     return features
   }
@@ -175,10 +190,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
 
   override fun registerPanels(): List<PanelRegistration> {
     return mutableListOf(
-            videoPanelRegistration(),
-            controlsPanelRegistration(),
-            selectorPanelRegistration(),
-            mrPanelRegistration())
+            controlsPanelRegistration(), selectorPanelRegistration(), mrPanelRegistration())
         .apply {
           if (DEBUG) {
             add(debugPanelRegistration())
@@ -218,7 +230,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
     // set the reference space to enable recentering
     scene.setReferenceSpace(ReferenceSpace.LOCAL_FLOOR)
 
-    systemManager.registerSystem(SpatialAudioSystem(panner))
+    systemManager.registerSystem(SpatialAudioSystem(panner, this))
     componentManager.registerComponent<SpatializedAudioPanel>(SpatializedAudioPanel.Companion)
 
     scene.isSystemPassthroughEnabled().let { isMrMode ->
@@ -226,6 +238,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
       locomotionSystem.enableLocomotion(!isMrMode)
       avatarSystem.setShowControllers(!isMrMode)
       avatarSystem.setShowHands(!isMrMode)
+      inMrMode = isMrMode
     }
 
     scene.setViewOrigin(0f, 0.0f, 0.0f, 0.0f)
@@ -263,7 +276,6 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
               listOf(
                   Grabbable(type = GrabbableType.PIVOT_Y, minHeight = 0.75f, maxHeight = 2.5f),
                   SpatializedAudioPanel(),
-                  Panel(R.layout.spatialized_video),
                   Transform(initialPose * Pose(Vector3(0f, 1.25f, 2f), Quaternion(0f, 0f, 0f))),
               ))
       Entity(R.integer.video_selector_panel)
@@ -300,228 +312,270 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
       mrPanelPose = Entity(R.integer.spatialized_video_panel).getComponent<Transform>().transform
       setMrMode(scene.isSystemPassthroughEnabled())
       isFirstReadyDone = true
+      createVideoPanel()
     }
   }
 
   // Video Panel
-  private fun videoPanelRegistration(): PanelRegistration {
-    return PanelRegistration(R.layout.spatialized_video) {
-      config {
-        // based on video sizes
-        layoutWidthInPx = 3840
-        layoutHeightInPx = 1080
-        stereoMode = StereoMode.LeftRight
-        includeGlass = false
-        width = MR_SCREEN_WIDTH
-        height = MR_SCREEN_HEIGHT
-        layerConfig = LayerConfig()
-        // want to disable left hand pinch so we can drag the panel around with hands
-        clickButtons =
-            (ButtonBits.ButtonA or ButtonBits.ButtonTriggerL or ButtonBits.ButtonTriggerR)
-        // force efficient copy of video texture
-        mips = 1
-        sceneMeshCreator = { texture: SceneTexture ->
-          val halfHeight = height / 2f
-          val halfWidth = width / 2f
-          val halfDepth = 0.1f
-          val rounding = 0.075f
-          val triMesh =
-              TriangleMesh(
-                  8,
-                  18,
-                  intArrayOf(6, 6, 12, 6, 0, 6),
-                  arrayOf(
-                      SceneMaterial(texture, AlphaMode.TRANSLUCENT, "data/shaders/spatial/reflect")
-                          .apply {
-                            setStereoMode(stereoMode)
-                            setUnlit(true)
-                          },
-                      SceneMaterial(texture, AlphaMode.TRANSLUCENT, "data/shaders/spatial/shadow")
-                          .apply { setUnlit(true) },
-                      SceneMaterial(texture, AlphaMode.OPAQUE, SceneMaterial.HOLE_PUNCH_SHADER)
-                          .apply {
-                            setStereoMode(stereoMode)
-                            setUnlit(true)
-                          },
-                  ))
-          triMesh.updateGeometry(
-              0,
-              floatArrayOf(
-                  -halfWidth,
-                  -halfHeight,
-                  0f,
-                  halfWidth,
-                  -halfHeight,
-                  0f,
-                  halfWidth,
-                  halfHeight,
-                  0f,
-                  -halfWidth,
-                  halfHeight,
-                  0f,
-                  // shadow
-                  -halfWidth,
-                  -halfHeight,
-                  halfDepth,
-                  halfWidth,
-                  -halfHeight,
-                  halfDepth,
-                  halfWidth,
-                  -halfHeight,
-                  -halfDepth,
-                  -halfWidth,
-                  -halfHeight,
-                  -halfDepth),
-              floatArrayOf(
-                  0f,
-                  0f,
-                  1f,
-                  0f,
-                  0f,
-                  1f,
-                  0f,
-                  0f,
-                  1f,
-                  0f,
-                  0f,
-                  1f,
-                  0f,
-                  0f,
-                  1f,
-                  0f,
-                  0f,
-                  1f,
-                  0f,
-                  0f,
-                  1f,
-                  0f,
-                  0f,
-                  1f),
-              floatArrayOf(
-                  // front
-                  0f,
-                  1f,
-                  1f,
-                  1f,
-                  1f,
-                  0f,
-                  0f,
-                  0f,
-                  // shadow
-                  halfWidth - rounding,
-                  halfDepth - rounding,
-                  halfWidth - rounding,
-                  halfDepth - rounding,
-                  halfWidth - rounding,
-                  halfDepth - rounding,
-                  halfWidth - rounding,
-                  halfDepth - rounding),
-              intArrayOf(
-                  Color.WHITE,
-                  Color.WHITE,
-                  Color.WHITE,
-                  Color.WHITE,
-                  Color.WHITE,
-                  Color.WHITE,
-                  Color.WHITE,
-                  Color.WHITE))
-          triMesh.updatePrimitives(
-              0, intArrayOf(0, 1, 2, 0, 2, 3, 0, 2, 1, 0, 3, 2, 4, 6, 5, 4, 7, 6))
-          SceneMesh.fromTriangleMesh(triMesh, false)
+  private fun createVideoPanel() {
+    val videoPanelEntity = Entity(R.integer.spatialized_video_panel)
+    val panelConfigOptions =
+        PanelConfigOptions().apply {
+          // based on video sizes
+          layoutWidthInPx = 3840
+          layoutHeightInPx = 1080
+          stereoMode = StereoMode.LeftRight
+          includeGlass = false
+          width = MR_SCREEN_WIDTH
+          height = MR_SCREEN_HEIGHT
+          layerConfig = LayerConfig()
+          // want to disable left hand pinch so we can drag the panel around with hands
+          clickButtons =
+              (ButtonBits.ButtonA or ButtonBits.ButtonTriggerL or ButtonBits.ButtonTriggerR)
+          // force efficient copy of video texture
+          mips = 1
+          sceneMeshCreator = { texture: SceneTexture ->
+            val halfHeight = height / 2f
+            val halfWidth = width / 2f
+            val halfDepth = 0.1f
+            val rounding = 0.075f
+            val triMesh =
+                TriangleMesh(
+                    8,
+                    18,
+                    intArrayOf(6, 6, 12, 6, 0, 6),
+                    arrayOf(
+                        SceneMaterial(
+                                texture, AlphaMode.TRANSLUCENT, "data/shaders/spatial/reflect")
+                            .apply {
+                              setStereoMode(stereoMode)
+                              setUnlit(true)
+                            },
+                        SceneMaterial(texture, AlphaMode.TRANSLUCENT, "data/shaders/spatial/shadow")
+                            .apply { setUnlit(true) },
+                        SceneMaterial(
+                                texture, AlphaMode.HOLE_PUNCH, SceneMaterial.HOLE_PUNCH_SHADER)
+                            .apply {
+                              setStereoMode(stereoMode)
+                              setUnlit(true)
+                            },
+                    ))
+            triMesh.updateGeometry(
+                0,
+                floatArrayOf(
+                    -halfWidth,
+                    -halfHeight,
+                    0f,
+                    halfWidth,
+                    -halfHeight,
+                    0f,
+                    halfWidth,
+                    halfHeight,
+                    0f,
+                    -halfWidth,
+                    halfHeight,
+                    0f,
+                    // shadow
+                    -halfWidth,
+                    -halfHeight,
+                    halfDepth,
+                    halfWidth,
+                    -halfHeight,
+                    halfDepth,
+                    halfWidth,
+                    -halfHeight,
+                    -halfDepth,
+                    -halfWidth,
+                    -halfHeight,
+                    -halfDepth),
+                floatArrayOf(
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f),
+                floatArrayOf(
+                    // front
+                    0f,
+                    1f,
+                    1f,
+                    1f,
+                    1f,
+                    0f,
+                    0f,
+                    0f,
+                    // shadow
+                    halfWidth - rounding,
+                    halfDepth - rounding,
+                    halfWidth - rounding,
+                    halfDepth - rounding,
+                    halfWidth - rounding,
+                    halfDepth - rounding,
+                    halfWidth - rounding,
+                    halfDepth - rounding),
+                intArrayOf(
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE))
+            triMesh.updatePrimitives(
+                0, intArrayOf(0, 1, 2, 0, 2, 3, 0, 2, 1, 0, 3, 2, 4, 6, 5, 4, 7, 6))
+            SceneMesh.fromTriangleMesh(triMesh, false)
+          }
         }
-      }
-      panel {
-        playerView = rootView?.findViewById<PlayerView>(R.id.video_view)!!
-        playerView.setUseController(false)
-        player.repeatMode = Player.REPEAT_MODE_ONE
-        player.setSeekParameters(SeekParameters.CLOSEST_SYNC)
-        playerView.player = player
-        seekBar.thenAccept { it ->
-          player.addListener(
-              object : Player.Listener {
-                override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-                  if (playbackState == Player.STATE_READY) {
-                    seekBar.thenAccept { it.max = player.duration.toInt() }
+
+    val panelSceneObject =
+        PanelSceneObject(scene, videoPanelEntity, panelConfigOptions).apply {
+          player.repeatMode = Player.REPEAT_MODE_ONE
+          player.setSeekParameters(SeekParameters.CLOSEST_SYNC)
+          seekBar.thenAccept { it ->
+            player.addListener(
+                object : Player.Listener {
+                  override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
+                    if (playbackState == Player.STATE_READY) {
+                      seekBar.thenAccept { it.max = player.duration.toInt() }
+                    }
                   }
-                }
 
-                override fun onPositionDiscontinuity(reason: Int) {
-                  it.progress = player.currentPosition.toInt()
-                }
+                  override fun onPositionDiscontinuity(reason: Int) {
+                    it.progress = player.currentPosition.toInt()
+                  }
 
-                override fun onPlayerError(error: PlaybackException) {
-                  // The ExoPlayer can throw a decoder error under heavy load such as app startup,
-                  // in the case of a decoding error reloading the video into exoplayer fixes the
-                  // issue.
-                  // The theory here is that the file itself is not an issue, but the hardware
-                  // decoder
-                  // becomes backed up during app startup which causes a decoding error to be
-                  // thrown.
-                  setUri?.let { uri -> setVideo(uri) }
-                  Log.e("ExoPlayer", "Player encountered an error: $error")
-                }
-              })
+                  override fun onPlayerError(error: PlaybackException) {
+                    // The ExoPlayer can throw a decoder error under heavy load such as app
+                    // startup,
+                    // in the case of a decoding error reloading the video into exoplayer fixes
+                    // the
+                    // issue.
+                    // The theory here is that the file itself is not an issue, but the hardware
+                    // decoder
+                    // becomes backed up during app startup which causes a decoding error to be
+                    // thrown.
+                    setUri?.let { uri -> setVideo(uri) }
+                    Log.e("ExoPlayer", "Player encountered an error: $error")
+                  }
+                })
 
-          it.setOnSeekBarChangeListener(
-              object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(
-                    seekBar: SeekBar?,
-                    progress: Int,
-                    fromUser: Boolean
-                ) {
-                  if (fromUser) {
-                    player.seekTo(progress.toLong())
+            it.setOnSeekBarChangeListener(
+                object : SeekBar.OnSeekBarChangeListener {
+                  override fun onProgressChanged(
+                      seekBar: SeekBar?,
+                      progress: Int,
+                      fromUser: Boolean
+                  ) {
+                    if (fromUser) {
+                      player.seekTo(progress.toLong())
+                      resetControllerFadeOutTimer()
+                    }
+                  }
+
+                  override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                    if (isPlaying) {
+                      // Pause the player while the user is dragging the SeekBar
+                      player.playWhenReady = false
+                    }
                     resetControllerFadeOutTimer()
                   }
+
+                  override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    if (isPlaying) {
+                      // Resume the player when the user stops dragging the SeekBar
+                      player.playWhenReady = true
+                    }
+                  }
+                })
+          }
+
+          addInputListener(
+              object : InputListener {
+                override fun onHoverStart(
+                    receiver: SceneObject,
+                    sourceOfInput: Entity,
+                ) {
+                  animateControllerVisibility(true)
                 }
 
-                override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                  if (isPlaying) {
-                    // Pause the player while the user is dragging the SeekBar
-                    player.playWhenReady = false
-                  }
+                override fun onClick(
+                    receiver: SceneObject,
+                    hitInfo: HitInfo,
+                    sourceOfInput: Entity,
+                ) {
+                  togglePlay()
+                }
+
+                override fun onInput(
+                    receiver: SceneObject,
+                    hitInfo: HitInfo,
+                    sourceOfInput: Entity,
+                    changed: Int,
+                    clicked: Int,
+                    downTime: Long
+                ): Boolean {
                   resetControllerFadeOutTimer()
-                }
-
-                override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                  if (isPlaying) {
-                    // Resume the player when the user stops dragging the SeekBar
-                    player.playWhenReady = true
-                  }
+                  return false
                 }
               })
+
+          // Default media
+          Movie.fromRawVideo("doggie", "Doggie")?.let { movie -> setVideo(movie.uri) }
+
+          val handler = Handler(Looper.getMainLooper())
+          handler.postDelayed(
+              object : Runnable {
+                override fun run() {
+                  if (isPlaying && !isSeeking) {
+                    seekBar.thenAccept { it.progress = player.currentPosition.toInt() }
+                  }
+                  handler.postDelayed(this, 500)
+                }
+              },
+              500)
         }
 
-        // Default media
-        Movie.fromRawVideo("doggie", "Doggie")?.let { movie -> setVideo(movie.uri) }
+    player.setVideoSurface(panelSceneObject.getSurface())
 
-        playerView.setOnClickListener { togglePlay() }
-        setupHoverAndTouchListeners(playerView)
-
-        val handler = Handler(Looper.getMainLooper())
-        handler.postDelayed(
-            object : Runnable {
-              override fun run() {
-                if (isPlaying && !isSeeking) {
-                  seekBar.thenAccept { it.progress = player.currentPosition.toInt() }
-                }
-                handler.postDelayed(this, 500)
-              }
-            },
-            500)
-      }
-    }
+    systemManager
+        .findSystem<SceneObjectSystem>()
+        .addSceneObject(
+            videoPanelEntity, CompletableFuture<SceneObject>().apply { complete(panelSceneObject) })
+    // mark the mesh as explicitly able to catch input
+    videoPanelEntity.setComponent(Hittable())
   }
 
   private fun debugPanelRegistration(): PanelRegistration {
-    return PanelRegistration(R.layout.debug) {
+    return PanelRegistration(R.layout.controls) {
       config {
-        fractionOfScreen = 0.5f
-        height = 1f
-        width = 0.6f
+        width = 0.8f
+        height = 0.25f
+        pivotOffsetWidth = 0.5f
+        pivotOffsetHeight = 1.05f
         includeGlass = false
         layerConfig = LayerConfig()
         enableTransparent = true
+        layoutDpi = 600
         themeResourceId = R.style.PanelAppThemeTransparent
       }
       panel {
@@ -762,6 +816,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
     locomotionSystem.enableLocomotion(!isMrMode)
     avatarSystem.setShowControllers(!isMrMode)
     avatarSystem.setShowHands(!isMrMode)
+    inMrMode = isMrMode
   }
 
   companion object {
@@ -816,6 +871,7 @@ class CustomRenderersFactory : DefaultRenderersFactory {
             audioRendererEventListener,
             audioSink_,
         )
+    rendererList.add(0, audioRenderer)
     return rendererList.toTypedArray()
   }
 }

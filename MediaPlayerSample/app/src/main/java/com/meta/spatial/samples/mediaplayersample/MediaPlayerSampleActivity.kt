@@ -11,7 +11,6 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +18,9 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.webkit.WebView
-import android.widget.VideoView
+import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
+import androidx.media3.exoplayer.ExoPlayer
 import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.compose.ComposeFeature
 import com.meta.spatial.compose.composePanel
@@ -28,24 +29,30 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.core.Vector4
+import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
+import com.meta.spatial.debugtools.HotReloadFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
-import com.meta.spatial.runtime.AlphaMode
+import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
+import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.runtime.BlendMode
 import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.PanelConfigOptions
+import com.meta.spatial.runtime.PanelSceneObject
+import com.meta.spatial.runtime.PanelShapeType
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneMaterialAttribute
 import com.meta.spatial.runtime.SceneMaterialDataType
 import com.meta.spatial.runtime.SceneMesh
+import com.meta.spatial.runtime.SceneObject
 import com.meta.spatial.runtime.SceneTexture
 import com.meta.spatial.runtime.StereoMode
-import com.meta.spatial.runtime.TriangleMesh
+import com.meta.spatial.runtime.panel.material
+import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Grabbable
-import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.toolkit.SceneObjectSystem
@@ -55,6 +62,7 @@ import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.vr.LocomotionSystem
 import com.meta.spatial.vr.VRFeature
 import java.io.File
+import java.util.concurrent.CompletableFuture
 import kotlin.coroutines.resume
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -76,16 +84,14 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
   var skyVideoPanel: Entity? = null
 
   val activityScope = CoroutineScope(Dispatchers.Main)
-  var videoView: VideoView? = null
+  var exoPlayer: ExoPlayer? = null
   var webView: WebView? = null
-  var triMesh: TriangleMesh? = null
-  var panelMesh: SceneMesh? = null
   val LIGHTS_UP_AMBIENT: Float = 5.0f
   lateinit var locomotionSystem: LocomotionSystem
   var sky: Entity? = null
   var videoTexture: SceneTexture? = null
   var sceneMaterials: Array<SceneMaterial>? = null
-  var skyPanelMaterial: SceneMaterial? = null
+  var skyBoxMaterial: SceneMaterial? = null
   var skyPanelVisible: Boolean = false
   var animationScope: CoroutineScope? = null
   var animationJob: Job? = null
@@ -112,7 +118,6 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
         MovieSceneState.VR -> {
 
           sky?.setComponent(Visible(!mrState_)) // hide sky
-          skyVideoPanel?.setComponent(Visible(!mrState_)) // hide 360 panel
           environment?.setComponent(Visible(!mrState_)) // hide environment
           locomotionSystem.enableLocomotion(!mrState_)
           videoPanel?.setComponents(
@@ -122,12 +127,15 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
           if (skyPanelVisible) {
 
             // stop 360 video
-            videoView?.suspend()
+            exoPlayer?.stop()
 
             animationJob =
                 animationScope!!.launch {
+                  // animate sky box in
                   animateTransitionMask(
-                      arrayOf(skyPanelMaterial!!), 0f, 1f, "customParams", 1f) // hide 360
+                      arrayOf(skyBoxMaterial!!), 1f, 0f, "customParams", 1f, true) {
+                        skyVideoPanel?.setComponent(Visible(false))
+                      }
                   playRandomSfx()
                   animateTransitionMask(sceneMaterials!!, 1f, 0f, "roughness", 1f, false) // show VR
                   skyPanelVisible = false
@@ -137,16 +145,14 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
           }
         }
         MovieSceneState.SURROUND -> {
-
-          sky?.setComponent(Visible(true)) // show room sky
+          skyVideoPanel?.setComponent(Visible(true))
           videoPanel?.setComponents(listOf(Grabbable(false), Visible(false))) // hide video panel
 
           // scene.setViewOrigin(0f, 0f, 0f, 0f) // reset locomotion
           locomotionSystem.enableLocomotion(false)
 
           // play 360 video.
-          videoView?.start()
-          videoView?.setVisibility(View.VISIBLE)
+          exoPlayer?.play()
 
           // unload webview video and hide.
           webView?.loadUrl("")
@@ -155,9 +161,12 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
             playRandomSfx()
             animationJob =
                 animationScope!!.launch {
-                  animateTransitionMask(sceneMaterials!!, 0f, 1f, "roughness", 1f) // hide VR
-                  animateTransitionMask(
-                      arrayOf(skyPanelMaterial!!), 1f, 0f, "customParams", 1f) // show 360
+                  // hide VR
+                  animateTransitionMask(sceneMaterials!!, 0f, 1f, "roughness", 1f, true) {
+                    environment?.setComponent(Visible(false))
+                  }
+                  // animate sky box out
+                  animateTransitionMask(arrayOf(skyBoxMaterial!!), 0f, 1f, "customParams", 1f)
                   skyPanelVisible = true
                 }
           }
@@ -191,6 +200,9 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     val features = mutableListOf<SpatialFeature>(VRFeature(this), ComposeFeature())
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
+      features.add(HotReloadFeature(this))
+      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
+      features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
     return features
   }
@@ -212,7 +224,6 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
       val composition = glXFManager.getGLXFInfo("example_key_name")
       environment = composition.getNodeByName("Environment").entity
       videoPanel = composition.getNodeByName("VideoPanel").entity
-      skyVideoPanel = composition.getNodeByName("SkyVideoPanel").entity
 
       val mrPanel: Entity = composition.getNodeByName("MRPanel").entity
       val listPanel: Entity = composition.getNodeByName("ListPanel").entity
@@ -229,6 +240,16 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     }
   }
 
+  override fun onPause() {
+    super.onPause()
+    exoPlayer?.pause()
+  }
+
+  override fun onResume() {
+    super.onResume()
+    exoPlayer?.play()
+  }
+
   override fun onSceneReady() {
     super.onSceneReady()
     // set the reference space to enable recentering
@@ -239,32 +260,25 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
         sunDirection = -Vector3(1.0f, 3.0f, 2.0f))
     scene.updateIBLEnvironment("chromatic.env")
 
-    sky =
-        Entity.create(
-            listOf(
-                Mesh(Uri.parse("mesh://skybox")),
-                Material().apply {
-                  baseTextureAndroidResourceId = R.drawable.skydome
-                  unlit = true // Prevent scene lighting from affecting the skybox
-                },
-                Visible(true),
-                Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
+    skyVideoPanel = createSkyViewer()
+
+    sky = createSkyBox()
   }
 
   override fun registerPanels(): List<PanelRegistration> {
     return listOf(
         videoPanelRegistration(),
-        skyVideoPanelRegistration(),
         PanelRegistration(R.integer.list_panel) {
           activityClass = ListPanel::class.java
           config {
-            fractionOfScreen = 0.4f
-            mips = PanelConfigOptions.MIPS_MAX
-            height = 2f
             width = 1.5f
-            layoutHeightInPx = 1365
-            layoutWidthInPx = 1024
+            height = 2f
+            layoutWidthInPx = 750
+            layoutHeightInPx = 1000
+            layoutDpi = 260
             includeGlass = false
+            layerConfig = LayerConfig()
+            enableTransparent = true
           }
         },
         PanelRegistration(R.integer.mr_panel) {
@@ -272,7 +286,6 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
             fractionOfScreen = 0.15f
             height = .2f
             width = .6f
-            layerConfig = LayerConfig()
             enableTransparent = true
             includeGlass = false
             themeResourceId = R.style.ThemeTransparent
@@ -295,8 +308,11 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
 
       movieState = MovieSceneState.SURROUND
 
-      // load the 360 video into the video view.
-      videoView!!.setVideoURI(Uri.parse(videoUrl))
+      // load the 360 video into exoplayer
+      exoPlayer?.let {
+        it.setMediaItem(MediaItem.fromUri(Uri.parse(videoUrl)))
+        it.prepare()
+      }
     }
   }
 
@@ -304,46 +320,14 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     return PanelRegistration(R.integer.video_id) {
       layoutResourceId = R.layout.video_layout
       config {
-        pivotOffsetWidth = 0.0f
-        pivotOffsetHeight = 0.0f
-        height = 2.4f
+        includeGlass = false
+        layoutWidthInPx = 1920
+        layoutHeightInPx = 1080
+        height = 2.25f
         width = 4f
-        fractionOfScreen = 1f
-        sceneMeshCreator = { texture: SceneTexture ->
-          val halfHeight = height / 2f
-          val halfWidth = width / 2f
-          triMesh =
-              TriangleMesh(
-                  4,
-                  6,
-                  intArrayOf(0, 6),
-                  arrayOf(
-                      SceneMaterial(texture, AlphaMode.MASKED, SceneMaterial.UNLIT_SHADER).apply {
-                        setStereoMode(stereoMode)
-                        setUnlit(true)
-                      }))
-          triMesh!!.updateGeometry(
-              0,
-              floatArrayOf(
-                  -halfWidth,
-                  -halfHeight,
-                  0f,
-                  halfWidth,
-                  -halfHeight,
-                  0f,
-                  halfWidth,
-                  halfHeight,
-                  0f,
-                  -halfWidth,
-                  halfHeight,
-                  0f),
-              floatArrayOf(0f, 0f, 1f, 0f, 0f, 1f, 0f, 0f, 1f, 0f, 0f, 1f),
-              floatArrayOf(0f, 1f, 1f, 1f, 1f, 0f, 0f, 0f),
-              intArrayOf(Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE))
-          triMesh!!.updatePrimitives(0, intArrayOf(0, 1, 2, 0, 2, 3))
-          panelMesh = SceneMesh.fromTriangleMesh(triMesh!!, false)
-          panelMesh!!
-        }
+        layerConfig = LayerConfig()
+        // we want access to the video panel to perform lighting effects
+        forceSceneTexture = true
         panel {
           webView = rootView?.findViewById<WebView>(R.id.web_view)
           val webSettings = webView!!.getSettings()
@@ -383,9 +367,10 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     }
   }
 
-  private fun skyVideoPanelRegistration(): PanelRegistration {
-
-    skyPanelMaterial =
+  private fun createSkyBox(): Entity {
+    val entity = Entity.create(Transform())
+    val texture = SceneTexture(getDrawable(R.drawable.skydome))
+    skyBoxMaterial =
         SceneMaterial.custom(
                 "data/shaders/custom/360",
                 arrayOf<SceneMaterialAttribute>(
@@ -400,35 +385,58 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
             .apply {
               setBlendMode(BlendMode.TRANSLUCENT)
 
-              // set the stereo mode to up down so the 360 video is rendered in stereo
-              // mode.
-              setStereoMode(StereoMode.UpDown)
-
               // set the initial state of the custom material.
-              setAttribute("customParams", Vector4(1.0f, 0f, 0f, 0f))
+              setAttribute("customParams", Vector4(0.0f, 0f, 0f, 0f))
+              setTexture("albedoSampler", texture)
+            }
+            .also { material ->
+              val sceneObject =
+                  SceneObject(scene, SceneMesh.skybox(280f, material), "skybox", entity)
+              systemManager
+                  .findSystem<SceneObjectSystem>()
+                  .addSceneObject(
+                      entity, CompletableFuture<SceneObject>().apply { complete(sceneObject) })
             }
 
-    return PanelRegistration(R.integer.sky_video_id) {
-      layoutResourceId = R.layout.sky_video_layout
-      config {
-        val SPHERE_RADIUS: Float = 300.0f
-        // render at a lower resolution for perf
-        layoutWidthInPx = (5760 / 1.75).toInt()
-        layoutHeightInPx = (5760 / 1.75).toInt()
-        pivotOffsetWidth = 0.0f
-        pivotOffsetHeight = 0.0f
-        stereoMode = StereoMode.UpDown
-        sceneMeshCreator = { texture: SceneTexture ->
-          skyPanelMaterial!!.apply { setTexture("albedoSampler", texture) }
-          SceneMesh.skybox(SPHERE_RADIUS, skyPanelMaterial!!)
+    return entity
+  }
+
+  private fun createSkyViewer(): Entity {
+    val entity = Entity.create(Transform(), Visible(false))
+    val SPHERE_RADIUS: Float = 300.0f
+    val panelConfig =
+        PanelConfigOptions().apply {
+          // height doesn't matter since surface will get resized
+          layoutWidthInPx = 100
+          layoutHeightInPx = 100
+          stereoMode = StereoMode.UpDown
+          panelShapeType = PanelShapeType.EQUIRECT
+          radiusForCylinderOrSphere = SPHERE_RADIUS
+          includeGlass = false
+          // enable direct-to-compositor rendering
+          mips = 1
+          // always render the layer first (behind all the other layers)
+          layerConfig = LayerConfig(zIndex = -1)
         }
-      }
-      panel {
-        setIsVisible(false)
-        videoView = rootView?.findViewById<VideoView>(R.id.video_view)
-        entity?.setComponent(Transform.build { rotateY(180f) })
-      }
-    }
+
+    val panelSceneObject =
+        PanelSceneObject(
+            scene,
+            entity,
+            panelConfig,
+        )
+
+    systemManager
+        .findSystem<SceneObjectSystem>()
+        .addSceneObject(
+            entity, CompletableFuture<SceneObject>().apply { complete(panelSceneObject) })
+
+    exoPlayer =
+        ExoPlayer.Builder(this).build().apply {
+          repeatMode = Player.REPEAT_MODE_ONE
+          setVideoSurface(panelSceneObject.getSurface())
+        }
+    return entity
   }
 
   suspend fun animateTransitionMask(
@@ -437,7 +445,8 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
       end: Float,
       propertyName: String = "roughness",
       time: Float = 1.0f,
-      accelerate: Boolean = true
+      accelerate: Boolean = true,
+      onEnd: () -> Unit = {}
   ) =
       suspendCancellableCoroutine<Unit> { continuation ->
         // Create an ObjectAnimator to animate a float value from start to end
@@ -462,12 +471,14 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
             object : AnimatorListenerAdapter() {
               override fun onAnimationEnd(animation: Animator) {
                 continuation.resume(Unit)
+                onEnd()
               }
             })
 
         animator.start()
         continuation.invokeOnCancellation {
           animator.cancel()
+          onEnd()
           materials.forEach { material ->
             if (propertyName == "roughness") {
               material.setMetalRoughness(end)
@@ -486,6 +497,12 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
           rootEntity = gltfxEntity!!,
           keyName = "example_key_name")
     }
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    exoPlayer?.release()
+    exoPlayer = null
   }
 
   companion object {

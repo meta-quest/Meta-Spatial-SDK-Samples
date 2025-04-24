@@ -52,8 +52,8 @@ entities:
             - -0.106921583
             - 0
         com.meta.spatial.physics.Physics:
-          state: 0
           shape: environmentDeskCollisions.gltf
+          state: 0
         com.meta.spatial.toolkit.SupportsLocomotion:
           {}
       tag: Environment
@@ -210,6 +210,11 @@ entities:
         com.meta.components.Name:
           name: aboutPanel
         com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 3.14159274
+            - 0
+            - 0
           rotation.format: Euler
           scale:
             - 2

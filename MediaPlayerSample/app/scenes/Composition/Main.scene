@@ -8,7 +8,6 @@ entities:
             - ref:panels
             - ref:Environment
             - ref:VideoPanel
-            - ref:SkyVideoPanel
       tag: Scene
   com.meta.models.SceneNode:
     - components:
@@ -77,24 +76,6 @@ entities:
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: ListPanel
-    - components:
-        com.meta.components.Animatable:
-          {}
-        com.meta.components.Name:
-          name: SkyVideoPanel
-        com.meta.components.SceneNode:
-          rotation.format: Euler
-          scale:
-            - 0
-            - 0
-            - 1
-        com.meta.spatial.toolkit.Panel:
-          panel: "@integer/sky_video_id"
-        com.meta.spatial.toolkit.PanelDimensions:
-          {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: true
-      tag: SkyVideoPanel
     - components:
         com.meta.components.Animatable:
           {}

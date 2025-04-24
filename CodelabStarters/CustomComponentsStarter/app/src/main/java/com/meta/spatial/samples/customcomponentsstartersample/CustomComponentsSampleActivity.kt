@@ -14,12 +14,16 @@ import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
+import com.meta.spatial.debugtools.HotReloadFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
+import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
+import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
@@ -38,23 +42,24 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf<SpatialFeature>(
-            VRFeature(this),
-            OVRMetricsFeature(
-                this,
-                OVRMetricsDataModel() {
-                  numberOfMeshes()
-                  numberOfGrabbables()
-                },
-                LookAtMetrics {
-                  pos()
-                  pitch()
-                  yaw()
-                  roll()
-                }))
+    val features = mutableListOf<SpatialFeature>(VRFeature(this))
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
+      features.add(HotReloadFeature(this))
+      features.add(
+          OVRMetricsFeature(
+              this,
+              OVRMetricsDataModel() {
+                numberOfMeshes()
+                numberOfGrabbables()
+              },
+              LookAtMetrics {
+                pos()
+                pitch()
+                yaw()
+                roll()
+              }))
+      features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
     return features
   }
@@ -77,8 +82,6 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
 
       // TODO: get the robot and the basketBall entities from the composition
 
-      // TODO add the LookAt component to the robot so it points at the basketBall
-
     }
   }
 
@@ -90,6 +93,8 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
             includeGlass = false
             width = 2.0f
             height = 1.5f
+            layerConfig = LayerConfig()
+            enableTransparent = true
           }
         })
   }

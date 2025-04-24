@@ -9,17 +9,17 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import com.meta.pixelandtexel.geovoyage.GrabbableNoRotation
+import com.meta.pixelandtexel.geovoyage.Pinnable
 import com.meta.pixelandtexel.geovoyage.R
-import com.meta.pixelandtexel.geovoyage.ecs.grabbablenorotation.GrabbableNoRotation
+import com.meta.pixelandtexel.geovoyage.Spin
+import com.meta.pixelandtexel.geovoyage.Spinnable
+import com.meta.pixelandtexel.geovoyage.Tether
 import com.meta.pixelandtexel.geovoyage.ecs.grabbablenorotation.GrabbableNoRotationSystem
 import com.meta.pixelandtexel.geovoyage.ecs.landmarkspawn.LandmarkSpawnSystem
-import com.meta.pixelandtexel.geovoyage.ecs.pinnable.Pinnable
 import com.meta.pixelandtexel.geovoyage.ecs.pinnable.PinnableSystem
-import com.meta.pixelandtexel.geovoyage.ecs.spin.Spin
 import com.meta.pixelandtexel.geovoyage.ecs.spin.SpinSystem
-import com.meta.pixelandtexel.geovoyage.ecs.spinnable.Spinnable
 import com.meta.pixelandtexel.geovoyage.ecs.spinnable.SpinnableSystem
-import com.meta.pixelandtexel.geovoyage.ecs.tether.Tether
 import com.meta.pixelandtexel.geovoyage.ecs.tether.TetherSystem
 import com.meta.pixelandtexel.geovoyage.enums.PlayMode
 import com.meta.pixelandtexel.geovoyage.enums.SettingsKey
@@ -34,8 +34,8 @@ import com.meta.pixelandtexel.geovoyage.utils.copyTo
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.runtime.AlphaMode
+import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.PanelConfigOptions
-import com.meta.spatial.runtime.QuadLayerConfig
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneObject
@@ -140,7 +140,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
         enableTransparent = true,
         forceSceneTexture = true,
         // Enable better looking panels
-        layerConfig = QuadLayerConfig(),
+        layerConfig = LayerConfig(),
         panelShader = SceneMaterial.HOLE_PUNCH_PANEL_SHADER,
         alphaMode = AlphaMode.HOLE_PUNCH)
   }

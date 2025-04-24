@@ -75,6 +75,7 @@ object SettingsService {
             else -> throw Exception("Unsupported value type ${default::class.simpleName}")
           }
     }
+    @Suppress("UNCHECKED_CAST")
     return cache[key]!! as T
   }
 

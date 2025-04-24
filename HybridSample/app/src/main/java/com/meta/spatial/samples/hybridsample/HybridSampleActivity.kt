@@ -17,10 +17,16 @@ import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
+import com.meta.spatial.debugtools.HotReloadFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
+import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
+import com.meta.spatial.ovrmetrics.OVRMetricsFeature
+import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
+import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
@@ -43,6 +49,9 @@ class HybridSampleActivity : AppSystemActivity() {
     val features = mutableListOf<SpatialFeature>(VRFeature(this))
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
+      features.add(HotReloadFeature(this))
+      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
+      features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
     return features
   }
@@ -122,6 +131,8 @@ class HybridSampleActivity : AppSystemActivity() {
             includeGlass = false
             width = 2.0f
             height = 1.5f
+            layerConfig = LayerConfig()
+            enableTransparent = true
           }
           panel {
             val button: Button? = rootView?.findViewById<Button>(R.id.chosen)

@@ -30,10 +30,12 @@ class FollowerSystem() : SystemBase() {
     val deltaTime = (currentTime - prevTime) / 1000f
     prevTime = currentTime
 
-    val followerEntities = Query.where { has(FollowerComponent.id, Transform.id) }.eval()
+    val followerEntities =
+        Query.where { has(FollowerComponent.id, Transform.id) }
+            .filter { by(FollowerComponent.enabledData).isEqualTo(true) }
+            .eval()
     followerEntities.forEach { followerEntity ->
       val follower = followerEntity.getComponent<FollowerComponent>()
-      if (!follower.enabled) return
 
       // match target by name (there should only be one)
       val target =
