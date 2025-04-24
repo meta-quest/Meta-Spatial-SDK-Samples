@@ -19,6 +19,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object PresentationModule {
 
+  @Singleton
   @Provides
   fun providePanelDelegate(): PanelDelegate {
     return SpatialActivityManager.getAppSystemActivity() as PanelDelegate
