@@ -27,6 +27,7 @@ import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
+import com.meta.spatial.toolkit.MeshCollision
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.vr.VRFeature
@@ -116,7 +117,7 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
 
     Entity.create(
         listOf(
-            Mesh(Uri.parse("mesh://skybox")),
+            Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
             Material().apply {
               baseTextureAndroidResourceId = R.drawable.skydome
               unlit = true // Prevent scene lighting from affecting the skybox

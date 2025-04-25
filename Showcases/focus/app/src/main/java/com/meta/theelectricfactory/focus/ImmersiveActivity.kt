@@ -714,7 +714,7 @@ class ImmersiveActivity : AppSystemActivity() {
   fun createSkybox(res: Int) {
     skybox =
         Entity.create(
-            Mesh(Uri.parse("mesh://skybox")),
+            Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
             Material().apply {
               baseTextureAndroidResourceId = res
               unlit = true // Prevent scene lighting from affecting the skybox

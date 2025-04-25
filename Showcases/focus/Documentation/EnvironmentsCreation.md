@@ -16,7 +16,7 @@ These elements function independently but are combined in Focus to form a cohesi
 To create a panorama, or skybox, you can use Spatial SDK skybox Mesh primitive and set a 360 image to the baseTextureAndroidResourceId attribute:
 ```kotlin
 skybox =  Entity.create(
-    Mesh(Uri.parse("mesh://skybox")),
+    Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
     Material().apply {
         baseTextureAndroidResourceId = R.drawable.skybox1
         unlit = true // Prevent scene lighting from affecting the skybox

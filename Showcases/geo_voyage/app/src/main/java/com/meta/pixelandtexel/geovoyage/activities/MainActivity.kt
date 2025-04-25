@@ -175,7 +175,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
 
       Entity(R.integer.skybox_id)
           .setComponents(
-              Mesh(Uri.parse("mesh://skybox")),
+              Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
               Material().apply { unlit = true },
               Transform(),
               Visible(false))

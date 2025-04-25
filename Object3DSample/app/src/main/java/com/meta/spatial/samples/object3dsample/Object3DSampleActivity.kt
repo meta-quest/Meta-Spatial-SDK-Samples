@@ -39,6 +39,7 @@ import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
+import com.meta.spatial.toolkit.MeshCollision
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.toolkit.PlaybackState
 import com.meta.spatial.toolkit.PlaybackType
@@ -117,7 +118,7 @@ class Object3DSampleActivity : AppSystemActivity() {
     skybox =
         Entity.create(
             listOf(
-                Mesh(Uri.parse("mesh://skybox")),
+                Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
                 Material().apply {
                   baseTextureAndroidResourceId = R.drawable.skydome
                   unlit = true
