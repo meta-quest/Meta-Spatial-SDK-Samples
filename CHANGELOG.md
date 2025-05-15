@@ -4,6 +4,22 @@ Check out our official [release notes](https://developers.meta.com/horizon/docum
 
 This format is roughly based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 0.6.1 - 2025-05-15
+
+### Added
+
+- None
+
+### Changed
+
+- None
+
+### Fixed
+
+- Fixed a bug where the keyboard would not appear on v76+
+- Fixed a bug where panel animations would cause a crash
+- Fixed an issue where setting the passthrough LUT would not work after sleeping and waking up the device
+
 ## 0.6.0 - 2025-04-22
 
 This release is a major version bump because it has a number of large improvements, new features, and a small number of breaking changes.

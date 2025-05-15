@@ -70,52 +70,21 @@ The documentation for Meta Spatial SDK can be found [here](https://developers.me
 
 Find our official release notes [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
 
-## 0.6.0 Updates
-
-This release is a major version bump because it has a number of large improvements, new features, and a small number of breaking changes.
+## 0.6.1 Updates
 
 ### Added
 
-- Experimental Feature: [Interaction SDK](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-isdk-overview/)
-  - Using `IsdkFeature` automatically replaces built in toolkit components/systems like Grabbable with `Isdk` equivalents
-  - Provides interactions that are consistent with the Meta Horizon OS and brings parity between controller and hand interactions
-    - Interact with panels directly using hands or controllers
-    - Grab 3D objects with hands or controllers, directly or using a raycast
-    - Advanced grab customization (responsiveness, two-handed, constraints)
-  - The Object3DSampleIsdk sample app in the [samples repo](https://github.com/meta-quest/Meta-Spatial-SDK-Samples) demonstrates how to use the new IsdkFeature and other Isdk APIs
-- [Datamodel Inspector](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-android-studio-plugin)
-  - Using `DataModelInspectorFeature` launches a webserver at a specified port that provides a live table view of ECS.
-  - Connect to a running app via Data Model Inspector Tool Window in the new Meta Horizon Android Studio Plugin.
-- [Query filters and sorting](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-queries/)
-  - Add filtering API for queries so that developers can refine the entity query results by applying filters on attributes.
-  - Add sorting API for queries so that developers can sort the entity by criteria on attributes.
-- GLTF Animation Pointer Support
-  - Added the ability to modify material factors and UV transforms via `KHR_animation_pointer` support.
-  - This can allow you to do things like animate opacity or make moving textures and play them with the `Animated()` component.
-- DRM support for Activity based panels on v76
-  - Using an Activity based panel (not inflated view) along with a `LayerConfig` set to `secure=true` will allow you to display DRM content on v76+. Previously, you had to render directly to a secure swapchain.
+- None
 
 ### Changed
 
-- We now support Color4 as an Attribute Type for use directly in components. Because of this, Color4 has been moved packages from `com.meta.spatial.toolkit` -> `com.meta.spatial.core`
-- Uris are now supported as an Attribute Type for use in components
-- Component XML is now the preferred method for making Spatial SDK Components
-  - Using Components XML increases performance of components and queries.
-  - Components XML can be used in Spatial Editor.
-  - Components written in Kotlin (instead of XML) will no longer be able to be added to objects in Spatial Editor
-- `PanelAnimation` and `PanelConfigOptions2` are now marked as experimental
-  - These APIs may be unstable and/or subject to change in the future. If you want to use them now, you will need to use the `@SpatialSDKExperimentalAPI` annotation
-- Default cursor has been changed to more closely match the Quest Home environment cursor
-- Samples now use `libs.versions.toml` for version management (removing the need to set the version in the `gradle.properties` file)
-- Changed the behavior of the `Layer.setClip()` API
-  - If the area of the clip for the left or right eye is 0, there will be no layer submitted for that eye.
-  - This can allow you to have separate transforms for layers sharing a swapchain with the left and right eyes
-- Bundled shaders assets have been cleaned up and compressed, decreasing APK size.
-- Various performance and stability improvements.
+- None
 
 ### Fixed
 
-- Fixed bug where deleting an entity while grabbed causes a crash
+- Fixed a bug where the keyboard would not appear on v76+
+- Fixed a bug where panel animations would cause a crash
+- Fixed an issue where setting the passthrough LUT would not work after sleeping and waking up the device
 
 ## Spatial SDK Gradle Plugin
 
