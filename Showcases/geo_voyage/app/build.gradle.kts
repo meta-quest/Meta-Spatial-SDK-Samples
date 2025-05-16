@@ -22,7 +22,7 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 21
+    versionCode = 22
     versionName = "1.0.1"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -80,7 +80,6 @@ dependencies {
 
   // Meta Spatial SDK libs
   implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-ovrmetrics:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
 
