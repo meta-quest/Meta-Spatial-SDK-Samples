@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  ~ (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+  -->
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:horizonos="http://schemas.horizonos/sdk"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:installLocation="auto"
+>
+
+    <horizonos:uses-horizonos-sdk
+    horizonos:minSdkVersion="69"
+    horizonos:targetSdkVersion="69"
+  />
+
+    <application
+    android:name=".app.UISetSampleApplication"
+    android:allowBackup="true"
+    android:dataExtractionRules="@xml/data_extraction_rules"
+    android:fullBackupContent="@xml/backup_rules"
+    android:label="${applicationLabel}"
+    android:largeHeap="true"
+    android:supportsRtl="true"
+    android:theme="@style/Theme.UISetSample"
+    tools:targetApi="31"
+  >
+        <activity
+      android:name=".app.ImmersiveActivity"
+      android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
+      android:excludeFromRecents="true"
+      android:exported="true"
+      android:launchMode="singleTask"
+      android:screenOrientation="landscape"
+      tools:ignore="DiscouragedApi"
+    >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="com.oculus.intent.category.VR" />
+            </intent-filter>
+        </activity>
+
+        <!--suppress AndroidElementNotAllowed: https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-tooling-castinputforward#adding-input-forwarding -->
+        <uses-native-library
+      android:name="libossdk.oculus.so"
+      android:required="true"
+    />
+    </application>
+
+    <meta-data android:name="com.oculus.vr.focusaware" android:value="true" />
+
+    <uses-feature
+    android:name="com.oculus.feature.RENDER_MODEL"
+    android:required="false"
+  />
+    <uses-feature
+    android:name="com.oculus.feature.VIRTUAL_KEYBOARD"
+    android:required="false"
+  />
+    <uses-feature
+    android:name="oculus.software.overlay_keyboard"
+    android:required="false"
+  />
+    <uses-feature
+    android:name="android.hardware.vr.headtracking"
+    android:required="true"
+  />
+    <uses-feature
+    android:name="com.oculus.feature.PASSTHROUGH"
+    android:required="false"
+  />
+    <uses-feature
+    android:name="oculus.software.handtracking"
+    android:required="false"
+  />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+</manifest>

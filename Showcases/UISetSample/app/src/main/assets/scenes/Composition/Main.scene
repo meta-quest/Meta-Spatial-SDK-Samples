@@ -1,0 +1,560 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:ButtonsLayout
+            - ref:ControlsLayout
+            - ref:SlidersLayout
+            - ref:TooltipsLayout
+            - ref:DialogsLayout
+            - ref:HorizonOSPattern1
+            - ref:VideoPlayerPattern
+            - ref:CustomUIPattern31
+            - ref:Navigator
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: ButtonsLayout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 2
+            - 1
+            - 1
+          translation:
+            - 5
+            - 3.34159517
+            - 0
+          componentVersion: 1
+          children:
+            - ref:TextTileButtonsLayout
+            - ref:ButtonShelvesLayout
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/1"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: ButtonsLayout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: SlidersLayout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 2
+            - 1
+            - 1
+          translation:
+            - 5
+            - 0.894941092
+            - 0
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/2"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: SlidersLayout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: ControlsLayout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 2
+            - 1.13999999
+            - 1
+          translation:
+            - 5.5
+            - 2.09884953
+            - 0
+          componentVersion: 1
+          children:
+            - ref:DropdownLayout
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/3"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: ControlsLayout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: TextTileButtonsLayout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - -0.785398185
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 2
+            - 1
+            - 1
+          translation:
+            - -2.0999999
+            - 0.00213861465
+            - -0.5
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/4"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: TextTileButtonsLayout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: ButtonShelvesLayout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 0.785398185
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 1
+            - 0.75999999
+            - 1
+          translation:
+            - 1.60000002
+            - 0
+            - -0.300000012
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/8"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: ButtonShelvesLayout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: TooltipsLayout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 2
+            - 1.17999995
+            - 1
+          translation:
+            - 5.5
+            - -0.234057903
+            - 0
+          componentVersion: 1
+          children:
+            - ref:TextFieldsLayout
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/6"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: TooltipsLayout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: TextFieldsLayout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 2
+            - 0.699999988
+            - 1
+          translation:
+            - -2.0999999
+            - 0
+            - 0
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/5"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: TextFieldsLayout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: DropdownLayout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 2
+            - 0.680000007
+            - 1
+          translation:
+            - -2.0999999
+            - 0.00213861465
+            - 0
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/10"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: DropdownLayout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: DialogsLayout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 2
+            - 1.79999995
+            - 1
+          translation:
+            - 5
+            - -1.40771508
+            - 0
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/11"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: DialogsLayout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: HorizonOSPattern3
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - -0.785398185
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 1.46000004
+            - 0.949999988
+            - 1
+          translation:
+            - -1.60000002
+            - 0.00213861465
+            - -0.449999988
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/22"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: HorizonOSPattern3
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: HorizonOSPattern2
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 0.785398185
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 1.46000004
+            - 0.949999988
+            - 1
+          translation:
+            - 1.60000002
+            - 0
+            - -0.449999988
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/21"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: HorizonOSPattern2
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: HorizonOSPattern1
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1.46000004
+            - 0.949999988
+            - 1
+          translation:
+            - 10
+            - 3.34159517
+            - 0
+          componentVersion: 1
+          children:
+            - ref:HorizonOSPattern2
+            - ref:HorizonOSPattern3
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/20"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: HorizonOSPattern1
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: VideoPlayerPattern
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1.78999996
+            - 1.17999995
+            - 1
+          translation:
+            - 10
+            - 3.79520297
+            - 0
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/23"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: VideoPlayerPattern
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: CustomUIPattern2
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.939999998
+            - 0.889999986
+            - 1
+          translation:
+            - 1.10000002
+            - 0.00145298243
+            - -0.000360965729
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/25"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: CustomUIPattern2
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: CustomUIPattern2x4
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - -0.785398185
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 0.579999983
+            - 0.670000017
+            - 1
+          translation:
+            - -0.939999998
+            - 0.00213861465
+            - -0.25
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/26"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: CustomUIPattern2x4
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: CustomUIPattern3
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1.02999997
+            - 0.75999999
+            - 1
+          translation:
+            - 0
+            - 0.300000012
+            - 0
+          componentVersion: 1
+          children:
+            - ref:CustomUIPattern2
+            - ref:CustomUIPattern2x4
+            - ref:CustomUIPattern3x3
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/24"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: CustomUIPattern31
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: CustomUIPattern3x3
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 0.785398185
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 0.850000024
+            - 0.519999981
+            - 1
+          translation:
+            - 2.11491013
+            - 0.00213861465
+            - -0.300000012
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/27"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: CustomUIPattern3x3
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: DemoVideo
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 0.52359879
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 0.449999988
+            - 0.449999988
+            - 1
+          translation:
+            - 0.550000012
+            - 0
+            - -0.150000006
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/101"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: DemoVideo
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Themes
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - -0.52359879
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 0.449999988
+            - 0.550000012
+            - 1
+          translation:
+            - -0.550000012
+            - -0.100000001
+            - -0.150000006
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/102"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: Themes
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Navigator
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.52359879
+            - 0
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 0.5
+            - 0.449999988
+            - 1
+          translation:
+            - 0
+            - -0.5
+            - -0.100000001
+          componentVersion: 1
+          children:
+            - ref:DemoVideo
+            - ref:Themes
+        com.meta.spatial.toolkit.Grabbable:
+          {}
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/100"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: Navigator
+metadata:
+  version: 1.32
