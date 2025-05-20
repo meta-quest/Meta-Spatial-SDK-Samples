@@ -7,26 +7,21 @@
   android:versionName="1.0"
   android:installLocation="auto"
 >
-
   <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="32" />
-
   <!-- Tell the system this app works in either 3dof or 6dof mode -->
   <uses-feature
     android:name="android.hardware.vr.headtracking"
     android:required="true"
   />
-
   <horizonos:uses-horizonos-sdk
     horizonos:minSdkVersion="69"
     horizonos:targetSdkVersion="69"
   />
-
   <uses-feature
     android:name="oculus.software.handtracking"
     android:required="false"
   />
   <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
-
   <!-- Tell the system this app uses experimental extensions -->
   <uses-feature
     android:name="com.oculus.experimental.enabled"
@@ -42,9 +37,7 @@
     android:name="com.oculus.feature.VIRTUAL_KEYBOARD"
     android:required="false"
   />
-
   <uses-feature android:glEsVersion="0x00030001" />
-
   <uses-feature
     android:name="oculus.software.overlay_keyboard"
     android:required="false"
@@ -57,7 +50,6 @@
   <uses-permission android:name="com.oculus.permission.RENDER_MODEL" />
   <!-- Volume Control -->
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
   <application android:allowBackup="false" android:label="Hybrid Sample">
     <meta-data
       android:name="com.oculus.supportedDevices"
@@ -68,44 +60,25 @@
       android:value="V2.0"
     />
     <meta-data android:name="com.oculus.vr.focusaware" android:value="true" />
-
     <uses-native-library
       android:name="libossdk.oculus.so"
       android:required="false"
     />
-
     <activity
       android:name=".PancakeActivity"
       android:screenOrientation="landscape"
       android:exported="true"
       android:resizeableActivity="true"
     >
-      <meta-data
-        android:name="com.oculus.vrshell.supports_free_resizing"
-        maxSizeX="1600"
-        maxSizeY="1000"
-        minSizeX="800"
-        minSizeY="500"
-        android:value="true"
-      />
-      <meta-data
-        android:name="com.oculus.vrshell.free_resizing_lock_aspect_ratio"
-        android:value="true"
-      />
+      <!-- Set the panel size when not in immersive (VR) mode -->
       <layout android:defaultHeight="550dp" android:defaultWidth="800dp" />
-      <meta-data
-        android:name="com.oculus.vrdesktop.control_bar_config"
-        android:value="{'show_title':false,'show_report_bug':false,'with_back_button':false, 'use_activity_label':false}"
-      />
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.DEFAULT" />
         <category android:name="com.oculus.intent.category.2D" />
-
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-
     <activity
       android:name="com.meta.spatial.samples.hybridsample.HybridSampleActivity"
       android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
