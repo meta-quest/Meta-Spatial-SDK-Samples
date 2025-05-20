@@ -5,7 +5,7 @@
 UI Set Sample is a project demonstrating the capabilities of the Meta Spatial SDK and the Meta Horizon OS UI Set for building immersive experiences on Meta Horizon OS.
 
 This repository contains:
- - The UI Set library (found at UISetSample/app/libs/meta-uiset-1.0.0.aar)
+ - The UI Set library (found at UISetSample/app/libs/meta-spatial-uiset-1.0.0.aar)
  - A sample project demonstrating how this library can be used to create Meta-themed UI in an application
 
 ## Documentation

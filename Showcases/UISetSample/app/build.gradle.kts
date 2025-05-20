@@ -106,7 +106,7 @@ android {
 }
 
 dependencies {
-  implementation(files("libs/meta-uiset-1.0.0.aar"))
+  implementation(files("libs/meta-spatial-uiset-1.0.1.aar"))
 
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
