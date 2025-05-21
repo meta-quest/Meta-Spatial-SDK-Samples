@@ -9,7 +9,6 @@
 >
   <uses-sdk android:minSdkVersion="32" android:targetSdkVersion="32" />
   <!-- Tell the system this app works in either 3dof or 6dof mode -->
-
   <horizonos:uses-horizonos-sdk
     horizonos:minSdkVersion="69"
     horizonos:targetSdkVersion="69"
@@ -28,11 +27,6 @@
   />
   <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
   <uses-permission android:name="com.oculus.permission.USE_SCENE" />
-  <!-- Tell the system this app uses experimental extensions -->
-  <uses-feature
-    android:name="com.oculus.experimental.enabled"
-    android:required="true"
-  />
   <!-- Tell the system this app can render passthrough -->
   <uses-feature
     android:name="com.oculus.feature.PASSTHROUGH"
@@ -62,7 +56,6 @@
       android:name="com.oculus.ossplash.background"
       android:value="passthrough-contextual"
     />
-
     <meta-data
       android:name="com.oculus.supportedDevices"
       android:value="quest2|questpro|quest3"
@@ -76,12 +69,10 @@
       android:value="V2.0"
     />
     <meta-data android:name="com.oculus.vr.focusaware" android:value="true" />
-
     <uses-native-library
       android:name="libossdk.oculus.so"
       android:required="false"
     />
-
     <activity
       android:name="com.meta.spatial.samples.spatialvideosample.SpatialVideoSampleActivity"
       android:launchMode="singleTask"

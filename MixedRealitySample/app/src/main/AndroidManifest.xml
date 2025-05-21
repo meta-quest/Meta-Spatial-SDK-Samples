@@ -6,26 +6,17 @@
   android:versionName="1.0"
   android:installLocation="auto"
 >
-
   <uses-sdk android:minSdkVersion="29" android:targetSdkVersion="32" />
-
   <!-- Tell the system this app works in either 3dof or 6dof mode -->
   <uses-feature
     android:name="android.hardware.vr.headtracking"
     android:required="true"
   />
-
   <uses-feature
     android:name="oculus.software.handtracking"
     android:required="false"
   />
   <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
-
-  <!-- Tell the system this app uses experimental extensions -->
-  <uses-feature
-    android:name="com.oculus.experimental.enabled"
-    android:required="true"
-  />
   <!-- Tell the system this app can render passthrough -->
   <uses-feature
     android:name="com.oculus.feature.PASSTHROUGH"
@@ -37,7 +28,6 @@
     android:required="false"
   />
   <uses-feature android:glEsVersion="0x00030001" />
-
   <uses-feature
     android:name="oculus.software.overlay_keyboard"
     android:required="false"
@@ -50,10 +40,8 @@
   <uses-permission android:name="com.oculus.permission.RENDER_MODEL" />
   <!-- Volume Control -->
   <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
   <uses-permission android:name="com.oculus.permission.USE_ANCHOR_API" />
   <uses-permission android:name="com.oculus.permission.USE_SCENE" />
-
   <application android:allowBackup="false" android:label="Mixed Reality Sample">
     <meta-data
       android:name="com.oculus.supportedDevices"
@@ -64,12 +52,10 @@
       android:value="V2.0"
     />
     <meta-data android:name="com.oculus.vr.focusaware" android:value="true" />
-
     <uses-native-library
       android:name="libossdk.oculus.so"
       android:required="false"
     />
-
     <activity
       android:name="com.meta.spatial.samples.mixedrealitysample.MixedRealitySampleActivity"
       android:launchMode="singleTask"
