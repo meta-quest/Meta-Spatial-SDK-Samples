@@ -64,7 +64,7 @@ class HybridSampleActivity : AppSystemActivity() {
 
     // wait for GLXF to load before accessing nodes inside it
     loadGLXF().invokeOnCompletion {
-      // get the environment mesh from Cosmo and set it to use an unlit shader.
+      // get the environment mesh from Spatial Editor and set it to use an unlit shader.
       val composition = glXFManager.getGLXFInfo("example_key_name")
       environmentEntity = composition.getNodeByName("Environment").entity
       val environmentMesh = environmentEntity?.getComponent<Mesh>()
