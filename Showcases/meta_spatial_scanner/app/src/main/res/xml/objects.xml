@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <!-- Configurations for "curated" objects, which have pre-assembled images and copy. Contains
+     info for UI construction and layout, as well as parameters for interacting with designated 3D
+     models found in the scene composition. -->
+
+    <object name="refrigerator">
+        <matching-labels>
+            <label>fridge</label>
+            <label>refrigerator</label>
+        </matching-labels>
+        <mesh-entity
+      name="Fridge"
+      initialAnimationTrack="1"
+      bounds="0.84f, 1.62f, 0.77f"
+      positionOffset="1.1f, -0.85f, 0f"
+      rotationOffset="0f, 30f, 0f"
+    />
+        <ui-panels>
+            <panel animationTrack="0" layout="TILES" title="Refrigerator">
+                <tiles>
+                    <tile
+            image="@drawable/fridge_light"
+            subtitle="Lightbulb Change"
+            title="How To:"
+          />
+                    <tile
+            image="@drawable/fridge_filter"
+            subtitle="Filter Change"
+            title="How To:"
+          />
+                    <tile
+            image="@drawable/fridge_shelves"
+            subtitle="Swap/Move Drawers or Shelves"
+            title="How To:"
+          />
+                    <tile
+            image="@drawable/fridge_ice"
+            subtitle="Clean/Replace Ice Machine"
+            title="How To:"
+          />
+                </tiles>
+            </panel>
+            <panel
+        animationTrack="1"
+        layout="IMAGE_COPY"
+        title="Model: RF32CG0SR/AA"
+      >
+                <image>@drawable/fridge_hero</image>
+                <body>@string/fridge_body_copy</body>
+            </panel>
+        </ui-panels>
+    </object>
+    <object name="tv">
+        <matching-labels>
+            <label>tv</label>
+            <label>television</label>
+        </matching-labels>
+        <mesh-entity
+      name="TV"
+      initialAnimationTrack="0"
+      positionOffset="0.9f, -0.1f, 0f"
+      rotationOffset="0f, 30f, 0f"
+    />
+        <ui-panels>
+            <panel animationTrack="1" layout="TILES" title="Television">
+                <tiles>
+                    <tile
+            image="@drawable/tv_wifi"
+            subtitle="Troubleshoot Wifi Connection"
+            title="How To:"
+          />
+                    <tile
+            image="@drawable/tv_apps"
+            subtitle="Connect Your Apps"
+            title="How To:"
+          />
+                    <tile
+            image="@drawable/tv_mount"
+            subtitle="Prepare for Wall Mounting"
+            title="How To:"
+          />
+                    <tile
+            image="@drawable/tv_sound"
+            subtitle="Connect a Sound System"
+            title="How To:"
+          />
+                </tiles>
+            </panel>
+            <panel
+        animationTrack="0"
+        layout="IMAGE_COPY"
+        title='43" QLED 4K Smart TV'
+      >
+                <image>@drawable/tv_hero</image>
+                <body>@string/tv_body_copy</body>
+            </panel>
+        </ui-panels>
+    </object>
+    <object name="phone">
+        <matching-labels>
+            <label>telephone</label>
+            <label>cell phone</label>
+            <label>cellphone</label>
+            <label>phone</label>
+        </matching-labels>
+        <mesh-entity
+      name="Phone"
+      bounds="0.43f, 0.91f, 0.09f"
+      initialAnimationTrack="1"
+      positionOffset="0.8f, -0.2f, 0f"
+      rotationOffset="0f, 30f, 0f"
+    />
+        <ui-panels>
+            <panel animationTrack="0" layout="TILES" title="Phone">
+                <tiles>
+                    <tile
+            image="@drawable/phone_connectivity"
+            subtitle="Troubleshoot Connectivity"
+            title="How To:"
+          />
+                    <tile
+            image="@drawable/phone_audio"
+            subtitle="Troubleshoot Audio Issues"
+            title="How To:"
+          />
+                    <tile
+            image="@drawable/phone_customize"
+            subtitle="Customize Settings"
+            title="How To:"
+          />
+                    <tile
+            image="@drawable/phone_maintenance"
+            subtitle="Basic Device Maintenance"
+            title="How To:"
+          />
+                </tiles>
+            </panel>
+            <panel
+        animationTrack="1"
+        layout="IMAGE_COPY"
+        title='7" 512GB Smartphone'
+      >
+                <image>@drawable/phone_hero</image>
+                <body>@string/phone_body_copy</body>
+            </panel>
+        </ui-panels>
+    </object>
+</resources>

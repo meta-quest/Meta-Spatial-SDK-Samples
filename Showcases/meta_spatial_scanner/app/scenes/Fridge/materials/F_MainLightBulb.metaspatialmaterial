@@ -1,0 +1,55 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: F_MainLightBulb
+    com.meta.components.PbrMaterial:
+      alphaCutoff: 0.5
+      alphaMode: Opaque
+      baseColorFactor.colorspace: RGB
+      baseColorFactor.data:
+        - 1
+        - 1
+        - 1
+        - 1
+      baseColorFactor.type: color4
+      clearcoatNormalTexture.scale: 1
+      emissiveFactor.colorspace: RGB
+      emissiveFactor.data:
+        - 1
+        - 1
+        - 1
+        - 0
+      emissiveFactor.type: color4
+      emissiveStrength: 1
+      ior: 1.45000005
+      metallicFactor: 1
+      normalTexture.scale: 0.300000012
+      occlusionTexture.textureStrength: 1
+      roughnessFactor: 0.858578622
+      sheenColorFactor.colorspace: RGB
+      sheenColorFactor.type: color3
+      specularColorFactor.colorspace: RGB
+      specularColorFactor.data:
+        - 1
+        - 1
+        - 1
+      specularColorFactor.type: color3
+      specularFactor: 1
+      volumeAttenuationColor.colorspace: RGB
+      volumeAttenuationColor.data:
+        - 1
+        - 1
+        - 1
+      volumeAttenuationColor.type: color3
+      volumeAttenuationDistance: 3.40282347e+38
+      componentVersion: 1
+      baseColorTexture.texture: ref:texture10
+      metallicRoughnessTexture.texture: ref:texture11
+      normalTexture.texture: ref:texture9
+      specularTexture.texture: ref:texture8
+    com.meta.components.PointerNodeInverseComponent:
+      {}
+    com.meta.components.StandardMaterial:
+      isDoubleSided: true
+metadata:
+  version: 1.32

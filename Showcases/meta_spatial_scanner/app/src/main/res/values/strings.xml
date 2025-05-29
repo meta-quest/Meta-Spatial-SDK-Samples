@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Llama query template -->
+    <string name="object_query_template">
+        Briefly describe the {{object_name}} in this image. Specifically, provide technical details or information about its construction, but do not guess details which are not apparent in the photo.
+    </string>
+
+    <!-- Camera status -->
+    <string name="camera_status_off">Paused</string>
+    <string name="camera_status_on">Scanning</string>
+
+    <!-- Buttons -->
+    <string name="btn_got_it">Got It</string>
+    <string name="btn_continue">Continue</string>
+    <string name="btn_dismiss">Dismiss</string>
+    <string name="btn_generate_objects">Generate Objects</string>
+
+    <!-- Content descriptions -->
+    <string name="camera_controls_button_description">Play/pause button</string>
+    <string name="help_button_description">Help button</string>
+    <string name="refrigerator_image_description">Refrigerator</string>
+    <string name="dot">Dot</string>
+
+    <!-- Welcome panel -->
+    <string name="notice">
+        This application uses generative AI to describe the content of images, and those responses may be inaccurate or inappropriate. [Learn More](https://www.facebook.com/privacy/guide/genai/). Your queries and the generative AI responses are not retained by Meta.
+    </string>
+    <string name="camera_controls_title">Camera Controls</string>
+    <string name="camera_controls_1">
+        Look at your left palm to activate camera scanner controls.
+    </string>
+    <string name="camera_controls_2">
+        Press play to begin the scan, and pause to end scanning.
+    </string>
+
+    <!-- Tips -->
+    <string name="select_object_title">Select Object</string>
+    <string
+    name="select_object_copy"
+  >Select an object to learn more information about it.</string>
+    <string name="no_objects_detected_title">No Objects Detected</string>
+    <string
+    name="no_objects_detected_body"
+  >Try moving to a different room or location, or select one of the generated objects.</string>
+    <string name="find_objects_title">Find Curated Objects</string>
+    <string
+    name="find_objects_body"
+  >Look for one of the curated objects: a phone, fridge, or television. Or select one of the generated objects.</string>
+    <string name="help_title">Help</string>
+    <string name="help_body">
+        You can scan your surroundings to identify objects with the play button. Select a detected object to learn more about it, or choose from generated objects.
+    </string>
+
+    <!-- Curated objects copy -->
+    <string name="fridge_body_copy">
+        ## More Room. More Organization. More Fun!\n\n
+        - Stay Connected: Share photos, stream music or video, read recipes, and more all from your fridge\'s AI companion.\n
+        - Chill Out: Cool your summertime drink with fresh cubed or crushed ice with the Dual Auto Ice Maker.\n
+        - Better Workflow: A flat-front fridge design with a recessed drawer handle blends into any kitchen beautifully.
+    </string>
+    <string name="tv_body_copy">
+        ## Unmatched Quality, Endless Watchability.\n\n
+        - Stunning Views: With 4k resolution, enhanced picture quality and 100% color volume, you\'ve never seen your content like this before.\n
+        - Smartly Secure: Connect your accounts worry-free with a top-of-the-line security system, keeping your data locked tight and your viewing hassle-free.\n
+        - All Content, All the Time: Connect your streaming apps, or search our library of 5000+ free titles. Never miss a title again!
+    </string>
+    <string name="phone_body_copy">
+        ## Experience More. Do More. Effortlessly.\n\n
+        - Never Stop Playing: With up to 36 hours of video playback, you\'re good to go all day on a single charge.\n
+        - Capture the Moment: With an unmatched 2-in-1 camera system, you\'ll get the shot you want no matter the lighting.\n
+        - Powerfully Professional: 6-core GPU, 6 core CPU, and a neural engine mean you\'ve never been faster at getting things done.
+    </string>
+</resources>

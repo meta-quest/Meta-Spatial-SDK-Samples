@@ -1,0 +1,343 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:Fridge
+            - ref:TV
+            - ref:Phone
+            - ref:WelcomePanel
+            - ref:CameraControlsPanel
+            - ref:HelpButtonPanel
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: CameraControlsPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.0399999991
+            - 0.0399999991
+            - 1
+          componentVersion: 1
+        com.meta.pixelandtexel.scanner.WristAttached:
+          position:
+            - 0.0799999982
+            - -0.0399999991
+            - -0.0199999996
+          rotation:
+            - -30
+            - -55
+            - -90
+          faceUser: true
+        com.meta.spatial.toolkit.Panel:
+          panel: "@layout/ui_camera_controls_view"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: CameraControlsPanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:Fridge/Main.metaspatialobj
+        com.meta.components.Name:
+          name: Fridge
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 1.5
+            - -100
+            - 0
+          componentVersion: 1
+          children:
+            - ref:max
+            - ref:min
+        com.meta.spatial.toolkit.Animated:
+          track: projref:Fridge?tag=CloseToOpen
+        com.meta.spatial.toolkit.Box:
+          min:
+            - -0.419999987
+            - -0.810000002
+            - 0
+          max:
+            - 0.419999987
+            - 0.819999993
+            - 0.769999981
+        com.meta.spatial.toolkit.Grabbable:
+          type: 1
+        com.meta.spatial.toolkit.Visible:
+          {}
+      tag: Fridge
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: WelcomePanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 3.14159274
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 0.370000005
+            - 0.400000006
+            - 1
+          translation:
+            - 0
+            - 1.70000005
+            - -1
+          componentVersion: 1
+        com.meta.spatial.toolkit.Grabbable:
+          type: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/welcome_panel_id"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: WelcomePanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:TV/Main.metaspatialobj
+        com.meta.components.Name:
+          name: TV
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0
+            - -100
+            - 0
+          componentVersion: 1
+          children:
+            - ref:max1
+            - ref:min1
+        com.meta.spatial.toolkit.Animated:
+          track: projref:TV?tag=FrontToBack
+        com.meta.spatial.toolkit.Box:
+          min:
+            - -0.5
+            - -0.300000012
+            - 0
+          max:
+            - 0.50999999
+            - 0.300000012
+            - 0.100000001
+        com.meta.spatial.toolkit.Grabbable:
+          type: 1
+        com.meta.spatial.toolkit.Visible:
+          {}
+      tag: TV
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:Phone/Main.metaspatialobj
+        com.meta.components.Name:
+          name: Phone
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -1.5
+            - -100
+            - 0
+          componentVersion: 1
+          children:
+            - ref:max2
+            - ref:min2
+        com.meta.spatial.toolkit.Animated:
+          track: projref:Phone?tag=FrontToBack
+        com.meta.spatial.toolkit.Box:
+          max:
+            - 0.209999993
+            - 0.449999988
+            - 0.0599999987
+          min:
+            - -0.219999999
+            - -0.460000008
+            - -0.0299999993
+        com.meta.spatial.toolkit.Grabbable:
+          type: 1
+        com.meta.spatial.toolkit.Visible:
+          {}
+      tag: Phone
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: min
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.423324108
+            - -0.812217712
+            - 0
+          componentVersion: 1
+      tag: min
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: max
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.422205925
+            - 0.823295593
+            - 0.772341907
+          componentVersion: 1
+      tag: max
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: HelpButtonPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.0399999991
+            - 0.0399999991
+            - 1
+          componentVersion: 1
+        com.meta.pixelandtexel.scanner.WristAttached:
+          faceUser: true
+          rotation:
+            - -30
+            - -55
+            - -90
+          position:
+            - 0.0700000003
+            - -0.0799999982
+            - -0.0299999993
+        com.meta.spatial.toolkit.Panel:
+          panel: "@layout/ui_help_button_view"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: HelpButtonPanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: min
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.501837969
+            - -0.297210693
+            - 0.00251603499
+          componentVersion: 1
+      tag: min1
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: max
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.506229162
+            - 0.302787781
+            - 0.0970481634
+          componentVersion: 1
+      tag: max1
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: min
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.220475674
+            - -0.4633255
+            - 0
+          componentVersion: 1
+      tag: min2
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: max
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.21383369
+            - 0.453491211
+            - 0.056432277
+          componentVersion: 1
+      tag: max2
+metadata:
+  version: 1.32

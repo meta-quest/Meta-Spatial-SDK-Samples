@@ -1,0 +1,9 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: texture15
+    com.meta.components.Texture:
+      image: ref:F_DoorWaterDisplay_BaseColor-F_DoorWaterDisplay_Alpha
+      sampler: ref:sampler0
+metadata:
+  version: 1.32

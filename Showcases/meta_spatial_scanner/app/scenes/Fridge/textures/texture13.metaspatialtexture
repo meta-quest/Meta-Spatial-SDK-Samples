@@ -1,0 +1,9 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: texture13
+    com.meta.components.Texture:
+      image: ref:F_WaterFilter_Metallic-F_WaterFilter_Roughness
+      sampler: ref:sampler0
+metadata:
+  version: 1.32

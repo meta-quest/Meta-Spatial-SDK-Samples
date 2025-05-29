@@ -1,0 +1,283 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.Animation:
+    - components:
+        com.meta.components.Animation:
+          endTime: 3.20833325
+          startTime: 0.0416666679
+          channels:
+            - ref:AnimationChannel2
+            - ref:AnimationChannel1
+            - ref:AnimationChannel3
+            - ref:AnimationChannel
+        com.meta.components.AnimationNodeInverseComponent:
+          {}
+        com.meta.components.Name:
+          name: BackToFront
+      tag: BackToFront
+    - components:
+        com.meta.components.Animation:
+          endTime: 3.20833325
+          startTime: 0.0416666679
+          channels:
+            - ref:AnimationChannel7
+            - ref:AnimationChannel6
+            - ref:AnimationChannel5
+            - ref:AnimationChannel4
+        com.meta.components.AnimationNodeInverseComponent:
+          {}
+        com.meta.components.Name:
+          name: FrontToBack
+      tag: FrontToBack
+  com.meta.models.AnimationChannel:
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel7.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel7
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel6.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel6
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel5.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel5
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel4.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:Phone_Rig
+          targetComponent: ref:Phone_Rig
+      tag: AnimationChannel4
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel3.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel3
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel2.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel2
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel1.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel1
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:Phone_Rig
+          targetComponent: ref:Phone_Rig
+      tag: AnimationChannel
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:Phone_AO
+            - ref:Phone_Body
+            - ref:Phone_Metal
+            - ref:Phone_Screen
+            - ref:Phone_camera
+            - ref:Mesh
+            - ref:BackToFront
+            - ref:FrontToBack
+        com.meta.components.Name:
+          name: Phone
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry6.bin
+          mode: Triangles
+      tag: Geometry6
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry5.bin
+          mode: Triangles
+      tag: Geometry5
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry4.bin
+          mode: Triangles
+      tag: Geometry4
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry3.bin
+          mode: Triangles
+      tag: Geometry3
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry2.bin
+          mode: Triangles
+      tag: Geometry2
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry1.bin
+          mode: Triangles
+      tag: Geometry1
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+          mode: Triangles
+      tag: Geometry
+  com.meta.models.Material:
+    - uri: docref:materials/Phone_Body.metaspatialmaterial
+      tag: Phone_Body
+    - uri: docref:materials/Phone_camera.metaspatialmaterial
+      tag: Phone_camera
+    - uri: docref:materials/Phone_Screen.metaspatialmaterial
+      tag: Phone_Screen
+    - uri: docref:materials/Phone_Metal.metaspatialmaterial
+      tag: Phone_Metal
+    - uri: docref:materials/Phone_AO.metaspatialmaterial
+      tag: Phone_AO
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive2
+            - ref:Primitive6
+            - ref:Primitive
+            - ref:Primitive4
+            - ref:Primitive5
+            - ref:Primitive3
+            - ref:Primitive1
+        com.meta.components.Name:
+          name: Mesh
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Mesh
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry2
+          material: ref:Phone_Metal
+      tag: Primitive6
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry4
+          material: ref:Phone_Metal
+      tag: Primitive5
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry5
+          material: ref:Phone_camera
+      tag: Primitive4
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry3
+          material: ref:Phone_Body
+      tag: Primitive3
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry
+          material: ref:Phone_Screen
+      tag: Primitive2
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry1
+          material: ref:Phone_AO
+      tag: Primitive1
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry6
+          material: ref:Phone_Body
+      tag: Primitive
+  com.meta.models.Skin:
+    - components:
+        com.meta.components.Name:
+          name: Phone_Rig
+        com.meta.components.Skin:
+          inverseBindMatrices:
+            -
+              - 1
+              - -0
+              - 0
+              - -0
+              - -0
+              - 1
+              - -0
+              - 0
+              - 0
+              - -0
+              - 1
+              - -0
+              - -0
+              - 0.251888394
+              - -0
+              - 1
+          jointMatrices:
+            -
+              - 1
+              - 0
+              - 0
+              - 0
+              - 0
+              - 1
+              - 0
+              - 0
+              - 0
+              - 0
+              - 1
+              - 0
+              - 0
+              - 0
+              - 0
+              - 1
+          joints:
+            - ref:Bone
+      tag: Phone_Rig1
+metadata:
+  version: 1.32

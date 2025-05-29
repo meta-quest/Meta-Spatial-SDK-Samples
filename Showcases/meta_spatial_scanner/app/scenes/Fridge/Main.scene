@@ -1,0 +1,1208 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:Armature
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: WaterFilter
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 2.58701704e-07
+            - 2.38418579e-07
+            - 6.16792994e-14
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 8.2406828e-08
+            - 0.0503157377
+            - 0.0503498949
+          componentVersion: 1
+      tag: WaterFilter
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: DoorScreen01
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.707106948
+            - -0.70710659
+            - -3.39855461e-07
+            - 4.41264206e-07
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.0855752304
+            - 0.205131948
+            - 0.0950833708
+          componentVersion: 1
+      tag: DoorScreen01
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: LightMainBody
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 5.94176509e-13
+            - 1.14838156e-06
+            - 0
+            - 1
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0
+            - 1.53808987
+            - 0.0409400165
+          componentVersion: 1
+          children:
+            - ref:LightMainCover
+      tag: LightMainBody
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: WaterFilterBody
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 4.09138625e-13
+            - 7.90753631e-07
+            - 0
+            - 1
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.295231551
+            - 1.53346074
+            - -0.243219048
+          componentVersion: 1
+          children:
+            - ref:WaterFilter
+      tag: WaterFilterBody
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: R_FridegeMainPullout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 5.33850759e-08
+            - 5.33850759e-08
+            - 0.707106769
+            - 0.707106769
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.215955764
+            - 1.08304715
+            - 0
+          componentVersion: 1
+      tag: R_FridegeMainPullout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: L_FridegeMainPullout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 5.33850759e-08
+            - 5.33850759e-08
+            - 0.707106769
+            - 0.707106769
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.216146544
+            - 1.08304715
+            - 0
+          componentVersion: 1
+      tag: L_FridegeMainPullout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: R_FirdegeDoor
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 5.33850759e-08
+            - 5.33850759e-08
+            - 0.707106769
+            - 0.707106769
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.415263116
+            - 1.20085239
+            - 0.329517484
+          componentVersion: 1
+      tag: R_FirdegeDoor
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: IceBox
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 5.33850759e-08
+            - 5.33850759e-08
+            - 0.707106769
+            - 0.707106769
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.299406767
+            - 1.40077198
+            - -0.185971111
+          componentVersion: 1
+      tag: IceBox
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: BDrawer
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 5.33850759e-08
+            - 5.33850759e-08
+            - 0.707106769
+            - 0.707106769
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0
+            - 0.213006496
+            - 0
+          componentVersion: 1
+      tag: BDrawer
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: LightMainCover
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 2.58701704e-07
+            - 3.57627925e-07
+            - 9.25189558e-14
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.0372296944
+            - -4.41868764e-14
+            - -0.10642878
+          componentVersion: 1
+      tag: LightMainCover
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Exterior_BottomDrawer
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Refregerator.005
+      tag: Fridge_Geo_Exterior_BottomDrawer
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_BottomDrawer
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Refregerator.002
+      tag: Fridge_Geo_Interior_BottomDrawer
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_BottomPullout_SupportRail
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Interior_Support.002
+      tag: Fridge_Geo_Interior_BottomPullout_SupportRail
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_DoubleShelves_Transparent
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Interior_Shelves.003
+      tag: Fridge_Geo_Interior_DoubleShelves_Transparent
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_IceBox_Body
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Interior_IceMaker.004
+      tag: Fridge_Geo_Interior_IceBox_Body
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Right_Door_Exterior_WaterDispense
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Right_Door.018
+      tag: Fridge_Geo_Right_Door_Exterior_WaterDispense
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_IceBox_Drawer
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Interior_IceMaker.003
+      tag: Fridge_Geo_Interior_IceBox_Drawer
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_Left_Shelf_Transparent
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Att_25_high.003
+      tag: Fridge_Geo_Interior_Left_Shelf_Transparent
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_BottomPullout_Body
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Interior_Drawner.004
+      tag: Fridge_Geo_Interior_BottomPullout_Body
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_MainLigt_Body
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Sphere
+      tag: Fridge_Geo_Interior_MainLigt_Body
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_MainLigt_Bulbs
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Mesh.074
+      tag: Fridge_Geo_Interior_MainLigt_Bulbs
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_Right_Shelf
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Att_25_high.002
+      tag: Fridge_Geo_Interior_Right_Shelf
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Left_Door_Exterior_Screen01
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Right_Door.003
+      tag: Fridge_Geo_Left_Door_Exterior_Screen01
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Left_Door_Interior_Shelves
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Right_Door_Shelves.002
+      tag: Fridge_Geo_Left_Door_Interior_Shelves
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Right_Door_Interior_Body
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Right_Door.006
+      tag: Fridge_Geo_Right_Door_Interior_Body
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_WaterFilter_Body
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Cube.009
+      tag: Fridge_Geo_Interior_WaterFilter_Body
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Right_Door.001
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Right_Door.001
+      tag: Right_Door.0011
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Root
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0
+            - -0.733577967
+            - 0
+          componentVersion: 1
+          children:
+            - ref:BDrawer
+            - ref:TopDrawer
+            - ref:FridgeMainBottomPullout
+            - ref:R_FridegeMainPullout
+            - ref:L_FridegeMainPullout
+            - ref:L_FridgeDoor
+            - ref:R_FirdegeDoor
+            - ref:IceBox
+            - ref:LightMainBody
+            - ref:WaterFilterBody
+      tag: Root
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: FridgeMainBottomPullout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 5.33850759e-08
+            - 5.33850759e-08
+            - 0.707106769
+            - 0.707106769
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0
+            - 0.832211733
+            - 0
+          componentVersion: 1
+      tag: FridgeMainBottomPullout
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: DoorScreen02
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.707106948
+            - -0.70710659
+            - -4.24149164e-07
+            - 5.2555788e-07
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.085575223
+            - 0.205131948
+            - 0.116951957
+          componentVersion: 1
+      tag: DoorScreen02
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: L_FridgeDoor
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 5.33850759e-08
+            - 5.33850759e-08
+            - 0.707106769
+            - 0.707106769
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.416255623
+            - 1.20085239
+            - 0.329517484
+          componentVersion: 1
+          children:
+            - ref:DoorScreen01
+            - ref:DoorScreen02
+      tag: L_FridgeDoor
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Exterior_BackPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Body.004
+      tag: Fridge_Geo_Exterior_BackPanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_DoubleShelves
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Interior_Shelves.002
+      tag: Fridge_Geo_Interior_DoubleShelves
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Exterior_TopDrawer
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Refregerator.003
+      tag: Fridge_Geo_Exterior_TopDrawer
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_MainLigt_Cover
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Interior_Light_Left.015
+      tag: Fridge_Geo_Interior_MainLigt_Cover
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_BottomPullout_Transparent
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Interior_Drawner.008
+      tag: Fridge_Geo_Interior_BottomPullout_Transparent
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Right_Door_Interior_Shelves
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Att_24_high.002
+      tag: Fridge_Geo_Right_Door_Interior_Shelves
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: TopDrawer
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 5.33850759e-08
+            - 5.33850759e-08
+            - 0.707106769
+            - 0.707106769
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0
+            - 0.638194084
+            - 0
+          componentVersion: 1
+      tag: TopDrawer
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_Left_Shelf
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Att_26_high.002
+      tag: Fridge_Geo_Interior_Left_Shelf
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_WaterFilter_Filter
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Cylinder.006
+      tag: Fridge_Geo_Interior_WaterFilter_Filter
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Exterior_Bottom
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Body.005
+      tag: Fridge_Geo_Exterior_Bottom
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_Right_Shelf_Transparent
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Att_26_high.003
+      tag: Fridge_Geo_Interior_Right_Shelf_Transparent
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Armature
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 3.14159274
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 3.73178786e-08
+            - -0.0735166371
+            - 0.42686674
+          componentVersion: 1
+          children:
+            - ref:Fridge_Geo_Exterior_BackPanel
+            - ref:Fridge_Geo_Exterior_Body
+            - ref:Fridge_Geo_Exterior_Bottom
+            - ref:Fridge_Geo_Exterior_BottomDrawer
+            - ref:Fridge_Geo_Exterior_TopDrawer
+            - ref:Fridge_Geo_Interior_BackPanel
+            - ref:Fridge_Geo_Interior_BottomDrawer
+            - ref:Fridge_Geo_Interior_BottomPullout_Body
+            - ref:Fridge_Geo_Interior_BottomPullout_SupportRail
+            - ref:Fridge_Geo_Interior_BottomPullout_Transparent
+            - ref:Fridge_Geo_Interior_DoubleShelves
+            - ref:Fridge_Geo_Interior_DoubleShelves_Transparent
+            - ref:Fridge_Geo_Interior_IceBox_Body
+            - ref:Fridge_Geo_Interior_IceBox_Drawer
+            - ref:Fridge_Geo_Interior_Left_Shelf
+            - ref:Fridge_Geo_Interior_Left_Shelf_Transparent
+            - ref:Fridge_Geo_Interior_MainLigt_Body
+            - ref:Fridge_Geo_Interior_MainLigt_Bulbs
+            - ref:Fridge_Geo_Interior_MainLigt_Cover
+            - ref:Fridge_Geo_Interior_Right_Shelf
+            - ref:Fridge_Geo_Interior_Right_Shelf_Transparent
+            - ref:Fridge_Geo_Interior_TopDrawer
+            - ref:Fridge_Geo_Interior_WaterFilter_Body
+            - ref:Fridge_Geo_Interior_WaterFilter_Filter
+            - ref:Fridge_Geo_Left_Door_Exterior_Body
+            - ref:Fridge_Geo_Left_Door_Exterior_Screen01
+            - ref:Fridge_Geo_Left_Door_Interior_Body
+            - ref:Fridge_Geo_Left_Door_Interior_Shelves
+            - ref:Fridge_Geo_Right_Door_Exterior_Body
+            - ref:Fridge_Geo_Right_Door_Exterior_WaterDispense
+            - ref:Fridge_Geo_Right_Door_Interior_Body
+            - ref:Fridge_Geo_Right_Door_Interior_Shelves
+            - ref:Right_Door.0011
+            - ref:Root
+      tag: Armature
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_TopDrawer
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Refregerator.009
+      tag: Fridge_Geo_Interior_TopDrawer
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Exterior_Body
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Body.002
+      tag: Fridge_Geo_Exterior_Body
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Left_Door_Interior_Body
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Right_Door.004
+      tag: Fridge_Geo_Left_Door_Interior_Body
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Right_Door_Exterior_Body
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Right_Door.016
+      tag: Fridge_Geo_Right_Door_Exterior_Body
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Interior_BackPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Body.016
+      tag: Fridge_Geo_Interior_BackPanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Fridge_Geo_Left_Door_Exterior_Body
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          skin: ref:Armature1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Right_Door.002
+      tag: Fridge_Geo_Left_Door_Exterior_Body
+metadata:
+  version: 1.32

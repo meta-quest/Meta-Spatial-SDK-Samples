@@ -1,0 +1,355 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.Animation:
+    - components:
+        com.meta.components.Animation:
+          endTime: 3.20833325
+          startTime: 0.0416666679
+          channels:
+            - ref:AnimationChannel4
+            - ref:AnimationChannel3
+            - ref:AnimationChannel1
+            - ref:AnimationChannel2
+        com.meta.components.AnimationNodeInverseComponent:
+          {}
+        com.meta.components.Name:
+          name: BackToFront
+      tag: BackToFront
+    - components:
+        com.meta.components.Animation:
+          endTime: 3.20833325
+          startTime: 0.0416666679
+          channels:
+            - ref:AnimationChannel7
+            - ref:AnimationChannel6
+            - ref:AnimationChannel
+            - ref:AnimationChannel5
+        com.meta.components.AnimationNodeInverseComponent:
+          {}
+        com.meta.components.Name:
+          name: FrontToBack
+      tag: FrontToBack
+  com.meta.models.AnimationChannel:
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel7.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel7
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel6.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel6
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel5.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:TV_Rig
+          targetComponent: ref:TV_Rig
+      tag: AnimationChannel5
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel4.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel4
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel3.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel3
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel2.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:TV_Rig
+          targetComponent: ref:TV_Rig
+      tag: AnimationChannel2
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel1.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel1
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:Bone
+          targetComponent: ref:Bone
+      tag: AnimationChannel
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:TV_MainPlastic_Roughness
+            - ref:Dark
+            - ref:Font
+            - ref:Plastic
+            - ref:Red
+            - ref:TV_MainPlastic
+            - ref:TV_Metal
+            - ref:TV_Screen
+            - ref:TV_SmoothPlastic
+            - ref:Text_Ui
+            - ref:UI
+            - ref:YELLOW RUB
+            - ref:white  rub
+            - ref:Cube.014
+            - ref:Cube.023
+            - ref:BackToFront
+            - ref:FrontToBack
+        com.meta.components.Name:
+          name: TV
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry11.bin
+          mode: Triangles
+      tag: Geometry11
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry10.bin
+          mode: Triangles
+      tag: Geometry10
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry9.bin
+          mode: Triangles
+      tag: Geometry9
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry8.bin
+          mode: Triangles
+      tag: Geometry8
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry7.bin
+          mode: Triangles
+      tag: Geometry7
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry6.bin
+          mode: Triangles
+      tag: Geometry6
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry5.bin
+          mode: Triangles
+      tag: Geometry5
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry4.bin
+          mode: Triangles
+      tag: Geometry4
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry3.bin
+          mode: Triangles
+      tag: Geometry3
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry2.bin
+          mode: Triangles
+      tag: Geometry2
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry1.bin
+          mode: Triangles
+      tag: Geometry1
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+          mode: Triangles
+      tag: Geometry
+  com.meta.models.Image:
+    - components:
+        com.meta.components.Asset:
+          path: assets/TV_MainPlastic_Roughness.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: TV_MainPlastic_Roughness
+      tag: TV_MainPlastic_Roughness
+  com.meta.models.Material:
+    - uri: docref:materials/UI.metaspatialmaterial
+      tag: UI
+    - uri: docref:materials/white  rub.metaspatialmaterial
+      tag: white  rub
+    - uri: docref:materials/TV_Metal.metaspatialmaterial
+      tag: TV_Metal
+    - uri: docref:materials/Red.metaspatialmaterial
+      tag: Red
+    - uri: docref:materials/YELLOW RUB.metaspatialmaterial
+      tag: YELLOW RUB
+    - uri: docref:materials/TV_MainPlastic.metaspatialmaterial
+      tag: TV_MainPlastic
+    - uri: docref:materials/Plastic.metaspatialmaterial
+      tag: Plastic
+    - uri: docref:materials/Font.metaspatialmaterial
+      tag: Font
+    - uri: docref:materials/Text_Ui.metaspatialmaterial
+      tag: Text_Ui
+    - uri: docref:materials/TV_Screen.metaspatialmaterial
+      tag: TV_Screen
+    - uri: docref:materials/TV_SmoothPlastic.metaspatialmaterial
+      tag: TV_SmoothPlastic
+    - uri: docref:materials/Dark.metaspatialmaterial
+      tag: Dark
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive1
+            - ref:Primitive7
+        com.meta.components.Name:
+          name: Cube.014
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Cube.014
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive
+            - ref:Primitive2
+            - ref:Primitive9
+            - ref:Primitive11
+            - ref:Primitive8
+            - ref:Primitive6
+            - ref:Primitive5
+            - ref:Primitive4
+            - ref:Primitive10
+            - ref:Primitive3
+        com.meta.components.Name:
+          name: Cube.023
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Cube.023
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry8
+          material: ref:TV_SmoothPlastic
+      tag: Primitive11
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry5
+          material: ref:Red
+      tag: Primitive10
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry9
+          material: ref:TV_Screen
+      tag: Primitive9
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry7
+          material: ref:YELLOW RUB
+      tag: Primitive8
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry11
+          material: ref:Text_Ui
+      tag: Primitive7
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry
+          material: ref:TV_Metal
+      tag: Primitive6
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry3
+          material: ref:Dark
+      tag: Primitive5
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry6
+          material: ref:white  rub
+      tag: Primitive4
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry4
+          material: ref:Plastic
+      tag: Primitive3
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry1
+          material: ref:Font
+      tag: Primitive2
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry2
+          material: ref:UI
+      tag: Primitive1
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry10
+          material: ref:TV_MainPlastic
+      tag: Primitive
+  com.meta.models.Sampler:
+    - components:
+        com.meta.components.Name:
+          name: sampler0
+        com.meta.components.Sampler:
+          magFilter: Linear
+          minFilter: LinearMipmapLinear
+          wrapS: Repeat
+          wrapT: Repeat
+      tag: sampler0
+  com.meta.models.Texture:
+    - uri: docref:textures/texture2.metaspatialtexture
+      tag: texture2
+    - uri: docref:textures/texture1.metaspatialtexture
+      tag: texture1
+metadata:
+  version: 1.32

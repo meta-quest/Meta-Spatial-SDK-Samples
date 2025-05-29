@@ -1,0 +1,2822 @@
+scene: docref:Main.scene
+entities:
+  com.meta.models.Animation:
+    - components:
+        com.meta.components.Animation:
+          endTime: 3
+          startTime: 0.0333333351
+          channels:
+            - ref:AnimationChannel83
+            - ref:AnimationChannel21
+            - ref:AnimationChannel89
+            - ref:AnimationChannel19
+            - ref:AnimationChannel88
+            - ref:AnimationChannel73
+            - ref:AnimationChannel87
+            - ref:AnimationChannel86
+            - ref:AnimationChannel85
+            - ref:AnimationChannel84
+            - ref:AnimationChannel82
+            - ref:AnimationChannel55
+            - ref:AnimationChannel16
+            - ref:AnimationChannel60
+            - ref:AnimationChannel67
+            - ref:AnimationChannel81
+            - ref:AnimationChannel80
+            - ref:AnimationChannel79
+            - ref:AnimationChannel78
+            - ref:AnimationChannel51
+            - ref:AnimationChannel8
+            - ref:AnimationChannel75
+            - ref:AnimationChannel32
+            - ref:AnimationChannel77
+            - ref:AnimationChannel76
+            - ref:AnimationChannel74
+            - ref:AnimationChannel72
+            - ref:AnimationChannel11
+            - ref:AnimationChannel71
+            - ref:AnimationChannel35
+            - ref:AnimationChannel13
+            - ref:AnimationChannel57
+            - ref:AnimationChannel12
+            - ref:AnimationChannel70
+            - ref:AnimationChannel69
+            - ref:AnimationChannel58
+            - ref:AnimationChannel4
+            - ref:AnimationChannel68
+            - ref:AnimationChannel66
+            - ref:AnimationChannel65
+            - ref:AnimationChannel34
+            - ref:AnimationChannel64
+            - ref:AnimationChannel63
+            - ref:AnimationChannel62
+            - ref:AnimationChannel61
+        com.meta.components.AnimationNodeInverseComponent:
+          {}
+        com.meta.components.Name:
+          name: OpenToClose
+      tag: OpenToClose
+    - components:
+        com.meta.components.Animation:
+          endTime: 3
+          startTime: 0.0333333351
+          channels:
+            - ref:AnimationChannel50
+            - ref:AnimationChannel56
+            - ref:AnimationChannel9
+            - ref:AnimationChannel48
+            - ref:AnimationChannel31
+            - ref:AnimationChannel47
+            - ref:AnimationChannel2
+            - ref:AnimationChannel46
+            - ref:AnimationChannel17
+            - ref:AnimationChannel45
+            - ref:AnimationChannel53
+            - ref:AnimationChannel7
+            - ref:AnimationChannel43
+            - ref:AnimationChannel42
+            - ref:AnimationChannel41
+            - ref:AnimationChannel14
+            - ref:AnimationChannel1
+            - ref:AnimationChannel54
+            - ref:AnimationChannel39
+            - ref:AnimationChannel38
+            - ref:AnimationChannel18
+            - ref:AnimationChannel36
+            - ref:AnimationChannel30
+            - ref:AnimationChannel40
+            - ref:AnimationChannel15
+            - ref:AnimationChannel52
+            - ref:AnimationChannel59
+            - ref:AnimationChannel49
+            - ref:AnimationChannel33
+            - ref:AnimationChannel23
+            - ref:AnimationChannel28
+            - ref:AnimationChannel10
+            - ref:AnimationChannel26
+            - ref:AnimationChannel
+            - ref:AnimationChannel6
+            - ref:AnimationChannel37
+            - ref:AnimationChannel29
+            - ref:AnimationChannel5
+            - ref:AnimationChannel27
+            - ref:AnimationChannel25
+            - ref:AnimationChannel44
+            - ref:AnimationChannel24
+            - ref:AnimationChannel22
+            - ref:AnimationChannel20
+            - ref:AnimationChannel3
+        com.meta.components.AnimationNodeInverseComponent:
+          {}
+        com.meta.components.Name:
+          name: CloseToOpen
+      tag: CloseToOpen
+  com.meta.models.AnimationChannel:
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel89.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:Root
+          targetComponent: ref:Root
+      tag: AnimationChannel89
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel88.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:BDrawer
+          targetComponent: ref:BDrawer
+      tag: AnimationChannel88
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel87.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:TopDrawer
+          targetComponent: ref:TopDrawer
+      tag: AnimationChannel87
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel86.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:TopDrawer
+          targetComponent: ref:TopDrawer
+      tag: AnimationChannel86
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel85.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:TopDrawer
+          targetComponent: ref:TopDrawer
+      tag: AnimationChannel85
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel84.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:FridgeMainBottomPullout
+          targetComponent: ref:FridgeMainBottomPullout
+      tag: AnimationChannel84
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel83.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:Root
+          targetComponent: ref:Root
+      tag: AnimationChannel83
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel82.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:FridgeMainBottomPullout
+          targetComponent: ref:FridgeMainBottomPullout
+      tag: AnimationChannel82
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel81.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:L_FridegeMainPullout
+          targetComponent: ref:L_FridegeMainPullout
+      tag: AnimationChannel81
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel80.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:L_FridegeMainPullout
+          targetComponent: ref:L_FridegeMainPullout
+      tag: AnimationChannel80
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel79.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:L_FridegeMainPullout
+          targetComponent: ref:L_FridegeMainPullout
+      tag: AnimationChannel79
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel78.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:L_FridgeDoor
+          targetComponent: ref:L_FridgeDoor
+      tag: AnimationChannel78
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel77.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:DoorScreen01
+          targetComponent: ref:DoorScreen01
+      tag: AnimationChannel77
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel76.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:DoorScreen02
+          targetComponent: ref:DoorScreen02
+      tag: AnimationChannel76
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel75.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:DoorScreen01
+          targetComponent: ref:DoorScreen01
+      tag: AnimationChannel75
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel74.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:DoorScreen02
+          targetComponent: ref:DoorScreen02
+      tag: AnimationChannel74
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel73.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:BDrawer
+          targetComponent: ref:BDrawer
+      tag: AnimationChannel73
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel72.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:DoorScreen02
+          targetComponent: ref:DoorScreen02
+      tag: AnimationChannel72
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel71.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:R_FirdegeDoor
+          targetComponent: ref:R_FirdegeDoor
+      tag: AnimationChannel71
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel70.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:LightMainBody
+          targetComponent: ref:LightMainBody
+      tag: AnimationChannel70
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel69.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:LightMainBody
+          targetComponent: ref:LightMainBody
+      tag: AnimationChannel69
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel68.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:LightMainCover
+          targetComponent: ref:LightMainCover
+      tag: AnimationChannel68
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel67.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:R_FridegeMainPullout
+          targetComponent: ref:R_FridegeMainPullout
+      tag: AnimationChannel67
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel66.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:LightMainCover
+          targetComponent: ref:LightMainCover
+      tag: AnimationChannel66
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel65.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:WaterFilterBody
+          targetComponent: ref:WaterFilterBody
+      tag: AnimationChannel65
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel64.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:WaterFilterBody
+          targetComponent: ref:WaterFilterBody
+      tag: AnimationChannel64
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel63.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:WaterFilter
+          targetComponent: ref:WaterFilter
+      tag: AnimationChannel63
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel62.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:WaterFilter
+          targetComponent: ref:WaterFilter
+      tag: AnimationChannel62
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel61.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:WaterFilter
+          targetComponent: ref:WaterFilter
+      tag: AnimationChannel61
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel60.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:R_FridegeMainPullout
+          targetComponent: ref:R_FridegeMainPullout
+      tag: AnimationChannel60
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel59.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:DoorScreen02
+          targetComponent: ref:DoorScreen02
+      tag: AnimationChannel59
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel58.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:LightMainBody
+          targetComponent: ref:LightMainBody
+      tag: AnimationChannel58
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel57.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:IceBox
+          targetComponent: ref:IceBox
+      tag: AnimationChannel57
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel56.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:Root
+          targetComponent: ref:Root
+      tag: AnimationChannel56
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel55.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:FridgeMainBottomPullout
+          targetComponent: ref:FridgeMainBottomPullout
+      tag: AnimationChannel55
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel54.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:L_FridegeMainPullout
+          targetComponent: ref:L_FridegeMainPullout
+      tag: AnimationChannel54
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel53.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:FridgeMainBottomPullout
+          targetComponent: ref:FridgeMainBottomPullout
+      tag: AnimationChannel53
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel52.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:DoorScreen02
+          targetComponent: ref:DoorScreen02
+      tag: AnimationChannel52
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel51.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:L_FridgeDoor
+          targetComponent: ref:L_FridgeDoor
+      tag: AnimationChannel51
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel50.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:Root
+          targetComponent: ref:Root
+      tag: AnimationChannel50
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel49.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:R_FirdegeDoor
+          targetComponent: ref:R_FirdegeDoor
+      tag: AnimationChannel49
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel48.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:BDrawer
+          targetComponent: ref:BDrawer
+      tag: AnimationChannel48
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel47.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:BDrawer
+          targetComponent: ref:BDrawer
+      tag: AnimationChannel47
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel46.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:TopDrawer
+          targetComponent: ref:TopDrawer
+      tag: AnimationChannel46
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel45.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:FridgeMainBottomPullout
+          targetComponent: ref:FridgeMainBottomPullout
+      tag: AnimationChannel45
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel44.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:WaterFilterBody
+          targetComponent: ref:WaterFilterBody
+      tag: AnimationChannel44
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel43.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:R_FridegeMainPullout
+          targetComponent: ref:R_FridegeMainPullout
+      tag: AnimationChannel43
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel42.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:R_FridegeMainPullout
+          targetComponent: ref:R_FridegeMainPullout
+      tag: AnimationChannel42
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel41.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:R_FridegeMainPullout
+          targetComponent: ref:R_FridegeMainPullout
+      tag: AnimationChannel41
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel40.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:DoorScreen01
+          targetComponent: ref:DoorScreen01
+      tag: AnimationChannel40
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel39.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:L_FridgeDoor
+          targetComponent: ref:L_FridgeDoor
+      tag: AnimationChannel39
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel38.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:L_FridgeDoor
+          targetComponent: ref:L_FridgeDoor
+      tag: AnimationChannel38
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel37.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:LightMainBody
+          targetComponent: ref:LightMainBody
+      tag: AnimationChannel37
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel36.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:DoorScreen01
+          targetComponent: ref:DoorScreen01
+      tag: AnimationChannel36
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel35.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:R_FirdegeDoor
+          targetComponent: ref:R_FirdegeDoor
+      tag: AnimationChannel35
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel34.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:WaterFilterBody
+          targetComponent: ref:WaterFilterBody
+      tag: AnimationChannel34
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel33.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:R_FirdegeDoor
+          targetComponent: ref:R_FirdegeDoor
+      tag: AnimationChannel33
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel32.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:DoorScreen01
+          targetComponent: ref:DoorScreen01
+      tag: AnimationChannel32
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel31.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:BDrawer
+          targetComponent: ref:BDrawer
+      tag: AnimationChannel31
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel30.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:DoorScreen01
+          targetComponent: ref:DoorScreen01
+      tag: AnimationChannel30
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel29.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:LightMainCover
+          targetComponent: ref:LightMainCover
+      tag: AnimationChannel29
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel28.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:IceBox
+          targetComponent: ref:IceBox
+      tag: AnimationChannel28
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel27.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:LightMainCover
+          targetComponent: ref:LightMainCover
+      tag: AnimationChannel27
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel26.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:IceBox
+          targetComponent: ref:IceBox
+      tag: AnimationChannel26
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel25.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:WaterFilterBody
+          targetComponent: ref:WaterFilterBody
+      tag: AnimationChannel25
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel24.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:WaterFilterBody
+          targetComponent: ref:WaterFilterBody
+      tag: AnimationChannel24
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel23.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:R_FirdegeDoor
+          targetComponent: ref:R_FirdegeDoor
+      tag: AnimationChannel23
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel22.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:WaterFilter
+          targetComponent: ref:WaterFilter
+      tag: AnimationChannel22
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel21.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:Root
+          targetComponent: ref:Root
+      tag: AnimationChannel21
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel20.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:WaterFilter
+          targetComponent: ref:WaterFilter
+      tag: AnimationChannel20
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel19.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:BDrawer
+          targetComponent: ref:BDrawer
+      tag: AnimationChannel19
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel18.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:L_FridgeDoor
+          targetComponent: ref:L_FridgeDoor
+      tag: AnimationChannel18
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel17.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:TopDrawer
+          targetComponent: ref:TopDrawer
+      tag: AnimationChannel17
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel16.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:R_FridegeMainPullout
+          targetComponent: ref:R_FridegeMainPullout
+      tag: AnimationChannel16
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel15.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:DoorScreen02
+          targetComponent: ref:DoorScreen02
+      tag: AnimationChannel15
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel14.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:L_FridegeMainPullout
+          targetComponent: ref:L_FridegeMainPullout
+      tag: AnimationChannel14
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel13.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:IceBox
+          targetComponent: ref:IceBox
+      tag: AnimationChannel13
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel12.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:IceBox
+          targetComponent: ref:IceBox
+      tag: AnimationChannel12
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel11.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:R_FirdegeDoor
+          targetComponent: ref:R_FirdegeDoor
+      tag: AnimationChannel11
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel10.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:IceBox
+          targetComponent: ref:IceBox
+      tag: AnimationChannel10
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel9.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:Root
+          targetComponent: ref:Root
+      tag: AnimationChannel9
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel8.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:L_FridgeDoor
+          targetComponent: ref:L_FridgeDoor
+      tag: AnimationChannel8
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel7.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:FridgeMainBottomPullout
+          targetComponent: ref:FridgeMainBottomPullout
+      tag: AnimationChannel7
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel6.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:LightMainBody
+          targetComponent: ref:LightMainBody
+      tag: AnimationChannel6
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel5.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:LightMainCover
+          targetComponent: ref:LightMainCover
+      tag: AnimationChannel5
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel4.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:LightMainCover
+          targetComponent: ref:LightMainCover
+      tag: AnimationChannel4
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel3.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Scale
+          componentVersion: 1
+          target: ref:WaterFilter
+          targetComponent: ref:WaterFilter
+      tag: AnimationChannel3
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel2.bin
+          interpolation: Linear
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:TopDrawer
+          targetComponent: ref:TopDrawer
+      tag: AnimationChannel2
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel1.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Rotation
+          componentVersion: 1
+          target: ref:L_FridegeMainPullout
+          targetComponent: ref:L_FridegeMainPullout
+      tag: AnimationChannel1
+    - components:
+        com.meta.components.AnimationChannel:
+          data: binary/AnimationChannel.bin
+          interpolation: Step
+          pointerType: None
+          targetPath: Translation
+          componentVersion: 1
+          target: ref:LightMainBody
+          targetComponent: ref:LightMainBody
+      tag: AnimationChannel
+  com.meta.models.AssetFolder:
+    - components:
+        com.meta.components.AssetFolder:
+          assets:
+            - ref:F_BodyMain_Roughness
+            - ref:F_ClearPlastic_Alpha
+            - ref:F_ClearPlastic_Roughness
+            - ref:F_DoorWaterDisplay_BaseColor-F_DoorWaterDisplay_Alpha
+            - ref:F_DoorWaterDisplay_Emission
+            - ref:F_DoorWaterDisplay_Roughness
+            - ref:F_MainPlastic_Normal
+            - ref:F_MainPlastic_Roughness
+            - ref:F_StandardMetal_BaseColor
+            - ref:F_StandardMetal_Roughness
+            - ref:F_WaterFilter_BaseColor
+            - ref:F_WaterFilter_Metallic-F_WaterFilter_Roughness
+            - ref:LightBulbAlbedo
+            - ref:LightBulbMetal
+            - ref:LightBulbNormal
+            - ref:LightBulbRough
+            - ref:F_ClearPlastic1
+            - ref:F_ClearPlastic
+            - ref:F_DoorWaterDisplay
+            - ref:F_MainBody
+            - ref:F_MainLightBulb
+            - ref:F_MainLightCover
+            - ref:F_MainPlastic
+            - ref:F_MetalBright
+            - ref:F_PlasticGrey
+            - ref:F_Screen
+            - ref:F_ScreenEdges
+            - ref:F_Seal
+            - ref:F_StandardMetal
+            - ref:F_WaterFilter
+            - ref:Att_24_high.002
+            - ref:Att_25_high.002
+            - ref:Att_25_high.003
+            - ref:Att_26_high.002
+            - ref:Att_26_high.003
+            - ref:Body.002
+            - ref:Body.004
+            - ref:Body.005
+            - ref:Body.016
+            - ref:Cube.009
+            - ref:Cylinder.006
+            - ref:Interior_Drawner.004
+            - ref:Interior_Drawner.008
+            - ref:Interior_IceMaker.003
+            - ref:Interior_IceMaker.004
+            - ref:Interior_Light_Left.015
+            - ref:Interior_Shelves.002
+            - ref:Interior_Shelves.003
+            - ref:Interior_Support.002
+            - ref:Mesh.074
+            - ref:Refregerator.002
+            - ref:Refregerator.003
+            - ref:Refregerator.005
+            - ref:Refregerator.009
+            - ref:Right_Door.001
+            - ref:Right_Door.002
+            - ref:Right_Door.003
+            - ref:Right_Door.004
+            - ref:Right_Door.006
+            - ref:Right_Door.016
+            - ref:Right_Door.018
+            - ref:Right_Door_Shelves.002
+            - ref:Sphere
+            - ref:CloseToOpen
+            - ref:OpenToClose
+        com.meta.components.Name:
+          name: FridgeAnimFix
+  com.meta.models.AssetRoot:
+    - components:
+        com.meta.components.AssetMetadata:
+          {}
+        com.meta.components.AssetRoot:
+          defaultScene: ref:Scene
+          scenes:
+            - ref:Scene
+  com.meta.models.Geometry:
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry50.bin
+          mode: Triangles
+      tag: Geometry50
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry49.bin
+          mode: Triangles
+      tag: Geometry49
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry48.bin
+          mode: Triangles
+      tag: Geometry48
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry47.bin
+          mode: Triangles
+      tag: Geometry47
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry46.bin
+          mode: Triangles
+      tag: Geometry46
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry45.bin
+          mode: Triangles
+      tag: Geometry45
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry44.bin
+          mode: Triangles
+      tag: Geometry44
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry43.bin
+          mode: Triangles
+      tag: Geometry43
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry42.bin
+          mode: Triangles
+      tag: Geometry42
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry41.bin
+          mode: Triangles
+      tag: Geometry41
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry40.bin
+          mode: Triangles
+      tag: Geometry40
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry39.bin
+          mode: Triangles
+      tag: Geometry39
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry38.bin
+          mode: Triangles
+      tag: Geometry38
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry37.bin
+          mode: Triangles
+      tag: Geometry37
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry36.bin
+          mode: Triangles
+      tag: Geometry36
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry35.bin
+          mode: Triangles
+      tag: Geometry35
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry34.bin
+          mode: Triangles
+      tag: Geometry34
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry33.bin
+          mode: Triangles
+      tag: Geometry33
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry32.bin
+          mode: Triangles
+      tag: Geometry32
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry31.bin
+          mode: Triangles
+      tag: Geometry31
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry30.bin
+          mode: Triangles
+      tag: Geometry30
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry29.bin
+          mode: Triangles
+      tag: Geometry29
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry28.bin
+          mode: Triangles
+      tag: Geometry28
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry27.bin
+          mode: Triangles
+      tag: Geometry27
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry26.bin
+          mode: Triangles
+      tag: Geometry26
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry25.bin
+          mode: Triangles
+      tag: Geometry25
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry24.bin
+          mode: Triangles
+      tag: Geometry24
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry23.bin
+          mode: Triangles
+      tag: Geometry23
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry22.bin
+          mode: Triangles
+      tag: Geometry22
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry21.bin
+          mode: Triangles
+      tag: Geometry21
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry20.bin
+          mode: Triangles
+      tag: Geometry20
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry19.bin
+          mode: Triangles
+      tag: Geometry19
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry18.bin
+          mode: Triangles
+      tag: Geometry18
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry17.bin
+          mode: Triangles
+      tag: Geometry17
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry16.bin
+          mode: Triangles
+      tag: Geometry16
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry15.bin
+          mode: Triangles
+      tag: Geometry15
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry14.bin
+          mode: Triangles
+      tag: Geometry14
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry13.bin
+          mode: Triangles
+      tag: Geometry13
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry12.bin
+          mode: Triangles
+      tag: Geometry12
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry11.bin
+          mode: Triangles
+      tag: Geometry11
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry10.bin
+          mode: Triangles
+      tag: Geometry10
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry9.bin
+          mode: Triangles
+      tag: Geometry9
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry8.bin
+          mode: Triangles
+      tag: Geometry8
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry7.bin
+          mode: Triangles
+      tag: Geometry7
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry6.bin
+          mode: Triangles
+      tag: Geometry6
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry5.bin
+          mode: Triangles
+      tag: Geometry5
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry4.bin
+          mode: Triangles
+      tag: Geometry4
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry3.bin
+          mode: Triangles
+      tag: Geometry3
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry2.bin
+          mode: Triangles
+      tag: Geometry2
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry1.bin
+          mode: Triangles
+      tag: Geometry1
+    - components:
+        com.meta.components.Geometry:
+          data: binary/Geometry.bin
+          mode: Triangles
+      tag: Geometry
+  com.meta.models.Image:
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_MainPlastic_Roughness.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_MainPlastic_Roughness
+      tag: F_MainPlastic_Roughness
+    - components:
+        com.meta.components.Asset:
+          path: assets/LightBulbRough.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: LightBulbRough
+      tag: LightBulbRough
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_DoorWaterDisplay_Roughness.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_DoorWaterDisplay_Roughness
+      tag: F_DoorWaterDisplay_Roughness
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_WaterFilter_BaseColor.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_WaterFilter_BaseColor
+      tag: F_WaterFilter_BaseColor
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_DoorWaterDisplay_Emission.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_DoorWaterDisplay_Emission
+      tag: F_DoorWaterDisplay_Emission
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_BodyMain_Roughness.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_BodyMain_Roughness
+      tag: F_BodyMain_Roughness
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_DoorWaterDisplay_BaseColor-F_DoorWaterDisplay_Alpha.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_DoorWaterDisplay_BaseColor-F_DoorWaterDisplay_Alpha
+      tag: F_DoorWaterDisplay_BaseColor-F_DoorWaterDisplay_Alpha
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_ClearPlastic_Alpha.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_ClearPlastic_Alpha
+      tag: F_ClearPlastic_Alpha
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_StandardMetal_Roughness.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_StandardMetal_Roughness
+      tag: F_StandardMetal_Roughness
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_ClearPlastic_Roughness.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_ClearPlastic_Roughness
+      tag: F_ClearPlastic_Roughness
+    - components:
+        com.meta.components.Asset:
+          path: assets/LightBulbMetal.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: LightBulbMetal
+      tag: LightBulbMetal
+    - components:
+        com.meta.components.Asset:
+          path: assets/LightBulbNormal.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: LightBulbNormal
+      tag: LightBulbNormal
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_WaterFilter_Metallic-F_WaterFilter_Roughness.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_WaterFilter_Metallic-F_WaterFilter_Roughness
+      tag: F_WaterFilter_Metallic-F_WaterFilter_Roughness
+    - components:
+        com.meta.components.Asset:
+          path: assets/LightBulbAlbedo.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: LightBulbAlbedo
+      tag: LightBulbAlbedo
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_StandardMetal_BaseColor.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_StandardMetal_BaseColor
+      tag: F_StandardMetal_BaseColor
+    - components:
+        com.meta.components.Asset:
+          path: assets/F_MainPlastic_Normal.png
+        com.meta.components.Image:
+          height: 2048
+          mimeType: image/png
+          width: 2048
+        com.meta.components.Name:
+          name: F_MainPlastic_Normal
+      tag: F_MainPlastic_Normal
+  com.meta.models.Material:
+    - uri: docref:materials/F_WaterFilter.metaspatialmaterial
+      tag: F_WaterFilter
+    - uri: docref:materials/F_MainBody.metaspatialmaterial
+      tag: F_MainBody
+    - uri: docref:materials/F_MainPlastic.metaspatialmaterial
+      tag: F_MainPlastic
+    - uri: docref:materials/F_MainLightCover.metaspatialmaterial
+      tag: F_MainLightCover
+    - uri: docref:materials/F_PlasticGrey.metaspatialmaterial
+      tag: F_PlasticGrey
+    - uri: docref:materials/F_MainLightBulb.metaspatialmaterial
+      tag: F_MainLightBulb
+    - uri: docref:materials/F_Seal.metaspatialmaterial
+      tag: F_Seal
+    - uri: docref:materials/F_MetalBright.metaspatialmaterial
+      tag: F_MetalBright
+    - uri: docref:materials/F_StandardMetal.metaspatialmaterial
+      tag: F_StandardMetal
+    - uri: docref:materials/F_ClearPlastic1.metaspatialmaterial
+      tag: F_ClearPlastic1
+    - uri: docref:materials/F_ClearPlastic.metaspatialmaterial
+      tag: F_ClearPlastic
+    - uri: docref:materials/F_ScreenEdges.metaspatialmaterial
+      tag: F_ScreenEdges
+    - uri: docref:materials/F_DoorWaterDisplay.metaspatialmaterial
+      tag: F_DoorWaterDisplay
+    - uri: docref:materials/F_Screen.metaspatialmaterial
+      tag: F_Screen
+  com.meta.models.Mesh:
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive
+        com.meta.components.Name:
+          name: Att_26_high.002
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Att_26_high.002
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive50
+        com.meta.components.Name:
+          name: Body.005
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Body.005
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive47
+        com.meta.components.Name:
+          name: Body.004
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Body.004
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive26
+        com.meta.components.Name:
+          name: Interior_Support.002
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Interior_Support.002
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive15
+            - ref:Primitive1
+            - ref:Primitive14
+        com.meta.components.Name:
+          name: Right_Door.016
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Right_Door.016
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive34
+            - ref:Primitive32
+            - ref:Primitive9
+        com.meta.components.Name:
+          name: Refregerator.005
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Refregerator.005
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive2
+        com.meta.components.Name:
+          name: Att_26_high.003
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Att_26_high.003
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive39
+            - ref:Primitive49
+        com.meta.components.Name:
+          name: Body.002
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Body.002
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive46
+            - ref:Primitive45
+        com.meta.components.Name:
+          name: Right_Door.003
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Right_Door.003
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive12
+            - ref:Primitive19
+            - ref:Primitive31
+        com.meta.components.Name:
+          name: Right_Door_Shelves.002
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Right_Door_Shelves.002
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive44
+        com.meta.components.Name:
+          name: Right_Door.001
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Right_Door.001
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive13
+            - ref:Primitive27
+        com.meta.components.Name:
+          name: Interior_IceMaker.003
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Interior_IceMaker.003
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive5
+            - ref:Primitive37
+        com.meta.components.Name:
+          name: Att_24_high.002
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Att_24_high.002
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive41
+        com.meta.components.Name:
+          name: Cylinder.006
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Cylinder.006
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive30
+        com.meta.components.Name:
+          name: Att_25_high.003
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Att_25_high.003
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive24
+        com.meta.components.Name:
+          name: Interior_Light_Left.015
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Interior_Light_Left.015
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive38
+        com.meta.components.Name:
+          name: Refregerator.002
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Refregerator.002
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive48
+        com.meta.components.Name:
+          name: Interior_Shelves.003
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Interior_Shelves.003
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive18
+            - ref:Primitive17
+            - ref:Primitive16
+        com.meta.components.Name:
+          name: Interior_IceMaker.004
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Interior_IceMaker.004
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive29
+        com.meta.components.Name:
+          name: Interior_Drawner.004
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Interior_Drawner.004
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive11
+            - ref:Primitive36
+            - ref:Primitive35
+        com.meta.components.Name:
+          name: Right_Door.002
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Right_Door.002
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive28
+            - ref:Primitive25
+        com.meta.components.Name:
+          name: Mesh.074
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Mesh.074
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive22
+        com.meta.components.Name:
+          name: Right_Door.004
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Right_Door.004
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive20
+        com.meta.components.Name:
+          name: Refregerator.009
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Refregerator.009
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive6
+        com.meta.components.Name:
+          name: Interior_Shelves.002
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Interior_Shelves.002
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive40
+            - ref:Primitive3
+            - ref:Primitive4
+        com.meta.components.Name:
+          name: Refregerator.003
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Refregerator.003
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive23
+        com.meta.components.Name:
+          name: Body.016
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Body.016
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive33
+        com.meta.components.Name:
+          name: Interior_Drawner.008
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Interior_Drawner.008
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive43
+            - ref:Primitive42
+        com.meta.components.Name:
+          name: Sphere
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Sphere
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive8
+        com.meta.components.Name:
+          name: Right_Door.006
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Right_Door.006
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive21
+        com.meta.components.Name:
+          name: Cube.009
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Cube.009
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive10
+        com.meta.components.Name:
+          name: Right_Door.018
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Right_Door.018
+    - components:
+        com.meta.components.Mesh:
+          morphTargetNames:
+            []
+          morphTargetWeights:
+            []
+          primitives:
+            - ref:Primitive7
+        com.meta.components.Name:
+          name: Att_25_high.002
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+      tag: Att_25_high.002
+  com.meta.models.Primitive:
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry50
+          material: ref:F_StandardMetal
+      tag: Primitive50
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry49
+          material: ref:F_MainPlastic
+      tag: Primitive49
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry23
+          material: ref:F_ClearPlastic1
+      tag: Primitive48
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry48
+          material: ref:F_MetalBright
+      tag: Primitive47
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry47
+          material: ref:F_ScreenEdges
+      tag: Primitive46
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry31
+          material: ref:F_Screen
+      tag: Primitive45
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry46
+          material: ref:F_DoorWaterDisplay
+      tag: Primitive44
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry45
+          material: ref:F_MainPlastic
+      tag: Primitive43
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry25
+          material: ref:F_MetalBright
+      tag: Primitive42
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry18
+          material: ref:F_WaterFilter
+      tag: Primitive41
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry2
+          material: ref:F_MainBody
+      tag: Primitive40
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry8
+          material: ref:F_MainBody
+      tag: Primitive39
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry15
+          material: ref:F_MainPlastic
+      tag: Primitive38
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry4
+          material: ref:F_ClearPlastic1
+      tag: Primitive37
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry44
+          material: ref:F_Seal
+      tag: Primitive36
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry43
+          material: ref:F_StandardMetal
+      tag: Primitive35
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry42
+          material: ref:F_MainBody
+      tag: Primitive34
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry33
+          material: ref:F_ClearPlastic1
+      tag: Primitive33
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry14
+          material: ref:F_StandardMetal
+      tag: Primitive32
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry38
+          material: ref:F_ClearPlastic
+      tag: Primitive31
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry28
+          material: ref:F_ClearPlastic1
+      tag: Primitive30
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry6
+          material: ref:F_MainPlastic
+      tag: Primitive29
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry40
+          material: ref:F_MainLightBulb
+      tag: Primitive28
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry29
+          material: ref:F_MainPlastic
+      tag: Primitive27
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry11
+          material: ref:F_MainPlastic
+      tag: Primitive26
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry26
+          material: ref:F_MetalBright
+      tag: Primitive25
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry9
+          material: ref:F_MainLightCover
+      tag: Primitive24
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry39
+          material: ref:F_MainPlastic
+      tag: Primitive23
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry20
+          material: ref:F_MainPlastic
+      tag: Primitive22
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry19
+          material: ref:F_MainPlastic
+      tag: Primitive21
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry16
+          material: ref:F_MainPlastic
+      tag: Primitive20
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry22
+          material: ref:F_ClearPlastic
+      tag: Primitive19
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry37
+          material: ref:F_MainPlastic
+      tag: Primitive18
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry10
+          material: ref:F_MainPlastic
+      tag: Primitive17
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry3
+          material: ref:F_MainPlastic
+      tag: Primitive16
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry21
+          material: ref:F_MainBody
+      tag: Primitive15
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry36
+          material: ref:F_StandardMetal
+      tag: Primitive14
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry30
+          material: ref:F_MainPlastic
+      tag: Primitive13
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry12
+          material: ref:F_ClearPlastic
+      tag: Primitive12
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry24
+          material: ref:F_MainBody
+      tag: Primitive11
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry34
+          material: ref:F_StandardMetal
+      tag: Primitive10
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry32
+          material: ref:F_PlasticGrey
+      tag: Primitive9
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry35
+          material: ref:F_MainPlastic
+      tag: Primitive8
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry
+          material: ref:F_MainPlastic
+      tag: Primitive7
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry13
+          material: ref:F_MainPlastic
+      tag: Primitive6
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry17
+          material: ref:F_ClearPlastic1
+      tag: Primitive5
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry7
+          material: ref:F_PlasticGrey
+      tag: Primitive4
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry41
+          material: ref:F_StandardMetal
+      tag: Primitive3
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry1
+          material: ref:F_ClearPlastic1
+      tag: Primitive2
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry5
+          material: ref:F_Seal
+      tag: Primitive1
+    - components:
+        com.meta.components.Primitive:
+          geometry: ref:Geometry27
+          material: ref:F_MainPlastic
+      tag: Primitive
+  com.meta.models.Sampler:
+    - components:
+        com.meta.components.Name:
+          name: sampler0
+        com.meta.components.Sampler:
+          magFilter: Linear
+          minFilter: LinearMipmapLinear
+          wrapS: Repeat
+          wrapT: Repeat
+      tag: sampler0
+  com.meta.models.Skin:
+    - components:
+        com.meta.components.Name:
+          name: Armature
+        com.meta.components.Skin:
+          inverseBindMatrices:
+            -
+              - 1
+              - -0
+              - 0
+              - -0
+              - -0
+              - 1
+              - -0
+              - 0
+              - 0
+              - -0
+              - 1
+              - -0
+              - -0
+              - 0.733577967
+              - -0
+              - 1
+            -
+              - -1
+              - -0
+              - 1.50995803e-07
+              - -0
+              - 1.50995803e-07
+              - 0
+              - 1
+              - -0
+              - 0
+              - 1
+              - -0
+              - -0
+              - 7.86041099e-08
+              - -0
+              - 0.52057147
+              - 1
+            -
+              - -1
+              - -0
+              - 1.50995803e-07
+              - -0
+              - 1.50995803e-07
+              - 0
+              - 1
+              - -0
+              - 0
+              - 1
+              - -0
+              - -0
+              - 1.44025663e-08
+              - -0
+              - 0.0953838825
+              - 1
+            -
+              - -1
+              - -0
+              - 1.50995803e-07
+              - -0
+              - 1.50995803e-07
+              - 0
+              - 1
+              - -0
+              - 0
+              - 1
+              - 0
+              - -0
+              - -1.48932848e-08
+              - 0
+              - -0.0986337662
+              - 1
+            -
+              - -1
+              - -0
+              - 1.50995803e-07
+              - -0
+              - 1.50995803e-07
+              - 0
+              - 1
+              - -0
+              - 0
+              - 1
+              - 0
+              - -0
+              - -0.215955824
+              - 0
+              - -0.349469155
+              - 1
+            -
+              - -1
+              - -0
+              - 1.50995803e-07
+              - -0
+              - 1.50995803e-07
+              - 0
+              - 1
+              - -0
+              - 0
+              - 1
+              - 0
+              - -0
+              - 0.216146484
+              - -0
+              - -0.349469215
+              - 1
+            -
+              - -1
+              - -0
+              - 1.50995803e-07
+              - -0
+              - 1.50995803e-07
+              - 0
+              - 1
+              - -0
+              - 0
+              - 1
+              - 0
+              - -0
+              - 0.416255563
+              - -0.329517484
+              - -0.467274487
+              - 1
+            -
+              - -1
+              - -7.58190222e-09
+              - 1.1046701e-06
+              - -0
+              - 7.58242447e-09
+              - -1
+              - 4.58924433e-07
+              - 0
+              - 1.1046701e-06
+              - 4.76837101e-07
+              - 1
+              - -0
+              - 0.50183028
+              - 0.562357545
+              - -0.534650207
+              - 1
+            -
+              - -1
+              - -7.58190222e-09
+              - 1.34308868e-06
+              - -0
+              - 7.58253371e-09
+              - -1
+              - 4.58924433e-07
+              - 0
+              - 1.34308868e-06
+              - 4.7683713e-07
+              - 1
+              - -0
+              - 0.501830161
+              - 0.584226131
+              - -0.534650326
+              - 1
+            -
+              - -1
+              - -0
+              - 1.50995803e-07
+              - -0
+              - 1.50995803e-07
+              - 0
+              - 1
+              - -0
+              - 0
+              - 1
+              - 0
+              - -0
+              - -0.415263176
+              - -0.329517484
+              - -0.467274368
+              - 1
+            -
+              - -1
+              - -0
+              - 1.50995803e-07
+              - -0
+              - 1.50995803e-07
+              - -0
+              - 1
+              - -0
+              - 0
+              - 1
+              - 0
+              - -0
+              - -0.299406856
+              - 0.185971111
+              - -0.667193949
+              - 1
+            -
+              - -1
+              - -1.18835302e-12
+              - 2.29676311e-06
+              - -0
+              - 1.18835302e-12
+              - -1
+              - -2.72936536e-18
+              - 0
+              - 2.29676311e-06
+              - 2.72936536e-18
+              - 1
+              - -0
+              - -9.40304759e-08
+              - 0.804511905
+              - -0.0409400165
+              - 1
+            -
+              - -1
+              - 5.42101086e-20
+              - 1.58150726e-06
+              - -0
+              - 8.18277249e-13
+              - -1
+              - 5.17403407e-07
+              - -0
+              - 1.58150726e-06
+              - 5.17403407e-07
+              - 1
+              - -0
+              - 0.0372295529
+              - 0.804511964
+              - 0.0654883683
+              - 1
+            -
+              - -1
+              - -8.18277249e-13
+              - 1.58150726e-06
+              - -0
+              - 8.18277249e-13
+              - -1
+              - -1.29411145e-18
+              - 0
+              - 1.58150726e-06
+              - 1.29411145e-18
+              - 1
+              - -0
+              - 0.295231938
+              - 0.79988277
+              - 0.243218586
+              - 1
+            -
+              - -1
+              - -0
+              - 1.1046701e-06
+              - -0
+              - 5.71560052e-13
+              - -1
+              - 5.17403407e-07
+              - -0
+              - 1.1046701e-06
+              - 5.17403407e-07
+              - 1
+              - -0
+              - 0.29523176
+              - 0.749567151
+              - 0.192868441
+              - 1
+          jointMatrices:
+            -
+              - 1
+              - 0
+              - 0
+              - 0
+              - 0
+              - 1
+              - 0
+              - 0
+              - 0
+              - 0
+              - 1
+              - 0
+              - 0
+              - 0
+              - 0
+              - 1
+            -
+              - 0.999999881
+              - 5.21080354e-15
+              - 9.00005117e-15
+              - 0
+              - 0
+              - 0.99999994
+              - 5.96046448e-08
+              - 0
+              - 0
+              - 5.96046448e-08
+              - 0.99999994
+              - 0
+              - -3.25480203e-15
+              - -5.96046448e-08
+              - 3.10284776e-08
+              - 1
+            -
+              - 0.999999881
+              - 5.21080354e-15
+              - 9.00005117e-15
+              - 0
+              - 0
+              - 0.99999994
+              - 5.96046448e-08
+              - 0
+              - 0
+              - 5.96046448e-08
+              - 0.99999994
+              - 0
+              - 5.9875065e-17
+              - -7.4505806e-09
+              - 5.68532244e-09
+              - 1
+            -
+              - 0.999999881
+              - 5.21080354e-15
+              - 9.00005117e-15
+              - 0
+              - 0
+              - 0.99999994
+              - 5.96046448e-08
+              - 0
+              - 0
+              - 5.96046448e-08
+              - 0.99999994
+              - 0
+              - -2.26923515e-16
+              - 7.4505806e-09
+              - -5.8790306e-09
+              - 1
+            -
+              - 0.999999881
+              - 5.21080354e-15
+              - 9.00005117e-15
+              - 0
+              - 0
+              - 0.99999994
+              - 5.96046448e-08
+              - 0
+              - 0
+              - 5.96046448e-08
+              - 0.99999994
+              - 0
+              - -2.98023224e-08
+              - 2.98023224e-08
+              - -2.08299848e-08
+              - 1
+            -
+              - 0.999999881
+              - 5.21080354e-15
+              - 9.00005117e-15
+              - 0
+              - 0
+              - 0.99999994
+              - 5.96046448e-08
+              - 0
+              - 0
+              - 5.96046448e-08
+              - 0.99999994
+              - 0
+              - 2.98023224e-08
+              - 2.98023224e-08
+              - -2.08299884e-08
+              - 1
+            -
+              - 0.999999881
+              - 5.21080354e-15
+              - 9.00005117e-15
+              - 0
+              - 0
+              - 0.99999994
+              - 5.96046448e-08
+              - 0
+              - 0
+              - 5.96046448e-08
+              - 0.99999994
+              - 0
+              - 5.96046448e-08
+              - 0
+              - 0
+              - 1
+            -
+              - 0.999999881
+              - 2.24830259e-14
+              - 9.56867371e-14
+              - 0
+              - -2.2394289e-14
+              - 0.999999881
+              - -1.79127237e-08
+              - 0
+              - 0
+              - 1.19209176e-07
+              - 0.999999881
+              - 0
+              - 5.96046448e-08
+              - 0
+              - 1.1920929e-07
+              - 1
+            -
+              - 0.999999881
+              - 9.35372453e-14
+              - 6.72650276e-14
+              - 0
+              - -2.22241235e-14
+              - 0.999999881
+              - -1.79127237e-08
+              - 0
+              - 0
+              - 1.19209147e-07
+              - 0.999999881
+              - 0
+              - 5.96046448e-08
+              - 0
+              - 1.1920929e-07
+              - 1
+            -
+              - 0.999999881
+              - 5.21080354e-15
+              - 9.00005117e-15
+              - 0
+              - 0
+              - 0.99999994
+              - 5.96046448e-08
+              - 0
+              - 0
+              - 5.96046448e-08
+              - 0.99999994
+              - 0
+              - -5.96046448e-08
+              - 0
+              - 0
+              - 1
+            -
+              - 0.999999881
+              - 5.21080354e-15
+              - 9.00005117e-15
+              - 0
+              - 0
+              - 0.99999994
+              - 5.96046448e-08
+              - 0
+              - 0
+              - 5.96046448e-08
+              - 0.99999994
+              - 0
+              - -2.98023224e-08
+              - 5.96046448e-08
+              - -5.96046448e-08
+              - 1
+            -
+              - 1
+              - -3.13435283e-24
+              - 0
+              - 0
+              - -6.26870567e-24
+              - 1
+              - -1.36468268e-18
+              - 0
+              - 0
+              - -1.36468268e-18
+              - 1
+              - 0
+              - -3.18159805e-15
+              - 0
+              - 0
+              - 1
+            -
+              - 1
+              - -2.9478843e-21
+              - 0
+              - 0
+              - -5.71579929e-20
+              - 1
+              - 0
+              - 0
+              - 0
+              - 0
+              - 1
+              - 0
+              - 0
+              - 0
+              - 0
+              - 1
+            -
+              - 1
+              - -1.02332328e-24
+              - 0
+              - 0
+              - -2.04664657e-24
+              - 1
+              - -6.47055727e-19
+              - 0
+              - 0
+              - -6.47055727e-19
+              - 1
+              - 0
+              - 0
+              - 0
+              - 0
+              - 1
+            -
+              - 1
+              - 2.415717e-20
+              - 0
+              - 0
+              - 2.415717e-20
+              - 1
+              - 0
+              - 0
+              - 0
+              - 0
+              - 1
+              - 0
+              - 0
+              - 0
+              - 0
+              - 1
+          joints:
+            - ref:Root
+            - ref:BDrawer
+            - ref:TopDrawer
+            - ref:FridgeMainBottomPullout
+            - ref:R_FridegeMainPullout
+            - ref:L_FridegeMainPullout
+            - ref:L_FridgeDoor
+            - ref:DoorScreen01
+            - ref:DoorScreen02
+            - ref:R_FirdegeDoor
+            - ref:IceBox
+            - ref:LightMainBody
+            - ref:LightMainCover
+            - ref:WaterFilterBody
+            - ref:WaterFilter
+      tag: Armature1
+  com.meta.models.Texture:
+    - uri: docref:textures/texture4.metaspatialtexture
+      tag: texture4
+    - uri: docref:textures/texture16.metaspatialtexture
+      tag: texture16
+    - uri: docref:textures/texture7.metaspatialtexture
+      tag: texture7
+    - uri: docref:textures/texture1.metaspatialtexture
+      tag: texture1
+    - uri: docref:textures/texture6.metaspatialtexture
+      tag: texture6
+    - uri: docref:textures/texture11.metaspatialtexture
+      tag: texture11
+    - uri: docref:textures/texture9.metaspatialtexture
+      tag: texture9
+    - uri: docref:textures/texture8.metaspatialtexture
+      tag: texture8
+    - uri: docref:textures/texture15.metaspatialtexture
+      tag: texture15
+    - uri: docref:textures/texture10.metaspatialtexture
+      tag: texture10
+    - uri: docref:textures/texture2.metaspatialtexture
+      tag: texture2
+    - uri: docref:textures/texture13.metaspatialtexture
+      tag: texture13
+    - uri: docref:textures/texture5.metaspatialtexture
+      tag: texture5
+    - uri: docref:textures/texture3.metaspatialtexture
+      tag: texture3
+    - uri: docref:textures/texture12.metaspatialtexture
+      tag: texture12
+    - uri: docref:textures/texture14.metaspatialtexture
+      tag: texture14
+metadata:
+  version: 1.32

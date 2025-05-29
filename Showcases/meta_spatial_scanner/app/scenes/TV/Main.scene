@@ -1,0 +1,113 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:TV_Rig
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: TV
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 0.0174532924
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0
+            - 0.251888394
+            - 0
+          componentVersion: 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Cube.023
+      tag: TV1
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Info
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 0.0468973219
+            - 0.0022142895
+            - 0.00074299
+          translation:
+            - -0.146512836
+            - 0.145682335
+            - -0.0426949263
+          componentVersion: 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Cube.014
+      tag: Info
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Bone
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 1
+            - 0
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+          children:
+            - ref:Info
+            - ref:TV1
+      tag: Bone
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: TV_Rig
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 3.14159274
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 3.21629812e-09
+            - -0.275695682
+            - 0.0367901623
+          componentVersion: 1
+          children:
+            - ref:Bone
+      tag: TV_Rig
+metadata:
+  version: 1.32

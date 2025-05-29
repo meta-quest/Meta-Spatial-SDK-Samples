@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:horizonos="http://schemas.horizonos/sdk"
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.meta.pixelandtexel.scanner"
+  android:installLocation="auto"
+  android:versionCode="1"
+  android:versionName="1.0"
+>
+
+    <uses-sdk
+    android:minSdkVersion="29"
+    android:targetSdkVersion="32"
+    tools:ignore="ExpiredTargetSdkVersion"
+  />
+
+    <horizonos:uses-horizonos-sdk
+    horizonos:minSdkVersion="74"
+    horizonos:targetSdkVersion="74"
+  />
+
+    <!-- Tell the system this app works in either 3dof or 6dof mode -->
+    <uses-feature
+    android:name="android.hardware.vr.headtracking"
+    android:required="true"
+  />
+
+
+    <uses-feature
+    android:name="oculus.software.handtracking"
+    android:required="false"
+  />
+
+    <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
+
+    <!-- Tell the system this app uses experimental extensions -->
+    <uses-feature
+    android:name="com.oculus.experimental.enabled"
+    android:required="true"
+  />
+    <!-- Tell the system this app can render passthrough -->
+    <uses-feature
+    android:name="com.oculus.feature.PASSTHROUGH"
+    android:required="false"
+  />
+    <!-- Tell the system this app uses the virtual keyboard extensions -->
+    <uses-feature
+    android:name="com.oculus.feature.VIRTUAL_KEYBOARD"
+    android:required="false"
+  />
+    <uses-feature android:glEsVersion="0x00030001" />
+
+    <uses-feature
+    android:name="oculus.software.overlay_keyboard"
+    android:required="false"
+  />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+    android:name="com.oculus.feature.RENDER_MODEL"
+    android:required="false"
+  />
+    <uses-permission android:name="com.oculus.permission.RENDER_MODEL" />
+    <!-- Volume Control -->
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <!-- Tell the system this app requires camera access -->
+    <uses-feature
+    android:name="horizonos.feature.HEADSET_CAMERA"
+    android:required="false"
+  />
+    <uses-permission android:name="horizonos.permission.HEADSET_CAMERA" />
+
+    <application
+    android:allowBackup="false"
+    android:label="Meta Spatial Scanner"
+  >
+        <meta-data
+      android:name="com.oculus.supportedDevices"
+      android:value="quest2|questpro|quest3"
+    />
+        <meta-data
+      android:name="com.oculus.handtracking.version"
+      android:value="V2.0"
+    />
+        <meta-data
+      android:name="com.oculus.vr.focusaware"
+      android:value="true"
+    />
+
+        <uses-native-library
+      android:name="libossdk.oculus.so"
+      android:required="false"
+    />
+
+        <!--Remove Firebase Logging-->
+        <service
+      android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+      tools:node="remove"
+    />
+
+        <activity
+      android:name="com.meta.pixelandtexel.scanner.activities.MainActivity"
+      android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
+      android:excludeFromRecents="false"
+      android:exported="true"
+      android:launchMode="singleTask"
+      android:screenOrientation="landscape"
+    >
+            <!-- This filter lets the apk show up as a launchable icon. -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="com.oculus.intent.category.VR" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+      android:name="com.meta.pixelandtexel.scanner.activities.LiveStreamingActivity"
+      android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
+      android:excludeFromRecents="false"
+      android:exported="true"
+      android:launchMode="singleTask"
+      android:screenOrientation="landscape"
+    >
+        </activity>
+    </application>
+</manifest>
