@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<ComponentSchema packageName="com.meta.spatial.samples.premiummediasample">
+  <Component name="Anchorable">
+    <FloatAttribute name="offset" defaultValue="0f" />
+  </Component>
+</ComponentSchema>

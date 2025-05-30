@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:horizonos="http://schemas.horizonos/sdk"
+  xmlns:tools="http://schemas.android.com/tools"
+  package="com.meta.spatial.samples.premiummediasample"
+  android:installLocation="auto"
+  android:versionCode="1"
+  android:versionName="1.0"
+>
+  <!-- Tell the system this app works in either 3dof or 6dof mode -->
+  <uses-feature
+    android:name="android.hardware.vr.headtracking"
+    android:required="true"
+  />
+  <uses-sdk android:minSdkVersion="28" android:targetSdkVersion="33" />
+  <horizonos:uses-horizonos-sdk
+    horizonos:minSdkVersion="69"
+    horizonos:targetSdkVersion="69"
+  />
+  <uses-feature
+    android:name="oculus.software.handtracking"
+    android:required="false"
+  />
+  <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
+  <uses-permission android:name="com.oculus.permission.USE_ANCHOR_API" />
+  <uses-permission android:name="com.oculus.permission.USE_SCENE" />
+  <uses-permission android:name="android.permission.VIBRATE" />
+  <!-- Tell the system this app can render passthrough -->
+  <uses-feature
+    android:name="com.oculus.feature.PASSTHROUGH"
+    android:required="false"
+  />
+  <!-- Tell the system this app uses the virtual keyboard extensions -->
+  <uses-feature
+    android:name="com.oculus.feature.VIRTUAL_KEYBOARD"
+    android:required="false"
+  />
+  <uses-feature android:glEsVersion="0x00030001" />
+  <uses-feature
+    android:name="oculus.software.overlay_keyboard"
+    android:required="false"
+  />
+  <uses-permission android:name="android.permission.INTERNET" />
+  <uses-feature
+    android:name="com.oculus.feature.RENDER_MODEL"
+    android:required="false"
+  />
+  <uses-permission android:name="com.oculus.permission.RENDER_MODEL" />
+  <!-- Volume Control -->
+  <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+  <application
+    android:allowBackup="false"
+    android:label="3D Movies Demo"
+    tools:replace="android:label"
+    android:largeHeap="true"
+    android:theme="@android:style/Theme.NoTitleBar"
+    android:usesCleartextTraffic="true"
+  >
+    <meta-data
+      android:name="com.oculus.ossplash.background"
+      android:value="passthrough-contextual"
+    />
+    <meta-data
+      android:name="com.oculus.supportedDevices"
+      android:value="quest2|questpro|quest3"
+    />
+    <meta-data
+      android:name="com.oculus.handtracking.version"
+      android:value="V2.0"
+    />
+    <meta-data android:name="com.oculus.vr.focusaware" android:value="true" />
+    <uses-native-library
+      android:name="libossdk.oculus.so"
+      android:required="true"
+    />
+    <service android:name=".service.IPCService" android:exported="false" />
+    <activity
+      android:name=".immersive.ImmersiveActivity"
+      android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
+      android:excludeFromRecents="false"
+      android:exported="true"
+      android:launchMode="singleTask"
+      android:screenOrientation="landscape"
+      android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+    >
+      <!-- This filter lets the apk show up as a launchable icon. -->
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+        <category android:name="com.oculus.intent.category.VR" />
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
+    <!-- Panel Activities -->
+    <activity
+      android:name=".panels.homePanel.HomePanelActivity"
+      android:allowEmbedded="true"
+      android:exported="false"
+      android:process=":home_panel"
+      android:theme="@style/PanelAppThemeTransparent"
+    />
+    <activity
+      android:name=".panels.controlsPanel.ControlsPanelActivity"
+      android:allowEmbedded="true"
+      android:exported="false"
+      android:process=":controls_panel"
+      android:theme="@style/PanelAppThemeTransparent"
+    />
+  </application>
+</manifest>

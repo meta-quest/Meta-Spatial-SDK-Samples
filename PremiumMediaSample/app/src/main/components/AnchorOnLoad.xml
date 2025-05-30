@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<ComponentSchema packageName="com.meta.spatial.samples.premiummediasample">
+  <Component name="AnchorOnLoad">
+    <FloatAttribute name="distanceCheck" defaultValue="1f" />
+    <BooleanAttribute name="scaleProportional" defaultValue="false" />
+  </Component>
+</ComponentSchema>

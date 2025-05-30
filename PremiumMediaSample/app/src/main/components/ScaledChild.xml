@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<ComponentSchema packageName="com.meta.spatial.samples.premiummediasample">
+  <Component name="ScaledChild">
+    <Vector3Attribute name="localPosition" defaultValue="0.0f, 0.0f, 0.0f" />
+    <Vector3Attribute name="pivotOffset" defaultValue="0.5f, 1.4f, 1.0f" />
+    <BooleanAttribute name="isEnabled" defaultValue="true" />
+  </Component>
+</ComponentSchema>
