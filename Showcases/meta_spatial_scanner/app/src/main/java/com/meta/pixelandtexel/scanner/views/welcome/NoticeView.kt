@@ -20,7 +20,7 @@ import com.meta.spatial.uiset.theme.SpatialTheme
 import dev.jeziellago.compose.markdowntext.MarkdownText
 
 @Composable
-fun NoticeView(onContinue: (() -> Unit)) {
+fun NoticeView(onLinkClicked: ((String) -> Unit)? = null, onContinue: (() -> Unit)) {
   Panel {
     Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize()) {
       Column(
@@ -29,7 +29,8 @@ fun NoticeView(onContinue: (() -> Unit)) {
       ) {
         MarkdownText(
             stringResource(R.string.notice),
-            style = SpatialTheme.typography.body1.merge(TextStyle(color = SpatialColor.white100)))
+            style = SpatialTheme.typography.body1.merge(TextStyle(color = SpatialColor.white100)),
+            onLinkClicked = onLinkClicked)
         PrimaryButton(stringResource(R.string.btn_continue), onClick = onContinue, expanded = true)
       }
     }

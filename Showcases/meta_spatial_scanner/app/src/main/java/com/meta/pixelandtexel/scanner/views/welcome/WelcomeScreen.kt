@@ -26,6 +26,7 @@ object Routes {
 fun WelcomeScreen(
     vm: WelcomeViewModel = viewModel(),
     navController: NavHostController = rememberNavController(),
+    onLinkClicked: ((String) -> Unit)? = null,
     dismissPanel: (() -> Unit)? = null
 ) {
   val route by vm.route
@@ -40,7 +41,7 @@ fun WelcomeScreen(
         // purposefully empty
       }
       composable(Routes.NOTICE) {
-        NoticeView {
+        NoticeView(onLinkClicked = onLinkClicked) {
           SettingsService.set(SettingsKey.ACCEPTED_NOTICE, true)
           vm.navTo(Routes.CAMERA_CONTROLS_INTRO)
         }
