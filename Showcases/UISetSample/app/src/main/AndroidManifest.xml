@@ -36,6 +36,7 @@
     >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="com.oculus.intent.category.VR" />
@@ -47,9 +48,16 @@
       android:name="libossdk.oculus.so"
       android:required="true"
     />
-    </application>
 
-    <meta-data android:name="com.oculus.vr.focusaware" android:value="true" />
+        <meta-data
+      android:name="com.oculus.vr.focusaware"
+      android:value="true"
+    />
+        <meta-data
+      android:name="com.oculus.handtracking.version"
+      android:value="V2.0"
+    />
+    </application>
 
     <uses-feature
     android:name="com.oculus.feature.RENDER_MODEL"
@@ -71,10 +79,13 @@
     android:name="com.oculus.feature.PASSTHROUGH"
     android:required="false"
   />
+
     <uses-feature
     android:name="oculus.software.handtracking"
     android:required="false"
   />
+
+    <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 

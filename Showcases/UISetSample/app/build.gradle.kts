@@ -7,6 +7,7 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.meta.spatial)
+  alias(libs.plugins.compose.compiler)
 }
 
 // Signing
@@ -133,6 +134,7 @@ dependencies {
   implementation(libs.meta.spatial.sdk.physics)
   implementation(libs.meta.spatial.sdk.toolkit)
   implementation(libs.meta.spatial.sdk.vr)
+  implementation(libs.meta.spatial.sdk.isdk)
   implementation(libs.meta.spatial.sdk.mruk)
   implementation(libs.meta.spatial.sdk.castinputforward)
   implementation(libs.meta.spatial.sdk.compose)

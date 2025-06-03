@@ -1,6 +1,6 @@
 [versions]
 agp = "8.6.1"
-kotlin = "1.9.25"
+kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
@@ -35,6 +35,7 @@ meta-spatial-sdk = { module = "com.meta.spatial:meta-spatial-sdk", version.ref =
 meta-spatial-sdk-castinputforward = { module = "com.meta.spatial:meta-spatial-sdk-castinputforward", version.ref = "metaSpatialSdk" }
 meta-spatial-sdk-mruk = { module = "com.meta.spatial:meta-spatial-sdk-mruk", version.ref = "metaSpatialSdk" }
 meta-spatial-sdk-vr = { module = "com.meta.spatial:meta-spatial-sdk-vr", version.ref = "metaSpatialSdk" }
+meta-spatial-sdk-isdk = { module = "com.meta.spatial:meta-spatial-sdk-isdk", version.ref = "metaSpatialSdk" }
 meta-spatial-sdk-toolkit = { module = "com.meta.spatial:meta-spatial-sdk-toolkit", version.ref = "metaSpatialSdk" }
 meta-spatial-sdk-physics = { module = "com.meta.spatial:meta-spatial-sdk-physics", version.ref = "metaSpatialSdk" }
 meta-spatial-sdk-ovrmetrics = { module = "com.meta.spatial:meta-spatial-sdk-ovrmetrics", version.ref = "metaSpatialSdk" }
@@ -50,3 +51,5 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 meta-spatial = { id = "com.meta.spatial.plugin", version.ref = "metaSpatialSdk" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

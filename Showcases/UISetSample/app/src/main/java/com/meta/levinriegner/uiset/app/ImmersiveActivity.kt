@@ -13,6 +13,7 @@ import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.compose.ComposeFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
+import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.PanelRegistration
@@ -31,7 +32,8 @@ class ImmersiveActivity : AppSystemActivity() {
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features = mutableListOf(VRFeature(this), ComposeFeature())
+    val features =
+        mutableListOf(VRFeature(this), ComposeFeature(), IsdkFeature(this, spatial, systemManager))
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
     }
