@@ -94,4 +94,6 @@
     name="test_input_text_field"
     translatable="false"
   >Test input text</string>
+
+    <string name="placeholder_ollama_url">http://your.ip.address.here:port</string>
 </resources>

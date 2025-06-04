@@ -18,10 +18,7 @@ fun SuccessScreen(result: String) {
   SecondaryPanel { ScrollableTextAreaWithScrollBar(text = result) }
 }
 
-@Preview(
-    widthDp = 932,
-    heightDp = 650,
-)
+@Preview(widthDp = 570, heightDp = 480)
 @Composable
 private fun SuccessScreenPreview() {
   GeoVoyageTheme {

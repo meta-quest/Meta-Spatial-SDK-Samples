@@ -5,9 +5,7 @@ package com.meta.pixelandtexel.geovoyage.ui.askearth
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,9 +18,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.meta.pixelandtexel.geovoyage.R
-import com.meta.pixelandtexel.geovoyage.ui.components.buttons.PrimaryButton
 import com.meta.pixelandtexel.geovoyage.ui.components.panel.SecondaryPanel
 import com.meta.pixelandtexel.geovoyage.ui.theme.GeoVoyageTheme
+import com.meta.spatial.uiset.button.PrimaryButton
+import com.meta.spatial.uiset.theme.SpatialTheme
 
 /**
  * Display error message when query cannot be answered. Show alternative query suggestions.
@@ -38,30 +37,26 @@ fun RejectedScreen(onAskExampleQuestion: (question: String) -> Unit) {
       Text(
           text = stringResource(id = R.string.rejected_screen_default_query_failure_message),
           style =
-              MaterialTheme.typography.headlineSmall.copy(
-                  fontSize = 30.sp,
+              SpatialTheme.typography.headline3Strong.copy(
+                  fontSize = 18.sp,
                   fontWeight = FontWeight.Black,
                   fontStyle = FontStyle.Italic,
               ),
           textAlign = TextAlign.Center)
       Column(
           horizontalAlignment = Alignment.CenterHorizontally,
-          verticalArrangement = Arrangement.spacedBy(30.dp),
-          modifier = Modifier.padding(top = 30.dp)) {
+          verticalArrangement = Arrangement.spacedBy(12.dp),
+          modifier = Modifier.padding(top = 24.dp)) {
             shuffledQuestions.forEach { question ->
-              PrimaryButton(text = question, modifier = Modifier.fillMaxWidth()) {
-                onAskExampleQuestion(question)
-              }
+              PrimaryButton(
+                  label = question, onClick = { onAskExampleQuestion(question) }, expanded = true)
             }
           }
     }
   }
 }
 
-@Preview(
-    widthDp = 932,
-    heightDp = 650,
-)
+@Preview(widthDp = 570, heightDp = 480)
 @Composable
 private fun RejectedScreenPreview() {
   GeoVoyageTheme { RejectedScreen {} }
