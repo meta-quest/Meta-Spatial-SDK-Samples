@@ -2,6 +2,7 @@
 
 package com.meta.pixelandtexel.scanner.activities
 
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -210,10 +211,15 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
                         override val onBackPressedDispatcher: OnBackPressedDispatcher
                           get() = OnBackPressedDispatcher()
                       }) {
-                    WelcomeScreen {
-                      welcomePanelEntity?.destroy()
-                      welcomePanelEntity = null
-                    }
+                    WelcomeScreen(
+                        onLinkClicked = {
+                          val uri = it.toUri()
+                          val browserIntent = Intent(Intent.ACTION_VIEW, uri)
+                          startActivity(browserIntent)
+                        }) {
+                          welcomePanelEntity?.destroy()
+                          welcomePanelEntity = null
+                        }
                   }
             }
           }
