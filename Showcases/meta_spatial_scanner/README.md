@@ -120,7 +120,7 @@ AWS_BEDROCK_SECRET_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 ## NDK Installation
 
-This app uses custom shaders which the Meta Spatial Plugin compiles at build time using the `glslc` executable bundled with the Android NDK. In order to build and run this app, a recent version of the NDK must be installed and findable on your machine – usually via the SDK Manager if using Android Studio. The installed NDK version musta also be specified in the `:app/build.gradle.kts` using the `ndkVersion` property of the defaultConfig.
+This app uses custom shaders which the Meta Spatial Plugin compiles at build time using the `glslc` executable bundled with the Android NDK. In order to build and run this app, a recent version of the NDK must be installed and findable on your machine – usually via the SDK Manager if using Android Studio. The installed NDK version must also be specified in the `:app/build.gradle.kts` using the `ndkVersion` property of the defaultConfig.
 
 # User Flow
 
