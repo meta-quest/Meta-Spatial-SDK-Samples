@@ -2,62 +2,58 @@
 
 package com.meta.pixelandtexel.geovoyage.ui.theme
 
-import androidx.compose.material3.Typography
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.googlefonts.Font
-import androidx.compose.ui.text.googlefonts.GoogleFont
-import androidx.compose.ui.unit.sp
 import com.meta.pixelandtexel.geovoyage.R
+import com.meta.spatial.uiset.theme.SpatialTypography
 
-val provider =
-    GoogleFont.Provider(
-        providerAuthority = "com.google.android.gms.fonts",
-        providerPackage = "com.google.android.gms",
-        certificates = R.array.com_google_android_gms_fonts_certs)
-
-val bodyFontFamily =
+val montserratFontFamily =
     FontFamily(
-        Font(
-            googleFont = GoogleFont("Montserrat"),
-            fontProvider = provider,
-        ))
+        Font(R.font.montserrat_light, FontWeight.Light),
+        Font(R.font.montserrat_regular, FontWeight.Normal),
+        Font(R.font.montserrat_medium, FontWeight.Medium),
+        Font(R.font.montserrat_semibold, FontWeight.SemiBold),
+        Font(R.font.montserrat_bold, FontWeight.Bold),
+        Font(R.font.montserrat_black, FontWeight.Black),
+    )
 
-val displayFontFamily =
-    FontFamily(
-        Font(
-            googleFont = GoogleFont("Montserrat"),
-            fontProvider = provider,
-        ))
-
-// Default Material 3 typography values
-val baseline = Typography()
+val baseline = SpatialTypography()
 
 val GeoVoyageTypography =
-    Typography(
-        displayLarge = baseline.displayLarge.copy(fontFamily = displayFontFamily),
-        displayMedium = baseline.displayMedium.copy(fontFamily = displayFontFamily),
-        displaySmall = baseline.displaySmall.copy(fontFamily = displayFontFamily),
-        headlineLarge = baseline.headlineLarge.copy(fontFamily = displayFontFamily),
-        headlineMedium = baseline.headlineMedium.copy(fontFamily = displayFontFamily),
-        headlineSmall =
-            baseline.headlineSmall.copy(
-                fontFamily = displayFontFamily,
+    SpatialTypography(
+        headline1Strong =
+            baseline.headline1Strong.copy(
+                fontFamily = montserratFontFamily, color = GeoVoyageColors.textColor),
+        headline1 =
+            baseline.headline1.copy(
+                fontFamily = montserratFontFamily, color = GeoVoyageColors.textColor),
+        headline2Strong =
+            baseline.headline2Strong.copy(
+                fontFamily = montserratFontFamily, color = GeoVoyageColors.textColor),
+        headline2 =
+            baseline.headline2.copy(
+                fontFamily = montserratFontFamily, color = GeoVoyageColors.textColor),
+        headline3Strong =
+            baseline.headline3Strong.copy(
+                fontFamily = montserratFontFamily, color = GeoVoyageColors.textColor),
+        headline3 =
+            baseline.headline3.copy(
+                fontFamily = montserratFontFamily,
                 fontWeight = FontWeight.Medium,
-                fontSize = 25.sp,
-                lineHeight = 34.sp),
-        titleLarge =
-            baseline.titleLarge.copy(
-                fontFamily = displayFontFamily,
+                color = GeoVoyageColors.textColor),
+        body1Strong =
+            baseline.body1Strong.copy(
+                fontFamily = montserratFontFamily, color = GeoVoyageColors.textColor),
+        body1 =
+            baseline.body1.copy(
+                fontFamily = montserratFontFamily,
                 fontWeight = FontWeight.Medium,
-                fontSize = 20.sp,
-                lineHeight = 26.sp),
-        titleMedium = baseline.titleMedium.copy(fontFamily = displayFontFamily),
-        titleSmall = baseline.titleSmall.copy(fontFamily = displayFontFamily),
-        bodyLarge = baseline.bodyLarge.copy(fontFamily = bodyFontFamily),
-        bodyMedium = baseline.bodyMedium.copy(fontFamily = bodyFontFamily),
-        bodySmall = baseline.bodySmall.copy(fontFamily = bodyFontFamily),
-        labelLarge = baseline.labelLarge.copy(fontFamily = bodyFontFamily),
-        labelMedium = baseline.labelMedium.copy(fontFamily = bodyFontFamily),
-        labelSmall = baseline.labelSmall.copy(fontFamily = bodyFontFamily),
+                color = GeoVoyageColors.textColor),
+        body2Strong =
+            baseline.body2Strong.copy(
+                fontFamily = montserratFontFamily, color = GeoVoyageColors.textColor),
+        body2 =
+            baseline.body2.copy(
+                fontFamily = montserratFontFamily, color = GeoVoyageColors.textColor),
     )

@@ -3,4 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="ic_launcher_background">#131F30</color>
+    <color name="quiz_correct_green">#2F5E37</color>
+    <color name="quiz_incorrect_red">#B01919</color>
 </resources>

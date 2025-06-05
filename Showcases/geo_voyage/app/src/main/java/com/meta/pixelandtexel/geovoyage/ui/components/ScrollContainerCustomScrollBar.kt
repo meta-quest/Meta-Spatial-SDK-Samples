@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -25,6 +24,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
@@ -33,8 +33,10 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.meta.pixelandtexel.geovoyage.ui.theme.GeoVoyageColors
 import com.meta.pixelandtexel.geovoyage.ui.theme.GeoVoyageTheme
 import com.meta.pixelandtexel.geovoyage.utils.DisplayUtils.toPx
+import com.meta.spatial.uiset.theme.LocalTypography
 import dev.jeziellago.compose.markdowntext.MarkdownText
 import kotlin.math.roundToInt
 import kotlinx.coroutines.launch
@@ -63,7 +65,7 @@ fun ScrollableTextAreaWithScrollBar(text: String, modifier: Modifier = Modifier)
           MarkdownText(
               markdown = text,
               modifier = Modifier.fillMaxWidth(),
-              style = MaterialTheme.typography.headlineSmall)
+              style = LocalTypography.current.body1)
         }
 
     // Custom Scroll Bar
@@ -74,7 +76,7 @@ fun ScrollableTextAreaWithScrollBar(text: String, modifier: Modifier = Modifier)
                   .align(Alignment.CenterEnd)
                   .fillMaxHeight()
                   .width(8.dp)
-                  .background(MaterialTheme.colorScheme.secondaryContainer)
+                  .background(Color.Transparent)
                   .onGloballyPositioned { layoutCoordinates ->
                     containerHeight.intValue = layoutCoordinates.size.height
                   }
@@ -102,7 +104,7 @@ fun ScrollableTextAreaWithScrollBar(text: String, modifier: Modifier = Modifier)
                         .clip(RoundedCornerShape(20.0.dp))
                         .width(8.dp)
                         .height(with(LocalDensity.current) { thumbHeight.toDp() })
-                        .background(MaterialTheme.colorScheme.secondary))
+                        .background(GeoVoyageColors.textColor.copy(alpha = 0.5f)))
           }
     }
   }

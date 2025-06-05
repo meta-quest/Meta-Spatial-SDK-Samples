@@ -21,7 +21,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ExploreViewModel : ViewModel(), IPlayModeViewModel {
+class ExploreViewModel(
+    skipLandmarksEnabledCheck: Boolean = false // for @Preview
+) : ViewModel(), IPlayModeViewModel {
   companion object {
     private const val TAG: String = "ExploreViewModel"
   }
@@ -46,7 +48,9 @@ class ExploreViewModel : ViewModel(), IPlayModeViewModel {
   private lateinit var placeholderMessage: String
 
   init {
-    _landmarksEnabled.value = SettingsService.get(SettingsKey.LANDMARKS_ENABLED, true)
+    if (!skipLandmarksEnabledCheck) {
+      _landmarksEnabled.value = SettingsService.get(SettingsKey.LANDMARKS_ENABLED, true)
+    }
   }
 
   override fun onPlayModeResumed() {

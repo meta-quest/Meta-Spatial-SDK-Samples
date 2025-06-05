@@ -21,7 +21,9 @@ import com.meta.pixelandtexel.geovoyage.services.witai.enums.WitAiStartResult
 import com.meta.pixelandtexel.geovoyage.services.witai.models.WitAiUnderstoodResponse
 import com.meta.pixelandtexel.geovoyage.ui.askearth.Routes
 
-class AskEarthViewModel : ViewModel(), IPlayModeViewModel {
+class AskEarthViewModel(
+    skipPermissionsCheck: Boolean = false // for @Preview
+) : ViewModel(), IPlayModeViewModel {
   private val _route = mutableStateOf("")
   private val _title = mutableStateOf("")
   private val _userRejectedPermission = mutableStateOf(false)
@@ -39,8 +41,10 @@ class AskEarthViewModel : ViewModel(), IPlayModeViewModel {
   private var micPermissionsGranted = false
 
   init {
-    micPermissionsGranted = hasMicPermissions()
-    navTo(if (micPermissionsGranted) Routes.LISTENING_ROUTE else Routes.PERMISSIONS_ROUTE)
+    if (!skipPermissionsCheck) {
+      micPermissionsGranted = hasMicPermissions()
+      navTo(if (micPermissionsGranted) Routes.LISTENING_ROUTE else Routes.PERMISSIONS_ROUTE)
+    }
   }
 
   override fun onPlayModeSuspended() {

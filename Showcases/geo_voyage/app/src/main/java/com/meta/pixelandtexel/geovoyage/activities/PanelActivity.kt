@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -29,12 +30,12 @@ import com.meta.pixelandtexel.geovoyage.models.TriviaQuestion
 import com.meta.pixelandtexel.geovoyage.services.SettingsService
 import com.meta.pixelandtexel.geovoyage.services.llama.QueryLlamaService
 import com.meta.pixelandtexel.geovoyage.ui.askearth.AskEarthScreen
-import com.meta.pixelandtexel.geovoyage.ui.components.buttons.NavButtonState
 import com.meta.pixelandtexel.geovoyage.ui.components.panel.PrimaryPanel
 import com.meta.pixelandtexel.geovoyage.ui.dailyquiz.DailyQuizScreen
 import com.meta.pixelandtexel.geovoyage.ui.explore.ExploreScreen
 import com.meta.pixelandtexel.geovoyage.ui.interstitial.InterstitialScreen
 import com.meta.pixelandtexel.geovoyage.ui.intro.IntroScreen
+import com.meta.pixelandtexel.geovoyage.ui.mainnavigator.NavButtonState
 import com.meta.pixelandtexel.geovoyage.ui.mainnavigator.PanelNavContainer
 import com.meta.pixelandtexel.geovoyage.ui.mainnavigator.Routes
 import com.meta.pixelandtexel.geovoyage.ui.settings.SettingsScreen
@@ -46,6 +47,11 @@ import com.meta.pixelandtexel.geovoyage.viewmodels.IPlayModeViewModel
 import com.meta.pixelandtexel.geovoyage.viewmodels.PanelViewModel
 import com.meta.pixelandtexel.geovoyage.viewmodels.QuizViewModel
 import com.meta.pixelandtexel.geovoyage.viewmodels.TodayInHistoryViewModel
+import com.meta.spatial.uiset.theme.icons.SpatialIcons
+import com.meta.spatial.uiset.theme.icons.regular.MicrophoneOn
+import com.meta.spatial.uiset.theme.icons.regular.StarFull
+import com.meta.spatial.uiset.theme.icons.regular.Trophy
+import com.meta.spatial.uiset.theme.icons.regular.World
 import java.lang.ref.WeakReference
 import kotlin.random.Random
 import org.xmlpull.v1.XmlPullParser
@@ -81,31 +87,31 @@ class PanelActivity : ActivityCompat.OnRequestPermissionsResultCallback, Compone
     // NOTE: uncomment to test interstitial user notice
     // SettingsService.set(SettingsKey.ACCEPTED_NOTICE, false)
 
-    val navButtonStates =
-        listOf(
-            NavButtonState(
-                text = getString(R.string.explore),
-                route = Routes.EXPLORE_ROUTE,
-                iconResId = R.drawable.ic_explore,
-            ),
-            NavButtonState(
-                text = getString(R.string.ask),
-                route = Routes.ASK_EARTH_ROUTE,
-                iconResId = R.drawable.ic_mic,
-            ),
-            NavButtonState(
-                text = getString(R.string.today),
-                route = Routes.TODAY_IN_HISTORY_ROUTE,
-                iconResId = R.drawable.ic_calendar,
-            ),
-            NavButtonState(
-                text = getString(R.string.quiz),
-                route = Routes.DAILY_QUIZ_ROUTE,
-                iconResId = R.drawable.ic_question_block,
-            ))
-
     setContent {
       navController = rememberNavController()
+
+      val navButtonStates =
+          listOf(
+              NavButtonState(
+                  text = getString(R.string.explore),
+                  route = Routes.EXPLORE_ROUTE,
+                  iconImage = SpatialIcons.Regular.World,
+              ),
+              NavButtonState(
+                  text = getString(R.string.ask),
+                  route = Routes.ASK_EARTH_ROUTE,
+                  iconImage = SpatialIcons.Regular.MicrophoneOn,
+              ),
+              NavButtonState(
+                  text = getString(R.string.today),
+                  route = Routes.TODAY_IN_HISTORY_ROUTE,
+                  iconImage = SpatialIcons.Regular.StarFull,
+              ),
+              NavButtonState(
+                  text = getString(R.string.quiz),
+                  route = Routes.DAILY_QUIZ_ROUTE,
+                  iconImage = SpatialIcons.Regular.Trophy,
+              ))
 
       // instantiate our view models
       panelVM = viewModel()
@@ -154,49 +160,51 @@ class PanelActivity : ActivityCompat.OnRequestPermissionsResultCallback, Compone
       }
 
       GeoVoyageTheme {
-        Box(modifier = Modifier.size(1210.dp, 940.dp).padding(0.dp)) {
-          PrimaryPanel {
-            if (userAcceptedNotice) {
-              PanelNavContainer(title, route, navButtonStates, { panelVM.navTo(it) }) {
-                NavHost(
-                    navController = navController,
-                    startDestination = Routes.INTRO_ROUTE,
-                    modifier = Modifier) {
-                      // routes
-                      composable(route = Routes.INTRO_ROUTE) { IntroScreen() }
-                      composable(route = Routes.EXPLORE_ROUTE) {
-                        ExploreScreen(
-                            vm = exploreVM,
-                            setTitle = { panelVM.setTitle(it) },
-                            onReportVRProblem = {
-                              val uri = Uri.parse(it)
-                              val browserIntent = Intent(Intent.ACTION_VIEW, uri)
-                              startActivity(browserIntent)
-                            })
-                      }
-                      composable(route = Routes.ASK_EARTH_ROUTE) {
-                        AskEarthScreen(
-                            vm = askVM,
-                            onUserRejectedPermission = { panelVM.navTo(Routes.INTRO_ROUTE) },
-                            setTitle = { panelVM.setTitle(it) })
-                      }
-                      composable(route = Routes.TODAY_IN_HISTORY_ROUTE) {
-                        TodayInHistoryScreen(vm = todayVM, setTitle = { panelVM.setTitle(it) })
-                      }
-                      composable(route = Routes.DAILY_QUIZ_ROUTE) {
-                        DailyQuizScreen(
-                            vm = quizVM,
-                            allQuestions = questions,
-                            setTitle = { panelVM.setTitle(it) })
-                      }
-                      composable(route = Routes.SETTINGS_ROUTE) { SettingsScreen() }
-                    }
+        Box(
+            modifier =
+                Modifier.size(
+                        dimensionResource(R.dimen.panel_width),
+                        dimensionResource(R.dimen.panel_height))
+                    .padding(0.dp)) {
+              PrimaryPanel {
+                if (userAcceptedNotice) {
+                  PanelNavContainer(title, route, navButtonStates, { panelVM.navTo(it) }) {
+                    NavHost(
+                        navController = navController,
+                        startDestination = Routes.INTRO_ROUTE,
+                        modifier = Modifier) {
+                          // routes
+                          composable(route = Routes.INTRO_ROUTE) { IntroScreen() }
+                          composable(route = Routes.EXPLORE_ROUTE) {
+                            ExploreScreen(
+                                vm = exploreVM,
+                                setTitle = { panelVM.setTitle(it) },
+                                onReportVRProblem = {
+                                  val uri = Uri.parse(it)
+                                  val browserIntent = Intent(Intent.ACTION_VIEW, uri)
+                                  startActivity(browserIntent)
+                                })
+                          }
+                          composable(route = Routes.ASK_EARTH_ROUTE) {
+                            AskEarthScreen(
+                                vm = askVM,
+                                onUserRejectedPermission = { panelVM.navTo(Routes.INTRO_ROUTE) },
+                                setTitle = { panelVM.setTitle(it) })
+                          }
+                          composable(route = Routes.TODAY_IN_HISTORY_ROUTE) {
+                            TodayInHistoryScreen(vm = todayVM, setTitle = { panelVM.setTitle(it) })
+                          }
+                          composable(route = Routes.DAILY_QUIZ_ROUTE) {
+                            DailyQuizScreen(vm = quizVM, setTitle = { panelVM.setTitle(it) })
+                          }
+                          composable(route = Routes.SETTINGS_ROUTE) { SettingsScreen() }
+                        }
+                  }
+                } else {
+                  InterstitialScreen { panelVM.userAcceptedNotice() }
+                }
               }
-            } else {
-              InterstitialScreen { panelVM.userAcceptedNotice() }
             }
-          }
-        }
       }
     }
   }

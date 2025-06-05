@@ -2,28 +2,24 @@
 
 import java.util.Properties
 
-val metaSpatialSdkVersion: String by project
-
 plugins {
-  id("com.android.application")
-  id("org.jetbrains.kotlin.android")
-  id("org.jetbrains.kotlin.plugin.serialization")
-  id("org.jetbrains.kotlin.plugin.compose")
-  id("com.meta.spatial.plugin")
-  id("com.google.devtools.ksp") version "2.0.0-1.0.24" apply true
+  alias(libs.plugins.android.application)
+  alias(libs.plugins.jetbrains.kotlin.android)
+  alias(libs.plugins.meta.spatial.plugin)
+  alias(libs.plugins.jetbrains.kotlin.plugin.compose)
 }
 
 android {
   namespace = "com.meta.pixelandtexel.geovoyage"
-  compileSdk = 34
+  compileSdk = 35
 
   defaultConfig {
     applicationId = "com.meta.pixelandtexel.geovoyage"
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 23
-    versionName = "1.0.1"
+    versionCode = 24
+    versionName = "1.1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -57,61 +53,54 @@ android {
     compose = true
   }
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
   }
-  kotlinOptions { jvmTarget = "1.8" }
+  kotlinOptions { jvmTarget = "17" }
 }
 
-composeCompiler { enableStrongSkippingMode = true }
-
 dependencies {
-  implementation("androidx.core:core-ktx:1.13.1")
-  implementation("androidx.appcompat:appcompat:1.7.0")
-  implementation("com.google.android.material:material:1.12.0")
-  implementation("androidx.activity:activity-ktx:1.9.2")
-  implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-  implementation("androidx.navigation:navigation-runtime-ktx:2.8.1")
-  implementation("androidx.navigation:navigation-compose:2.8.1")
-  implementation("androidx.compose.ui:ui-text-google-fonts:1.7.2")
-  testImplementation("junit:junit:4.13.2")
-  androidTestImplementation("androidx.test.ext:junit:1.2.1")
-  androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+  implementation(libs.androidx.core.ktx)
+  implementation(libs.androidx.appcompat)
+  implementation(libs.androidx.activity.ktx)
+  implementation(libs.androidx.constraintlayout)
+  implementation(libs.androidx.navigation.runtime.ktx)
+  implementation(libs.androidx.navigation.compose)
+  testImplementation(libs.junit)
+  androidTestImplementation(libs.androidx.junit)
+  androidTestImplementation(libs.androidx.espresso.core)
 
   // Meta Spatial SDK libs
-  implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
+  implementation(libs.meta.spatial.sdk.base)
+  implementation(libs.meta.spatial.sdk.toolkit)
+  implementation(libs.meta.spatial.sdk.vr)
+  implementation(libs.meta.spatial.sdk.isdk)
+
+  implementation(files("libs/meta-spatial-uiset-1.0.1.aar"))
 
   // For parsing json
-  implementation("com.google.code.gson:gson:2.10.1")
+  implementation(libs.google.gson)
 
   // For formatting llama response
-  implementation("com.github.jeziellago:compose-markdown:0.5.2")
+  implementation(libs.compose.markdown)
 
   // AWS Bedrock integration
-  implementation("aws.sdk.kotlin:bedrockruntime:1.3.3")
+  implementation(libs.aws.bedrockruntime)
 
   // -- Jetpack compose --
 
-  val composeBom = platform("androidx.compose:compose-bom:2024.06.00")
-  implementation(composeBom)
-  androidTestImplementation(composeBom)
+  implementation(platform(libs.androidx.compose.bom))
+  androidTestImplementation(platform(libs.androidx.compose.bom))
   // Material Design 3
-  implementation("androidx.compose.material3:material3")
+  implementation(libs.androidx.material3)
   // Android Studio Preview support
-  implementation("androidx.compose.ui:ui-tooling-preview")
-  debugImplementation("androidx.compose.ui:ui-tooling")
+  implementation(libs.androidx.ui.tooling.preview)
+  debugImplementation(libs.androidx.ui.tooling)
   // UI Tests
-  androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-  debugImplementation("androidx.compose.ui:ui-test-manifest")
+  androidTestImplementation(libs.androidx.ui.test.junit4)
+  debugImplementation(libs.androidx.ui.test.manifest)
   // Integration with activities
-  implementation("androidx.activity:activity-compose:1.9.2")
-  // Compose ConstraintLayout
-  implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
-
-  ksp("com.meta.spatial.plugin:com.meta.spatial.plugin.gradle.plugin:$metaSpatialSdkVersion")
-  ksp("com.google.code.gson:gson:2.10.1")
+  implementation(libs.androidx.activity.compose)
 }
 
 // Function to load properties from the local.properties file
@@ -137,7 +126,6 @@ spatial {
         outputPath.set(sceneDirectory)
       }
     }
-
     componentGeneration { outputPath.set(sceneDirectory) }
   }
 }
