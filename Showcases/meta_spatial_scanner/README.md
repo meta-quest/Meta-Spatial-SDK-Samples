@@ -36,6 +36,7 @@ Note that using the Passthrough Camera API to start a camera session and read vi
   - [AWS Bedrock Setup](#aws-bedrock-setup)
   - [AWS Access Key](#aws-access-key)
   - [Adding Your App Secrets](#adding-your-app-secrets)
+  - [NDK Installation](#ndk-installation)
 - [User Flow](#user-flow)
 - [App Architecture](#app-architecture)
   - [Main Scene Composition](#main-scene-composition)
@@ -116,6 +117,10 @@ AWS_REGION=XX-XXXX-X
 AWS_BEDROCK_ACCESS_KEY=XXXXXXXXXXXXXXXXXXXX
 AWS_BEDROCK_SECRET_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ```
+
+## NDK Installation
+
+This app uses custom shaders which the Meta Spatial Plugin compiles at build time using the `glslc` executable bundled with the Android NDK. In order to build and run this app, a recent version of the NDK must be installed and findable on your machine – usually via the SDK Manager if using Android Studio. The installed NDK version musta also be specified in the `:app/build.gradle.kts` using the `ndkVersion` property of the defaultConfig.
 
 # User Flow
 
