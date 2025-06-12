@@ -4,6 +4,7 @@ package com.meta.pixelandtexel.geovoyage.services
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.meta.pixelandtexel.geovoyage.BuildConfig
 import com.meta.pixelandtexel.geovoyage.enums.SettingsKey
 
@@ -64,6 +65,10 @@ object SettingsService {
   }
 
   fun <T : Any> get(key: SettingsKey, default: T): T {
+    if (!::prefs.isInitialized) {
+      Log.e(TAG, "SettingsService not initialized; returning default value")
+      return default
+    }
     if (!cache.containsKey(key)) {
       cache[key] =
           when (default) {

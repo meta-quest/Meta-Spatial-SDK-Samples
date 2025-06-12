@@ -30,12 +30,11 @@ import com.meta.pixelandtexel.geovoyage.services.SettingsService
 import com.meta.pixelandtexel.geovoyage.services.googlemaps.GoogleTilesService
 import com.meta.pixelandtexel.geovoyage.services.googlemaps.IPanoramaServiceHandler
 import com.meta.pixelandtexel.geovoyage.services.llama.QueryLlamaService
-import com.meta.pixelandtexel.geovoyage.utils.copyTo
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
+import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.runtime.AlphaMode
 import com.meta.spatial.runtime.LayerConfig
-import com.meta.spatial.runtime.PanelConfigOptions
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneObject
@@ -81,7 +80,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   private lateinit var permissionsResultCallback: (granted: Boolean) -> Unit
 
   override fun registerFeatures(): List<SpatialFeature> {
-    return listOf(VRFeature(this))
+    return listOf(VRFeature(this), IsdkFeature(this, spatial, systemManager))
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -125,24 +124,21 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
     return listOf(
         PanelRegistration(R.integer.panel_id) {
           activityClass = PanelActivity::class.java
-          config { getPanelConfig(1.21f, 0.94f, 1210).copyTo(this) }
+          config {
+            width = 0.772f
+            height = 0.6f
+            layoutWidthInDp = 772f
+            layoutHeightInDp = 600f
+            includeGlass = false
+            themeResourceId = R.style.PanelAppThemeTransparent
+            enableTransparent = true
+            forceSceneTexture = true
+            // Enable better looking panels
+            layerConfig = LayerConfig()
+            panelShader = SceneMaterial.HOLE_PUNCH_PANEL_SHADER
+            alphaMode = AlphaMode.HOLE_PUNCH
+          }
         })
-  }
-
-  private fun getPanelConfig(width: Float, height: Float, dp: Int): PanelConfigOptions {
-    return PanelConfigOptions(
-        width = width,
-        height = height,
-        layoutWidthInDp = dp.toFloat(),
-        layoutHeightInDp = dp * (height / width),
-        includeGlass = false,
-        themeResourceId = R.style.PanelAppThemeTransparent,
-        enableTransparent = true,
-        forceSceneTexture = true,
-        // Enable better looking panels
-        layerConfig = LayerConfig(),
-        panelShader = SceneMaterial.HOLE_PUNCH_PANEL_SHADER,
-        alphaMode = AlphaMode.HOLE_PUNCH)
   }
 
   override fun onSceneReady() {
@@ -188,7 +184,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
               R.integer.panel_id,
               R.integer.panel_id,
               Transform(),
-              Tether(globeEntity, -63f, 15f, 1.2f),
+              Tether(globeEntity, -63f, 15f, 0.9f),
               Visible(false))
     }
   }

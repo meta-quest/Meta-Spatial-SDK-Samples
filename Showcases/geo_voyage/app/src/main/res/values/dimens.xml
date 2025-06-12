@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <dimen name="panel_width">772dp</dimen>
+    <dimen name="panel_height">600dp</dimen>
+
+    <dimen name="nav_column_width">130dp</dimen>
+
+    <dimen name="standard_margin">24dp</dimen>
+
+    <dimen name="centered_panel_width">270dp</dimen>
+    <dimen name="centered_panel_height">260dp</dimen>
+    <dimen name="short_panel_height">260dp</dimen>
+    <dimen name="medium_panel_height">388dp</dimen>
+    <dimen name="tall_panel_height">480dp</dimen>
+</resources>
