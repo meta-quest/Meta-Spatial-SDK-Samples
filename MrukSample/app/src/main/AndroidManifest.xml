@@ -83,7 +83,6 @@
       android:name="com.meta.spatial.samples.mruksample.MrukAnchorMeshSampleActivity"
       android:launchMode="singleTask"
       android:excludeFromRecents="false"
-      android:screenOrientation="landscape"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
       android:exported="true"
     >
@@ -97,7 +96,6 @@
       android:name="com.meta.spatial.samples.mruksample.RaycastSampleActivity"
       android:launchMode="singleTask"
       android:excludeFromRecents="false"
-      android:screenOrientation="landscape"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
       android:exported="true"
     >

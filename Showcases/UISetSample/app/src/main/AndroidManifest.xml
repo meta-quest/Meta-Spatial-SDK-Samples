@@ -31,7 +31,6 @@
       android:excludeFromRecents="true"
       android:exported="true"
       android:launchMode="singleTask"
-      android:screenOrientation="landscape"
       tools:ignore="DiscouragedApi"
     >
             <intent-filter>

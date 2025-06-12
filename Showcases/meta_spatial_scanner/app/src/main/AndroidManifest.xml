@@ -107,7 +107,6 @@
       android:excludeFromRecents="false"
       android:exported="true"
       android:launchMode="singleTask"
-      android:screenOrientation="landscape"
     >
             <!-- This filter lets the apk show up as a launchable icon. -->
             <intent-filter>
@@ -124,7 +123,6 @@
       android:excludeFromRecents="false"
       android:exported="true"
       android:launchMode="singleTask"
-      android:screenOrientation="landscape"
     >
         </activity>
     </application>

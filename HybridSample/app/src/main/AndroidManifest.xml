@@ -61,7 +61,6 @@
     />
     <activity
       android:name=".PancakeActivity"
-      android:screenOrientation="landscape"
       android:exported="true"
       android:resizeableActivity="true"
     >
@@ -79,7 +78,6 @@
       android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
       android:launchMode="singleTask"
       android:excludeFromRecents="false"
-      android:screenOrientation="landscape"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
       android:exported="true"
     >

@@ -81,7 +81,6 @@
       android:excludeFromRecents="false"
       android:exported="true"
       android:launchMode="singleTask"
-      android:screenOrientation="landscape"
       android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
     >
       <!-- This filter lets the apk show up as a launchable icon. -->
