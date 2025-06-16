@@ -9,12 +9,13 @@ val metaSpatialSdkVersion: String by project
 plugins {
   id("com.android.application")
   id("org.jetbrains.kotlin.android")
-  id("kotlin-kapt")
+  id("com.google.devtools.ksp")
   id("com.google.dagger.hilt.android")
   id("kotlin-parcelize")
   id("com.meta.spatial.plugin")
   id("com.datadoghq.dd-sdk-android-gradle-plugin")
   id("org.jetbrains.kotlin.plugin.serialization")
+  id("org.jetbrains.kotlin.plugin.compose")
 }
 
 // Signing
@@ -42,8 +43,8 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 21
-    versionName = "0.0.19"
+    versionCode = 22
+    versionName = "0.0.20"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }
@@ -147,7 +148,7 @@ android {
     targetCompatibility = JavaVersion.VERSION_1_8
   }
   // Allow references to generated code (Hilt)
-  kapt { correctErrorTypes = true }
+  // ksp { correctErrorTypes = true }
 }
 
 dependencies {
@@ -172,15 +173,15 @@ dependencies {
   implementation("com.github.levin-riegner:cropify:master-SNAPSHOT")
 
   implementation("com.github.bumptech.glide:glide:4.16.0")
-  kapt("com.github.bumptech.glide:compiler:4.16.0")
+  ksp("com.github.bumptech.glide:compiler:4.16.0")
 
   // ExoPlayer
   implementation("androidx.media3:media3-exoplayer:1.4.1")
   implementation("androidx.media3:media3-ui:1.4.1")
 
   // Dependency injection
-  implementation("com.google.dagger:hilt-android:2.51")
-  kapt("com.google.dagger:hilt-android-compiler:2.51")
+  implementation("com.google.dagger:hilt-android:2.56.2")
+  ksp("com.google.dagger:hilt-android-compiler:2.56.2")
 
   // Utilities
   implementation("com.jakewharton.timber:timber:5.0.1")
@@ -191,13 +192,27 @@ dependencies {
   androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
   // Meta Spatial SDK libs
-  implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-ovrmetrics:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-physics:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:$metaSpatialSdkVersion")
+  //implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
+  //implementation("com.meta.spatial:meta-spatial-sdk-ovrmetrics:$metaSpatialSdkVersion")
+  //implementation("com.meta.spatial:meta-spatial-sdk-physics:$metaSpatialSdkVersion")
+  //implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
+  //implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
+  //implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
+  //implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:$metaSpatialSdkVersion")
+
+  implementation(files("libs/meta-spatial-sdk-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-animation-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-castinputforward-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-compose-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-datamodelinspector-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-hotreload-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-isdk-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-mruk-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-ovrmetrics-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-physics-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-spatialaudio-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-toolkit-0.7.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-vr-0.7.0.aar"))
 
   // Meta Spatial SDK dependencies
   implementation("com.squareup.okhttp3:okhttp:4.12.0")
