@@ -52,7 +52,7 @@ Before diving into the exciting world of mixed reality media, ensure you have th
    - Clone the repository from GitHub:
   
      ```bash
-     git clone https://github.com/levin-riegner/kreos-aether
+     git clone https://github.com/meta-quest/Meta-Spatial-SDK-Samples
      ```
 
 3. **Import into Android Studio:**

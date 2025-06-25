@@ -63,7 +63,6 @@
       android:name="com.meta.spatial.samples.object3dsample.Object3DSampleActivity"
       android:launchMode="singleTask"
       android:excludeFromRecents="false"
-      android:screenOrientation="landscape"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
       android:exported="true"
     >

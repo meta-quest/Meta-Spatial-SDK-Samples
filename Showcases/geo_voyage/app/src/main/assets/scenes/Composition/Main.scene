@@ -16,6 +16,8 @@ entities:
           documentReference: projref:earth/Main.metaspatialobj
         com.meta.components.Name:
           name: earth
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0
@@ -29,8 +31,9 @@ entities:
             - 1
           translation:
             - 0
-            - 1
-            - 1.5
+            - 1.25
+            - 1.20000005
+          componentVersion: 1
           children:
             - ref:trees
             - ref:pin
@@ -51,8 +54,11 @@ entities:
           documentReference: projref:pin/Main.metaspatialobj
         com.meta.components.Name:
           name: pin
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
+          componentVersion: 1
         com.meta.spatial.toolkit.Visible:
           isVisible: false
       tag: pin
@@ -64,12 +70,15 @@ entities:
           documentReference: projref:trees/Main.metaspatialobj
         com.meta.components.Name:
           name: trees
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
+          componentVersion: 1
       tag: trees
     - components:
         com.meta.components.Animatable:
@@ -79,12 +88,15 @@ entities:
           documentReference: projref:clouds/Main.metaspatialobj
         com.meta.components.Name:
           name: clouds
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
+          componentVersion: 1
         com.meta.pixelandtexel.geovoyage.Spin:
           axis:
             - 0
@@ -93,4 +105,4 @@ entities:
           speed: 1
       tag: clouds
 metadata:
-  version: 1.0
+  version: 1.32

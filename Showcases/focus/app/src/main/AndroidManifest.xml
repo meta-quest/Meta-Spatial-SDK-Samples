@@ -67,7 +67,6 @@
       android:excludeFromRecents="false"
       android:exported="true"
       android:launchMode="singleTask"
-      android:screenOrientation="landscape"
       android:theme="@style/Theme.Focus.Transparent"
     >
             <intent-filter>
@@ -86,7 +85,6 @@
       android:allowEmbedded="true"
       android:configChanges="uiMode"
       android:exported="true"
-      android:screenOrientation="landscape"
       android:theme="@style/Theme.Focus.Transparent"
     >
             <intent-filter>

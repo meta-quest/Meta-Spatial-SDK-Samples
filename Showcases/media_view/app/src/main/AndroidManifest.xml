@@ -33,7 +33,6 @@
       android:launchMode="singleTask"
       android:excludeFromRecents="true"
       tools:ignore="DiscouragedApi"
-      android:screenOrientation="landscape"
       android:theme="@style/Theme.MediaView"
     >
             <intent-filter>
@@ -120,7 +119,6 @@
       android:exported="true"
       android:launchMode="singleTask"
       tools:ignore="DiscouragedApi"
-      android:screenOrientation="landscape"
       android:theme="@style/Theme.MediaView"
     >
             <intent-filter>

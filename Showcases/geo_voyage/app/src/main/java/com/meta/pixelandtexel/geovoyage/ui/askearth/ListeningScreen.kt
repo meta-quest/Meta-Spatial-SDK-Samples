@@ -18,14 +18,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meta.pixelandtexel.geovoyage.R
-import com.meta.pixelandtexel.geovoyage.ui.components.buttons.PrimaryButton
 import com.meta.pixelandtexel.geovoyage.ui.components.panel.SecondaryPanel
 import com.meta.pixelandtexel.geovoyage.ui.theme.GeoVoyageTheme
+import com.meta.spatial.uiset.button.PrimaryButton
 
 /**
  * Display speech input interface.
@@ -36,7 +37,6 @@ import com.meta.pixelandtexel.geovoyage.ui.theme.GeoVoyageTheme
 fun ListeningScreen(amplitude: Int = 0, onStopListeningClicked: () -> Unit) {
   var imageId: Int = R.drawable.askearth_thinking_darr
 
-  // TODO add these to a config instead of hard-coding here
   if (amplitude > 100) {
     imageId = R.drawable.askearth_speaking_darr_1
   }
@@ -51,44 +51,47 @@ fun ListeningScreen(amplitude: Int = 0, onStopListeningClicked: () -> Unit) {
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally,
       modifier = Modifier.fillMaxSize()) {
-        SecondaryPanel(modifier = Modifier.width(452.dp).height(430.dp)) {
-          Column(
-              modifier = Modifier.fillMaxSize(),
-              verticalArrangement = Arrangement.SpaceEvenly,
-              horizontalAlignment = Alignment.CenterHorizontally,
-          ) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier.fillMaxWidth()) {
-                  Image(
-                      painterResource(id = imageId),
-                      contentDescription = "Ask Earth Amplitude",
-                      contentScale = ContentScale.FillWidth,
-                      colorFilter = ColorFilter.tint(Color.Black),
-                      modifier = Modifier.graphicsLayer(rotationZ = 90f).width(150.dp))
-                  Image(
-                      painterResource(id = R.drawable.askearth_speaking_mic),
-                      contentDescription = "Ask Earth Mic",
-                      colorFilter = ColorFilter.tint(Color.Black),
-                      contentScale = ContentScale.FillWidth,
-                      modifier = Modifier.padding(12.dp).width(56.dp))
-                  Image(
-                      painterResource(id = imageId),
-                      contentDescription = "Ask Earth Amplitude",
-                      contentScale = ContentScale.FillWidth,
-                      colorFilter = ColorFilter.tint(Color.Black),
-                      modifier = Modifier.graphicsLayer(rotationZ = -90f).width(150.dp))
-                }
-            PrimaryButton(
-                text = stringResource(id = R.string.finished_speaking),
-                onClick = onStopListeningClicked)
-          }
-        }
+        SecondaryPanel(
+            modifier =
+                Modifier.width(dimensionResource(R.dimen.centered_panel_width))
+                    .height(dimensionResource(R.dimen.centered_panel_height))) {
+              Column(
+                  modifier = Modifier.fillMaxSize(),
+                  verticalArrangement = Arrangement.SpaceEvenly,
+                  horizontalAlignment = Alignment.CenterHorizontally,
+              ) {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier.fillMaxWidth()) {
+                      Image(
+                          painterResource(id = imageId),
+                          contentDescription = "Ask Earth Amplitude",
+                          contentScale = ContentScale.FillWidth,
+                          colorFilter = ColorFilter.tint(Color.Black),
+                          modifier = Modifier.graphicsLayer(rotationZ = 90f).width(80.dp))
+                      Image(
+                          painterResource(id = R.drawable.askearth_speaking_mic),
+                          contentDescription = "Ask Earth Mic",
+                          colorFilter = ColorFilter.tint(Color.Black),
+                          contentScale = ContentScale.FillWidth,
+                          modifier = Modifier.padding(12.dp).width(36.dp))
+                      Image(
+                          painterResource(id = imageId),
+                          contentDescription = "Ask Earth Amplitude",
+                          contentScale = ContentScale.FillWidth,
+                          colorFilter = ColorFilter.tint(Color.Black),
+                          modifier = Modifier.graphicsLayer(rotationZ = -90f).width(80.dp))
+                    }
+                PrimaryButton(
+                    label = stringResource(id = R.string.finished_speaking),
+                    onClick = onStopListeningClicked)
+              }
+            }
       }
 }
 
-@Preview(widthDp = 932, heightDp = 650, showBackground = true, backgroundColor = 0xFFECEFE8)
+@Preview(widthDp = 570, heightDp = 480, showBackground = true, backgroundColor = 0xFFECEFE8)
 @Composable
 private fun SpeakingScreenPreview() {
   GeoVoyageTheme { ListeningScreen {} }

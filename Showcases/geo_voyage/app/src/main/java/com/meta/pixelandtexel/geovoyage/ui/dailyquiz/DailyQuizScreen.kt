@@ -12,7 +12,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.meta.pixelandtexel.geovoyage.models.TriviaQuestion
 import com.meta.pixelandtexel.geovoyage.ui.theme.GeoVoyageTheme
 import com.meta.pixelandtexel.geovoyage.viewmodels.QuizViewModel
 
@@ -39,7 +38,6 @@ val QuestionRoutes =
 
 @Composable
 fun DailyQuizScreen(
-    allQuestions: List<TriviaQuestion>,
     vm: QuizViewModel = viewModel(),
     setTitle: ((text: String) -> Unit)? = null,
     navController: NavHostController = rememberNavController()
@@ -66,7 +64,7 @@ fun DailyQuizScreen(
     }
     for (i in QuestionRoutes.indices) {
       composable(QuestionRoutes[i]) {
-        QuestionScreen(quizQuestions[i].query, vm.answerOptions[i], vm.answerIndexes[i], i) { idx ->
+        QuestionScreen(quizQuestions[i].query, vm.answerOptions[i], vm.answerIndexes[i]) { idx ->
           vm.answerQuestion(i, idx)
         }
       }
@@ -75,8 +73,8 @@ fun DailyQuizScreen(
   }
 }
 
-@Preview
+@Preview(widthDp = 570, heightDp = 480, showBackground = true, backgroundColor = 0xFFECEFE8)
 @Composable
 fun DailyQuizScreenPreview() {
-  GeoVoyageTheme { DailyQuizScreen(listOf<TriviaQuestion>()) }
+  GeoVoyageTheme { DailyQuizScreen() }
 }

@@ -76,7 +76,6 @@
     <activity
       android:name="com.meta.spatial.samples.spatialvideosample.SpatialVideoSampleActivity"
       android:launchMode="singleTask"
-      android:screenOrientation="landscape"
       android:excludeFromRecents="false"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
       android:exported="true"

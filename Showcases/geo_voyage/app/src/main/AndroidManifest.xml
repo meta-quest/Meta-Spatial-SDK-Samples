@@ -82,7 +82,6 @@
       android:excludeFromRecents="true"
       android:exported="true"
       android:launchMode="singleTask"
-      android:screenOrientation="landscape"
       android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
     >
             <intent-filter>
