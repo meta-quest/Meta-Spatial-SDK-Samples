@@ -16,6 +16,7 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
+import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
@@ -47,6 +48,7 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
     val features =
         mutableListOf<SpatialFeature>(
             VRFeature(this),
+            IsdkFeature(this, spatial, systemManager),
             HotReloadFeature(this),
             OVRMetricsFeature(
                 this,

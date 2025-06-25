@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+>
+
+  <TextView
+    android:id="@+id/mruk_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Keyboard Tracker Sample"
+    android:textSize="30sp"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:layout_margin="16dp"
+  />
+
+  <TextView
+    android:id="@+id/explain_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="If below scene permission or keyboard tracking indicate NO, please make sure to give the app scene permission, and ensure Keyboard Tracking is enabled. Keyboard Tracking can be enabled in the OS at Settings -> Devices -> Keyboard -> Show my keyboard. If everything is enabled and you have a keyboard in front of you, you should see a bounding box drawn around it."
+    android:textSize="24sp"
+    android:gravity="center"
+    android:layout_margin="16dp"
+  />
+
+
+  <TextView
+    android:id="@+id/scene_permission_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="PLACEHOLDER"
+    android:textSize="24sp"
+    android:gravity="center"
+    android:layout_margin="16dp"
+  />
+
+  <TextView
+    android:id="@+id/keyboard_tracking_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="PLACEHOLDER"
+    android:textSize="24sp"
+    android:gravity="center"
+    android:layout_margin="16dp"
+  />
+
+  <Button
+    android:id="@+id/start_stop_tracker"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:text="PLACEHOLDER"
+  />
+
+  <Button
+    android:id="@+id/close_sample"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:text="Close Sample"
+  />
+
+</LinearLayout>

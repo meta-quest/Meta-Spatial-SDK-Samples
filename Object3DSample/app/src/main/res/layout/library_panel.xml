@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <RelativeLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,7 +19,6 @@
     android:clipToOutline="true"
     android:padding="12dp"
   >
-
     <!--Heading-->
     <TextView
       android:gravity="left"
@@ -29,7 +29,6 @@
       android:text="Object Library"
       android:textSize="36dp"
     />
-
     <LinearLayout
       android:orientation="horizontal"
       android:layout_width="match_parent"
@@ -46,7 +45,6 @@
         android:layout_width="160dp"
         android:src="@drawable/bot"
       />
-
       <ImageView
         android:background="@drawable/image_bg"
         android:clipToOutline="true"
@@ -57,7 +55,6 @@
         android:layout_width="160dp"
         android:src="@drawable/quad"
       />
-
       <ImageView
         android:background="@drawable/image_bg"
         android:clipToOutline="true"
@@ -68,9 +65,7 @@
         android:layout_width="160dp"
         android:src="@drawable/plant"
       />
-
     </LinearLayout>
-
     <LinearLayout
       android:orientation="horizontal"
       android:layout_width="match_parent"
@@ -87,7 +82,6 @@
         android:layout_width="160dp"
         android:src="@drawable/lamp"
       />
-
       <ImageView
         android:background="@drawable/image_bg"
         android:clipToOutline="true"
@@ -98,7 +92,6 @@
         android:layout_width="160dp"
         android:src="@drawable/chair"
       />
-
       <ImageView
         android:background="@drawable/image_bg"
         android:clipToOutline="true"
@@ -109,7 +102,6 @@
         android:layout_width="160dp"
         android:src="@drawable/sculpture"
       />
-
     </LinearLayout>
   </LinearLayout>
 </RelativeLayout>

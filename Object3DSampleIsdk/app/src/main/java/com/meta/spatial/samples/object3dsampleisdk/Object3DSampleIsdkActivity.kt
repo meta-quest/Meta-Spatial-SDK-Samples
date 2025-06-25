@@ -40,10 +40,12 @@ import com.meta.spatial.runtime.SemanticType
 import com.meta.spatial.toolkit.Animated
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Box
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
+import com.meta.spatial.toolkit.MeshCollision
 import com.meta.spatial.toolkit.Panel
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.toolkit.PlaybackState
@@ -59,7 +61,6 @@ import kotlinx.coroutines.launch
 class Object3DSampleIsdkActivity : AppSystemActivity() {
 
   private val activityScope = CoroutineScope(Dispatchers.Main)
-  private val glxfKey = "deskScene"
   private var gltfxEntity: Entity? = null
   private var passthroughEnabled = false
 
@@ -92,8 +93,7 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    loadGLXF().invokeOnCompletion {
-      val composition = glXFManager.getGLXFInfo(glxfKey)
+    loadGLXF { composition ->
       robot = composition.getNodeByName("robot").entity
       drone = composition.getNodeByName("drone").entity
       plant = composition.getNodeByName("plant").entity
@@ -106,13 +106,6 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
       val environmentMesh = environmentEntity?.getComponent<Mesh>()
       environmentMesh?.defaultShaderOverride = SceneMaterial.UNLIT_SHADER
       environmentEntity?.setComponent(environmentMesh!!)
-
-      // TEMP FIX
-      environmentEntity?.setComponent(
-          Physics(
-              shape = "environmentDeskCollisions.gltf",
-              state = PhysicsState.STATIC,
-              density = 1.0f))
     }
 
     // Set up ISDK input listener
@@ -121,8 +114,8 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
     // 1. Hover affordance - indicate objects are hovered by slightly scaling them up in size
     // 2. Handle object release - notify physics when objects are released
     systemManager
-        .findSystem<IsdkInputListenerSystem>()
-        .setInputListener(
+        .tryFindSystem<IsdkInputListenerSystem>()
+        ?.setInputListener(
             object : InputListener {
               val selectCounts: HashMap<Long, Int> = HashMap<Long, Int>()
 
@@ -220,7 +213,7 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
     skybox =
         Entity.create(
             listOf(
-                Mesh(Uri.parse("mesh://skybox")),
+                Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
                 Material().apply {
                   baseTextureAndroidResourceId = R.drawable.skydome
                   unlit = true
@@ -337,13 +330,13 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
         .start()
   }
 
-  private fun loadGLXF(): Job {
+  private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          keyName = glxfKey)
+          onLoaded = onLoaded)
     }
   }
 }

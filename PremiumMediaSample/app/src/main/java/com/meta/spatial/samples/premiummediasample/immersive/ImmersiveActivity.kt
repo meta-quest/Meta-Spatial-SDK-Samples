@@ -1,4 +1,9 @@
-// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 package com.meta.spatial.samples.premiummediasample.immersive
 
@@ -11,7 +16,6 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
-import com.meta.spatial.runtime.ButtonBits
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.samples.premiummediasample.AnchorOnLoad
 import com.meta.spatial.samples.premiummediasample.Anchorable
@@ -45,7 +49,6 @@ import com.meta.spatial.samples.premiummediasample.systems.scalable.TouchScalabl
 import com.meta.spatial.samples.premiummediasample.systems.scaleChildren.ScaleChildrenSystem
 import com.meta.spatial.samples.premiummediasample.systems.tweenEngine.TweenEngineSystem
 import com.meta.spatial.toolkit.AvatarSystem
-import com.meta.spatial.toolkit.GrabbableSystem
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.vr.LocomotionSystem
 import java.io.File
@@ -83,10 +86,6 @@ class ImmersiveActivity : BaseMrukActivity(), IPCMessageHandler {
     val avatarSystem = systemManager.findSystem<AvatarSystem>()
     avatarSystem.setShowControllers(false)
     avatarSystem.setShowHands(false)
-
-    // Make X (left hand pinch) also trigger grabbing so we move panels with hand pinch
-    systemManager.findSystem<GrabbableSystem>().grabButtons =
-        (ButtonBits.ButtonSqueezeR or ButtonBits.ButtonSqueezeL or ButtonBits.ButtonX)
 
     // Register Systems
     componentManager.registerComponent<Scalable>(Scalable.Companion)
@@ -205,10 +204,10 @@ class ImmersiveActivity : BaseMrukActivity(), IPCMessageHandler {
     immersiveViewModel.resumeApp()
   }
 
-  override fun onDestroy() {
+  override fun onSpatialShutdown() {
     immersiveViewModel.destroy()
     ipcServiceConnection.unbindService()
-    super.onDestroy()
+    super.onSpatialShutdown()
   }
 
   override fun registerPanels(): List<PanelRegistration> {

@@ -10,10 +10,11 @@ package com.meta.spatial.samples.animationssample
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
-import com.meta.spatial.animation.PanelAnimation
 import com.meta.spatial.animation.PanelAnimationFeature
-import com.meta.spatial.animation.PanelQuadCylinderAnimator
+import com.meta.spatial.animation.PanelQuadCylinderAnimation
+import com.meta.spatial.animation.PanelQuadCylinderAnimationType
 import com.meta.spatial.castinputforward.CastInputForwardFeature
+import com.meta.spatial.core.DataModel
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
@@ -21,6 +22,7 @@ import com.meta.spatial.core.SpatialSDKExperimentalAPI
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
+import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.runtime.PanelShapeType
@@ -35,6 +37,7 @@ import com.meta.spatial.runtime.panel.resolution
 import com.meta.spatial.runtime.panel.shapeType
 import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.MeshCollision
@@ -64,7 +67,9 @@ class AnimationsSampleActivity : AppSystemActivity() {
 
   override fun registerFeatures(): List<SpatialFeature> {
     @OptIn(SpatialSDKExperimentalAPI::class)
-    val features = mutableListOf<SpatialFeature>(VRFeature(this), PanelAnimationFeature())
+    val features =
+        mutableListOf<SpatialFeature>(
+            VRFeature(this), IsdkFeature(this, spatial, systemManager), PanelAnimationFeature())
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -84,11 +89,10 @@ class AnimationsSampleActivity : AppSystemActivity() {
     systemManager.registerSystem(DroneSystem(droneSceneController))
     systemManager.registerSystem(ManageGLXFSceneObjectsSystem(this, waitForGLXFSceneObjects))
 
-    loadGLXF().invokeOnCompletion {
+    loadGLXF { composition ->
       waitForGLXFSceneObjects.thenAccept { _ -> droneSceneController = DroneSceneController() }
 
       // get the environment mesh from Meta Spatial Editor and set it to use an unlit shader.
-      val composition = glXFManager.getGLXFInfo(GLXF_DRONE_SCENE)
       val environmentEntity: Entity? = composition.getNodeByName("environment").entity
       val environmentMesh = environmentEntity?.getComponent<Mesh>()
       environmentMesh?.defaultShaderOverride = SceneMaterial.UNLIT_SHADER
@@ -102,25 +106,43 @@ class AnimationsSampleActivity : AppSystemActivity() {
     return listOf(
         PanelRegistration(R.layout.ui_panel).fromConfigOptions2 { ent ->
           defaultOptions.cylinder(1.0f).resolution(widthInDp = 720f).onPanelCreation { ent ->
-            val button = rootView?.findViewById<Button>(R.id.transform_button)!!
-            button.setOnClickListener {
+            val transformButton = rootView?.findViewById<Button>(R.id.transform_button)!!
+            transformButton.setOnClickListener {
               if (shapeType == PanelShapeType.CYLINDER) {
-                button.text = "Change to Cylinder Shape"
-                @OptIn(SpatialSDKExperimentalAPI::class)
-                ent.setComponent(PanelAnimation(PanelQuadCylinderAnimator()))
-              } else {
-                button.text = "Change to Quad Shape"
-                @OptIn(SpatialSDKExperimentalAPI::class)
+                transformButton.text = "Change to Cylinder Shape"
                 ent.setComponent(
-                    PanelAnimation(
-                        PanelQuadCylinderAnimator(targetRadius = Random.nextFloat() * 2f + 0.5f)))
+                    PanelQuadCylinderAnimation(
+                        startTime = DataModel.getLocalDataModelTime(),
+                        animationType = PanelQuadCylinderAnimationType.CYLINDER_TO_QUAD))
+              } else {
+                transformButton.text = "Change to Quad Shape"
+                ent.setComponent(
+                    PanelQuadCylinderAnimation(
+                        startTime = DataModel.getLocalDataModelTime(),
+                        animationType = PanelQuadCylinderAnimationType.QUAD_TO_CYLINDER,
+                        targetRadius = Random.nextFloat() * 2f + 0.5f))
               }
             }
           }
         },
         PanelRegistration(R.layout.ui_about).fromConfigOptions2 { defaultOptions },
         PanelRegistration(R.layout.ui_info).fromConfigOptions2 { defaultOptions },
-        PanelRegistration(R.layout.ui_grab).fromConfigOptions2 { defaultOptions })
+        PanelRegistration(R.layout.ui_grab).fromConfigOptions2 { ent ->
+          defaultOptions.onPanelCreation { ent ->
+            val followModeButton = rootView?.findViewById<Button>(R.id.follow_mode_button)!!
+            followModeButton.setOnClickListener {
+              if (droneSceneController != null) {
+                droneSceneController!!.toggleFollowTargetMode()
+                if (droneSceneController!!.getFollowTargetIsBuiltInFollower()) {
+                  followModeButton.text = "Change to Custom"
+                } else {
+                  followModeButton.text = "Change to Builtin"
+                }
+              }
+            }
+          }
+        },
+    )
   }
 
   override fun onSceneReady() {
@@ -148,13 +170,14 @@ class AnimationsSampleActivity : AppSystemActivity() {
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
   }
 
-  private fun loadGLXF(): Job {
+  private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/droneScene.glxf"),
           rootEntity = gltfxEntity!!,
-          keyName = GLXF_DRONE_SCENE)
+          keyName = GLXF_DRONE_SCENE,
+          onLoaded = onLoaded)
     }
   }
 

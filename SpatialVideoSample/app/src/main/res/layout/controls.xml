@@ -37,7 +37,7 @@
       android:background="@android:color/transparent"
     />
   </LinearLayout>
-    <SeekBar
+  <SeekBar
     style="@style/Widget.AppCompat.SeekBar"
     android:id="@+id/seek_bar"
     android:layout_width="match_parent"

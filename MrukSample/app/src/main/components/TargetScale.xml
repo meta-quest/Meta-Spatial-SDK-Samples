@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<ComponentSchema packageName="com.meta.spatial.samples.mruksample">
+  <Component name="TargetScale">
+    <FloatAttribute name="target" defaultValue="1.0f" />
+    <FloatAttribute name="speed" defaultValue="0.1f" />
+  </Component>
+</ComponentSchema>

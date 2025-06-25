@@ -49,27 +49,22 @@ class ButtonSystem() : SystemBase() {
         // listen for input
         so.addInputListener(
             object : InputListener {
-              override fun onInput(
+              override fun onClickDown(
                   receiver: SceneObject,
                   hitInfo: HitInfo,
                   sourceOfInput: Entity,
-                  changed: Int,
-                  clicked: Int,
-                  downTime: Long
-              ): Boolean {
-                val anyButtonDown: Int = changed and clicked
-                if ((anyButtonDown and triggerButtons) != 0) {
-                  if (!button.isDown) {
-                    button.isDown = true
-                    entity.setComponent(button)
-                    dataModel?.sendEvent(entity, "button", EventArgs("click", dataModel))
-                  }
-                }
-                return false
+              ) {
+                button.isDown = true
+                entity.setComponent(button)
               }
 
-              override fun stopInput(receiver: SceneObject, sourceOfInput: Entity, downTime: Long) =
-                  Unit
+              override fun onClick(
+                  receiver: SceneObject,
+                  hitInfo: HitInfo,
+                  sourceOfInput: Entity,
+              ) {
+                dataModel?.sendEvent(entity, "button", EventArgs("click", dataModel))
+              }
             })
       }
     }

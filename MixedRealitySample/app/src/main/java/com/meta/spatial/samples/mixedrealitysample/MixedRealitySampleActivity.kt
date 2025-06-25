@@ -20,6 +20,7 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
+import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.mruk.AnchorProceduralMesh
 import com.meta.spatial.mruk.AnchorProceduralMeshConfig
 import com.meta.spatial.mruk.MRUKFeature
@@ -34,6 +35,7 @@ import com.meta.spatial.physics.PhysicsWorldBounds
 import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.vr.LocomotionSystem
@@ -61,6 +63,7 @@ class MixedRealitySampleActivity : AppSystemActivity() {
         mutableListOf(
             PhysicsFeature(spatial, worldBounds = PhysicsWorldBounds(minY = -100.0f)),
             VRFeature(this),
+            IsdkFeature(this, spatial, systemManager),
             mrukFeature)
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
@@ -92,9 +95,9 @@ class MixedRealitySampleActivity : AppSystemActivity() {
     systemManager.findSystem<LocomotionSystem>().enableLocomotion(false)
     scene.enablePassthrough(true)
 
-    loadGLXF().invokeOnCompletion {
+    loadGLXF { composition ->
+      systemManager.unregisterSystem<BallShooter>()
       glxfLoaded = true
-      val composition = glXFManager.getGLXFInfo(GLXF_SCENE)
       val bball = composition.getNodeByName("BasketBall").entity
       val mesh = bball.getComponent<Mesh>()
       ballShooter = BallShooter(mesh)
@@ -131,10 +134,10 @@ class MixedRealitySampleActivity : AppSystemActivity() {
     }
   }
 
-  override fun onDestroy() {
-    super.onDestroy()
+  override fun onSpatialShutdown() {
     procMeshSpawner.destroy()
     mrukFeature.removeSceneEventListener(sceneEventListener)
+    super.onSpatialShutdown()
   }
 
   override fun onSceneReady() {
@@ -203,13 +206,14 @@ class MixedRealitySampleActivity : AppSystemActivity() {
     return true
   }
 
-  private fun loadGLXF(): Job {
+  private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          keyName = GLXF_SCENE)
+          keyName = GLXF_SCENE,
+          onLoaded = onLoaded)
     }
   }
 

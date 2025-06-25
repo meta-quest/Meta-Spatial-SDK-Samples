@@ -1,4 +1,9 @@
-// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 package com.meta.spatial.samples.premiummediasample.immersive
 
@@ -6,6 +11,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import com.meta.spatial.core.SpatialFeature
+import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.toolkit.AppSystemActivity
@@ -16,7 +22,7 @@ abstract class BaseMrukActivity : AppSystemActivity() {
 
   override fun registerFeatures(): List<SpatialFeature> {
     mrukFeature = MRUKFeature(this, systemManager)
-    return listOf(VRFeature(this), mrukFeature)
+    return listOf(VRFeature(this), IsdkFeature(this, spatial, systemManager), mrukFeature)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {

@@ -25,7 +25,14 @@ android {
     ndkVersion = "27.0.12077973"
   }
 
-  packaging { resources.excludes.add("META-INF/LICENSE") }
+  packaging {
+    resources.excludes.add("META-INF/LICENSE")
+    resources.excludes.add("LICENSE")
+    resources.excludes.add("LICENSE.CC0")
+    resources.excludes.add("LICENSE.blob")
+    resources.excludes.add("LICENSE.Apachev2")
+    resources.excludes.add("LICENSE.MIT")
+  }
 
   lint { abortOnError = false }
 
@@ -46,6 +53,7 @@ android {
   kotlinOptions { jvmTarget = "17" }
 }
 
+//noinspection UseTomlInstead
 dependencies {
   implementation(libs.androidx.core.ktx)
   testImplementation(libs.junit)
@@ -58,6 +66,7 @@ dependencies {
   implementation(libs.meta.spatial.sdk.ovrmetrics)
   implementation(libs.meta.spatial.sdk.toolkit)
   implementation(libs.meta.spatial.sdk.vr)
+  implementation(libs.meta.spatial.sdk.isdk)
   implementation(libs.meta.spatial.sdk.castinputforward)
   implementation(libs.meta.spatial.sdk.hotreload)
   implementation(libs.meta.spatial.sdk.datamodelinspector)
@@ -93,7 +102,9 @@ spatial {
   allowUsageDataCollection.set(true)
   scenes {
     // if you have installed Meta Spatial Editor somewhere else, update the file path.
+
     // cliPath.set("/Applications/Meta Spatial Editor.app/Contents/MacOS/CLI")
+
     exportItems {
       item {
         projectPath.set(sceneDirectory.file("Main.metaspatial"))

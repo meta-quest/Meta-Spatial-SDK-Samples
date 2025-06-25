@@ -11,6 +11,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import com.meta.spatial.samples.mruksample.anchor_mesh.MrukAnchorMeshSampleActivity
+import com.meta.spatial.samples.mruksample.keyboard_tracker.KeyboardTrackerSampleActivity
+import com.meta.spatial.samples.mruksample.qr_code_scanner.QrCodeScannerSampleActivity
+import com.meta.spatial.samples.mruksample.raycast.RaycastSampleActivity
 
 /** Basic activity that shows a menu to choose between the different sample activities. */
 class MrukSampleStartMenuActivity : Activity() {
@@ -26,6 +30,16 @@ class MrukSampleStartMenuActivity : Activity() {
 
     val raycastButton = findViewById<Button>(R.id.button_sample_raycast)
     raycastButton?.setOnClickListener { startSampleActivity(RaycastSampleActivity::class.java) }
+
+    val keyboardTrackerButton = findViewById<Button>(R.id.button_sample_keyboard_tracker)
+    keyboardTrackerButton?.setOnClickListener {
+      startSampleActivity(KeyboardTrackerSampleActivity::class.java)
+    }
+
+    val qrCodeScannerButton = findViewById<Button>(R.id.button_sample_qr_code_scanner)
+    qrCodeScannerButton?.setOnClickListener {
+      startSampleActivity(QrCodeScannerSampleActivity::class.java)
+    }
   }
 
   private fun <T> startSampleActivity(c: Class<T>) {

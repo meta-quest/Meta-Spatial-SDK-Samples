@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +9,6 @@
   android:background="@drawable/popup_bg"
   android:clipToOutline="true"
 >
-
   <!--Body text-->
   <TextView
     android:gravity="center_vertical"
@@ -20,5 +20,4 @@
     android:textColor="#F1F4F7"
     android:textSize="26sp"
   />
-
 </LinearLayout>

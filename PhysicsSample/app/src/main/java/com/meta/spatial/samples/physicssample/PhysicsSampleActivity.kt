@@ -18,6 +18,7 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
+import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
@@ -30,6 +31,7 @@ import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.GLXFNode
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
@@ -81,7 +83,11 @@ class BallRunActivity : AppSystemActivity() {
   private var finishCount: Int = 0
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features = mutableListOf<SpatialFeature>(PhysicsFeature(spatial), VRFeature(this))
+    val features =
+        mutableListOf<SpatialFeature>(
+            PhysicsFeature(spatial, useGrabbablePhysics = false),
+            VRFeature(this),
+            IsdkFeature(this, spatial, systemManager))
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -108,7 +114,7 @@ class BallRunActivity : AppSystemActivity() {
     systemManager.registerSystem(SpinnerSystem())
     systemManager.registerSystem(UpAndDownSystem())
 
-    loadGLXF().invokeOnCompletion { onCompositionReady() }
+    loadGLXF { composition -> onCompositionReady(composition) }
   }
 
   override fun registerPanels(): List<PanelRegistration> {
@@ -161,10 +167,10 @@ class BallRunActivity : AppSystemActivity() {
     // spatial.enablePhysicsDebugLines(true)
   }
 
-  fun onCompositionReady() {
+  fun onCompositionReady(composition: GLXFInfo) {
 
-    val composition = glXFManager.getGLXFInfo("example_key_name")
-
+    val upDownSystem = systemManager.tryFindSystem<UpAndDownSystem>()
+    upDownSystem?.resetEntities()
     // set the environment shader to unlit
     val environmentEntity: Entity? = composition.getNodeByName("Environment").entity
     val environmentMesh = environmentEntity?.getComponent<Mesh>()
@@ -266,13 +272,13 @@ class BallRunActivity : AppSystemActivity() {
     entity.setComponent(physics)
   }
 
-  private fun loadGLXF(): Job {
+  private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          keyName = "example_key_name")
+          onLoaded = onLoaded)
     }
   }
 }

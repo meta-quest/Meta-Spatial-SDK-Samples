@@ -24,7 +24,14 @@ android {
     ndkVersion = "27.0.12077973"
   }
 
-  packaging { resources.excludes.add("META-INF/LICENSE") }
+  packaging {
+    resources.excludes.add("META-INF/LICENSE")
+    resources.excludes.add("LICENSE")
+    resources.excludes.add("LICENSE.CC0")
+    resources.excludes.add("LICENSE.blob")
+    resources.excludes.add("LICENSE.Apachev2")
+    resources.excludes.add("LICENSE.MIT")
+  }
 
   lint { abortOnError = false }
 
@@ -43,6 +50,7 @@ android {
   kotlinOptions { jvmTarget = "17" }
 }
 
+//noinspection UseTomlInstead
 dependencies {
   implementation(libs.androidx.core.ktx)
   testImplementation(libs.junit)
@@ -55,6 +63,7 @@ dependencies {
   implementation(libs.meta.spatial.sdk.toolkit)
   implementation(libs.meta.spatial.sdk.physics)
   implementation(libs.meta.spatial.sdk.vr)
+  implementation(libs.meta.spatial.sdk.isdk)
   implementation(libs.meta.spatial.sdk.mruk)
   implementation(libs.meta.spatial.sdk.castinputforward)
   implementation(libs.meta.spatial.sdk.hotreload)

@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +9,6 @@
   android:background="@drawable/layout_bg"
   android:clipToOutline="true"
 >
-
   <ImageView
     android:gravity="center"
     android:src="@drawable/cover"
@@ -16,7 +16,6 @@
     android:layout_height="250dp"
     android:scaleType="centerCrop"
   />
-
   <TextView
     android:gravity="left"
     android:layout_height="wrap_content"
@@ -27,5 +26,4 @@
     android:lineHeight="24dp"
     android:textColor="#cccccc"
   />
-
 </LinearLayout>

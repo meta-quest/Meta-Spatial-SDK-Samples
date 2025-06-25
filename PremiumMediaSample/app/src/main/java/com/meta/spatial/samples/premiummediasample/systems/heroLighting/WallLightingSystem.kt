@@ -1,4 +1,9 @@
-// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 package com.meta.spatial.samples.premiummediasample.systems.heroLighting
 
@@ -14,6 +19,8 @@ import com.meta.spatial.mruk.MRUKAnchor
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKLabel
 import com.meta.spatial.mruk.MRUKPlane
+import com.meta.spatial.mruk.getSize
+import com.meta.spatial.mruk.hasLabel
 import com.meta.spatial.runtime.BlendMode
 import com.meta.spatial.runtime.DepthWrite
 import com.meta.spatial.runtime.SceneMaterial
