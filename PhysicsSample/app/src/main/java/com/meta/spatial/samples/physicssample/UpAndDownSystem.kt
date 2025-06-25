@@ -17,7 +17,11 @@ import kotlin.math.sin
 class UpAndDownSystem() : SystemBase() {
 
   private var lastTime = System.currentTimeMillis()
-  private var entities = listOf<Entity>()
+  private var entities = mutableListOf<Entity>()
+
+  public fun resetEntities() {
+    entities.clear()
+  }
 
   private fun findNewObjects() {
 

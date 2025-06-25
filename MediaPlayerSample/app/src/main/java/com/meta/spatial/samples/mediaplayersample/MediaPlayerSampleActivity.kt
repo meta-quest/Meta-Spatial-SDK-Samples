@@ -31,6 +31,7 @@ import com.meta.spatial.core.Vector3
 import com.meta.spatial.core.Vector4
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
+import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
@@ -52,6 +53,7 @@ import com.meta.spatial.runtime.StereoMode
 import com.meta.spatial.runtime.panel.material
 import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.PanelRegistration
@@ -197,7 +199,9 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
   }
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features = mutableListOf<SpatialFeature>(VRFeature(this), ComposeFeature())
+    val features =
+        mutableListOf<SpatialFeature>(
+            VRFeature(this), ComposeFeature(), IsdkFeature(this, spatial, systemManager))
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -220,8 +224,7 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     NetworkedAssetLoader.init(
         File(applicationContext.getCacheDir().canonicalPath), OkHttpAssetFetcher())
 
-    loadGLXF().invokeOnCompletion {
-      val composition = glXFManager.getGLXFInfo("example_key_name")
+    loadGLXF { composition ->
       environment = composition.getNodeByName("Environment").entity
       videoPanel = composition.getNodeByName("VideoPanel").entity
 
@@ -233,7 +236,7 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
 
       // set the environment mesh to use a custom shader.
       val environmentMesh = environment?.getComponent<Mesh>()
-      environmentMesh?.defaultShaderOverride = "data/shaders/custom/transition"
+      environmentMesh?.defaultShaderOverride = "transition"
       environment?.setComponent(environmentMesh!!)
 
       updateTextures(videoTexture)
@@ -372,7 +375,7 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     val texture = SceneTexture(getDrawable(R.drawable.skydome))
     skyBoxMaterial =
         SceneMaterial.custom(
-                "data/shaders/custom/360",
+                "360",
                 arrayOf<SceneMaterialAttribute>(
 
                     // define the some standard pbr material attributes.
@@ -489,20 +492,20 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
         }
       }
 
-  private fun loadGLXF(): Job {
+  private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          keyName = "example_key_name")
+          onLoaded = onLoaded)
     }
   }
 
-  override fun onDestroy() {
-    super.onDestroy()
+  override fun onSpatialShutdown() {
     exoPlayer?.release()
     exoPlayer = null
+    super.onSpatialShutdown()
   }
 
   companion object {

@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -8,7 +9,7 @@
   android:background="#0F0F0F"
   android:clipToOutline="true"
 >
- <!--Header Image-->
+  <!--Header Image-->
   <ImageView
     android:gravity="center"
     android:src="@drawable/hybrid"
@@ -16,7 +17,6 @@
     android:layout_height="250dp"
     android:scaleType="centerCrop"
   />
-
   <!--Heading-->
   <TextView
     android:gravity="center"
@@ -29,7 +29,6 @@
     android:textStyle="bold"
     android:textColor="#ffffff"
   />
-
   <!--Body text-->
   <TextView
     android:gravity="center"
@@ -41,7 +40,6 @@
     android:lineHeight="18dp"
     android:textColor="#cccccc"
   />
-
   <!--Button-->
   <Button
     android:id="@+id/chosen"
@@ -52,5 +50,4 @@
     android:background="@drawable/button_bg"
     android:textColor="#ffffff"
   />
-
 </LinearLayout>

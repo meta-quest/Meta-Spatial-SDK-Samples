@@ -1,4 +1,9 @@
-// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 @file:androidx.annotation.OptIn(androidx.media3.common.util.UnstableApi::class)
 
@@ -10,7 +15,6 @@ import androidx.media3.ui.PlayerView
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Vector2
 import com.meta.spatial.runtime.ButtonBits
-import com.meta.spatial.runtime.EquirectLayerConfig
 import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.PanelConfigOptions
 import com.meta.spatial.runtime.PanelSceneObject
@@ -49,7 +53,6 @@ import com.meta.spatial.toolkit.Visible
 import dorkbox.tweenEngine.TweenEngine
 import dorkbox.tweenEngine.TweenEquations
 import java.util.concurrent.CompletableFuture
-import kotlin.math.PI
 import kotlin.math.roundToInt
 
 /**
@@ -77,27 +80,10 @@ class ExoVideoEntity(
         ipcServiceConnection: IPCServiceConnection
     ): ExoVideoEntity {
       val panelSize = Vector2(mediaSource.aspectRatio * BASE_PANEL_SIZE, BASE_PANEL_SIZE)
+      val equirectRadius = 50f
       val drmEnabled =
           mediaSource.videoSource is VideoSource.Url &&
               mediaSource.videoSource.drmLicenseUrl != null
-
-      val panelLayerConfig =
-          when (mediaSource.videoShape) {
-            MediaSource.VideoShape.Rectilinear -> LayerConfig()
-            MediaSource.VideoShape.Equirect180 -> {
-              val horizontalAngle = (PI).toFloat() // 1pi = 180 Degrees
-              EquirectLayerConfig(
-                  zIndex = -1,
-                  radius = 50f,
-                  centralHorizontalAngle = (PI).toFloat(), // 1pi = 180 Degrees
-                  upperVerticalAngle = horizontalAngle / 2f,
-                  lowerVerticalAngle = -(horizontalAngle / 2f),
-              )
-            }
-          }
-
-      // Common properties
-      panelLayerConfig.apply { secure = drmEnabled }
 
       // DRM can be enabled two ways:
       // 1. Activity Panel and Direct-To-Compositor
@@ -115,6 +101,8 @@ class ExoVideoEntity(
         if (mediaSource.videoShape == MediaSource.VideoShape.Rectilinear) {
           width = panelSize.x
           height = panelSize.y
+        } else if (mediaSource.videoShape == MediaSource.VideoShape.Equirect180) {
+          radiusForCylinderOrSphere = equirectRadius
         }
         layoutWidthInPx = mediaSource.videoDimensionsPx.x
         layoutHeightInPx = mediaSource.videoDimensionsPx.y
@@ -124,11 +112,15 @@ class ExoVideoEntity(
         forceSceneTexture = true
         themeResourceId = R.style.PanelAppThemeTransparent
         includeGlass = false
-        layerConfig = panelLayerConfig
+        layerConfig =
+            LayerConfig(
+                zIndex =
+                    if (mediaSource.videoShape == MediaSource.VideoShape.Equirect180) -1 else 0,
+                secure = drmEnabled)
         panelShapeType =
             when (mediaSource.videoShape) {
               MediaSource.VideoShape.Rectilinear -> PanelShapeType.QUAD
-              MediaSource.VideoShape.Equirect180 -> PanelShapeType.EQUIRECT
+              MediaSource.VideoShape.Equirect180 -> PanelShapeType.EQUIRECT180
             }
 
         // want to disable left hand pinch so we can drag the panel around with hands

@@ -1,6 +1,6 @@
 # Media Player sample
 
-The Media Playersample shows an immersive video playback experience. It allows users to discover and play videos in a custom immersive environment, editable with the Meta Spatial Editor, or use Passthrough to integrate with the physical environment. Using a native Android view model, it showcases communication between a 2D panel showing the list of available videos the video playback in the immersive enviornment.
+The Media Player Sample shows an immersive video playback experience. Users can discover and play videos in a custom environment, editable with the Meta Spatial Editor, or use Passthrough to integrate with the physical environment. It uses a native Android view model to demonstrate communication between a 2D panel listing available videos and the video playback in the immersive environment.
 
 ![Media Player Sample](documentation/media-player-sample.jpg)
 

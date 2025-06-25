@@ -35,6 +35,7 @@ import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.Animated
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Material
@@ -54,7 +55,6 @@ import kotlinx.coroutines.launch
 class Object3DSampleActivity : AppSystemActivity() {
 
   private val activityScope = CoroutineScope(Dispatchers.Main)
-  private val glxfKey = "deskScene"
   private var gltfxEntity: Entity? = null
   private var passthroughEnabled = false
 
@@ -83,8 +83,7 @@ class Object3DSampleActivity : AppSystemActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    loadGLXF().invokeOnCompletion {
-      val composition = glXFManager.getGLXFInfo(glxfKey)
+    loadGLXF { composition ->
       robot = composition.getNodeByName("robot").entity
       drone = composition.getNodeByName("drone").entity
       plant = composition.getNodeByName("plant").entity
@@ -225,13 +224,13 @@ class Object3DSampleActivity : AppSystemActivity() {
         .start()
   }
 
-  private fun loadGLXF(): Job {
+  private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          keyName = glxfKey)
+          onLoaded = onLoaded)
     }
   }
 }

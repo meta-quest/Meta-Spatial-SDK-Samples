@@ -15,14 +15,18 @@ import android.util.Log
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import com.meta.spatial.core.Color4
-import com.meta.spatial.core.Entity
+import com.meta.spatial.core.Pose
+import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.isdk.IsdkSystem
 import com.meta.spatial.runtime.AlphaMode
-import com.meta.spatial.runtime.ButtonDownEventArgs
-import com.meta.spatial.runtime.ControllerButton
+import com.meta.spatial.runtime.PointerEvent
+import com.meta.spatial.runtime.PointerEventType
+import com.meta.spatial.runtime.Scene
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneAudioPlayer
 import com.meta.spatial.runtime.SceneObject
+import com.meta.spatial.runtime.SemanticType
 import com.meta.spatial.toolkit.Animated
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
@@ -42,7 +46,9 @@ class DroneSceneController() {
   private val activity = SpatialActivityManager.getVrActivity<AnimationsSampleActivity>()
   private val glxf = activity.glXFManager.getGLXFInfo(activity.GLXF_DRONE_SCENE)
   private val sos = activity.systemManager.findSystem<SceneObjectSystem>()
+  private val isdks = activity.systemManager.findSystem<IsdkSystem>()
   private val animClipMap = mutableMapOf<String, Int>()
+  private val grabPanel = glxf.getNodeByName("grabPanel").entity
   private val droneEnt = glxf.getNodeByName("drone").entity
   private val droneTargetEnt = glxf.getNodeByName("droneTarget").entity
   private val droneComponent = droneEnt.getComponent<DroneComponent>()
@@ -64,6 +70,45 @@ class DroneSceneController() {
         roughness = 0.7f
         alphaMode = AlphaMode.TRANSLUCENT.ordinal
       }
+
+  private var pointerEventListener: (PointerEvent) -> Unit = { event: PointerEvent ->
+    handlePointerEvent(event)
+  }
+
+  fun getFollowTargetIsBuiltInFollower(): Boolean {
+    val followerTarget = droneTargetEnt.getComponent<FollowerTarget>()
+    return followerTarget.isBuiltInFollower
+  }
+
+  fun toggleFollowTargetMode() {
+    val followerTarget = droneTargetEnt.getComponent<FollowerTarget>()
+    followerTarget.isBuiltInFollower = !followerTarget.isBuiltInFollower
+    val newMaterial =
+        if (followerTarget.isBuiltInFollower) selectedTargetMaterial else defaultTargetMaterial
+    droneTargetEnt.setComponents(newMaterial, followerTarget)
+  }
+
+  private fun handlePointerEvent(event: PointerEvent) {
+    if (event.hitInfo.entity != droneTargetEnt) {
+      return@handlePointerEvent
+    }
+
+    if (event.semanticType == SemanticType.Grab.id) {
+      if (event.type == PointerEventType.Select.id) {
+        grabPanel.setComponent(Visible(false))
+      } else if (event.type == PointerEventType.Unselect.id) {
+        val transformComp = droneTargetEnt.getComponent<Transform>()
+        transformComp.transform.t.y -= 0.75f
+
+        val scene: Scene = sos.getScene()
+        val headPose: Pose = scene.getViewerPose()
+        transformComp.transform.q =
+            Quaternion.lookRotationAroundY(transformComp.transform.t - headPose.t)
+
+        grabPanel.setComponents(Visible(true), transformComp)
+      }
+    }
+  }
 
   init {
     val button = ButtonController(activity, "startButton")
@@ -91,6 +136,11 @@ class DroneSceneController() {
               track = animClipMap.get("openarm")!!)
       droneEnt.setComponent(anim)
     }
+
+    // Register an input listener for the target sphere on the IsdkSystem, rather than the
+    // SceneObject itself, as the SceneObject is recreated whenever the material is changed (and so
+    // loses any listeners)
+    isdks.registerObserver(pointerEventListener)
 
     scaleAnim.apply {
       duration = 400
@@ -173,42 +223,17 @@ class DroneSceneController() {
         }))
 
     // show the grab instruction panel
-    val grabPanel = glxf.getNodeByName("grabPanel").entity
     grabPanel.setComponent(Visible(true))
 
-    // hide the instructions panel on first sphere grab
-    var firstGrab = true
-    glxf
-        .getNodeByName("droneTarget")
-        .entity
-        .registerEventListener(ButtonDownEventArgs.EVENT_NAME) {
-            entity: Entity,
-            eventArgs: ButtonDownEventArgs ->
-          if (firstGrab) {
-            if (eventArgs.button == ControllerButton.RightSqueeze ||
-                eventArgs.button == ControllerButton.LeftSqueeze) {
-              firstGrab = false
-              grabPanel.setComponent(Visible(false))
-            }
-          }
-          if (eventArgs.button == ControllerButton.RightTrigger ||
-              eventArgs.button == ControllerButton.LeftTrigger) {
-            val followerTarget = entity.getComponent<FollowerTarget>()
-            followerTarget.isBuiltInFollower = !followerTarget.isBuiltInFollower
-            val newMaterial =
-                if (followerTarget.isBuiltInFollower) selectedTargetMaterial
-                else defaultTargetMaterial
-            entity.setComponents(newMaterial, followerTarget)
-          }
-        }
-        .setComponents(Mesh(Uri.parse("mesh://sphere")), Sphere(0.2f), defaultTargetMaterial)
+    droneTargetEnt.setComponents(
+        Mesh(Uri.parse("mesh://sphere")), Sphere(0.2f), defaultTargetMaterial)
   }
 
   private fun delayAction(action: () -> Unit, duration: Long): TimerTask {
     val timerTask =
         object : TimerTask() {
           override fun run() {
-            action()
+            activity.runOnMainThread { action() }
           }
         }
     Timer().schedule(timerTask, duration)

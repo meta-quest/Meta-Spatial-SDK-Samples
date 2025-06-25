@@ -88,6 +88,7 @@ dependencies {
   // Meta Spatial SDK libs
   implementation(libs.meta.spatial.sdk.base)
   implementation(libs.meta.spatial.sdk.vr)
+  implementation(libs.meta.spatial.sdk.isdk)
   implementation(libs.meta.spatial.sdk.ovrmetrics)
   implementation(libs.meta.spatial.sdk.toolkit)
   implementation(libs.meta.spatial.sdk.castinputforward)

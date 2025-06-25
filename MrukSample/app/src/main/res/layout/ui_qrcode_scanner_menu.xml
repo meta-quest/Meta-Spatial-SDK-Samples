@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+>
+
+  <TextView
+    android:id="@+id/mruk_title"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="QR Code Tracker Sample"
+    android:textSize="30sp"
+    android:textStyle="bold"
+    android:gravity="center"
+    android:layout_margin="16dp"
+  />
+
+  <TextView
+    android:id="@+id/explain_text"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="This sample demonstrates QR code tracking. Open a QR code on your phone (or print one out) that contains a link to a website. When looking at the QR code, a web view with the website should pop up."
+    android:textSize="24sp"
+    android:gravity="center"
+    android:layout_margin="16dp"
+  />
+
+  <Button
+    android:id="@+id/close_sample"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:text="Close Sample"
+  />
+
+</LinearLayout>

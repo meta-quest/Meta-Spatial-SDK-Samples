@@ -16,6 +16,7 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
+import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
@@ -25,6 +26,7 @@ import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.MeshCollision
@@ -43,7 +45,8 @@ class StarterSampleActivity : AppSystemActivity() {
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features = mutableListOf<SpatialFeature>(VRFeature(this))
+    val features =
+        mutableListOf<SpatialFeature>(VRFeature(this), IsdkFeature(this, spatial, systemManager))
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -59,9 +62,8 @@ class StarterSampleActivity : AppSystemActivity() {
         File(applicationContext.getCacheDir().canonicalPath), OkHttpAssetFetcher())
 
     // wait for GLXF to load before accessing nodes inside it
-    loadGLXF().invokeOnCompletion {
+    loadGLXF { composition ->
       // get the environment mesh from Spatial Editor and set it to use an unlit shader.
-      val composition = glXFManager.getGLXFInfo("example_key_name")
       val environmentEntity: Entity? = composition.getNodeByName("Environment").entity
       val environmentMesh = environmentEntity?.getComponent<Mesh>()
       environmentMesh?.defaultShaderOverride = SceneMaterial.UNLIT_SHADER
@@ -108,13 +110,13 @@ class StarterSampleActivity : AppSystemActivity() {
         })
   }
 
-  private fun loadGLXF(): Job {
+  private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          keyName = "example_key_name")
+          onLoaded = onLoaded)
     }
   }
 }

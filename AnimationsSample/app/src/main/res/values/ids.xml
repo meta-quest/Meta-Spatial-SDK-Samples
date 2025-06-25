@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-	<item type="id" name="is_built_in" />
+  <item type="id" name="is_built_in" />
 </resources>

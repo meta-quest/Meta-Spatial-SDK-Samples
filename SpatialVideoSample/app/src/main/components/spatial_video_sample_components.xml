@@ -1,3 +1,4 @@
+<?xml version="1.0" ?>
 <ComponentSchema packageName="com.meta.spatial.samples.spatialvideosample">
   <Component name="SpatializedAudioPanel" />
 </ComponentSchema>

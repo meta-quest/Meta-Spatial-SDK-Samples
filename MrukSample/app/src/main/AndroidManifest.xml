@@ -80,7 +80,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name="com.meta.spatial.samples.mruksample.MrukAnchorMeshSampleActivity"
+      android:name="com.meta.spatial.samples.mruksample.anchor_mesh.MrukAnchorMeshSampleActivity"
       android:launchMode="singleTask"
       android:excludeFromRecents="false"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
@@ -93,7 +93,33 @@
       </intent-filter>
     </activity>
     <activity
-      android:name="com.meta.spatial.samples.mruksample.RaycastSampleActivity"
+      android:name="com.meta.spatial.samples.mruksample.raycast.RaycastSampleActivity"
+      android:launchMode="singleTask"
+      android:excludeFromRecents="false"
+      android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
+      android:exported="true"
+    >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="com.oculus.intent.category.VR" />
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name="com.meta.spatial.samples.mruksample.keyboard_tracker.KeyboardTrackerSampleActivity"
+      android:launchMode="singleTask"
+      android:excludeFromRecents="false"
+      android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
+      android:exported="true"
+    >
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="com.oculus.intent.category.VR" />
+        <category android:name="android.intent.category.DEFAULT" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name="com.meta.spatial.samples.mruksample.qr_code_scanner.QrCodeScannerSampleActivity"
       android:launchMode="singleTask"
       android:excludeFromRecents="false"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"

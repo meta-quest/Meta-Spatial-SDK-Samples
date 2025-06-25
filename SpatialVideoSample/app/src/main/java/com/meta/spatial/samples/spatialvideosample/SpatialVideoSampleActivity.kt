@@ -51,6 +51,11 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
+import com.meta.spatial.isdk.IsdkFeature
+import com.meta.spatial.isdk.IsdkGrabbable
+import com.meta.spatial.isdk.IsdkPanelDimensions
+import com.meta.spatial.isdk.IsdkPanelGrabHandle
+import com.meta.spatial.isdk.updateIsdkComponentProperties
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.runtime.AlphaMode
@@ -71,8 +76,8 @@ import com.meta.spatial.runtime.TriangleMesh
 import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.AvatarSystem
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Grabbable
-import com.meta.spatial.toolkit.GrabbableSystem
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Hittable
 import com.meta.spatial.toolkit.Material
@@ -125,7 +130,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features = mutableListOf<SpatialFeature>(VRFeature(this))
+    val features =
+        mutableListOf<SpatialFeature>(VRFeature(this), IsdkFeature(this, spatial, systemManager))
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -164,10 +170,6 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
     locomotionSystem = systemManager.findSystem<LocomotionSystem>()
     locomotionSystem.enableLocomotion(false)
 
-    // Make X (left hand pinch) also trigger grabbing so we move panels with hand pinch
-    systemManager.findSystem<GrabbableSystem>().grabButtons =
-        (ButtonBits.ButtonSqueezeR or ButtonBits.ButtonSqueezeL or ButtonBits.ButtonX)
-
     controlsFadeOutTimer =
         object : CountDownTimer(100, 100) {
           override fun onTick(millisUntilFinished: Long) {}
@@ -177,8 +179,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
           }
         }
 
-    loadGLXF().invokeOnCompletion {
-      val composition = glXFManager.getGLXFInfo("example_key_name")
+    loadGLXF { composition ->
       environmentGLXF = composition.getNodeByName("MediaRoom").entity
       environmentGLXF?.let {
         val environmentMesh = it.getComponent<Mesh>()
@@ -258,13 +259,13 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
     scene.updateIBLEnvironment("chromatic.env")
   }
 
-  private fun loadGLXF(): Job {
+  private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          keyName = "example_key_name")
+          onLoaded = onLoaded)
     }
   }
 
@@ -330,9 +331,6 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
           width = MR_SCREEN_WIDTH
           height = MR_SCREEN_HEIGHT
           layerConfig = LayerConfig()
-          // want to disable left hand pinch so we can drag the panel around with hands
-          clickButtons =
-              (ButtonBits.ButtonA or ButtonBits.ButtonTriggerL or ButtonBits.ButtonTriggerR)
           // force efficient copy of video texture
           mips = 1
           sceneMeshCreator = { texture: SceneTexture ->
@@ -564,6 +562,14 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
             videoPanelEntity, CompletableFuture<SceneObject>().apply { complete(panelSceneObject) })
     // mark the mesh as explicitly able to catch input
     videoPanelEntity.setComponent(Hittable())
+
+    // Usually, ISDK is able to create panel dimensions from a Panel component. Since the video
+    // player manually constructs the PanelSceneObject, we need to manually set the panel
+    // dimensions & keep them up to date when switching MR modes.
+    videoPanelEntity.setComponent(IsdkPanelDimensions())
+    videoPanelEntity.setComponent(IsdkPanelGrabHandle())
+    videoPanelEntity.setComponent(IsdkGrabbable())
+    panelSceneObject.updateIsdkComponentProperties(videoPanelEntity)
   }
 
   private fun debugPanelRegistration(): PanelRegistration {
@@ -611,7 +617,6 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
       config {
         width = 0.8f
         height = 0.25f
-        pivotOffsetWidth = 0.5f
         pivotOffsetHeight = 1.05f
         includeGlass = false
         layerConfig = LayerConfig()
@@ -670,6 +675,10 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
   }
 
   fun animateControllerVisibility(visible: Boolean) {
+    if (!this::controllerView.isInitialized) {
+      return
+    }
+
     if (visible) {
       alphaAnimator =
           ObjectAnimator.ofFloat(controllerView, "alpha", controllerView.alpha, 1.0f).apply {
@@ -686,6 +695,10 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
   }
 
   fun resetControllerFadeOutTimer() {
+    if (!this::controllerView.isInitialized) {
+      return
+    }
+
     if (isPlaying) {
       controlsFadeOutTimer.cancel()
       controlsFadeOutTimer.start()
@@ -781,38 +794,40 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
   }
 
   public fun setMrMode(isMrMode: Boolean) {
+    val videoPanelEntity = Entity(R.integer.spatialized_video_panel)
     if (!isMrMode) {
-      mrPanelPose =
-          Entity(R.integer.spatialized_video_panel).tryGetComponent<Transform>()?.transform
-              ?: Pose()
+      mrPanelPose = videoPanelEntity.tryGetComponent<Transform>()?.transform ?: Pose()
       environmentGLXF?.setComponent(Visible(true))
       skydome?.setComponent(Visible(true))
     }
-    val grabbable =
-        Entity(R.integer.spatialized_video_panel).tryGetComponent<Grabbable>() ?: Grabbable()
+    val grabbable = videoPanelEntity.tryGetComponent<Grabbable>() ?: Grabbable()
     grabbable.enabled = isMrMode
-    Entity(R.integer.spatialized_video_panel).setComponent(grabbable)
+    videoPanelEntity.setComponent(grabbable)
 
     if (isMrMode) {
       scene.setViewOrigin(0f, 0f, 0f, 0f) // reset locomotion
       environmentGLXF?.setComponent(Visible(false))
       skydome?.setComponent(Visible(false))
-      Entity(R.integer.spatialized_video_panel)
-          .setComponents(
-              listOf(Scale(1.0f), Transform(mrPanelPose), TransformParent(Entity.nullEntity())))
+      videoPanelEntity.setComponents(
+          listOf(Scale(1.0f), Transform(mrPanelPose), TransformParent(Entity.nullEntity())))
       Entity(R.integer.controls_id)
           .setComponent(Transform(Pose(Vector3(0.0f, -0.43f, -0.15f), Quaternion(20f, 0f, 0f))))
     } else {
-      Entity(R.integer.spatialized_video_panel)
-          .setComponents(
-              listOf(
-                  Scale(SpatialVideoSampleActivity.VR_SCREEN_RATIO),
-                  Transform(Pose(Vector3(0.2f, 1.7f, 4.5f), Quaternion(0f, 0f, 0f))),
-              ))
+      videoPanelEntity.setComponents(
+          listOf(
+              Scale(SpatialVideoSampleActivity.VR_SCREEN_RATIO),
+              Transform(Pose(Vector3(0.2f, 1.7f, 4.5f), Quaternion(0f, 0f, 0f))),
+          ))
       Entity(R.integer.controls_id)
           .setComponents(
               listOf(Transform(Pose(Vector3(0.0f, -1.1f, -2.0f), Quaternion(20f, 0f, 0f)))))
     }
+
+    val sceneObjectSystem = systemManager.findSystem<SceneObjectSystem>()
+    val sysObject = sceneObjectSystem.getSceneObject(videoPanelEntity)?.getNow(null)
+    val panel = sysObject as PanelSceneObject?
+    panel?.updateIsdkComponentProperties(videoPanelEntity)
+
     scene.enablePassthrough(isMrMode)
     locomotionSystem.enableLocomotion(!isMrMode)
     avatarSystem.setShowControllers(!isMrMode)
