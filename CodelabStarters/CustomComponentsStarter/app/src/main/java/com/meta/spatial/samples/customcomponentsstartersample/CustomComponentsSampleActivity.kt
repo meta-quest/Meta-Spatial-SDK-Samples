@@ -25,6 +25,7 @@ import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.MeshCollision
@@ -72,9 +73,7 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
 
     // TODO: register the LookAt system and component
 
-    loadGLXF().invokeOnCompletion {
-      val composition = glXFManager.getGLXFInfo("example_key_name")
-
+    loadGLXF { composition ->
       // set the environment to be unlit
       val environmentEntity: Entity? = composition.getNodeByName("Environment").entity
       val environmentMesh = environmentEntity?.getComponent<Mesh>()
@@ -82,7 +81,6 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
       environmentEntity?.setComponent(environmentMesh!!)
 
       // TODO: get the robot and the basketBall entities from the composition
-
     }
   }
 
@@ -125,13 +123,13 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
   }
 
-  private fun loadGLXF(): Job {
+  private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          keyName = "example_key_name")
+          onLoaded = onLoaded)
     }
   }
 }
