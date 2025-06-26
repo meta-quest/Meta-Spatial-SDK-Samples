@@ -71,52 +71,53 @@ The documentation for Meta Spatial SDK can be found [here](https://developers.me
 
 Find our official release notes [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
 
-## 0.6.0 Updates
+## 0.7.0 Updates
 
-This release is a major version bump because it has a number of large improvements, new features, and a small number of breaking changes.
+This release is a major version bump, which means some breaking changes were introduced.
 
 ### Added
 
-- Experimental Feature: [Interaction SDK](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-isdk-overview/)
-  - Using `IsdkFeature` automatically replaces built in toolkit components/systems like Grabbable with `Isdk` equivalents
-  - Provides interactions that are consistent with the Meta Horizon OS and brings parity between controller and hand interactions
-    - Interact with panels directly using hands or controllers
-    - Grab 3D objects with hands or controllers, directly or using a raycast
-    - Advanced grab customization (responsiveness, two-handed, constraints)
-  - The `Object3DSampleIsdk` sample app in the [samples repo](https://github.com/meta-quest/Meta-Spatial-SDK-Samples) demonstrates how to use the new IsdkFeature and other Isdk APIs
-- Datamodel Inspector
-  - Using `DataModelInspectorFeature` launches a webserver at a specified port that provides a live table view of ECS.
-  - Connect to a running app via Data Model Inspector Tool Window in the new Meta Horizon Android Studio Plugin.
-- [Query filters and sorting](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-queries/)
-  - [Add filtering API for queries](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-filters/) so that developers can refine the entity query results by applying filters on attributes.
-  - [Add sorting API for queries](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-sorting/) so that developers can sort the entity by criteria on attributes.
-- GLTF Animation Pointer Support
-  - Added the ability to modify material factors and UV transforms via `KHR_animation_pointer` support.
-  - This can allow you to do things like animate opacity or make moving textures and play them with the `Animated()` component.
-- [DRM support](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-2dpanel-drm) for Activity based panels on v76
-  - Using an Activity based panel (not inflated view) along with a `LayerConfig` set to `secure=true` will allow you to display DRM content on v76+. Previously, you had to render directly to a secure swapchain.
+- Spatial SDK activity lifecycle
+  - Add an activity lifecycle callback `onSpatialShutdown`. This lifecycle callback is guaranteed to be called during a Spatial activity’s shutdown process. Spatial resources such as entities and scene objects should be cleaned up here.
+- Experimental Feature: `childrenOf` query
+  - Add a [childrenOf](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-childrenof-query) query to query the child entities for an entity.
+- Experimental Feature: `changedSince` query
+  - Add a [changedSince](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-changedsince-query) query to get the changed entities since a certain datamodel version.
+- CPU/GPU performance level now defaults to `SUSTAINED_HIGH`, added new performance level controls
+- Support for spatialization of Dolby Atmos and other soundfield audio using the AudioSessionId Component
+- Support for [compositor layer sharpening and super sampling](https://developers.meta.com/horizon/documentation/native/android/mobile-openxr-composition-layer-filtering) via `LayerFilters`
 
 ### Changed
 
-- We now support Color4 as an Attribute Type for use directly in components. Because of this, Color4 has been moved packages from `com.meta.spatial.toolkit` -> `com.meta.spatial.core`
-- Uris are now supported as an Attribute Type for use in components
-- Component XML is now the preferred method for making Spatial SDK Components
-  - Using Components XML increases performance of components and queries.
-  - Components XML can be used in Spatial Editor.
-  - Components written in Kotlin (instead of XML) will no longer be able to be added to objects in Spatial Editor
-- `PanelAnimation` and `PanelConfigOptions2` are now marked as experimental
-  - These APIs may be unstable and/or subject to change in the future. If you want to use them now, you will need to use the `@SpatialSDKExperimentalAPI` annotation
-- Default cursor has been changed to more closely match the Quest Home environment cursor
-- Samples now use `libs.versions.toml` for version management (removing the need to set the version in the `gradle.properties` file)
-- Changed the behavior of the `Layer.setClip()` API
-  - If the area of the clip for the left or right eye is 0, there will be no layer submitted for that eye.
-  - This can allow you to have separate transforms for layers sharing a swapchain with the left and right eyes
-- Bundled shaders assets have been cleaned up and compressed, decreasing APK size.
-- Various performance and stability improvements.
+- The Spatial SDK AARs are now built with Kotlin 2.1.0. This is a breaking change, so you will need to update the Kotlin version in your application.
+- Components are cached by default now, which reduces access to native C++ data and improves performance.
+- The component GLXF’s attribute `uri` is now a UriAttribute. The component Mesh’s `mesh` attribute is now also a UriAttribute.
+- Ray intersections with non-BVH meshes now ignore triangle backfaces (consistent with BVH intersections).
+  - This may break some apps - especially those with panels/buttons. Make sure they are oriented correctly.
+- Custom shaders should now import base Spatial SDK shader files prefixed with “data/shaders”, which matches the path to these files from the APK assets directory.
+  - `#include <metaSpatialSdkFragmentBase.glsl>` should become `#include <data/shaders/metaSpatialSdkFragmentBase.glsl>`
+- Experimental feature: panel animations
+  - The PanelAnimation component is removed. Use PanelQuadCylinderAnimation, PanelScaleInAnimation or PanelScaleOutAnimation instead.
+- Experimental feature: ISDK
+  - Rename IsdkToolkitBridgeSystem to IsdkComponentCreationSystem
+  - Near-field Grabbable entities can be picked up with whole-palm grab
+  - Interactor type hints added to PointerEvent.
+  - Panel offsets added to IsdkPanelDimensions.
+  - Updated sample applications to use IsdkFeature.
 
 ### Fixed
 
-- Fixed bug where deleting an entity while grabbed causes a crash
+- Fixed issue with glTF Animation Pointer node transformations getting applied to the wrong nodes
+- Experimental feature: ISDK
+  - Input now works via Cast Input Forwarding
+  - Entities can now be selected in the Data Model Inspector via in-game controllers or Cast Input Forwarding
+  - IsdkGrabbable billboarding now supports mesh direction offsets.
+  - Fix locomotion / IsdkSystem dependency ordering
+  - Allow non-uniform scaling on grabbables
+  - Improved cursor & ray visualizations
+  - Disabling collision via `Hittable` component now disables Isdk Surfaces.
+  - Visible(false) components now excluded from ISDK
+  - Animation of Curved/Quad panels now correctly updates IsdkPanelDimensions
 
 ## Spatial SDK Gradle Plugin
 
