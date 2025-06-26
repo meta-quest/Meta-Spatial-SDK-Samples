@@ -46,7 +46,7 @@ This release is a major version bump, which means some breaking changes were int
   - Entities can now be selected in the Data Model Inspector via in-game controllers or Cast Input Forwarding
   - IsdkGrabbable billboarding now supports mesh direction offsets.
   - Fix locomotion / IsdkSystem dependency ordering
-  - Allow non-uniform scaling on grabables
+  - Allow non-uniform scaling on grabbables
   - Improved cursor & ray visualizations
   - Disabling collision via `Hittable` component now disables Isdk Surfaces.
   - Visible(false) components now excluded from ISDK
