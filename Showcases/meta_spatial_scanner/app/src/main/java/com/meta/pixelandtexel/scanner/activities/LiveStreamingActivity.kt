@@ -300,10 +300,10 @@ class LiveStreamingActivity :
     super.onPause()
   }
 
-  override fun onDestroy() {
+  override fun onSpatialShutdown() {
     cameraController.dispose()
     videoServer.dispose()
-    super.onDestroy()
+    super.onSpatialShutdown()
   }
 
   // permissions requesting
