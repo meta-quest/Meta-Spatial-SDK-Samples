@@ -159,6 +159,6 @@ class WebView(
     }
 
     // ToolComponent is added to web view to save properties and identify it
-    ent.setComponent(ToolComponent(uuid, AssetType.WEB_VIEW, Vector3(0f, 0.3f, 0f)))
+    ent.setComponent(ToolComponent(uuid, AssetType.WEB_VIEW, Vector3(0f, 0.3f, -0.005f)))
   }
 }

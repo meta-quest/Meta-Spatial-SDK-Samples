@@ -43,14 +43,20 @@ Finally, we will probably want the spatial object to be placed facing the user, 
 We can calculate the lookRotation from the user's head to the object new position for that, and rotate it 180 degrees in the Y axis:
 ```kotlin
 var newRot = Quaternion.lookRotation(newPos - headPose.t)
-if (nonPanel) newRot *= Quaternion(0f, 180f, 0f)
+val billboardOrientationEuler: Vector3 =
+  entity.tryGetComponent<IsdkGrabbable>()?.billboardOrientation ?: Vector3(0f, 0f, 0f)
+
+newRot *= Quaternion(
+  billboardOrientationEuler.x,
+  billboardOrientationEuler.y,
+  billboardOrientationEuler.z)
 ```
 
 You can check *placeInFront()* full function below.
 It also includes an offset vector in case you need to place an element in a particular pose (relative to user).
 You will see that we treat some elements differently, like the toolbar and big panels, that are shown deeper or lower than the rest of the objects.
 ```kotlin
-fun placeInFront(entity: Entity?, offset: Vector3 = Vector3(0f), bigPanel:Boolean = false, nonPanel:Boolean = false) {
+fun placeInFront(entity: Entity?, offset: Vector3 = Vector3(0f), bigPanel:Boolean = false) {
     val headPose:Pose = getHeadPose();
 
     val isToolbar = entity!! == ImmersiveActivity.instance.get()?.toolbarPanel
@@ -74,9 +80,14 @@ fun placeInFront(entity: Entity?, offset: Vector3 = Vector3(0f), bigPanel:Boolea
 
     // Add rotation to look in same vector direction as user
     var newRot = Quaternion.lookRotation(newPos - headPose.t)
-    // Rotate 180 degrees to face user in case of non panel objects
-    if (nonPanel) newRot *= Quaternion(0f, 180f, 0f)
-
+    val billboardOrientationEuler: Vector3 =
+      entity.tryGetComponent<IsdkGrabbable>()?.billboardOrientation ?: Vector3(0f, 0f, 0f)
+    
+    newRot *= Quaternion(
+      billboardOrientationEuler.x,
+      billboardOrientationEuler.y,
+      billboardOrientationEuler.z)
+  
     entity.setComponent(Transform(Pose(newPos, newRot)))
 }
 ```
@@ -88,8 +99,8 @@ Here is the piece of the code where the main elements are placed at an initial c
 placeInFront(toolbarPanel)
 placeInFront(tasksPanel, Vector3(-0.45f, -0.04f, 0.8f))
 placeInFront(aiExchangePanel, Vector3(0.45f, -0.05f, 0.8f))
-placeInFront(clock, Vector3(0f, 0.23f, 0.9f), nonPanel = true)
-placeInFront(speaker, Vector3(-0.65f, -0.3f, 0.65f), nonPanel = true)
+placeInFront(clock, Vector3(0f, 0.23f, 0.9f))
+placeInFront(speaker, Vector3(-0.65f, -0.3f, 0.65f))
 ```
 
 ![Elements](./Resources/elements.jpg)

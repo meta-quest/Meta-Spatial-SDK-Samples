@@ -9,6 +9,7 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SpatialContext
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.isdk.IsdkGrabbable
 import com.meta.spatial.runtime.Scene
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
@@ -52,8 +53,9 @@ class Timer(scene: Scene, ctx: SpatialContext, totalTime: Int) {
         Entity.create(
             Mesh(mesh = Uri.parse("timer.glb")),
             Scale(0.1f),
-            Grabbable(true, GrabbableType.PIVOT_Y),
-            Transform(Pose(Vector3(0f))))
+            Grabbable(enabled = true, GrabbableType.PIVOT_Y),
+            IsdkGrabbable(billboardOrientation = Vector3(0f, 180f, 0f)),
+            Transform(Pose(Vector3(0f), Quaternion(0f, 180f, 0f))))
 
     // Create an entity with a panel component
     val timerPanel: Entity =
@@ -75,7 +77,7 @@ class Timer(scene: Scene, ctx: SpatialContext, totalTime: Int) {
     timerObj.setComponent(ToolComponent(-1, AssetType.TIMER, Vector3(0f, 0.13f, 0f)))
 
     // We place it in front of the user
-    placeInFront(timerObj, nonPanel = true)
+    placeInFront(timerObj)
     // We add a listener to show delete button when entity is selected
     addDeleteButton(timerObj)
     ImmersiveActivity.instance

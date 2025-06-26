@@ -17,6 +17,7 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.Query
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.isdk.IsdkGrabbable
 import com.meta.spatial.runtime.ButtonBits
 import com.meta.spatial.runtime.ButtonDownEventArgs
 import com.meta.spatial.runtime.ControllerButton
@@ -201,8 +202,7 @@ fun getHeadPose(): Pose {
 fun placeInFront(
     entity: Entity?,
     offset: Vector3 = Vector3(0f),
-    bigPanel: Boolean = false,
-    nonPanel: Boolean = false
+    bigPanel: Boolean = false
 ) {
   val headPose: Pose = getHeadPose()
 
@@ -228,8 +228,13 @@ fun placeInFront(
 
   // Add rotation to look in same vector direction as user
   var newRot = Quaternion.lookRotation(newPos - headPose.t)
-  // Rotate 180 degrees to face user in case of non panel objects
-  if (nonPanel) newRot *= Quaternion(0f, 180f, 0f)
+  val billboardOrientationEuler: Vector3 =
+    entity.tryGetComponent<IsdkGrabbable>()?.billboardOrientation ?: Vector3(0f, 0f, 0f)
+
+  newRot *= Quaternion(
+    billboardOrientationEuler.x,
+    billboardOrientationEuler.y,
+    billboardOrientationEuler.z)
 
   entity.setComponent(Transform(Pose(newPos, newRot)))
 }
