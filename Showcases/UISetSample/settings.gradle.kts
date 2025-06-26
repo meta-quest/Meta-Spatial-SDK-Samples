@@ -12,7 +12,7 @@ pluginManagement {
     mavenCentral()
     gradlePluginPortal()
   }
-  plugins { id("com.meta.spatial.plugin") version "0.6.0" }
+  plugins { id("com.meta.spatial.plugin") version "0.7.0" }
 }
 
 dependencyResolutionManagement {
