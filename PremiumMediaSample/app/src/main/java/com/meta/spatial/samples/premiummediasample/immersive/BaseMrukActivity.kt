@@ -11,7 +11,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import com.meta.spatial.core.SpatialFeature
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.toolkit.AppSystemActivity
@@ -22,7 +21,7 @@ abstract class BaseMrukActivity : AppSystemActivity() {
 
   override fun registerFeatures(): List<SpatialFeature> {
     mrukFeature = MRUKFeature(this, systemManager)
-    return listOf(VRFeature(this), IsdkFeature(this, spatial, systemManager), mrukFeature)
+    return listOf(VRFeature(this), mrukFeature)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
