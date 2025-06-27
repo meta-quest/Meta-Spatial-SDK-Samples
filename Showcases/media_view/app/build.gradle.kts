@@ -9,12 +9,13 @@ val metaSpatialSdkVersion: String by project
 plugins {
   id("com.android.application")
   id("org.jetbrains.kotlin.android")
-  id("kotlin-kapt")
+  id("com.google.devtools.ksp")
   id("com.google.dagger.hilt.android")
   id("kotlin-parcelize")
   id("com.meta.spatial.plugin")
   id("com.datadoghq.dd-sdk-android-gradle-plugin")
   id("org.jetbrains.kotlin.plugin.serialization")
+  id("org.jetbrains.kotlin.plugin.compose")
 }
 
 // Signing
@@ -42,8 +43,8 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 21
-    versionName = "0.0.19"
+    versionCode = 22
+    versionName = "0.0.20"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }
@@ -147,7 +148,7 @@ android {
     targetCompatibility = JavaVersion.VERSION_1_8
   }
   // Allow references to generated code (Hilt)
-  kapt { correctErrorTypes = true }
+  // ksp { correctErrorTypes = true }
 }
 
 dependencies {
@@ -172,15 +173,15 @@ dependencies {
   implementation("com.github.levin-riegner:cropify:master-SNAPSHOT")
 
   implementation("com.github.bumptech.glide:glide:4.16.0")
-  kapt("com.github.bumptech.glide:compiler:4.16.0")
+  ksp("com.github.bumptech.glide:compiler:4.16.0")
 
   // ExoPlayer
   implementation("androidx.media3:media3-exoplayer:1.4.1")
   implementation("androidx.media3:media3-ui:1.4.1")
 
   // Dependency injection
-  implementation("com.google.dagger:hilt-android:2.51")
-  kapt("com.google.dagger:hilt-android-compiler:2.51")
+  implementation("com.google.dagger:hilt-android:2.56.2")
+  ksp("com.google.dagger:hilt-android-compiler:2.56.2")
 
   // Utilities
   implementation("com.jakewharton.timber:timber:5.0.1")

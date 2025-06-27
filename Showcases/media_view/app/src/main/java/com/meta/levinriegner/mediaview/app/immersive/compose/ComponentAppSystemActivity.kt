@@ -47,6 +47,11 @@ open class ComponentAppSystemActivity : AppSystemActivity() {
     super.onResume()
     lifecycleOwner.onResume()
   }
+
+  override fun onSpatialShutdown() {
+    lifecycleOwner.onSpatialShutdown()
+    super.onSpatialShutdown()
+  }
 }
 
 class ComposeActivityLifecycleOwner : LifecycleOwner, ViewModelStoreOwner, SavedStateRegistryOwner {
@@ -69,6 +74,11 @@ class ComposeActivityLifecycleOwner : LifecycleOwner, ViewModelStoreOwner, Saved
   }
 
   fun onDestroy() {
+    lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    store.clear()
+  }
+
+  fun onSpatialShutdown() {
     lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     store.clear()
   }
