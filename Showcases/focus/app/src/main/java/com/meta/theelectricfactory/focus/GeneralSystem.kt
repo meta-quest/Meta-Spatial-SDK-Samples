@@ -37,8 +37,7 @@ class GeneralSystem() : SystemBase() {
       // home panel.
       if (headPose.t != Vector3(0f) && logo?.getComponent<Visible>()?.isVisible == false) {
 
-        placeInFront(
-            ImmersiveActivity.instance.get()?.logo, Vector3(0f, -0.1f, 0.9f), nonPanel = true)
+        placeInFront(ImmersiveActivity.instance.get()?.logo, Vector3(0f, -0.1f, 0.9f))
         ImmersiveActivity.instance.get()?.logo?.setComponent(Visible(true))
         initTime = System.currentTimeMillis()
 

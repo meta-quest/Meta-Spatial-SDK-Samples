@@ -88,6 +88,6 @@ class Tool(
     }
 
     // We add it a ToolComponent to be able to identify it and get the type and uuid of the entity
-    obj.setComponent(ToolComponent(uuid, type!!, Vector3(0f, deleteButtonHeight, 0f)))
+    obj.setComponent(ToolComponent(uuid, type!!, Vector3(0f, deleteButtonHeight, -0.005f)))
   }
 }

@@ -30,7 +30,11 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.Query
 import com.meta.spatial.core.SpatialFeature
+import com.meta.spatial.core.Vector2
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.isdk.IsdkFeature
+import com.meta.spatial.isdk.IsdkGrabbable
+import com.meta.spatial.isdk.IsdkPanelDimensions
 import com.meta.spatial.runtime.PanelSceneObject
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneAudioPlayer
@@ -109,7 +113,9 @@ class ImmersiveActivity : AppSystemActivity() {
   var waitingForAI = false
 
   override fun registerFeatures(): List<SpatialFeature> {
-    return listOf(VRFeature(this))
+    val features =
+        mutableListOf<SpatialFeature>(VRFeature(this), IsdkFeature(this, spatial, systemManager))
+    return features
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -467,8 +473,8 @@ class ImmersiveActivity : AppSystemActivity() {
       placeInFront(toolbarPanel)
       placeInFront(tasksPanel, Vector3(-0.45f, -0.04f, 0.8f))
       placeInFront(aiExchangePanel, Vector3(0.45f, -0.05f, 0.8f))
-      placeInFront(clock, Vector3(0f, 0.23f, 0.9f), nonPanel = true)
-      placeInFront(speaker, Vector3(-0.65f, -0.3f, 0.65f), nonPanel = true)
+      placeInFront(clock, Vector3(0f, 0.23f, 0.9f))
+      placeInFront(speaker, Vector3(-0.65f, -0.3f, 0.65f))
 
       // Unique elements created in database
       DB.createUniqueAsset(
@@ -556,6 +562,7 @@ class ImmersiveActivity : AppSystemActivity() {
             Transform(Pose(Vector3(0f))),
             Visible(false),
             Grabbable(true, GrabbableType.PIVOT_Y),
+            IsdkGrabbable(billboardOrientation = Vector3(0f, 180f, 0f)),
             // Empty UUID since the asset is not linked with any project for now
             UniqueAssetComponent(type = AssetType.SPEAKER))
 
@@ -624,6 +631,7 @@ class ImmersiveActivity : AppSystemActivity() {
             Scale(Vector3(0.1f)),
             Transform(Pose(Vector3(0f))),
             Grabbable(true, GrabbableType.FACE),
+            IsdkGrabbable(billboardOrientation = Vector3(0f, 180f, 0f)),
             Visible(false),
             // Empty UUID since the asset is not linked with any project for now
             UniqueAssetComponent(type = AssetType.CLOCK))
@@ -657,6 +665,7 @@ class ImmersiveActivity : AppSystemActivity() {
             Mesh(Uri.parse("mesh://box")),
             Box(Vector3(-0.02f, -0.02f, 0f), Vector3(0.02f, 0.02f, 0f)),
             Transform(Pose(Vector3(0f))),
+            IsdkPanelDimensions(Vector2(0.04f, 0.04f)),
             Material().apply {
               baseTextureAndroidResourceId = R.drawable.delete
               alphaMode = 1
@@ -696,6 +705,7 @@ class ImmersiveActivity : AppSystemActivity() {
             Scale(Vector3(0.075f)),
             Visible(false),
             Transform(Pose(Vector3(0f))),
+            IsdkGrabbable(enabled = false, billboardOrientation = Vector3(0f, 180f, 0f)),
         )
 
     environment =
@@ -1208,7 +1218,7 @@ class ImmersiveActivity : AppSystemActivity() {
 
   private fun registerTasksPanel(): PanelRegistration {
     val _width = 0.275f
-    val _height = 0.6f
+    val _height = 0.5f
     val _widthInPx = 1120
     val _dpi = 270
 
@@ -1952,8 +1962,16 @@ class ImmersiveActivity : AppSystemActivity() {
   // When an object is selected, the delete button is shown in the specified position
   fun selectElement(ent: Entity) {
     currentObjectSelected = ent
+    val billboardOrientationEuler: Vector3 =
+        ent.tryGetComponent<IsdkGrabbable>()?.billboardOrientation ?: Vector3(0f, 0f, 0f)
     deleteButton.setComponent(
-        Transform(Pose(ent.getComponent<ToolComponent>().deleteButtonPosition)))
+        Transform(
+            Pose(
+                ent.getComponent<ToolComponent>().deleteButtonPosition,
+                Quaternion(
+                    billboardOrientationEuler.x,
+                    billboardOrientationEuler.y,
+                    billboardOrientationEuler.z))))
     deleteButton.setComponent(TransformParent(ent))
     deleteButton.setComponent(Visible(true))
   }

@@ -54,6 +54,8 @@ class BoardParentingSystem : SystemBase() {
         }
       }
 
+      if (grabbingController == Entity.nullEntity()) return
+
       // Get absolute transform to compare real distance between controller and sticker
       val grabDistance =
           getAbsoluteTransform(grabbedChild)
