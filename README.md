@@ -54,7 +54,7 @@ We also have a starter app [CustomComponentsStarter](/CodelabStarters/CustomComp
 
 ## Showcases
 
-The [Showcases](/Showcases) folder contains three apps which are deployed to the Meta Horizon Store. These are fully-featured applications built with Meta Spatial SDK, and are open-sourced here in this repository.
+The [Showcases](/Showcases) folder contains five apps. These are fully-featured applications built with Meta Spatial SDK, and are open-sourced here in this repository.
 
 - [Focus](/Showcases/focus)
   - [Download from the store](https://www.meta.com/experiences/focus/8625912667430203/)
@@ -62,6 +62,9 @@ The [Showcases](/Showcases) folder contains three apps which are deployed to the
   - [Download from the store](https://www.meta.com/experiences/media-view/8510454682344317/)
 - [Geo Voyage](/Showcases/geo_voyage)
   - [Download from the store](https://www.meta.com/experiences/geo-voyage/8230251250434003/)
+- [Meta Horizon UI Set](/Showcases/UISetSample)
+- [Spatial Scanner](/Showcases/meta_spatial_scanner)
+
 
 ## Documentation
 
