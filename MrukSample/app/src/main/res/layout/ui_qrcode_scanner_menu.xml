@@ -21,7 +21,7 @@
     android:id="@+id/explain_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="This sample demonstrates QR code tracking. Open a QR code on your phone (or print one out) that contains a link to a website. When looking at the QR code, a web view with the website should pop up."
+    android:text="This sample shows how to track QR codes. Scan a QR code containing a website link, and a web view will open. This feature is still experimental make sure to enable it with `adb shell setprop debug.oculus.experimentalEnabled 1`."
     android:textSize="24sp"
     android:gravity="center"
     android:layout_margin="16dp"
