@@ -58,6 +58,11 @@ import com.meta.spatial.vr.VRFeature
 import java.lang.ref.WeakReference
 import kotlinx.coroutines.*
 
+import androidx.compose.runtime.Composable
+import com.meta.spatial.compose.ComposeFeature
+import com.meta.spatial.compose.composePanel
+import com.meta.spatial.runtime.LayerConfig
+
 class ImmersiveActivity : AppSystemActivity() {
 
   // Enable or disable AI in project
@@ -114,7 +119,7 @@ class ImmersiveActivity : AppSystemActivity() {
 
   override fun registerFeatures(): List<SpatialFeature> {
     val features =
-        mutableListOf<SpatialFeature>(VRFeature(this), IsdkFeature(this, spatial, systemManager))
+        mutableListOf<SpatialFeature>(VRFeature(this), ComposeFeature(), IsdkFeature(this, spatial, systemManager))
     return features
   }
 
@@ -437,11 +442,7 @@ class ImmersiveActivity : AppSystemActivity() {
 
   // Save project settings in second fragment
   fun saveProjectSettings(MRMode: Boolean? = null, projectName: String) {
-    var mrMode = false
-    if (MRMode != null && MRMode == true) {
-      mrMode = true
-      selectMRMode()
-    }
+    var mrMode = MRMode != null && MRMode == true
 
     // Settings if it is a new project...
     if (currentProject == null) {
@@ -866,7 +867,7 @@ class ImmersiveActivity : AppSystemActivity() {
 
               // if second fragment is initialized and active, we change to First Fragment
               try {
-                if (SecondFragment.instance.get()?.isActive() == true) {
+                if (SecondFragment.instance.get()?.isCurrentlyVisible() == true) {
                   SecondFragment.instance.get()?.moveToFirstFragment()
                 } else {
                   FirstFragment.instance.get()?.refreshProjects()
@@ -894,7 +895,7 @@ class ImmersiveActivity : AppSystemActivity() {
 
               // if first fragment is initialized and active, we change to Second Fragment
               try {
-                if (FirstFragment.instance.get()?.isActive() == true) {
+                if (FirstFragment.instance.get()?.isCurrentlyVisible() == true) {
                   FirstFragment.instance.get()?.moveToSecondFragment()
                 }
               } catch (e: UninitializedPropertyAccessException) {}

@@ -5,6 +5,7 @@ val metaSpatialSdkVersion: String by project
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.jetbrains.kotlin.android)
+  alias(libs.plugins.compose.compiler)
   id("com.meta.spatial.plugin")
 }
 
@@ -34,7 +35,11 @@ android {
     targetCompatibility = JavaVersion.VERSION_1_8
   }
   kotlinOptions { jvmTarget = "1.8" }
-  buildFeatures { viewBinding = true }
+  buildFeatures {
+    viewBinding = true
+    compose = true
+  }
+  composeOptions { kotlinCompilerExtensionVersion = "1.5.15" }
 }
 
 dependencies {
@@ -57,6 +62,17 @@ dependencies {
   implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-isdk:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-compose:$metaSpatialSdkVersion")
+
+  // Meta Spatial UI Set
+  implementation(files("libs/meta-spatial-uiset-1.0.1.aar"))
+
+  // Compose
+  implementation("androidx.compose.material3:material3")
+  implementation(platform("androidx.compose:compose-bom:2024.11.00"))
+  implementation("androidx.compose.ui:ui")
+  implementation("androidx.compose.ui:ui-tooling-preview")
+  debugImplementation("androidx.compose.ui:ui-tooling")
 
   // AI Integration dependencies
   implementation("com.google.code.gson:gson:2.8.9")
