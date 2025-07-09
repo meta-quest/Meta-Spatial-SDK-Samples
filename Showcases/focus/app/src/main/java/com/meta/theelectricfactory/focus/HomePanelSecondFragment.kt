@@ -2,7 +2,6 @@
 
 package com.meta.theelectricfactory.focus
 
-import android.R
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -10,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,21 +41,24 @@ import com.meta.spatial.uiset.theme.icons.regular.CategoryAll
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import com.meta.spatial.toolkit.Visible
+import com.meta.spatial.uiset.theme.LocalColorScheme
 import com.meta.spatial.uiset.theme.LocalTypography
 
 @Composable
 fun HomePanelSecondFragmentScreen() {
 
-    var saveButtonLabel = if (ImmersiveActivity.instance.get()?.currentProject != null) "Save project" else "Create project"
+    var immersiveActivity = ImmersiveActivity.getInstance()
+
+    var saveButtonLabel = if (immersiveActivity?.currentProject != null) "Save project" else "Create project"
     var projectNameInput = remember {
         mutableStateOf(
-            if (ImmersiveActivity.instance.get()?.currentProject != null) ImmersiveActivity.instance.get()?.currentProject!!.name
+            if (immersiveActivity?.currentProject != null) immersiveActivity.currentProject!!.name
             else ""
         )
     }
     var envSelected = remember {
         mutableIntStateOf(
-            if (ImmersiveActivity.instance.get()?.currentProject != null && !ImmersiveActivity.instance.get()?.currentProject!!.MR) ImmersiveActivity.instance.get()?.currentProject?.environment!!
+            if (immersiveActivity?.currentProject != null && !immersiveActivity.currentProject!!.MR) immersiveActivity.currentProject?.environment!!
             else 3
         )
     }
@@ -68,7 +72,6 @@ fun HomePanelSecondFragmentScreen() {
                     .background(SpatialTheme.colorScheme.panel)
                     .padding(40.dp),
             ) {
-
                 Row (modifier = Modifier
                     .fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween,
@@ -76,36 +79,39 @@ fun HomePanelSecondFragmentScreen() {
                 ) {
                     Text(
                         text = "Project Settings",
-                        color = Color.White //TODO get the color of the theme
+                        color = LocalColorScheme.current.primaryButton //TODO get the color of the theme
                     )
 
-                    PrimaryCircleButton(
-                        icon = {
-                            Icon(
-                                painterResource(id = R.drawable.ic_input_delete), //TODO
-                                contentDescription = "Close"
-                            )
-                        },
-                        onClick = {
-                            // If we don't have a current project open, we return Home Panel first view.
-                            if (ImmersiveActivity.instance.get()?.currentProject == null) {
-                                projectNameInput.value = ""
-                                ImmersiveActivity.instance.get()?.newProject()
-                                SecondFragment.instance.get()?.moveToFirstFragment()
-                            } else {
-                                // If it's an old project, we update project info each time the user closes or changes a property
-                                saveCurrentProject(projectNameInput, envSelected.intValue)
+                    Box(modifier = Modifier
+                        .height(40.dp)          //TODO
+                        .aspectRatio(1f)
+                    ) {
+                        PrimaryCircleButton(
+                            icon = {
+                                Icon(
+                                    painterResource(id = R.drawable.close),
+                                    contentDescription = "Close"
+                                )
+                            },
+                            onClick = {
+                                // If we don't have a current project open, we return Home Panel first view.
+                                if (ImmersiveActivity.getInstance()?.currentProject == null) {
+                                    projectNameInput.value = ""
+                                    ImmersiveActivity.getInstance()?.newProject()
+                                    SecondFragment.instance.get()?.moveToFirstFragment()
+                                } else {
+                                    // If it's an old project, we update project info each time the user closes or changes a property
+                                    saveCurrentProject(projectNameInput, envSelected.intValue)
+                                }
                             }
-                        }
-                    )
+                        )
+
+                    }
+
+
                 }
 
                 Spacer(modifier = Modifier.size(40.dp))
-
-                Text(
-                    text = "Project name",
-                    color = Color.White //TODO get the color of the theme
-                )
 
                 SpatialTextField(
                     modifier = Modifier.fillMaxWidth(),
@@ -117,25 +123,20 @@ fun HomePanelSecondFragmentScreen() {
 
                 Spacer(modifier = Modifier.size(40.dp))
 
-                // Gray line
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(1.dp)
-                        .background(color = Color(0xFFD4D3DC))
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = Color(0xFFD4D3DC)
                 )
 
                 Spacer(modifier = Modifier.size(40.dp))
 
                 Text(
                     text = "Select your environment",
-                    color = Color.White //TODO get the color of the theme
+                    color = LocalColorScheme.current.primaryButton //TODO get the color of the theme
                 )
 
-                Spacer(modifier = Modifier.size(40.dp))
-
                 LazyVerticalGrid(
-                    modifier = Modifier.height(370.dp),
+                    modifier = Modifier.height(380.dp),
                     columns = GridCells.Fixed(4),
                     horizontalArrangement = Arrangement.spacedBy(20.dp),
                 ) {
@@ -159,10 +160,9 @@ fun HomePanelSecondFragmentScreen() {
                             secondaryLabel = reality,
                             selected =  envSelected.intValue == environment.index,
                             onSelectionChange = {
-                                if (ImmersiveActivity.instance.get()?.currentProject != null) {
-                                    ImmersiveActivity.instance.get()?.currentProject!!.environment = environment.index
-                                    ImmersiveActivity.instance
-                                        .get()
+                                if (ImmersiveActivity.getInstance()?.currentProject != null) {
+                                    ImmersiveActivity.getInstance()?.currentProject!!.environment = environment.index
+                                    ImmersiveActivity.getInstance()
                                         ?.saveProjectSettings(envSelected.intValue != 3, projectNameInput.value)
                                 }
                                 envSelected.intValue = environment.index
@@ -171,14 +171,16 @@ fun HomePanelSecondFragmentScreen() {
                     }
                 }
 
-                Spacer(modifier = Modifier.size(40.dp))
+                Spacer(modifier = Modifier.size(20.dp))
 
                 Box (
                     modifier = Modifier.align(Alignment.End),
                 ) {
                     PrimaryButton(
                         label = saveButtonLabel,
-                        onClick = { saveCurrentProject(projectNameInput, envSelected.intValue) },
+                        onClick = {
+                            saveCurrentProject(projectNameInput, envSelected.intValue)
+                        },
                     )
                 }
             }
@@ -188,8 +190,8 @@ fun HomePanelSecondFragmentScreen() {
 
 // Show a border for selected environment image
 fun selectEnv(env: Int) {
-    if (env != 3) ImmersiveActivity.instance.get()?.selectEnvironment(env)
-    else ImmersiveActivity.instance.get()?.selectMRMode()
+    if (env != 3) ImmersiveActivity.getInstance()?.selectEnvironment(env)
+    else ImmersiveActivity.getInstance()?.selectMRMode()
 
     // TODO Show correct UI
 }
@@ -202,13 +204,13 @@ fun saveCurrentProject(
         projectNameInput.value = "Untitled"
     }
 
-    ImmersiveActivity.instance.get()?.saveProjectSettings(envSelected == 3, projectNameInput.value)
-    ImmersiveActivity.instance.get()?.homePanel?.setComponent(Visible(false))
+    ImmersiveActivity.getInstance()?.saveProjectSettings(envSelected == 3, projectNameInput.value)
+    ImmersiveActivity.getInstance()?.homePanel?.setComponent(Visible(false))
 }
 
 @Preview(
     widthDp = 1450,
-    heightDp = 1025,
+    heightDp = 900,
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable
