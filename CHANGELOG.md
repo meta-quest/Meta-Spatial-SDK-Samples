@@ -17,7 +17,9 @@ This release is a major version bump, which means some breaking changes were int
 - Experimental Feature: `changedSince` query
   - Add a `changedSince` query to get the changed entities since a certain datamodel version.
 - CPU/GPU performance level now defaults to `SUSTAINED_HIGH`, added new performance level controls
+- Support for spatialization of Dolby Atmos and other soundfield audio using the AudioSessionId Component
 - Support for compositor layer sharpening and super sampling (https://developers.meta.com/horizon/documentation/native/android/mobile-openxr-composition-layer-filtering) via `LayerFilters`
+- Support for [Live Edits](https://developer.android.com/develop/ui/compose/tooling/iterative-development) on Jetpack Compose UIs.
 
 ### Changed
 
