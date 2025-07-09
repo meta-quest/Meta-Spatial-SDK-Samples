@@ -2029,7 +2029,14 @@ class ImmersiveActivity : AppSystemActivity() {
     if (!cleaningProject) scene.playSound(deleteSound, position, 1f)
   }
 
-  companion object {
-    lateinit public var instance: WeakReference<ImmersiveActivity>
-  }
+//  companion object {
+//    lateinit public var instance: WeakReference<ImmersiveActivity>
+//  }
+
+    companion object {
+        lateinit var instance: WeakReference<ImmersiveActivity>
+
+        fun getInstance(): ImmersiveActivity? =
+            if (::instance.isInitialized) instance.get() else null
+    }
 }

@@ -2,9 +2,7 @@
 
 package com.meta.theelectricfactory.focus
 
-import android.R
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,13 +10,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,7 +30,6 @@ import androidx.compose.ui.unit.dp
 import com.meta.spatial.uiset.button.PrimaryButton
 import com.meta.spatial.uiset.button.PrimaryCircleButton
 import com.meta.spatial.uiset.button.TextTileButton
-import com.meta.spatial.uiset.theme.LocalTypography
 import com.meta.spatial.uiset.theme.SpatialTheme
 
 data class ProjectData(val uuid: Int, val name: String, val timeAgo: String)
@@ -66,12 +63,9 @@ fun HomePanelFirstFragmentScreen(projects: List<ProjectData>) {
 
                 Spacer(modifier = Modifier.size(40.dp))
 
-                // Gray line
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(1.dp)
-                        .background(color = Color(0xFFD4D3DC))
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = Color(0xFFD4D3DC)
                 )
 
                 Spacer(modifier = Modifier.size(40.dp))
@@ -119,14 +113,29 @@ fun ProjectCard(project: ProjectData, onDelete: (Int) -> Unit) {
                 ImmersiveActivity.instance.get()?.loadProject(project.uuid)
             })
 
-        PrimaryCircleButton(
-            icon = {
-                Icon(
-                    painterResource(id = R.drawable.ic_input_delete), //TODO
-                    contentDescription = "Delete project"
-                )},
-            onClick = { onDelete(project.uuid) }
-        )
+        Box(modifier = Modifier
+            .height(40.dp)          //TODO
+            .aspectRatio(1f)
+            //.align()
+        ) {
+            PrimaryCircleButton(
+                icon = {
+                    Icon(
+                        painterResource(id = R.drawable.delete_task),
+                        contentDescription = "Delete project"
+                    )},
+                onClick = { onDelete(project.uuid) }
+            )
+        }
+
+//        PrimaryCircleButton(
+//            icon = {
+//                Icon(
+//                    painterResource(id = R.drawable.delete_task),
+//                    contentDescription = "Delete project"
+//                )},
+//            onClick = { onDelete(project.uuid) }
+//        )
     }
 }
 
@@ -165,7 +174,7 @@ fun getProjectsFromDB(): List<ProjectData> {
 
 @Preview(
     widthDp = 1450,
-    heightDp = 1025,
+    heightDp = 900,
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable
