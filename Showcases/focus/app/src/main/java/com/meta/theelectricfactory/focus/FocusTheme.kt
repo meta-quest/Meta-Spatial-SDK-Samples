@@ -2,20 +2,16 @@
 
 package com.meta.theelectricfactory.focus
 
-import android.content.res.Configuration
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import com.meta.spatial.uiset.theme.LocalColorScheme
 import com.meta.spatial.uiset.theme.LocalTypography
 import com.meta.spatial.uiset.theme.SpatialColorScheme
 import com.meta.spatial.uiset.theme.SpatialShapes
 import com.meta.spatial.uiset.theme.SpatialTheme
 import com.meta.spatial.uiset.theme.SpatialTypography
-import com.meta.spatial.uiset.theme.darkSpatialColorScheme
 import com.meta.spatial.uiset.theme.lightSpatialColorScheme
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.unit.sp
@@ -41,15 +37,27 @@ object FocusColors {
                 ),
         )
 
-    // celeste fuerte #42A4FF
-    // violeta tranqui #EFEEFF //paneles
-    // violeta tranqui seleccionado #DFDCFF
-    // violeta fuerte #6153FF
-    // violeta fuerte deshabilitado #BFBAFF
-    // gris tranqui #F1F0F3
-    // texto ngro #16161B
-    // texto gris fuerte #434152
-    // texto gris subtitulo #A8A7B8
+    val blue = Color(0xFF42A4FF)
+    val disabledBlue = Color(0xFF004281)
+    val purple = Color(0xFF6153FF)
+    val disabledPurple = Color(0xFFBFBAFF)
+    val lightPurple = Color(0xFFEFEEFF)
+    val selectedLightPurple= Color(0xFFDFDCFF)
+    val black = Color(0xFF16161B)
+    val strongGray = Color(0xFF434152)
+    val gray = Color(0xFF434152)
+    val lightGray = Color(0xFFF1F0F3)
+
+    val lightBlue = Color(0xFFECF6FF)
+    val lightGreen = Color(0xFFDBFBF9)
+    val aiPurple = Color(0xFFF4EEFF)
+
+    val yellowStickyNote = Color(0xFFFFF874)
+    val greenStickyNote = Color(0xFF8DFFD9)
+    val pinkStickyNote = Color(0xFFFFA0C9)
+    val orangeStickyNote = Color(0xFFFFAA97)
+    val blueStickyNote = Color(0xFF8DCCFF)
+    val purpleStickyNote = Color(0xFFB390FF)
 }
 
 val onestFontFamily =
@@ -71,7 +79,8 @@ fun FocusTheme(content: @Composable () -> Unit) {
         colorScheme = focusColorScheme(),
         typography = focusTypo(),
         shapes = SpatialShapes(),
-        content = content)
+        content = content
+    )
 }
 
 @Composable
@@ -115,6 +124,11 @@ fun focusColorScheme(): SpatialColorScheme {
             secondaryButton = FocusColors.secondaryButton,
             panel = FocusColors.panel,
             dialog = FocusColors.dialog,
+//            active = FocusColors.primaryButton,
+//            hover = FocusColors.primaryButton,
+            primaryAlphaBackground = FocusColors.primaryButton,
+//            menu = FocusColors.primaryButton,
+//            sideNavBackground = FocusColors.primaryButton,
         )
 
 //    val focusDarkColorScheme = darkSpatialColorScheme()

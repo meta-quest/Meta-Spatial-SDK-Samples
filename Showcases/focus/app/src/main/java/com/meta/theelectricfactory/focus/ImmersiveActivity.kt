@@ -82,6 +82,7 @@ class ImmersiveActivity : AppSystemActivity() {
   // PANELS
   lateinit var homePanel: Entity
   lateinit var toolbarPanel: Entity
+  lateinit var testPanel: Entity
   lateinit var tasksPanel: Entity
   lateinit var aiExchangePanel: Entity
 
@@ -167,17 +168,63 @@ class ImmersiveActivity : AppSystemActivity() {
   override fun registerPanels(): List<PanelRegistration> {
     return listOf(
         registerHomePanel(),
-        registerToolbarPanel(),
+        //registerToolbarPanel(),
+        panelRegistration(PanelRegistrationIds.Toolbar, 0.65f, 0.065f, 105 ) { ToolbarPanel() },
         registerTasksPanel(),
         registerAIExchangePanel(),
-        registerStickySubPanel(),
-        registerLabelSubPanel(),
-        registerArrowSubPanel(),
-        registerBoardSubPanel(),
-        registerShapesSubPanel(),
-        registerStickerSubPanel(),
-        registerTimerSubPanel())
+        //registerStickySubPanel(),
+        panelRegistration(PanelRegistrationIds.StickySubPanel, 0.26f, 0.042f, 140 ) { StickySubPanel() },
+        //registerLabelSubPanel(),
+        panelRegistration(PanelRegistrationIds.LabelSubPanel, 0.47f, 0.042f, 140 ) { LabelSubPanel() },
+        //registerArrowSubPanel(),
+        panelRegistration(PanelRegistrationIds.ArrowSubPanel, 0.28f, 0.042f, 140 ) { ArrowSubPanel() },
+        //registerBoardSubPanel(),
+        panelRegistration(PanelRegistrationIds.BoardSubPanel, 0.21f, 0.042f, 140 ) { BoardSubPanel() },
+        //registerShapesSubPanel(),
+        panelRegistration(PanelRegistrationIds.ShapesSubPanel, 0.28f, 0.042f, 140 ) { ShapeSubPanel() },
+        //registerStickerSubPanel(),
+        panelRegistration(PanelRegistrationIds.StickerSubPanel, 0.29f, 0.042f, 140 ) { StickerSubPanel() },
+        //registerTimerSubPanel(),
+        panelRegistration(PanelRegistrationIds.TimerSubPanel, 0.38f, 0.042f, 140 ) { TimerSubPanel() },
+
+        panelRegistration(PanelRegistrationIds.PANEL_TEST, 0.28f, 0.042f, 140 ) { ArrowSubPanel() },
+    )
   }
+
+    object PanelRegistrationIds {
+        const val Toolbar = 25 //TODO
+        const val StickySubPanel = 26
+        const val LabelSubPanel = 27
+        const val ArrowSubPanel = 28
+        const val BoardSubPanel = 29
+        const val ShapesSubPanel = 30
+        const val StickerSubPanel = 31
+        const val TimerSubPanel = 32
+
+        const val PANEL_TEST = 35
+    }
+
+    private fun panelRegistration(
+        registrationId: Int,
+        layoutWidth: Float,
+        layoutHeight: Float,
+        dpi: Int,
+        content: @Composable () -> Unit,
+    ): PanelRegistration {
+        return PanelRegistration(registrationId) { _ ->
+            config {
+                width = layoutWidth
+                height = layoutHeight
+                layoutDpi = dpi // TODO
+                layerConfig = LayerConfig() // TODO maybe this is too expensive
+                enableTransparent = true
+                includeGlass = false
+                themeResourceId = R.style.Theme_Focus_Transparent
+            }
+
+            composePanel { setContent { content() } }
+        }
+    }
 
   override fun onPause() {
     super.onPause()
@@ -342,10 +389,12 @@ class ImmersiveActivity : AppSystemActivity() {
     placeInFront(toolbarPanel)
     toolbarPanel.setComponent(Visible(true))
 
+      placeInFront(testPanel)
+
     showClock(true)
     showSpeaker(true)
 
-    audioButton.setImageResource(if (speakerIsOn) R.drawable.sound else R.drawable.sound_off)
+    //audioButton.setImageResource(if (speakerIsOn) R.drawable.sound else R.drawable.sound_off)
 
     // Load and create Tool Assets
     val toolsCursor = DB.getToolAssets(currentProject?.uuid)
@@ -453,6 +502,7 @@ class ImmersiveActivity : AppSystemActivity() {
       DB.createProject(project)
 
       placeInFront(toolbarPanel)
+        placeInFront(testPanel)
       toolbarPanel.setComponent(Visible(true))
       tasksPanel.setComponent(Visible(true))
       if (AIenabled) aiExchangePanel.setComponent(Visible(true))
@@ -476,6 +526,8 @@ class ImmersiveActivity : AppSystemActivity() {
       placeInFront(aiExchangePanel, Vector3(0.45f, -0.05f, 0.8f))
       placeInFront(clock, Vector3(0f, 0.23f, 0.9f))
       placeInFront(speaker, Vector3(-0.65f, -0.3f, 0.65f))
+
+        placeInFront(testPanel)
 
       // Unique elements created in database
       DB.createUniqueAsset(
@@ -685,6 +737,7 @@ class ImmersiveActivity : AppSystemActivity() {
   private fun createPanels() {
     createHomePanel()
     createToolbarPanel()
+    createTestPanel()
     createTasksPanel()
     createAIExchangePanel()
 
@@ -762,7 +815,7 @@ class ImmersiveActivity : AppSystemActivity() {
     // Project audio state updated in database
     DB.updateUniqueAsset(speaker.getComponent<UniqueAssetComponent>().uuid, state = speakerIsOn)
     // Change texture to audio button state image in toolbar
-    audioButton.setImageResource(R.drawable.sound)
+    //audioButton.setImageResource(R.drawable.sound)
   }
 
   // Stop ambient audio and save its state in database
@@ -779,7 +832,7 @@ class ImmersiveActivity : AppSystemActivity() {
     // Project audio state updated in database
     DB.updateUniqueAsset(speaker.getComponent<UniqueAssetComponent>().uuid, state = speakerIsOn)
     // Change texture to audio button state image in toolbar
-    audioButton.setImageResource(R.drawable.sound_off)
+    //audioButton.setImageResource(R.drawable.sound_off)
   }
 
   // Play sound when a tool has been created
@@ -841,6 +894,57 @@ class ImmersiveActivity : AppSystemActivity() {
         }
     return panelRegistration
   }
+
+    fun OpenHomePanel() {
+        // if second fragment is initialized and active, we change to First Fragment
+        try {
+            if (SecondFragment.instance.get()?.isCurrentlyVisible() == true) {
+                SecondFragment.instance.get()?.moveToFirstFragment()
+            } else {
+                FirstFragment.instance.get()?.refreshProjects()
+            }
+        } catch (e: UninitializedPropertyAccessException) {}
+        placeInFront(homePanel)
+        homePanel.setComponent(Visible(true))
+        ambientSoundPlayer.stop()
+
+        newProject()
+    }
+
+    fun SwitchAudio() {
+        if (speakerIsOn) {
+            stopAmbientSound()
+        } else {
+            playAmbientSound()
+        }
+    }
+
+    fun OpenSettingsPanel() {
+        // if first fragment is initialized and active, we change to Second Fragment
+        try {
+            if (FirstFragment.instance.get()?.isCurrentlyVisible() == true) {
+                FirstFragment.instance.get()?.moveToSecondFragment()
+            }
+        } catch (e: UninitializedPropertyAccessException) {}
+        placeInFront(homePanel)
+        homePanel.setComponent(Visible(true))
+    }
+
+    fun OpenTasksPanel() {
+        placeInFront(tasksPanel, bigPanel = true)
+        tasksPanel.setComponent(Visible(true))
+        DB.updateUniqueAsset(tasksPanel.getComponent<UniqueAssetComponent>().uuid, state = true)
+    }
+
+    fun OpenWebView() {
+        WebView(scene, spatialContext)
+    }
+
+    fun OpenAIPanel() {
+        placeInFront(aiExchangePanel, bigPanel = true)
+        aiExchangePanel.setComponent(Visible(true))
+        DB.updateUniqueAsset(aiExchangePanel.getComponent<UniqueAssetComponent>().uuid, state = true)
+    }
 
   private fun registerToolbarPanel(): PanelRegistration {
     val _width = 0.65f
@@ -999,6 +1103,69 @@ class ImmersiveActivity : AppSystemActivity() {
         }
     return panelRegistration
   }
+
+    fun CreateStickyNote(index: Int) {
+        StickyNote(
+            scene = scene,
+            ctx = spatialContext,
+            message = "",
+            color = StickyColor.entries[index])
+        closeSubPanels()
+    }
+
+    fun CreateLabelTool(index: Int) {
+        // Create Label tool
+        Tool(
+            type = AssetType.LABEL,
+            source = labels[index].toString(),
+            size = 0.065f,
+            deleteButtonHeight = 0.05f)
+        closeSubPanels()
+    }
+
+    fun CreateArrowTool(index: Int) {
+        // Create Arrow tool
+        Tool(
+            type = AssetType.ARROW,
+            source = arrows[index].toString(),
+            size = 0.1f,
+            deleteButtonHeight = getDeleteButtonHeight(AssetType.ARROW, index))
+        closeSubPanels()
+    }
+
+    fun CreateBoard(index: Int) {
+        // Create Board
+        Tool(
+            type = AssetType.BOARD,
+            source = boards[index].toString(),
+            size = getAssetSize(AssetType.BOARD, index),
+            deleteButtonHeight = getDeleteButtonHeight(AssetType.BOARD, index))
+        closeSubPanels()
+    }
+
+    fun CreateShape(index: Int) {
+        // Create Shape tool (2D or 3D)
+        val type = if (index % 2 == 0) AssetType.SHAPE_2D else AssetType.SHAPE_3D
+        val deleteHeight = if (index % 2 == 0) 0.08f else 0.12f
+        Tool(
+            type = type,
+            source = shapes[index].toString(),
+            size = getAssetSize(type, index),
+            deleteButtonHeight = deleteHeight)
+        closeSubPanels()
+    }
+
+    fun CreateSticker(index: Int) {
+        // Create Sticker tool
+        Tool(type = AssetType.STICKER, source = stickers[index].toString(), size = 0.04f)
+        closeSubPanels()
+    }
+
+    fun CreateTimer(index: Int) {
+        // Create Timer
+        Timer(scene = scene, ctx = spatialContext, (index + 1) * 5)
+        closeSubPanels()
+    }
 
   private fun registerLabelSubPanel(): PanelRegistration {
     val _width = 0.47f
@@ -1340,16 +1507,24 @@ class ImmersiveActivity : AppSystemActivity() {
   fun createToolbarPanel() {
     toolbarPanel =
         Entity.createPanelEntity(
-            R.layout.toolbar_panel,
+            PanelRegistrationIds.Toolbar,
             Transform(Pose(Vector3(0f))),
             Grabbable(true, GrabbableType.FACE),
             Visible(false))
   }
+    fun createTestPanel() {
+        testPanel =
+            Entity.createPanelEntity(
+                PanelRegistrationIds.PANEL_TEST,
+                Transform(Pose(Vector3(0f))),
+                Grabbable(true, GrabbableType.FACE),
+                Visible(true))
+    }
 
   fun createStickySubPanel() {
     stickySubPanel =
         Entity.createPanelEntity(
-            R.layout.sticky_sub_panel,
+            PanelRegistrationIds.StickySubPanel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
             TransformParent(toolbarPanel))
@@ -1360,7 +1535,7 @@ class ImmersiveActivity : AppSystemActivity() {
   fun createLabelSubPanel() {
     labelSubPanel =
         Entity.createPanelEntity(
-            R.layout.label_sub_panel,
+            PanelRegistrationIds.LabelSubPanel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
             TransformParent(toolbarPanel))
@@ -1371,7 +1546,7 @@ class ImmersiveActivity : AppSystemActivity() {
   fun createArrowSubPanel() {
     arrowSubPanel =
         Entity.createPanelEntity(
-            R.layout.arrow_sub_panel,
+            PanelRegistrationIds.ArrowSubPanel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
             TransformParent(toolbarPanel))
@@ -1382,7 +1557,7 @@ class ImmersiveActivity : AppSystemActivity() {
   fun createBoardSubPanel() {
     boardSubPanel =
         Entity.createPanelEntity(
-            R.layout.board_sub_panel,
+            PanelRegistrationIds.BoardSubPanel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
             TransformParent(toolbarPanel))
@@ -1393,7 +1568,7 @@ class ImmersiveActivity : AppSystemActivity() {
   fun createShapeSubPanel() {
     shapeSubPanel =
         Entity.createPanelEntity(
-            R.layout.shape_sub_panel,
+            PanelRegistrationIds.ShapesSubPanel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
             TransformParent(toolbarPanel))
@@ -1404,7 +1579,7 @@ class ImmersiveActivity : AppSystemActivity() {
   fun createStickerSubPanel() {
     stickerSubPanel =
         Entity.createPanelEntity(
-            R.layout.sticker_sub_panel,
+            PanelRegistrationIds.StickerSubPanel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
             TransformParent(toolbarPanel))
@@ -1415,7 +1590,7 @@ class ImmersiveActivity : AppSystemActivity() {
   fun createTimerSubPanel() {
     timerSubPanel =
         Entity.createPanelEntity(
-            R.layout.timer_sub_panel,
+            PanelRegistrationIds.TimerSubPanel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
             TransformParent(toolbarPanel))
@@ -1430,14 +1605,14 @@ class ImmersiveActivity : AppSystemActivity() {
     closeSubPanels()
     if (!isVisible) {
       panel.setComponent(Visible(true))
-      toolButtons[index]?.setImageResource(pressedToolResources[index])
+      //toolButtons[index]?.setImageResource(pressedToolResources[index])
     }
   }
 
   fun closeSubPanels() {
     for (i in 0..subpanels.count() - 1) {
       subpanels[i].setComponent(Visible(false))
-      if (toolButtons.count() - 1 >= i) toolButtons[i]?.setImageResource(defaultToolResources[i])
+      //if (toolButtons.count() - 1 >= i) toolButtons[i]?.setImageResource(defaultToolResources[i])
     }
   }
 

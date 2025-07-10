@@ -114,8 +114,9 @@ fun ProjectCard(project: ProjectData, onDelete: (Int) -> Unit) {
             })
 
         Box(modifier = Modifier
-            .height(40.dp)          //TODO
+            .height(80.dp)          //TODO
             .aspectRatio(1f)
+            .padding(20.dp)
             //.align()
         ) {
             PrimaryCircleButton(
