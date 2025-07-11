@@ -37,20 +37,20 @@ fun LabelSubPanel() {
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .clip(RoundedCornerShape(100.dp))
-                .background(SpatialTheme.colorScheme.panel)
-                .padding(20.dp),
+                .clip(RoundedCornerShape(50.dp))
+                .background(SpatialTheme.colorScheme.panel),
             contentAlignment = Alignment.Center
         ) {
             Row (
-                horizontalArrangement = Arrangement.spacedBy(25.dp),
+                modifier = Modifier.fillMaxHeight(),
+                horizontalArrangement = Arrangement.spacedBy(5.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     text = "Labels",
                     color = LocalColorScheme.current.primaryButton,
-                    style = LocalTypography.current.headline2Strong.copy(
-                        fontSize = 35.sp),
+//                    style = LocalTypography.current.headline2Strong.copy(
+//                        fontSize = 35.sp),
                 )
 
                 LabelButton("To do", R.drawable.label_to_do, {immersiveActivity?.CreateLabelTool(0)})
@@ -81,8 +81,8 @@ fun LabelButton(
 }
 
 @Preview(
-    widthDp = (0.47f * 5000).toInt(),
-    heightDp = (0.042f * 5000).toInt(),
+    widthDp = (0.47f * focusDP).toInt(),
+    heightDp = (0.042f * focusDP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

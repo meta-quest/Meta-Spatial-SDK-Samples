@@ -37,22 +37,21 @@ fun StickerSubPanel() {
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .clip(RoundedCornerShape(100.dp))
-                .background(SpatialTheme.colorScheme.panel)
-                .padding(20.dp),
+                .clip(RoundedCornerShape(50.dp))
+                .background(SpatialTheme.colorScheme.panel),
             contentAlignment = Alignment.Center
         ) {
             Row (
                 modifier = Modifier.fillMaxHeight(),
-                horizontalArrangement = Arrangement.spacedBy(25.dp),
+                horizontalArrangement = Arrangement.spacedBy(5.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
 
                 Text(
                     text = "Stickers",
                     color = LocalColorScheme.current.primaryButton,
-                    style = LocalTypography.current.headline2Strong.copy(
-                        fontSize = 35.sp),
+//                    style = LocalTypography.current.headline2Strong.copy(
+//                        fontSize = 35.sp),
                 )
 
                 StickerButton( R.drawable.sticker1, {immersiveActivity?.CreateSticker(0)})
@@ -82,8 +81,8 @@ fun StickerButton( //TODO evaluar si no conviene que sean todos el mismo shape/a
 }
 
 @Preview(
-    widthDp = (0.29f * 5000).toInt(),
-    heightDp = (0.042f * 5000).toInt(),
+    widthDp = (0.29f * focusDP).toInt(),
+    heightDp = (0.042f * focusDP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

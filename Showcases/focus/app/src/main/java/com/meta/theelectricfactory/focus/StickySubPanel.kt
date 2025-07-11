@@ -38,20 +38,19 @@ fun StickySubPanel() {
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .clip(RoundedCornerShape(100.dp))
-                .background(SpatialTheme.colorScheme.panel)
-                .padding(20.dp),
+                .clip(RoundedCornerShape(50.dp))
+                .background(SpatialTheme.colorScheme.panel),
             contentAlignment = Alignment.Center
         ) {
             Row (
-                horizontalArrangement = Arrangement.spacedBy(25.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     text = "Sticky Notes",
                     color = LocalColorScheme.current.primaryButton,
-                    style = LocalTypography.current.headline2Strong.copy(
-                        fontSize = 35.sp),
+//                    style = LocalTypography.current.headline2Strong.copy(
+//                        fontSize = 35.sp),
                 )
 
                 StickyButton("yellow", FocusColors.yellowStickyNote, {immersiveActivity?.CreateStickyNote(0)})
@@ -73,9 +72,9 @@ fun StickyButton(
 ) {
     SpatialSideNavItem(
         Modifier
-            .size(100.dp)
+            .size(50.dp)
             .fillMaxHeight()
-            .background(color, RoundedCornerShape(80.dp)),
+            .background(color, RoundedCornerShape(50.dp)),
         icon = { Icon(
             painterResource(id = R.drawable.transparent),
             contentDescription = contentDescription,
@@ -90,8 +89,8 @@ fun StickyButton(
 }
 
 @Preview(
-    widthDp = (0.26f * 5000).toInt(),
-    heightDp = (0.042f * 5000).toInt(),
+    widthDp = (0.26f * focusDP).toInt(),
+    heightDp = (0.042f * focusDP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

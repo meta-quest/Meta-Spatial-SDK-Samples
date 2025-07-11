@@ -40,22 +40,21 @@ fun ArrowSubPanel() {
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
-                .clip(RoundedCornerShape(100.dp))
-                .background(SpatialTheme.colorScheme.panel)
-                .padding(20.dp),
+                .clip(RoundedCornerShape(50.dp))
+                .background(SpatialTheme.colorScheme.panel),
             contentAlignment = Alignment.Center
         ) {
             Row (
                 modifier = Modifier.fillMaxHeight(),
-                horizontalArrangement = Arrangement.spacedBy(25.dp),
+                horizontalArrangement = Arrangement.spacedBy(5.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
 
                 Text(
                     text = "Arrows",
                     color = LocalColorScheme.current.primaryButton,
-                    style = LocalTypography.current.headline2Strong.copy(
-                        fontSize = 35.sp),
+//                    style = LocalTypography.current.headline2Strong.copy(
+//                        fontSize = 35.sp),
                 )
 
                 ArrowButton( R.drawable.button_arrow1, {immersiveActivity?.CreateArrowTool(0)})
@@ -85,8 +84,8 @@ fun ArrowButton(
 }
 
 @Preview(
-    widthDp = (0.28f * 5000).toInt(),
-    heightDp = (0.042f * 5000).toInt(),
+    widthDp = (0.28f * focusDP).toInt(),
+    heightDp = (0.042f * focusDP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

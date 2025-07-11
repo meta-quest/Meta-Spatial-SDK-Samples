@@ -56,7 +56,7 @@ fun ToolbarPanel() {
                 ) {
 
                     Row (
-                        horizontalArrangement = Arrangement.spacedBy(25.dp),
+                        horizontalArrangement = Arrangement.spacedBy(20.dp),
                     ) {
 
                         ToolbarButton(
@@ -100,8 +100,9 @@ fun ToolbarPanel() {
                     contentAlignment = Alignment.Center
                 ) {
                     Row (
-                        horizontalArrangement = Arrangement.spacedBy(25.dp),
-                    ) {
+                        horizontalArrangement = Arrangement.spacedBy(20.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        ) {
                         ToolbarButton(
                             R.drawable.delete_task,
                             "Open Tasks Panel",
@@ -238,9 +239,9 @@ fun ToolbarButton(
 
     SpatialSideNavItem(
         Modifier
-            .size(80.dp)
+            .size(75.dp)
             .fillMaxHeight()
-            .background(backgroundColor, RoundedCornerShape(8.dp))
+            .background(backgroundColor, RoundedCornerShape(15.dp))
             .aspectRatio(1f),
         icon = { Icon(
             painterResource(id = icon),
@@ -257,8 +258,8 @@ fun ToolbarButton(
 }
 
 @Preview(
-    widthDp = (0.65f * 2500).toInt(),
-    heightDp = (0.065f * 2500).toInt(),
+    widthDp = (0.65f * focusDP).toInt(),
+    heightDp = (0.065f * focusDP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

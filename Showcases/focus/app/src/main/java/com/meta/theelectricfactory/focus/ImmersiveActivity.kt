@@ -169,25 +169,25 @@ class ImmersiveActivity : AppSystemActivity() {
     return listOf(
         registerHomePanel(),
         //registerToolbarPanel(),
-        panelRegistration(PanelRegistrationIds.Toolbar, 0.65f, 0.065f, 105 ) { ToolbarPanel() },
+        panelRegistration(PanelRegistrationIds.Toolbar, 0.65f, 0.065f) { ToolbarPanel() },
         registerTasksPanel(),
         registerAIExchangePanel(),
         //registerStickySubPanel(),
-        panelRegistration(PanelRegistrationIds.StickySubPanel, 0.26f, 0.042f, 140 ) { StickySubPanel() },
+        panelRegistration(PanelRegistrationIds.StickySubPanel, 0.26f, 0.042f) { StickySubPanel() },
         //registerLabelSubPanel(),
-        panelRegistration(PanelRegistrationIds.LabelSubPanel, 0.47f, 0.042f, 140 ) { LabelSubPanel() },
+        panelRegistration(PanelRegistrationIds.LabelSubPanel, 0.47f, 0.042f) { LabelSubPanel() },
         //registerArrowSubPanel(),
-        panelRegistration(PanelRegistrationIds.ArrowSubPanel, 0.28f, 0.042f, 140 ) { ArrowSubPanel() },
+        panelRegistration(PanelRegistrationIds.ArrowSubPanel, 0.28f, 0.042f) { ArrowSubPanel() },
         //registerBoardSubPanel(),
-        panelRegistration(PanelRegistrationIds.BoardSubPanel, 0.21f, 0.042f, 140 ) { BoardSubPanel() },
+        panelRegistration(PanelRegistrationIds.BoardSubPanel, 0.21f, 0.042f) { BoardSubPanel() },
         //registerShapesSubPanel(),
-        panelRegistration(PanelRegistrationIds.ShapesSubPanel, 0.28f, 0.042f, 140 ) { ShapeSubPanel() },
+        panelRegistration(PanelRegistrationIds.ShapesSubPanel, 0.28f, 0.042f) { ShapeSubPanel() },
         //registerStickerSubPanel(),
-        panelRegistration(PanelRegistrationIds.StickerSubPanel, 0.29f, 0.042f, 140 ) { StickerSubPanel() },
+        panelRegistration(PanelRegistrationIds.StickerSubPanel, 0.29f, 0.042f) { StickerSubPanel() },
         //registerTimerSubPanel(),
-        panelRegistration(PanelRegistrationIds.TimerSubPanel, 0.38f, 0.042f, 140 ) { TimerSubPanel() },
+        panelRegistration(PanelRegistrationIds.TimerSubPanel, 0.38f, 0.042f) { TimerSubPanel() },
 
-        panelRegistration(PanelRegistrationIds.PANEL_TEST, 0.28f, 0.042f, 140 ) { ArrowSubPanel() },
+        panelRegistration(PanelRegistrationIds.PANEL_TEST, 0.28f, 0.042f) { ArrowSubPanel() },
     )
   }
 
@@ -206,16 +206,16 @@ class ImmersiveActivity : AppSystemActivity() {
 
     private fun panelRegistration(
         registrationId: Int,
-        layoutWidth: Float,
-        layoutHeight: Float,
-        dpi: Int,
+        widthInMeters: Float,
+        heightInMeters: Float,
         content: @Composable () -> Unit,
     ): PanelRegistration {
         return PanelRegistration(registrationId) { _ ->
             config {
-                width = layoutWidth
-                height = layoutHeight
-                layoutDpi = dpi // TODO
+                width = widthInMeters
+                height = heightInMeters
+                // layoutWidthInPx = (3960 * width).toInt()
+                layoutWidthInDp = focusDP * width
                 layerConfig = LayerConfig() // TODO maybe this is too expensive
                 enableTransparent = true
                 includeGlass = false

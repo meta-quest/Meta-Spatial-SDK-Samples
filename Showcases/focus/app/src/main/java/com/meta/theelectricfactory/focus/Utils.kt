@@ -30,6 +30,7 @@ import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
 
 var temporalID: Int = 0
+const val focusDP: Int = 2200
 
 // Creates temporal ids to identify entities during runtime
 fun getDisposableID(): Int {
