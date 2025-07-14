@@ -3,6 +3,7 @@
 package com.meta.theelectricfactory.focus
 
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -10,14 +11,16 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.selection.selectable
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -32,17 +35,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meta.spatial.uiset.button.PrimaryButton
-import com.meta.spatial.uiset.button.PrimaryCircleButton
-import com.meta.spatial.uiset.button.TextTileButton
 import com.meta.spatial.uiset.input.SpatialTextField
 import com.meta.spatial.uiset.theme.SpatialTheme
-import com.meta.spatial.uiset.theme.icons.SpatialIcons
-import com.meta.spatial.uiset.theme.icons.regular.CategoryAll
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.unit.sp
 import com.meta.spatial.toolkit.Visible
+import com.meta.spatial.uiset.button.SecondaryCircleButton
 import com.meta.spatial.uiset.theme.LocalColorScheme
-import com.meta.spatial.uiset.theme.LocalTypography
 
 @Composable
 fun HomePanelSecondFragmentScreen() {
@@ -73,7 +74,8 @@ fun HomePanelSecondFragmentScreen() {
                     .padding(40.dp),
             ) {
                 Row (modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .height(40.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -83,14 +85,14 @@ fun HomePanelSecondFragmentScreen() {
                     )
 
                     Box(modifier = Modifier
-                        .height(40.dp)          //TODO
                         .aspectRatio(1f)
                     ) {
-                        PrimaryCircleButton(
+                        SecondaryCircleButton(
                             icon = {
                                 Icon(
-                                    painterResource(id = R.drawable.close),
-                                    contentDescription = "Close"
+                                    painterResource(id = R.drawable.close2),
+                                    contentDescription = "Close",
+                                    tint = Color.Unspecified
                                 )
                             },
                             onClick = {
@@ -111,41 +113,44 @@ fun HomePanelSecondFragmentScreen() {
 
                 }
 
-                Spacer(modifier = Modifier.size(40.dp))
+                Spacer(modifier = Modifier.size(30.dp))
 
                 SpatialTextField(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth(),
                     label = "Project name",
                     placeholder = "Enter project name",
                     value = projectNameInput.value,
                     onValueChange = { projectNameInput.value = it }
                 )
 
-                Spacer(modifier = Modifier.size(40.dp))
+                Spacer(modifier = Modifier.size(30.dp))
 
                 HorizontalDivider(
                     thickness = 1.dp,
                     color = Color(0xFFD4D3DC)
                 )
 
-                Spacer(modifier = Modifier.size(40.dp))
+                Spacer(modifier = Modifier.size(30.dp))
 
                 Text(
                     text = "Select your environment",
                     color = LocalColorScheme.current.primaryButton //TODO get the color of the theme
                 )
 
+                Spacer(modifier = Modifier.size(15.dp))
+
                 LazyVerticalGrid(
-                    modifier = Modifier.height(380.dp),
+                    modifier = Modifier.height(490.dp),
                     columns = GridCells.Fixed(4),
                     horizontalArrangement = Arrangement.spacedBy(20.dp),
                 ) {
-                    data class Environment(val name: String, val index: Int)
+                    data class Environment(val name: String, val img: Int, val index: Int, val label: String)
                     val environments = listOf(
-                        Environment("Desert Retreat", 0),
-                        Environment("Concrete Sanctuary", 1),
-                        Environment("Blush Oasis", 2),
-                        Environment("Passthrough", 3),
+                        Environment("Desert Retreat", R.drawable.env1, 0, "VR"),
+                        Environment("Concrete Sanctuary", R.drawable.env2, 1, "VR"),
+                        Environment("Blush Oasis", R.drawable.env3, 2, "VR"),
+                        Environment("Passthrough", R.drawable.env4, 3, "MR"),
                     );
 
                     items(environments) { environment ->
@@ -153,21 +158,62 @@ fun HomePanelSecondFragmentScreen() {
                         if (environment.index == 3) {
                             reality = "MR"
                         }
-                        TextTileButton(
-                            modifier = Modifier.fillMaxHeight(),
-                            icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-                            label = environment.name,
-                            secondaryLabel = reality,
-                            selected =  envSelected.intValue == environment.index,
-                            onSelectionChange = {
-                                if (ImmersiveActivity.getInstance()?.currentProject != null) {
-                                    ImmersiveActivity.getInstance()?.currentProject!!.environment = environment.index
-                                    ImmersiveActivity.getInstance()
-                                        ?.saveProjectSettings(envSelected.intValue != 3, projectNameInput.value)
-                                }
-                                envSelected.intValue = environment.index
-                            },
-                        )
+
+                        Box(
+                            modifier = Modifier
+                                .height(480.dp)
+                                .clip(SpatialTheme.shapes.large)
+                                .selectable(
+                                    selected = envSelected.intValue == environment.index,
+                                    onClick = {
+                                        if (ImmersiveActivity.getInstance()?.currentProject != null) {
+                                            ImmersiveActivity.getInstance()?.currentProject!!.environment = environment.index
+                                            ImmersiveActivity.getInstance()
+                                                ?.saveProjectSettings(envSelected.intValue != 3, projectNameInput.value)
+                                        }
+                                        envSelected.intValue = environment.index
+                                    },
+                                ),
+                        ) {
+                            Image(
+                                painter = painterResource(id = environment.img),
+                                contentDescription = null,
+                                contentScale = ContentScale.Crop,
+                                modifier = Modifier.fillMaxSize()
+                            )
+
+                            // Selected border
+                            if (envSelected.intValue == environment.index) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.border),
+                                    contentDescription = null,
+                                    contentScale = ContentScale.FillBounds,
+                                    modifier = Modifier.fillMaxSize()
+                                )
+                            }
+
+                            Text(
+                                text = environment.name,
+                                color = Color.White,
+                                lineHeight = 25.sp,
+                                modifier = Modifier
+                                    .align(Alignment.TopStart)
+                                    .padding(30.dp).width(130.dp),
+                            )
+
+                            Row(
+                                modifier = Modifier
+                                    .height(100.dp)
+                                    .padding(30.dp)
+                                    .align(Alignment.TopEnd),
+                            ) {
+                                PrimaryButton(
+                                    label = environment.label,
+                                    // isEnabled = false,
+                                    onClick = {}
+                                )
+                            }
+                        }
                     }
                 }
 
@@ -208,9 +254,9 @@ fun saveCurrentProject(
     ImmersiveActivity.getInstance()?.homePanel?.setComponent(Visible(false))
 }
 
-@Preview(
-    widthDp = 1450,
-    heightDp = 900,
+   @Preview(
+    widthDp = (0.58f * focusDP).toInt(),
+    heightDp = (0.41f * focusDP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

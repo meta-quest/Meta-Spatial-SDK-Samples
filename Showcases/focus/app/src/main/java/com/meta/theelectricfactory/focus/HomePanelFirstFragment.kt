@@ -91,8 +91,8 @@ fun ProjectGrid(projects: List<ProjectData>, onDelete: (Int) -> Unit) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
         modifier = Modifier.fillMaxSize(),
-        horizontalArrangement = Arrangement.spacedBy(22.dp),
-        verticalArrangement = Arrangement.spacedBy(22.dp),
+        horizontalArrangement = Arrangement.spacedBy(30.dp),
+        verticalArrangement = Arrangement.spacedBy(40.dp),
     ) {
         items(projects) { project ->
             ProjectCard(project, onDelete)
@@ -105,7 +105,7 @@ fun ProjectCard(project: ProjectData, onDelete: (Int) -> Unit) {
     Box {
         TextTileButton(
             modifier = Modifier
-                .aspectRatio(1f)
+                .height(310.dp)
                 .fillMaxSize(),
             label = project.name,
             secondaryLabel = project.timeAgo,
@@ -114,10 +114,10 @@ fun ProjectCard(project: ProjectData, onDelete: (Int) -> Unit) {
             })
 
         Box(modifier = Modifier
-            .height(80.dp)          //TODO
+            .height(80.dp)
             .aspectRatio(1f)
             .padding(20.dp)
-            //.align()
+            .align(Alignment.TopEnd)
         ) {
             PrimaryCircleButton(
                 icon = {
@@ -128,15 +128,6 @@ fun ProjectCard(project: ProjectData, onDelete: (Int) -> Unit) {
                 onClick = { onDelete(project.uuid) }
             )
         }
-
-//        PrimaryCircleButton(
-//            icon = {
-//                Icon(
-//                    painterResource(id = R.drawable.delete_task),
-//                    contentDescription = "Delete project"
-//                )},
-//            onClick = { onDelete(project.uuid) }
-//        )
     }
 }
 
@@ -174,8 +165,8 @@ fun getProjectsFromDB(): List<ProjectData> {
 }
 
 @Preview(
-    widthDp = 1450,
-    heightDp = 900,
+    widthDp = (0.58f * focusDP).toInt(),
+    heightDp = (0.41f * focusDP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

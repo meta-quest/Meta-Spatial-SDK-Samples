@@ -167,7 +167,8 @@ class ImmersiveActivity : AppSystemActivity() {
 
   override fun registerPanels(): List<PanelRegistration> {
     return listOf(
-        registerHomePanel(),
+        //registerHomePanel(),
+        panelRegistration(PanelRegistrationIds.HomePanel, 0.58f, 0.41f, true) {},
         //registerToolbarPanel(),
         panelRegistration(PanelRegistrationIds.Toolbar, 0.65f, 0.065f) { ToolbarPanel() },
         registerTasksPanel(),
@@ -192,7 +193,8 @@ class ImmersiveActivity : AppSystemActivity() {
   }
 
     object PanelRegistrationIds {
-        const val Toolbar = 25 //TODO
+        const val HomePanel = 24 //TODO
+        const val Toolbar = 25
         const val StickySubPanel = 26
         const val LabelSubPanel = 27
         const val ArrowSubPanel = 28
@@ -208,6 +210,7 @@ class ImmersiveActivity : AppSystemActivity() {
         registrationId: Int,
         widthInMeters: Float,
         heightInMeters: Float,
+        homePanel: Boolean = false,
         content: @Composable () -> Unit,
     ): PanelRegistration {
         return PanelRegistration(registrationId) { _ ->
@@ -222,7 +225,11 @@ class ImmersiveActivity : AppSystemActivity() {
                 themeResourceId = R.style.Theme_Focus_Transparent
             }
 
-            composePanel { setContent { content() } }
+            if (homePanel) {
+                activityClass = MainActivity::class.java
+            } else {
+                composePanel { setContent { content() } }
+            }
         }
     }
 
@@ -1498,7 +1505,7 @@ class ImmersiveActivity : AppSystemActivity() {
   private fun createHomePanel() {
     homePanel =
         Entity.createPanelEntity(
-            R.layout.activity_main,
+            PanelRegistrationIds.HomePanel,
             Transform(Pose(Vector3(0f))),
             Grabbable(true, GrabbableType.FACE),
             Visible(false))
