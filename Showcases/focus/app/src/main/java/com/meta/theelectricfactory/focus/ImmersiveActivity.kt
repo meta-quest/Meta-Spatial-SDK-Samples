@@ -168,27 +168,27 @@ class ImmersiveActivity : AppSystemActivity() {
   override fun registerPanels(): List<PanelRegistration> {
     return listOf(
         //registerHomePanel(),
-        panelRegistration(PanelRegistrationIds.HomePanel, 0.58f, 0.41f, true) {},
+        PanelRegistration(PanelRegistrationIds.HomePanel, 0.58f, 0.41f, true) {},
         //registerToolbarPanel(),
-        panelRegistration(PanelRegistrationIds.Toolbar, 0.65f, 0.065f) { ToolbarPanel() },
+        PanelRegistration(PanelRegistrationIds.Toolbar, 0.65f, 0.065f) { ToolbarPanel() },
         registerTasksPanel(),
         registerAIExchangePanel(),
         //registerStickySubPanel(),
-        panelRegistration(PanelRegistrationIds.StickySubPanel, 0.26f, 0.042f) { StickySubPanel() },
+        PanelRegistration(PanelRegistrationIds.StickySubPanel, 0.26f, 0.042f) { StickySubPanel() },
         //registerLabelSubPanel(),
-        panelRegistration(PanelRegistrationIds.LabelSubPanel, 0.47f, 0.042f) { LabelSubPanel() },
+        PanelRegistration(PanelRegistrationIds.LabelSubPanel, 0.44f, 0.042f) { LabelSubPanel() },
         //registerArrowSubPanel(),
-        panelRegistration(PanelRegistrationIds.ArrowSubPanel, 0.28f, 0.042f) { ArrowSubPanel() },
+        PanelRegistration(PanelRegistrationIds.ArrowSubPanel, 0.28f, 0.042f) { ArrowSubPanel() },
         //registerBoardSubPanel(),
-        panelRegistration(PanelRegistrationIds.BoardSubPanel, 0.21f, 0.042f) { BoardSubPanel() },
+        PanelRegistration(PanelRegistrationIds.BoardSubPanel, 0.21f, 0.042f) { BoardSubPanel() },
         //registerShapesSubPanel(),
-        panelRegistration(PanelRegistrationIds.ShapesSubPanel, 0.28f, 0.042f) { ShapeSubPanel() },
+        PanelRegistration(PanelRegistrationIds.ShapesSubPanel, 0.28f, 0.042f) { ShapeSubPanel() },
         //registerStickerSubPanel(),
-        panelRegistration(PanelRegistrationIds.StickerSubPanel, 0.29f, 0.042f) { StickerSubPanel() },
+        PanelRegistration(PanelRegistrationIds.StickerSubPanel, 0.29f, 0.042f) { StickerSubPanel() },
         //registerTimerSubPanel(),
-        panelRegistration(PanelRegistrationIds.TimerSubPanel, 0.38f, 0.042f) { TimerSubPanel() },
+        PanelRegistration(PanelRegistrationIds.TimerSubPanel, 0.38f, 0.042f) { TimerSubPanel() },
 
-        panelRegistration(PanelRegistrationIds.PANEL_TEST, 0.28f, 0.042f) { ArrowSubPanel() },
+        PanelRegistration(PanelRegistrationIds.PANEL_TEST, 0.28f, 0.042f) { ArrowSubPanel() },
     )
   }
 
@@ -206,7 +206,7 @@ class ImmersiveActivity : AppSystemActivity() {
         const val PANEL_TEST = 35
     }
 
-    private fun panelRegistration(
+    fun PanelRegistration(
         registrationId: Int,
         widthInMeters: Float,
         heightInMeters: Float,
@@ -426,8 +426,6 @@ class ImmersiveActivity : AppSystemActivity() {
 
         if (type == AssetType.WEB_VIEW) {
           WebView(
-              scene,
-              spatialContext,
               source,
               uuid,
               Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
@@ -559,7 +557,7 @@ class ImmersiveActivity : AppSystemActivity() {
           speaker.getComponent<Transform>().transform)
 
       // Initial Web View tool created as an example
-      WebView(scene, spatialContext)
+      WebView()
       // Clean tasks from previous projects, in case there are
       cleanAndLoadTasks()
       homePanel.setComponent(Visible(false))
@@ -944,7 +942,7 @@ class ImmersiveActivity : AppSystemActivity() {
     }
 
     fun OpenWebView() {
-        WebView(scene, spatialContext)
+        WebView()
     }
 
     fun OpenAIPanel() {
@@ -1024,7 +1022,7 @@ class ImmersiveActivity : AppSystemActivity() {
 
             val buttonWebView: ImageButton? =
                 rootView?.findViewById<ImageButton>(R.id.buttonWebView)
-            buttonWebView?.setOnClickListener { WebView(scene, spatialContext) }
+            buttonWebView?.setOnClickListener { WebView() }
 
             val buttonAI: ImageButton? = rootView?.findViewById<ImageButton>(R.id.buttonAI)
             if (AIenabled) {
@@ -1485,7 +1483,7 @@ class ImmersiveActivity : AppSystemActivity() {
             val clickableSpan =
                 object : ClickableSpan() {
                   override fun onClick(widget: View) {
-                    WebView(scene, spatialContext, "https://www.facebook.com/privacy/guide/genai/")
+                    WebView("https://www.facebook.com/privacy/guide/genai/")
                   }
                 }
 
