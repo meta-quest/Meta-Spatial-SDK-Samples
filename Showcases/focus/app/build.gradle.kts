@@ -3,83 +3,82 @@
 val metaSpatialSdkVersion: String by project
 
 plugins {
-  alias(libs.plugins.android.application)
-  alias(libs.plugins.jetbrains.kotlin.android)
-  alias(libs.plugins.compose.compiler)
-  id("com.meta.spatial.plugin")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
+    id("com.meta.spatial.plugin")
 }
 
 android {
-  namespace = "com.meta.theelectricfactory.focus"
-  compileSdk = 34
+    namespace = "com.meta.theelectricfactory.focus"
+    compileSdk = 34
 
-  defaultConfig {
-    applicationId = "com.meta.theelectricfactory.focus"
-    minSdk = 28
-    //noinspection ExpiredTargetSdkVersion
-    targetSdk = 32
-    versionCode = 21
-    versionName = "1.0"
+    defaultConfig {
+        applicationId = "com.meta.theelectricfactory.focus"
+        minSdk = 28
+        //noinspection ExpiredTargetSdkVersion
+        targetSdk = 32
+        versionCode = 21
+        versionName = "1.0"
 
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-  }
-
-  buildTypes {
-    release {
-      isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-  }
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-  }
-  kotlinOptions { jvmTarget = "1.8" }
-  buildFeatures {
-    viewBinding = true
-    compose = true
-  }
-  composeOptions { kotlinCompilerExtensionVersion = "1.5.15" }
+
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions { jvmTarget = "1.8" }
+    buildFeatures {
+        viewBinding = true
+        compose = true
+    }
+    composeOptions { kotlinCompilerExtensionVersion = "1.5.15" }
 }
 
 dependencies {
-  implementation(libs.androidx.core.ktx)
-  implementation(libs.androidx.appcompat)
-  implementation(libs.material)
-  implementation(libs.androidx.constraintlayout)
-  implementation(libs.androidx.navigation.fragment.ktx)
-  implementation(libs.androidx.navigation.ui.ktx)
-  implementation(libs.androidx.sqlite.bundled.android)
-  testImplementation(libs.junit)
-  androidTestImplementation(libs.androidx.junit)
-  androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.androidx.sqlite.bundled.android)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 
-  // Meta Spatial SDK dependencies
-  implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-ovrmetrics:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-physics:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-isdk:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-compose:$metaSpatialSdkVersion")
+    // Compose
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.material3)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.tooling)
+    implementation(libs.androidx.ui.tooling.preview)
 
-  // Meta Spatial UI Set
-  implementation(files("libs/meta-spatial-uiset-1.0.1.aar"))
+    // AI Integration dependencies
+    implementation(libs.google.gson)
+    implementation(libs.squareup.okhttp3)
+    implementation(platform(libs.squareup.okhttp3.boom))
+    implementation(libs.squareup.okhttp3.mockwebserver)
+    implementation(libs.squareup.okhttp3.logging.interceptor)
+    implementation(libs.facebook.soloader)
 
-  // Compose
-  implementation("androidx.compose.material3:material3")
-  implementation(platform("androidx.compose:compose-bom:2024.11.00"))
-  implementation("androidx.compose.ui:ui")
-  implementation("androidx.compose.ui:ui-tooling-preview")
-  debugImplementation("androidx.compose.ui:ui-tooling")
+    // Meta Spatial SDK dependencies
+    implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
+    implementation("com.meta.spatial:meta-spatial-sdk-ovrmetrics:$metaSpatialSdkVersion")
+    implementation("com.meta.spatial:meta-spatial-sdk-physics:$metaSpatialSdkVersion")
+    implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
+    implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
+    implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
+    implementation("com.meta.spatial:meta-spatial-sdk-isdk:$metaSpatialSdkVersion")
+    implementation("com.meta.spatial:meta-spatial-sdk-compose:$metaSpatialSdkVersion")
 
-  // AI Integration dependencies
-  implementation("com.google.code.gson:gson:2.8.9")
-  implementation("com.squareup.okhttp3:okhttp:4.12.0")
-  implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
-  implementation("com.squareup.okhttp3:okhttp")
-  implementation("com.squareup.okhttp3:logging-interceptor")
-  testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
-  implementation("com.facebook.soloader:soloader:0.11.0")
+    // Meta Spatial UI Set
+    implementation(files("libs/meta-spatial-uiset-1.0.1.aar"))
 }

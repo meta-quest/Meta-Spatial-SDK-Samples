@@ -254,7 +254,7 @@ fun saveCurrentProject(
     ImmersiveActivity.getInstance()?.homePanel?.setComponent(Visible(false))
 }
 
-   @Preview(
+@Preview(
     widthDp = (0.58f * focusDP).toInt(),
     heightDp = (0.41f * focusDP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,

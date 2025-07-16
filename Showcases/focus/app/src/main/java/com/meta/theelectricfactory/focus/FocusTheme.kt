@@ -95,6 +95,7 @@ fun focusTypo(): SpatialTypography {
             fontFamily = onestFontFamily),
         body1 = LocalTypography.current.body1.copy( //primary button text
             fontFamily = onestFontFamily,
+            //color = FocusColors.textColor,
             fontSize = 20.sp),
         body2 = LocalTypography.current.body2.copy( //secondary label text
             fontFamily = onestFontFamily,
