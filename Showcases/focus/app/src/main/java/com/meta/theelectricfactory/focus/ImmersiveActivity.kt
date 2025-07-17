@@ -172,7 +172,9 @@ class ImmersiveActivity : AppSystemActivity() {
         //registerToolbarPanel(),
         PanelRegistration(PanelRegistrationIds.Toolbar, 0.65f, 0.065f) { ToolbarPanel() },
         registerTasksPanel(),
-        registerAIExchangePanel(),
+        PanelRegistration(PanelRegistrationIds.TasksPanel, 0.38f, 0.042f) { StickySubPanel() },
+        //registerAIExchangePanel(),
+        PanelRegistration(PanelRegistrationIds.AIPanel, 0.3f, 0.5f) { AIPanel() },
         //registerStickySubPanel(),
         PanelRegistration(PanelRegistrationIds.StickySubPanel, 0.26f, 0.042f) { StickySubPanel() },
         //registerLabelSubPanel(),
@@ -187,13 +189,13 @@ class ImmersiveActivity : AppSystemActivity() {
         PanelRegistration(PanelRegistrationIds.StickerSubPanel, 0.29f, 0.042f) { StickerSubPanel() },
         //registerTimerSubPanel(),
         PanelRegistration(PanelRegistrationIds.TimerSubPanel, 0.38f, 0.042f) { TimerSubPanel() },
-
-        PanelRegistration(PanelRegistrationIds.PANEL_TEST, 0.28f, 0.042f) { ArrowSubPanel() },
     )
   }
 
     object PanelRegistrationIds {
-        const val HomePanel = 24 //TODO
+        const val HomePanel = 22 //TODO
+        const val AIPanel = 23
+        const val TasksPanel = 24
         const val Toolbar = 25
         const val StickySubPanel = 26
         const val LabelSubPanel = 27
@@ -202,8 +204,6 @@ class ImmersiveActivity : AppSystemActivity() {
         const val ShapesSubPanel = 30
         const val StickerSubPanel = 31
         const val TimerSubPanel = 32
-
-        const val PANEL_TEST = 35
     }
 
     fun PanelRegistration(
@@ -945,10 +945,10 @@ class ImmersiveActivity : AppSystemActivity() {
         WebView()
     }
 
-    fun OpenAIPanel() {
-        placeInFront(aiExchangePanel, bigPanel = true)
-        aiExchangePanel.setComponent(Visible(true))
-        DB.updateUniqueAsset(aiExchangePanel.getComponent<UniqueAssetComponent>().uuid, state = true)
+    fun ShowAIPanel(state: Boolean = true) {
+        if (state) placeInFront(aiExchangePanel, bigPanel = true)
+        aiExchangePanel.setComponent(Visible(state))
+        DB.updateUniqueAsset(aiExchangePanel.getComponent<UniqueAssetComponent>().uuid, state = state)
     }
 
   private fun registerToolbarPanel(): PanelRegistration {
@@ -1463,7 +1463,7 @@ class ImmersiveActivity : AppSystemActivity() {
               val question = textPrompt?.text.toString()
               if (question == "") return
               createMessage(question, false)
-              askToAI(question, buttonStickyAI!!, this)
+              //askToAI(question, buttonStickyAI!!, this)
               textPrompt?.setText("")
               activeLoadingState(true, this)
             }
@@ -1520,7 +1520,7 @@ class ImmersiveActivity : AppSystemActivity() {
     fun createTestPanel() {
         testPanel =
             Entity.createPanelEntity(
-                PanelRegistrationIds.PANEL_TEST,
+                PanelRegistrationIds.TasksPanel,
                 Transform(Pose(Vector3(0f))),
                 Grabbable(true, GrabbableType.FACE),
                 Visible(true))
@@ -1973,7 +1973,7 @@ class ImmersiveActivity : AppSystemActivity() {
   fun createAIExchangePanel() {
     aiExchangePanel =
         Entity.createPanelEntity(
-            R.layout.ai_exchange_panel,
+            PanelRegistrationIds.AIPanel,
             Transform(Pose(Vector3(0f))),
             Grabbable(true, GrabbableType.FACE),
             Visible(false),
@@ -2001,7 +2001,7 @@ class ImmersiveActivity : AppSystemActivity() {
 
   // This function sends the questions of the user to the AI. More info in AIUtils.kt
   // and creates the corresponding messages in the chat panel
-  fun askToAI(question: String, buttonSticky: Button, panel: PanelSceneObject) {
+  fun askToAI(question: String, onComplete: () -> (Unit)) {
     var response = ""
     GlobalScope.launch(Dispatchers.IO) {
       val result = AIUtils.askQuestion(question)
@@ -2013,10 +2013,11 @@ class ImmersiveActivity : AppSystemActivity() {
         } else {
           response = "Error: Empty response"
         }
-        lastAIResponse = response
-        buttonSticky.isEnabled = true
-        createMessage(response, true)
-        activeLoadingState(false, panel)
+          lastAIResponse = response
+          onComplete()
+//        buttonSticky.isEnabled = true
+//        createMessage(response, true)
+//        activeLoadingState(false, panel)
       }
     }
   }

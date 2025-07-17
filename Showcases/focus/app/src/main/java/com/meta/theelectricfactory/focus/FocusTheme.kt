@@ -38,8 +38,10 @@ object FocusColors {
         )
 
     val blue = Color(0xFF42A4FF)
+    val darkBlue = Color(0xFF28226D)
     val disabledBlue = Color(0xFF004281)
     val purple = Color(0xFF6153FF)
+    val darkPurple = Color(0xFF340087)
     val disabledPurple = Color(0xFFBFBAFF)
     val lightPurple = Color(0xFFEFEEFF)
     val selectedLightPurple= Color(0xFFDFDCFF)
