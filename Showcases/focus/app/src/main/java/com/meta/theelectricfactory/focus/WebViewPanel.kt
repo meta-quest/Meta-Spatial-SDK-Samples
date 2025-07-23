@@ -64,11 +64,11 @@ fun WebViewPanel(
         Box {
             Column(
                 modifier = Modifier
-                    .padding(40.dp),
+                    .padding(10.dp),
             ) {
                 Row (modifier = Modifier
                         .fillMaxWidth()
-                        .height(40.dp),
+                        .height(60.dp),
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -130,7 +130,7 @@ fun WebViewPanel(
                             onQueryChange = {
                                 urlInput.value = it
                                 lastTextChangeTime = System.currentTimeMillis()
-                                checkIfStillWriting(lastTextChangeTime, handler, lastRunnable,  {
+                                checkIfStillWriting(3 * 1000, lastTextChangeTime, handler, lastRunnable,  {
                                     onNewURL(urlInput.value, uuid, webViewRef)
                                 })
                             },
@@ -232,8 +232,7 @@ fun onNewURL(
     }
 }
 
-fun checkIfStillWriting(lastTextChangeTime: Long, handler: Handler, lastRunnable: Array<Runnable?>, onComplete: () -> (Unit)) {
-    val typingInterval: Long = 3 * 1000
+fun checkIfStillWriting( typingInterval: Long, lastTextChangeTime: Long, handler: Handler, lastRunnable: Array<Runnable?>, onComplete: () -> (Unit)) {
 
     lastRunnable[0]?.let { handler.removeCallbacks(it) }
 

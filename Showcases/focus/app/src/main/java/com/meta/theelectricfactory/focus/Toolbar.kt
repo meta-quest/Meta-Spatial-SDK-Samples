@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -28,7 +27,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meta.spatial.uiset.navigation.SpatialSideNavItem
-import com.meta.spatial.uiset.theme.LocalColorScheme
 import com.meta.spatial.uiset.theme.SpatialTheme
 
 @Composable
@@ -109,7 +107,7 @@ fun ToolbarPanel() {
                             false,
                             color = FocusColors.lightBlue,
                             onClick = {
-                                immersiveActivity?.OpenTasksPanel()
+                                immersiveActivity?.ShowTasksPanel(true)
                             }
                         )
 
@@ -130,7 +128,7 @@ fun ToolbarPanel() {
                                 false,
                                 color = FocusColors.aiPurple,
                                 onClick = {
-                                    immersiveActivity.OpenAIPanel()
+                                    immersiveActivity.ShowAIPanel(true)
                                 }
                             )
                         }

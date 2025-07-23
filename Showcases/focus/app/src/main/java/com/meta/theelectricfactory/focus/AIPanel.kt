@@ -3,6 +3,7 @@
 package com.meta.theelectricfactory.focus
 
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
+import android.util.Log
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -30,8 +31,10 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableIntState
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -64,8 +67,6 @@ import com.meta.spatial.uiset.tooltip.SpatialTooltipContent
 
 data class Message(val text: String, val isUser: Boolean)
 
-//TODO Clean chats!!!!
-
 @Composable
 fun AIPanel() {
 
@@ -75,6 +76,11 @@ fun AIPanel() {
     var stickyAvailable = remember { mutableStateOf(false) }
     var sendButtonLoading = remember { mutableStateOf(false) }
     var sendButtonIcon = remember { mutableIntStateOf(R.drawable.send) }
+    val currentProjectUuid by immersiveActivity?.focusViewModel!!.currentProjectUuid.collectAsState()
+
+    LaunchedEffect(currentProjectUuid) {
+        messagesList.clear()
+    }
 
     // For loading icon animation
     val infiniteTransition = rememberInfiniteTransition()
