@@ -268,8 +268,6 @@ fun AiDisclaimerText() {
     }
 }
 
-// TODO Clean chats!!
-
 fun activeLoadingState(state: Boolean, sendButtonLoading: MutableState<Boolean>, sendButtonIcon: MutableIntState) {
     ImmersiveActivity.getInstance()?.waitingForAI = state
     sendButtonLoading.value = state

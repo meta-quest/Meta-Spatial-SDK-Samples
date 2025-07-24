@@ -55,11 +55,29 @@ object FocusColors {
     val aiPurple = Color(0xFFF4EEFF)
 
     val yellowStickyNote = Color(0xFFFFF874)
+    val lightYellowStickyNote = Color(0xFFFFFDDC)
     val greenStickyNote = Color(0xFF8DFFD9)
+    val lightGreenStickyNote = Color(0xFFE2FFF5)
     val pinkStickyNote = Color(0xFFFFA0C9)
+    val lightPinkStickyNote = Color(0xFFFFDFED)
     val orangeStickyNote = Color(0xFFFFAA97)
+    val lightOrangeStickyNote = Color(0xFFFFE7E1)
     val blueStickyNote = Color(0xFF8DCCFF)
+    val lightBlueStickyNote = Color(0xFFDEF0FF)
     val purpleStickyNote = Color(0xFFB390FF)
+    val lightPurpleStickyNote = Color(0xFFE9DFFF)
+}
+
+fun GetStickyColors(stickyColor: StickyColor): Pair<Color, Color> {
+    return when (stickyColor) {
+        StickyColor.Blue -> Pair(FocusColors.blueStickyNote, FocusColors.lightBlueStickyNote)
+        StickyColor.Purple -> Pair(FocusColors.purpleStickyNote, FocusColors.lightPurpleStickyNote)
+        StickyColor.Yellow -> Pair(FocusColors.yellowStickyNote, FocusColors.lightYellowStickyNote)
+        StickyColor.Green -> Pair(FocusColors.greenStickyNote, FocusColors.lightGreenStickyNote)
+        StickyColor.Pink -> Pair(FocusColors.pinkStickyNote, FocusColors.lightPinkStickyNote)
+        StickyColor.Orange -> Pair(FocusColors.orangeStickyNote, FocusColors.lightOrangeStickyNote)
+        else -> Pair(FocusColors.blueStickyNote, FocusColors.lightBlueStickyNote)
+    }
 }
 
 val onestFontFamily =

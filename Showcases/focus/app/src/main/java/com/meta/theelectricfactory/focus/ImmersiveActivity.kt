@@ -85,7 +85,6 @@ class ImmersiveActivity : AppSystemActivity() {
     // PANELS
     lateinit var homePanel: Entity
     lateinit var toolbarPanel: Entity
-    lateinit var testPanel: Entity
     lateinit var tasksPanel: Entity
     lateinit var aiExchangePanel: Entity
 
@@ -183,8 +182,6 @@ class ImmersiveActivity : AppSystemActivity() {
             PanelRegistration(PanelRegistrationIds.ShapesSubPanel, 0.28f, 0.042f) { ShapeSubPanel() },
             PanelRegistration(PanelRegistrationIds.StickerSubPanel, 0.29f, 0.042f) { StickerSubPanel() },
             PanelRegistration(PanelRegistrationIds.TimerSubPanel, 0.38f, 0.042f) { TimerSubPanel() },
-
-            PanelRegistration(PanelRegistrationIds.TEST, 0.38f, 0.042f) { TimerSubPanel() },
         )
     }
 
@@ -200,8 +197,6 @@ class ImmersiveActivity : AppSystemActivity() {
         const val ShapesSubPanel = 30
         const val StickerSubPanel = 31
         const val TimerSubPanel = 32
-
-        const val TEST = 35
     }
 
     fun PanelRegistration(
@@ -397,8 +392,6 @@ class ImmersiveActivity : AppSystemActivity() {
         placeInFront(toolbarPanel)
         toolbarPanel.setComponent(Visible(true))
 
-        placeInFront(testPanel)
-
         showClock(true)
         showSpeaker(true)
 
@@ -480,8 +473,6 @@ class ImmersiveActivity : AppSystemActivity() {
                         stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_Z))
 
                 StickyNote(
-                    scene,
-                    spatialContext,
                     uuid,
                     message,
                     color!!,
@@ -511,7 +502,6 @@ class ImmersiveActivity : AppSystemActivity() {
             focusViewModel.updateCurrentProjectUuid(project.uuid)
 
             placeInFront(toolbarPanel)
-            placeInFront(testPanel)
             toolbarPanel.setComponent(Visible(true))
             tasksPanel.setComponent(Visible(true))
             if (AIenabled) aiExchangePanel.setComponent(Visible(true))
@@ -535,8 +525,6 @@ class ImmersiveActivity : AppSystemActivity() {
             placeInFront(aiExchangePanel, Vector3(0.45f, -0.05f, 0.8f))
             placeInFront(clock, Vector3(0f, 0.23f, 0.9f))
             placeInFront(speaker, Vector3(-0.65f, -0.3f, 0.65f))
-
-            placeInFront(testPanel)
 
             // Unique elements created in database
             DB.createUniqueAsset(
@@ -757,7 +745,6 @@ class ImmersiveActivity : AppSystemActivity() {
   private fun createPanels() {
     createHomePanel()
     createToolbarPanel()
-    createTestPanel()
     createTasksPanel()
     createAIExchangePanel()
 
@@ -1142,8 +1129,6 @@ class ImmersiveActivity : AppSystemActivity() {
               buttonSticky?.setOnClickListener {
                 // Create sticky note
                 StickyNote(
-                    scene = scene,
-                    ctx = spatialContext,
                     message = "",
                     color = StickyColor.entries[i])
                 closeSubPanels()
@@ -1156,8 +1141,6 @@ class ImmersiveActivity : AppSystemActivity() {
 
     fun CreateStickyNote(index: Int) {
         StickyNote(
-            scene = scene,
-            ctx = spatialContext,
             message = "",
             color = StickyColor.entries[index])
         closeSubPanels()
@@ -1562,14 +1545,6 @@ class ImmersiveActivity : AppSystemActivity() {
             Grabbable(true, GrabbableType.FACE),
             Visible(false))
   }
-    fun createTestPanel() {
-        testPanel =
-            Entity.createPanelEntity(
-                PanelRegistrationIds.TEST,
-                Transform(Pose(Vector3(0f))),
-                Grabbable(true, GrabbableType.FACE),
-                Visible(true))
-    }
 
   fun createStickySubPanel() {
     stickySubPanel =
@@ -2082,7 +2057,7 @@ class ImmersiveActivity : AppSystemActivity() {
           response = "Error: Empty response"
         }
         StickyNote(
-            scene = scene, ctx = spatialContext, message = response, color = StickyColor.Purple)
+            message = response, color = StickyColor.Purple)
       }
     }
   }
