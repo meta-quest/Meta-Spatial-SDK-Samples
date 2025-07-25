@@ -9,16 +9,11 @@ import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.createPanelEntity
-
-// Enum to save sticky notes possible colors
-enum class StickyColor {
-  Yellow,
-  Green,
-  Pink,
-  Orange,
-  Blue,
-  Purple
-}
+import com.meta.theelectricfactory.focus.panels.StickyNotePanel
+import com.meta.theelectricfactory.focus.utils.addDeleteButton
+import com.meta.theelectricfactory.focus.utils.getDisposableID
+import com.meta.theelectricfactory.focus.utils.getNewUUID
+import com.meta.theelectricfactory.focus.utils.placeInFront
 
 // Class to create a Sticky Note
 class StickyNote(
@@ -63,7 +58,7 @@ class StickyNote(
                     color = color
                 )
                 // We add a listener to show delete button when entity is selected
-            }.panel{addDeleteButton(sticky, this)}
+            }.panel{ addDeleteButton(sticky, this) }
         )
 
         // We add it a ToolComponent to be able to identify it and get the type and uuid of the entity

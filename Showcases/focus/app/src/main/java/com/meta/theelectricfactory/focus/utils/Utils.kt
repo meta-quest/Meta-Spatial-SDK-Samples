@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.utils
 
 import android.app.Activity
 import android.os.Handler
@@ -28,6 +28,13 @@ import com.meta.spatial.runtime.SceneObject
 import com.meta.spatial.toolkit.AvatarAttachment
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
+import com.meta.theelectricfactory.focus.AssetType
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.arrowHeightArray
+import com.meta.theelectricfactory.focus.boardHeightArray
+import com.meta.theelectricfactory.focus.boardSizeArray
+import com.meta.theelectricfactory.focus.shape2DSizeArray
+import com.meta.theelectricfactory.focus.shape3DSizeArray
 
 var temporalID: Int = 0
 const val focusDP: Int = 2200

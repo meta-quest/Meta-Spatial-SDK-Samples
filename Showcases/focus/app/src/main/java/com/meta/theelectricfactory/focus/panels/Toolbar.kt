@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.panels
 
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
 import androidx.compose.foundation.background
@@ -30,6 +30,12 @@ import androidx.compose.ui.unit.dp
 import com.meta.spatial.uiset.navigation.SpatialSideNavItem
 import com.meta.spatial.uiset.theme.LocalShapes
 import com.meta.spatial.uiset.theme.SpatialTheme
+
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.ui.FocusColors
+import com.meta.theelectricfactory.focus.ui.FocusTheme
+import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.utils.focusDP
 
 @Composable
 fun ToolbarPanel() {

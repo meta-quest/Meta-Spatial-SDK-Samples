@@ -1,12 +1,11 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.panels
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -52,9 +51,21 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.uiset.button.BorderlessIconButton
-import com.meta.spatial.uiset.button.PrimaryCircleButton
 import com.meta.spatial.uiset.button.SecondaryCircleButton
 import com.meta.spatial.uiset.tooltip.SpatialTooltipContent
+import com.meta.theelectricfactory.focus.DatabaseManager
+import com.meta.theelectricfactory.focus.ui.FocusColors
+import com.meta.theelectricfactory.focus.ui.FocusTheme
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.SpatialTask
+import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.utils.getNewUUID
+import com.meta.theelectricfactory.focus.ui.onestFontFamily
+import com.meta.theelectricfactory.focus.priorityLabels
+import com.meta.theelectricfactory.focus.ui.squareShapes
+import com.meta.theelectricfactory.focus.stateLabels
+import com.meta.theelectricfactory.focus.ui.tooltipColor
 
 data class Task(val uuid: Int, var title: String, val body: String, var state: Int, var priority: Int, val detached: Int, val pose: Pose)
 
@@ -159,8 +170,8 @@ fun TasksPanel() {
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     )
                     {
-                        LabelButton(stateLabels[templateTaskState.intValue], {switchLabel(templateTaskState)})
-                        LabelButton(priorityLabels[templateTaskPriority.intValue], {switchLabel(templateTaskPriority)})
+                        LabelButton(stateLabels[templateTaskState.intValue], { switchLabel(templateTaskState) })
+                        LabelButton(priorityLabels[templateTaskPriority.intValue], { switchLabel(templateTaskPriority) })
                     }
 
                     Spacer(modifier = Modifier.size(20.dp))

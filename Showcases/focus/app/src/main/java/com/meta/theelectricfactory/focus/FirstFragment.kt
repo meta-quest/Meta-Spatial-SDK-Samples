@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import java.lang.ref.WeakReference
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.platform.ComposeView
+import com.meta.theelectricfactory.focus.panels.HomePanelFirstFragmentScreen
+import com.meta.theelectricfactory.focus.panels.getProjectsFromDB
 
 class FirstFragment : Fragment() {
 

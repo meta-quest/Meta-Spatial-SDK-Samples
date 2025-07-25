@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.ui
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
@@ -17,6 +17,8 @@ import com.meta.spatial.uiset.theme.lightSpatialColorScheme
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.StickyColor
 
 object FocusColors {
     val panel =
@@ -129,11 +131,14 @@ fun focusTypo(): SpatialTypography {
 
     val focusLightTypo = SpatialTypography(
         headline1 = LocalTypography.current.headline1.copy(
-            fontFamily = onestFontFamily),
+            fontFamily = onestFontFamily
+        ),
         headline2 = LocalTypography.current.headline2.copy(
-            fontFamily = onestFontFamily),
+            fontFamily = onestFontFamily
+        ),
         headline3 = LocalTypography.current.headline3.copy(
-            fontFamily = onestFontFamily),
+            fontFamily = onestFontFamily
+        ),
         body1 = LocalTypography.current.body1.copy( //primary button text
             fontFamily = onestFontFamily,
             //color = FocusColors.textColor,
@@ -142,16 +147,20 @@ fun focusTypo(): SpatialTypography {
             fontFamily = onestFontFamily,
             fontSize = 20.sp),
         headline1Strong = LocalTypography.current.headline1.copy(
-            fontFamily = onestFontFamily),
+            fontFamily = onestFontFamily
+        ),
         headline2Strong = LocalTypography.current.headline2.copy(
-            fontFamily = onestFontFamily),
+            fontFamily = onestFontFamily
+        ),
         headline3Strong = LocalTypography.current.headline3.copy(
-            fontFamily = onestFontFamily),
+            fontFamily = onestFontFamily
+        ),
         body1Strong = LocalTypography.current.body1.copy( //Primary label text
             fontFamily = onestFontFamily,
             fontSize = 20.sp),
         body2Strong = LocalTypography.current.body2.copy(
-            fontFamily = onestFontFamily), //fontWeight = FontWeight.ExtraBold
+            fontFamily = onestFontFamily
+        ), //fontWeight = FontWeight.ExtraBold
     )
 
     return focusLightTypo
@@ -188,7 +197,7 @@ fun focusColorScheme(gray: Boolean = false): SpatialColorScheme {
             primaryButton = FocusColors.darkGray,
             secondaryButton = FocusColors.lightGray,
             secondaryAlphaBackground = FocusColors.darkGray, // EditTextField & TextTileButton label
-            
+
 
 //            panel = FocusColors.dialog,
 //            dialog = FocusColors.dialog,

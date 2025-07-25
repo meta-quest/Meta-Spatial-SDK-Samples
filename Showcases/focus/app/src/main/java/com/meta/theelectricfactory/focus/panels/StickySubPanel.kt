@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.panels
 
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
 import androidx.compose.foundation.background
@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -21,14 +21,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.meta.spatial.uiset.button.PrimaryIconButton
-import com.meta.spatial.uiset.theme.LocalColorScheme
-import com.meta.spatial.uiset.theme.LocalTypography
+import com.meta.spatial.uiset.navigation.SpatialSideNavItem
 import com.meta.spatial.uiset.theme.SpatialTheme
+import com.meta.theelectricfactory.focus.ui.FocusColors
+import com.meta.theelectricfactory.focus.ui.FocusTheme
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.utils.focusDP
 
 @Composable
-fun LabelSubPanel() {
+fun StickySubPanel() {
 
     var immersiveActivity = ImmersiveActivity.getInstance()
 
@@ -42,50 +44,55 @@ fun LabelSubPanel() {
             contentAlignment = Alignment.Center
         ) {
             Row (
-                modifier = Modifier.fillMaxHeight(),
-                horizontalArrangement = Arrangement.spacedBy(5.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "Labels",
-                    color = LocalColorScheme.current.primaryButton,
-//                    style = LocalTypography.current.headline2Strong.copy(
-//                        fontSize = 35.sp),
+                    text = "Sticky Notes",
+                    color = FocusColors.black,
                 )
 
-                LabelButton("To do", R.drawable.label_to_do, {immersiveActivity?.CreateLabelTool(0)})
-                LabelButton("In progress", R.drawable.label_in_progress, {immersiveActivity?.CreateLabelTool(1)})
-                LabelButton("Done", R.drawable.label_done, {immersiveActivity?.CreateLabelTool(2)})
-                LabelButton("Low priority", R.drawable.label_low, {immersiveActivity?.CreateLabelTool(3)})
-                LabelButton("Medium priority", R.drawable.label_medium, {immersiveActivity?.CreateLabelTool(4)})
-                LabelButton("High priority", R.drawable.label_high, {immersiveActivity?.CreateLabelTool(5)})
+                StickyButton("yellow", FocusColors.yellowStickyNote, {immersiveActivity?.CreateStickyNote(0)})
+                StickyButton("green", FocusColors.greenStickyNote, {immersiveActivity?.CreateStickyNote(1)})
+                StickyButton("pink", FocusColors.pinkStickyNote, {immersiveActivity?.CreateStickyNote(2)})
+                StickyButton("orange", FocusColors.orangeStickyNote, {immersiveActivity?.CreateStickyNote(3)})
+                StickyButton("blue", FocusColors.blueStickyNote, {immersiveActivity?.CreateStickyNote(4)})
+                StickyButton("purple", FocusColors.purpleStickyNote, {immersiveActivity?.CreateStickyNote(5)})
             }
         }
     }
 }
 
 @Composable
-fun LabelButton(
+fun StickyButton(
     contentDescription: String,
-    icon: Int,
+    color: Color,
     onClick: () -> Unit
 ) {
-    PrimaryIconButton(
+    SpatialSideNavItem(
+        Modifier
+            .size(50.dp)
+            .fillMaxHeight()
+            .background(color, RoundedCornerShape(50.dp)),
         icon = { Icon(
-            painterResource(id = icon),
+            painterResource(id = R.drawable.transparent),
             contentDescription = contentDescription,
             tint = Color.Unspecified
         )},
-        onClick = onClick,
+        primaryLabel = "",
+        collapsed = true,
+        onClick = {
+            onClick()
+        }
     )
 }
 
 @Preview(
-    widthDp = (0.47f * focusDP).toInt(),
+    widthDp = (0.26f * focusDP).toInt(),
     heightDp = (0.042f * focusDP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable
-fun LabelSubPanelPreview() {
-    LabelSubPanel()
+fun StickySubPanelPreview() {
+    StickySubPanel()
 }

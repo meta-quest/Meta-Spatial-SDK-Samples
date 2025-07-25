@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.panels
 
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
 import androidx.compose.foundation.Image
@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -43,11 +42,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.sp
 import com.meta.spatial.toolkit.Visible
-import com.meta.spatial.uiset.button.BorderlessIconButton
-import com.meta.spatial.uiset.button.SecondaryButton
 import com.meta.spatial.uiset.button.SecondaryCircleButton
-import com.meta.spatial.uiset.theme.LocalColorScheme
-import com.meta.spatial.uiset.tooltip.SpatialTooltipContent
+import com.meta.theelectricfactory.focus.ui.FocusColors
+import com.meta.theelectricfactory.focus.ui.FocusTheme
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.SecondFragment
+import com.meta.theelectricfactory.focus.ui.focusColorScheme
+import com.meta.theelectricfactory.focus.ui.squareShapes
+import com.meta.theelectricfactory.focus.utils.focusDP
 
 @Composable
 fun HomePanelSecondFragmentScreen() {

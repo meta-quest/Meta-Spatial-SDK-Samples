@@ -21,6 +21,13 @@ import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.createPanelEntity
 import com.meta.spatial.uiset.theme.SpatialTheme
+import com.meta.theelectricfactory.focus.panels.Task
+import com.meta.theelectricfactory.focus.panels.TaskCard
+import com.meta.theelectricfactory.focus.ui.FocusColors
+import com.meta.theelectricfactory.focus.ui.FocusTheme
+import com.meta.theelectricfactory.focus.utils.addDeleteButton
+import com.meta.theelectricfactory.focus.utils.getDisposableID
+import com.meta.theelectricfactory.focus.utils.placeInFront
 
 // Class to create a Spatial Task
 @SuppressLint("Range")
@@ -69,7 +76,7 @@ class SpatialTask(
                     }
                 }
             // We add a listener to show delete button when entity is selected
-            }.panel{addDeleteButton(taskPanelEntity, this)}
+            }.panel{ addDeleteButton(taskPanelEntity, this) }
         )
 
         // Place in front of user in case is new

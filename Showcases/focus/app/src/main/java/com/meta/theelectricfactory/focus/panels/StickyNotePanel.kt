@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.panels
 
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
 import android.os.Handler
@@ -27,6 +27,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
 import com.meta.spatial.uiset.theme.LocalShapes
+import com.meta.theelectricfactory.focus.ui.FocusTheme
+import com.meta.theelectricfactory.focus.ui.GetStickyColors
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.StickyColor
+import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.ui.onestFontFamily
 
 @Composable
 fun StickyNotePanel(

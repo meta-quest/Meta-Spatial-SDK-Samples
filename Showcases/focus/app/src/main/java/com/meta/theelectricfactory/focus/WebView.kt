@@ -9,6 +9,10 @@ import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.createPanelEntity
+import com.meta.theelectricfactory.focus.panels.WebViewPanel
+import com.meta.theelectricfactory.focus.utils.getDisposableID
+import com.meta.theelectricfactory.focus.utils.getNewUUID
+import com.meta.theelectricfactory.focus.utils.placeInFront
 
 // Class to create a Web View panel tool
 class WebView(

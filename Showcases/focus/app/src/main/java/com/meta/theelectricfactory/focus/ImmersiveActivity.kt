@@ -5,11 +5,7 @@ package com.meta.theelectricfactory.focus
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.StrikethroughSpan
 import android.util.Log
-import android.widget.EditText
-import android.widget.ImageButton
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
@@ -20,7 +16,6 @@ import com.meta.spatial.core.Vector3
 import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.isdk.IsdkGrabbable
 import com.meta.spatial.isdk.IsdkPanelDimensions
-import com.meta.spatial.runtime.PanelSceneObject
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneAudioPlayer
 import com.meta.spatial.toolkit.AppSystemActivity
@@ -42,11 +37,30 @@ import com.meta.spatial.vr.VRFeature
 import java.lang.ref.WeakReference
 import kotlinx.coroutines.*
 
+import com.meta.theelectricfactory.focus.panels.ToolbarPanel
+
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import com.meta.spatial.compose.ComposeFeature
 import com.meta.spatial.compose.composePanel
 import com.meta.spatial.runtime.LayerConfig
+import com.meta.theelectricfactory.focus.panels.AIPanel
+import com.meta.theelectricfactory.focus.panels.ArrowSubPanel
+import com.meta.theelectricfactory.focus.panels.BoardSubPanel
+import com.meta.theelectricfactory.focus.panels.LabelSubPanel
+import com.meta.theelectricfactory.focus.panels.ShapeSubPanel
+import com.meta.theelectricfactory.focus.panels.StickerSubPanel
+import com.meta.theelectricfactory.focus.panels.StickySubPanel
+import com.meta.theelectricfactory.focus.panels.TasksPanel
+import com.meta.theelectricfactory.focus.panels.TimerSubPanel
+import com.meta.theelectricfactory.focus.utils.AIUtils
+import com.meta.theelectricfactory.focus.utils.addOnSelectListener
+import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.utils.getAssetSize
+import com.meta.theelectricfactory.focus.utils.getChildren
+import com.meta.theelectricfactory.focus.utils.getDeleteButtonHeight
+import com.meta.theelectricfactory.focus.utils.getNewUUID
+import com.meta.theelectricfactory.focus.utils.placeInFront
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -965,7 +979,8 @@ class ImmersiveActivity : AppSystemActivity() {
             type = AssetType.ARROW,
             source = arrows[index].toString(),
             size = 0.1f,
-            deleteButtonHeight = getDeleteButtonHeight(AssetType.ARROW, index))
+            deleteButtonHeight = getDeleteButtonHeight(AssetType.ARROW, index)
+        )
         closeSubPanels()
     }
 
@@ -975,7 +990,8 @@ class ImmersiveActivity : AppSystemActivity() {
             type = AssetType.BOARD,
             source = boards[index].toString(),
             size = getAssetSize(AssetType.BOARD, index),
-            deleteButtonHeight = getDeleteButtonHeight(AssetType.BOARD, index))
+            deleteButtonHeight = getDeleteButtonHeight(AssetType.BOARD, index)
+        )
         closeSubPanels()
     }
 
@@ -999,7 +1015,7 @@ class ImmersiveActivity : AppSystemActivity() {
 
     fun CreateTimer(index: Int) {
         // Create Timer
-        Timer(scene = scene, ctx = spatialContext, (index + 1) * 5)
+        Timer((index + 1) * 5)
         closeSubPanels()
     }
 

@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.panels
 
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
 import androidx.compose.foundation.background
@@ -28,12 +28,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meta.spatial.uiset.button.PrimaryButton
-import com.meta.spatial.uiset.button.PrimaryCircleButton
 import com.meta.spatial.uiset.button.SecondaryCircleButton
 import com.meta.spatial.uiset.button.TextTileButton
 import com.meta.spatial.uiset.theme.LocalColorScheme
 import com.meta.spatial.uiset.theme.LocalShapes
 import com.meta.spatial.uiset.theme.SpatialTheme
+import com.meta.theelectricfactory.focus.DatabaseManager
+import com.meta.theelectricfactory.focus.FirstFragment
+import com.meta.theelectricfactory.focus.ui.FocusColors
+import com.meta.theelectricfactory.focus.ui.FocusTheme
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.ProjectData
+import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.ui.focusColorScheme
+import com.meta.theelectricfactory.focus.ui.squareShapes
+import com.meta.theelectricfactory.focus.utils.focusDP
 
 @Composable
 fun HomePanelFirstFragmentScreen(projects: List<ProjectData>) {

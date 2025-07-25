@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.panels
 
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
 import androidx.compose.foundation.background
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -21,14 +20,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.meta.spatial.uiset.button.BorderlessIconButton
 import com.meta.spatial.uiset.theme.LocalColorScheme
-import com.meta.spatial.uiset.theme.LocalTypography
 import com.meta.spatial.uiset.theme.SpatialTheme
+import com.meta.theelectricfactory.focus.ui.FocusTheme
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.utils.focusDP
 
 @Composable
-fun StickerSubPanel() {
+fun ShapeSubPanel() {
 
     var immersiveActivity = ImmersiveActivity.getInstance()
 
@@ -48,25 +49,25 @@ fun StickerSubPanel() {
             ) {
 
                 Text(
-                    text = "Stickers",
+                    text = "Shapes",
                     color = LocalColorScheme.current.primaryButton,
 //                    style = LocalTypography.current.headline2Strong.copy(
 //                        fontSize = 35.sp),
                 )
 
-                StickerButton( R.drawable.sticker1, {immersiveActivity?.CreateSticker(0)})
-                StickerButton( R.drawable.sticker2, {immersiveActivity?.CreateSticker(1)})
-                StickerButton( R.drawable.sticker3, {immersiveActivity?.CreateSticker(2)})
-                StickerButton( R.drawable.sticker4, {immersiveActivity?.CreateSticker(3)})
-                StickerButton( R.drawable.sticker5, {immersiveActivity?.CreateSticker(4)})
-                StickerButton( R.drawable.sticker6, {immersiveActivity?.CreateSticker(5)})
+                ShapeButton( R.drawable.shape1, {immersiveActivity?.CreateShape(0)})
+                ShapeButton( R.drawable.shape2, {immersiveActivity?.CreateShape(1)})
+                ShapeButton( R.drawable.shape3, {immersiveActivity?.CreateShape(2)})
+                ShapeButton( R.drawable.shape4, {immersiveActivity?.CreateShape(3)})
+                ShapeButton( R.drawable.shape5, {immersiveActivity?.CreateShape(4)})
+                ShapeButton( R.drawable.shape6, {immersiveActivity?.CreateShape(5)})
             }
         }
     }
 }
 
 @Composable
-fun StickerButton( //TODO evaluar si no conviene que sean todos el mismo shape/arrow/board.etc
+fun ShapeButton( //TODO evaluar si no conviene que sean todos el mismo shape/arrow/board.etc
     icon: Int,
     onClick: () -> Unit
 ) {
@@ -81,11 +82,11 @@ fun StickerButton( //TODO evaluar si no conviene que sean todos el mismo shape/a
 }
 
 @Preview(
-    widthDp = (0.29f * focusDP).toInt(),
+    widthDp = (0.28f * focusDP).toInt(),
     heightDp = (0.042f * focusDP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable
-fun StickerSubPanelPreview() {
-    StickerSubPanel()
+fun ShapeSubPanelPreview() {
+    ShapeSubPanel()
 }

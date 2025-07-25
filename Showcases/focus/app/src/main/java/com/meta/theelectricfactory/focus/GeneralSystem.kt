@@ -10,6 +10,8 @@ import com.meta.spatial.runtime.ButtonBits
 import com.meta.spatial.toolkit.Controller
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.Visible
+import com.meta.theelectricfactory.focus.utils.getHeadPose
+import com.meta.theelectricfactory.focus.utils.placeInFront
 
 // This is a custom system created to control general stuff of the app,
 // like the loading of the first assets, the behaviour of the toolbar and the loading state of the

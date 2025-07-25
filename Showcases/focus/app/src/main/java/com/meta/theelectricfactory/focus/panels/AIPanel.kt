@@ -1,9 +1,8 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.panels
 
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
-import android.util.Log
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
@@ -59,12 +58,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
-import com.meta.spatial.uiset.button.PrimaryCircleButton
 import com.meta.spatial.uiset.button.PrimaryIconButton
 import com.meta.spatial.uiset.button.SecondaryCircleButton
-import com.meta.spatial.uiset.theme.icons.SpatialIcons
-import com.meta.spatial.uiset.theme.icons.regular.Chat
 import com.meta.spatial.uiset.tooltip.SpatialTooltipContent
+import com.meta.theelectricfactory.focus.ui.FocusColors
+import com.meta.theelectricfactory.focus.ui.FocusTheme
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.Message
+import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.WebView
+import com.meta.theelectricfactory.focus.ui.focusColorScheme
+import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.ui.onestFontFamily
+import com.meta.theelectricfactory.focus.ui.squareShapes
+import com.meta.theelectricfactory.focus.ui.tooltipColor
 
 @Composable
 fun AIPanel() {

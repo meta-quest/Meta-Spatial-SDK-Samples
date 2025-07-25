@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.panels
 
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
 import androidx.compose.foundation.background
@@ -9,8 +9,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -22,14 +20,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.meta.spatial.uiset.navigation.SpatialSideNavItem
+import com.meta.spatial.uiset.button.BorderlessIconButton
 import com.meta.spatial.uiset.theme.LocalColorScheme
-import com.meta.spatial.uiset.theme.LocalTypography
 import com.meta.spatial.uiset.theme.SpatialTheme
+import com.meta.theelectricfactory.focus.ui.FocusTheme
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.utils.focusDP
 
 @Composable
-fun StickySubPanel() {
+fun ArrowSubPanel() {
 
     var immersiveActivity = ImmersiveActivity.getInstance()
 
@@ -43,57 +43,50 @@ fun StickySubPanel() {
             contentAlignment = Alignment.Center
         ) {
             Row (
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.fillMaxHeight(),
+                horizontalArrangement = Arrangement.spacedBy(5.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
+
                 Text(
-                    text = "Sticky Notes",
+                    text = "Arrows",
                     color = LocalColorScheme.current.primaryButton,
 //                    style = LocalTypography.current.headline2Strong.copy(
 //                        fontSize = 35.sp),
                 )
 
-                StickyButton("yellow", FocusColors.yellowStickyNote, {immersiveActivity?.CreateStickyNote(0)})
-                StickyButton("green", FocusColors.greenStickyNote, {immersiveActivity?.CreateStickyNote(1)})
-                StickyButton("pink", FocusColors.pinkStickyNote, {immersiveActivity?.CreateStickyNote(2)})
-                StickyButton("orange", FocusColors.orangeStickyNote, {immersiveActivity?.CreateStickyNote(3)})
-                StickyButton("blue", FocusColors.blueStickyNote, {immersiveActivity?.CreateStickyNote(4)})
-                StickyButton("purple", FocusColors.purpleStickyNote, {immersiveActivity?.CreateStickyNote(5)})
+                ArrowButton( R.drawable.button_arrow1, {immersiveActivity?.CreateArrowTool(0)})
+                ArrowButton( R.drawable.button_arrow2, {immersiveActivity?.CreateArrowTool(1)})
+                ArrowButton( R.drawable.button_arrow3, {immersiveActivity?.CreateArrowTool(2)})
+                ArrowButton( R.drawable.button_arrow4, {immersiveActivity?.CreateArrowTool(3)})
+                ArrowButton( R.drawable.button_arrow5, {immersiveActivity?.CreateArrowTool(4)})
+                ArrowButton( R.drawable.button_arrow6, {immersiveActivity?.CreateArrowTool(5)})
             }
         }
     }
 }
 
 @Composable
-fun StickyButton(
-    contentDescription: String,
-    color: Color,
+fun ArrowButton(
+    icon: Int,
     onClick: () -> Unit
 ) {
-    SpatialSideNavItem(
-        Modifier
-            .size(50.dp)
-            .fillMaxHeight()
-            .background(color, RoundedCornerShape(50.dp)),
+    BorderlessIconButton(
         icon = { Icon(
-            painterResource(id = R.drawable.transparent),
-            contentDescription = contentDescription,
+            painterResource(id = icon),
+            contentDescription = "",
             tint = Color.Unspecified
         )},
-        primaryLabel = "",
-        collapsed = true,
-        onClick = {
-            onClick()
-        }
+        onClick = onClick,
     )
 }
 
 @Preview(
-    widthDp = (0.26f * focusDP).toInt(),
+    widthDp = (0.28f * focusDP).toInt(),
     heightDp = (0.042f * focusDP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable
-fun StickySubPanelPreview() {
-    StickySubPanel()
+fun ArrowSubPanelPreview() {
+    ArrowSubPanel()
 }

@@ -28,6 +28,16 @@ val priorityLabels = arrayOf(
     Label("High priority", Color(0xFFFFDADA), Color(0xFFA30000)),
 )
 
+// Enum to save sticky notes possible colors
+enum class StickyColor {
+    Yellow,
+    Green,
+    Pink,
+    Orange,
+    Blue,
+    Purple
+}
+
 // Enum with all asset types in the app
 enum class AssetType {
     TASKS_PANEL,
@@ -56,7 +66,8 @@ val arrows =
         R.drawable.arrow3,
         R.drawable.arrow4,
         R.drawable.arrow5,
-        R.drawable.arrow6)
+        R.drawable.arrow6
+    )
 val labels =
     arrayOf(
         R.drawable.label1,
@@ -64,7 +75,8 @@ val labels =
         R.drawable.label3,
         R.drawable.label4,
         R.drawable.label5,
-        R.drawable.label6)
+        R.drawable.label6
+    )
 val boards = arrayOf(R.drawable.board1, R.drawable.board2, R.drawable.board3, R.drawable.board4)
 val shapes =
     arrayOf(
@@ -81,82 +93,12 @@ val stickers =
         R.drawable.sticker3,
         R.drawable.sticker4,
         R.drawable.sticker5,
-        R.drawable.sticker6)
-
-// toolbar button references
-val stickyButtons =
-    arrayOf(
-        R.id.buttonSticky1,
-        R.id.buttonSticky2,
-        R.id.buttonSticky3,
-        R.id.buttonSticky4,
-        R.id.buttonSticky5)
-val labelButtons =
-    arrayOf(
-        R.id.buttonLabel1,
-        R.id.buttonLabel2,
-        R.id.buttonLabel3,
-        R.id.buttonLabel4,
-        R.id.buttonLabel5,
-        R.id.buttonLabel6)
-val arrowButtons =
-    arrayOf(
-        R.id.buttonArrow1,
-        R.id.buttonArrow2,
-        R.id.buttonArrow3,
-        R.id.buttonArrow4,
-        R.id.buttonArrow5,
-        R.id.buttonArrow6)
-val boardButtons =
-    arrayOf(R.id.buttonBoard1, R.id.buttonBoard2, R.id.buttonBoard3, R.id.buttonBoard4)
-val shapesButtons =
-    arrayOf(
-        R.id.buttonShape1,
-        R.id.buttonShape2,
-        R.id.buttonShape3,
-        R.id.buttonShape4,
-        R.id.buttonShape5,
-        R.id.buttonShape6)
-val stickerButtons =
-    arrayOf(
-        R.id.buttonSticker1,
-        R.id.buttonSticker2,
-        R.id.buttonSticker3,
-        R.id.buttonSticker4,
-        R.id.buttonSticker5,
-        R.id.buttonSticker6)
-val timerButtons =
-    arrayOf(
-        R.id.buttonTimer1,
-        R.id.buttonTimer2,
-        R.id.buttonTimer3,
-        R.id.buttonTimer4,
-        R.id.buttonTimer5,
-        R.id.buttonTimer6)
+        R.drawable.sticker6
+    )
 
 // Environments and skyboxes assets
 val environments = arrayOf("environment1.glb", "environment2.glb", "environment3.glb")
 val skyboxes = arrayOf(R.drawable.skybox1, R.drawable.skybox2, R.drawable.skybox3)
-
-// Textures for toolbar buttons
-val defaultToolResources =
-    arrayOf(
-        R.drawable.sticky,
-        R.drawable.labels,
-        R.drawable.arrows,
-        R.drawable.boards,
-        R.drawable.shapes,
-        R.drawable.stickers,
-        R.drawable.timer)
-val pressedToolResources =
-    arrayOf(
-        R.drawable.sticky_pressed,
-        R.drawable.label_pressed,
-        R.drawable.arrow_pressed,
-        R.drawable.board_pressed,
-        R.drawable.shape_pressed,
-        R.drawable.sticker_pressed,
-        R.drawable.timer_pressed)
 
 // Sizes of tools
 val boardSizeArray = arrayOf(0.335f, 0.45f, 0.397f, 0.45f)
