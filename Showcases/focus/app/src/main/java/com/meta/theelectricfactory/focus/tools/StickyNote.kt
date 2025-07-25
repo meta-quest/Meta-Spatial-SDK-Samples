@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.tools
 
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
@@ -9,6 +9,11 @@ import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.createPanelEntity
+import com.meta.theelectricfactory.focus.AssetType
+import com.meta.theelectricfactory.focus.AttachableComponent
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.StickyColor
+import com.meta.theelectricfactory.focus.ToolComponent
 import com.meta.theelectricfactory.focus.panels.StickyNotePanel
 import com.meta.theelectricfactory.focus.utils.addDeleteButton
 import com.meta.theelectricfactory.focus.utils.getDisposableID

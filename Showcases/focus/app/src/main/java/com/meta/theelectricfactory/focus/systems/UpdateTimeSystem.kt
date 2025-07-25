@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.systems
 
 import android.util.Log
 import android.widget.TextView
@@ -10,6 +10,10 @@ import com.meta.spatial.core.SystemBase
 import com.meta.spatial.runtime.PanelSceneObject
 import com.meta.spatial.toolkit.SceneObjectSystem
 import com.meta.spatial.toolkit.TransformParent
+import com.meta.theelectricfactory.focus.AssetType
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.TimeComponent
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date

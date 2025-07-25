@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.meta.theelectricfactory.focus.R
 import com.meta.theelectricfactory.focus.panels.HomePanelSecondFragmentScreen
 import java.lang.ref.WeakReference
 
@@ -30,7 +31,7 @@ class SecondFragment : Fragment() {
 
     fun isCurrentlyVisible(): Boolean {
         return try {
-            val navController = SecondFragment.instance.get()?.findNavController()
+            val navController = instance.get()?.findNavController()
             navController?.currentDestination?.id == R.id.SecondFragment
         } catch (e: Exception) {
             false

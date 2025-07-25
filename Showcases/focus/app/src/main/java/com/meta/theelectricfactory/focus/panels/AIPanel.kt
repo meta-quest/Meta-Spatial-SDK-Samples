@@ -66,7 +66,7 @@ import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.Message
 import com.meta.theelectricfactory.focus.R
-import com.meta.theelectricfactory.focus.WebView
+import com.meta.theelectricfactory.focus.tools.WebView
 import com.meta.theelectricfactory.focus.ui.focusColorScheme
 import com.meta.theelectricfactory.focus.utils.focusDP
 import com.meta.theelectricfactory.focus.ui.onestFontFamily

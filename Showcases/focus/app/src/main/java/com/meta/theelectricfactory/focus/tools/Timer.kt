@@ -1,16 +1,14 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.tools
 
 import android.net.Uri
 import android.widget.TextView
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
-import com.meta.spatial.core.SpatialContext
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.isdk.IsdkGrabbable
-import com.meta.spatial.runtime.Scene
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Mesh
@@ -20,6 +18,11 @@ import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.toolkit.Scale
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
+import com.meta.theelectricfactory.focus.AssetType
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.TimeComponent
+import com.meta.theelectricfactory.focus.ToolComponent
 import com.meta.theelectricfactory.focus.utils.addDeleteButton
 import com.meta.theelectricfactory.focus.utils.getDisposableID
 import com.meta.theelectricfactory.focus.utils.placeInFront
@@ -71,7 +74,8 @@ class Timer(totalTime: Int) {
         // UpdateTimeSystem.kt
         timerPanel.setComponent(
             TimeComponent(
-                type = AssetType.TIMER, totalTime = totalTime, startTime = System.currentTimeMillis()))
+                type = AssetType.TIMER, totalTime = totalTime, startTime = System.currentTimeMillis())
+        )
         // We make panel entity child to the timer model entity
         timerPanel.setComponent(TransformParent(timerObj))
 

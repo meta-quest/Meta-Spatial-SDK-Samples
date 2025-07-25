@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.tools
 
 import android.net.Uri
 import com.meta.spatial.core.Entity
@@ -14,6 +14,10 @@ import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.Scale
 import com.meta.spatial.toolkit.Transform
+import com.meta.theelectricfactory.focus.AssetType
+import com.meta.theelectricfactory.focus.AttachableComponent
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.ToolComponent
 import com.meta.theelectricfactory.focus.utils.addDeleteButton
 import com.meta.theelectricfactory.focus.utils.getNewUUID
 import com.meta.theelectricfactory.focus.utils.placeInFront
@@ -66,7 +70,8 @@ class Tool(
             type == AssetType.LABEL ||
             type == AssetType.ARROW ||
             type == AssetType.SHAPE_2D ||
-            type == AssetType.STICKER) {
+            type == AssetType.STICKER
+        ) {
 
             obj.setComponent(AttachableComponent())
         }

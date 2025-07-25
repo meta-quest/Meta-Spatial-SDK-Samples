@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.systems
 
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Query
@@ -10,6 +10,8 @@ import com.meta.spatial.runtime.ButtonBits
 import com.meta.spatial.toolkit.Controller
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.Visible
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.R
 import com.meta.theelectricfactory.focus.utils.getHeadPose
 import com.meta.theelectricfactory.focus.utils.placeInFront
 

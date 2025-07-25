@@ -1,11 +1,15 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.systems
 
 import com.meta.spatial.core.Query
 import com.meta.spatial.core.SystemBase
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.Transform
+import com.meta.theelectricfactory.focus.AssetType
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.ToolComponent
+import com.meta.theelectricfactory.focus.UniqueAssetComponent
 
 // Custom system created to update the poses of the objects that had been moved in the database
 class DatabaseUpdateSystem : SystemBase() {

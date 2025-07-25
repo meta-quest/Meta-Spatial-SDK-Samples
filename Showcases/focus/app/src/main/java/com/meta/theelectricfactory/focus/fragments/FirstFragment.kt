@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,8 @@ import androidx.navigation.fragment.findNavController
 import java.lang.ref.WeakReference
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.platform.ComposeView
+import com.meta.theelectricfactory.focus.ProjectData
+import com.meta.theelectricfactory.focus.R
 import com.meta.theelectricfactory.focus.panels.HomePanelFirstFragmentScreen
 import com.meta.theelectricfactory.focus.panels.getProjectsFromDB
 

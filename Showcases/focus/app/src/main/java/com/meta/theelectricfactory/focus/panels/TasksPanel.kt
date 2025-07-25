@@ -53,12 +53,12 @@ import com.meta.spatial.core.Vector3
 import com.meta.spatial.uiset.button.BorderlessIconButton
 import com.meta.spatial.uiset.button.SecondaryCircleButton
 import com.meta.spatial.uiset.tooltip.SpatialTooltipContent
-import com.meta.theelectricfactory.focus.DatabaseManager
+import com.meta.theelectricfactory.focus.db.DatabaseManager
 import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.R
-import com.meta.theelectricfactory.focus.SpatialTask
+import com.meta.theelectricfactory.focus.tools.SpatialTask
 import com.meta.theelectricfactory.focus.utils.focusDP
 import com.meta.theelectricfactory.focus.utils.getNewUUID
 import com.meta.theelectricfactory.focus.ui.onestFontFamily

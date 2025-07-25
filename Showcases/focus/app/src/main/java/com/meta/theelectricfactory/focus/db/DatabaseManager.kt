@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.db
 
 import android.content.ContentValues
 import android.content.Context
@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.meta.spatial.core.Pose
+import com.meta.theelectricfactory.focus.AssetType
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.Project
+import com.meta.theelectricfactory.focus.StickyColor
 
 // Class to create and update Focus database
 class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null, DATABASE_VERSION) {
@@ -297,7 +301,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
                     put(UNIQUE_ASSET_ROTATION_Z, pose.q.z)
                 }
             }
-        db.update(UNIQUE_ASSETS_TABLE, values, "${UNIQUE_ASSET_UUID}=?", arrayOf(uuid.toString()))
+        db.update(UNIQUE_ASSETS_TABLE, values, "$UNIQUE_ASSET_UUID=?", arrayOf(uuid.toString()))
         db.close()
         updateLastTimeOpen()
     }
@@ -439,7 +443,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
     fun updateStickyMessage(uuid: Int?, message: String) {
         val db = writableDatabase
         val values = ContentValues().apply { put(STICKY_MESSAGE, message) }
-        db.update(STICKIES_TABLE, values, "${STICKY_UUID}=?", arrayOf(uuid.toString()))
+        db.update(STICKIES_TABLE, values, "$STICKY_UUID=?", arrayOf(uuid.toString()))
         db.close()
         updateLastTimeOpen()
     }
@@ -505,7 +509,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
                 if (priority != null) put(TASK_PRIORITY, priority)
                 if (detach != null) put(TASK_DETACH, detach)
             }
-        db.update(TASKS_TABLE, values, "${TASK_UUID}=?", arrayOf(uuid.toString()))
+        db.update(TASKS_TABLE, values, "$TASK_UUID=?", arrayOf(uuid.toString()))
         db.close()
         updateLastTimeOpen()
     }
@@ -520,7 +524,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
     fun updateWebViewURL(uuid: Int?, adress: String) {
         val db = writableDatabase
         val values = ContentValues().apply { put(TOOL_SOURCE, adress) }
-        db.update(TOOLS_TABLE, values, "${TOOL_UUID}=?", arrayOf(uuid.toString()))
+        db.update(TOOLS_TABLE, values, "$TOOL_UUID=?", arrayOf(uuid.toString()))
         db.close()
         updateLastTimeOpen()
     }

@@ -9,7 +9,7 @@
 
     <fragment
     android:id="@+id/FirstFragment"
-    android:name="com.meta.theelectricfactory.focus.FirstFragment"
+    android:name="com.meta.theelectricfactory.focus.fragments.FirstFragment"
     android:label="@string/first_fragment_label"
   >
 
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
     android:id="@+id/SecondFragment"
-    android:name="com.meta.theelectricfactory.focus.SecondFragment"
+    android:name="com.meta.theelectricfactory.focus.fragments.SecondFragment"
     android:label="@string/second_fragment_label"
   >
 

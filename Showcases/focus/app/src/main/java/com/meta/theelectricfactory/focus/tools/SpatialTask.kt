@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.tools
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -21,6 +21,10 @@ import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.createPanelEntity
 import com.meta.spatial.uiset.theme.SpatialTheme
+import com.meta.theelectricfactory.focus.AssetType
+import com.meta.theelectricfactory.focus.AttachableComponent
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.ToolComponent
 import com.meta.theelectricfactory.focus.panels.Task
 import com.meta.theelectricfactory.focus.panels.TaskCard
 import com.meta.theelectricfactory.focus.ui.FocusColors

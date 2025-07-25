@@ -33,8 +33,8 @@ import com.meta.spatial.uiset.button.TextTileButton
 import com.meta.spatial.uiset.theme.LocalColorScheme
 import com.meta.spatial.uiset.theme.LocalShapes
 import com.meta.spatial.uiset.theme.SpatialTheme
-import com.meta.theelectricfactory.focus.DatabaseManager
-import com.meta.theelectricfactory.focus.FirstFragment
+import com.meta.theelectricfactory.focus.db.DatabaseManager
+import com.meta.theelectricfactory.focus.fragments.FirstFragment
 import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity

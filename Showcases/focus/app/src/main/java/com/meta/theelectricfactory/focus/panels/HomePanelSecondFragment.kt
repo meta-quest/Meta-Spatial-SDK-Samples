@@ -47,7 +47,7 @@ import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.R
-import com.meta.theelectricfactory.focus.SecondFragment
+import com.meta.theelectricfactory.focus.fragments.SecondFragment
 import com.meta.theelectricfactory.focus.ui.focusColorScheme
 import com.meta.theelectricfactory.focus.ui.squareShapes
 import com.meta.theelectricfactory.focus.utils.focusDP

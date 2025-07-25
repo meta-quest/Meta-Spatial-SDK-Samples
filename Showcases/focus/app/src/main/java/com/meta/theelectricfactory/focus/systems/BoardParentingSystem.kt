@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.systems
 
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
@@ -13,6 +13,7 @@ import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.SceneObjectSystem
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.getAbsoluteTransform
+import com.meta.theelectricfactory.focus.AttachableComponent
 
 // This system allow us to detect when an object is close to a board and give the sensation to stick
 // it to the board.
