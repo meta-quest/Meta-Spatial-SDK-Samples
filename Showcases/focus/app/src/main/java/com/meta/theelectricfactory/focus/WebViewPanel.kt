@@ -43,6 +43,7 @@ import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.createPanelEntity
+import com.meta.spatial.uiset.button.SecondaryCircleButton
 
 @Composable
 fun WebViewPanel(
@@ -62,20 +63,17 @@ fun WebViewPanel(
     return FocusTheme {
 
         Box {
-            Column(
-                modifier = Modifier
-                    .padding(10.dp),
-            ) {
+            Column() {
                 Row (modifier = Modifier
                         .fillMaxWidth()
-                        .height(60.dp),
+                        .height(40.dp),
                     horizontalArrangement = Arrangement.spacedBy(10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Box(modifier = Modifier
                         .aspectRatio(1f)
                     ) {
-                        PrimaryCircleButton(
+                        SecondaryCircleButton(
                             onClick = {
                                 webViewRef.value?.let { webView ->
                                     if (webView.canGoBack()) {
@@ -101,7 +99,7 @@ fun WebViewPanel(
                     Box(modifier = Modifier
                         .aspectRatio(1f)
                     ) {
-                        PrimaryCircleButton(
+                        SecondaryCircleButton(
                             onClick = {
                                 webViewRef.value?.let { webView ->
                                     webView.loadUrl(webView.url ?: "")
@@ -146,14 +144,14 @@ fun WebViewPanel(
                         .aspectRatio(1f)
                         .align(Alignment.Top)
                     ) {
-                        PrimaryCircleButton(
+                        SecondaryCircleButton(
                             onClick = {
                                 immersiveActivity?.DB?.deleteToolAsset(uuid)
                                 entity.destroy()
                             },
                             icon = {
                                 Icon(
-                                    painterResource(id = R.drawable.delete),
+                                    painterResource(id = R.drawable.delete_task),
                                     contentDescription = "Delete",
                                     tint = Color.Unspecified
                                 )

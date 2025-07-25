@@ -53,6 +53,7 @@ import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.uiset.button.BorderlessIconButton
 import com.meta.spatial.uiset.button.PrimaryCircleButton
+import com.meta.spatial.uiset.button.SecondaryCircleButton
 import com.meta.spatial.uiset.tooltip.SpatialTooltipContent
 
 data class Task(val uuid: Int, var title: String, val body: String, var state: Int, var priority: Int, val detached: Int, val pose: Pose)
@@ -105,29 +106,32 @@ fun TasksPanel() {
         ) {
             Row (modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .height(60.dp),
+                .height(50.dp),
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-
-                SpatialTooltipContent(
-                    modifier = Modifier
-                        .clip(SpatialTheme.shapes.large),
-                    title = "Tasks",
-                )
+                SpatialTheme(
+                    colorScheme = tooltipColor(true)
+                ) {
+                    SpatialTooltipContent(
+                        modifier = Modifier
+                            .clip(SpatialTheme.shapes.large),
+                        title = "Tasks",
+                    )
+                }
 
                 Box(modifier = Modifier
+                    .height(40.dp)
                     .aspectRatio(1f)
-                    .align(Alignment.Top)
                 ) {
-                    PrimaryCircleButton(
+                    SecondaryCircleButton(
                         onClick = {
                             immersiveActivity?.ShowTasksPanel(false)
                         },
                         icon = {
                             Icon(
                                 painterResource(id = R.drawable.close),
-                                contentDescription = "Delete",
+                                contentDescription = "Close",
                                 tint = Color.Unspecified
                             )
                         },
@@ -135,7 +139,7 @@ fun TasksPanel() {
                 }
             }
 
-            Spacer(modifier = Modifier.size(10.dp))
+            Spacer(modifier = Modifier.size(40.dp))
 
             Box(
                 modifier = Modifier
@@ -155,8 +159,8 @@ fun TasksPanel() {
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     )
                     {
-                        LabelButton(stateLabels2[templateTaskState.intValue], {switchLabel(templateTaskState)})
-                        LabelButton(priorityLabels2[templateTaskPriority.intValue], {switchLabel(templateTaskPriority)})
+                        LabelButton(stateLabels[templateTaskState.intValue], {switchLabel(templateTaskState)})
+                        LabelButton(priorityLabels[templateTaskPriority.intValue], {switchLabel(templateTaskPriority)})
                     }
 
                     Spacer(modifier = Modifier.size(20.dp))
@@ -210,12 +214,12 @@ fun TasksPanel() {
                                 text ="Add text",
                                 fontFamily = onestFontFamily,
                                 fontSize = 20.sp,
-                                color = FocusColors.gray
+                                color = FocusColors.darkGray
                             )},
                         textStyle = TextStyle(
                             fontSize = 20.sp,
                             fontFamily = onestFontFamily,
-                            color = FocusColors.gray
+                            color = FocusColors.darkGray
                         ),
                         colors = TextFieldDefaults.colors(
                             focusedContainerColor = Color.Transparent,
@@ -227,20 +231,31 @@ fun TasksPanel() {
 
                     Spacer(modifier = Modifier.size(20.dp))
 
-                    PrimaryButton(
-                        label = "+ Add Task",
-                        onClick = {
-                            val _uuid = getNewUUID()
-                            immersiveActivity?.DB?.createTask(_uuid, immersiveActivity.currentProject?.uuid, titleInput.value, textInput.value, templateTaskState.intValue, templateTaskPriority.intValue)
-                            titleInput.value = ""
-                            textInput.value = ""
-                            templateTaskState.intValue = 0
-                            templateTaskPriority.intValue = 0
-                            immersiveActivity?.focusViewModel?.refreshTasksPanel()
-                        },
-                        isEnabled = titleInput.value.isNotEmpty(),
-                        expanded = true
-                    )
+                    SpatialTheme(
+                        shapes = squareShapes()
+                    ) {
+                        PrimaryButton(
+                            label = "+ Add Task",
+                            onClick = {
+                                val _uuid = getNewUUID()
+                                immersiveActivity?.DB?.createTask(
+                                    _uuid,
+                                    immersiveActivity.currentProject?.uuid,
+                                    titleInput.value,
+                                    textInput.value,
+                                    templateTaskState.intValue,
+                                    templateTaskPriority.intValue
+                                )
+                                titleInput.value = ""
+                                textInput.value = ""
+                                templateTaskState.intValue = 0
+                                templateTaskPriority.intValue = 0
+                                immersiveActivity?.focusViewModel?.refreshTasksPanel()
+                            },
+                            isEnabled = titleInput.value.isNotEmpty(),
+                            expanded = true
+                        )
+                    }
                 }
             }
 
@@ -315,78 +330,106 @@ fun TaskCard(
     Column (
         modifier = Modifier
             .fillMaxWidth()
-            .padding(0.dp, 10.dp)
     ) {
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(10.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            LabelButton(stateLabels2[taskLabelState.intValue], {
-                var newState = taskLabelState.intValue + 1
-                if (newState > 2) newState = 0
-                taskLabelState.intValue = newState
-                ImmersiveActivity.getInstance()?.DB?.updateTaskData(task.uuid, state = newState)
-                if (isSpatial) {
-                    mainTaskLabelState!!.intValue = newState
-                } else {
-                    ImmersiveActivity.getInstance()?.focusViewModel!!.setCurrentTaskUuid(task.uuid)
-                    ImmersiveActivity.getInstance()?.focusViewModel!!.updateCurrentSpatialTask()
-                }
-            })
-
-            LabelButton(priorityLabels2[taskLabelPriority.intValue], {
-                var newPriority = taskLabelPriority.intValue + 1
-                if (newPriority > 2) newPriority = 0
-                taskLabelPriority.intValue = newPriority
-                ImmersiveActivity.getInstance()?.DB?.updateTaskData(task.uuid, priority = newPriority)
-                if (isSpatial) {
-                    mainTaskLabelPriority!!.intValue = newPriority
-                } else {
-                    ImmersiveActivity.getInstance()?.focusViewModel!!.setCurrentTaskUuid(task.uuid)
-                    ImmersiveActivity.getInstance()?.focusViewModel!!.updateCurrentSpatialTask()
-                }
-            })
-
-            if (task.detached == 0 && !isSpatial) {
-                BorderlessIconButton(
-                    icon = {
-                        Icon(
-                            painterResource(id = R.drawable.detach),
-                            contentDescription = "Detach",
-                            tint = Color.Unspecified
-                        )
-                    },
-                    onClick = {
-                        // Spatial task is created and saved in database when detach button is pressed
+        Box() {
+            Box(modifier = Modifier
+                .align(Alignment.CenterStart)
+                .fillMaxWidth()
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    LabelButton(stateLabels[taskLabelState.intValue], {
+                        var newState = taskLabelState.intValue + 1
+                        if (newState > 2) newState = 0
+                        taskLabelState.intValue = newState
                         ImmersiveActivity.getInstance()?.DB?.updateTaskData(
                             task.uuid,
-                            detach = 1
+                            state = newState
                         )
-                        ImmersiveActivity.getInstance()?.focusViewModel?.refreshTasksPanel()
-                        SpatialTask(
-                            task = task,
-                            new = true,
-                            mainTaskLabelState = taskLabelState,
-                            mainTaskLabelPriority = taskLabelPriority,
-                            mainTaskTitle = taskTitleInput,
-                            mainTaskBody = taskBodyInput
+                        if (isSpatial) {
+                            mainTaskLabelState!!.intValue = newState
+                        } else {
+                            ImmersiveActivity.getInstance()?.focusViewModel!!.setCurrentTaskUuid(
+                                task.uuid
+                            )
+                            ImmersiveActivity.getInstance()?.focusViewModel!!.updateCurrentSpatialTask()
+                        }
+                    })
+
+                    LabelButton(priorityLabels[taskLabelPriority.intValue], {
+                        var newPriority = taskLabelPriority.intValue + 1
+                        if (newPriority > 2) newPriority = 0
+                        taskLabelPriority.intValue = newPriority
+                        ImmersiveActivity.getInstance()?.DB?.updateTaskData(
+                            task.uuid,
+                            priority = newPriority
                         )
-                    }
-                )
+                        if (isSpatial) {
+                            mainTaskLabelPriority!!.intValue = newPriority
+                        } else {
+                            ImmersiveActivity.getInstance()?.focusViewModel!!.setCurrentTaskUuid(
+                                task.uuid
+                            )
+                            ImmersiveActivity.getInstance()?.focusViewModel!!.updateCurrentSpatialTask()
+                        }
+                    })
+                }
             }
 
-            BorderlessIconButton(
-                icon = {
-                    Icon(
-                        painterResource(id = R.drawable.delete_task),
-                        contentDescription = "Delete",
-                        tint = Color.Unspecified
+            Box(modifier = Modifier
+                .align(Alignment.CenterEnd)
+                .fillMaxWidth(),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                Row(
+                    horizontalArrangement = Arrangement.spacedBy(10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    if (task.detached == 0 && !isSpatial) {
+                        BorderlessIconButton(
+                            icon = {
+                                Icon(
+                                    painterResource(id = R.drawable.detach),
+                                    contentDescription = "Detach",
+                                    tint = Color.Unspecified
+                                )
+                            },
+                            onClick = {
+                                // Spatial task is created and saved in database when detach button is pressed
+                                ImmersiveActivity.getInstance()?.DB?.updateTaskData(
+                                    task.uuid,
+                                    detach = 1
+                                )
+                                ImmersiveActivity.getInstance()?.focusViewModel?.refreshTasksPanel()
+                                SpatialTask(
+                                    task = task,
+                                    new = true,
+                                    mainTaskLabelState = taskLabelState,
+                                    mainTaskLabelPriority = taskLabelPriority,
+                                    mainTaskTitle = taskTitleInput,
+                                    mainTaskBody = taskBodyInput
+                                )
+                            }
+                        )
+                    }
+
+                    BorderlessIconButton(
+                        icon = {
+                            Icon(
+                                painterResource(id = R.drawable.delete_task),
+                                contentDescription = "Delete",
+                                tint = Color.Unspecified
+                            )
+                        },
+                        onClick = {
+                            ImmersiveActivity.getInstance()!!.deleteTask(task.uuid)
+                        }
                     )
-                },
-                onClick = {
-                    ImmersiveActivity.getInstance()!!.deleteTask(task.uuid)
                 }
-            )
+            }
         }
 
         Spacer(modifier = Modifier.size(20.dp))
@@ -442,7 +485,7 @@ fun TaskCard(
             textStyle = TextStyle(
                 fontSize = 18.sp,
                 fontFamily = onestFontFamily,
-                color = FocusColors.gray
+                color = FocusColors.darkGray
             ),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -42,8 +43,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.sp
 import com.meta.spatial.toolkit.Visible
+import com.meta.spatial.uiset.button.BorderlessIconButton
+import com.meta.spatial.uiset.button.SecondaryButton
 import com.meta.spatial.uiset.button.SecondaryCircleButton
 import com.meta.spatial.uiset.theme.LocalColorScheme
+import com.meta.spatial.uiset.tooltip.SpatialTooltipContent
 
 @Composable
 fun HomePanelSecondFragmentScreen() {
@@ -81,7 +85,6 @@ fun HomePanelSecondFragmentScreen() {
                 ) {
                     Text(
                         text = "Project Settings",
-                        color = LocalColorScheme.current.primaryButton //TODO get the color of the theme
                     )
 
                     Box(modifier = Modifier
@@ -90,7 +93,7 @@ fun HomePanelSecondFragmentScreen() {
                         SecondaryCircleButton(
                             icon = {
                                 Icon(
-                                    painterResource(id = R.drawable.close2),
+                                    painterResource(id = R.drawable.close),
                                     contentDescription = "Close",
                                     tint = Color.Unspecified
                                 )
@@ -115,33 +118,38 @@ fun HomePanelSecondFragmentScreen() {
 
                 Spacer(modifier = Modifier.size(30.dp))
 
-                SpatialTextField(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    label = "Project name",
-                    placeholder = "Enter project name",
-                    value = projectNameInput.value,
-                    onValueChange = { projectNameInput.value = it }
-                )
+                SpatialTheme(
+                    colorScheme = focusColorScheme(true)
+                ) {
+                    SpatialTextField(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        label = "Project name",
+                        placeholder = "Enter project name",
+                        value = projectNameInput.value,
+                        onValueChange = { projectNameInput.value = it }
+                    )
+                }
 
                 Spacer(modifier = Modifier.size(30.dp))
 
                 HorizontalDivider(
                     thickness = 1.dp,
-                    color = Color(0xFFD4D3DC)
+                    color = FocusColors.lightGray
                 )
 
                 Spacer(modifier = Modifier.size(30.dp))
 
                 Text(
                     text = "Select your environment",
-                    color = LocalColorScheme.current.primaryButton //TODO get the color of the theme
+                    color = FocusColors.darkGray,
+                    fontSize = 20.sp,
                 )
 
                 Spacer(modifier = Modifier.size(15.dp))
 
                 LazyVerticalGrid(
-                    modifier = Modifier.height(490.dp),
+                    modifier = Modifier.height(480.dp),
                     columns = GridCells.Fixed(4),
                     horizontalArrangement = Arrangement.spacedBy(20.dp),
                 ) {
@@ -154,15 +162,10 @@ fun HomePanelSecondFragmentScreen() {
                     );
 
                     items(environments) { environment ->
-                        var reality = "VR"
-                        if (environment.index == 3) {
-                            reality = "MR"
-                        }
-
                         Box(
                             modifier = Modifier
                                 .height(480.dp)
-                                .clip(SpatialTheme.shapes.large)
+                                .clip(SpatialTheme.shapes.medium)
                                 .selectable(
                                     selected = envSelected.intValue == environment.index,
                                     onClick = {
@@ -203,15 +206,19 @@ fun HomePanelSecondFragmentScreen() {
 
                             Row(
                                 modifier = Modifier
-                                    .height(100.dp)
+                                    .height(110.dp)
                                     .padding(30.dp)
                                     .align(Alignment.TopEnd),
                             ) {
-                                PrimaryButton(
-                                    label = environment.label,
-                                    // isEnabled = false,
-                                    onClick = {}
-                                )
+
+                                SpatialTheme(
+                                    colorScheme = focusColorScheme(true)
+                                ) {
+                                    PrimaryButton(
+                                        label = environment.label,
+                                        onClick = {}
+                                    )
+                                }
                             }
                         }
                     }
@@ -222,12 +229,16 @@ fun HomePanelSecondFragmentScreen() {
                 Box (
                     modifier = Modifier.align(Alignment.End),
                 ) {
-                    PrimaryButton(
-                        label = saveButtonLabel,
-                        onClick = {
-                            saveCurrentProject(projectNameInput, envSelected.intValue)
-                        },
-                    )
+                    SpatialTheme(
+                        shapes = squareShapes()
+                    ) {
+                        PrimaryButton(
+                            label = saveButtonLabel,
+                            onClick = {
+                                saveCurrentProject(projectNameInput, envSelected.intValue)
+                            },
+                        )
+                    }
                 }
             }
         }

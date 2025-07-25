@@ -61,11 +61,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.sp
 import com.meta.spatial.uiset.button.PrimaryCircleButton
 import com.meta.spatial.uiset.button.PrimaryIconButton
+import com.meta.spatial.uiset.button.SecondaryCircleButton
 import com.meta.spatial.uiset.theme.icons.SpatialIcons
 import com.meta.spatial.uiset.theme.icons.regular.Chat
 import com.meta.spatial.uiset.tooltip.SpatialTooltipContent
-
-data class Message(val text: String, val isUser: Boolean)
 
 @Composable
 fun AIPanel() {
@@ -93,35 +92,35 @@ fun AIPanel() {
     )
 
     return FocusTheme {
-        Column(
-            modifier = Modifier
-                .padding(10.dp),
-        ) {
+        Column {
             Row (modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .height(60.dp),
+                .height(50.dp),
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-
-                SpatialTooltipContent(
-                    modifier = Modifier
-                        .clip(SpatialTheme.shapes.large),
-                    title = "AI Exchange",
-                )
+                SpatialTheme(
+                    colorScheme = tooltipColor()
+                ) {
+                    SpatialTooltipContent(
+                        modifier = Modifier
+                            .clip(SpatialTheme.shapes.large),
+                        title = "AI Exchange",
+                    )
+                }
 
                 Box(modifier = Modifier
+                    .height(40.dp)
                     .aspectRatio(1f)
-                    .align(Alignment.Top)
                 ) {
-                    PrimaryCircleButton(
+                    SecondaryCircleButton(
                         onClick = {
                             immersiveActivity?.ShowAIPanel(false)
                         },
                         icon = {
                             Icon(
                                 painterResource(id = R.drawable.close),
-                                contentDescription = "Delete",
+                                contentDescription = "Close",
                                 tint = Color.Unspecified
                             )
                         },
@@ -129,15 +128,14 @@ fun AIPanel() {
                 }
             }
 
-            Spacer(modifier = Modifier.size(10.dp))
-
+            Spacer(modifier = Modifier.size(40.dp))
 
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
                     .clip(SpatialTheme.shapes.large)
-                    .background(FocusColors.panel),
+                    .background(FocusColors.selectedLightPurple),
                 contentAlignment = Alignment.BottomCenter
             ) {
 
@@ -167,15 +165,23 @@ fun AIPanel() {
                         Box(
                             modifier = Modifier.padding(30.dp)
                         ) {
-                            PrimaryButton(
-                                label = "Sticky note last message",
-                                leading = { Icon(imageVector = SpatialIcons.Regular.Chat, "") },
-                                onClick = {
-                                    immersiveActivity?.summarize(immersiveActivity.lastAIResponse)
-                                    stickyAvailable.value = false
-                                },
-                                isEnabled = stickyAvailable.value
-                            )
+                            SpatialTheme(
+                                shapes = squareShapes()
+                            ) {
+                                PrimaryButton(
+                                    label = "Sticky note last message",
+                                    leading = { Icon(
+                                        painterResource(id = R.drawable.sticky_note_icon),
+                                        contentDescription = "sticky",
+                                        tint = Color.Unspecified
+                                    )},
+                                    onClick = {
+                                        immersiveActivity?.summarize(immersiveActivity.lastAIResponse)
+                                        stickyAvailable.value = false
+                                    },
+                                    isEnabled = stickyAvailable.value
+                                )
+                            }
                         }
                     }
 
@@ -188,41 +194,74 @@ fun AIPanel() {
                             modifier = Modifier
                                 .align(Alignment.TopCenter)
                                 .padding(40.dp),
-                            verticalAlignment = Alignment.CenterVertically,
+                            verticalAlignment = Alignment.Bottom,
                             horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally)
                         ) {
-                            SpatialTextField(
-                                modifier = Modifier
-                                    .width(460.dp),
-                                label = "", //TODO !!!! !!! esto esta descentrando el input!
-                                placeholder = "Write a message",
-                                value = messageInput.value,
-                                onValueChange = {messageInput.value = it }
-                            )
+                            SpatialTheme(
+                                colorScheme = focusColorScheme(true)
+                            ) {
+                                SpatialTextField(
+                                    modifier = Modifier
+                                        .width(460.dp)
+                                        .height(100.dp),
+                                    label = "", //TODO !!!! !!! esto esta descentrando el input!
+                                    placeholder = "Write a message",
+                                    value = messageInput.value,
+                                    onValueChange = { messageInput.value = it }
+                                )
+                            }
 
-                            PrimaryIconButton(
-                                icon = {
-                                    Icon(
-                                        painterResource(id = sendButtonIcon.intValue),
-                                        contentDescription = "Send",
-                                        tint = Color.Unspecified,
-                                        modifier = if (sendButtonLoading.value) Modifier.graphicsLayer(rotationZ = rotation) else Modifier
+                            Box(modifier = Modifier
+                                .height(70.dp)
+                                .aspectRatio(1f)
+                            ) {
+                                SpatialTheme(
+                                    shapes = squareShapes()
+                                ) {
+                                    PrimaryIconButton(
+                                        icon = {
+                                            Icon(
+                                                painterResource(id = sendButtonIcon.intValue),
+                                                contentDescription = "Send",
+                                                tint = Color.Unspecified,
+                                                modifier = if (sendButtonLoading.value) Modifier.graphicsLayer(
+                                                    rotationZ = rotation
+                                                ) else Modifier
+                                            )
+                                        },
+                                        onClick = {
+                                            if (messageInput.value != "") {
+                                                messagesList.add(
+                                                    0,
+                                                    Message(messageInput.value, true)
+                                                )
+                                                immersiveActivity?.askToAI(messageInput.value, {
+                                                    messagesList.add(
+                                                        0,
+                                                        Message(
+                                                            immersiveActivity.lastAIResponse,
+                                                            false
+                                                        )
+                                                    )
+                                                    stickyAvailable.value = true
+                                                    activeLoadingState(
+                                                        false,
+                                                        sendButtonLoading,
+                                                        sendButtonIcon
+                                                    )
+                                                })
+                                                messageInput.value = ""
+                                                activeLoadingState(
+                                                    true,
+                                                    sendButtonLoading,
+                                                    sendButtonIcon
+                                                )
+                                            }
+                                        },
+                                        isEnabled = !sendButtonLoading.value && messageInput.value.isNotEmpty(),
                                     )
-                                },
-                                onClick = {
-                                    if (messageInput.value != "") {
-                                        messagesList.add(0, Message(messageInput.value, true))
-                                        immersiveActivity?.askToAI(messageInput.value, {
-                                            messagesList.add(0, Message(immersiveActivity.lastAIResponse, false))
-                                            stickyAvailable.value = true
-                                            activeLoadingState(false, sendButtonLoading, sendButtonIcon)
-                                        })
-                                        messageInput.value = ""
-                                        activeLoadingState(true, sendButtonLoading, sendButtonIcon)
-                                    }
-                                },
-                                isEnabled = !sendButtonLoading.value && messageInput.value.isNotEmpty(),
-                            )
+                                }
+                            }
                         }
                     }
                 }
@@ -282,7 +321,7 @@ fun ChatMessageItem(
 ) {
     val avatarSize = 60.dp
     val textColor =  if (isUser) FocusColors.darkBlue else FocusColors.darkPurple
-    val messageColor = if (isUser) FocusColors.lightPurple else FocusColors.aiPurple
+    val messageColor = if (isUser) FocusColors.lightPurple else FocusColors.aiChat
     val avatarRes = if (isUser) R.drawable.user_avatar else R.drawable.ai_avatar
 
     Row(

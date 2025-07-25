@@ -29,10 +29,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meta.spatial.uiset.button.PrimaryButton
 import com.meta.spatial.uiset.button.PrimaryCircleButton
+import com.meta.spatial.uiset.button.SecondaryCircleButton
 import com.meta.spatial.uiset.button.TextTileButton
+import com.meta.spatial.uiset.theme.LocalColorScheme
+import com.meta.spatial.uiset.theme.LocalShapes
 import com.meta.spatial.uiset.theme.SpatialTheme
-
-data class ProjectData(val uuid: Int, val name: String, val timeAgo: String)
 
 @Composable
 fun HomePanelFirstFragmentScreen(projects: List<ProjectData>) {
@@ -47,25 +48,29 @@ fun HomePanelFirstFragmentScreen(projects: List<ProjectData>) {
         Box {
             Column(
                 modifier = Modifier
-                    .clip(SpatialTheme.shapes.large)
-                    .background(SpatialTheme.colorScheme.panel)
+                    .clip(LocalShapes.current.large)
+                    .background(LocalColorScheme.current.panel)
                     .padding(40.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                PrimaryButton(
-                    label = "+ New Project",
-                    onClick = {
-                        ImmersiveActivity.instance.get()?.newProject()
-                        FirstFragment.instance.get()?.moveToSecondFragment()
-                    },
-                    expanded = true
-                )
+                SpatialTheme(
+                    shapes = squareShapes()
+                ) {
+                    PrimaryButton(
+                        label = "+ New Project",
+                        onClick = {
+                            ImmersiveActivity.instance.get()?.newProject()
+                            FirstFragment.instance.get()?.moveToSecondFragment()
+                        },
+                        expanded = true
+                    )
+                }
 
                 Spacer(modifier = Modifier.size(40.dp))
 
                 HorizontalDivider(
                     thickness = 1.dp,
-                    color = Color(0xFFD4D3DC)
+                    color = FocusColors.lightGray
                 )
 
                 Spacer(modifier = Modifier.size(40.dp))
@@ -103,15 +108,20 @@ fun ProjectGrid(projects: List<ProjectData>, onDelete: (Int) -> Unit) {
 @Composable
 fun ProjectCard(project: ProjectData, onDelete: (Int) -> Unit) {
     Box {
-        TextTileButton(
-            modifier = Modifier
-                .height(310.dp)
-                .fillMaxSize(),
-            label = project.name,
-            secondaryLabel = project.timeAgo,
-            onSelectionChange = {
-                ImmersiveActivity.instance.get()?.loadProject(project.uuid)
-            })
+        SpatialTheme(
+            colorScheme = focusColorScheme(true)
+        ) {
+            TextTileButton(
+                modifier = Modifier
+                    .height(310.dp)
+                    .fillMaxSize(),
+                label = project.name,
+                secondaryLabel = project.timeAgo,
+                onSelectionChange = {
+                    ImmersiveActivity.instance.get()?.loadProject(project.uuid)
+                }
+            )
+        }
 
         Box(modifier = Modifier
             .height(80.dp)
@@ -119,12 +129,14 @@ fun ProjectCard(project: ProjectData, onDelete: (Int) -> Unit) {
             .padding(20.dp)
             .align(Alignment.TopEnd)
         ) {
-            PrimaryCircleButton(
+            SecondaryCircleButton(
                 icon = {
                     Icon(
                         painterResource(id = R.drawable.delete_task),
-                        contentDescription = "Delete project"
-                    )},
+                        contentDescription = "Delete project",
+                        tint = Color.Unspecified
+                    )
+                },
                 onClick = { onDelete(project.uuid) }
             )
         }

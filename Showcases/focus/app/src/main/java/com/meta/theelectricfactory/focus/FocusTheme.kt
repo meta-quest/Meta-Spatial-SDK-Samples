@@ -2,6 +2,7 @@
 
 package com.meta.theelectricfactory.focus
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -14,12 +15,10 @@ import com.meta.spatial.uiset.theme.SpatialTheme
 import com.meta.spatial.uiset.theme.SpatialTypography
 import com.meta.spatial.uiset.theme.lightSpatialColorScheme
 import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 object FocusColors {
-    val primaryButton = Color(0xFF6153FF)
-    val secondaryButton = Color(0xFFF1F0F3)
-    val textColor = Color(0xFFFFFFFF)
     val panel =
         Brush.verticalGradient(
             colors =
@@ -33,27 +32,31 @@ object FocusColors {
             colors =
                 listOf(
                     Color(0xFFFFFFFF),
-                    Color(0xFFF2F1FF)
+                    Color(0xFF0FC71B)
                 ),
         )
 
     val blue = Color(0xFF42A4FF)
     val darkBlue = Color(0xFF28226D)
     val disabledBlue = Color(0xFF004281)
+
     val purple = Color(0xFF6153FF)
     val darkPurple = Color(0xFF340087)
     val disabledPurple = Color(0xFFBFBAFF)
-    val lightPurple = Color(0xFFEFEEFF)
-    val selectedLightPurple= Color(0xFFDFDCFF)
+    val lightPurple= Color(0xFFDFDCFF)
+    val selectedLightPurple = Color(0xFFEFEEFF)
+
     val black = Color(0xFF16161B)
-    val strongGray = Color(0xFF434152)
-    val gray = Color(0xFF434152)
+    val darkGray = Color(0xFF434152)
     val lightGray = Color(0xFFF1F0F3)
 
     val lightBlue = Color(0xFFECF6FF)
+    val lightBlue2 = Color(0xFFD9EDFF)
     val lightGreen = Color(0xFFDBFBF9)
     val aiPurple = Color(0xFFF4EEFF)
+    val aiChat = Color(0xFFEADCFF)
 
+    // Sticky Notes Colors
     val yellowStickyNote = Color(0xFFFFF874)
     val lightYellowStickyNote = Color(0xFFFFFDDC)
     val greenStickyNote = Color(0xFF8DFFD9)
@@ -98,9 +101,27 @@ fun FocusTheme(content: @Composable () -> Unit) {
     SpatialTheme(
         colorScheme = focusColorScheme(),
         typography = focusTypo(),
-        shapes = SpatialShapes(),
+        shapes = focusShapes(),
         content = content
     )
+}
+
+@Composable
+fun squareShapes(): SpatialShapes {
+    val shapes = SpatialShapes(
+        large = RoundedCornerShape(15.dp),
+    )
+    return shapes
+}
+
+@Composable
+fun focusShapes(): SpatialShapes {
+    val focusShapes = SpatialShapes(
+        small = RoundedCornerShape(15.dp), // SpatialTextField
+        medium = RoundedCornerShape(24.dp), // TextTileButton
+        large = RoundedCornerShape(30.dp), // Panels, Tooltips, Buttons
+    )
+    return focusShapes
 }
 
 @Composable
@@ -137,19 +158,61 @@ fun focusTypo(): SpatialTypography {
 }
 
 @Composable
-fun focusColorScheme(): SpatialColorScheme {
+fun tooltipColor(blue: Boolean = false): SpatialColorScheme {
 
-    val focusLightColorScheme = lightSpatialColorScheme()
+    var colorScheme = lightSpatialColorScheme()
         .copy(
-            primaryButton = FocusColors.primaryButton,
-            secondaryButton = FocusColors.secondaryButton,
+
+            primaryAlphaBackground = if (blue) FocusColors.disabledBlue else FocusColors.darkPurple, // Text of tooltip
+            menu =  if (blue) FocusColors.lightBlue2 else FocusColors.aiChat, // Background of tooltip
+        )
+
+    return colorScheme
+}
+
+@Composable
+fun focusColorScheme(gray: Boolean = false): SpatialColorScheme {
+
+    var focusLightColorScheme = lightSpatialColorScheme()
+        .copy(
+            primaryButton = FocusColors.purple,
+            secondaryButton = FocusColors.lightPurple,
             panel = FocusColors.panel,
             dialog = FocusColors.dialog,
-//            active = FocusColors.primaryButton,
-//            hover = FocusColors.primaryButton,
-            primaryAlphaBackground = FocusColors.primaryButton,
-//            menu = FocusColors.primaryButton,
-//            sideNavBackground = FocusColors.primaryButton,
+            //primaryAlphaBackground = FocusColors.purple,
+        )
+
+    if (gray) focusLightColorScheme = lightSpatialColorScheme()
+        .copy(
+
+            primaryButton = FocusColors.darkGray,
+            secondaryButton = FocusColors.lightGray,
+            secondaryAlphaBackground = FocusColors.darkGray, // EditTextField & TextTileButton label
+            
+
+//            panel = FocusColors.dialog,
+//            dialog = FocusColors.dialog,
+////            menu =  FocusColors.greenStickyNote,
+//            sideNavBackground= FocusColors.greenStickyNote,
+//            negativeButton = FocusColors.orangeStickyNote,
+//            controlButton = FocusColors.orangeStickyNote,
+//            secondaryControlButton = FocusColors.orangeStickyNote,
+//            secondaryControlBackground = FocusColors.orangeStickyNote,
+//            primaryAlphaBackground = FocusColors.darkPurple, // Texto de tooltip
+//            menu =  FocusColors.aiChat,
+//            placeholder =FocusColors.greenStickyNote,
+//            primaryOpaqueButton = FocusColors.greenStickyNote,
+//            secondaryOpaqueButton = FocusColors.greenStickyNote,
+//            hover =FocusColors.greenStickyNote,
+//            pressed = FocusColors.greenStickyNote,
+//            active = FocusColors.greenStickyNote,
+//            positive = FocusColors.greenStickyNote,
+//            negative = FocusColors.greenStickyNote,
+//            progressBarOnMedia = FocusColors.greenStickyNote,
+//            progressOnMedia = FocusColors.greenStickyNote,
+//            progressBarOnBackground = FocusColors.greenStickyNote,
+//            progressOnBackground = FocusColors.greenStickyNote,
+
         )
 
 //    val focusDarkColorScheme = darkSpatialColorScheme()

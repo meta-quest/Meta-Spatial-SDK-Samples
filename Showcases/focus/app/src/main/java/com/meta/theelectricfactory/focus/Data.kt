@@ -2,25 +2,48 @@
 
 package com.meta.theelectricfactory.focus
 
+import androidx.compose.ui.graphics.Color
+
 // Project class to manage project data
 data class Project(val uuid: Int, var name: String, var MR: Boolean, var environment: Int)
+data class ProjectData(val uuid: Int, val name: String, val timeAgo: String) //TODO esto es al pedo
+data class Message(val text: String, val isUser: Boolean)
+
+// State and priority labels for tasks
+data class Label(
+    val description: String,
+    val containerColor: Color,
+    val contentColor: Color
+)
+
+val stateLabels = arrayOf(
+    Label( "To do", Color(0xFFFFDBFA), Color(0xFFA6008D)),
+    Label("In progress", Color(0xFFF1DAFF), Color(0xFF6500A3)),
+    Label("Done", Color(0xFFE9E4FB), Color(0xFF2B167E)),
+)
+
+val priorityLabels = arrayOf(
+    Label("Low priority", Color(0xFFFFF5DB), Color(0xFFA67700)),
+    Label("Medium priority", Color(0xFFFFE8DA), Color(0xFFA33C00)),
+    Label("High priority", Color(0xFFFFDADA), Color(0xFFA30000)),
+)
 
 // Enum with all asset types in the app
 enum class AssetType {
-  TASKS_PANEL,
-  AI_PANEL,
-  CLOCK,
-  SPEAKER,
-  TASK,
-  STICKY_NOTE,
-  STICKER,
-  WEB_VIEW,
-  LABEL,
-  SHAPE_3D,
-  SHAPE_2D,
-  TIMER,
-  ARROW,
-  BOARD
+    TASKS_PANEL,
+    AI_PANEL,
+    CLOCK,
+    SPEAKER,
+    TASK,
+    STICKY_NOTE,
+    STICKER,
+    WEB_VIEW,
+    LABEL,
+    SHAPE_3D,
+    SHAPE_2D,
+    TIMER,
+    ARROW,
+    BOARD
 }
 
 // GENERAL DATA
@@ -110,11 +133,6 @@ val timerButtons =
         R.id.buttonTimer4,
         R.id.buttonTimer5,
         R.id.buttonTimer6)
-
-// State and priority labels for tasks
-val stateLabels =
-    arrayOf(R.drawable.label_to_do, R.drawable.label_in_progress, R.drawable.label_done)
-val priorityLabels = arrayOf(R.drawable.label_low, R.drawable.label_medium, R.drawable.label_high)
 
 // Environments and skyboxes assets
 val environments = arrayOf("environment1.glb", "environment2.glb", "environment3.glb")

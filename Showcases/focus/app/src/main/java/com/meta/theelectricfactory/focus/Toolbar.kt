@@ -13,10 +13,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -27,6 +28,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meta.spatial.uiset.navigation.SpatialSideNavItem
+import com.meta.spatial.uiset.theme.LocalShapes
 import com.meta.spatial.uiset.theme.SpatialTheme
 
 @Composable
@@ -34,6 +36,9 @@ fun ToolbarPanel() {
 
     var immersiveActivity = ImmersiveActivity.getInstance()
     val selectedTool = remember { mutableStateOf(-1) }
+
+    val speakerIsOn by immersiveActivity?.focusViewModel!!.speakerIsOn.collectAsState()
+    val soundIcon = if (speakerIsOn) R.drawable.sound else R.drawable.sound_off
 
     return FocusTheme {
         Box(
@@ -47,7 +52,7 @@ fun ToolbarPanel() {
                 Box( Modifier
                     .fillMaxWidth(0.26f)
                     .fillMaxHeight()
-                    .clip(SpatialTheme.shapes.large)
+                    .clip(LocalShapes.current.large)
                     .background(SpatialTheme.colorScheme.panel)
                     .padding(40.dp),
                     contentAlignment = Alignment.Center
@@ -58,7 +63,7 @@ fun ToolbarPanel() {
                     ) {
 
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            R.drawable.home,
                             "Home",
                             false,
                             color = FocusColors.lightGray,
@@ -68,7 +73,7 @@ fun ToolbarPanel() {
                         )
 
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            soundIcon,
                             "Audio On/Off",
                             false,
                             color = FocusColors.lightGray,
@@ -78,7 +83,7 @@ fun ToolbarPanel() {
                         )
 
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            R.drawable.settings,
                             "Settings",
                             false,
                             color = FocusColors.lightGray,
@@ -92,7 +97,7 @@ fun ToolbarPanel() {
                 Box(Modifier
                     .fillMaxWidth()
                     .fillMaxHeight()
-                    .clip(SpatialTheme.shapes.large)
+                    .clip(LocalShapes.current.large)
                     .background(SpatialTheme.colorScheme.panel)
                     .padding(40.dp),
                     contentAlignment = Alignment.Center
@@ -102,7 +107,7 @@ fun ToolbarPanel() {
                         verticalAlignment = Alignment.CenterVertically,
                         ) {
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            R.drawable.tasks,
                             "Open Tasks Panel",
                             false,
                             color = FocusColors.lightBlue,
@@ -112,7 +117,7 @@ fun ToolbarPanel() {
                         )
 
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            R.drawable.browser,
                             "Open Browser",
                             false,
                             color = FocusColors.lightGreen,
@@ -123,7 +128,7 @@ fun ToolbarPanel() {
 
                         if (immersiveActivity != null && immersiveActivity.AIenabled) {
                             ToolbarButton(
-                                R.drawable.delete_task,
+                                R.drawable.ai,
                                 "Chat with AI",
                                 false,
                                 color = FocusColors.aiPurple,
@@ -135,11 +140,11 @@ fun ToolbarPanel() {
 
                         VerticalDivider(
                             thickness = 1.dp,
-                            color = Color(0xFFD4D3DC)
+                            color = FocusColors.darkGray
                         )
 
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            R.drawable.sticky,
                             "Add Sticky Note",
                             selectedTool.value == 0,
                             onClick = {
@@ -150,7 +155,7 @@ fun ToolbarPanel() {
                         )
 
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            R.drawable.labels,
                             "Insert Label",
                             selectedTool.value == 1,
                             onClick = {
@@ -161,7 +166,7 @@ fun ToolbarPanel() {
                         )
 
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            R.drawable.arrows,
                             "Insert Flow Arrow",
                             selectedTool.value == 2,
                             onClick = {
@@ -172,7 +177,7 @@ fun ToolbarPanel() {
                         )
 
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            R.drawable.boards,
                             "Insert Board",
                             selectedTool.value == 3,
                             onClick = {
@@ -183,7 +188,7 @@ fun ToolbarPanel() {
                         )
 
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            R.drawable.shapes,
                             "Insert Shape",
                             selectedTool.value == 4,
                             onClick = {
@@ -194,7 +199,7 @@ fun ToolbarPanel() {
                         )
 
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            R.drawable.stickers,
                             "Insert Sticker",
                             selectedTool.value == 5,
                             onClick = {
@@ -205,7 +210,7 @@ fun ToolbarPanel() {
                         )
 
                         ToolbarButton(
-                            R.drawable.delete_task,
+                            R.drawable.timer,
                             "Set Timer",
                             selectedTool.value == 6,
                             onClick = {
@@ -239,7 +244,7 @@ fun ToolbarButton(
         Modifier
             .size(75.dp)
             .fillMaxHeight()
-            .background(backgroundColor, RoundedCornerShape(15.dp))
+            .background(backgroundColor, LocalShapes.current.small)
             .aspectRatio(1f),
         icon = { Icon(
             painterResource(id = icon),
