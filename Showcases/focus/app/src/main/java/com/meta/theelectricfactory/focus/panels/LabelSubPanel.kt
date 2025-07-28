@@ -25,11 +25,11 @@ import com.meta.spatial.uiset.theme.SpatialTheme
 import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
-import com.meta.theelectricfactory.focus.Label
+import com.meta.theelectricfactory.focus.data.Label
 import com.meta.theelectricfactory.focus.utils.FOCUS_DP
 import com.meta.theelectricfactory.focus.ui.focusFont
-import com.meta.theelectricfactory.focus.priorityLabels
-import com.meta.theelectricfactory.focus.stateLabels
+import com.meta.theelectricfactory.focus.data.priorityLabels
+import com.meta.theelectricfactory.focus.data.stateLabels
 
 @Composable
 fun LabelSubPanel() {

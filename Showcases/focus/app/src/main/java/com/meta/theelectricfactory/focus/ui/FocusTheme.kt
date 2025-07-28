@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.meta.theelectricfactory.focus.R
-import com.meta.theelectricfactory.focus.StickyColor
+import com.meta.theelectricfactory.focus.data.StickyColor
 
 enum class FocusColorSchemes {
     Main, Gray, BlueTooltip, PurpleTooltip, Transparent

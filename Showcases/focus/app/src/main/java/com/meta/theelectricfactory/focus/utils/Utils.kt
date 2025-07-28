@@ -25,11 +25,11 @@ import com.meta.spatial.toolkit.Visible
 import com.meta.theelectricfactory.focus.AssetType
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.ToolComponent
-import com.meta.theelectricfactory.focus.arrowHeightArray
-import com.meta.theelectricfactory.focus.boardHeightArray
-import com.meta.theelectricfactory.focus.boardSizeArray
-import com.meta.theelectricfactory.focus.shape2DSizeArray
-import com.meta.theelectricfactory.focus.shape3DSizeArray
+import com.meta.theelectricfactory.focus.data.arrowHeightArray
+import com.meta.theelectricfactory.focus.data.boardHeightArray
+import com.meta.theelectricfactory.focus.data.boardSizeArray
+import com.meta.theelectricfactory.focus.data.shape2DSizeArray
+import com.meta.theelectricfactory.focus.data.shape3DSizeArray
 
 var temporalID: Int = 0
 const val FOCUS_DP: Int = 2200

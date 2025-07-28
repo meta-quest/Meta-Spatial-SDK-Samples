@@ -1,8 +1,9 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.theelectricfactory.focus
+package com.meta.theelectricfactory.focus.data
 
 import androidx.compose.ui.graphics.Color
+import com.meta.theelectricfactory.focus.R
 
 // Project class to manage project data
 data class Project(val uuid: Int, var name: String, var MR: Boolean, var environment: Int)
@@ -34,24 +35,6 @@ enum class StickyColor {
     Orange,
     Blue,
     Purple
-}
-
-// Enum with all asset types in the app
-enum class AssetType {
-    TASKS_PANEL,
-    AI_PANEL,
-    CLOCK,
-    SPEAKER,
-    TASK,
-    STICKY_NOTE,
-    STICKER,
-    WEB_VIEW,
-    LABEL,
-    SHAPE_3D,
-    SHAPE_2D,
-    TIMER,
-    ARROW,
-    BOARD
 }
 
 // GENERAL DATA

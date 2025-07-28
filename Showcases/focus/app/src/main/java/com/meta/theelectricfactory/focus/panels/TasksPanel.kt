@@ -4,8 +4,6 @@ package com.meta.theelectricfactory.focus.panels
 
 import android.annotation.SuppressLint
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
-import android.os.Handler
-import android.os.Looper
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -65,8 +63,8 @@ import com.meta.theelectricfactory.focus.tools.SpatialTask
 import com.meta.theelectricfactory.focus.utils.FOCUS_DP
 import com.meta.theelectricfactory.focus.utils.getNewUUID
 import com.meta.theelectricfactory.focus.ui.focusFont
-import com.meta.theelectricfactory.focus.priorityLabels
-import com.meta.theelectricfactory.focus.stateLabels
+import com.meta.theelectricfactory.focus.data.priorityLabels
+import com.meta.theelectricfactory.focus.data.stateLabels
 import com.meta.theelectricfactory.focus.ui.FocusColorSchemes
 import com.meta.theelectricfactory.focus.ui.FocusShapes
 import com.meta.theelectricfactory.focus.ui.focusColorScheme

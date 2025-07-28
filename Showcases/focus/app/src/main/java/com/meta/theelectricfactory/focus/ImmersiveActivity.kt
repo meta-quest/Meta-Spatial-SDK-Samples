@@ -36,8 +36,16 @@ import com.meta.spatial.vr.LocomotionSystem
 import com.meta.spatial.vr.VRFeature
 import java.lang.ref.WeakReference
 import kotlinx.coroutines.*
-import androidx.lifecycle.ViewModel
 import com.meta.spatial.compose.ComposeFeature
+import com.meta.theelectricfactory.focus.data.Project
+import com.meta.theelectricfactory.focus.data.StickyColor
+import com.meta.theelectricfactory.focus.data.arrows
+import com.meta.theelectricfactory.focus.data.boards
+import com.meta.theelectricfactory.focus.data.environments
+import com.meta.theelectricfactory.focus.data.labels
+import com.meta.theelectricfactory.focus.data.shapes
+import com.meta.theelectricfactory.focus.data.skyboxes
+import com.meta.theelectricfactory.focus.data.stickers
 import com.meta.theelectricfactory.focus.db.DatabaseManager
 import com.meta.theelectricfactory.focus.fragments.FirstFragment
 import com.meta.theelectricfactory.focus.fragments.SecondFragment
@@ -70,8 +78,6 @@ import com.meta.theelectricfactory.focus.utils.getChildren
 import com.meta.theelectricfactory.focus.utils.getDeleteButtonHeight
 import com.meta.theelectricfactory.focus.utils.getNewUUID
 import com.meta.theelectricfactory.focus.utils.placeInFront
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 class ImmersiveActivity : AppSystemActivity() {
 

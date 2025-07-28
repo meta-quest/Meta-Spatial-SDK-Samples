@@ -11,8 +11,8 @@ import android.util.Log
 import com.meta.spatial.core.Pose
 import com.meta.theelectricfactory.focus.AssetType
 import com.meta.theelectricfactory.focus.ImmersiveActivity
-import com.meta.theelectricfactory.focus.Project
-import com.meta.theelectricfactory.focus.StickyColor
+import com.meta.theelectricfactory.focus.data.Project
+import com.meta.theelectricfactory.focus.data.StickyColor
 
 // Class to create and update Focus database
 class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null, DATABASE_VERSION) {

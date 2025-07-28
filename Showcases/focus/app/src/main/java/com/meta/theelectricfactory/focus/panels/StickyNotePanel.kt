@@ -31,7 +31,7 @@ import com.meta.spatial.uiset.theme.LocalShapes
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ui.getStickyColors
 import com.meta.theelectricfactory.focus.ImmersiveActivity
-import com.meta.theelectricfactory.focus.StickyColor
+import com.meta.theelectricfactory.focus.data.StickyColor
 import com.meta.theelectricfactory.focus.utils.FOCUS_DP
 import com.meta.theelectricfactory.focus.ui.focusFont
 
