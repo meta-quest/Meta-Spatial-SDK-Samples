@@ -1,9 +1,0 @@
-entities:
-  components:
-    com.meta.components.Name:
-      name: texture3
-    com.meta.components.Texture:
-      image: ref:MediaRoom_environment
-      sampler: ref:Sampler2
-metadata:
-  version: 1.0
