@@ -30,12 +30,12 @@ import androidx.compose.ui.unit.dp
 import com.meta.spatial.uiset.navigation.SpatialSideNavItem
 import com.meta.spatial.uiset.theme.LocalShapes
 import com.meta.spatial.uiset.theme.SpatialTheme
-
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.R
-import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
+import com.meta.theelectricfactory.focus.utils.FocusViewModel
 
 @Composable
 fun ToolbarPanel() {
@@ -43,7 +43,7 @@ fun ToolbarPanel() {
     var immersiveActivity = ImmersiveActivity.getInstance()
     val selectedTool = remember { mutableStateOf(-1) }
 
-    val speakerIsOn by immersiveActivity?.focusViewModel!!.speakerIsOn.collectAsState()
+    val speakerIsOn by FocusViewModel.instance.speakerIsOn.collectAsState()
     val soundIcon = if (speakerIsOn) R.drawable.sound else R.drawable.sound_off
 
     return FocusTheme {
@@ -267,8 +267,8 @@ fun ToolbarButton(
 }
 
 @Preview(
-    widthDp = (0.65f * focusDP).toInt(),
-    heightDp = (0.065f * focusDP).toInt(),
+    widthDp = (0.65f * FOCUS_DP).toInt(),
+    heightDp = (0.065f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

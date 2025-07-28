@@ -64,14 +64,17 @@ import com.meta.spatial.uiset.tooltip.SpatialTooltipContent
 import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
-import com.meta.theelectricfactory.focus.Message
 import com.meta.theelectricfactory.focus.R
 import com.meta.theelectricfactory.focus.tools.WebView
+import com.meta.theelectricfactory.focus.ui.FocusColorSchemes
+import com.meta.theelectricfactory.focus.ui.FocusShapes
 import com.meta.theelectricfactory.focus.ui.focusColorScheme
-import com.meta.theelectricfactory.focus.utils.focusDP
-import com.meta.theelectricfactory.focus.ui.onestFontFamily
-import com.meta.theelectricfactory.focus.ui.squareShapes
-import com.meta.theelectricfactory.focus.ui.tooltipColor
+import com.meta.theelectricfactory.focus.ui.focusShapes
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
+import com.meta.theelectricfactory.focus.ui.focusFont
+import com.meta.theelectricfactory.focus.utils.FocusViewModel
+
+data class Message(val text: String, val isUser: Boolean)
 
 @Composable
 fun AIPanel() {
@@ -82,7 +85,7 @@ fun AIPanel() {
     var stickyAvailable = remember { mutableStateOf(false) }
     var sendButtonLoading = remember { mutableStateOf(false) }
     var sendButtonIcon = remember { mutableIntStateOf(R.drawable.send) }
-    val currentProjectUuid by immersiveActivity?.focusViewModel!!.currentProjectUuid.collectAsState()
+    val currentProjectUuid by FocusViewModel.instance.currentProjectUuid.collectAsState()
 
     LaunchedEffect(currentProjectUuid) {
         messagesList.clear()
@@ -107,7 +110,7 @@ fun AIPanel() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 SpatialTheme(
-                    colorScheme = tooltipColor()
+                    colorScheme = focusColorScheme(FocusColorSchemes.PurpleTooltip)
                 ) {
                     SpatialTooltipContent(
                         modifier = Modifier
@@ -173,7 +176,7 @@ fun AIPanel() {
                             modifier = Modifier.padding(30.dp)
                         ) {
                             SpatialTheme(
-                                shapes = squareShapes()
+                                shapes = focusShapes(FocusShapes.Squared)
                             ) {
                                 PrimaryButton(
                                     label = "Sticky note last message",
@@ -205,16 +208,17 @@ fun AIPanel() {
                             horizontalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterHorizontally)
                         ) {
                             SpatialTheme(
-                                colorScheme = focusColorScheme(true)
+                                colorScheme = focusColorScheme(FocusColorSchemes.Gray)
                             ) {
                                 SpatialTextField(
                                     modifier = Modifier
                                         .width(460.dp)
                                         .height(100.dp),
-                                    label = "", //TODO !!!! !!! esto esta descentrando el input!
+                                    label = "",
                                     placeholder = "Write a message",
                                     value = messageInput.value,
-                                    onValueChange = { messageInput.value = it }
+                                    onValueChange = { messageInput.value = it },
+                                    singleLine = true,
                                 )
                             }
 
@@ -223,7 +227,7 @@ fun AIPanel() {
                                 .aspectRatio(1f)
                             ) {
                                 SpatialTheme(
-                                    shapes = squareShapes()
+                                    shapes = focusShapes(FocusShapes.Squared)
                                 ) {
                                     PrimaryIconButton(
                                         icon = {
@@ -277,6 +281,12 @@ fun AIPanel() {
     }
 }
 
+fun activeLoadingState(state: Boolean, sendButtonLoading: MutableState<Boolean>, sendButtonIcon: MutableIntState) {
+    ImmersiveActivity.getInstance()?.waitingForAI = state
+    sendButtonLoading.value = state
+    sendButtonIcon.intValue = if (state) R.drawable.loading else R.drawable.send
+}
+
 @Composable
 fun AiDisclaimerText() {
     val annotatedText = AnnotatedString.Builder().apply {
@@ -307,17 +317,11 @@ fun AiDisclaimerText() {
                 textAlign = TextAlign.Center,
                 fontSize = 25.sp,
                 lineHeight = 30.sp,
-                fontFamily = onestFontFamily,
+                fontFamily = focusFont,
                 color = FocusColors.disabledPurple
             ),
         )
     }
-}
-
-fun activeLoadingState(state: Boolean, sendButtonLoading: MutableState<Boolean>, sendButtonIcon: MutableIntState) {
-    ImmersiveActivity.getInstance()?.waitingForAI = state
-    sendButtonLoading.value = state
-    sendButtonIcon.intValue = if (state) R.drawable.loading else R.drawable.send
 }
 
 @Composable
@@ -363,7 +367,7 @@ fun ChatMessageItem(
                 fontSize = 20.sp,
                 lineHeight = 25.sp,
                 color = textColor,
-                fontFamily = onestFontFamily
+                fontFamily = focusFont
             )
         }
 
@@ -380,8 +384,8 @@ fun ChatMessageItem(
 }
 
 @Preview(
-    widthDp = (0.3f * focusDP).toInt(),
-    heightDp = (0.5f * focusDP).toInt(),
+    widthDp = (0.3f * FOCUS_DP).toInt(),
+    heightDp = (0.5f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

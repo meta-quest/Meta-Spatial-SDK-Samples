@@ -36,17 +36,13 @@ import com.meta.spatial.vr.LocomotionSystem
 import com.meta.spatial.vr.VRFeature
 import java.lang.ref.WeakReference
 import kotlinx.coroutines.*
-
-import com.meta.theelectricfactory.focus.panels.ToolbarPanel
-
-import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import com.meta.spatial.compose.ComposeFeature
-import com.meta.spatial.compose.composePanel
-import com.meta.spatial.runtime.LayerConfig
 import com.meta.theelectricfactory.focus.db.DatabaseManager
 import com.meta.theelectricfactory.focus.fragments.FirstFragment
 import com.meta.theelectricfactory.focus.fragments.SecondFragment
+import com.meta.theelectricfactory.focus.panels.PanelRegistrationIds
+import com.meta.theelectricfactory.focus.panels.ToolbarPanel
 import com.meta.theelectricfactory.focus.panels.AIPanel
 import com.meta.theelectricfactory.focus.panels.ArrowSubPanel
 import com.meta.theelectricfactory.focus.panels.BoardSubPanel
@@ -56,6 +52,7 @@ import com.meta.theelectricfactory.focus.panels.StickerSubPanel
 import com.meta.theelectricfactory.focus.panels.StickySubPanel
 import com.meta.theelectricfactory.focus.panels.TasksPanel
 import com.meta.theelectricfactory.focus.panels.TimerSubPanel
+import com.meta.theelectricfactory.focus.panels.panelRegistration
 import com.meta.theelectricfactory.focus.systems.BoardParentingSystem
 import com.meta.theelectricfactory.focus.systems.DatabaseUpdateSystem
 import com.meta.theelectricfactory.focus.systems.GeneralSystem
@@ -65,8 +62,9 @@ import com.meta.theelectricfactory.focus.tools.Timer
 import com.meta.theelectricfactory.focus.tools.Tool
 import com.meta.theelectricfactory.focus.tools.WebView
 import com.meta.theelectricfactory.focus.utils.AIUtils
+import com.meta.theelectricfactory.focus.utils.FocusViewModel
 import com.meta.theelectricfactory.focus.utils.addOnSelectListener
-import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.utils.deleteObject
 import com.meta.theelectricfactory.focus.utils.getAssetSize
 import com.meta.theelectricfactory.focus.utils.getChildren
 import com.meta.theelectricfactory.focus.utils.getDeleteButtonHeight
@@ -127,7 +125,7 @@ class ImmersiveActivity : AppSystemActivity() {
     var lastAIResponse = ""
     var waitingForAI = false
 
-    val focusViewModel = FocusViewModel()
+    //val focusViewModel = FocusViewModel()
 
     override fun registerFeatures(): List<SpatialFeature> {
         val features =
@@ -173,64 +171,23 @@ class ImmersiveActivity : AppSystemActivity() {
         // Rest of the elements in scene are created
         createSceneElements()
         // Initial state of objects in scene
-        setInitState()
+        setInitialState()
     }
 
     override fun registerPanels(): List<PanelRegistration> {
         return listOf(
-            PanelRegistration(PanelRegistrationIds.HomePanel, 0.58f, 0.41f, true) {},
-            PanelRegistration(PanelRegistrationIds.Toolbar, 0.65f, 0.065f) { ToolbarPanel() },
-            PanelRegistration(PanelRegistrationIds.TasksPanel, 0.275f, 0.5f) { TasksPanel() },
-            PanelRegistration(PanelRegistrationIds.AIPanel, 0.3f, 0.5f) { AIPanel() },
-            PanelRegistration(PanelRegistrationIds.StickySubPanel, 0.26f, 0.042f) { StickySubPanel() },
-            PanelRegistration(PanelRegistrationIds.LabelSubPanel, 0.44f, 0.042f) { LabelSubPanel() },
-            PanelRegistration(PanelRegistrationIds.ArrowSubPanel, 0.28f, 0.042f) { ArrowSubPanel() },
-            PanelRegistration(PanelRegistrationIds.BoardSubPanel, 0.21f, 0.042f) { BoardSubPanel() },
-            PanelRegistration(PanelRegistrationIds.ShapesSubPanel, 0.28f, 0.042f) { ShapeSubPanel() },
-            PanelRegistration(PanelRegistrationIds.StickerSubPanel, 0.29f, 0.042f) { StickerSubPanel() },
-            PanelRegistration(PanelRegistrationIds.TimerSubPanel, 0.38f, 0.042f) { TimerSubPanel() },
+            panelRegistration(PanelRegistrationIds.HomePanel, 0.58f, 0.41f, true) {},
+            panelRegistration(PanelRegistrationIds.Toolbar, 0.65f, 0.065f) { ToolbarPanel() },
+            panelRegistration(PanelRegistrationIds.TasksPanel, 0.275f, 0.5f) { TasksPanel() },
+            panelRegistration(PanelRegistrationIds.AIPanel, 0.3f, 0.5f) { AIPanel() },
+            panelRegistration(PanelRegistrationIds.StickySubPanel, 0.26f, 0.042f) { StickySubPanel() },
+            panelRegistration(PanelRegistrationIds.LabelSubPanel, 0.44f, 0.042f) { LabelSubPanel() },
+            panelRegistration(PanelRegistrationIds.ArrowSubPanel, 0.28f, 0.042f) { ArrowSubPanel() },
+            panelRegistration(PanelRegistrationIds.BoardSubPanel, 0.21f, 0.042f) { BoardSubPanel() },
+            panelRegistration(PanelRegistrationIds.ShapesSubPanel, 0.28f, 0.042f) { ShapeSubPanel() },
+            panelRegistration(PanelRegistrationIds.StickerSubPanel, 0.29f, 0.042f) { StickerSubPanel() },
+            panelRegistration(PanelRegistrationIds.TimerSubPanel, 0.38f, 0.042f) { TimerSubPanel() },
         )
-    }
-
-    object PanelRegistrationIds {
-        const val HomePanel = 22 //TODO
-        const val AIPanel = 23
-        const val TasksPanel = 24
-        const val Toolbar = 25
-        const val StickySubPanel = 26
-        const val LabelSubPanel = 27
-        const val ArrowSubPanel = 28
-        const val BoardSubPanel = 29
-        const val ShapesSubPanel = 30
-        const val StickerSubPanel = 31
-        const val TimerSubPanel = 32
-    }
-
-    fun PanelRegistration(
-        registrationId: Int,
-        widthInMeters: Float,
-        heightInMeters: Float,
-        homePanel: Boolean = false,
-        content: @Composable () -> Unit,
-    ): PanelRegistration {
-        return PanelRegistration(registrationId) { _ ->
-            config {
-                width = widthInMeters
-                height = heightInMeters
-                // layoutWidthInPx = (3960 * width).toInt()
-                layoutWidthInDp = focusDP * width
-                layerConfig = LayerConfig() // TODO maybe this is too expensive
-                enableTransparent = true
-                includeGlass = false
-                themeResourceId = R.style.Theme_Focus_Transparent
-            }
-
-            if (homePanel) {
-                activityClass = MainActivity::class.java
-            } else {
-                composePanel { setContent { content() } }
-            }
-        }
     }
 
     override fun onPause() {
@@ -245,7 +202,7 @@ class ImmersiveActivity : AppSystemActivity() {
         if (currentProject != null && speakerIsOn) playAmbientSound()
     }
 
-    private fun setInitState() {
+    private fun setInitialState() {
         // Set initial state of objects in scene
         setPassthrough(true)
         setLighting(-1)
@@ -283,15 +240,7 @@ class ImmersiveActivity : AppSystemActivity() {
         speakerIsOn = false
         lastAIResponse = ""
         waitingForAI = false
-        setInitState()
-    }
-
-    private fun cleanElements() {
-        // Clean previous elements in project, if there is any
-        val toolAssets = Query.where { has(ToolComponent.id) }
-        for (entity in toolAssets.eval()) {
-            deleteObject(entity, false, true)
-        }
+        setInitialState()
     }
 
     // Load project from scroll view in First Fragment
@@ -313,7 +262,7 @@ class ImmersiveActivity : AppSystemActivity() {
                 else false
             val env = cursor.getInt(cursor.getColumnIndex(DatabaseManager.PROJECT_ENVIRONMENT))
             currentProject = Project(id, projectName, mr, env)
-            focusViewModel.updateCurrentProjectUuid(id)
+            FocusViewModel.instance.updateCurrentProjectUuid(id)
         }
         cursor.close()
 
@@ -505,7 +454,7 @@ class ImmersiveActivity : AppSystemActivity() {
             val project = Project(getNewUUID(), projectName, mrMode, currentEnvironment)
             currentProject = project
             DB.createProject(project)
-            focusViewModel.updateCurrentProjectUuid(project.uuid)
+            FocusViewModel.instance.updateCurrentProjectUuid(project.uuid)
 
             placeInFront(toolbarPanel)
             toolbarPanel.setComponent(Visible(true))
@@ -580,6 +529,14 @@ class ImmersiveActivity : AppSystemActivity() {
             currentProject?.environment = currentEnvironment
 
             DB.updateProject(currentProject)
+        }
+    }
+
+    private fun cleanElements() {
+        // Clean previous elements in project, if there is any
+        val toolAssets = Query.where { has(ToolComponent.id) }
+        for (entity in toolAssets.eval()) {
+            deleteObject(entity, false, true)
         }
     }
 
@@ -834,7 +791,7 @@ class ImmersiveActivity : AppSystemActivity() {
         // Project audio state updated in database
         DB.updateUniqueAsset(speaker.getComponent<UniqueAssetComponent>().uuid, state = speakerIsOn)
         // Change texture to audio button state image in toolbar
-        focusViewModel.setSpeakerIsOn(true)
+        FocusViewModel.instance.setSpeakerIsOn(true)
     }
 
     // Stop ambient audio and save its state in database
@@ -851,7 +808,7 @@ class ImmersiveActivity : AppSystemActivity() {
         // Project audio state updated in database
         DB.updateUniqueAsset(speaker.getComponent<UniqueAssetComponent>().uuid, state = speakerIsOn)
         // Change texture to audio button state image in toolbar
-        focusViewModel.setSpeakerIsOn(false)
+        FocusViewModel.instance.setSpeakerIsOn(false)
     }
 
     // Play sound when a tool has been created
@@ -888,7 +845,7 @@ class ImmersiveActivity : AppSystemActivity() {
 
     fun deleteTask(uuid: Int) {
         DB.deleteTask(uuid)
-        focusViewModel.refreshTasksPanel()
+        FocusViewModel.instance.refreshTasksPanel()
 
         // Delete correspondent spatial task if exists
         var ent = getSpatialTask(uuid)
@@ -1201,132 +1158,6 @@ class ImmersiveActivity : AppSystemActivity() {
                 StickyNote(
                     message = response, color = StickyColor.Purple)
             }
-        }
-    }
-
-//    // Chats from previous projects are cleaned when a new project has been loaded
-//    fun cleanChats() {
-//        lateinit var aiPanel: PanelSceneObject
-//        systemManager.findSystem<SceneObjectSystem>().getSceneObject(aiExchangePanel)?.thenAccept {
-//                sceneObject ->
-//            aiPanel = sceneObject as PanelSceneObject
-//        }
-//
-//        val scrollView: TableLayout? =
-//            aiPanel.rootView?.findViewById<TableLayout>(R.id.aiScrollViewTable)
-//        // Cleaning chats
-//        scrollView?.removeAllViews()
-//        lastAIResponse = ""
-//        systemManager.findSystem<SceneObjectSystem>().getSceneObject(aiExchangePanel)?.thenAccept {
-//                sceneObject ->
-//            aiPanel = sceneObject as PanelSceneObject
-//        }
-//        aiPanel.rootView?.findViewById<Button>(R.id.buttonStickyAI)?.isEnabled = false
-//    }
-
-    // When an object is selected, the delete button is shown in the specified position
-    fun selectElement(ent: Entity) {
-        currentObjectSelected = ent
-        val billboardOrientationEuler: Vector3 =
-            ent.tryGetComponent<IsdkGrabbable>()?.billboardOrientation ?: Vector3(0f, 0f, 0f)
-        deleteButton.setComponent(
-            Transform(
-                Pose(
-                    ent.getComponent<ToolComponent>().deleteButtonPosition,
-                    Quaternion(
-                        billboardOrientationEuler.x,
-                        billboardOrientationEuler.y,
-                        billboardOrientationEuler.z))))
-        deleteButton.setComponent(TransformParent(ent))
-        deleteButton.setComponent(Visible(true))
-    }
-
-    // Delete object depending on the type
-    fun deleteObject(
-        entity: Entity?,
-        deleteFromDB: Boolean = false,
-        cleaningProject: Boolean = false
-    ) {
-        val position = entity!!.getComponent<Transform>().transform.t
-
-        if (currentObjectSelected != null && currentObjectSelected!!.equals(entity)) {
-            currentObjectSelected = null
-        }
-
-        // deleteButton is detached from the object
-        deleteButton.setComponent(TransformParent())
-        deleteButton.setComponent(Visible(false))
-
-        // Checking type of object to know how to delete it.
-        val asset = entity.getComponent<ToolComponent>()
-        // Check if we have to delete it from database as well or we are just cleaning the space to show
-        // a different project
-        if (deleteFromDB && asset.type != AssetType.TASK && asset.type != AssetType.TIMER) {
-            when (asset.type) {
-                AssetType.STICKY_NOTE -> {
-                    DB.deleteSticky(asset.uuid)
-                }
-                AssetType.BOARD -> {
-                    var children = getChildren(entity)
-                    for (i in children.count() - 1 downTo 0) {
-                        deleteObject(children[i], true)
-                    }
-                    DB.deleteToolAsset(asset.uuid)
-                }
-                else -> {
-                    DB.deleteToolAsset(asset.uuid)
-                }
-            }
-        } else if (asset.type == AssetType.TASK && !cleaningProject) {
-            DB.updateTaskData(asset.uuid, detach = 0)
-            focusViewModel.refreshTasksPanel()
-
-            // In case of some object, we need to delete its children too
-        } else if (asset.type == AssetType.TIMER || asset.type == AssetType.BOARD) {
-            var children = getChildren(entity)
-            for (i in children.count() - 1 downTo 0) {
-                children[i].destroy()
-            }
-        }
-        entity.destroy()
-        if (!cleaningProject) scene.playSound(deleteSound, position, 1f)
-    }
-
-    class FocusViewModel : ViewModel() {
-        private val _tasksListsHasChanged = MutableStateFlow<Int>(0)
-        val tasksListsHasChanged = _tasksListsHasChanged.asStateFlow()
-
-        fun refreshTasksPanel() {
-            _tasksListsHasChanged.value++
-        }
-
-        private val _currentProjectUuid = MutableStateFlow<Int?>(null)
-        val currentProjectUuid = _currentProjectUuid.asStateFlow()
-
-        fun updateCurrentProjectUuid(uuid: Int?) {
-            _currentProjectUuid.value = uuid
-            refreshTasksPanel()
-        }
-
-        private val _currentTaskUuid = MutableStateFlow<Int?>(null)
-        val currentTaskUuid = _currentTaskUuid.asStateFlow()
-
-        fun setCurrentTaskUuid(uuid: Int?) {
-            _currentTaskUuid.value = uuid
-        }
-
-        private val _currentTaskUpdated = MutableStateFlow<Int>(0)
-        val currentTaskUpdated = _currentTaskUpdated.asStateFlow()
-
-        fun updateCurrentSpatialTask() {
-            _currentTaskUpdated.value++
-        }
-
-        private val _speakerIsOn = MutableStateFlow<Boolean>(false)
-        val speakerIsOn = _speakerIsOn.asStateFlow()
-
-        fun setSpeakerIsOn(isOn: Boolean) {
-            _speakerIsOn.value = isOn
         }
     }
 

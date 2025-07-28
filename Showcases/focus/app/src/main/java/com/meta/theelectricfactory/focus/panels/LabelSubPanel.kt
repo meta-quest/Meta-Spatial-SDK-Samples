@@ -26,8 +26,8 @@ import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.Label
-import com.meta.theelectricfactory.focus.utils.focusDP
-import com.meta.theelectricfactory.focus.ui.onestFontFamily
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
+import com.meta.theelectricfactory.focus.ui.focusFont
 import com.meta.theelectricfactory.focus.priorityLabels
 import com.meta.theelectricfactory.focus.stateLabels
 
@@ -84,14 +84,14 @@ fun LabelButton(
         Text(
             text = label.description,
             fontSize = 16.sp,
-            fontFamily = onestFontFamily
+            fontFamily = focusFont
         )
     }
 }
 
 @Preview(
-    widthDp = (0.44f * focusDP).toInt(),
-    heightDp = (0.042f * focusDP).toInt(),
+    widthDp = (0.44f * FOCUS_DP).toInt(),
+    heightDp = (0.042f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

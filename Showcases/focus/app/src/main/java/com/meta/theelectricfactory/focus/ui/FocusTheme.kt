@@ -20,6 +20,26 @@ import androidx.compose.ui.unit.sp
 import com.meta.theelectricfactory.focus.R
 import com.meta.theelectricfactory.focus.StickyColor
 
+enum class FocusColorSchemes {
+    Main, Gray, BlueTooltip, PurpleTooltip, Transparent
+}
+
+enum class FocusShapes {
+    Main, Squared
+}
+
+val focusFont = FontFamily(
+    Font(R.font.onest_regular, FontWeight.Normal),
+    Font(R.font.onest_light, FontWeight.Light),
+    Font(R.font.onest_extra_light, FontWeight.ExtraLight),
+    Font(R.font.onest_medium, FontWeight.Medium),
+    Font(R.font.onest_semi_bold, FontWeight.SemiBold),
+    Font(R.font.onest_bold, FontWeight.Bold),
+    Font(R.font.onest_extra_bold, FontWeight.ExtraBold),
+    Font(R.font.onest_black, FontWeight.Black),
+    Font(R.font.onest_thin, FontWeight.Thin),
+)
+
 object FocusColors {
     val panel =
         Brush.verticalGradient(
@@ -73,7 +93,7 @@ object FocusColors {
     val lightPurpleStickyNote = Color(0xFFE9DFFF)
 }
 
-fun GetStickyColors(stickyColor: StickyColor): Pair<Color, Color> {
+fun getStickyColors(stickyColor: StickyColor): Pair<Color, Color> {
     return when (stickyColor) {
         StickyColor.Blue -> Pair(FocusColors.blueStickyNote, FocusColors.lightBlueStickyNote)
         StickyColor.Purple -> Pair(FocusColors.purpleStickyNote, FocusColors.lightPurpleStickyNote)
@@ -85,153 +105,104 @@ fun GetStickyColors(stickyColor: StickyColor): Pair<Color, Color> {
     }
 }
 
-val onestFontFamily =
-    FontFamily(
-        Font(R.font.onest_regular, FontWeight.Normal),
-        Font(R.font.onest_light, FontWeight.Light),
-        Font(R.font.onest_extra_light, FontWeight.ExtraLight),
-        Font(R.font.onest_medium, FontWeight.Medium),
-        Font(R.font.onest_semi_bold, FontWeight.SemiBold),
-        Font(R.font.onest_bold, FontWeight.Bold),
-        Font(R.font.onest_extra_bold, FontWeight.ExtraBold),
-        Font(R.font.onest_black, FontWeight.Black),
-        Font(R.font.onest_thin, FontWeight.Thin),
-    )
-
 @Composable
 fun FocusTheme(content: @Composable () -> Unit) {
     SpatialTheme(
-        colorScheme = focusColorScheme(),
+        colorScheme = focusColorScheme(FocusColorSchemes.Main),
         typography = focusTypo(),
-        shapes = focusShapes(),
+        shapes = focusShapes(FocusShapes.Main),
         content = content
     )
 }
 
 @Composable
-fun squareShapes(): SpatialShapes {
-    val shapes = SpatialShapes(
-        large = RoundedCornerShape(15.dp),
-    )
-    return shapes
-}
+fun focusColorScheme(mode: FocusColorSchemes = FocusColorSchemes.Main): SpatialColorScheme {
 
-@Composable
-fun focusShapes(): SpatialShapes {
-    val focusShapes = SpatialShapes(
-        small = RoundedCornerShape(15.dp), // SpatialTextField
-        medium = RoundedCornerShape(24.dp), // TextTileButton
-        large = RoundedCornerShape(30.dp), // Panels, Tooltips, Buttons
-    )
-    return focusShapes
-}
-
-@Composable
-fun focusTypo(): SpatialTypography {
-
-    val focusLightTypo = SpatialTypography(
-        headline1 = LocalTypography.current.headline1.copy(
-            fontFamily = onestFontFamily
-        ),
-        headline2 = LocalTypography.current.headline2.copy(
-            fontFamily = onestFontFamily
-        ),
-        headline3 = LocalTypography.current.headline3.copy(
-            fontFamily = onestFontFamily
-        ),
-        body1 = LocalTypography.current.body1.copy( //primary button text
-            fontFamily = onestFontFamily,
-            //color = FocusColors.textColor,
-            fontSize = 20.sp),
-        body2 = LocalTypography.current.body2.copy( //secondary label text
-            fontFamily = onestFontFamily,
-            fontSize = 20.sp),
-        headline1Strong = LocalTypography.current.headline1.copy(
-            fontFamily = onestFontFamily
-        ),
-        headline2Strong = LocalTypography.current.headline2.copy(
-            fontFamily = onestFontFamily
-        ),
-        headline3Strong = LocalTypography.current.headline3.copy(
-            fontFamily = onestFontFamily
-        ),
-        body1Strong = LocalTypography.current.body1.copy( //Primary label text
-            fontFamily = onestFontFamily,
-            fontSize = 20.sp),
-        body2Strong = LocalTypography.current.body2.copy(
-            fontFamily = onestFontFamily
-        ), //fontWeight = FontWeight.ExtraBold
+    var colorScheme = lightSpatialColorScheme().copy(
+        primaryButton = FocusColors.purple,
+        secondaryButton = FocusColors.lightPurple,
+        panel = FocusColors.panel,
+        dialog = FocusColors.dialog,
     )
 
-    return focusLightTypo
-}
-
-@Composable
-fun tooltipColor(blue: Boolean = false): SpatialColorScheme {
-
-    var colorScheme = lightSpatialColorScheme()
-        .copy(
-
-            primaryAlphaBackground = if (blue) FocusColors.disabledBlue else FocusColors.darkPurple, // Text of tooltip
-            menu =  if (blue) FocusColors.lightBlue2 else FocusColors.aiChat, // Background of tooltip
+    if (mode == FocusColorSchemes.Gray) {
+        colorScheme = lightSpatialColorScheme().copy(
+            primaryButton = FocusColors.darkGray,
+            secondaryButton = FocusColors.lightGray,
+            secondaryAlphaBackground = FocusColors.darkGray, // EditTextField & TextTileButton label
+            active = FocusColors.purple,
         )
+    } else if (mode == FocusColorSchemes.Transparent) {
+        colorScheme = lightSpatialColorScheme().copy(
+            secondaryButton = Color.Transparent,
+        )
+    } else if (mode == FocusColorSchemes.BlueTooltip) {
+        colorScheme = lightSpatialColorScheme().copy(
+            primaryAlphaBackground = FocusColors.disabledBlue, // Text of tooltip
+            menu =  FocusColors.lightBlue2, // Background of tooltip
+        )
+    } else if (mode == FocusColorSchemes.PurpleTooltip) {
+        colorScheme = lightSpatialColorScheme().copy(
+            primaryAlphaBackground = FocusColors.darkPurple,
+            menu =  FocusColors.aiChat,
+        )
+    }
 
     return colorScheme
 }
 
 @Composable
-fun focusColorScheme(gray: Boolean = false): SpatialColorScheme {
+fun focusShapes(mode: FocusShapes = FocusShapes.Main): SpatialShapes {
+    var shapes = SpatialShapes(
+        small = RoundedCornerShape(15.dp), // SpatialTextField
+        medium = RoundedCornerShape(24.dp), // TextTileButton
+        large = RoundedCornerShape(30.dp), // Panels, Tooltips, Buttons
+    )
 
-    var focusLightColorScheme = lightSpatialColorScheme()
-        .copy(
-            primaryButton = FocusColors.purple,
-            secondaryButton = FocusColors.lightPurple,
-            panel = FocusColors.panel,
-            dialog = FocusColors.dialog,
-            //primaryAlphaBackground = FocusColors.purple,
+    if (mode == FocusShapes.Squared) {
+        shapes = SpatialShapes(
+            large = RoundedCornerShape(15.dp),
         )
+    }
+    return shapes
+}
 
-    if (gray) focusLightColorScheme = lightSpatialColorScheme()
-        .copy(
+@Composable
+fun focusTypo(): SpatialTypography {
 
-            primaryButton = FocusColors.darkGray,
-            secondaryButton = FocusColors.lightGray,
-            secondaryAlphaBackground = FocusColors.darkGray, // EditTextField & TextTileButton label
+    val typo = SpatialTypography(
+        headline1 = LocalTypography.current.headline1.copy(
+            fontFamily = focusFont
+        ),
+        headline2 = LocalTypography.current.headline2.copy(
+            fontFamily = focusFont
+        ),
+        headline3 = LocalTypography.current.headline3.copy(
+            fontFamily = focusFont
+        ),
+        body1 = LocalTypography.current.body1.copy( //primary button text
+            fontFamily = focusFont,
+            //color = FocusColors.textColor,
+            fontSize = 20.sp),
+        body2 = LocalTypography.current.body2.copy( //secondary label text
+            fontFamily = focusFont,
+            fontSize = 20.sp),
+        headline1Strong = LocalTypography.current.headline1.copy(
+            fontFamily = focusFont
+        ),
+        headline2Strong = LocalTypography.current.headline2.copy(
+            fontFamily = focusFont
+        ),
+        headline3Strong = LocalTypography.current.headline3.copy(
+            fontFamily = focusFont
+        ),
+        body1Strong = LocalTypography.current.body1.copy( //Primary label text
+            fontFamily = focusFont,
+            fontSize = 20.sp),
+        body2Strong = LocalTypography.current.body2.copy(
+            fontFamily = focusFont
+        ), //fontWeight = FontWeight.ExtraBold
+    )
 
-
-//            panel = FocusColors.dialog,
-//            dialog = FocusColors.dialog,
-////            menu =  FocusColors.greenStickyNote,
-//            sideNavBackground= FocusColors.greenStickyNote,
-//            negativeButton = FocusColors.orangeStickyNote,
-//            controlButton = FocusColors.orangeStickyNote,
-//            secondaryControlButton = FocusColors.orangeStickyNote,
-//            secondaryControlBackground = FocusColors.orangeStickyNote,
-//            primaryAlphaBackground = FocusColors.darkPurple, // Texto de tooltip
-//            menu =  FocusColors.aiChat,
-//            placeholder =FocusColors.greenStickyNote,
-//            primaryOpaqueButton = FocusColors.greenStickyNote,
-//            secondaryOpaqueButton = FocusColors.greenStickyNote,
-//            hover =FocusColors.greenStickyNote,
-//            pressed = FocusColors.greenStickyNote,
-//            active = FocusColors.greenStickyNote,
-//            positive = FocusColors.greenStickyNote,
-//            negative = FocusColors.greenStickyNote,
-//            progressBarOnMedia = FocusColors.greenStickyNote,
-//            progressOnMedia = FocusColors.greenStickyNote,
-//            progressBarOnBackground = FocusColors.greenStickyNote,
-//            progressOnBackground = FocusColors.greenStickyNote,
-
-        )
-
-//    val focusDarkColorScheme = darkSpatialColorScheme()
-//
-//    val uiMode = LocalConfiguration.current.uiMode
-//    if ((uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES) {
-//        return focusDarkColorScheme()
-//    } else {
-//        return focusLightColorScheme()
-//    }
-
-    return focusLightColorScheme
+    return typo
 }

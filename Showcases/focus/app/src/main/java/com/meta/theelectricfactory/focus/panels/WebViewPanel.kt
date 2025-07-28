@@ -46,7 +46,8 @@ import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.R
-import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
+import com.meta.theelectricfactory.focus.utils.checkIfStillWriting
 
 @Composable
 fun WebViewPanel(
@@ -233,22 +234,9 @@ fun onNewURL(
     }
 }
 
-fun checkIfStillWriting( typingInterval: Long, lastTextChangeTime: Long, handler: Handler, lastRunnable: Array<Runnable?>, onComplete: () -> (Unit)) {
-
-    lastRunnable[0]?.let { handler.removeCallbacks(it) }
-
-    val runnable = Runnable {
-        if (System.currentTimeMillis() - lastTextChangeTime >= typingInterval) {
-            onComplete()
-        }
-    }
-    lastRunnable[0] = runnable
-    handler.postDelayed(runnable, typingInterval)
-}
-
 @Preview(
-    widthDp = (0.56f * focusDP).toInt(),
-    heightDp = (0.4f * focusDP).toInt(),
+    widthDp = (0.56f * FOCUS_DP).toInt(),
+    heightDp = (0.4f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

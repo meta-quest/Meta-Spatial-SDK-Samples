@@ -27,7 +27,7 @@ import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.R
-import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
 
 @Composable
 fun StickySubPanel() {
@@ -88,8 +88,8 @@ fun StickyButton(
 }
 
 @Preview(
-    widthDp = (0.26f * focusDP).toInt(),
-    heightDp = (0.042f * focusDP).toInt(),
+    widthDp = (0.26f * FOCUS_DP).toInt(),
+    heightDp = (0.042f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

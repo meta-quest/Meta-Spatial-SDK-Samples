@@ -48,9 +48,11 @@ import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.R
 import com.meta.theelectricfactory.focus.fragments.SecondFragment
+import com.meta.theelectricfactory.focus.ui.FocusColorSchemes
+import com.meta.theelectricfactory.focus.ui.FocusShapes
 import com.meta.theelectricfactory.focus.ui.focusColorScheme
-import com.meta.theelectricfactory.focus.ui.squareShapes
-import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.ui.focusShapes
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
 
 @Composable
 fun HomePanelSecondFragmentScreen() {
@@ -122,7 +124,7 @@ fun HomePanelSecondFragmentScreen() {
                 Spacer(modifier = Modifier.size(30.dp))
 
                 SpatialTheme(
-                    colorScheme = focusColorScheme(true)
+                    colorScheme = focusColorScheme(FocusColorSchemes.Gray)
                 ) {
                     SpatialTextField(
                         modifier = Modifier
@@ -130,7 +132,8 @@ fun HomePanelSecondFragmentScreen() {
                         label = "Project name",
                         placeholder = "Enter project name",
                         value = projectNameInput.value,
-                        onValueChange = { projectNameInput.value = it }
+                        onValueChange = { projectNameInput.value = it },
+                        singleLine = true,
                     )
                 }
 
@@ -215,7 +218,7 @@ fun HomePanelSecondFragmentScreen() {
                             ) {
 
                                 SpatialTheme(
-                                    colorScheme = focusColorScheme(true)
+                                    colorScheme = focusColorScheme(FocusColorSchemes.Gray)
                                 ) {
                                     PrimaryButton(
                                         label = environment.label,
@@ -233,7 +236,7 @@ fun HomePanelSecondFragmentScreen() {
                     modifier = Modifier.align(Alignment.End),
                 ) {
                     SpatialTheme(
-                        shapes = squareShapes()
+                        shapes = focusShapes(FocusShapes.Squared)
                     ) {
                         PrimaryButton(
                             label = saveButtonLabel,
@@ -252,8 +255,6 @@ fun HomePanelSecondFragmentScreen() {
 fun selectEnv(env: Int) {
     if (env != 3) ImmersiveActivity.getInstance()?.selectEnvironment(env)
     else ImmersiveActivity.getInstance()?.selectMRMode()
-
-    // TODO Show correct UI
 }
 
 fun saveCurrentProject(
@@ -269,8 +270,8 @@ fun saveCurrentProject(
 }
 
 @Preview(
-    widthDp = (0.58f * focusDP).toInt(),
-    heightDp = (0.41f * focusDP).toInt(),
+    widthDp = (0.58f * FOCUS_DP).toInt(),
+    heightDp = (0.41f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

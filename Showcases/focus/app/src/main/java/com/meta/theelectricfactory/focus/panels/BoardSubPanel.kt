@@ -26,7 +26,7 @@ import com.meta.spatial.uiset.theme.SpatialTheme
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.R
-import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
 
 @Composable
 fun BoardSubPanel() {
@@ -51,8 +51,6 @@ fun BoardSubPanel() {
                 Text(
                     text = "Boards",
                     color = LocalColorScheme.current.primaryButton,
-//                    style = LocalTypography.current.headline2Strong.copy(
-//                        fontSize = 35.sp),
                 )
 
                 BoardButton( R.drawable.button_board1, {immersiveActivity?.CreateBoard(0)})
@@ -80,8 +78,8 @@ fun BoardButton(
 }
 
 @Preview(
-    widthDp = (0.21f * focusDP).toInt(),
-    heightDp = (0.042f * focusDP).toInt(),
+    widthDp = (0.21f * FOCUS_DP).toInt(),
+    heightDp = (0.042f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

@@ -15,6 +15,7 @@ import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.StickyColor
 import com.meta.theelectricfactory.focus.ToolComponent
 import com.meta.theelectricfactory.focus.panels.StickyNotePanel
+import com.meta.theelectricfactory.focus.panels.panelRegistration
 import com.meta.theelectricfactory.focus.utils.addDeleteButton
 import com.meta.theelectricfactory.focus.utils.getDisposableID
 import com.meta.theelectricfactory.focus.utils.getNewUUID
@@ -56,7 +57,7 @@ class StickyNote(
 
         // Register the panel
         immersiveActivity?.registerPanel(
-            immersiveActivity!!.PanelRegistration(id, 0.14f, 0.14f) {
+            panelRegistration(id, 0.14f, 0.14f) {
                 StickyNotePanel(
                     uuid = uuid,
                     message = message,

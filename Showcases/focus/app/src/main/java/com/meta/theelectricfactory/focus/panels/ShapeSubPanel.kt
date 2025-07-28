@@ -26,7 +26,7 @@ import com.meta.spatial.uiset.theme.SpatialTheme
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.R
-import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
 
 @Composable
 fun ShapeSubPanel() {
@@ -51,8 +51,6 @@ fun ShapeSubPanel() {
                 Text(
                     text = "Shapes",
                     color = LocalColorScheme.current.primaryButton,
-//                    style = LocalTypography.current.headline2Strong.copy(
-//                        fontSize = 35.sp),
                 )
 
                 ShapeButton( R.drawable.shape1, {immersiveActivity?.CreateShape(0)})
@@ -82,8 +80,8 @@ fun ShapeButton( //TODO evaluar si no conviene que sean todos el mismo shape/arr
 }
 
 @Preview(
-    widthDp = (0.28f * focusDP).toInt(),
-    heightDp = (0.042f * focusDP).toInt(),
+    widthDp = (0.28f * FOCUS_DP).toInt(),
+    heightDp = (0.042f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

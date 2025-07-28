@@ -13,6 +13,7 @@ import com.meta.theelectricfactory.focus.AssetType
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.ToolComponent
 import com.meta.theelectricfactory.focus.panels.WebViewPanel
+import com.meta.theelectricfactory.focus.panels.panelRegistration
 import com.meta.theelectricfactory.focus.utils.getDisposableID
 import com.meta.theelectricfactory.focus.utils.getNewUUID
 import com.meta.theelectricfactory.focus.utils.placeInFront
@@ -50,7 +51,7 @@ class WebView(
 
         // Register the panel
         immersiveActivity?.registerPanel(
-            immersiveActivity!!.PanelRegistration(id, 0.56f, 0.4f) { WebViewPanel(url, uuid, ent) }
+            panelRegistration(id, 0.56f, 0.4f) { WebViewPanel(url, uuid, ent) }
         )
 
         // ToolComponent is added to web view to save properties and identify it

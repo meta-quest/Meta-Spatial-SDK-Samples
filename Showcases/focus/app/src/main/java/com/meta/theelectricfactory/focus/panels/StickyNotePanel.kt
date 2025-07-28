@@ -3,8 +3,6 @@
 package com.meta.theelectricfactory.focus.panels
 
 import android.content.res.Configuration.UI_MODE_TYPE_VR_HEADSET
-import android.os.Handler
-import android.os.Looper
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,6 +10,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,14 +25,15 @@ import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.sp
 import com.meta.spatial.uiset.theme.LocalShapes
 import com.meta.theelectricfactory.focus.ui.FocusTheme
-import com.meta.theelectricfactory.focus.ui.GetStickyColors
+import com.meta.theelectricfactory.focus.ui.getStickyColors
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.StickyColor
-import com.meta.theelectricfactory.focus.utils.focusDP
-import com.meta.theelectricfactory.focus.ui.onestFontFamily
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
+import com.meta.theelectricfactory.focus.ui.focusFont
 
 @Composable
 fun StickyNotePanel(
@@ -41,7 +42,7 @@ fun StickyNotePanel(
     color: StickyColor,
 ) {
     var messageInput = remember { mutableStateOf(message) }
-    val (mainColor, lightColor) = GetStickyColors(color)
+    val (mainColor, lightColor) = getStickyColors(color)
 
     var textSize = 25.sp
     var lineHeight = 30.sp
@@ -49,10 +50,6 @@ fun StickyNotePanel(
         textSize = 20.sp
         lineHeight = 22.sp
     }
-
-    var lastTextChangeTime = remember { 0L }
-    val handler = remember { Handler(Looper.getMainLooper()) }
-    val lastRunnable = remember { arrayOf<Runnable?>(null) }
 
     return FocusTheme {
         Column() {
@@ -93,23 +90,23 @@ fun StickyNotePanel(
                                 modifier = Modifier
                                     .fillMaxWidth(),
                                 value = messageInput.value,
-                                onValueChange = {
-                                    messageInput.value = it
-                                    lastTextChangeTime = System.currentTimeMillis()
-                                    checkIfStillWriting(3 * 1000, lastTextChangeTime, handler, lastRunnable, {
+                                onValueChange = { messageInput.value = it },
+                                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+                                keyboardActions = KeyboardActions(
+                                    onDone = {
                                         ImmersiveActivity.getInstance()!!.DB.updateStickyMessage(uuid, messageInput.value)
-                                    })
-                                },
+                                    }
+                                ),
                                 placeholder = {
                                     Text(
                                         text ="Type something...",
-                                        fontFamily = onestFontFamily,
+                                        fontFamily = focusFont,
                                         fontSize = textSize,
                                         lineHeight = lineHeight,
                                     )},
                                 textStyle = TextStyle(
                                     fontSize = textSize,
-                                    fontFamily = onestFontFamily,
+                                    fontFamily = focusFont,
                                     lineHeight = lineHeight
                                 ),
                                 colors = TextFieldDefaults.colors(
@@ -128,8 +125,8 @@ fun StickyNotePanel(
 }
 
 @Preview(
-    widthDp = (0.14f * focusDP).toInt(),
-    heightDp = (0.14f * focusDP).toInt(),
+    widthDp = (0.14f * FOCUS_DP).toInt(),
+    heightDp = (0.14f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

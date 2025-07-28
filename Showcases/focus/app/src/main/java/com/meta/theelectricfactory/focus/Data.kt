@@ -6,8 +6,6 @@ import androidx.compose.ui.graphics.Color
 
 // Project class to manage project data
 data class Project(val uuid: Int, var name: String, var MR: Boolean, var environment: Int)
-data class ProjectData(val uuid: Int, val name: String, val timeAgo: String) //TODO esto es al pedo
-data class Message(val text: String, val isUser: Boolean)
 
 // State and priority labels for tasks
 data class Label(

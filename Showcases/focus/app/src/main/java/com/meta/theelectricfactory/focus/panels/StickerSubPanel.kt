@@ -27,7 +27,7 @@ import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.R
-import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
 
 @Composable
 fun StickerSubPanel() {
@@ -85,8 +85,8 @@ fun StickerButton( //TODO evaluar si no conviene que sean todos el mismo shape/a
 }
 
 @Preview(
-    widthDp = (0.29f * focusDP).toInt(),
-    heightDp = (0.042f * focusDP).toInt(),
+    widthDp = (0.29f * FOCUS_DP).toInt(),
+    heightDp = (0.042f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

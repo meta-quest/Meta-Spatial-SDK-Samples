@@ -27,6 +27,7 @@ import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.ToolComponent
 import com.meta.theelectricfactory.focus.panels.Task
 import com.meta.theelectricfactory.focus.panels.TaskCard
+import com.meta.theelectricfactory.focus.panels.panelRegistration
 import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.utils.addDeleteButton
@@ -54,7 +55,7 @@ class SpatialTask(
 
         // Register the panel
         immersiveActivity?.registerPanel(
-            immersiveActivity!!.PanelRegistration(id, 0.24f, 0.15f) {
+            panelRegistration(id, 0.24f, 0.15f) {
                 FocusTheme {
                     Box(
                         modifier = Modifier

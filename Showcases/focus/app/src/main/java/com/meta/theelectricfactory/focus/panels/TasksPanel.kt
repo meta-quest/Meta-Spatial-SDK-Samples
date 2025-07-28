@@ -21,6 +21,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -46,6 +48,7 @@ import com.meta.spatial.uiset.theme.SpatialTheme
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.sp
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
@@ -59,13 +62,16 @@ import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
 import com.meta.theelectricfactory.focus.R
 import com.meta.theelectricfactory.focus.tools.SpatialTask
-import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
 import com.meta.theelectricfactory.focus.utils.getNewUUID
-import com.meta.theelectricfactory.focus.ui.onestFontFamily
+import com.meta.theelectricfactory.focus.ui.focusFont
 import com.meta.theelectricfactory.focus.priorityLabels
-import com.meta.theelectricfactory.focus.ui.squareShapes
 import com.meta.theelectricfactory.focus.stateLabels
-import com.meta.theelectricfactory.focus.ui.tooltipColor
+import com.meta.theelectricfactory.focus.ui.FocusColorSchemes
+import com.meta.theelectricfactory.focus.ui.FocusShapes
+import com.meta.theelectricfactory.focus.ui.focusColorScheme
+import com.meta.theelectricfactory.focus.ui.focusShapes
+import com.meta.theelectricfactory.focus.utils.FocusViewModel
 
 data class Task(val uuid: Int, var title: String, val body: String, var state: Int, var priority: Int, val detached: Int, val pose: Pose)
 
@@ -80,7 +86,7 @@ fun TasksPanel() {
     val templateTaskState = remember { mutableIntStateOf(0) }
     val templateTaskPriority = remember { mutableIntStateOf(0) }
 
-    val tasksListHasChanged by immersiveActivity?.focusViewModel!!.tasksListsHasChanged.collectAsState()
+    val tasksListHasChanged by FocusViewModel.instance.tasksListsHasChanged.collectAsState()
     LaunchedEffect(tasksListHasChanged) {
         tasksList.clear()
         val cursor = immersiveActivity?.DB?.getTasks(immersiveActivity.currentProject?.uuid)
@@ -122,7 +128,7 @@ fun TasksPanel() {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 SpatialTheme(
-                    colorScheme = tooltipColor(true)
+                    colorScheme = focusColorScheme(FocusColorSchemes.BlueTooltip)
                 ) {
                     SpatialTooltipContent(
                         modifier = Modifier
@@ -198,12 +204,12 @@ fun TasksPanel() {
                         placeholder = {
                             Text(
                                 text ="Task title",
-                                fontFamily = onestFontFamily,
+                                fontFamily = focusFont,
                                 fontSize = 28.sp,
                             )},
                         textStyle = TextStyle(
                             fontSize = 28.sp,
-                            fontFamily = onestFontFamily
+                            fontFamily = focusFont
                         ),
                         colors = TextFieldDefaults.colors(
                             focusedContainerColor = Color.Transparent,
@@ -223,13 +229,13 @@ fun TasksPanel() {
                         placeholder = {
                             Text(
                                 text ="Add text",
-                                fontFamily = onestFontFamily,
+                                fontFamily = focusFont,
                                 fontSize = 20.sp,
                                 color = FocusColors.darkGray
                             )},
                         textStyle = TextStyle(
                             fontSize = 20.sp,
-                            fontFamily = onestFontFamily,
+                            fontFamily = focusFont,
                             color = FocusColors.darkGray
                         ),
                         colors = TextFieldDefaults.colors(
@@ -243,7 +249,7 @@ fun TasksPanel() {
                     Spacer(modifier = Modifier.size(20.dp))
 
                     SpatialTheme(
-                        shapes = squareShapes()
+                        shapes = focusShapes(FocusShapes.Squared)
                     ) {
                         PrimaryButton(
                             label = "+ Add Task",
@@ -261,7 +267,7 @@ fun TasksPanel() {
                                 textInput.value = ""
                                 templateTaskState.intValue = 0
                                 templateTaskPriority.intValue = 0
-                                immersiveActivity?.focusViewModel?.refreshTasksPanel()
+                                FocusViewModel.instance.refreshTasksPanel()
                             },
                             isEnabled = titleInput.value.isNotEmpty(),
                             expanded = true
@@ -315,14 +321,10 @@ fun TaskCard(
     var taskTitleInput = remember(key) { mutableStateOf(task.title) }
     var taskBodyInput = remember(key) { mutableStateOf(task.body) }
 
-    var lastTextChangeTime = remember { 0L }
-    val handler = remember(key) { Handler(Looper.getMainLooper()) }
-    val lastRunnable = remember(key) { arrayOf<Runnable?>(null) }
-
-    val taskUpdated by ImmersiveActivity.getInstance()?.focusViewModel!!.currentTaskUpdated.collectAsState()
+    val taskUpdated by FocusViewModel.instance.currentTaskUpdated.collectAsState()
     LaunchedEffect(taskUpdated) {
-        if (isSpatial && task.uuid == ImmersiveActivity.getInstance()?.focusViewModel!!.currentTaskUuid.value) {
-            val cursor = ImmersiveActivity.getInstance()?.DB?.getTaskData(ImmersiveActivity.getInstance()?.focusViewModel!!.currentTaskUuid.value)
+        if (isSpatial && task.uuid == FocusViewModel.instance.currentTaskUuid.value) {
+            val cursor = ImmersiveActivity.getInstance()?.DB?.getTaskData(FocusViewModel.instance.currentTaskUuid.value)
             if (cursor != null && cursor.moveToFirst()) {
                 val taskState = cursor.getInt(cursor.getColumnIndex(DatabaseManager.TASK_STATE))
                 val taskPriority = cursor.getInt(cursor.getColumnIndex(DatabaseManager.TASK_PRIORITY))
@@ -362,10 +364,10 @@ fun TaskCard(
                         if (isSpatial) {
                             mainTaskLabelState!!.intValue = newState
                         } else {
-                            ImmersiveActivity.getInstance()?.focusViewModel!!.setCurrentTaskUuid(
+                            FocusViewModel.instance.setCurrentTaskUuid(
                                 task.uuid
                             )
-                            ImmersiveActivity.getInstance()?.focusViewModel!!.updateCurrentSpatialTask()
+                            FocusViewModel.instance.updateCurrentSpatialTask()
                         }
                     })
 
@@ -380,10 +382,10 @@ fun TaskCard(
                         if (isSpatial) {
                             mainTaskLabelPriority!!.intValue = newPriority
                         } else {
-                            ImmersiveActivity.getInstance()?.focusViewModel!!.setCurrentTaskUuid(
+                            FocusViewModel.instance.setCurrentTaskUuid(
                                 task.uuid
                             )
-                            ImmersiveActivity.getInstance()?.focusViewModel!!.updateCurrentSpatialTask()
+                            FocusViewModel.instance.updateCurrentSpatialTask()
                         }
                     })
                 }
@@ -414,7 +416,7 @@ fun TaskCard(
                                     task.uuid,
                                     detach = 1
                                 )
-                                ImmersiveActivity.getInstance()?.focusViewModel?.refreshTasksPanel()
+                                FocusViewModel.instance.refreshTasksPanel()
                                 SpatialTask(
                                     task = task,
                                     new = true,
@@ -449,22 +451,22 @@ fun TaskCard(
             modifier = Modifier
                 .fillMaxWidth(),
             value = taskTitleInput.value,
-            onValueChange = {
-                taskTitleInput.value = it
-                lastTextChangeTime = System.currentTimeMillis()
-                checkIfStillWriting(2 * 1000, lastTextChangeTime, handler, lastRunnable, {
+            onValueChange = { taskTitleInput.value = it },
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(
+                onDone = {
                     ImmersiveActivity.getInstance()!!.DB.updateTaskData(task.uuid, title = taskTitleInput.value, body = taskBodyInput.value)
                     if (isSpatial) {
                         mainTaskTitle!!.value = taskTitleInput.value
                     } else {
-                        ImmersiveActivity.getInstance()?.focusViewModel!!.setCurrentTaskUuid(task.uuid)
-                        ImmersiveActivity.getInstance()?.focusViewModel!!.updateCurrentSpatialTask()
+                        FocusViewModel.instance.setCurrentTaskUuid(task.uuid)
+                        FocusViewModel.instance.updateCurrentSpatialTask()
                     }
-                })
-            },
+                }
+            ),
             textStyle = TextStyle(
                 fontSize = 23.sp,
-                fontFamily = onestFontFamily
+                fontFamily = focusFont
             ),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
@@ -480,22 +482,22 @@ fun TaskCard(
                 .fillMaxWidth()
                 .height(110.dp),
             value = taskBodyInput.value,
-            onValueChange = {
-                taskBodyInput.value = it
-                lastTextChangeTime = System.currentTimeMillis()
-                checkIfStillWriting(2 * 1000, lastTextChangeTime, handler, lastRunnable, {
+            onValueChange = { taskBodyInput.value = it },
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+            keyboardActions = KeyboardActions(
+                onDone = {
                     ImmersiveActivity.getInstance()!!.DB.updateTaskData(task.uuid, title = taskTitleInput.value, body = taskBodyInput.value)
                     if (isSpatial) {
                         mainTaskBody!!.value = taskBodyInput.value
                     } else {
-                        ImmersiveActivity.getInstance()?.focusViewModel!!.setCurrentTaskUuid(task.uuid)
-                        ImmersiveActivity.getInstance()?.focusViewModel!!.updateCurrentSpatialTask()
+                        FocusViewModel.instance.setCurrentTaskUuid(task.uuid)
+                        FocusViewModel.instance.updateCurrentSpatialTask()
                     }
-                })
-            },
+                }
+            ),
             textStyle = TextStyle(
                 fontSize = 18.sp,
-                fontFamily = onestFontFamily,
+                fontFamily = focusFont,
                 color = FocusColors.darkGray
             ),
             colors = TextFieldDefaults.colors(
@@ -528,8 +530,8 @@ fun TaskCard(
 }
 
 @Preview(
-    widthDp = (0.275f * focusDP).toInt(),
-    heightDp = (0.5f * focusDP).toInt(),
+    widthDp = (0.275f * FOCUS_DP).toInt(),
+    heightDp = (0.5f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable

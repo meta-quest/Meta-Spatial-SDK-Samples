@@ -38,14 +38,17 @@ import com.meta.theelectricfactory.focus.fragments.FirstFragment
 import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.ImmersiveActivity
-import com.meta.theelectricfactory.focus.ProjectData
 import com.meta.theelectricfactory.focus.R
+import com.meta.theelectricfactory.focus.ui.FocusColorSchemes
+import com.meta.theelectricfactory.focus.ui.FocusShapes
 import com.meta.theelectricfactory.focus.ui.focusColorScheme
-import com.meta.theelectricfactory.focus.ui.squareShapes
-import com.meta.theelectricfactory.focus.utils.focusDP
+import com.meta.theelectricfactory.focus.ui.focusShapes
+import com.meta.theelectricfactory.focus.utils.FOCUS_DP
+
+data class ProjectCardData(val uuid: Int, val name: String, val timeAgo: String)
 
 @Composable
-fun HomePanelFirstFragmentScreen(projects: List<ProjectData>) {
+fun HomePanelFirstFragmentScreen(projects: List<ProjectCardData>) {
 
     LaunchedEffect(Unit) {
         if (projects.isEmpty()) {
@@ -63,7 +66,7 @@ fun HomePanelFirstFragmentScreen(projects: List<ProjectData>) {
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 SpatialTheme(
-                    shapes = squareShapes()
+                    shapes = focusShapes(FocusShapes.Squared)
                 ) {
                     PrimaryButton(
                         label = "+ New Project",
@@ -101,7 +104,7 @@ fun HomePanelFirstFragmentScreen(projects: List<ProjectData>) {
 }
 
 @Composable
-fun ProjectGrid(projects: List<ProjectData>, onDelete: (Int) -> Unit) {
+fun ProjectGrid(projects: List<ProjectCardData>, onDelete: (Int) -> Unit) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
         modifier = Modifier.fillMaxSize(),
@@ -115,10 +118,10 @@ fun ProjectGrid(projects: List<ProjectData>, onDelete: (Int) -> Unit) {
 }
 
 @Composable
-fun ProjectCard(project: ProjectData, onDelete: (Int) -> Unit) {
+fun ProjectCard(project: ProjectCardData, onDelete: (Int) -> Unit) {
     Box {
         SpatialTheme(
-            colorScheme = focusColorScheme(true)
+            colorScheme = focusColorScheme(FocusColorSchemes.Gray)
         ) {
             TextTileButton(
                 modifier = Modifier
@@ -153,9 +156,9 @@ fun ProjectCard(project: ProjectData, onDelete: (Int) -> Unit) {
 }
 
 @Suppress("Range")
-fun getProjectsFromDB(): List<ProjectData> {
+fun getProjectsFromDB(): List<ProjectCardData> {
     val cursor = ImmersiveActivity.instance.get()?.DB?.getProjects()
-    val projects = mutableListOf<ProjectData>()
+    val projects = mutableListOf<ProjectCardData>()
 
     if (cursor?.moveToFirst() == true) {
         while (!cursor.isAfterLast) {
@@ -176,7 +179,7 @@ fun getProjectsFromDB(): List<ProjectData> {
                 else -> "Edited $seconds seconds ago"
             }
 
-            projects.add(ProjectData(uuid, name, timeAgo))
+            projects.add(ProjectCardData(uuid, name, timeAgo))
             cursor.moveToNext()
         }
     }
@@ -186,18 +189,18 @@ fun getProjectsFromDB(): List<ProjectData> {
 }
 
 @Preview(
-    widthDp = (0.58f * focusDP).toInt(),
-    heightDp = (0.41f * focusDP).toInt(),
+    widthDp = (0.58f * FOCUS_DP).toInt(),
+    heightDp = (0.41f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
 @Composable
 fun HomePanelFirstFragmentScreenPreview() {
     val fakeProjects = listOf(
-        ProjectData(uuid = 1, name = "Project One", timeAgo = "time"),
-        ProjectData(uuid = 2, name = "Project Two", timeAgo = "time"),
-        ProjectData(uuid = 2, name = "Project Two", timeAgo = "time"),
-        ProjectData(uuid = 2, name = "Project Two", timeAgo = "time"),
-        ProjectData(uuid = 2, name = "Project Two", timeAgo = "time")
+        ProjectCardData(uuid = 1, name = "Project One", timeAgo = "time"),
+        ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time"),
+        ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time"),
+        ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time"),
+        ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time")
     )
     HomePanelFirstFragmentScreen(fakeProjects)
 }
