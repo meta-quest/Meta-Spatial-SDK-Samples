@@ -90,18 +90,6 @@
         {
             "attributes": [
                 {
-                    "keyString": "isVisible",
-                    "name": "isVisible",
-                    "type": {
-                        "attributeType": "Boolean"
-                    }
-                }
-            ],
-            "name": "com.meta.spatial.toolkit.Visible"
-        },
-        {
-            "attributes": [
-                {
                     "keyString": "min",
                     "name": "min",
                     "type": {

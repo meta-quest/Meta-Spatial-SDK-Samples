@@ -659,20 +659,6 @@
     {
       "name": "com.meta.spatial.toolkit.TrackedBody",
       "attributes": []
-    },
-    {
-      "name": "com.meta.spatial.toolkit.Visible",
-      "attributes": [
-        {
-          "name": "isVisible",
-          "keyString": "isVisible",
-          "type": {
-            "attributeType": "Boolean"
-          },
-          "description": "The mesh\u0027s current visibility state. "
-        }
-      ],
-      "description": "\n Gives the ability to change mesh between being visible and invisible.\n \n @param isVisible The mesh\u0027s current visibility state.\n"
     }
   ],
   "enums": [

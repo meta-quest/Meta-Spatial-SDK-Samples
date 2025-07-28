@@ -738,18 +738,6 @@
       "name": "com.meta.spatial.toolkit.TrackedBody",
       "attributes": [],
       "description": "\n Maps joints found in BodyJoint to a Pose in world space. If a bone is not present in the map, it\n means that the tracking is not currently valid for that pose.\n\n Will be present locally if the XR_FB_body_tracking is able to be loaded.\n"
-    },
-    {
-      "name": "com.meta.spatial.toolkit.Visible",
-      "attributes": [
-        {
-          "name": "isVisible",
-          "keyString": "isVisible",
-          "type": {
-            "attributeType": "Boolean"
-          }
-        }
-      ]
     }
   ],
   "enums": [
