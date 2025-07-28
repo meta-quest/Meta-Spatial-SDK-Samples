@@ -70,7 +70,7 @@ import com.meta.theelectricfactory.focus.tools.Timer
 import com.meta.theelectricfactory.focus.tools.Tool
 import com.meta.theelectricfactory.focus.tools.WebView
 import com.meta.theelectricfactory.focus.utils.AIUtils
-import com.meta.theelectricfactory.focus.utils.FocusViewModel
+import com.meta.theelectricfactory.focus.viewmodels.FocusViewModel
 import com.meta.theelectricfactory.focus.utils.addOnSelectListener
 import com.meta.theelectricfactory.focus.utils.deleteObject
 import com.meta.theelectricfactory.focus.utils.getAssetSize
@@ -614,18 +614,6 @@ class ImmersiveActivity : AppSystemActivity() {
                 // We make this entity child to the speaker entity
                 TransformParent(speaker)
             )
-
-        // Add listener to detect when user is selecting the object and stop or play sound
-        addOnSelectListener(
-            speaker,
-            fun() {
-              if (speakerIsOn) {
-                stopAmbientSound()
-              } else {
-                playAmbientSound()
-              }
-            }
-        )
     }
 
     // Clock composed object created by two entities, one with a Mesh component and the other with a
@@ -1092,16 +1080,17 @@ class ImmersiveActivity : AppSystemActivity() {
 
     fun openSubPanel(panel: Entity) {
         val isVisible = panel.getComponent<Visible>().isVisible
-        closeSubPanels()
+        closeSubPanels(true)
         if (!isVisible) {
             panel.setComponent(Visible(true))
         }
     }
 
-    fun closeSubPanels() {
+    fun closeSubPanels(keepSelectedTool: Boolean = false) {
         for (i in 0..subpanels.count() - 1) {
             subpanels[i].setComponent(Visible(false))
         }
+        if (!keepSelectedTool) FocusViewModel.instance.setSelectedTool(-1)
     }
 
     fun createTasksPanel() {

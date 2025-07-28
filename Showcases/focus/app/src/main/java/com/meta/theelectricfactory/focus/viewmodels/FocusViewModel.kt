@@ -1,4 +1,4 @@
-package com.meta.theelectricfactory.focus.utils
+package com.meta.theelectricfactory.focus.viewmodels
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -39,6 +39,13 @@ class FocusViewModel : ViewModel() {
 
     fun setSpeakerIsOn(isOn: Boolean) {
         _speakerIsOn.value = isOn
+    }
+
+    private val _selectedTool = MutableStateFlow<Int>(-1)
+    val selectedTool = _selectedTool.asStateFlow()
+
+    fun setSelectedTool(selectedTool: Int) {
+        _selectedTool.value = selectedTool
     }
 
     companion object {

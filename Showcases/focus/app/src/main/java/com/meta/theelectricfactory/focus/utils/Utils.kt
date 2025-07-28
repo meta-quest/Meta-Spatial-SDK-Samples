@@ -30,6 +30,7 @@ import com.meta.theelectricfactory.focus.data.boardHeightArray
 import com.meta.theelectricfactory.focus.data.boardSizeArray
 import com.meta.theelectricfactory.focus.data.shape2DSizeArray
 import com.meta.theelectricfactory.focus.data.shape3DSizeArray
+import com.meta.theelectricfactory.focus.viewmodels.FocusViewModel
 
 var temporalID: Int = 0
 const val FOCUS_DP: Int = 2200
@@ -107,33 +108,16 @@ fun addDeleteButton(entity: Entity, panel: PanelSceneObject? = null) {
 
 // Function to detect when an entity has been selected or grabbed
 fun addOnSelectListener(entity: Entity, onClick: () -> (Unit)) {
-
-    // We treat the speaker differently from other objects, preventing it from being selected when the
-    // user grabs it to avoid the audio stopping. //TODO this is not working correctly anymore
-    if (entity == ImmersiveActivity.instance.get()?.speaker) {
-        entity.registerEventListener<ButtonDownEventArgs>(ButtonDownEventArgs.EVENT_NAME) {
-                ent,
-                eventArgs ->
-            if (eventArgs.button == ControllerButton.A ||
-                eventArgs.button == ControllerButton.X ||
-                eventArgs.button == ControllerButton.RightTrigger ||
-                eventArgs.button == ControllerButton.LeftTrigger) {
-                onClick()
-            }
-        }
-        // Check if entity has been selected or grabbed with button A, X, triggers, or grips
-    } else {
-        entity.registerEventListener<ButtonDownEventArgs>(ButtonDownEventArgs.EVENT_NAME) {
-                ent,
-                eventArgs ->
-            if (eventArgs.button == ControllerButton.A ||
-                eventArgs.button == ControllerButton.X ||
-                eventArgs.button == ControllerButton.RightTrigger ||
-                eventArgs.button == ControllerButton.LeftTrigger ||
-                eventArgs.button == ControllerButton.RightSqueeze ||
-                eventArgs.button == ControllerButton.LeftSqueeze) {
-                onClick()
-            }
+    entity.registerEventListener<ButtonDownEventArgs>(ButtonDownEventArgs.EVENT_NAME) {
+            ent,
+            eventArgs ->
+        if (eventArgs.button == ControllerButton.A ||
+            eventArgs.button == ControllerButton.X ||
+            eventArgs.button == ControllerButton.RightTrigger ||
+            eventArgs.button == ControllerButton.LeftTrigger ||
+            eventArgs.button == ControllerButton.RightSqueeze ||
+            eventArgs.button == ControllerButton.LeftSqueeze) {
+            onClick()
         }
     }
 }

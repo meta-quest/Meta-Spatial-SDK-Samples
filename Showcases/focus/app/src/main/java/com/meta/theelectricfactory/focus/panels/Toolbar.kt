@@ -35,14 +35,14 @@ import com.meta.theelectricfactory.focus.ui.FocusColors
 import com.meta.theelectricfactory.focus.ui.FocusTheme
 import com.meta.theelectricfactory.focus.R
 import com.meta.theelectricfactory.focus.utils.FOCUS_DP
-import com.meta.theelectricfactory.focus.utils.FocusViewModel
+import com.meta.theelectricfactory.focus.viewmodels.FocusViewModel
 
 @Composable
 fun ToolbarPanel() {
 
     var immersiveActivity = ImmersiveActivity.getInstance()
-    val selectedTool = remember { mutableStateOf(-1) }
 
+    val selectedTool by FocusViewModel.instance.selectedTool.collectAsState()
     val speakerIsOn by FocusViewModel.instance.speakerIsOn.collectAsState()
     val soundIcon = if (speakerIsOn) R.drawable.sound else R.drawable.sound_off
 
@@ -152,10 +152,10 @@ fun ToolbarPanel() {
                         ToolbarButton(
                             R.drawable.sticky,
                             "Add Sticky Note",
-                            selectedTool.value == 0,
+                            selectedTool == 0,
                             onClick = {
-                                if (selectedTool.value != 0) selectedTool.value = 0
-                                else selectedTool.value = -1
+                                if (selectedTool != 0) FocusViewModel.instance.setSelectedTool(0)
+                                else FocusViewModel.instance.setSelectedTool(-1)
                                 immersiveActivity?.openSubPanel(immersiveActivity.stickySubPanel)
                             }
                         )
@@ -163,10 +163,10 @@ fun ToolbarPanel() {
                         ToolbarButton(
                             R.drawable.labels,
                             "Insert Label",
-                            selectedTool.value == 1,
+                            selectedTool == 1,
                             onClick = {
-                                if (selectedTool.value != 1) selectedTool.value = 1
-                                else selectedTool.value = -1
+                                if (selectedTool != 1) FocusViewModel.instance.setSelectedTool(1)
+                                else FocusViewModel.instance.setSelectedTool(-1)
                                 immersiveActivity?.openSubPanel(immersiveActivity.labelSubPanel)
                             }
                         )
@@ -174,10 +174,10 @@ fun ToolbarPanel() {
                         ToolbarButton(
                             R.drawable.arrows,
                             "Insert Flow Arrow",
-                            selectedTool.value == 2,
+                            selectedTool == 2,
                             onClick = {
-                                if (selectedTool.value != 2) selectedTool.value = 2
-                                else selectedTool.value = -1
+                                if (selectedTool != 2) FocusViewModel.instance.setSelectedTool(2)
+                                else FocusViewModel.instance.setSelectedTool(-1)
                                 immersiveActivity?.openSubPanel(immersiveActivity.arrowSubPanel)
                             }
                         )
@@ -185,10 +185,10 @@ fun ToolbarPanel() {
                         ToolbarButton(
                             R.drawable.boards,
                             "Insert Board",
-                            selectedTool.value == 3,
+                            selectedTool == 3,
                             onClick = {
-                                if (selectedTool.value != 3) selectedTool.value = 3
-                                else selectedTool.value = -1
+                                if (selectedTool != 3) FocusViewModel.instance.setSelectedTool(3)
+                                else FocusViewModel.instance.setSelectedTool(-1)
                                 immersiveActivity?.openSubPanel(immersiveActivity.boardSubPanel)
                             }
                         )
@@ -196,10 +196,10 @@ fun ToolbarPanel() {
                         ToolbarButton(
                             R.drawable.shapes,
                             "Insert Shape",
-                            selectedTool.value == 4,
+                            selectedTool == 4,
                             onClick = {
-                                if (selectedTool.value != 4) selectedTool.value = 4
-                                else selectedTool.value = -1
+                                if (selectedTool != 4) FocusViewModel.instance.setSelectedTool(4)
+                                else FocusViewModel.instance.setSelectedTool(-1)
                                 immersiveActivity?.openSubPanel(immersiveActivity.shapeSubPanel)
                             }
                         )
@@ -207,10 +207,10 @@ fun ToolbarPanel() {
                         ToolbarButton(
                             R.drawable.stickers,
                             "Insert Sticker",
-                            selectedTool.value == 5,
+                            selectedTool == 5,
                             onClick = {
-                                if (selectedTool.value != 5) selectedTool.value = 5
-                                else selectedTool.value = -1
+                                if (selectedTool != 5) FocusViewModel.instance.setSelectedTool(5)
+                                else FocusViewModel.instance.setSelectedTool(-1)
                                 immersiveActivity?.openSubPanel(immersiveActivity.stickerSubPanel)
                             }
                         )
@@ -218,10 +218,10 @@ fun ToolbarPanel() {
                         ToolbarButton(
                             R.drawable.timer,
                             "Set Timer",
-                            selectedTool.value == 6,
+                            selectedTool == 6,
                             onClick = {
-                                if (selectedTool.value != 6) selectedTool.value = 6
-                                else selectedTool.value = -1
+                                if (selectedTool != 6) FocusViewModel.instance.setSelectedTool(6)
+                                else FocusViewModel.instance.setSelectedTool(-1)
                                 immersiveActivity?.openSubPanel(immersiveActivity.timerSubPanel)
                             }
                         )

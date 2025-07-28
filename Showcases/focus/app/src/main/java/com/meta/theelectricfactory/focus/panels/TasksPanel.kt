@@ -69,7 +69,7 @@ import com.meta.theelectricfactory.focus.ui.FocusColorSchemes
 import com.meta.theelectricfactory.focus.ui.FocusShapes
 import com.meta.theelectricfactory.focus.ui.focusColorScheme
 import com.meta.theelectricfactory.focus.ui.focusShapes
-import com.meta.theelectricfactory.focus.utils.FocusViewModel
+import com.meta.theelectricfactory.focus.viewmodels.FocusViewModel
 
 data class Task(val uuid: Int, var title: String, val body: String, var state: Int, var priority: Int, val detached: Int, val pose: Pose)
 

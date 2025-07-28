@@ -72,7 +72,7 @@ import com.meta.theelectricfactory.focus.ui.focusColorScheme
 import com.meta.theelectricfactory.focus.ui.focusShapes
 import com.meta.theelectricfactory.focus.utils.FOCUS_DP
 import com.meta.theelectricfactory.focus.ui.focusFont
-import com.meta.theelectricfactory.focus.utils.FocusViewModel
+import com.meta.theelectricfactory.focus.viewmodels.FocusViewModel
 
 data class Message(val text: String, val isUser: Boolean)
 
