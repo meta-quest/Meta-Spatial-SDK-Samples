@@ -40,7 +40,7 @@ class PanelRegistry {
         panelRegistration(
             PanelRegistrationIds.PANEL_BUTTONS_LAYOUT,
             layoutWidth = 1136f,
-            layoutHeight = 568f,
+            layoutHeight = 569f,
         ) {
           ButtonsLayout()
         },
