@@ -26,7 +26,8 @@ class StickyNote(
     var uuid: Int = -1,
     var message: String = "",
     var color: StickyColor,
-    var pose: Pose = Pose()
+    var pose: Pose = Pose(),
+    var parentUuid: Int = -1
 ) {
     var immersiveActivity = ImmersiveActivity.getInstance()
 
@@ -70,6 +71,6 @@ class StickyNote(
         // We add it a ToolComponent to be able to identify it and get the type and uuid of the entity
         sticky.setComponent(ToolComponent(uuid, AssetType.STICKY_NOTE, Vector3(0f, 0.1f, -0.005f)))
         // We add an AttachableComponent to the object to be able to "stick" it to the boards
-        sticky.setComponent(AttachableComponent())
+        sticky.setComponent(AttachableComponent(parentUuid = parentUuid))
     }
 }

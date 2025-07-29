@@ -71,7 +71,7 @@ import com.meta.theelectricfactory.focus.ui.focusColorScheme
 import com.meta.theelectricfactory.focus.ui.focusShapes
 import com.meta.theelectricfactory.focus.viewmodels.FocusViewModel
 
-data class Task(val uuid: Int, var title: String, val body: String, var state: Int, var priority: Int, val detached: Int, val pose: Pose)
+data class Task(val uuid: Int, var title: String, val body: String, var state: Int, var priority: Int, val detached: Int, val parentUuid: Int, val pose: Pose)
 
 @SuppressLint("Range")
 @Composable
@@ -96,6 +96,7 @@ fun TasksPanel() {
                 val state = cursor.getInt(cursor.getColumnIndex(DatabaseManager.TASK_STATE))
                 val priority = cursor.getInt(cursor.getColumnIndex(DatabaseManager.TASK_PRIORITY))
                 val detached = cursor.getInt(cursor.getColumnIndex(DatabaseManager.TASK_DETACH))
+                val parentUuid = cursor.getInt(cursor.getColumnIndex(DatabaseManager.TASK_PARENT))
 
                 val posX = cursor.getFloat(cursor.getColumnIndex(DatabaseManager.TASK_POSITION_X))
                 val posY = cursor.getFloat(cursor.getColumnIndex(DatabaseManager.TASK_POSITION_Y))
@@ -108,7 +109,7 @@ fun TasksPanel() {
 
                 val pose = Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ))
 
-                tasksList.add(Task(uuid, title, body, state, priority, detached, pose))
+                tasksList.add(Task(uuid, title, body, state, priority, detached, parentUuid, pose))
                 cursor.moveToNext()
             }
         }

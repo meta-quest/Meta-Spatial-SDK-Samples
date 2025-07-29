@@ -19,6 +19,7 @@ import com.meta.spatial.core.Vector3
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Transform
+import com.meta.spatial.toolkit.TransformParent
 import com.meta.spatial.toolkit.createPanelEntity
 import com.meta.spatial.uiset.theme.SpatialTheme
 import com.meta.theelectricfactory.focus.AssetType
@@ -87,8 +88,17 @@ class SpatialTask(
         // Place in front of user in case is new
         if (new) placeInFront(taskPanelEntity)
         taskPanelEntity.setComponent(ToolComponent(task.uuid, AssetType.TASK, Vector3(0f, 0.11f, -0.005f)))
-        // We add an AttachableComponent to the object to be able to "stick" it to the boards
-        taskPanelEntity.setComponent(AttachableComponent())
+
+        // We add an AttachableComponent to the object to be able to stick it to the boards
+        taskPanelEntity.setComponent(AttachableComponent(parentUuid = task.parentUuid))
+
+        if (task.parentUuid != -1) {
+            if (!taskPanelEntity.hasComponent<TransformParent>() ||
+                (taskPanelEntity.hasComponent<TransformParent>() && taskPanelEntity.getComponent<TransformParent>().entity == Entity.nullEntity())) {
+
+                ImmersiveActivity.getInstance()?.linkToolsWithParentBoards(taskPanelEntity)
+            }
+        }
 
         if (new) immersiveActivity?.playCreationSound(taskPanelEntity.getComponent<Transform>().transform.t)
     }

@@ -29,7 +29,8 @@ class Tool(
     val size: Float = 1f,
     var uuid: Int = -1,
     var pose: Pose = Pose(),
-    var deleteButtonHeight: Float = 0.08f
+    var deleteButtonHeight: Float = 0.08f,
+    var parentUuid: Int = -1
 ) {
     init {
 
@@ -73,7 +74,7 @@ class Tool(
             type == AssetType.STICKER
         ) {
 
-            obj.setComponent(AttachableComponent())
+            obj.setComponent(AttachableComponent(parentUuid = parentUuid))
         }
 
         // If tool is new, we save it in database

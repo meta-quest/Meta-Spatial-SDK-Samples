@@ -356,8 +356,6 @@ class ImmersiveActivity : AppSystemActivity() {
         showClock(true)
         showSpeaker(true)
 
-        //audioButton.setImageResource(if (speakerIsOn) R.drawable.sound else R.drawable.sound_off)
-
         // Load and create Tool Assets
         val toolsCursor = DB.getToolAssets(currentProject?.uuid)
         if (toolsCursor.moveToFirst()) {
@@ -367,8 +365,8 @@ class ImmersiveActivity : AppSystemActivity() {
                 val type = AssetType.entries.find { it.name == rawType }
                 val source = toolsCursor.getString(toolsCursor.getColumnIndex(DatabaseManager.TOOL_SOURCE))
                 val size = toolsCursor.getFloat(toolsCursor.getColumnIndex(DatabaseManager.TOOL_SIZE))
-                val deleteHeight =
-                    toolsCursor.getFloat(toolsCursor.getColumnIndex(DatabaseManager.TOOL_DELETE_HEIGHT))
+                val deleteHeight = toolsCursor.getFloat(toolsCursor.getColumnIndex(DatabaseManager.TOOL_DELETE_HEIGHT))
+                val parentUuid = toolsCursor.getInt(toolsCursor.getColumnIndex(DatabaseManager.TOOL_PARENT))
 
                 val posX = toolsCursor.getFloat(toolsCursor.getColumnIndex(DatabaseManager.TOOL_POSITION_X))
                 val posY = toolsCursor.getFloat(toolsCursor.getColumnIndex(DatabaseManager.TOOL_POSITION_Y))
@@ -391,7 +389,8 @@ class ImmersiveActivity : AppSystemActivity() {
                         size = size,
                         uuid = uuid,
                         pose = Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)),
-                        deleteButtonHeight = deleteHeight
+                        deleteButtonHeight = deleteHeight,
+                        parentUuid = parentUuid
                     )
                 }
                 toolsCursor.moveToNext()
@@ -409,6 +408,7 @@ class ImmersiveActivity : AppSystemActivity() {
                 val rawColor =
                     stickiesCursor.getString(stickiesCursor.getColumnIndex(DatabaseManager.STICKY_COLOR))
                 val color = StickyColor.entries.find { it.name == rawColor }
+                val parentUuid = stickiesCursor.getInt(stickiesCursor.getColumnIndex(DatabaseManager.STICKY_PARENT))
 
                 val posX =
                     stickiesCursor.getFloat(
@@ -437,7 +437,8 @@ class ImmersiveActivity : AppSystemActivity() {
                     uuid,
                     message,
                     color!!,
-                    Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ))
+                    Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)),
+                    parentUuid
                 )
 
                 stickiesCursor.moveToNext()
@@ -445,8 +446,40 @@ class ImmersiveActivity : AppSystemActivity() {
         }
         stickiesCursor.close()
 
-        // Clean task from previous projects and load corresponding ones
-        //cleanAndLoadTasks()
+        linkToolsWithParentBoards()
+    }
+
+    fun linkToolsWithParentBoards(spatialTask: Entity? = null) {
+        var boards: MutableList<Entity> = mutableListOf()
+
+        val toolAssets = Query.where { has(AttachableComponent.id) }
+        for (entity in toolAssets.eval()) {
+
+            val type = entity.getComponent<AttachableComponent>().type
+            if (type == 1) {
+                boards.add(entity)
+            }
+        }
+
+        if (spatialTask != null) {
+            val parentUuid = spatialTask.getComponent<AttachableComponent>().parentUuid
+            for (board in boards) {
+                val boardUuid = board.getComponent<ToolComponent>().uuid
+                if (boardUuid == parentUuid) {
+                    spatialTask.setComponent(TransformParent(board))
+                }
+            }
+        } else {
+            for (entity in toolAssets.eval()) {
+                val parentUuid = entity.getComponent<AttachableComponent>().parentUuid
+                if (parentUuid != -1) {
+                    for (board in boards) {
+                        val boardUuid = board.getComponent<ToolComponent>().uuid
+                        if (boardUuid == parentUuid) entity.setComponent(TransformParent(board))
+                    }
+                }
+            }
+        }
     }
 
     // Save project settings in second fragment

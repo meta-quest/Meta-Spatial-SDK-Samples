@@ -21,7 +21,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
         public const val DATABASE_NAME = "focusapp.db"
         // Database version needs to be incremented each time you make a change in the database
         // structure
-        public const val DATABASE_VERSION = 10
+        public const val DATABASE_VERSION = 11
 
         // Projects table
         public const val PROJECTS_TABLE = "project"
@@ -56,6 +56,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
         public const val TOOL_SOURCE = "source"
         public const val TOOL_SIZE = "size"
         public const val TOOL_DELETE_HEIGHT = "delete_height"
+        public const val TOOL_PARENT = "parent_uuid"
         public const val TOOL_POSITION_X = "position_x"
         public const val TOOL_POSITION_Y = "position_y"
         public const val TOOL_POSITION_Z = "position_z"
@@ -71,6 +72,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
         public const val STICKY_PROJECT_UUID = "project_uuid"
         public const val STICKY_MESSAGE = "message"
         public const val STICKY_COLOR = "color"
+        public const val STICKY_PARENT = "parent_uuid"
         public const val STICKY_POSITION_X = "position_x"
         public const val STICKY_POSITION_Y = "position_y"
         public const val STICKY_POSITION_Z = "position_z"
@@ -89,6 +91,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
         public const val TASK_STATE = "state"
         public const val TASK_PRIORITY = "priority"
         public const val TASK_DETACH = "detach"
+        public const val TASK_PARENT = "parent_uuid"
         public const val TASK_POSITION_X = "position_x"
         public const val TASK_POSITION_Y = "position_y"
         public const val TASK_POSITION_Z = "position_z"
@@ -135,6 +138,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
                     "$TOOL_SOURCE TEXT, " +
                     "$TOOL_SIZE FLOAT, " +
                     "$TOOL_DELETE_HEIGHT FLOAT, " +
+                    "$TOOL_PARENT INTEGER, " +
                     "$TOOL_POSITION_X FLOAT, " +
                     "$TOOL_POSITION_Y FLOAT, " +
                     "$TOOL_POSITION_Z FLOAT, " +
@@ -150,6 +154,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
                     "$STICKY_PROJECT_UUID INTEGER, " +
                     "$STICKY_MESSAGE TEXT, " +
                     "$STICKY_COLOR TEXT, " +
+                    "$STICKY_PARENT INTEGER, " +
                     "$STICKY_POSITION_X FLOAT, " +
                     "$STICKY_POSITION_Y FLOAT, " +
                     "$STICKY_POSITION_Z FLOAT, " +
@@ -168,6 +173,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
                     "$TASK_STATE INTEGER, " +
                     "$TASK_PRIORITY INTEGER, " +
                     "$TASK_DETACH INTEGER, " +
+                    "$TASK_PARENT INTEGER, " +
                     "$TASK_POSITION_X FLOAT, " +
                     "$TASK_POSITION_Y FLOAT, " +
                     "$TASK_POSITION_Z FLOAT, " +
@@ -325,6 +331,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
                 put(TOOL_SOURCE, source)
                 put(TOOL_SIZE, size)
                 put(TOOL_DELETE_HEIGHT, deleteHeight)
+                put(TOOL_PARENT, -1)
                 put(TOOL_POSITION_X, position.t.x)
                 put(TOOL_POSITION_Y, position.t.y)
                 put(TOOL_POSITION_Z, position.t.z)
@@ -399,6 +406,43 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
         updateLastTimeOpen()
     }
 
+    fun updateParent(assetUuid: Int, type: AssetType, parentUuid: Int) {
+        val db = writableDatabase
+        var values = ContentValues()
+        var table = ""
+        var _uuid = ""
+
+        when (type) {
+            AssetType.STICKY_NOTE -> {
+                table = STICKIES_TABLE
+                _uuid = STICKY_UUID
+                values =
+                    ContentValues().apply {
+                        put(STICKY_PARENT, parentUuid)
+                    }
+            }
+            AssetType.TASK -> {
+                table = TASKS_TABLE
+                _uuid = TASK_UUID
+                values =
+                    ContentValues().apply {
+                        put(TASK_PARENT, parentUuid)
+                    }
+            }
+            else -> {
+                table = TOOLS_TABLE
+                _uuid = TOOL_UUID
+                values =
+                    ContentValues().apply {
+                        put(TOOL_PARENT, parentUuid)
+                    }
+            }
+        }
+        db.update(table, values, "${_uuid}=?", arrayOf(assetUuid.toString()))
+        db.close()
+        updateLastTimeOpen()
+    }
+
     fun deleteToolAsset(uuid: Int?) {
         val db = writableDatabase
         db.delete(TOOLS_TABLE, "$TOOL_UUID=?", arrayOf(uuid.toString()))
@@ -421,6 +465,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
                 put(STICKY_PROJECT_UUID, projectUUID)
                 put(STICKY_MESSAGE, message)
                 put(STICKY_COLOR, color.name)
+                put(STICKY_PARENT, -1)
                 put(STICKY_POSITION_X, position.t.x)
                 put(STICKY_POSITION_Y, position.t.y)
                 put(STICKY_POSITION_Z, position.t.z)
@@ -474,6 +519,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
                 put(TASK_STATE, state)
                 put(TASK_PRIORITY, priority)
                 put(TASK_DETACH, 0)
+                put(TASK_PARENT, -1)
             }
         db.insert(TASKS_TABLE, null, values)
         db.close()
