@@ -14,7 +14,7 @@ We need to find a way to make things happen in front of the user.
 One of the main Focus mechanics is the creation of tools, elements the user can place around the space.
 To instantiate this elements, we created a function that takes the user position and rotation to place an object in front of them.
 
-You can find the *placeInFront()* function in [Utils.kt](../app/src/main/java/com/meta/focus/Utils.kt)
+You can find the *placeInFront()* function in [Utils.kt](../app/src/main/java/com/meta/theelectricfactory/focus/utils/Utils.kt)
 
 We first need to get the user's position. A local entity with an AvatarBody component gives you access to the head:
 ```kotlin
@@ -57,7 +57,7 @@ It also includes an offset vector in case you need to place an element in a part
 You will see that we treat some elements differently, like the toolbar and big panels, that are shown deeper or lower than the rest of the objects.
 ```kotlin
 fun placeInFront(entity: Entity?, offset: Vector3 = Vector3(0f), bigPanel:Boolean = false) {
-    val headPose:Pose = getHeadPose();
+    val headPose:Pose = getHeadPose()
 
     val isToolbar = entity!! == ImmersiveActivity.instance.get()?.toolbarPanel
 
@@ -96,11 +96,13 @@ fun placeInFront(entity: Entity?, offset: Vector3 = Vector3(0f), bigPanel:Boolea
 
 Here is the piece of the code where the main elements are placed at an initial configuration, when a new project has been created:
 ```kotlin
-placeInFront(toolbarPanel)
-placeInFront(tasksPanel, Vector3(-0.45f, -0.04f, 0.8f))
-placeInFront(aiExchangePanel, Vector3(0.45f, -0.05f, 0.8f))
-placeInFront(clock, Vector3(0f, 0.23f, 0.9f))
-placeInFront(speaker, Vector3(-0.65f, -0.3f, 0.65f))
+// ProjectManager.kt
+// Initial configuration of panels for a new project
+placeInFront(PanelManager.instance.toolbarPanel)
+placeInFront(PanelManager.instance.tasksPanel, Vector3(-0.45f, -0.04f, 0.8f))
+placeInFront(PanelManager.instance.aiExchangePanel, Vector3(0.45f, -0.05f, 0.8f))
+placeInFront(immA?.clock, Vector3(0f, 0.23f, 0.9f))
+placeInFront(immA?.speaker, Vector3(-0.65f, -0.3f, 0.65f))
 ```
 
 ![Elements](./Resources/elements.jpg)

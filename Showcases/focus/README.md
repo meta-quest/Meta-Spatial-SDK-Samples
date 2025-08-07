@@ -26,9 +26,9 @@ Download [Android Studio](https://developer.android.com/studio) and open the clo
 
 ### Meta Spatial SDK version
 
-Check that you are using the latest version of Meta Spatial SDK AARs. AAR files are included in the libs folder, beneath app in the Project view: *YourProject > app > libs*.
+Check that you are using the latest version of Meta Spatial SDK in Gradle dependencies.
 
-You can check Spatial SDK version between the Gradle dependencies as well, in *build.gradle.kts*.
+You can check Spatial SDK version in *gradle.properties*.
 
 
 ### Deploy to your headset
@@ -72,36 +72,42 @@ The main class of the project, and the one that controls all the experience is t
 
 Focus project contains the following core classes:
 
-[**Tool**](./app/src/main/java/com/meta/theelectricfactory/focus/Tool.kt) (2D and 3D): Contains most of the spatial tools the users can create in the experience.
+[**Tool**](./app/src/main/java/com/meta/theelectricfactory/focus/tools/Tool.kt) (2D and 3D): Contains most of the spatial tools the users can create in the experience.
 
-[**StickyNote**](./app/src/main/java/com/meta/theelectricfactory/focus/StickyNote.kt): Creates a sticky note tool.
+[**StickyNote**](./app/src/main/java/com/meta/theelectricfactory/focus/tools/StickyNote.kt): Creates a sticky note tool.
 
-[**SpatialTask**](./app/src/main/java/com/meta/theelectricfactory/focus/SpatialTask.kt): Creates a spatial task with data already existing in the database.
+[**SpatialTask**](./app/src/main/java/com/meta/theelectricfactory/focus/tools/SpatialTask.kt): Creates a spatial task with data already existing in the database.
 
-[**WebView**](./app/src/main/java/com/meta/theelectricfactory/focus/WebView.kt): Creates a browser panel.
+[**WebView**](./app/src/main/java/com/meta/theelectricfactory/focus/tools/WebView.kt): Creates a browser panel.
 
-[**Timer**](./app/src/main/java/com/meta/theelectricfactory/focus/Timer.kt): Creates timers with different duration.
+[**Timer**](./app/src/main/java/com/meta/theelectricfactory/focus/tools/Timer.kt): Creates timers with different duration.
 
-[**DatabaseManager**](./app/src/main/java/com/meta/theelectricfactory/focus/DatabaseManager.kt): creation of local database and methods to save and retrieve data.
+[**DatabaseManager**](./app/src/main/java/com/meta/theelectricfactory/focus/managers/DatabaseManager.kt): creation of local database and methods to save and retrieve data.
 
-[**Data**](./app/src/main/java/com/meta/theelectricfactory/focus/Data.kt): File that contains general data of the project, referencing drawables, buttons, etc.
+[**Data**](./app/src/main/java/com/meta/theelectricfactory/focus/data/Data.kt): File that contains general data of the project, referencing drawables, buttons, etc.
 
-[**Utils**](./app/src/main/java/com/meta/theelectricfactory/focus/Utils.kt): file containing useful general functions. Helpers to save time for developers.
+[**Utils**](./app/src/main/java/com/meta/theelectricfactory/focus/utils/Utils.kt): file containing useful general functions. Helpers to save time for developers.
 
-[**AIUtils**](./app/src/main/java/com/meta/theelectricfactory/focus/AIUtils.kt): methods to communicate with the AI backend server.
+[**AIManager**](./app/src/main/java/com/meta/theelectricfactory/focus/managers/AIManager.kt): methods to communicate with the AI backend server.
 
-[**Layouts**](./app/src/main/res/layout): to create all the panels of the experience.
+[**Panels**](./app/src/main/java/com/meta/theelectricfactory/focus/panels): to create all the panels of the experience.
+
+[**Managers**](./app/src/main/java/com/meta/theelectricfactory/focus/managers): other Managers of the experience: ProjectManager, PanelManager, AudioManager, TasksManager, ToolManager.
+
+[**FocusTheme**](./app/src/main/java/com/meta/theelectricfactory/focus/ui/FocusTheme.kt): controls the UI colors, shapes and typo.
+
 
 Custom components:
-- [**UniqueAssetComponent**](./app/src/main/java/com/meta/theelectricfactory/focus/UniqueAssetComponent.kt): allow us to identify all entities that are unique (Clock, Speaker, AI Exchange Panel, Tasks Panel).
-- [**ToolComponent**](./app/src/main/java/com/meta/theelectricfactory/focus/ToolComponent.kt): allow us to identify and save properties of tool assets, as type of tool and position to show the delete button.
-- [**TimeComponent**](./app/src/main/java/com/meta/theelectricfactory/focus/TimeComponent.kt): allow us to identify and save properties of Clock and Timer tool.
+- [**UniqueAssetComponent**](./app/src/main/components/UniqueAssetComponent.xml): allow us to identify all entities that are unique (Clock, Speaker, AI Exchange Panel, Tasks Panel).
+- [**ToolComponent**](./app/src/main/components/ToolComponent.xml): allow us to identify and save properties of tool assets, as type of tool and position to show the delete button.
+- [**TimeComponent**](./app/src/main/components/TimeComponent.xml): allow us to identify and save properties of Clock and Timer tool.
+- [**AttachableComponent**](./app/src/main/components/AttachableComponent.xml): allow us to identify attachable tools to stick them to the boards.
 
 Custom systems:
-- [**GeneralSystem**](./app/src/main/java/com/meta/theelectricfactory/focus/GeneralSystem.kt): Controls the app introduction timing and controller inputs.
-- [**DatabaseUpdateSystem**](./app/src/main/java/com/meta/theelectricfactory/focus/DatabaseUpdateSystem.kt): Update the position of moved spatial objects in the database .
-- [**UpdateTimeSystem**](./app/src/main/java/com/meta/theelectricfactory/focus/UpdateTimeSystem.kt): Updates the UI of the clock and timers in the experience.
-- [**BoardParentingSystem**](./app/src/main/java/com/meta/theelectricfactory/focus/BoardParentingSystem.kt): Detects when an object is close to a board and "stick" it to the board.
+- [**GeneralSystem**](./app/src/main/java/com/meta/theelectricfactory/focus/systems/GeneralSystem.kt): Controls the app introduction timing and controller inputs.
+- [**DatabaseUpdateSystem**](./app/src/main/java/com/meta/theelectricfactory/focus/systems/DatabaseUpdateSystem.kt): Update the position of moved spatial objects in the database .
+- [**UpdateTimeSystem**](./app/src/main/java/com/meta/theelectricfactory/focus/systems/UpdateTimeSystem.kt): Updates the UI of the clock and timers in the experience.
+- [**BoardParentingSystem**](./app/src/main/java/com/meta/theelectricfactory/focus/systems/BoardParentingSystem.kt): Detects when an object is close to a board and stick it to the board.
 
 
 ## Primary Technical Features
@@ -138,6 +144,8 @@ Custom systems:
 This project makes use of the following plugins and software:
 
 **Meta Spatial SDK**
+
+[**Jetpack Compose**](https://developer.android.com/compose)
 
 [**Gson**](https://github.com/google/gson)
 
