@@ -4,6 +4,28 @@ Check out our official [release notes](https://developers.meta.com/horizon/docum
 
 This format is roughly based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 0.7.1 - 2025-08-14
+
+### Added
+
+- MRUK: Added Environment Raycasting
+  - Allows users to raycast against the environment without going through space setup
+  - Available for exploration in the `MrukSample` project
+- Added UISet Feature
+  - A set of Jetpack Compose components that allow you to build with Meta Quest's design system
+
+
+### Changed
+
+- ISDK pointer only shows up when pointing at an object in range
+
+### Fixed
+
+- Fixed ISDK interaction with scaled panels
+- Fixed race condition with `NetworkedAssetLoader`
+- Fixed a bug where Gradle daemon would crash after a failed project sync.
+- Fixed animation pointers not working on metallic-factor
+
 ## 0.7.0 - 2025-06-25
 
 This release is a major version bump, which means some breaking changes were introduced.

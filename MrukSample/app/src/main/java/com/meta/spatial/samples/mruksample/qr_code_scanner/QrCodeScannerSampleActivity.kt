@@ -20,10 +20,9 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.SpatialSDKExperimentalAPI
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.mruk.MRUKFeature
+import com.meta.spatial.mruk.MRUKStartTrackerResult
 import com.meta.spatial.mruk.Tracker
-import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.runtime.LayerConfig
-import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.samples.mruksample.Menu
 import com.meta.spatial.samples.mruksample.MrukSampleStartMenuActivity
 import com.meta.spatial.samples.mruksample.R
@@ -41,7 +40,6 @@ import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.toolkit.createPanelEntity
 import com.meta.spatial.vr.VRFeature
-import java.io.File
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
@@ -49,6 +47,8 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
   private lateinit var mrukFeature: MRUKFeature
   private var showUiPanel = false
   private val panelId = 2
+  private var startStopTrackerButton: Button? = null
+  private var trackerRunning = false
 
   override fun registerFeatures(): List<SpatialFeature> {
     mrukFeature = MRUKFeature(this, systemManager)
@@ -57,8 +57,6 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    NetworkedAssetLoader.init(
-        File(applicationContext.getCacheDir().canonicalPath), OkHttpAssetFetcher())
 
     componentManager.registerComponent<Menu>(Menu)
     componentManager.registerComponent<TargetScale>(TargetScale)
@@ -75,7 +73,7 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
       Log.i(TAG, "Scene permission has not been granted, requesting $PERMISSION_USE_SCENE")
       requestPermissions(arrayOf(PERMISSION_USE_SCENE), REQUEST_CODE_PERMISSION_USE_SCENE)
     } else {
-      scanQrCodes()
+      startTracker()
     }
   }
 
@@ -174,13 +172,52 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
                   applicationContext,
                   MrukSampleStartMenuActivity::class.java)
             }
+
+            startStopTrackerButton = rootView?.findViewById<Button>(R.id.start_stop_tracker)
+            startStopTrackerButton?.setOnClickListener {
+              if (trackerRunning) {
+                mrukFeature.stopTrackers()
+              } else {
+                startTracker()
+              }
+              updateStartStopTrackerButton(!trackerRunning)
+            }
+            updateStartStopTrackerButton(trackerRunning)
           }
         })
   }
 
   @OptIn(SpatialSDKExperimentalAPI::class)
-  fun scanQrCodes() {
-    mrukFeature.configureTrackers(setOf(Tracker.QrCode))
+  fun startTracker() {
+    mrukFeature.configureTrackers(setOf(Tracker.QrCode)).whenComplete {
+        result: MRUKStartTrackerResult,
+        _ ->
+      if (result == MRUKStartTrackerResult.SUCCESS) {
+        updateStartStopTrackerButton(true)
+      } else {
+        updateStartStopTrackerButton(false)
+      }
+    }
+  }
+
+  private fun stopTrackers() {
+    mrukFeature.stopTrackers()
+    updateStartStopTrackerButton(false)
+  }
+
+  private fun updateStartStopTrackerButton(running: Boolean) {
+    if (running) {
+      startStopTrackerButton?.setText("Stop Tracker")
+    } else {
+      startStopTrackerButton?.setText("Start Tracker")
+    }
+
+    trackerRunning = running
+  }
+
+  override fun onSpatialShutdown() {
+    stopTrackers()
+    super.onSpatialShutdown()
   }
 
   override fun onRequestPermissionsResult(
@@ -194,7 +231,7 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
       val granted = grantResults[0] == PackageManager.PERMISSION_GRANTED
       if (granted) {
         Log.i(TAG, "Use scene permission has been granted")
-        scanQrCodes()
+        startTracker()
       } else {
         Log.i(TAG, "Use scene permission was DENIED!")
       }

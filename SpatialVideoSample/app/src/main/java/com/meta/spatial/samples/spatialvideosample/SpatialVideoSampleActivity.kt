@@ -552,6 +552,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                 }
               },
               500)
+          setScale(Vector3(VR_SCREEN_RATIO))
         }
 
     player.setVideoSurface(panelSceneObject.getSurface())

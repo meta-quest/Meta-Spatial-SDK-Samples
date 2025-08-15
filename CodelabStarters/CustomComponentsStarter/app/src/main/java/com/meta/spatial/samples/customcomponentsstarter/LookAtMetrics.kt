@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.meta.spatial.samples.customcomponentsstartersample
+package com.meta.spatial.samples.customcomponentsstarter
 
 import android.util.Log
 import com.meta.spatial.core.Entity

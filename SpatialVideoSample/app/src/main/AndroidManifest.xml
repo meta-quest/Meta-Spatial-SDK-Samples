@@ -7,7 +7,7 @@
   android:versionName="1.0"
   android:installLocation="auto"
 >
-  <uses-sdk android:minSdkVersion="32" android:targetSdkVersion="32" />
+  
   <!-- Tell the system this app works in either 3dof or 6dof mode -->
   <horizonos:uses-horizonos-sdk
     horizonos:minSdkVersion="69"

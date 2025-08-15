@@ -17,13 +17,9 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
-import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
-import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
-import com.meta.spatial.debugtools.HotReloadFeature
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.mruk.AnchorMeshSpawner
 import com.meta.spatial.mruk.AnchorProceduralMesh
 import com.meta.spatial.mruk.AnchorProceduralMeshConfig
@@ -33,13 +29,8 @@ import com.meta.spatial.mruk.MRUKLabel
 import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.mruk.MRUKRoom
 import com.meta.spatial.mruk.MRUKSceneEventListener
-import com.meta.spatial.okhttp3.OkHttpAssetFetcher
-import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
-import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.runtime.LayerConfig
-import com.meta.spatial.runtime.NetworkedAssetLoader
-import com.meta.spatial.samples.mruksample.BuildConfig
 import com.meta.spatial.samples.mruksample.MrukSampleStartMenuActivity
 import com.meta.spatial.samples.mruksample.R
 import com.meta.spatial.samples.mruksample.common.MrukInputSystem
@@ -81,19 +72,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
     // MRUKFeature the PhysicsFeature gets enabled as well. This is needed for having the physics
     // colliders on the AnchorProceduralMesh working.
     mrukFeature = MRUKFeature(this, systemManager)
-    val features =
-        mutableListOf(
-            VRFeature(this),
-            PhysicsFeature(spatial),
-            IsdkFeature(this, spatial, systemManager),
-            mrukFeature)
-    if (BuildConfig.DEBUG) {
-      features.add(CastInputForwardFeature(this))
-      features.add(HotReloadFeature(this))
-      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
-      features.add(DataModelInspectorFeature(spatial, this.componentManager))
-    }
-    return features
+    return listOf(VRFeature(this), PhysicsFeature(spatial), mrukFeature)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -161,8 +140,6 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
                 MRUKLabel.FLOOR to AnchorProceduralMeshConfig(floorMaterial, true),
                 MRUKLabel.WALL_FACE to AnchorProceduralMeshConfig(wallMaterial, true),
                 MRUKLabel.CEILING to AnchorProceduralMeshConfig(wallMaterial, true)))
-
-    NetworkedAssetLoader.init(File(applicationContext.cacheDir.canonicalPath), OkHttpAssetFetcher())
 
     mrukFeature.addSceneEventListener(this)
 
