@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-package com.meta.spatial.samples.customcomponentsstartersample
+package com.meta.spatial.samples.customcomponentsstarter
 
 import android.net.Uri
 import android.os.Bundle
@@ -39,7 +39,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 // default activity
-class CustomComponentsSampleActivity : AppSystemActivity() {
+class CustomComponentsStarterActivity : AppSystemActivity() {
   private var gltfxEntity: Entity? = null
   private val activityScope = CoroutineScope(Dispatchers.Main)
 

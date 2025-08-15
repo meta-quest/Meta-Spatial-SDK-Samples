@@ -13,6 +13,7 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SystemBase
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.mruk.MRUKEnvironmentRaycastHitResult
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKHit
 import com.meta.spatial.mruk.SurfaceType
@@ -21,10 +22,17 @@ import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.Visible
 
+enum class RaycastMode {
+  SINGLE,
+  ALL,
+  GLOBAL_MESH,
+  DEPTH,
+}
+
 class UpdateRaycastSystem(
     private val mrukFeature: MRUKFeature,
     private val arrowEntities: MutableList<Entity>,
-    var showAllHits: Boolean = true
+    var raycastMode: RaycastMode = RaycastMode.ALL,
 ) : SystemBase() {
 
   override fun execute() {
@@ -36,44 +44,72 @@ class UpdateRaycastSystem(
     val rightHand = getRightController(mrukFeature.systemManager)
     val rightHandPose = rightHand?.tryGetComponent<Transform>()?.transform
     val currentRoom = mrukFeature.getCurrentRoom()
-    if (currentRoom != null && rightHandPose != null) {
+    if (rightHandPose != null) {
       val rightHandDirection = (rightHandPose.q * Vector3(0f, 0f, 1f)).normalize()
-      val surfaceMask = SurfaceType.PLANE_VOLUME
       val maxDistance = Float.POSITIVE_INFINITY
 
-      val hits: Array<MRUKHit>
-      if (showAllHits) {
-        hits =
-            mrukFeature.raycastRoomAll(
-                currentRoom.anchor.uuid,
-                rightHandPose.t,
-                rightHandDirection,
-                maxDistance,
-                surfaceMask)
-      } else {
-        val hit =
-            mrukFeature.raycastRoom(
-                currentRoom.anchor.uuid,
-                rightHandPose.t,
-                rightHandDirection,
-                maxDistance,
-                surfaceMask)
-        hits =
-            if (hit != null) {
-              arrayOf(hit)
-            } else {
-              emptyArray()
-            }
-      }
-      for (i in hits.indices) {
-        if (i >= arrowEntities.size) {
-          arrowEntities.add(Entity.create(listOf(Mesh(Uri.parse("arrow.glb")), Transform(Pose()))))
+      if (raycastMode == RaycastMode.DEPTH) {
+        val depthRaycastResult = mrukFeature.raycastEnvironment(rightHandPose.t, rightHandDirection)
+        if (depthRaycastResult.result == MRUKEnvironmentRaycastHitResult.SUCCESS) {
+          if (arrowEntities.isEmpty()) {
+            arrowEntities.add(
+                Entity.create(listOf(Mesh(Uri.parse("arrow.glb")), Transform(Pose()))))
+          }
+          val arrowPose =
+              Pose(
+                  depthRaycastResult.point,
+                  Quaternion.lookRotation(depthRaycastResult.normal.normalize()))
+          val entity = arrowEntities[0]
+          entity.setComponent(Transform(arrowPose))
+          entity.setComponent(Visible(true))
         }
-        val hit = hits[i]
-        val entity = arrowEntities[i]
-        val arrowPose = Pose(hit.hitPosition, Quaternion.lookRotation(hit.hitNormal.normalize()))
-        entity.setComponent(Transform(arrowPose))
-        entity.setComponent(Visible(true))
+      } else if (currentRoom != null) {
+        val hits: Array<MRUKHit> =
+            when (raycastMode) {
+              RaycastMode.SINGLE -> {
+                val hit =
+                    mrukFeature.raycastRoom(
+                        currentRoom.anchor.uuid,
+                        rightHandPose.t,
+                        rightHandDirection,
+                        maxDistance,
+                        SurfaceType.PLANE_VOLUME)
+                if (hit != null) arrayOf(hit) else emptyArray()
+              }
+              RaycastMode.ALL -> {
+                mrukFeature.raycastRoomAll(
+                    currentRoom.anchor.uuid,
+                    rightHandPose.t,
+                    rightHandDirection,
+                    maxDistance,
+                    SurfaceType.PLANE_VOLUME)
+              }
+              RaycastMode.GLOBAL_MESH -> {
+                val hit =
+                    mrukFeature.raycastRoom(
+                        currentRoom.anchor.uuid,
+                        rightHandPose.t,
+                        rightHandDirection,
+                        maxDistance,
+                        SurfaceType.MESH)
+                if (hit != null) arrayOf(hit) else emptyArray()
+              }
+              RaycastMode.DEPTH -> {
+                emptyArray()
+              }
+            }
+
+        for (i in hits.indices) {
+          if (i >= arrowEntities.size) {
+            arrowEntities.add(
+                Entity.create(listOf(Mesh(Uri.parse("arrow.glb")), Transform(Pose()))))
+          }
+          val hit = hits[i]
+          val entity = arrowEntities[i]
+          val arrowPose = Pose(hit.hitPosition, Quaternion.lookRotation(hit.hitNormal.normalize()))
+          entity.setComponent(Transform(arrowPose))
+          entity.setComponent(Visible(true))
+        }
       }
     }
   }

@@ -47,6 +47,7 @@ We have 11 sample apps, demonstrating various features of Meta Spatial SDK:
 - [MrukSample](/MrukSample) shows an immersive experience influenced by the user's physical surroundings.
 - [Object3DSample](/Object3DSample) shows inserting 3D objects into a scene and adjusting their properties in Meta Spatial Editor.
 - [PhysicsSample](/PhysicsSample) shows adding a physics component and adjusting its properties in Meta Spatial Editor.
+- [PremiumMediaSample](/PremiumMediaSample) shows a media streaming experience integrated into the users spatial environment.
 - [SpatialVideoSample](/SpatialVideoSample) shows how to play video with spatialized audio.
 - [StarterSample](/StarterSample) is a starter project that is part of [Getting Started](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-helloworld) with Meta Spatial SDK.
 
@@ -65,7 +66,6 @@ The [Showcases](/Showcases) folder contains five apps. These are fully-featured 
 - [Meta Horizon UI Set](/Showcases/UISetSample)
 - [Spatial Scanner](/Showcases/meta_spatial_scanner)
 
-
 ## Documentation
 
 The documentation for Meta Spatial SDK can be found [here](https://developers.meta.com/horizon/develop/spatial-sdk).
@@ -74,54 +74,27 @@ The documentation for Meta Spatial SDK can be found [here](https://developers.me
 
 Find our official release notes [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
 
-## 0.7.0 Updates
-
-This release is a major version bump, which means some breaking changes were introduced.
+## 0.7.1 Updates
 
 ### Added
 
-- Spatial SDK activity lifecycle
-  - Add an activity lifecycle callback `onSpatialShutdown`. This lifecycle callback is guaranteed to be called during a Spatial activity’s shutdown process. Spatial resources such as entities and scene objects should be cleaned up here.
-- Experimental Feature: `childrenOf` query
-  - Add a [childrenOf](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-childrenof-query) query to query the child entities for an entity.
-- Experimental Feature: `changedSince` query
-  - Add a [changedSince](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-changedsince-query) query to get the changed entities since a certain datamodel version.
-- CPU/GPU performance level now defaults to `SUSTAINED_HIGH`, added new performance level controls
-- Support for [compositor layer sharpening and super sampling](https://developers.meta.com/horizon/documentation/native/android/mobile-openxr-composition-layer-filtering) via `LayerFilters`
-- Support for [Live Edits](https://developer.android.com/develop/ui/compose/tooling/iterative-development) on Jetpack Compose UIs.
+- MRUK: Added Environment Raycasting
+  - Allows users to raycast against the environment without going through space setup
+  - Available for exploration in the `MrukSample` project
+- Added UISet Feature
+  - A set of Jetpack Compose components that allow you to build with Meta Quest's design system
+
 
 ### Changed
 
-- The Spatial SDK AARs are now built with Kotlin 2.1.0. This is a breaking change, so you will need to update the Kotlin version in your application.
-- Components are cached by default now, which reduces access to native C++ data and improves performance.
-- The component GLXF’s attribute `uri` is now a UriAttribute. The component Mesh’s `mesh` attribute is now also a UriAttribute.
-- Ray intersections with non-BVH meshes now ignore triangle backfaces (consistent with BVH intersections).
-  - This may break some apps - especially those with panels/buttons. Make sure they are oriented correctly.
-- Custom shaders should now import base Spatial SDK shader files prefixed with “data/shaders”, which matches the path to these files from the APK assets directory.
-  - `#include <metaSpatialSdkFragmentBase.glsl>` should become `#include <data/shaders/metaSpatialSdkFragmentBase.glsl>`
-- Experimental feature: panel animations
-  - The PanelAnimation component is removed. Use PanelQuadCylinderAnimation, PanelScaleInAnimation or PanelScaleOutAnimation instead.
-- Experimental feature: ISDK
-  - Rename IsdkToolkitBridgeSystem to IsdkComponentCreationSystem
-  - Near-field Grabbable entities can be picked up with whole-palm grab
-  - Interactor type hints added to PointerEvent.
-  - Panel offsets added to IsdkPanelDimensions.
-  - Updated sample applications to use IsdkFeature.
+- ISDK pointer only shows up when pointing at an object in range
 
 ### Fixed
 
-- Fixed issue with glTF Animation Pointer node transformations getting applied to the wrong nodes
-- Experimental feature: ISDK
-  - Input now works via Cast Input Forwarding
-  - Entities can now be selected in the Data Model Inspector via in-game controllers or Cast Input Forwarding
-  - IsdkGrabbable billboarding now supports mesh direction offsets.
-  - Fix locomotion / IsdkSystem dependency ordering
-  - Allow non-uniform scaling on grabbables
-  - Improved cursor & ray visualizations
-  - Disabling collision via `Hittable` component now disables Isdk Surfaces.
-  - Visible(false) components now excluded from ISDK
-  - Animation of Curved/Quad panels now correctly updates IsdkPanelDimensions
-
+- Fixed ISDK interaction with scaled panels
+- Fixed race condition with `NetworkedAssetLoader`
+- Fixed a bug where Gradle daemon would crash after a failed project sync.
+- Fixed animation pointers not working on metallic-factor
 ## Spatial SDK Gradle Plugin
 
 The samples all include the Spatial SDK Gradle Plugin in their build files. This plugin is used for the [Spatial Editor integration](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-editor#use-the-spatial-sdk-gradle-plugin) and for build-related features like [custom shaders](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-custom-shaders).

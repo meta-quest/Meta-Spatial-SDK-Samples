@@ -15,10 +15,10 @@
     android:gravity="center"
   />
   <TextView
-    android:id="@+id/mruk_sample_description"
+    android:id="@+id/mruksample_description"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="This sample showcases raycasting from your right controller to the scene. Use your captured scene or load an example from a json file.You can toggle between showing only the first or all hits."
+    android:text="Point your right controller to cast rays at the scene, global mesh, or depth data. Use your captured room or load a sample from JSON. For scene raycasting, toggle between showing first hit only or all hits."
     android:textSize="18sp"
     android:gravity="start"
   />
@@ -119,39 +119,70 @@
   </LinearLayout>
   <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="wrap_content"
     android:layout_marginHorizontal="5dp"
     android:layout_marginVertical="10dp"
-    android:orientation="horizontal"
+    android:orientation="vertical"
   >
-    <TextView
-      android:layout_width="wrap_content"
-      android:layout_height="match_parent"
-      android:layout_marginEnd="10dp"
-      android:text="Raycast Hits"
-      android:textSize="18sp"
-      android:gravity="center_vertical"
-    />
-    <RadioGroup
+    <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="match_parent"
+      android:layout_height="40dp"
       android:orientation="horizontal"
     >
-      <RadioButton
-        android:id="@+id/raycast_hits_all"
+      <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="10dp"
-        android:text="All"
-        android:checked="true"
+        android:layout_marginEnd="10dp"
+        android:text="Raycast Hits"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
       />
-      <RadioButton
-        android:id="@+id/raycast_hits_single"
+      <Spinner
+        android:id="@+id/raycast_type_spinner"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@android:color/white"
+      />
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/scene_options_container"
+      android:layout_width="match_parent"
+      android:layout_height="40dp"
+      android:layout_marginTop="5dp"
+      android:orientation="horizontal"
+    >
+      <TextView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginHorizontal="10dp"
-        android:text="First Only"
+        android:layout_marginEnd="10dp"
+        android:text="Scene Options"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
       />
-    </RadioGroup>
+      <RadioGroup
+        android:id="@+id/scene_options_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+      >
+        <RadioButton
+          android:id="@+id/raycast_hits_all"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_marginHorizontal="10dp"
+          android:text="All"
+        />
+        <RadioButton
+          android:id="@+id/raycast_hits_single"
+          android:layout_width="wrap_content"
+          android:layout_height="match_parent"
+          android:layout_marginHorizontal="10dp"
+          android:text="First Only"
+          android:checked="true"
+        />
+      </RadioGroup>
+    </LinearLayout>
   </LinearLayout>
 </LinearLayout>

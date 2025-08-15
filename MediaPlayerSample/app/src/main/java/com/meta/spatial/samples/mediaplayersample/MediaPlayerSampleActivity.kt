@@ -358,11 +358,11 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
         // make it look like a movie screen is being projected on the room.
         roomMaterial.setTexture("emissive", videoTexture!!)
         roomMaterial.setTexture(
-            "occlusion", SceneTexture(getDrawable(R.drawable._media_room_screen_mask)))
+            "occlusion", SceneTexture(getDrawable(R.drawable.media_room_screen_mask)))
 
         foliageMaterial.setTexture("emissive", videoTexture!!)
         foliageMaterial.setTexture(
-            "occlusion", SceneTexture(getDrawable(R.drawable._media_room_screen_mask)))
+            "occlusion", SceneTexture(getDrawable(R.drawable.media_room_screen_mask)))
 
         sceneMaterials = arrayOf(roomMaterial, foliageMaterial, groundMaterial)
         sceneMaterials!!.forEach { material -> material.setMetalRoughness(0.0f) }
