@@ -10,42 +10,41 @@
     android:id="@+id/mruk_title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="16dp"
     android:text="Keyboard Tracker Sample"
     android:textSize="30sp"
     android:textStyle="bold"
     android:gravity="center"
-    android:layout_margin="16dp"
   />
 
   <TextView
     android:id="@+id/explain_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="If below scene permission or keyboard tracking indicate NO, please make sure to give the app scene permission, and ensure Keyboard Tracking is enabled. Keyboard Tracking can be enabled in the OS at Settings -> Devices -> Keyboard -> Show my keyboard. If everything is enabled and you have a keyboard in front of you, you should see a bounding box drawn around it."
+    android:layout_margin="16dp"
+    android:text="Track physical keyboards with virtual bounding boxes displayed over detected keyboards. Requires scene permission and keyboard tracking enabled in Settings -> Devices -> Keyboard -> Show my keyboard."
     android:textSize="24sp"
     android:gravity="center"
-    android:layout_margin="16dp"
   />
-
 
   <TextView
     android:id="@+id/scene_permission_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="16dp"
     android:text="PLACEHOLDER"
     android:textSize="24sp"
     android:gravity="center"
-    android:layout_margin="16dp"
   />
 
   <TextView
     android:id="@+id/keyboard_tracking_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="16dp"
     android:text="PLACEHOLDER"
     android:textSize="24sp"
     android:gravity="center"
-    android:layout_margin="16dp"
   />
 
   <Button

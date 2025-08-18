@@ -17,5 +17,5 @@ enum class AssetType {
     SHAPE_2D,
     TIMER,
     ARROW,
-    BOARD
+    BOARD,
 }

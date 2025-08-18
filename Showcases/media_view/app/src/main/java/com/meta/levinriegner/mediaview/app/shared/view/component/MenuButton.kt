@@ -47,7 +47,8 @@ fun MenuButton(
         Icon(
             painter = painterResource(id = iconResId),
             contentDescription = "Button Icon",
-            modifier = Modifier.size(80.dp))
+            modifier = Modifier.size(80.dp),
+        )
 
         Spacer(modifier = Modifier.size(20.dp))
       }

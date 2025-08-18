@@ -66,7 +66,7 @@ class IPCServiceConnection(
       mArg1: Int? = null,
       mArg2: Int? = null,
       bundle: Bundle? = null,
-      mReplyTo: Messenger? = null
+      mReplyTo: Messenger? = null,
   ) {
     if (toServiceMessenger != null) {
       try {

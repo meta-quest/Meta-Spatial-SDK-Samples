@@ -48,7 +48,9 @@ fun getDisposableID(): Int {
 fun getNewUUID(): Int {
     val savedData =
         ImmersiveActivity.getInstance()!!.getSharedPreferences(
-        "com.meta.theelectricfactory.focus.MySavedData", Activity.MODE_PRIVATE)
+            "com.meta.theelectricfactory.focus.MySavedData",
+            Activity.MODE_PRIVATE,
+        )
     val uuid = savedData.getInt("currentUUID", -1)
 
     with(savedData.edit()) {
@@ -72,7 +74,7 @@ fun addDeleteButton(entity: Entity, panel: PanelSceneObject? = null) {
                     sourceOfInput: Entity,
                     changed: Int,
                     clicked: Int,
-                    downTime: Long
+                    downTime: Long,
                 ): Boolean {
                     // Check if panel has been clicked/tapped with button A, X, triggers o squeezers
                     if ((changed and ButtonBits.ButtonA) != 0 ||
@@ -95,7 +97,8 @@ fun addDeleteButton(entity: Entity, panel: PanelSceneObject? = null) {
                     }
                     return false
                 }
-            })
+            }
+        )
         // If entity has a Mesh component, object is selected with a registerEventListener
     } else {
         addOnSelectListener(
@@ -231,7 +234,11 @@ fun selectElement(ent: Entity) {
                 Quaternion(
                     billboardOrientationEuler.x,
                     billboardOrientationEuler.y,
-                    billboardOrientationEuler.z))))
+                    billboardOrientationEuler.z,
+                )
+            )
+        )
+    )
 
     // Change icon if the object is a task
     if (ent.getComponent<ToolComponent>().type == AssetType.TASK) {
@@ -257,7 +264,7 @@ fun selectElement(ent: Entity) {
 fun deleteObject(
     entity: Entity?,
     deleteFromDB: Boolean = false,
-    cleaningProject: Boolean = false
+    cleaningProject: Boolean = false,
 ) {
     Log.i("Focus", "Focus> Deleting object: ${entity?.getComponent<ToolComponent>()?.uuid}")
 

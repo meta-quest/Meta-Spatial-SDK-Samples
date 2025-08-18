@@ -38,16 +38,18 @@ fun RoundedButton(title: String, onClick: () -> Unit) {
           BorderStroke(
               1.dp,
               AppColor.MetaBlu,
-          )) {
-        Text(
-            title,
-            color = AppColor.White,
-            fontWeight = FontWeight.Bold,
-            style = MaterialTheme.typography.bodySmall,
-            fontSize = 10.sp,
-            modifier =
-                Modifier.align(
-                    alignment = Alignment.CenterVertically,
-                ))
-      }
+          ),
+  ) {
+    Text(
+        title,
+        color = AppColor.White,
+        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.bodySmall,
+        fontSize = 10.sp,
+        modifier =
+            Modifier.align(
+                alignment = Alignment.CenterVertically,
+            ),
+    )
+  }
 }

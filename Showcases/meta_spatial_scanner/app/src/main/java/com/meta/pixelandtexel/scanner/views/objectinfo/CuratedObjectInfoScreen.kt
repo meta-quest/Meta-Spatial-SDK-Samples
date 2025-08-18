@@ -36,7 +36,7 @@ import com.meta.spatial.uiset.theme.icons.regular.VrObject
 fun CuratedObjectInfoScreen(
     vm: CuratedObjectInfoViewModel = viewModel(),
     onResume: (() -> Unit)? = null,
-    onClose: (() -> Unit)? = null
+    onClose: (() -> Unit)? = null,
 ) {
   val navController = rememberNavController()
   val route by vm.route
@@ -57,7 +57,8 @@ fun CuratedObjectInfoScreen(
                 icon = { Image(icon, "Navigate to $r") },
                 onClick = { vm.navTo(r, i) },
                 collapsed = true,
-                selected = r == route)
+                selected = r == route,
+            )
             Spacer(Modifier.height(8.dp))
           }
         }
@@ -74,7 +75,8 @@ fun CuratedObjectInfoScreen(
                         content as TilesPanelContent,
                         { vm.onTileSelected(i, it) },
                         onResume,
-                        onClose)
+                        onClose,
+                    )
 
                 PanelContentType.IMAGE_COPY ->
                     CuratedObjectImageCopyPanel(content as ImageCopyPanelContent, onResume, onClose)
@@ -100,10 +102,15 @@ private fun CuratedObjectInfoScreenPreviewTiles() {
                   null,
                   listOf(
                       TileContent(
-                          "How To:", "Troubleshoot Wifi Connection", R.drawable.fridge_light),
+                          "How To:",
+                          "Troubleshoot Wifi Connection",
+                          R.drawable.fridge_light,
+                      ),
                       TileContent("How To:", "Connect Your Apps", R.drawable.tv_apps),
                       TileContent("How To:", "Prepare for Wall Mounting", R.drawable.tv_mount),
-                      TileContent("How To:", "Connect a Sound System", R.drawable.tv_sound))))))
+                      TileContent("How To:", "Connect a Sound System", R.drawable.tv_sound),
+                  ),
+              ))))
 }
 
 @Preview(widthDp = 708, heightDp = 644)
@@ -124,5 +131,6 @@ private fun CuratedObjectInfoScreenPreviewImageCopy() {
                       "\n" +
                       "- Share pictures, stream music and videos, access recipes, control your smart devices and Alexa all from the fridge.\n" +
                       "- Enjoy your favorite beverage with your choice of ice. Choose from cubed ice or Ice Bites from the Dual Auto Ice Maker in the freezer drawer, or choose from curved or crushed ice from the external dispenser.\n" +
-                      "- A flat-front fridge design with recessed drawer handle blends beautifully into the kitchen."))))
+                      "- A flat-front fridge design with recessed drawer handle blends beautifully into the kitchen.",
+              ))))
 }

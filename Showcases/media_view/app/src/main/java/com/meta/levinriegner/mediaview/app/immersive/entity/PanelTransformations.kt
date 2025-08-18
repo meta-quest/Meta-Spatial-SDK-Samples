@@ -24,7 +24,7 @@ class PanelTransformations(
       entity: Entity,
       distance: Float,
       positionOffset: Vector3,
-      applyTilt: Boolean = false
+      applyTilt: Boolean = false,
   ) {
     val headPose = environmentEntities.getHeadPose()
 

@@ -136,14 +136,16 @@ class ExploreViewModel(
                         _result.value = "Llama error:\n$reason"
                         busyQuerying = false
                       }
-                    })
+                    },
+            )
           }
 
           override fun onError(reason: String) {
             _result.value = "Google Maps error:\n$reason"
             busyQuerying = false
           }
-        })
+        },
+    )
   }
 
   fun displayLandmarkInfo(info: Landmark, coords: GeoCoordinates) {

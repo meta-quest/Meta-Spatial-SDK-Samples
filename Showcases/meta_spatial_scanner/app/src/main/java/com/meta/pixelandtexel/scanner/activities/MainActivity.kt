@@ -115,13 +115,15 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             onStatusChanged = ::onObjectDetectionFeatureStatusChanged,
             onDetectedObjects = ::onObjectsDetected,
             confirmTrackedObjectSelected = ::confirmTrackedObjectSelected,
-            onTrackedObjectSelected = ::showInfoPanelForObject)
+            onTrackedObjectSelected = ::showInfoPanelForObject,
+        )
 
     return listOf(
         VRFeature(this),
         ComposeFeature(),
         objectDetectionFeature,
-        IsdkFeature(this, spatial, systemManager))
+        IsdkFeature(this, spatial, systemManager),
+    )
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -179,7 +181,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
         ambientColor = Vector3(0f),
         sunColor = Vector3(0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.2f)
+        environmentIntensity = 0.2f,
+    )
     scene.updateIBLEnvironment("museum_lobby.env")
 
     scene.setViewOrigin(0.0f, 0.0f, 0.0f, 180.0f)
@@ -318,7 +321,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
                   onClose = {
                     dismissInfoPanel()
                     tipManager.reportUserEvent(UserEvent.DISMISSED_INFO_PANEL)
-                  })
+                  },
+              )
             }
           }
         },
@@ -347,11 +351,15 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
                           get() = OnBackPressedDispatcher()
                       }) {
                     CuratedObjectInfoScreen(
-                        vm, onResume = ::startScanning, onClose = ::dismissInfoPanel)
+                        vm,
+                        onResume = ::startScanning,
+                        onClose = ::dismissInfoPanel,
+                    )
                   }
             }
           }
-        })
+        },
+    )
   }
 
   /**
@@ -451,7 +459,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
           Entity.createPanelEntity(
               R.integer.curated_info_panel_id,
               Transform(spawnPose),
-              Grabbable(type = GrabbableType.PIVOT_Y))
+              Grabbable(type = GrabbableType.PIVOT_Y),
+          )
 
       tipManager.reportUserEvent(UserEvent.SELECTED_CURATED_OBJECT)
 
@@ -474,7 +483,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
           Entity.createPanelEntity(
               R.integer.info_panel_id,
               Transform(spawnPose),
-              Grabbable(type = GrabbableType.PIVOT_Y))
+              Grabbable(type = GrabbableType.PIVOT_Y),
+          )
 
       tipManager.reportUserEvent(UserEvent.SELECTED_OBJECT)
     }
@@ -498,7 +508,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
         Entity.createPanelEntity(
             R.integer.curated_info_panel_id,
             Transform(spawnPose),
-            Grabbable(type = GrabbableType.PIVOT_Y))
+            Grabbable(type = GrabbableType.PIVOT_Y),
+        )
 
     tipManager.reportUserEvent(UserEvent.SELECTED_CURATED_OBJECT)
 
@@ -521,7 +532,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   private fun getPanelSpawnPosition(
       rightEdgePose: Pose,
       panelWidth: Float,
-      zDistance: Float = 1f
+      zDistance: Float = 1f,
   ): Pose {
     // get angle based on arc length of panel width / 2 at z distance
     val angle = (panelWidth / 2) / zDistance
@@ -567,7 +578,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
       glXFManager.inflateGLXF(
           "apk:///scenes/Composition.glxf".toUri(),
           rootEntity = gltfxEntity!!,
-          keyName = "scanner_app_main_scene")
+          keyName = "scanner_app_main_scene",
+      )
     }
   }
 
@@ -587,7 +599,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   override fun onRequestPermissionsResult(
       requestCode: Int,
       permissions: Array<out String>,
-      grantResults: IntArray
+      grantResults: IntArray,
   ) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 

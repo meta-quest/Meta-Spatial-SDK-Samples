@@ -56,6 +56,7 @@ class PanelReadySystem() : SystemBase() {
   override fun getDependencies(): SystemDependencies {
     return SystemDependencies(
         mustRunBefore = mutableSetOf(SystemDependencyConfig(MeshCreationSystem::class)),
-        mustRunAfter = mutableSetOf(SystemDependencyConfig(TweenEngineSystem::class)))
+        mustRunAfter = mutableSetOf(SystemDependencyConfig(TweenEngineSystem::class)),
+    )
   }
 }

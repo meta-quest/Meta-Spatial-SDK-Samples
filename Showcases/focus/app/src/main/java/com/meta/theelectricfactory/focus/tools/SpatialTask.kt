@@ -45,7 +45,7 @@ class SpatialTask(
     mainTaskLabelState: MutableIntState? = null,
     mainTaskLabelPriority: MutableIntState? = null,
     mainTaskTitle: MutableState<String>? = null,
-    mainTaskBody: MutableState<String>? = null
+    mainTaskBody: MutableState<String>? = null,
 ) {
     var immA = ImmersiveActivity.getInstance()
 
@@ -78,7 +78,7 @@ class SpatialTask(
                                 mainTaskLabelState = mainTaskLabelState,
                                 mainTaskLabelPriority = mainTaskLabelPriority,
                                 mainTaskTitle = mainTaskTitle,
-                                mainTaskBody = mainTaskBody
+                                mainTaskBody = mainTaskBody,
                             )
                         }
                     }

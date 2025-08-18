@@ -35,7 +35,7 @@ fun ObjectInfoTile(
     title: String,
     subTitle: String = "",
     painter: Painter? = null,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
   Button(
       onClick = onClick,
@@ -46,35 +46,39 @@ fun ObjectInfoTile(
               containerColor = Color.Black,
               contentColor = Color.White,
               disabledContainerColor = Color.Black,
-              disabledContentColor = Color.White),
-      modifier = Modifier.padding(0.dp).fillMaxWidth().aspectRatio(1.333f)) {
-        Box(modifier = Modifier.fillMaxSize()) {
-          if (painter != null) {
-            Image(
-                painter = painter,
-                contentDescription = "Button tile $title",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize())
-          }
-          Column(modifier = Modifier.align(Alignment.BottomStart).padding(16.dp)) {
-            Text(
-                title,
-                color = SpatialColor.white100,
-                style =
-                    SpatialTheme.typography.body1Strong.merge(
-                        TextStyle(shadow = Shadow(blurRadius = 4.dp.value))))
-
-            Spacer(Modifier.height(2.dp))
-            Text(
-                subTitle,
-                color = SpatialColor.gray30,
-                style =
-                    SpatialTheme.typography.body2.merge(
-                        TextStyle(shadow = Shadow(blurRadius = 4.dp.value))),
-            )
-          }
-        }
+              disabledContentColor = Color.White,
+          ),
+      modifier = Modifier.padding(0.dp).fillMaxWidth().aspectRatio(1.333f),
+  ) {
+    Box(modifier = Modifier.fillMaxSize()) {
+      if (painter != null) {
+        Image(
+            painter = painter,
+            contentDescription = "Button tile $title",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize(),
+        )
       }
+      Column(modifier = Modifier.align(Alignment.BottomStart).padding(16.dp)) {
+        Text(
+            title,
+            color = SpatialColor.white100,
+            style =
+                SpatialTheme.typography.body1Strong.merge(
+                    TextStyle(shadow = Shadow(blurRadius = 4.dp.value))),
+        )
+
+        Spacer(Modifier.height(2.dp))
+        Text(
+            subTitle,
+            color = SpatialColor.gray30,
+            style =
+                SpatialTheme.typography.body2.merge(
+                    TextStyle(shadow = Shadow(blurRadius = 4.dp.value))),
+        )
+      }
+    }
+  }
 }
 
 @Preview(widthDp = 253, heightDp = 190)

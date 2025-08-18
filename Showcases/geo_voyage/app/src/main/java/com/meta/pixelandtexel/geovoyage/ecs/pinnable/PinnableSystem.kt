@@ -106,7 +106,7 @@ class PinnableSystem(private val glxfManager: GLXFManager) : SystemBase() {
                   sourceOfInput: Entity,
                   changed: Int,
                   clicked: Int,
-                  downTime: Long
+                  downTime: Long,
               ): Boolean {
                 if (hitInfo.entity != entity) {
                   return true
@@ -130,7 +130,10 @@ class PinnableSystem(private val glxfManager: GLXFManager) : SystemBase() {
                   val rotatedHitPoint = pinnablePose.inverse().q.times(pinnableToHitPoint)
                   val coords =
                       GeoCoordinates.fromCartesianCoords(
-                          rotatedHitPoint.x, rotatedHitPoint.y, rotatedHitPoint.z)
+                          rotatedHitPoint.x,
+                          rotatedHitPoint.y,
+                          rotatedHitPoint.z,
+                      )
                   Log.d(TAG, "pinned ${coords.toCommonNotation()}")
                   MainActivity.instance.get()?.userDroppedPin(coords)
 
@@ -140,7 +143,8 @@ class PinnableSystem(private val glxfManager: GLXFManager) : SystemBase() {
                       Pose(
                           hitInfo.point,
                           Quaternion.lookRotation(pinnableToHitPoint)
-                              .times(Quaternion(90f, 0f, 0f)))
+                              .times(Quaternion(90f, 0f, 0f)),
+                      )
                   val localPose =
                       entity.getComponent<Transform>().transform.inverse().times(worldPose)
                   val newTransform = Transform(localPose)

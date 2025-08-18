@@ -26,7 +26,8 @@ object MathUtils {
             cos(halfAngle).toFloat(),
             axis.x * sinHalfAngle,
             axis.y * sinHalfAngle,
-            axis.z * sinHalfAngle)
+            axis.z * sinHalfAngle,
+        )
         .normalize()
   }
 
@@ -42,7 +43,7 @@ object MathUtils {
   fun Quaternion.Companion.fromSequentialPYR(
       pitchDeg: Float,
       yawDeg: Float,
-      rollDeg: Float
+      rollDeg: Float,
   ): Quaternion {
     return Quaternion.fromAxisAngle(Vector3.Right, pitchDeg)
         .times(Quaternion.fromAxisAngle(Vector3.Up, yawDeg))

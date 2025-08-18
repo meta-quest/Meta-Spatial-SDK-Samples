@@ -18,7 +18,7 @@ import com.meta.spatial.samples.premiummediasample.service.IPCServiceConnection
 
 class ControlPanelPollHandler(
     private val exoPlayer: ExoPlayer,
-    private val ipcServiceConnection: IPCServiceConnection
+    private val ipcServiceConnection: IPCServiceConnection,
 ) {
   // Send out IPC message every 11ms to update state of ControlPanel
   private val exoPlayerLooper = Handler(Looper.getMainLooper())
@@ -48,6 +48,7 @@ class ControlPanelPollHandler(
           putBoolean("isMuted", player.volume == 0f)
           putFloat("progress", player.currentPosition.toFloat() * 0.001f)
           putFloat("duration", player.duration.toFloat() * 0.001f)
-        })
+        },
+    )
   }
 }

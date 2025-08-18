@@ -10,5 +10,5 @@ data class TriviaQuestion(
     val option3: String,
     val difficulty: UShort,
     val latitude: Float,
-    val longitude: Float
+    val longitude: Float,
 )

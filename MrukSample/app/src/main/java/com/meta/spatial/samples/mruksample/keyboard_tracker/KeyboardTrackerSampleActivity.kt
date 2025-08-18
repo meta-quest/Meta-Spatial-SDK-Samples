@@ -13,24 +13,16 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
-import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.SpatialSDKExperimentalAPI
 import com.meta.spatial.core.Vector3
-import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
-import com.meta.spatial.debugtools.HotReloadFeature
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKSceneEventListener
 import com.meta.spatial.mruk.MRUKStartTrackerResult
 import com.meta.spatial.mruk.Tracker
-import com.meta.spatial.okhttp3.OkHttpAssetFetcher
-import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
-import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.runtime.LayerConfig
-import com.meta.spatial.runtime.NetworkedAssetLoader
-import com.meta.spatial.samples.mruksample.BuildConfig
 import com.meta.spatial.samples.mruksample.MrukSampleStartMenuActivity
 import com.meta.spatial.samples.mruksample.R
 import com.meta.spatial.samples.mruksample.common.MrukInputSystem
@@ -48,7 +40,6 @@ import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.toolkit.createPanelEntity
 import com.meta.spatial.vr.LocomotionSystem
 import com.meta.spatial.vr.VRFeature
-import java.io.File
 
 // default activity
 class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
@@ -66,18 +57,8 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
   private val panelId = 2
 
   override fun registerFeatures(): List<SpatialFeature> {
-    // Register the features that are needed for that sample. Note that in addition to the
-    // MRUKFeature the PhysicsFeature gets enabled as well. This is needed for having the physics
-    // colliders on the AnchorProceduralMesh working.
     mrukFeature = MRUKFeature(this, systemManager)
-    val features = mutableListOf(VRFeature(this), mrukFeature)
-    if (BuildConfig.DEBUG) {
-      features.add(CastInputForwardFeature(this))
-      features.add(HotReloadFeature(this))
-      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
-      features.add(DataModelInspectorFeature(spatial, this.componentManager))
-    }
-    return features
+    return listOf(VRFeature(this), mrukFeature)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,8 +70,6 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
     systemManager.registerSystem(SpawnKeyboardSystem(mrukFeature))
 
     scene.enablePassthrough(true)
-
-    NetworkedAssetLoader.init(File(applicationContext.cacheDir.canonicalPath), OkHttpAssetFetcher())
 
     // Request the user to give the app scene permission if not already granted.
     // Otherwise, the app will not be able to access the device scene data.
@@ -118,7 +97,7 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
   override fun onRequestPermissionsResult(
       requestCode: Int,
       permissions: Array<out String>,
-      grantResults: IntArray
+      grantResults: IntArray,
   ) {
     if (requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
         permissions.size == 1 &&
@@ -142,7 +121,8 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
         ambientColor = Vector3(0f),
         sunColor = Vector3(7.0f, 7.0f, 7.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
     scene.updateIBLEnvironment("environment.env")
 
     Entity.create(
@@ -152,10 +132,16 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
               baseTextureAndroidResourceId = R.drawable.skydome
               unlit = true // Prevent scene lighting from affecting the skybox
             },
-            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
+            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
+        ))
 
     Entity.createPanelEntity(
-        panelId, R.layout.ui_keyboard_tracker_menu, Transform(), Visible(showUiPanel), Grabbable())
+        panelId,
+        R.layout.ui_keyboard_tracker_menu,
+        Transform(),
+        Visible(showUiPanel),
+        Grabbable(),
+    )
   }
 
   override fun onSpatialShutdown() {
@@ -229,7 +215,8 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
               returnTo2DActivity(
                   this@KeyboardTrackerSampleActivity,
                   applicationContext,
-                  MrukSampleStartMenuActivity::class.java)
+                  MrukSampleStartMenuActivity::class.java,
+              )
             }
 
             scenePermissionTextView = rootView?.findViewById<TextView>(R.id.scene_permission_text)

@@ -29,7 +29,7 @@ class StickyNote(
     var message: String = "",
     var color: StickyColor,
     var pose: Pose = Pose(),
-    var parentUuid: Int = -1
+    var parentUuid: Int = -1,
 ) {
     var immA = ImmersiveActivity.getInstance()
 
@@ -49,7 +49,7 @@ class StickyNote(
                 ProjectManager.instance.currentProject?.uuid,
                 color,
                 message,
-                sticky.getComponent<Transform>().transform
+                sticky.getComponent<Transform>().transform,
             )
             AudioManager.instance.playCreationSound(sticky.getComponent<Transform>().transform.t)
         }
@@ -60,7 +60,7 @@ class StickyNote(
                 StickyNotePanel(
                     uuid = uuid,
                     message = message,
-                    color = color
+                    color = color,
                 )
                 // We add a listener to show delete button when entity is selected
             }.panel{ addDeleteButton(sticky, this) }

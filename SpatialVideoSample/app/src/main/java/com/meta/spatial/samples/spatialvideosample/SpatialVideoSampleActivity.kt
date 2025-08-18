@@ -192,7 +192,10 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
 
   override fun registerPanels(): List<PanelRegistration> {
     return mutableListOf(
-            controlsPanelRegistration(), selectorPanelRegistration(), mrPanelRegistration())
+            controlsPanelRegistration(),
+            selectorPanelRegistration(),
+            mrPanelRegistration(),
+        )
         .apply {
           if (DEBUG) {
             add(debugPanelRegistration())
@@ -254,7 +257,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                   unlit = true
                 },
                 Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-                Visible(false)))
+                Visible(false),
+            ))
 
     scene.updateIBLEnvironment("chromatic.env")
   }
@@ -265,7 +269,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          onLoaded = onLoaded)
+          onLoaded = onLoaded,
+      )
     }
   }
 
@@ -345,7 +350,10 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                     intArrayOf(6, 6, 12, 6, 0, 6),
                     arrayOf(
                         SceneMaterial(
-                                texture, AlphaMode.TRANSLUCENT, "data/shaders/spatial/reflect")
+                                texture,
+                                AlphaMode.TRANSLUCENT,
+                                "data/shaders/spatial/reflect",
+                            )
                             .apply {
                               setStereoMode(stereoMode)
                               setUnlit(true)
@@ -353,12 +361,16 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                         SceneMaterial(texture, AlphaMode.TRANSLUCENT, "data/shaders/spatial/shadow")
                             .apply { setUnlit(true) },
                         SceneMaterial(
-                                texture, AlphaMode.HOLE_PUNCH, SceneMaterial.HOLE_PUNCH_SHADER)
+                                texture,
+                                AlphaMode.HOLE_PUNCH,
+                                SceneMaterial.HOLE_PUNCH_SHADER,
+                            )
                             .apply {
                               setStereoMode(stereoMode)
                               setUnlit(true)
                             },
-                    ))
+                    ),
+                )
             triMesh.updateGeometry(
                 0,
                 floatArrayOf(
@@ -386,7 +398,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                     -halfDepth,
                     -halfWidth,
                     -halfHeight,
-                    -halfDepth),
+                    -halfDepth,
+                ),
                 floatArrayOf(
                     0f,
                     0f,
@@ -411,7 +424,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                     1f,
                     0f,
                     0f,
-                    1f),
+                    1f,
+                ),
                 floatArrayOf(
                     // front
                     0f,
@@ -430,7 +444,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                     halfWidth - rounding,
                     halfDepth - rounding,
                     halfWidth - rounding,
-                    halfDepth - rounding),
+                    halfDepth - rounding,
+                ),
                 intArrayOf(
                     Color.WHITE,
                     Color.WHITE,
@@ -439,9 +454,13 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                     Color.WHITE,
                     Color.WHITE,
                     Color.WHITE,
-                    Color.WHITE))
+                    Color.WHITE,
+                ),
+            )
             triMesh.updatePrimitives(
-                0, intArrayOf(0, 1, 2, 0, 2, 3, 0, 2, 1, 0, 3, 2, 4, 6, 5, 4, 7, 6))
+                0,
+                intArrayOf(0, 1, 2, 0, 2, 3, 0, 2, 1, 0, 3, 2, 4, 6, 5, 4, 7, 6),
+            )
             SceneMesh.fromTriangleMesh(triMesh, false)
           }
         }
@@ -483,7 +502,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                   override fun onProgressChanged(
                       seekBar: SeekBar?,
                       progress: Int,
-                      fromUser: Boolean
+                      fromUser: Boolean,
                   ) {
                     if (fromUser) {
                       player.seekTo(progress.toLong())
@@ -531,7 +550,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                     sourceOfInput: Entity,
                     changed: Int,
                     clicked: Int,
-                    downTime: Long
+                    downTime: Long,
                 ): Boolean {
                   resetControllerFadeOutTimer()
                   return false
@@ -551,7 +570,9 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                   handler.postDelayed(this, 500)
                 }
               },
-              500)
+              500,
+          )
+          setScale(Vector3(VR_SCREEN_RATIO))
         }
 
     player.setVideoSurface(panelSceneObject.getSurface())
@@ -559,7 +580,9 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
     systemManager
         .findSystem<SceneObjectSystem>()
         .addSceneObject(
-            videoPanelEntity, CompletableFuture<SceneObject>().apply { complete(panelSceneObject) })
+            videoPanelEntity,
+            CompletableFuture<SceneObject>().apply { complete(panelSceneObject) },
+        )
     // mark the mesh as explicitly able to catch input
     videoPanelEntity.setComponent(Hittable())
 

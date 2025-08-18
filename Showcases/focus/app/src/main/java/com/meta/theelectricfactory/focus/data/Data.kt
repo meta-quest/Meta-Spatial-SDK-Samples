@@ -34,7 +34,7 @@ enum class StickyColor {
     Pink,
     Orange,
     Blue,
-    Purple
+    Purple,
 }
 
 // Textures and models for tools
@@ -45,7 +45,7 @@ val arrows =
         R.drawable.arrow3,
         R.drawable.arrow4,
         R.drawable.arrow5,
-        R.drawable.arrow6
+        R.drawable.arrow6,
     )
 val labels =
     arrayOf(
@@ -54,7 +54,7 @@ val labels =
         R.drawable.label3,
         R.drawable.label4,
         R.drawable.label5,
-        R.drawable.label6
+        R.drawable.label6,
     )
 val boards = arrayOf(R.drawable.board1, R.drawable.board2, R.drawable.board3, R.drawable.board4)
 val shapes =
@@ -64,7 +64,8 @@ val shapes =
         R.drawable.shape3,
         "cube.glb",
         R.drawable.shape5,
-        "rhombus.glb")
+        "rhombus.glb",
+    )
 val stickers =
     arrayOf(
         R.drawable.sticker1,
@@ -72,7 +73,7 @@ val stickers =
         R.drawable.sticker3,
         R.drawable.sticker4,
         R.drawable.sticker5,
-        R.drawable.sticker6
+        R.drawable.sticker6,
     )
 
 // Environments and skyboxes assets

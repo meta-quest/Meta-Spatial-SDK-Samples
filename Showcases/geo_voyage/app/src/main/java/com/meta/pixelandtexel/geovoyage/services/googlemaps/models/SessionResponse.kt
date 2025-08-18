@@ -8,5 +8,5 @@ data class SessionResponse(
     val expiry: Long,
     val tileWidth: Int,
     val tileHeight: Int,
-    val imageFormat: String
+    val imageFormat: String,
 )

@@ -70,7 +70,8 @@ class Object3DSampleActivity : AppSystemActivity() {
     val features =
         mutableListOf<SpatialFeature>(
             PhysicsFeature(spatial, worldBounds = PhysicsWorldBounds(minY = -100.0f)),
-            VRFeature(this))
+            VRFeature(this),
+        )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -109,7 +110,8 @@ class Object3DSampleActivity : AppSystemActivity() {
         ambientColor = Vector3(0f),
         sunColor = Vector3(7.0f, 7.0f, 7.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
     scene.updateIBLEnvironment("environment.env")
 
     scene.setViewOrigin(0f, 0.0f, 0.0f, 0.0f)
@@ -122,7 +124,8 @@ class Object3DSampleActivity : AppSystemActivity() {
                   baseTextureAndroidResourceId = R.drawable.skydome
                   unlit = true
                 },
-                Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
+                Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
+            ))
 
     // uncomment to see the physics debug lines
     // spatial.enablePhysicsDebugLines(true)
@@ -159,13 +162,18 @@ class Object3DSampleActivity : AppSystemActivity() {
             // keep in mind that bounding boxes are centered on the object origin
             setUpButton(button1, robot, dimensions = Vector3(0.11f, 0.21f, 0.08f))
             setUpButton(
-                button2, drone, isAnimated = true, dimensions = Vector3(0.106f, 0.07f, 0.22f))
+                button2,
+                drone,
+                isAnimated = true,
+                dimensions = Vector3(0.106f, 0.07f, 0.22f),
+            )
             setUpButton(button3, plant, dimensions = Vector3(0.09f, 0.09f, 0.09f))
             setUpButton(button4, deskLamp, dimensions = Vector3(0.2f, 0.34f, 0.06f))
             setUpButton(button5, easyChair, dimensions = Vector3(0.3f, 0.34f, 0.3f))
             setUpButton(button6, sculpture, dimensions = Vector3(0.23f, 0.17f, 0.17f))
           }
-        })
+        },
+    )
   }
 
   private fun setUpButton(
@@ -173,7 +181,7 @@ class Object3DSampleActivity : AppSystemActivity() {
       entity: Entity? = null,
       collisionMesh: String = "box",
       isAnimated: Boolean = false,
-      dimensions: Vector3 = Vector3(0.1f, 0.1f, 0.1f)
+      dimensions: Vector3 = Vector3(0.1f, 0.1f, 0.1f),
   ) {
 
     val scale: Vector3 = entity?.getComponent<Scale>()?.scale?.copy() ?: Vector3(1f, 1f, 1f)
@@ -185,16 +193,19 @@ class Object3DSampleActivity : AppSystemActivity() {
                   listOf(
                       Mesh(
                           mesh = Uri.parse(glb),
-                          defaultShaderOverride = SceneMaterial.PHYSICALLY_BASED_SHADER),
+                          defaultShaderOverride = SceneMaterial.PHYSICALLY_BASED_SHADER,
+                      ),
                       Grabbable(type = GrabbableType.PIVOT_Y),
                       Scale(scale),
                       Physics(
                               shape = collisionMesh,
                               density = 0.1f,
                               state = PhysicsState.DYNAMIC,
-                              dimensions = dimensions)
+                              dimensions = dimensions,
+                          )
                           .applyMaterial(PhysicsMaterial.WOOD),
-                      Transform(Pose(Vector3(0f, 1.2f, 2.1f), Quaternion(0f, 180f, 0f)))))
+                      Transform(Pose(Vector3(0f, 1.2f, 2.1f), Quaternion(0f, 180f, 0f))),
+                  ))
 
           scaleUp(objModel, scale)
 
@@ -230,7 +241,8 @@ class Object3DSampleActivity : AppSystemActivity() {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          onLoaded = onLoaded)
+          onLoaded = onLoaded,
+      )
     }
   }
 }

@@ -89,7 +89,7 @@ class AnchorSnappingSystem() : SystemBase() {
   private fun trySnapToPlaneAnchor(
       anchorable: Entity,
       anchorablePose: Pose,
-      plane: Entity
+      plane: Entity,
   ): Boolean {
     // Get values
     val planeTransform = getAbsoluteTransform(plane)
@@ -110,7 +110,8 @@ class AnchorSnappingSystem() : SystemBase() {
         anchorablePose.t,
         planeTransform.t,
         Vector3(planeSize.x, planeSize.y, planeSnapSize),
-        planeTransform.q)) {
+        planeTransform.q,
+    )) {
       // Snap to plane
       snapToAnchorViaGrab(
           anchorable,
@@ -118,14 +119,19 @@ class AnchorSnappingSystem() : SystemBase() {
           planeNormal,
           projectPointOntoPlane(anchorablePose.t, planePosition, planeNormal) +
               planeNormal.times(anchorable.getComponent<Anchorable>().offset),
-          planeAnchor)
+          planeAnchor,
+      )
       // Break out of the loop; only check 1 plane at a time to prevent corner fightin
       return true
     } else {
       // Use backup raycast check if box test fails
       val hitInfo =
           doesRayIntersectPlane(
-              headPosition, movementOffset, plane, maxRayLength = movementOffset.length())
+              headPosition,
+              movementOffset,
+              plane,
+              maxRayLength = movementOffset.length(),
+          )
       if (hitInfo != null) {
         // Snap to plane
         snapToAnchorViaGrab(anchorable, anchorablePose, planeNormal, hitInfo.point, planeAnchor)
@@ -142,7 +148,7 @@ class AnchorSnappingSystem() : SystemBase() {
       anchorablePose: Pose,
       planeNormal: Vector3,
       snappedPosition: Vector3,
-      planeAnchor: MRUKAnchor
+      planeAnchor: MRUKAnchor,
   ) {
     // If wall, snap position and also adjust rotation
     if (planeAnchor.hasLabel(MRUKLabel.WALL_FACE)) {
@@ -182,7 +188,7 @@ class AnchorSnappingSystem() : SystemBase() {
       anchorable: Entity,
       headPose: Pose,
       planesToCheck: Sequence<Entity>? = null,
-      rescale: Boolean = false
+      rescale: Boolean = false,
   ) {
     val anchorablePose = getAbsoluteTransform(anchorable)
     val anchorOnLoad = anchorable.getComponent<AnchorOnLoad>()
@@ -220,7 +226,12 @@ class AnchorSnappingSystem() : SystemBase() {
         // Calculate and set new pose
         val newPoseAbsolute =
             calculatePoseFromAnchorPlane(
-                anchorable, anchorablePose, planeAnchor, planeNormal, hitInfo.point)
+                anchorable,
+                anchorablePose,
+                planeAnchor,
+                planeNormal,
+                hitInfo.point,
+            )
         anchorable.setComponent(Transform(fromAbsoluteToLocal(newPoseAbsolute, anchorable)))
 
         // Set new scale if needed (keeps the old FOV)
@@ -252,7 +263,7 @@ class AnchorSnappingSystem() : SystemBase() {
       anchorablePose: Pose,
       planeAnchor: MRUKAnchor,
       planeNormal: Vector3,
-      hitPoint: Vector3
+      hitPoint: Vector3,
   ): Pose {
     val newPoseAbsolute = Pose()
     // If wall, snap position and also adjust rotation

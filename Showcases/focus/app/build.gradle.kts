@@ -18,7 +18,7 @@ android {
         minSdk = 28
         //noinspection ExpiredTargetSdkVersion
         targetSdk = 32
-        versionCode = 23
+        versionCode = 24
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -76,9 +76,8 @@ dependencies {
     implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
     implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
     implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
+    implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:${metaSpatialSdkVersion}")
     implementation("com.meta.spatial:meta-spatial-sdk-isdk:$metaSpatialSdkVersion")
     implementation("com.meta.spatial:meta-spatial-sdk-compose:$metaSpatialSdkVersion")
-
-    // Meta Spatial UI Set
-    implementation(files("libs/meta-spatial-uiset-1.0.1.aar"))
+    implementation("com.meta.spatial:meta-spatial-sdk-uiset:$metaSpatialSdkVersion")
 }

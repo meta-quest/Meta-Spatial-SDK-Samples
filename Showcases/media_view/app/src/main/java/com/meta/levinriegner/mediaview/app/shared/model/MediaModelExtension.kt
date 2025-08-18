@@ -72,7 +72,8 @@ fun MediaModel.textureWidthAndHeight(): Pair<Int, Int> {
       dpToPx(defaultTextureDp) + dpToPx(mediaPanelSpacingOffsetDp),
       dpToPx(
           (defaultTextureDp * (panelHeight / panelWidth)).toInt() +
-              dpToPx(mediaPanelSpacingOffsetDp)))
+              dpToPx(mediaPanelSpacingOffsetDp)),
+  )
 }
 
 fun MediaModel.minimizedPanelConfigOptions(): PanelConfigOptions {
@@ -114,7 +115,8 @@ fun MediaModel.minimizedPanelConfigOptions(): PanelConfigOptions {
               val unlitMaterial =
                   SceneMaterial(texture, AlphaMode.OPAQUE, SceneMaterial.UNLIT_SHADER)
               SceneMesh.singleSidedQuad(panelWidth / 2, panelHeight / 2, unlitMaterial)
-            })
+            },
+        )
 
     IMAGE_360 ->
         PanelConfigOptions(
@@ -192,7 +194,8 @@ fun MediaModel.maximizedPanelConfigOptions(): PanelConfigOptions {
               val unlitMaterial =
                   SceneMaterial(texture, AlphaMode.OPAQUE, SceneMaterial.UNLIT_SHADER)
               SceneMesh.cylinderSurface(5.0f, 5.0f, 0.7f, unlitMaterial)
-            })
+            },
+        )
 
     IMAGE_360 ->
         PanelConfigOptions(

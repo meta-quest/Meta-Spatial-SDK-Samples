@@ -75,7 +75,8 @@ class ToolManager {
             type = type,
             source = shapes[index].toString(),
             size = getAssetSize(type, index),
-            deleteButtonHeight = deleteHeight)
+            deleteButtonHeight = deleteHeight,
+        )
         PanelManager.instance.closeSubPanels()
     }
 

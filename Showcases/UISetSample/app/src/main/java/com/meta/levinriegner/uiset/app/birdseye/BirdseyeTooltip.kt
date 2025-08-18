@@ -49,7 +49,8 @@ fun BirdseyeTooltip() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground))
+                    color = LocalColorScheme.current.primaryAlphaBackground),
+        )
         Spacer(modifier = Modifier.height(20.dp))
         Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
           SpatialTooltipContent(
@@ -65,7 +66,8 @@ fun BirdseyeTooltip() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground))
+                color = LocalColorScheme.current.primaryAlphaBackground),
+    )
     Spacer(modifier = Modifier.height(40.dp))
 
     Spacer(Modifier.size(37.dp))
@@ -188,7 +190,8 @@ fun BirdseyeTooltip() {
         "  Tooltip Example",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground))
+                color = LocalColorScheme.current.primaryAlphaBackground),
+    )
     Spacer(modifier = Modifier.height(20.dp))
     Row() { TooltipDemo() }
   }
@@ -206,12 +209,13 @@ private fun TooltipDemo() {
             title = "Primary",
         )
       },
-      state = tooltipState) {
-        PrimaryButton(
-            label = "Hover Me",
-            onClick = { /* no-op */ },
-        )
-      }
+      state = tooltipState,
+  ) {
+    PrimaryButton(
+        label = "Hover Me",
+        onClick = { /* no-op */ },
+    )
+  }
 }
 
 @Preview(

@@ -65,7 +65,8 @@ fun ScrollableTextAreaWithScrollBar(text: String, modifier: Modifier = Modifier)
           MarkdownText(
               markdown = text,
               modifier = Modifier.fillMaxWidth(),
-              style = LocalTypography.current.body1)
+              style = LocalTypography.current.body1,
+          )
         }
 
     // Custom Scroll Bar
@@ -131,12 +132,14 @@ class ScrollableTextAreaProvider : PreviewParameterProvider<String> {
           "This is a short answers",
           "This is a medium answer".repeat(50),
           "This is a long answer".repeat(500),
-          """  
-            # Sample  
-            * Markdown  
-            * [Link](https://example.com)  
-            ![Image](https://example.com/img.png "Image")  
-            <a href="https://www.google.com/">Google</a>  
-        """
-              .trimIndent())
+          """
+            
+              # Sample  
+              * Markdown  
+              * [Link](https://example.com)  
+              ![Image](https://example.com/img.png "Image")  
+              <a href="https://www.google.com/">Google</a>  
+          """
+              .trimIndent(),
+      )
 }

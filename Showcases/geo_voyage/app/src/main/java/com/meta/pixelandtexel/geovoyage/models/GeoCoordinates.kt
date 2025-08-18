@@ -50,6 +50,7 @@ data class GeoCoordinates(val latitude: Float, val longitude: Float) {
         adjustedLatitude,
         latDirection,
         adjustedLongitude,
-        lonDirection)
+        lonDirection,
+    )
   }
 }

@@ -83,7 +83,8 @@ fun GalleryView(
                 .border(
                     width = 1.dp,
                     color = AppColor.MetaBlu,
-                    shape = RoundedCornerShape(Dimens.radiusMedium))
+                    shape = RoundedCornerShape(Dimens.radiusMedium),
+                )
                 .clip(RoundedCornerShape(Dimens.radiusMedium))) { innerPadding ->
           when (uiState) {
             UiState.Idle -> Box(Modifier)
@@ -173,7 +174,8 @@ private fun Header(
                 Icon(
                     painter = painterResource(id = R.drawable.icon_sortby),
                     contentDescription = "Button Icon",
-                    modifier = Modifier.size(20.dp).offset(x = (-20).dp, y = 0.dp))
+                    modifier = Modifier.size(20.dp).offset(x = (-20).dp, y = 0.dp),
+                )
                 Text(
                     modifier = Modifier.fillMaxWidth().offset(x = (-17).dp, y = 0.dp),
                     text = stringResource(id = R.string.sort_by),
@@ -208,7 +210,8 @@ private fun Header(
                                     Icon(
                                         imageVector = Icons.Default.Check,
                                         contentDescription = null,
-                                        modifier = Modifier.size(15.dp))
+                                        modifier = Modifier.size(15.dp),
+                                    )
                                   })
                               else null,
                           text = {
@@ -223,7 +226,8 @@ private fun Header(
                                           MediaSortBy.SizeDesc -> R.string.sort_by_size_desc
                                           MediaSortBy.NameAsc -> R.string.sort_by_name_asc
                                           MediaSortBy.NameDesc -> R.string.sort_by_name_desc
-                                        }))
+                                        }),
+                            )
                           },
                           onClick = {
                             sortExpanded = false
@@ -257,7 +261,8 @@ private fun Header(
                           checkedIconColor = AppColor.MetaBlu,
                       ),
               checked = showMetadata,
-              onCheckedChange = { onToggleMetadata(it) })
+              onCheckedChange = { onToggleMetadata(it) },
+          )
         }
       }
     }
@@ -277,13 +282,14 @@ private fun MediaGrid(
       contentPadding = PaddingValues(Dimens.large),
       verticalArrangement = Arrangement.spacedBy(Dimens.small),
       horizontalArrangement = Arrangement.spacedBy(Dimens.small),
-      columns = GridCells.Adaptive(Dimens.galleryItemSize)) {
-        items(media.size) { index ->
-          MediaItemView(
-              media[index],
-              showMetadata,
-              onItemClicked = onItemClicked,
-          )
-        }
-      }
+      columns = GridCells.Adaptive(Dimens.galleryItemSize),
+  ) {
+    items(media.size) { index ->
+      MediaItemView(
+          media[index],
+          showMetadata,
+          onItemClicked = onItemClicked,
+      )
+    }
+  }
 }

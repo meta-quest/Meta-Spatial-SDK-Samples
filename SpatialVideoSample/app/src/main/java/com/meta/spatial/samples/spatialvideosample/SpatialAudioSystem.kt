@@ -20,7 +20,7 @@ import kotlin.math.sin
 
 class SpatialAudioSystem(
     val panner: ChannelMixingAudioProcessor,
-    val activity: SpatialVideoSampleActivity
+    val activity: SpatialVideoSampleActivity,
 ) : SystemBase() {
   override fun execute() {
     val head =
@@ -64,7 +64,9 @@ class SpatialAudioSystem(
                   left_level.toFloat(),
                   right_level.toFloat(),
                   left_level.toFloat(),
-                  right_level.toFloat())))
+                  right_level.toFloat(),
+              ),
+          ))
     }
   }
 

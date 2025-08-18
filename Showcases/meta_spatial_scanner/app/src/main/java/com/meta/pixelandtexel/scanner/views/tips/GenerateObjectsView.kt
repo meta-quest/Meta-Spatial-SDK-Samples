@@ -36,31 +36,37 @@ fun GenerateObjectsView(
         painter = painterResource(R.drawable.tip_refrigerator),
         contentDescription = stringResource(R.string.refrigerator_image_description),
         modifier = Modifier.fillMaxWidth(),
-        colorFilter = ColorFilter.tint(Color(0x88000000), BlendMode.Darken))
+        colorFilter = ColorFilter.tint(Color(0x88000000), BlendMode.Darken),
+    )
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.weight(1f).fillMaxWidth().padding(20.dp)) {
-          Text(
-              titleCopy,
-              color = Color.White,
-              style = SpatialTheme.typography.headline3Strong,
-              modifier = Modifier.padding(top = 6.dp))
-          Text(
-              bodyCopy,
-              textAlign = TextAlign.Center,
-              color = Color.White,
-              style = SpatialTheme.typography.body2,
-              modifier = Modifier.padding(bottom = 8.dp))
-          PrimaryButton(
-              stringResource(R.string.btn_dismiss),
-              expanded = true,
-              onClick = { onDismiss?.invoke() })
-          PrimaryButton(
-              stringResource(R.string.btn_generate_objects),
-              expanded = true,
-              onClick = { onGenerate?.invoke() })
-        }
+        modifier = Modifier.weight(1f).fillMaxWidth().padding(20.dp),
+    ) {
+      Text(
+          titleCopy,
+          color = Color.White,
+          style = SpatialTheme.typography.headline3Strong,
+          modifier = Modifier.padding(top = 6.dp),
+      )
+      Text(
+          bodyCopy,
+          textAlign = TextAlign.Center,
+          color = Color.White,
+          style = SpatialTheme.typography.body2,
+          modifier = Modifier.padding(bottom = 8.dp),
+      )
+      PrimaryButton(
+          stringResource(R.string.btn_dismiss),
+          expanded = true,
+          onClick = { onDismiss?.invoke() },
+      )
+      PrimaryButton(
+          stringResource(R.string.btn_generate_objects),
+          expanded = true,
+          onClick = { onGenerate?.invoke() },
+      )
+    }
   }
 }
 
@@ -69,5 +75,6 @@ fun GenerateObjectsView(
 fun GenerateObjectsViewPreview() {
   GenerateObjectsView(
       "Title Copy",
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porttitor egestas libero, at egestas lacus sollicitudin nec.")
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc porttitor egestas libero, at egestas lacus sollicitudin nec.",
+  )
 }

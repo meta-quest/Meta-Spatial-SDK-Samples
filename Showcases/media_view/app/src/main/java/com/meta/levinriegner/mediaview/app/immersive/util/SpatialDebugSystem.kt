@@ -79,7 +79,8 @@ class SpatialDebugSystem : SystemBase() {
             Quaternion(
                 spatialDebugComponent.rotationOffset.x,
                 spatialDebugComponent.rotationOffset.y,
-                spatialDebugComponent.rotationOffset.z)
+                spatialDebugComponent.rotationOffset.z,
+            )
         val dot = eyePose.q.dot(rotation)
         if (dot > 0.999f) {
           eyePose.q =

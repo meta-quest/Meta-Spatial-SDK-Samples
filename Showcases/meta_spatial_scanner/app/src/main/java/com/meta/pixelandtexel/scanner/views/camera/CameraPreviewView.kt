@@ -21,7 +21,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 fun CameraPreviewView(
     modifier: Modifier = Modifier,
     onSurfaceAvailable: (Surface) -> Unit,
-    onSurfaceDestroyed: (Surface) -> Unit
+    onSurfaceDestroyed: (Surface) -> Unit,
 ) {
   val lifecycleOwner = LocalLifecycleOwner.current
   val context = LocalContext.current

@@ -150,7 +150,8 @@ class MovieViewModel : ViewModel() {
                     "@VRwithJasmine gets her #MetaQuest3 play area ready to go Question is, what game to play first?",
                 poster_path = R.drawable.movie08,
                 youtubeId = "SBljI8B2zj0",
-            ))
+            ),
+        )
   }
 
   fun selectMovie(movie: Movie) {
@@ -172,14 +173,15 @@ fun MovieApp(viewModel: MovieViewModel) {
         NavHost(
             navController = navController,
             startDestination = "movieList",
-            contentAlignment = Alignment.Center) {
-              composable("movieList", enterTransition = null) {
-                MovieListScreen(navController, viewModel)
-              }
-              composable("movieDetail", enterTransition = null) {
-                MovieDetailScreen(navController, viewModel)
-              }
-            }
+            contentAlignment = Alignment.Center,
+        ) {
+          composable("movieList", enterTransition = null) {
+            MovieListScreen(navController, viewModel)
+          }
+          composable("movieDetail", enterTransition = null) {
+            MovieDetailScreen(navController, viewModel)
+          }
+        }
       }
 }
 
@@ -232,7 +234,8 @@ fun ImageItem(
           0f,
           0f,
           1f,
-          0f)
+          0f,
+      )
   Image(
       painter = painter,
       contentDescription = null,
@@ -243,7 +246,8 @@ fun ImageItem(
           Modifier.fillMaxWidth()
               .height(160.dp)
               .clickable(onClick = onClick)
-              .hoverable(interactionSource = interactionSource))
+              .hoverable(interactionSource = interactionSource),
+  )
 }
 
 @Composable
@@ -256,29 +260,30 @@ fun MovieListItem(movie: Movie, onMovieSelected: (Movie) -> Unit) {
               .height(160.dp)
               .padding(start = 8.dp, end = 8.dp, bottom = 6.dp)
               .clip(RoundedCornerShape(16.dp, 16.dp, 16.dp, 16.dp)),
-      contentAlignment = Alignment.BottomCenter) {
-        ImageItem(
-            painter = painterResource(movie.poster_path), onClick = { onMovieSelected(movie) })
-        Box(
-            modifier =
-                Modifier.fillMaxSize()
-                    .background(
-                        brush = Brush.verticalGradient(listOf(Color.Transparent, Color.Black))),
-            contentAlignment = Alignment.Center) {
-              Text(
-                  text = movie.title,
-                  style = MaterialTheme.typography.body1,
-                  color = Color.White,
-                  minLines = 1,
-                  maxLines = 2,
-                  overflow = TextOverflow.Ellipsis,
-                  textAlign = TextAlign.Center,
-                  modifier =
-                      Modifier.fillMaxWidth()
-                          .align(Alignment.BottomCenter)
-                          .padding(start = 8.dp, end = 8.dp, bottom = 8.dp))
-            }
-      }
+      contentAlignment = Alignment.BottomCenter,
+  ) {
+    ImageItem(painter = painterResource(movie.poster_path), onClick = { onMovieSelected(movie) })
+    Box(
+        modifier =
+            Modifier.fillMaxSize()
+                .background(brush = Brush.verticalGradient(listOf(Color.Transparent, Color.Black))),
+        contentAlignment = Alignment.Center,
+    ) {
+      Text(
+          text = movie.title,
+          style = MaterialTheme.typography.body1,
+          color = Color.White,
+          minLines = 1,
+          maxLines = 2,
+          overflow = TextOverflow.Ellipsis,
+          textAlign = TextAlign.Center,
+          modifier =
+              Modifier.fillMaxWidth()
+                  .align(Alignment.BottomCenter)
+                  .padding(start = 8.dp, end = 8.dp, bottom = 8.dp),
+      )
+    }
+  }
 }
 
 @Composable
@@ -310,40 +315,47 @@ fun MovieDetailScreen(navController: NavController, viewModel: MovieViewModel) {
         topBar = {
           IconButton(
               interactionSource = interactionSource,
-              onClick = { navController.navigate("movieList") }) {
-                Icon(
-                    imageVector = Icons.Rounded.ArrowBack,
-                    contentDescription = "Back",
-                    tint = if (isHovered) Color.Gray else Color.White)
-              }
+              onClick = { navController.navigate("movieList") },
+          ) {
+            Icon(
+                imageVector = Icons.Rounded.ArrowBack,
+                contentDescription = "Back",
+                tint = if (isHovered) Color.Gray else Color.White,
+            )
+          }
         },
-        backgroundColor = Color(0xFF1f1f1f)) {
-          Column(
-              modifier = Modifier.fillMaxSize().padding(start = 32.dp, end = 32.dp),
-              verticalArrangement = Arrangement.Center,
-              horizontalAlignment = Alignment.CenterHorizontally) {
-                Image(painter = painterResource(movie.poster_path), contentDescription = null)
-                Spacer(modifier = Modifier.height(32.dp))
-                Text(
-                    text = movie.title,
-                    minLines = 1,
-                    style = MaterialTheme.typography.h5,
-                    color = Color.White)
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = movie.overview,
-                    minLines = 1,
-                    style = MaterialTheme.typography.body1,
-                    color = Color.White)
-              }
-        }
+        backgroundColor = Color(0xFF1f1f1f),
+    ) {
+      Column(
+          modifier = Modifier.fillMaxSize().padding(start = 32.dp, end = 32.dp),
+          verticalArrangement = Arrangement.Center,
+          horizontalAlignment = Alignment.CenterHorizontally,
+      ) {
+        Image(painter = painterResource(movie.poster_path), contentDescription = null)
+        Spacer(modifier = Modifier.height(32.dp))
+        Text(
+            text = movie.title,
+            minLines = 1,
+            style = MaterialTheme.typography.h5,
+            color = Color.White,
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            text = movie.overview,
+            minLines = 1,
+            style = MaterialTheme.typography.body1,
+            color = Color.White,
+        )
+      }
+    }
   }
       ?: run {
         Text(
             text = "No movie selected",
             minLines = 1,
             style = MaterialTheme.typography.h6,
-            color = Color.White)
+            color = Color.White,
+        )
       }
 }
 

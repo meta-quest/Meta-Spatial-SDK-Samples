@@ -63,29 +63,34 @@ fun SettingsScreen() {
                         .fillMaxSize()
                         .weight(1f)
                         .verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                  SettingsSwitchListItem("Enable Wit.ai filtering", isWitAiFilteringEnabled) {
-                    SettingsService.set(SettingsKey.WIT_AI_FILTERING_ENABLED, it)
-                  }
-                  SettingsSwitchListItem("Detect speech ended", isSilenceDetectionEnabled) {
-                    SettingsService.set(SettingsKey.SILENCE_DETECTION_ENABLED, it)
-                  }
-                  SettingsRadioButtonGroupListItem(
-                      "Llama server", llamaServerSelectedIndex, llamaServerOptions) {
-                        val newType =
-                            LlamaServerType.fromValue(it)
-                                ?: throw Exception("Invalid LlamaServerType from value $it")
-                        SettingsService.set(SettingsKey.LLAMA_SERVER_TYPE, newType.value)
-                      }
-                  if (llamaServerSelectedIndex.intValue == LlamaServerType.OLLAMA.value) {
-                    SettingsTextFieldListItem(
-                        "Ollama server URL",
-                        stringResource(R.string.placeholder_ollama_url),
-                        textFieldValue) {
-                          SettingsService.set(SettingsKey.OLLAMA_URL, it)
-                        }
-                  }
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+            ) {
+              SettingsSwitchListItem("Enable Wit.ai filtering", isWitAiFilteringEnabled) {
+                SettingsService.set(SettingsKey.WIT_AI_FILTERING_ENABLED, it)
+              }
+              SettingsSwitchListItem("Detect speech ended", isSilenceDetectionEnabled) {
+                SettingsService.set(SettingsKey.SILENCE_DETECTION_ENABLED, it)
+              }
+              SettingsRadioButtonGroupListItem(
+                  "Llama server",
+                  llamaServerSelectedIndex,
+                  llamaServerOptions,
+              ) {
+                val newType =
+                    LlamaServerType.fromValue(it)
+                        ?: throw Exception("Invalid LlamaServerType from value $it")
+                SettingsService.set(SettingsKey.LLAMA_SERVER_TYPE, newType.value)
+              }
+              if (llamaServerSelectedIndex.intValue == LlamaServerType.OLLAMA.value) {
+                SettingsTextFieldListItem(
+                    "Ollama server URL",
+                    stringResource(R.string.placeholder_ollama_url),
+                    textFieldValue,
+                ) {
+                  SettingsService.set(SettingsKey.OLLAMA_URL, it)
                 }
+              }
+            }
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth(),
@@ -93,7 +98,8 @@ fun SettingsScreen() {
               Text(
                   "Version: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
                   color = Color.Black,
-                  style = MaterialTheme.typography.bodyMedium)
+                  style = MaterialTheme.typography.bodyMedium,
+              )
             }
           }
         }

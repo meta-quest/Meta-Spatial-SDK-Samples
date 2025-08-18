@@ -29,7 +29,8 @@ class HomePanelActivity : ComponentActivity() {
       ipcServiceConnection.messageProcess(
           IPCService.IMMERSIVE_CHANNEL,
           ImmersiveActivityCodes.HOME_PANEL_SELECT_ITEM.ordinal,
-          Bundle().apply { putSerializable("homeItem", homeItem) })
+          Bundle().apply { putSerializable("homeItem", homeItem) },
+      )
     }
 
     setContent { HomeView(homePanelViewModel) }

@@ -13,7 +13,7 @@ import com.meta.spatial.runtime.SceneMaterial
 data class TweenSceneMaterial(
     val material: SceneMaterial,
     val attributeName: String = "",
-    var currentValue: Vector4
+    var currentValue: Vector4,
 ) {
   companion object {
     const val SET_ATTRIBUTE_VECTOR4 = 1

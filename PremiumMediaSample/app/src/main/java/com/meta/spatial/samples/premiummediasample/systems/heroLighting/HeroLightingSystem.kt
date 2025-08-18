@@ -26,7 +26,7 @@ import dorkbox.tweenEngine.TweenAccessor
 
 class HeroLightingSystem(
     private val autoDetectTexture: Boolean = true,
-    private var isProcessingShaders: Boolean = true
+    private var isProcessingShaders: Boolean = true,
 ) : SystemBase() {
 
   // Data

@@ -1,4 +1,9 @@
-// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 plugins {
   alias(libs.plugins.android.application)
@@ -14,7 +19,7 @@ android {
     applicationId = "com.meta.spatial.samples.mruksample"
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
-    targetSdk = 32
+    targetSdk = 34
     versionCode = 1
     versionName = "1.0"
 
@@ -24,14 +29,7 @@ android {
     ndkVersion = "27.0.12077973"
   }
 
-  packaging {
-    resources.excludes.add("META-INF/LICENSE")
-    resources.excludes.add("LICENSE")
-    resources.excludes.add("LICENSE.CC0")
-    resources.excludes.add("LICENSE.blob")
-    resources.excludes.add("LICENSE.Apachev2")
-    resources.excludes.add("LICENSE.MIT")
-  }
+  packaging { resources.excludes.add("META-INF/LICENSE") }
 
   lint { abortOnError = false }
 

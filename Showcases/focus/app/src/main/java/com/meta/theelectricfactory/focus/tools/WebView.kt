@@ -23,7 +23,7 @@ import com.meta.theelectricfactory.focus.utils.placeInFront
 class WebView(
     url: String = "https://www.google.com/",
     var uuid: Int = -1,
-    pose: Pose = Pose()
+    pose: Pose = Pose(),
 ) {
 
     var id = getDisposableID()
@@ -46,7 +46,7 @@ class WebView(
                 url,
                 0f, // not relevant
                 0f, // not relevant
-                ent.getComponent<Transform>().transform
+                ent.getComponent<Transform>().transform,
             )
         }
 

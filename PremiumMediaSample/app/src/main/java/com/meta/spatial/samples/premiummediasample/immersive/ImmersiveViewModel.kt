@@ -38,7 +38,7 @@ import dorkbox.tweenEngine.TweenEngine
 
 class ImmersiveViewModel(
     val ipcServiceConnection: IPCServiceConnection,
-    val systemManager: SystemManager
+    val systemManager: SystemManager,
 ) {
   private lateinit var tweenEngine: TweenEngine
   private lateinit var controlVisibilitySystem: ControlPanelVisibilitySystem
@@ -86,7 +86,8 @@ class ImmersiveViewModel(
           debugControlsPanel!!,
           SPAWN_DISTANCE,
           angleYAxisFromHead = 90f,
-          offset = Vector3(0f, -0.5f, 0f))
+          offset = Vector3(0f, -0.5f, 0f),
+      )
     }
 
     setDistanceFov(homePanel.entity, SPAWN_DISTANCE, homePanelFov)
@@ -101,7 +102,9 @@ class ImmersiveViewModel(
   fun showHome(initialShow: Boolean = false) {
     homePanel.fadeVisibility(true)
     cinemaStateHandler.setCinemaState(
-        CinemaState.Home, forceIsPlayingLighting = true) // Changes lighting
+        CinemaState.Home,
+        forceIsPlayingLighting = true,
+    ) // Changes lighting
     if (!initialShow) {
       cinemaStateHandler.moveHomeToTVPosition()
     }
@@ -171,7 +174,9 @@ class ImmersiveViewModel(
     currentExoPanel?.let { exoPanel ->
       exoPanel.entity.registerEventListener<ExoPlayerEvent>(ExoPlayerEvent.ON_END) { _, _ ->
         lightingPassthroughHandler.transitionLighting(
-            cinemaStateHandler.cinemaState, isPlaying = false)
+            cinemaStateHandler.cinemaState,
+            isPlaying = false,
+        )
       }
       if (mediaItem.videoShape == MediaSource.VideoShape.Rectilinear) {
         controlsPanel.attachToEntity(exoPanel.entity)

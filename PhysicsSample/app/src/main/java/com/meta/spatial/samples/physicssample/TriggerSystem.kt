@@ -72,7 +72,8 @@ class TriggerSystem() : SystemBase() {
           dataModel?.sendEvent(
               triggerEntity,
               triggerArea.eventName,
-              TriggerEventArgs(direction, triggerArea.value, dataModel))
+              TriggerEventArgs(direction, triggerArea.value, dataModel),
+          )
         } else if (!isInside && trigger.insideAreaId == areaEntity.id) {
           trigger.insideAreaId = 0
           triggerEntity.setComponent(trigger)

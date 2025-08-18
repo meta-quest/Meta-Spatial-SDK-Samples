@@ -21,7 +21,7 @@ import com.meta.spatial.toolkit.PlaybackType
  */
 class CuratedObjectInfoViewModel(
     val uiContent: List<PanelContentBase>,
-    private val meshEntity: Entity? = null
+    private val meshEntity: Entity? = null,
 ) : ViewModel() {
   private val _route = mutableStateOf("0_${uiContent.first().title}")
   val route: State<String> = _route
@@ -52,7 +52,8 @@ class CuratedObjectInfoViewModel(
                 startTime = System.currentTimeMillis(),
                 playbackState = PlaybackState.PLAYING,
                 playbackType = PlaybackType.CLAMP,
-                track = track))
+                track = track,
+            ))
       }
     }
   }

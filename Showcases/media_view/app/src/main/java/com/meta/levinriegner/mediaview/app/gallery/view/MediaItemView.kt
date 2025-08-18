@@ -78,7 +78,8 @@ fun MediaItemView(
               contentDescription = item.name,
               modifier = Modifier.fillMaxSize(),
               contentScale = ContentScale.Crop,
-              alignment = Alignment.Center)
+              alignment = Alignment.Center,
+          )
 
           AnimatedOpacity(visible = !showMetadata) {
             Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Bottom) {
@@ -95,7 +96,8 @@ fun MediaItemView(
                 Icon(
                     painter = painterResource(id = icon),
                     contentDescription = "Button Icon",
-                    modifier = Modifier.size(18.dp))
+                    modifier = Modifier.size(18.dp),
+                )
 
                 item.durationHMS()?.let {
                   val duration =
@@ -158,7 +160,8 @@ fun MediaItemView(
                           fontWeight = FontWeight.Bold,
                           color = Color.White,
                       ),
-                  maxLines = 1)
+                  maxLines = 1,
+              )
               Text(
                   text = "Size: ${item.sizeLabel()}",
                   style =
@@ -167,7 +170,8 @@ fun MediaItemView(
                           fontWeight = FontWeight.Bold,
                           color = Color.White,
                       ),
-                  maxLines = 1)
+                  maxLines = 1,
+              )
             }
 
             Row(
@@ -177,7 +181,8 @@ fun MediaItemView(
               Icon(
                   painter = painterResource(id = icon),
                   contentDescription = "Button Icon",
-                  modifier = Modifier.size(18.dp))
+                  modifier = Modifier.size(18.dp),
+              )
 
               item.durationHMS()?.let {
                 val duration =

@@ -77,7 +77,7 @@ class ExoVideoEntity(
         exoPlayer: ExoPlayer,
         mediaSource: MediaSource,
         tweenEngine: TweenEngine,
-        ipcServiceConnection: IPCServiceConnection
+        ipcServiceConnection: IPCServiceConnection,
     ): ExoVideoEntity {
       val panelSize = Vector2(mediaSource.aspectRatio * BASE_PANEL_SIZE, BASE_PANEL_SIZE)
       val equirectRadius = 50f
@@ -116,7 +116,8 @@ class ExoVideoEntity(
             LayerConfig(
                 zIndex =
                     if (mediaSource.videoShape == MediaSource.VideoShape.Equirect180) -1 else 0,
-                secure = drmEnabled)
+                secure = drmEnabled,
+            )
         panelShapeType =
             when (mediaSource.videoShape) {
               MediaSource.VideoShape.Rectilinear -> PanelShapeType.QUAD
@@ -186,7 +187,9 @@ class ExoVideoEntity(
     // To support all devices, limiting maximum dimensions to that of Quest 2: 3600x1920
     val (downScaledWidthInPx, downScaledHeightInPx) =
         downScaleResolutionForQuest2(
-            mediaSource.videoDimensionsPx.x, mediaSource.videoDimensionsPx.y)
+            mediaSource.videoDimensionsPx.x,
+            mediaSource.videoDimensionsPx.y,
+        )
     val overridePanelConfig: PanelConfigOptions.() -> Unit = {
       panelConfigBlock()
       layoutWidthInPx = downScaledWidthInPx
@@ -263,7 +266,9 @@ class ExoVideoEntity(
       immersiveActivity.systemManager
           .findSystem<SceneObjectSystem>()
           .addSceneObject(
-              entity, CompletableFuture<SceneObject>().apply { complete(panelSceneObject) })
+              entity,
+              CompletableFuture<SceneObject>().apply { complete(panelSceneObject) },
+          )
 
       SurfaceUtil.paintBlack(panelSceneObject.getSurface())
 
@@ -289,19 +294,25 @@ class ExoVideoEntity(
   fun showPlayer(onShowComplete: (() -> Unit)? = null) {
     controlPanelPollHandler.start()
     super.fadeVisibility(
-        true, TIMINGS.EXOPLAYER_FADE_BOTH.millisToFloat(), TweenEquations.Circle_In) {
-          exoPlayer.playWhenReady = true
-          onShowComplete?.invoke()
-        }
+        true,
+        TIMINGS.EXOPLAYER_FADE_BOTH.millisToFloat(),
+        TweenEquations.Circle_In,
+    ) {
+      exoPlayer.playWhenReady = true
+      onShowComplete?.invoke()
+    }
   }
 
   fun hidePlayer(onHideComplete: (() -> Unit)? = null) {
     exoPlayer.pause()
     controlPanelPollHandler.stop()
     super.fadeVisibility(
-        false, TIMINGS.EXOPLAYER_FADE_BOTH.millisToFloat(), TweenEquations.Circle_Out) {
-          onHideComplete?.invoke()
-        }
+        false,
+        TIMINGS.EXOPLAYER_FADE_BOTH.millisToFloat(),
+        TweenEquations.Circle_Out,
+    ) {
+      onHideComplete?.invoke()
+    }
   }
 
   fun destroy() {
@@ -316,5 +327,5 @@ class ExoVideoEntity(
 
 enum class PanelRenderingStyle {
   VIEWS,
-  DIRECT_TO_SURFACE
+  DIRECT_TO_SURFACE,
 }

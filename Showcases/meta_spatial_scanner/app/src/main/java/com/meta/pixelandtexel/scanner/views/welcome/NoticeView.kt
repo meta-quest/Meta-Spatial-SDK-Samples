@@ -30,7 +30,8 @@ fun NoticeView(onLinkClicked: ((String) -> Unit)? = null, onContinue: (() -> Uni
         MarkdownText(
             stringResource(R.string.notice),
             style = SpatialTheme.typography.body1.merge(TextStyle(color = SpatialColor.white100)),
-            onLinkClicked = onLinkClicked)
+            onLinkClicked = onLinkClicked,
+        )
         PrimaryButton(stringResource(R.string.btn_continue), onClick = onContinue, expanded = true)
       }
     }

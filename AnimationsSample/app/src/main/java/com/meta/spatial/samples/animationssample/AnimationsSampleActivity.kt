@@ -69,7 +69,10 @@ class AnimationsSampleActivity : AppSystemActivity() {
     @OptIn(SpatialSDKExperimentalAPI::class)
     val features =
         mutableListOf<SpatialFeature>(
-            VRFeature(this), IsdkFeature(this, spatial, systemManager), PanelAnimationFeature())
+            VRFeature(this),
+            IsdkFeature(this, spatial, systemManager),
+            PanelAnimationFeature(),
+        )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -113,14 +116,16 @@ class AnimationsSampleActivity : AppSystemActivity() {
                 ent.setComponent(
                     PanelQuadCylinderAnimation(
                         startTime = DataModel.getLocalDataModelTime(),
-                        animationType = PanelQuadCylinderAnimationType.CYLINDER_TO_QUAD))
+                        animationType = PanelQuadCylinderAnimationType.CYLINDER_TO_QUAD,
+                    ))
               } else {
                 transformButton.text = "Change to Quad Shape"
                 ent.setComponent(
                     PanelQuadCylinderAnimation(
                         startTime = DataModel.getLocalDataModelTime(),
                         animationType = PanelQuadCylinderAnimationType.QUAD_TO_CYLINDER,
-                        targetRadius = Random.nextFloat() * 2f + 0.5f))
+                        targetRadius = Random.nextFloat() * 2f + 0.5f,
+                    ))
               }
             }
           }
@@ -155,7 +160,8 @@ class AnimationsSampleActivity : AppSystemActivity() {
         ambientColor = Vector3(0f),
         sunColor = Vector3(7.0f, 7.0f, 7.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
     scene.updateIBLEnvironment("environment.env")
 
     scene.setViewOrigin(0.0f, 0.0f, 0.0f, 0.0f)
@@ -167,7 +173,8 @@ class AnimationsSampleActivity : AppSystemActivity() {
               baseTextureAndroidResourceId = R.drawable.skydome
               unlit = true
             },
-            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
+            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
+        ))
   }
 
   private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
@@ -177,7 +184,8 @@ class AnimationsSampleActivity : AppSystemActivity() {
           Uri.parse("apk:///scenes/droneScene.glxf"),
           rootEntity = gltfxEntity!!,
           keyName = GLXF_DRONE_SCENE,
-          onLoaded = onLoaded)
+          onLoaded = onLoaded,
+      )
     }
   }
 

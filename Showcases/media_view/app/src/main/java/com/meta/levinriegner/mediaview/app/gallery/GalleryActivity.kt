@@ -55,7 +55,8 @@ class GalleryActivity : ComponentActivity() {
               Toast.makeText(
                       this@GalleryActivity,
                       event.error ?: getString(R.string.upload_failed_error),
-                      Toast.LENGTH_LONG)
+                      Toast.LENGTH_LONG,
+                  )
                   .show()
             }
           }

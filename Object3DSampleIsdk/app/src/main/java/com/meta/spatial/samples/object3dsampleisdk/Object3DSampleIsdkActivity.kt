@@ -80,9 +80,11 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
             PhysicsFeature(
                 spatial,
                 useGrabbablePhysics = false,
-                worldBounds = PhysicsWorldBounds(minY = -100.0f)),
+                worldBounds = PhysicsWorldBounds(minY = -100.0f),
+            ),
             VRFeature(this),
-            IsdkFeature(this, spatial, systemManager, BuildConfig.DEBUG))
+            IsdkFeature(this, spatial, systemManager, BuildConfig.DEBUG),
+        )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(DataModelInspectorFeature(spatial, this.componentManager))
@@ -130,10 +132,16 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
                   type: Int,
                   sourceOfInput: Entity,
                   scrollInfo: Vector2,
-                  semanticType: Int
+                  semanticType: Int,
               ) {
                 super.onPointerEvent(
-                    receiver, hitInfo, type, sourceOfInput, scrollInfo, semanticType)
+                    receiver,
+                    hitInfo,
+                    type,
+                    sourceOfInput,
+                    scrollInfo,
+                    semanticType,
+                )
 
                 // We only want to process "grab" events
                 if (semanticType != SemanticType.Grab.id) {
@@ -205,7 +213,8 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
         ambientColor = Vector3(0f),
         sunColor = Vector3(7.0f, 7.0f, 7.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
     scene.updateIBLEnvironment("environment.env")
 
     scene.setViewOrigin(0f, 0.0f, 0.0f, 0.0f)
@@ -218,13 +227,15 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
                   baseTextureAndroidResourceId = R.drawable.skydome
                   unlit = true
                 },
-                Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
+                Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
+            ))
 
     Entity.create(
         listOf(
             Panel(R.layout.scrolling),
             Transform(Pose(Vector3(x = -0.3f, y = 1f, z = 0.2f))),
-            Grabbable()))
+            Grabbable(),
+        ))
 
     // uncomment to see the physics debug lines
     // spatial.enablePhysicsDebugLines(true)
@@ -255,7 +266,11 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
             // keep in mind that bounding boxes are centered on the object origin
             setUpButton(button1, robot, dimensions = Vector3(0.11f, 0.21f, 0.08f))
             setUpButton(
-                button2, drone, isAnimated = true, dimensions = Vector3(0.106f, 0.07f, 0.22f))
+                button2,
+                drone,
+                isAnimated = true,
+                dimensions = Vector3(0.106f, 0.07f, 0.22f),
+            )
             setUpButton(button3, plant, dimensions = Vector3(0.09f, 0.09f, 0.09f))
             setUpButton(button4, deskLamp, dimensions = Vector3(0.2f, 0.34f, 0.06f))
             setUpButton(button5, easyChair, dimensions = Vector3(0.3f, 0.34f, 0.3f))
@@ -269,7 +284,8 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
             height = 0.6f
             width = 0.3375f
           }
-        })
+        },
+    )
   }
 
   private fun setUpButton(
@@ -277,7 +293,7 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
       entity: Entity? = null,
       collisionMesh: String = "box",
       isAnimated: Boolean = false,
-      dimensions: Vector3 = Vector3(0.1f, 0.1f, 0.1f)
+      dimensions: Vector3 = Vector3(0.1f, 0.1f, 0.1f),
   ) {
 
     val scale = entity?.getComponent<Scale>() ?: Scale(Vector3(1f, 1f, 1f))
@@ -290,7 +306,8 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
                   listOf(
                       Mesh(
                           mesh = Uri.parse(glb),
-                          defaultShaderOverride = SceneMaterial.PHYSICALLY_BASED_SHADER),
+                          defaultShaderOverride = SceneMaterial.PHYSICALLY_BASED_SHADER,
+                      ),
                       Grabbable(type = GrabbableType.PIVOT_Y),
                       Box(min = dimensions * invScale * -1.0f, max = dimensions * invScale * 1.0f),
                       scale,
@@ -298,9 +315,11 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
                               shape = collisionMesh,
                               density = 0.1f,
                               state = PhysicsState.DYNAMIC,
-                              dimensions = dimensions)
+                              dimensions = dimensions,
+                          )
                           .applyMaterial(PhysicsMaterial.WOOD),
-                      Transform(Pose(Vector3(0f, 1.2f, 2.1f), Quaternion(0f, 180f, 0f)))))
+                      Transform(Pose(Vector3(0f, 1.2f, 2.1f), Quaternion(0f, 180f, 0f))),
+                  ))
 
           scaleUp(objModel, scale.scale)
 
@@ -336,7 +355,8 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          onLoaded = onLoaded)
+          onLoaded = onLoaded,
+      )
     }
   }
 }

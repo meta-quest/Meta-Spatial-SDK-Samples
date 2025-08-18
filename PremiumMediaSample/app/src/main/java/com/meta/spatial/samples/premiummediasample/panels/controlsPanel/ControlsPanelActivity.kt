@@ -75,7 +75,8 @@ class ControlsPanelActivity : ComponentActivity(), IPCMessageHandler {
             ControlsPanelButton("TV") {
               controlsPanelViewModel.updateCinemaState(CinemaState.TV)
               controlsPanelViewModel.passthroughSetInteractable(true)
-            })
+            },
+        )
     val noButtons = listOf<ControlsPanelButton>()
     return when (cinemaState) {
       CinemaState.Cinema -> cinemaAndTV

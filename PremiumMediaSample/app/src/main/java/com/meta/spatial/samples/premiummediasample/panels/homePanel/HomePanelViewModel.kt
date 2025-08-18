@@ -26,7 +26,9 @@ class HomePanelViewModel {
               thumbId = R.drawable.poster_sk8_chickens,
               description =
                   Description(
-                      title = "Sk8 Chickens", description = "Rectilinear Stereoscopic Video"),
+                      title = "Sk8 Chickens",
+                      description = "Rectilinear Stereoscopic Video",
+                  ),
               showInMenu = true,
               media =
                   MediaSource(
@@ -35,14 +37,17 @@ class HomePanelViewModel {
                       mips = 9,
                       videoSource =
                           VideoSource.Url(
-                              "https://dw9dv4drqa1gx.cloudfront.net/DASH_Chickens/SK8_Chickens_3840x1080_Stereo.mpd")),
+                              "https://dw9dv4drqa1gx.cloudfront.net/DASH_Chickens/SK8_Chickens_3840x1080_Stereo.mpd"),
+                  ),
           ),
           HomeItem(
               id = "apoIsland180",
               thumbId = R.drawable.poster_apo_island,
               description =
                   Description(
-                      title = "Apo Island", description = "Equirectangular 180 Stereoscopic Video"),
+                      title = "Apo Island",
+                      description = "Equirectangular 180 Stereoscopic Video",
+                  ),
               showInMenu = true,
               media =
                   MediaSource(
@@ -52,7 +57,8 @@ class HomePanelViewModel {
                       mips = 9,
                       videoSource =
                           VideoSource.Url(
-                              "https://dw9dv4drqa1gx.cloudfront.net/DASH_apo_island/echeng_apo_island_35mbps_vr180.mpd")),
+                              "https://dw9dv4drqa1gx.cloudfront.net/DASH_apo_island/echeng_apo_island_35mbps_vr180.mpd"),
+                  ),
           ),
           HomeItem(
               id = "sintelDRM",
@@ -67,7 +73,9 @@ class HomePanelViewModel {
                       videoSource =
                           VideoSource.Url(
                               "https://storage.googleapis.com/shaka-demo-assets/sintel-widevine/dash.mpd",
-                              "https://cwip-shaka-proxy.appspot.com/no_auth")),
+                              "https://cwip-shaka-proxy.appspot.com/no_auth",
+                          ),
+                  ),
           ),
       )
 

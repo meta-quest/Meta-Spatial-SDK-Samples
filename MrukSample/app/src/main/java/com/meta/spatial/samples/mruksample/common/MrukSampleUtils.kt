@@ -43,7 +43,7 @@ fun getRightController(systemManager: SystemManager): Entity? {
 fun <T> returnTo2DActivity(
     activity: AppSystemActivity,
     applicationContext: Context,
-    class2DActivity: Class<T>
+    class2DActivity: Class<T>,
 ) {
   val panelIntent =
       Intent(applicationContext, class2DActivity).apply {
@@ -56,7 +56,8 @@ fun <T> returnTo2DActivity(
           applicationContext,
           0,
           panelIntent,
-          PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+          PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+      )
 
   // Create and send the Intent to launch the Home environment, providing the
   // PendingIntent object as extra parameters

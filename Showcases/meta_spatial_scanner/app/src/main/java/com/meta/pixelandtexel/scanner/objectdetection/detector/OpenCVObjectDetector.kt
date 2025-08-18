@@ -61,7 +61,8 @@ class OpenCVObjectDetector(context: Context) : IObjectDetectorHelper {
           "sheep",
           "sofa",
           "train",
-          "tvmonitor")
+          "tvmonitor",
+      )
 
   init {
     try {

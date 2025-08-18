@@ -127,7 +127,8 @@ class ImmersiveActivity : BaseMrukActivity(), IPCMessageHandler {
     scene.setLightingEnvironment(
         ambientColor = LIGHT_AMBIENT_COLOR,
         sunColor = LIGHT_SUN_COLOR,
-        sunDirection = LIGHT_SUN_DIRECTION)
+        sunDirection = LIGHT_SUN_DIRECTION,
+    )
 
     immersiveViewModel.initializeEntities(scene)
   }

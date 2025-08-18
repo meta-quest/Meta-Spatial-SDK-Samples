@@ -169,7 +169,8 @@ data class MediaStoreFileDto(
                   MediaStore.Files.getContentUri(
                       cursor.getString(
                           cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.VOLUME_NAME))),
-                  cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID))),
+                  cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)),
+              ),
           albumArtist =
               cursor
                   .getColumnIndex(MediaStore.Audio.AudioColumns.ALBUM_ARTIST)

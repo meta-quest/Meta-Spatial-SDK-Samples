@@ -34,13 +34,13 @@ data class DriveConfig(
 ) {
   fun toJSONString(): String {
     return """
-            {
-                "scopes": "$scopes",
-                "clientId": "$clientId",
-                "apiKey": "$apiKey",
-                "appId": "$appId"
-            }
-        """
+               {
+                   "scopes": "$scopes",
+                   "clientId": "$clientId",
+                   "apiKey": "$apiKey",
+                   "appId": "$appId"
+               }
+           """
         .trimIndent()
   }
 }

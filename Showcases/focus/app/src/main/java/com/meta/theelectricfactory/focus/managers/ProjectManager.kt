@@ -308,7 +308,7 @@ class ProjectManager {
                 project.uuid,
                 AssetType.CLOCK,
                 true,
-                immA?.clock!!.getComponent<Transform>().transform
+                immA?.clock!!.getComponent<Transform>().transform,
             )
 
             immA?.DB?.createUniqueAsset(

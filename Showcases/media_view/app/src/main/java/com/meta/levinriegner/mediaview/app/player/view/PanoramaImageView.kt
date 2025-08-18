@@ -32,5 +32,6 @@ fun PanoramaImageView(
                 )
             .into(imageView)
       },
-      modifier = modifier.fillMaxSize())
+      modifier = modifier.fillMaxSize(),
+  )
 }

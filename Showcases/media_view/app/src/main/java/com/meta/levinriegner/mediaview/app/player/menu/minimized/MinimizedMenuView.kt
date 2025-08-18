@@ -59,23 +59,26 @@ fun MinimizedMenuView(
                 .aspectRatio(1f)
                 .background(
                     Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd)),
-                    shape = CircleShape)
+                    shape = CircleShape,
+                )
                 .border(
                     width = 1.dp,
                     color = AppColor.MetaBlu,
-                    shape = RoundedCornerShape((Dimens.playerMenuButtonSize / 2).dp))
+                    shape = RoundedCornerShape((Dimens.playerMenuButtonSize / 2).dp),
+                )
                 .clickable(
                     indication = null,
                     interactionSource = remember { MutableInteractionSource() },
                 ) {
                   isMenuVisible.value = !isMenuVisible.value
-                }) {
-          Icon(
-              painter = painterResource(id = R.drawable.icon_menu_dots_horizontal),
-              contentDescription = "Menu",
-              tint = AppColor.White,
-          )
-        }
+                },
+    ) {
+      Icon(
+          painter = painterResource(id = R.drawable.icon_menu_dots_horizontal),
+          contentDescription = "Menu",
+          tint = AppColor.White,
+      )
+    }
     Spacer(modifier = Modifier.size(Dimens.small))
     MaterialTheme(shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(16.dp))) {
       DropdownMenu(
@@ -93,13 +96,15 @@ fun MinimizedMenuView(
               (Icon(
                   painter = painterResource(id = R.drawable.icon_immersive_view),
                   contentDescription = null,
-                  modifier = Modifier.size(30.dp)))
+                  modifier = Modifier.size(30.dp),
+              ))
             },
             text = { Text(fontSize = 17.sp, text = "Immersive View") },
             onClick = {
               isMenuVisible.value = false
               onMaximize()
-            })
+            },
+        )
         HorizontalDivider(color = AppColor.White15, thickness = 1.dp)
         DropdownMenuItem(
             leadingIcon = {
@@ -108,12 +113,14 @@ fun MinimizedMenuView(
                       if (!confirmingDelete.value) Icons.Outlined.Delete
                       else Icons.Outlined.AutoDelete,
                   contentDescription = null,
-                  modifier = Modifier.size(30.dp)))
+                  modifier = Modifier.size(30.dp),
+              ))
             },
             text = {
               Text(
                   fontSize = 17.sp,
-                  text = if (!confirmingDelete.value) "Delete" else "Confirm Delete?")
+                  text = if (!confirmingDelete.value) "Delete" else "Confirm Delete?",
+              )
             },
             onClick = {
               if (confirmingDelete.value) {
@@ -122,20 +129,23 @@ fun MinimizedMenuView(
                 Timber.i("Confirming delete")
               }
               confirmingDelete.value = !confirmingDelete.value
-            })
+            },
+        )
         HorizontalDivider(color = AppColor.White15, thickness = 1.dp)
         DropdownMenuItem(
             leadingIcon = {
               (Icon(
                   painter = painterResource(id = R.drawable.icon_close),
                   contentDescription = null,
-                  modifier = Modifier.size(30.dp)))
+                  modifier = Modifier.size(30.dp),
+              ))
             },
             text = { Text(fontSize = 17.sp, text = "Close") },
             onClick = {
               isMenuVisible.value = false
               onClose()
-            })
+            },
+        )
       }
     }
   }

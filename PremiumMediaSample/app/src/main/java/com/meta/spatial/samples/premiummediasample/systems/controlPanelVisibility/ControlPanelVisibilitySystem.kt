@@ -64,7 +64,8 @@ class ControlPanelVisibilitySystem(private val controlsPanel: ControlsPanelEntit
           setControlsVisibility(
               systemManager.findSystem<PointerInfoSystem>().checkHover(controlsPanel.entity) ||
                   !controlsVisible,
-              false)
+              false,
+          )
         }
       }
     }

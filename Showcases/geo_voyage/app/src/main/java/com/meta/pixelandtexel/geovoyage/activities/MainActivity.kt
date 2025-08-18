@@ -174,7 +174,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
               Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
               Material().apply { unlit = true },
               Transform(),
-              Visible(false))
+              Visible(false),
+          )
 
       // this is a workaround for preventing the black panels
       val globeEntity = composition.getNodeByName("earth").entity
@@ -185,7 +186,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
               R.integer.panel_id,
               Transform(),
               Tether(globeEntity, -63f, 15f, 0.9f),
-              Visible(false))
+              Visible(false),
+          )
     }
   }
 
@@ -193,7 +195,10 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
     glxfEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
-          Uri.parse("scenes/Composition.glxf"), rootEntity = glxfEntity!!, keyName = "scene")
+          Uri.parse("scenes/Composition.glxf"),
+          rootEntity = glxfEntity!!,
+          keyName = "scene",
+      )
     }
   }
 
@@ -328,7 +333,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
               Log.w(TAG, "Failed to get panorama bitmap: $reason")
               onFinished(false)
             }
-          })
+          },
+      )
     }
   }
 
@@ -382,13 +388,16 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
     permissionsResultCallback = callback
 
     ActivityCompat.requestPermissions(
-        this, arrayOf(Manifest.permission.RECORD_AUDIO), REQUEST_PERMISSIONS_CODE)
+        this,
+        arrayOf(Manifest.permission.RECORD_AUDIO),
+        REQUEST_PERMISSIONS_CODE,
+    )
   }
 
   override fun onRequestPermissionsResult(
       requestCode: Int,
       permissions: Array<out String>,
-      grantResults: IntArray
+      grantResults: IntArray,
   ) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 

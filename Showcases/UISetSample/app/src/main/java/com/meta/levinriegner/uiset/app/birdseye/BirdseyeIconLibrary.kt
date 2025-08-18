@@ -349,7 +349,8 @@ fun BirdseyeIconLibrary() {
               mapOf("name" to "heart-on", "icon" to SpatialIcons.Regular.HeartOn),
               mapOf(
                   "name" to "friends-request-sent",
-                  "icon" to SpatialIcons.Regular.FriendsRequestSent),
+                  "icon" to SpatialIcons.Regular.FriendsRequestSent,
+              ),
               mapOf("name" to "friends-report", "icon" to SpatialIcons.Regular.FriendsReport),
               mapOf("name" to "friends-kick", "icon" to SpatialIcons.Regular.FriendsKick),
               mapOf("name" to "friends-remove", "icon" to SpatialIcons.Regular.FriendsRemove),
@@ -412,10 +413,13 @@ fun BirdseyeIconLibrary() {
               mapOf("name" to "home-edit", "icon" to SpatialIcons.Regular.HomeEdit),
               mapOf(
                   "name" to "intrusion-detection",
-                  "icon" to SpatialIcons.Regular.IntrusionDetection),
+                  "icon" to SpatialIcons.Regular.IntrusionDetection,
+              ),
               mapOf("name" to "hand cursor", "icon" to SpatialIcons.Regular.HandCursor),
               mapOf(
-                  "name" to "unknown-controller", "icon" to SpatialIcons.Regular.UnknownController),
+                  "name" to "unknown-controller",
+                  "icon" to SpatialIcons.Regular.UnknownController,
+              ),
               mapOf("name" to "unknown-headset", "icon" to SpatialIcons.Regular.UnknownHeadset),
               // mapOf("name" to "upload", "icon" to SpatialIcons.Regular.Upload),
               mapOf("name" to "unknown-sources", "icon" to SpatialIcons.Regular.UnknownSources),
@@ -431,12 +435,16 @@ fun BirdseyeIconLibrary() {
               mapOf("name" to "resize-horizontal", "icon" to SpatialIcons.Regular.ResizeHorizontal),
               mapOf(
                   "name" to "resize-horizontal-down",
-                  "icon" to SpatialIcons.Regular.ResizeHorizontalDown),
+                  "icon" to SpatialIcons.Regular.ResizeHorizontalDown,
+              ),
               mapOf(
-                  "name" to "resize-vertical-up", "icon" to SpatialIcons.Regular.ResizeVerticalUp),
+                  "name" to "resize-vertical-up",
+                  "icon" to SpatialIcons.Regular.ResizeVerticalUp,
+              ),
               mapOf(
                   "name" to "resize-vertical-down",
-                  "icon" to SpatialIcons.Regular.ResizeVerticalDown),
+                  "icon" to SpatialIcons.Regular.ResizeVerticalDown,
+              ),
               mapOf("name" to "play-next-circle", "icon" to SpatialIcons.Regular.PlayNextCircle),
               mapOf("name" to "play-prev", "icon" to SpatialIcons.Regular.PlayPrev),
               mapOf("name" to "play-prev-circle", "icon" to SpatialIcons.Regular.PlayPrevCircle),
@@ -452,7 +460,8 @@ fun BirdseyeIconLibrary() {
               mapOf("name" to "reorient", "icon" to SpatialIcons.Regular.Reorient),
               mapOf(
                   "name" to "concepts (dogfooding)",
-                  "icon" to SpatialIcons.Regular.ConceptsDogfooding),
+                  "icon" to SpatialIcons.Regular.ConceptsDogfooding,
+              ),
               mapOf("name" to "environment", "icon" to SpatialIcons.Regular.Environment),
               mapOf("name" to "events-add", "icon" to SpatialIcons.Regular.EventsAdd),
               mapOf("name" to "events", "icon" to SpatialIcons.Regular.Events),
@@ -473,7 +482,8 @@ fun BirdseyeIconLibrary() {
               mapOf("name" to "comfortable", "icon" to SpatialIcons.Regular.Comfortable),
               mapOf(
                   "name" to "closed-captioning-off",
-                  "icon" to SpatialIcons.Regular.ClosedCaptioningOff),
+                  "icon" to SpatialIcons.Regular.ClosedCaptioningOff,
+              ),
               mapOf("name" to "closed-captioning", "icon" to SpatialIcons.Regular.ClosedCaptioning),
               mapOf("name" to "file", "icon" to SpatialIcons.Regular.File),
               mapOf("name" to "compass", "icon" to SpatialIcons.Regular.Compass),
@@ -535,7 +545,8 @@ fun BirdseyeIconLibrary() {
               mapOf("name" to "night-mode", "icon" to SpatialIcons.Regular.NightMode),
               mapOf(
                   "name" to "microphone-unavailable",
-                  "icon" to SpatialIcons.Regular.MicrophoneUnavailable),
+                  "icon" to SpatialIcons.Regular.MicrophoneUnavailable,
+              ),
               mapOf("name" to "microphone-on", "icon" to SpatialIcons.Regular.MicrophoneOn),
               mapOf("name" to "microphone-off", "icon" to SpatialIcons.Regular.MicrophoneOff),
               mapOf("name" to "password", "icon" to SpatialIcons.Regular.Password),
@@ -546,10 +557,12 @@ fun BirdseyeIconLibrary() {
               mapOf("name" to "moderate", "icon" to SpatialIcons.Regular.Moderate),
               mapOf(
                   "name" to "media-immersive-video",
-                  "icon" to SpatialIcons.Regular.MediaImmersiveVideo),
+                  "icon" to SpatialIcons.Regular.MediaImmersiveVideo,
+              ),
               mapOf(
                   "name" to "media-immersive-photo",
-                  "icon" to SpatialIcons.Regular.MediaImmersivePhoto),
+                  "icon" to SpatialIcons.Regular.MediaImmersivePhoto,
+              ),
               mapOf("name" to "media-3d-horiz", "icon" to SpatialIcons.Regular.Media3dHoriz),
               mapOf("name" to "media-3d-vert", "icon" to SpatialIcons.Regular.Media3dVert),
               mapOf("name" to "media-360", "icon" to SpatialIcons.Regular.Media360),
@@ -574,7 +587,9 @@ fun BirdseyeIconLibrary() {
               mapOf("name" to "arrows-up-down", "icon" to SpatialIcons.Regular.ArrowsUpDown),
               mapOf("name" to "arrows-left-right", "icon" to SpatialIcons.Regular.ArrowsLeftRight),
               mapOf(
-                  "name" to "arrow-right-circle", "icon" to SpatialIcons.Regular.ArrowRightCircle),
+                  "name" to "arrow-right-circle",
+                  "icon" to SpatialIcons.Regular.ArrowRightCircle,
+              ),
               mapOf("name" to "arrow-left-circle", "icon" to SpatialIcons.Regular.ArrowLeftCircle),
               mapOf("name" to "arrow-up-circle", "icon" to SpatialIcons.Regular.ArrowUpCircle),
               mapOf("name" to "arrow-down-circle", "icon" to SpatialIcons.Regular.ArrowDownCircle),
@@ -604,7 +619,8 @@ fun BirdseyeIconLibrary() {
             "For optimal sizing, small icons should not exceed 32px, while large icons can start at size 33px and above.",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground))
+                    color = LocalColorScheme.current.primaryAlphaBackground),
+        )
       }
       Spacer(modifier = Modifier.height(20.dp))
       Row(modifier = Modifier.background(SpatialTheme.colorScheme.hover).fillMaxWidth()) {
@@ -614,13 +630,15 @@ fun BirdseyeIconLibrary() {
               "  Component",
               style =
                   LocalTypography.current.headline1Strong.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground))
+                      color = LocalColorScheme.current.primaryAlphaBackground),
+          )
           Spacer(modifier = Modifier.height(20.dp))
           Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
             Icon(
                 imageVector = SpatialIcons.Regular.Redo,
                 "",
-                tint = LocalColorScheme.current.primaryAlphaBackground)
+                tint = LocalColorScheme.current.primaryAlphaBackground,
+            )
           }
           Spacer(modifier = Modifier.height(20.dp))
         }
@@ -632,28 +650,32 @@ fun BirdseyeIconLibrary() {
             Row(
                 modifier = Modifier.height(60.dp).fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween) {
-                  Box(modifier = Modifier.width(200.dp)) {
-                    Text(
-                        icon["name"] as String,
-                        style =
-                            LocalTypography.current.body1.copy(
-                                color = LocalColorScheme.current.primaryAlphaBackground))
-                  }
-                  Box(modifier = Modifier.size(dimensionResource(R.dimen.button_icon_size))) {
-                    Icon(
-                        imageVector = icon["icon"] as ImageVector,
-                        "",
-                        tint = LocalColorScheme.current.primaryAlphaBackground)
-                  }
-                  Box(modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size))) {
-                    Icon(
-                        imageVector = icon["icon"] as ImageVector,
-                        "",
-                        tint = LocalColorScheme.current.primaryAlphaBackground,
-                        modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size)))
-                  }
-                }
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+              Box(modifier = Modifier.width(200.dp)) {
+                Text(
+                    icon["name"] as String,
+                    style =
+                        LocalTypography.current.body1.copy(
+                            color = LocalColorScheme.current.primaryAlphaBackground),
+                )
+              }
+              Box(modifier = Modifier.size(dimensionResource(R.dimen.button_icon_size))) {
+                Icon(
+                    imageVector = icon["icon"] as ImageVector,
+                    "",
+                    tint = LocalColorScheme.current.primaryAlphaBackground,
+                )
+              }
+              Box(modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size))) {
+                Icon(
+                    imageVector = icon["icon"] as ImageVector,
+                    "",
+                    tint = LocalColorScheme.current.primaryAlphaBackground,
+                    modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size)),
+                )
+              }
+            }
           }
         }
         VerticalDivider()
@@ -662,28 +684,32 @@ fun BirdseyeIconLibrary() {
             Row(
                 modifier = Modifier.height(60.dp).fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween) {
-                  Box(modifier = Modifier.width(200.dp)) {
-                    Text(
-                        icon["name"] as String,
-                        style =
-                            LocalTypography.current.body1.copy(
-                                color = LocalColorScheme.current.primaryAlphaBackground))
-                  }
-                  Box(modifier = Modifier.size(dimensionResource(R.dimen.button_icon_size))) {
-                    Icon(
-                        imageVector = icon["icon"] as ImageVector,
-                        "",
-                        tint = LocalColorScheme.current.primaryAlphaBackground)
-                  }
-                  Box(modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size))) {
-                    Icon(
-                        imageVector = icon["icon"] as ImageVector,
-                        "",
-                        tint = LocalColorScheme.current.primaryAlphaBackground,
-                        modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size)))
-                  }
-                }
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+              Box(modifier = Modifier.width(200.dp)) {
+                Text(
+                    icon["name"] as String,
+                    style =
+                        LocalTypography.current.body1.copy(
+                            color = LocalColorScheme.current.primaryAlphaBackground),
+                )
+              }
+              Box(modifier = Modifier.size(dimensionResource(R.dimen.button_icon_size))) {
+                Icon(
+                    imageVector = icon["icon"] as ImageVector,
+                    "",
+                    tint = LocalColorScheme.current.primaryAlphaBackground,
+                )
+              }
+              Box(modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size))) {
+                Icon(
+                    imageVector = icon["icon"] as ImageVector,
+                    "",
+                    tint = LocalColorScheme.current.primaryAlphaBackground,
+                    modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size)),
+                )
+              }
+            }
           }
         }
         VerticalDivider()
@@ -692,28 +718,32 @@ fun BirdseyeIconLibrary() {
             Row(
                 modifier = Modifier.height(60.dp).fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween) {
-                  Box(modifier = Modifier.width(200.dp)) {
-                    Text(
-                        icon["name"] as String,
-                        style =
-                            LocalTypography.current.body1.copy(
-                                color = LocalColorScheme.current.primaryAlphaBackground))
-                  }
-                  Box(modifier = Modifier.size(dimensionResource(R.dimen.button_icon_size))) {
-                    Icon(
-                        imageVector = icon["icon"] as ImageVector,
-                        "",
-                        tint = LocalColorScheme.current.primaryAlphaBackground)
-                  }
-                  Box(modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size))) {
-                    Icon(
-                        imageVector = icon["icon"] as ImageVector,
-                        "",
-                        tint = LocalColorScheme.current.primaryAlphaBackground,
-                        modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size)))
-                  }
-                }
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+              Box(modifier = Modifier.width(200.dp)) {
+                Text(
+                    icon["name"] as String,
+                    style =
+                        LocalTypography.current.body1.copy(
+                            color = LocalColorScheme.current.primaryAlphaBackground),
+                )
+              }
+              Box(modifier = Modifier.size(dimensionResource(R.dimen.button_icon_size))) {
+                Icon(
+                    imageVector = icon["icon"] as ImageVector,
+                    "",
+                    tint = LocalColorScheme.current.primaryAlphaBackground,
+                )
+              }
+              Box(modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size))) {
+                Icon(
+                    imageVector = icon["icon"] as ImageVector,
+                    "",
+                    tint = LocalColorScheme.current.primaryAlphaBackground,
+                    modifier = Modifier.size(dimensionResource(R.dimen.dialog_icon_size)),
+                )
+              }
+            }
           }
         }
       }

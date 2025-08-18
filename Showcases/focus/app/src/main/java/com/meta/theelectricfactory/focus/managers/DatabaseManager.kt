@@ -243,7 +243,8 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
             PROJECTS_TABLE,
             values,
             "$PROJECT_UUID=?",
-            arrayOf(ProjectManager.instance.currentProject?.uuid.toString()))
+            arrayOf(ProjectManager.instance.currentProject?.uuid.toString()),
+        )
         db.close()
     }
 
@@ -263,7 +264,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
         projectUUID: Int?,
         type: AssetType,
         state: Boolean,
-        position: Pose
+        position: Pose,
     ) {
         val db = writableDatabase
         val values =
@@ -320,7 +321,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
         source: String,
         size: Float,
         deleteHeight: Float,
-        position: Pose
+        position: Pose,
     ) {
         val db = writableDatabase
         val values =
@@ -456,7 +457,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
         projectUUID: Int?,
         color: StickyColor,
         message: String,
-        position: Pose
+        position: Pose,
     ) {
         val db = writableDatabase
         val values =
@@ -507,7 +508,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
         title: String,
         body: String,
         state: Int,
-        priority: Int
+        priority: Int,
     ) {
         val db = writableDatabase
         val values =
@@ -544,7 +545,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
         body: String? = null,
         state: Int? = null,
         priority: Int? = null,
-        detach: Int? = null
+        detach: Int? = null,
     ) {
         val db = writableDatabase
         val values =

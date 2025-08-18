@@ -92,7 +92,8 @@ class LiveStreamingActivity :
         ambientColor = Vector3(0f),
         sunColor = Vector3(0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.2f)
+        environmentIntensity = 0.2f,
+    )
     scene.updateIBLEnvironment("museum_lobby.env")
 
     scene.setViewOrigin(0.0f, 0.0f, 0.0f, 180.0f)
@@ -105,7 +106,8 @@ class LiveStreamingActivity :
         Entity.createPanelEntity(
             R.integer.video_streaming_panel_id,
             Transform(Pose(Vector3(0f, 1.4f, -1.5f), Quaternion(0f, 180f, 0f))),
-            Grabbable(type = GrabbableType.PIVOT_Y))
+            Grabbable(type = GrabbableType.PIVOT_Y),
+        )
   }
 
   override fun registerPanels(): List<PanelRegistration> {
@@ -157,7 +159,8 @@ class LiveStreamingActivity :
                       // handle surface destroyed; stop current session
 
                       stopCamera()
-                    })
+                    },
+                )
 
             setContent { LiveStreamingScreen(liveStreamingViewModel) }
           }
@@ -172,7 +175,8 @@ class LiveStreamingActivity :
               listOfNotNull(
                   if (::cameraViewSurfaceProvider.isInitialized) cameraViewSurfaceProvider
                   else null),
-          imageAvailableListener = this)
+          imageAvailableListener = this,
+      )
       return
     }
 
@@ -322,7 +326,7 @@ class LiveStreamingActivity :
   override fun onRequestPermissionsResult(
       requestCode: Int,
       permissions: Array<out String>,
-      grantResults: IntArray
+      grantResults: IntArray,
   ) {
     super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 

@@ -32,7 +32,7 @@ class Tool(
     var uuid: Int = -1,
     var pose: Pose = Pose(),
     var deleteButtonHeight: Float = 0.08f,
-    var parentUuid: Int = -1
+    var parentUuid: Int = -1,
 ) {
     val immA = ImmersiveActivity.getInstance()
 
@@ -48,7 +48,8 @@ class Tool(
                     Scale(Vector3(size)),
                     Grabbable(true, GrabbableType.PIVOT_Y),
                     Transform(pose),
-                    Animated(System.currentTimeMillis()))
+                    Animated(System.currentTimeMillis()),
+                )
             // The rest of the tools are all 2D
         } else {
             obj =
@@ -62,7 +63,8 @@ class Tool(
                         unlit = true
                     },
                     Grabbable(true, GrabbableType.PIVOT_Y),
-                    Transform(pose))
+                    Transform(pose),
+                )
         }
 
         // We add a listener to show delete button when entity is selected
@@ -92,7 +94,7 @@ class Tool(
                 source,
                 size,
                 deleteButtonHeight,
-                obj.getComponent<Transform>().transform
+                obj.getComponent<Transform>().transform,
             )
             AudioManager.instance.playCreationSound(obj.getComponent<Transform>().transform.t)
         }

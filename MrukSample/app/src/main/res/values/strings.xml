@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <string-array
+    name="raycast_type_array"
+    description="Options for raycast type selection in the UI"
+  >
+    <item description="Option to raycast to scene objects">Scene</item>
+    <item description="Option to raycast to global mesh">Global Mesh</item>
+    <item description="Option to raycast to depth buffer">Depth</item>
+  </string-array>
+</resources>

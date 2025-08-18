@@ -66,7 +66,8 @@ object QueryLlamaService {
             val newURL = (newValue as PreferenceValue.StringValue).value
             ollamaRequestBuilder = Request.Builder().url("${newURL}/api/generate")
           }
-        })
+        },
+    )
 
     // AWS Bedrock querying setup
 
@@ -89,7 +90,7 @@ object QueryLlamaService {
       query: String,
       creativity: Float = .1f, // temperature
       diversity: Float = .9f, // top_p
-      handler: IQueryLlamaServiceHandler
+      handler: IQueryLlamaServiceHandler,
   ) {
     if (queryTemplate.isNullOrEmpty()) {
       throw Exception("Llama query template not created")
@@ -113,7 +114,7 @@ object QueryLlamaService {
       query: String,
       temp: Float,
       top_p: Float,
-      handler: IQueryLlamaServiceHandler
+      handler: IQueryLlamaServiceHandler,
   ) {
     /** Perform the network request in a background thread */
     thread {
@@ -182,7 +183,7 @@ object QueryLlamaService {
       query: String,
       temp: Float,
       top_p: Float,
-      handler: IQueryLlamaServiceHandler
+      handler: IQueryLlamaServiceHandler,
   ) {
     thread {
       runBlocking {

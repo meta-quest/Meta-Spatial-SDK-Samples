@@ -69,7 +69,7 @@ object GoogleTilesService {
 
   suspend fun getPanoramaDataAt(
       coords: GeoCoordinates,
-      radius: Int = 100000 // 100 km
+      radius: Int = 100000, // 100 km
   ): PanoMetadata? {
     try {
       // get our session if we don't have one
@@ -215,7 +215,7 @@ object GoogleTilesService {
 
   private suspend fun getPanoMetadataAt(
       coords: GeoCoordinates,
-      radius: Int = 10000
+      radius: Int = 10000,
   ): PanoMetadata? {
     return withContext(Dispatchers.IO) {
       try {
@@ -289,7 +289,7 @@ object GoogleTilesService {
       tileWidth: Int,
       tileHeight: Int,
       numTilesXf: Float,
-      numTilesYf: Float
+      numTilesYf: Float,
   ): Bitmap {
     val fullWidth = (numTilesXf * tileWidth).toInt()
     val fullHeight = (numTilesYf * tileHeight).toInt()

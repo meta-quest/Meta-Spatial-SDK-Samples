@@ -40,7 +40,7 @@ data class CuratedObject(
     val name: String,
     val matchingLabels: List<String>,
     val ui: List<PanelContentBase>,
-    val order: Int
+    val order: Int,
 ) {
   var meshEntity: Entity? = null
   var meshBounds: Bound3D? = null
@@ -53,20 +53,20 @@ data class CuratedObject(
 enum class PanelContentType {
   UNKNOWN,
   TILES,
-  IMAGE_COPY
+  IMAGE_COPY,
 }
 
 abstract class PanelContentBase(
     val title: String,
     val layoutType: PanelContentType,
-    val animationTrack: Int? = null
+    val animationTrack: Int? = null,
 )
 
 class ImageCopyPanelContent(
     title: String,
     animationTrack: Int?,
     val imageResId: Int? = null,
-    val copy: String? = null
+    val copy: String? = null,
 ) : PanelContentBase(title, PanelContentType.IMAGE_COPY, animationTrack)
 
 class TilesPanelContent(title: String, animationTrack: Int?, val tiles: List<TileContent>) :

@@ -21,7 +21,7 @@ class AnalogScalableSystem(
     private val pointerSystem: PointerInfoSystem,
     private var minScale: Float = 0.5f,
     private var maxScale: Float = 5f,
-    private var globalScaleSpeed: Float = 1f
+    private var globalScaleSpeed: Float = 1f,
 ) : SystemBase() {
 
   private var lastTime = System.currentTimeMillis()

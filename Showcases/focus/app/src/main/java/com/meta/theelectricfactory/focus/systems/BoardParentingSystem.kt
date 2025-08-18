@@ -127,7 +127,7 @@ class BoardParentingSystem : SystemBase() {
         v1: Vector3,
         v2: Vector3,
         v3: Vector3,
-        v4: Vector3
+        v4: Vector3,
     ): Float {
         // Calculate two edges of the rectangle
         val edge1 = v2.minus(v1)
@@ -166,7 +166,8 @@ class BoardParentingSystem : SystemBase() {
                     pointToLineSegmentDistance(point, v1, v2),
                     pointToLineSegmentDistance(point, v2, v3),
                     pointToLineSegmentDistance(point, v3, v4),
-                    pointToLineSegmentDistance(point, v4, v1))
+                    pointToLineSegmentDistance(point, v4, v1),
+                )
             distances.minOrNull() ?: 0f
         }
     }

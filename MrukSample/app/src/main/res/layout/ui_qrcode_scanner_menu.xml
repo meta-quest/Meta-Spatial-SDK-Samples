@@ -10,21 +10,30 @@
     android:id="@+id/mruk_title"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="16dp"
     android:text="QR Code Tracker Sample"
     android:textSize="30sp"
     android:textStyle="bold"
     android:gravity="center"
-    android:layout_margin="16dp"
   />
 
   <TextView
     android:id="@+id/explain_text"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="This sample shows how to track QR codes. Scan a QR code containing a website link, and a web view will open. This feature is still experimental make sure to enable it with `adb shell setprop debug.oculus.experimentalEnabled 1`."
+    android:layout_margin="16dp"
+    android:text="Scan QR codes with website links to display the website over the code. This experimental feature requires: adb shell setprop debug.oculus.experimentalEnabled 1"
     android:textSize="24sp"
     android:gravity="center"
-    android:layout_margin="16dp"
+  />
+
+  <Button
+    android:id="@+id/start_stop_tracker"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:layout_margin="5dp"
+    android:background="@android:color/white"
+    android:text="PLACEHOLDER"
   />
 
   <Button

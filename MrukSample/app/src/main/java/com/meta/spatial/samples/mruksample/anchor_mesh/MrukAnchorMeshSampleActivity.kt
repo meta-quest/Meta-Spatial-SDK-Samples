@@ -17,13 +17,9 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.TextView
-import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
-import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
-import com.meta.spatial.debugtools.HotReloadFeature
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.mruk.AnchorMeshSpawner
 import com.meta.spatial.mruk.AnchorProceduralMesh
 import com.meta.spatial.mruk.AnchorProceduralMeshConfig
@@ -33,13 +29,8 @@ import com.meta.spatial.mruk.MRUKLabel
 import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.mruk.MRUKRoom
 import com.meta.spatial.mruk.MRUKSceneEventListener
-import com.meta.spatial.okhttp3.OkHttpAssetFetcher
-import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
-import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.runtime.LayerConfig
-import com.meta.spatial.runtime.NetworkedAssetLoader
-import com.meta.spatial.samples.mruksample.BuildConfig
 import com.meta.spatial.samples.mruksample.MrukSampleStartMenuActivity
 import com.meta.spatial.samples.mruksample.R
 import com.meta.spatial.samples.mruksample.common.MrukInputSystem
@@ -81,19 +72,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
     // MRUKFeature the PhysicsFeature gets enabled as well. This is needed for having the physics
     // colliders on the AnchorProceduralMesh working.
     mrukFeature = MRUKFeature(this, systemManager)
-    val features =
-        mutableListOf(
-            VRFeature(this),
-            PhysicsFeature(spatial),
-            IsdkFeature(this, spatial, systemManager),
-            mrukFeature)
-    if (BuildConfig.DEBUG) {
-      features.add(CastInputForwardFeature(this))
-      features.add(HotReloadFeature(this))
-      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
-      features.add(DataModelInspectorFeature(spatial, this.componentManager))
-    }
-    return features
+    return listOf(VRFeature(this), PhysicsFeature(spatial), mrukFeature)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,10 +113,12 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
                             "Furniture/Plant1.glb",
                             "Furniture/Plant2.glb",
                             "Furniture/Plant3.glb",
-                            "Furniture/Plant4.glb")),
+                            "Furniture/Plant4.glb",
+                        )),
                 MRUKLabel.WALL_ART to
                     AnchorMeshSpawner.AnchorMeshGroup(listOf("Furniture/WallArt.glb")),
-            ))
+            ),
+        )
 
     // Setup the AnchorProceduralMesh. The AnchorProceduralMesh will generate meshes in place of
     // scene anchors. For example floor, ceiling, and walls.
@@ -160,9 +141,9 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
                 MRUKLabel.BED to AnchorProceduralMeshConfig(null, true),
                 MRUKLabel.FLOOR to AnchorProceduralMeshConfig(floorMaterial, true),
                 MRUKLabel.WALL_FACE to AnchorProceduralMeshConfig(wallMaterial, true),
-                MRUKLabel.CEILING to AnchorProceduralMeshConfig(wallMaterial, true)))
-
-    NetworkedAssetLoader.init(File(applicationContext.cacheDir.canonicalPath), OkHttpAssetFetcher())
+                MRUKLabel.CEILING to AnchorProceduralMeshConfig(wallMaterial, true),
+            ),
+        )
 
     mrukFeature.addSceneEventListener(this)
 
@@ -218,7 +199,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
   override fun onRequestPermissionsResult(
       requestCode: Int,
       permissions: Array<out String>,
-      grantResults: IntArray
+      grantResults: IntArray,
   ) {
     if (requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
         permissions.size == 1 &&
@@ -240,10 +221,16 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
         ambientColor = Vector3(0.2f),
         sunColor = Vector3(1.0f, 1.0f, 1.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
 
     Entity.createPanelEntity(
-        panelId, R.layout.ui_anchor_mesh_menu, Transform(), Visible(showUiPanel), Grabbable())
+        panelId,
+        R.layout.ui_anchor_mesh_menu,
+        Transform(),
+        Visible(showUiPanel),
+        Grabbable(),
+    )
   }
 
   override fun onSpatialShutdown() {
@@ -315,7 +302,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
       globalMeshSpawner =
           AnchorProceduralMesh(
               mrukFeature,
-              mapOf(MRUKLabel.GLOBAL_MESH to AnchorProceduralMeshConfig(wallMaterial, false)))
+              mapOf(MRUKLabel.GLOBAL_MESH to AnchorProceduralMeshConfig(wallMaterial, false)),
+          )
     } else {
       globalMeshSpawner?.destroy()
       globalMeshSpawner = null
@@ -377,7 +365,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
             ArrayAdapter.createFromResource(
                     rootView?.context!!,
                     R.array.json_rooms_array,
-                    android.R.layout.simple_spinner_item)
+                    android.R.layout.simple_spinner_item,
+                )
                 .also { adapter ->
                   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                   jsonFileSpinner.adapter = adapter
@@ -419,7 +408,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
                   PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(
                     arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE)
+                    REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE,
+                )
               } else {
                 val fileName = "scene_${UUID.randomUUID()}.json"
                 writeStringToFile(applicationContext, fileName, mrukFeature.saveSceneToJsonString())
@@ -431,7 +421,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
               returnTo2DActivity(
                   this@MrukAnchorMeshSampleActivity,
                   applicationContext,
-                  MrukSampleStartMenuActivity::class.java)
+                  MrukSampleStartMenuActivity::class.java,
+              )
             }
           }
         })

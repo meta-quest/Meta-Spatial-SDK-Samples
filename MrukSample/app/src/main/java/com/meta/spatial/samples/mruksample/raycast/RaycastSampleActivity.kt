@@ -10,21 +10,21 @@ package com.meta.spatial.samples.mruksample.raycast
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.Spinner
 import android.widget.TextView
-import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.core.Vector4
-import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
-import com.meta.spatial.debugtools.HotReloadFeature
 import com.meta.spatial.mruk.AnchorProceduralMesh
 import com.meta.spatial.mruk.AnchorProceduralMeshConfig
 import com.meta.spatial.mruk.MRUKAnchorTexCoordMode
@@ -32,10 +32,9 @@ import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKLabel
 import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.mruk.MRUKSpawnMode
+import com.meta.spatial.mruk.MRUKStartEnvrionmentRaycasterResult
 import com.meta.spatial.mruk.MRUKWallTexCoordModeU
 import com.meta.spatial.mruk.MRUKWallTexCoordModeV
-import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
-import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.runtime.BlendMode
 import com.meta.spatial.runtime.DepthWrite
@@ -44,7 +43,6 @@ import com.meta.spatial.runtime.MaterialSidedness
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneMaterialAttribute
 import com.meta.spatial.runtime.SceneMaterialDataType
-import com.meta.spatial.samples.mruksample.BuildConfig
 import com.meta.spatial.samples.mruksample.MrukSampleStartMenuActivity
 import com.meta.spatial.samples.mruksample.R
 import com.meta.spatial.samples.mruksample.common.MrukInputSystem
@@ -83,14 +81,7 @@ class RaycastSampleActivity : AppSystemActivity() {
 
   override fun registerFeatures(): List<SpatialFeature> {
     mrukFeature = MRUKFeature(this, systemManager)
-    val features = mutableListOf(VRFeature(this), PhysicsFeature(spatial), mrukFeature)
-    if (BuildConfig.DEBUG) {
-      features.add(CastInputForwardFeature(this))
-      features.add(HotReloadFeature(this))
-      features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
-      features.add(DataModelInspectorFeature(spatial, this.componentManager))
-    }
-    return features
+    return listOf(VRFeature(this), PhysicsFeature(spatial), mrukFeature)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -117,21 +108,37 @@ class RaycastSampleActivity : AppSystemActivity() {
                     SceneMaterialAttribute("albedoUVTransformM00", SceneMaterialDataType.Vector4),
                     SceneMaterialAttribute("albedoUVTransformM10", SceneMaterialDataType.Vector4),
                     SceneMaterialAttribute(
-                        "roughnessMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "roughnessMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "roughnessMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "roughnessMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "emissiveMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "emissiveMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "emissiveMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "emissiveMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "occlusionMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "occlusionMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "occlusionMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "occlusionMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "normalMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "normalMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "normalMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "normalMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                 ),
             )
             .apply {
@@ -149,6 +156,13 @@ class RaycastSampleActivity : AppSystemActivity() {
       requestPermissions(arrayOf(PERMISSION_USE_SCENE), REQUEST_CODE_PERMISSION_USE_SCENE)
     } else {
       loadScene(true)
+
+      val result = mrukFeature.startEnvironmentRaycaster()
+      if (result == MRUKStartEnvrionmentRaycasterResult.SUCCESS) {
+        Log.i(TAG, "Environment raycaster started sucessfully")
+      } else {
+        Log.e(TAG, "Environment raycaster failed to start: $result")
+      }
     }
   }
 
@@ -159,10 +173,16 @@ class RaycastSampleActivity : AppSystemActivity() {
         ambientColor = Vector3(0.2f),
         sunColor = Vector3(1.0f, 1.0f, 1.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
 
     Entity.createPanelEntity(
-        panelId, R.layout.ui_raycast_menu, Transform(), Visible(showUiPanel), Grabbable())
+        panelId,
+        R.layout.ui_raycast_menu,
+        Transform(),
+        Visible(showUiPanel),
+        Grabbable(),
+    )
   }
 
   private fun setProcMeshVisibility(visible: Boolean) {
@@ -183,7 +203,8 @@ class RaycastSampleActivity : AppSystemActivity() {
                   MRUKLabel.BED to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
                   MRUKLabel.FLOOR to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
                   MRUKLabel.WALL_FACE to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
-                  MRUKLabel.CEILING to AnchorProceduralMeshConfig(roomOutlineMaterial, true)),
+                  MRUKLabel.CEILING to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+              ),
               MRUKSpawnMode.CURRENT_ROOM_ONLY,
               MRUKWallTexCoordModeU.STRETCH_SECTION,
               MRUKWallTexCoordModeV.STRETCH,
@@ -201,7 +222,8 @@ class RaycastSampleActivity : AppSystemActivity() {
       globalMeshSpawner =
           AnchorProceduralMesh(
               mrukFeature,
-              mapOf(MRUKLabel.GLOBAL_MESH to AnchorProceduralMeshConfig(wallMaterial, false)))
+              mapOf(MRUKLabel.GLOBAL_MESH to AnchorProceduralMeshConfig(wallMaterial, false)),
+          )
     }
   }
 
@@ -226,7 +248,8 @@ class RaycastSampleActivity : AppSystemActivity() {
             ArrayAdapter.createFromResource(
                     rootView?.context!!,
                     R.array.json_rooms_array,
-                    android.R.layout.simple_spinner_item)
+                    android.R.layout.simple_spinner_item,
+                )
                 .also { adapter ->
                   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                   jsonFileSpinner.adapter = adapter
@@ -242,7 +265,7 @@ class RaycastSampleActivity : AppSystemActivity() {
               }
             }
 
-            rootView?.findViewById<TextView>(R.id.mruk_sample_description)?.text = sampleDescription
+            rootView?.findViewById<TextView>(R.id.mruksample_description)?.text = sampleDescription
 
             val loadSceneFromDeviceButton =
                 rootView?.findViewById<Button>(R.id.load_scene_from_device)
@@ -255,14 +278,77 @@ class RaycastSampleActivity : AppSystemActivity() {
               }
             }
 
-            val allHitsRadioButton = rootView?.findViewById<RadioButton>(R.id.raycast_hits_all)
-            allHitsRadioButton?.setOnCheckedChangeListener { _, isChecked ->
-              updateRaycastSystem.showAllHits = isChecked
+            // Set up the raycast type spinner
+            val raycastTypeSpinner = rootView?.findViewById<Spinner>(R.id.raycast_type_spinner)
+            val context = rootView?.context
+            if (context != null) {
+              val adapter =
+                  ArrayAdapter.createFromResource(
+                      context,
+                      R.array.raycast_type_array,
+                      android.R.layout.simple_spinner_item,
+                  )
+              adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+              raycastTypeSpinner?.adapter = adapter
             }
 
+            // Get references to scene options container and radio buttons
+            val sceneOptionsContainer =
+                rootView?.findViewById<LinearLayout>(R.id.scene_options_container)
+            val allHitsRadioButton = rootView?.findViewById<RadioButton>(R.id.raycast_hits_all)
             val singleHitRadioButton = rootView?.findViewById<RadioButton>(R.id.raycast_hits_single)
+
+            // Set default selection to "Scene" and "First Only"
+            raycastTypeSpinner?.setSelection(RAYCAST_TYPE_SCENE)
+            singleHitRadioButton?.isChecked = true
+            updateRaycastSystem.raycastMode = RaycastMode.SINGLE
+
+            // Handle spinner selection changes
+            raycastTypeSpinner?.onItemSelectedListener =
+                object : AdapterView.OnItemSelectedListener {
+                  override fun onItemSelected(
+                      parent: AdapterView<*>?,
+                      view: View?,
+                      position: Int,
+                      id: Long,
+                  ) {
+                    when (position) {
+                      RAYCAST_TYPE_SCENE -> {
+                        sceneOptionsContainer?.visibility = View.VISIBLE
+                        // Apply the current radio button selection
+                        if (allHitsRadioButton?.isChecked == true) {
+                          updateRaycastSystem.raycastMode = RaycastMode.ALL
+                        } else {
+                          updateRaycastSystem.raycastMode = RaycastMode.SINGLE
+                        }
+                      }
+                      RAYCAST_TYPE_GLOBAL_MESH -> {
+                        sceneOptionsContainer?.visibility = View.GONE
+                        updateRaycastSystem.raycastMode = RaycastMode.GLOBAL_MESH
+                      }
+                      RAYCAST_TYPE_DEPTH -> {
+                        sceneOptionsContainer?.visibility = View.GONE
+                        updateRaycastSystem.raycastMode = RaycastMode.DEPTH
+                      }
+                    }
+                  }
+
+                  override fun onNothingSelected(parent: AdapterView<*>?) {
+                    // Do nothing
+                  }
+                }
+
+            // Handle radio button changes
+            allHitsRadioButton?.setOnCheckedChangeListener { _, isChecked ->
+              if (isChecked && raycastTypeSpinner?.selectedItemPosition == RAYCAST_TYPE_SCENE) {
+                updateRaycastSystem.raycastMode = RaycastMode.ALL
+              }
+            }
+
             singleHitRadioButton?.setOnCheckedChangeListener { _, isChecked ->
-              updateRaycastSystem.showAllHits = !isChecked
+              if (isChecked && raycastTypeSpinner?.selectedItemPosition == RAYCAST_TYPE_SCENE) {
+                updateRaycastSystem.raycastMode = RaycastMode.SINGLE
+              }
             }
 
             val checkBoxSceneObjects = rootView?.findViewById<CheckBox>(R.id.checkbox_scene_objects)
@@ -283,7 +369,8 @@ class RaycastSampleActivity : AppSystemActivity() {
               returnTo2DActivity(
                   this@RaycastSampleActivity,
                   applicationContext,
-                  MrukSampleStartMenuActivity::class.java)
+                  MrukSampleStartMenuActivity::class.java,
+              )
             }
           }
         })
@@ -292,7 +379,7 @@ class RaycastSampleActivity : AppSystemActivity() {
   override fun onRequestPermissionsResult(
       requestCode: Int,
       permissions: Array<out String>,
-      grantResults: IntArray
+      grantResults: IntArray,
   ) {
     if (requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
         permissions.size == 1 &&
@@ -304,6 +391,13 @@ class RaycastSampleActivity : AppSystemActivity() {
         Log.i(TAG, "Use scene permission was DENIED!")
       }
       loadScene(granted)
+
+      val result = mrukFeature.startEnvironmentRaycaster()
+      if (result == MRUKStartEnvrionmentRaycasterResult.SUCCESS) {
+        Log.i(TAG, "Environment raycaster started sucessfully")
+      } else {
+        Log.e(TAG, "Environment raycaster failed to start: $result")
+      }
     }
   }
 
@@ -345,6 +439,7 @@ class RaycastSampleActivity : AppSystemActivity() {
 
   override fun onSpatialShutdown() {
     procMeshSpawner?.destroy()
+    mrukFeature.stopEnvironmentRaycaster()
 
     super.onSpatialShutdown()
   }
@@ -390,5 +485,10 @@ class RaycastSampleActivity : AppSystemActivity() {
     const val TAG: String = "MrukRaycastSample"
     const val PERMISSION_USE_SCENE: String = "com.oculus.permission.USE_SCENE"
     const val REQUEST_CODE_PERMISSION_USE_SCENE: Int = 1
+
+    // Raycast type spinner position constants
+    const val RAYCAST_TYPE_SCENE: Int = 0
+    const val RAYCAST_TYPE_GLOBAL_MESH: Int = 1
+    const val RAYCAST_TYPE_DEPTH: Int = 2
   }
 }

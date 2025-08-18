@@ -82,7 +82,8 @@ class OnboardingActivity : ComponentActivity() {
                     .border(
                         width = 1.dp,
                         color = AppColor.MetaBlu,
-                        shape = RoundedCornerShape(Dimens.radiusMedium))
+                        shape = RoundedCornerShape(Dimens.radiusMedium),
+                    )
                     .clip(shape = RoundedCornerShape(Dimens.radiusMedium))) {
               Column(Modifier.fillMaxSize()) {
                 // Content
@@ -124,7 +125,9 @@ class OnboardingActivity : ComponentActivity() {
                       Crossfade(targetState = currentStep, label = currentStep.title) { step ->
                         if (step.isVideo) {
                           OnboardingVideo(
-                              exoPlayer, modifier = Modifier.fillMaxHeight().fillMaxWidth(.75f))
+                              exoPlayer,
+                              modifier = Modifier.fillMaxHeight().fillMaxWidth(.75f),
+                          )
                         } else {
                           Image(
                               rememberAsyncImagePainter(
@@ -133,7 +136,8 @@ class OnboardingActivity : ComponentActivity() {
                               "${step.title} image",
                               modifier =
                                   Modifier.fillMaxWidth(.75f)
-                                      .background(AppColor.DarkBackgroundSweep))
+                                      .background(AppColor.DarkBackgroundSweep),
+                          )
                         }
                       }
 
@@ -143,53 +147,53 @@ class OnboardingActivity : ComponentActivity() {
                           modifier =
                               Modifier.fillMaxSize()
                                   .background(AppColor.BackgroundSweep)
-                                  .padding(Dimens.small)) {
+                                  .padding(Dimens.small),
+                      ) {
 
-                            // Top bar with close button
-                            Box(modifier = Modifier.align(Alignment.End)) {
-                              CloseButton(
-                                  onPressed = {
-                                    pagerCoroutineScope.launch { pagerState.scrollToPage(0) }
-                                    viewModel.close()
-                                  })
+                        // Top bar with close button
+                        Box(modifier = Modifier.align(Alignment.End)) {
+                          CloseButton(
+                              onPressed = {
+                                pagerCoroutineScope.launch { pagerState.scrollToPage(0) }
+                                viewModel.close()
+                              })
+                        }
+
+                        val onFinishButtonPressed =
+                            if (!pagerState.canScrollForward) {
+                              {
+                                pagerCoroutineScope.launch { pagerState.scrollToPage(0) }
+                                viewModel.close()
+                              }
+                            } else {
+                              null
                             }
 
-                            val onFinishButtonPressed =
-                                if (!pagerState.canScrollForward) {
-                                  {
-                                    pagerCoroutineScope.launch { pagerState.scrollToPage(0) }
-                                    viewModel.close()
-                                  }
-                                } else {
-                                  null
-                                }
+                        HorizontalPager(userScrollEnabled = false, state = pagerState) { index ->
+                          val step = state.steps[index]
 
-                            HorizontalPager(userScrollEnabled = false, state = pagerState) { index
-                              ->
-                              val step = state.steps[index]
+                          OnboardingSlide(
+                              title = step.title,
+                              description = step.description,
+                          )
+                        }
 
-                              OnboardingSlide(
-                                  title = step.title,
-                                  description = step.description,
-                              )
-                            }
-
-                            OnboardingControls(
-                                onPreviousButtonPressed = {
-                                  pagerCoroutineScope.launch {
-                                    pagerState.animateScrollToPage(pagerState.currentPage - 1)
-                                  }
-                                },
-                                onNextButtonPressed = {
-                                  pagerCoroutineScope.launch {
-                                    pagerState.animateScrollToPage(pagerState.currentPage + 1)
-                                  }
-                                },
-                                onFinishButtonPressed = onFinishButtonPressed,
-                                currentStep = pagerState.currentPage + 1,
-                                totalSteps = pagerState.pageCount,
-                            )
-                          }
+                        OnboardingControls(
+                            onPreviousButtonPressed = {
+                              pagerCoroutineScope.launch {
+                                pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                              }
+                            },
+                            onNextButtonPressed = {
+                              pagerCoroutineScope.launch {
+                                pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                              }
+                            },
+                            onFinishButtonPressed = onFinishButtonPressed,
+                            currentStep = pagerState.currentPage + 1,
+                            totalSteps = pagerState.pageCount,
+                        )
+                      }
                     }
                   }
 

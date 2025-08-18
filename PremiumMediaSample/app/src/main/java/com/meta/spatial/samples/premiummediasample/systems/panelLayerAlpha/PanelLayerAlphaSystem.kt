@@ -42,7 +42,9 @@ class PanelLayerAlphaSystem() : SystemBase() {
                 val plaComp = entity.getComponent<PanelLayerAlpha>()
                 // Assuming color scale bias is default other than alpha
                 sceneObjectLayer.setColorScaleBias(
-                    Vector4(1.0f, 1.0f, 1.0f, plaComp.layerAlpha), Vector4(0.0f))
+                    Vector4(1.0f, 1.0f, 1.0f, plaComp.layerAlpha),
+                    Vector4(0.0f),
+                )
               }
             }
       }
@@ -55,7 +57,8 @@ class PanelLayerAlphaSystem() : SystemBase() {
         mustRunBefore =
             mutableSetOf(
                 SystemDependencyConfig(MeshCreationSystem::class),
-                SystemDependencyConfig(TweenEngineSystem::class)),
+                SystemDependencyConfig(TweenEngineSystem::class),
+            ),
     )
   }
 }

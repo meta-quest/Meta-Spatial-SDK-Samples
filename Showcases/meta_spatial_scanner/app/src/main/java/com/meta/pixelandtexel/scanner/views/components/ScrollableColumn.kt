@@ -53,9 +53,10 @@ fun ScrollableColumn(content: @Composable () -> Unit) {
                     .verticalScroll(scrollState)
                     .onGloballyPositioned { coordinates ->
                       contentHeight = coordinates.size.height
-                    }) {
-              content.invoke()
-            }
+                    },
+        ) {
+          content.invoke()
+        }
 
         if (showArrow) {
           Box(
@@ -69,12 +70,14 @@ fun ScrollableColumn(content: @Composable () -> Unit) {
                                   colors =
                                       listOf(
                                           Color.Transparent,
-                                          SpatialColor.RLDSpanelBlackGradientBottom))))
+                                          SpatialColor.RLDSpanelBlackGradientBottom,
+                                      ))))
           Icon(
               imageVector = SpatialIcons.Regular.ArrowDown,
               contentDescription = "Scroll down",
               tint = Color.White,
-              modifier = Modifier.align(Alignment.BottomCenter))
+              modifier = Modifier.align(Alignment.BottomCenter),
+          )
         }
       }
 }

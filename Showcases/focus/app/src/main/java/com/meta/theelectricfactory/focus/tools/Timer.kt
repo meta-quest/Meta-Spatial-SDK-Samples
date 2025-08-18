@@ -62,7 +62,8 @@ class Timer(totalTime: Int) {
                 Scale(0.1f),
                 Grabbable(enabled = true, GrabbableType.PIVOT_Y),
                 IsdkGrabbable(billboardOrientation = Vector3(0f, 180f, 0f)),
-                Transform(Pose(Vector3(0f), Quaternion(0f, 180f, 0f))))
+                Transform(Pose(Vector3(0f), Quaternion(0f, 180f, 0f))),
+            )
 
         // Create an entity with a panel component
         val timerPanel: Entity =
@@ -70,13 +71,15 @@ class Timer(totalTime: Int) {
                 // hittable property should be NonCollision if we don't want to interact with it, nor
                 // block the parent entity
                 Panel(id).apply { hittable = MeshCollision.NoCollision },
-                Transform(Pose(Vector3(0f, 0f, 0.025f), Quaternion(0f, 180f, 0f))))
+                Transform(Pose(Vector3(0f, 0f, 0.025f), Quaternion(0f, 180f, 0f))),
+            )
 
         // We add a TimeComponent to timer panel to be able to update it. More info in
         // UpdateTimeSystem.kt
         timerPanel.setComponent(
             TimeComponent(
-                type = AssetType.TIMER, totalTime = totalTime, startTime = System.currentTimeMillis())
+                type = AssetType.TIMER, totalTime = totalTime, startTime = System.currentTimeMillis(),
+            )
         )
         // We make panel entity child to the timer model entity
         timerPanel.setComponent(TransformParent(timerObj))

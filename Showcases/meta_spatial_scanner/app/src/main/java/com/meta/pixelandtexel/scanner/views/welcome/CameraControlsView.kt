@@ -52,62 +52,70 @@ fun CameraControlsView(onContinue: (() -> Unit)) {
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()) {
-              AnimatedVisibility(
-                  visible = visible,
-                  enter = fadeIn(tween(durationMillis = 800)),
-                  exit = fadeOut(tween(durationMillis = 800)),
-              ) {
-                Box(contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()) {
-                  Image(
-                      painter = painterResource(R.drawable.hand_swipe),
-                      contentDescription = "",
-                      modifier = Modifier.fillMaxSize().padding(top = 40.dp, bottom = 10.dp))
-                  Image(
-                      painter = painterResource(R.drawable.arrow_over_3x),
-                      contentDescription = "",
-                      modifier =
-                          Modifier.fillMaxSize().padding(top = 25.dp, bottom = 100.dp, end = 10.dp))
-                }
-              }
+            modifier = Modifier.fillMaxSize(),
+        ) {
+          AnimatedVisibility(
+              visible = visible,
+              enter = fadeIn(tween(durationMillis = 800)),
+              exit = fadeOut(tween(durationMillis = 800)),
+          ) {
+            Box(contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()) {
+              Image(
+                  painter = painterResource(R.drawable.hand_swipe),
+                  contentDescription = "",
+                  modifier = Modifier.fillMaxSize().padding(top = 40.dp, bottom = 10.dp),
+              )
+              Image(
+                  painter = painterResource(R.drawable.arrow_over_3x),
+                  contentDescription = "",
+                  modifier =
+                      Modifier.fillMaxSize().padding(top = 25.dp, bottom = 100.dp, end = 10.dp),
+              )
             }
+          }
+        }
         Column(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()) {
-              AnimatedVisibility(
-                  visible = !visible,
-                  enter = fadeIn(tween(durationMillis = 800)),
-                  exit = fadeOut(tween(durationMillis = 800)),
-              ) {
-                Box(contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()) {
-                  Image(
-                      painter = painterResource(R.drawable.hand_open),
-                      contentDescription = "",
-                      modifier = Modifier.fillMaxSize().padding(vertical = 10.dp))
-                }
-              }
+            modifier = Modifier.fillMaxSize(),
+        ) {
+          AnimatedVisibility(
+              visible = !visible,
+              enter = fadeIn(tween(durationMillis = 800)),
+              exit = fadeOut(tween(durationMillis = 800)),
+          ) {
+            Box(contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()) {
+              Image(
+                  painter = painterResource(R.drawable.hand_open),
+                  contentDescription = "",
+                  modifier = Modifier.fillMaxSize().padding(vertical = 10.dp),
+              )
             }
+          }
+        }
       }
       Column(
           horizontalAlignment = Alignment.CenterHorizontally,
           verticalArrangement = Arrangement.SpaceBetween,
-          modifier = Modifier.weight(0.95f).fillMaxWidth().padding(20.dp)) {
-            Text(
-                stringResource(R.string.camera_controls_title),
-                style = SpatialTheme.typography.headline3Strong,
-                color = Color.White)
-            Text(
-                stringResource(R.string.camera_controls_1),
-                style = SpatialTheme.typography.body2,
-                color = Color.White)
-            Text(
-                stringResource(R.string.camera_controls_2),
-                style = SpatialTheme.typography.body2,
-                color = Color.White)
-            PrimaryButton(
-                stringResource(R.string.btn_got_it), onClick = onContinue, expanded = true)
-          }
+          modifier = Modifier.weight(0.95f).fillMaxWidth().padding(20.dp),
+      ) {
+        Text(
+            stringResource(R.string.camera_controls_title),
+            style = SpatialTheme.typography.headline3Strong,
+            color = Color.White,
+        )
+        Text(
+            stringResource(R.string.camera_controls_1),
+            style = SpatialTheme.typography.body2,
+            color = Color.White,
+        )
+        Text(
+            stringResource(R.string.camera_controls_2),
+            style = SpatialTheme.typography.body2,
+            color = Color.White,
+        )
+        PrimaryButton(stringResource(R.string.btn_got_it), onClick = onContinue, expanded = true)
+      }
     }
   }
 }
