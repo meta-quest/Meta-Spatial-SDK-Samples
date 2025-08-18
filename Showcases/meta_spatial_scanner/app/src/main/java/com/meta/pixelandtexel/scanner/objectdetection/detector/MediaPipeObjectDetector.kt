@@ -135,8 +135,13 @@ class MediaPipeObjectDetector(context: Context) : IObjectDetectorHelper {
 
     resultsListener?.onObjectsDetected(
         DetectedObjectsResult.fromMPResults(
-            result.detections(), inferenceTime, input.width, input.height),
-        image!!)
+            result.detections(),
+            inferenceTime,
+            input.width,
+            input.height,
+        ),
+        image!!,
+    )
 
     finishedDetectingCallback.getAndSet(null)!!()
   }

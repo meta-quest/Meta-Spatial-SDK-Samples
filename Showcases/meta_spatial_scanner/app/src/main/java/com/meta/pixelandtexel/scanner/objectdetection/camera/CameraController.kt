@@ -58,7 +58,7 @@ import kotlinx.coroutines.launch
  */
 class CameraController(
     private val context: Context,
-    private val cameraEye: CameraEye = CameraEye.LEFT
+    private val cameraEye: CameraEye = CameraEye.LEFT,
 ) {
   companion object {
     private const val TAG = "Camera"
@@ -168,7 +168,7 @@ class CameraController(
    */
   fun start(
       surfaceProviders: List<ISurfaceProvider> = listOf(),
-      imageAvailableListener: ImageAvailableListener? = null
+      imageAvailableListener: ImageAvailableListener? = null,
   ) {
     if (!isInitialized) {
       throw RuntimeException("Camera not initialized")
@@ -213,7 +213,7 @@ class CameraController(
    */
   private suspend fun startInternal(
       surfaceProviders: List<ISurfaceProvider>,
-      imageAvailableListener: ImageAvailableListener? = null
+      imageAvailableListener: ImageAvailableListener? = null,
   ) {
     try {
       _isRunning.set(true)
@@ -231,7 +231,11 @@ class CameraController(
       if (imageAvailableListener != null) {
         imageReader =
             ImageReader.newInstance(
-                cameraOutputSize.width, cameraOutputSize.height, CAMERA_IMAGE_FORMAT, 2)
+                cameraOutputSize.width,
+                cameraOutputSize.height,
+                CAMERA_IMAGE_FORMAT,
+                2,
+            )
         targets.add(imageReader!!.surface)
       }
 
@@ -245,7 +249,10 @@ class CameraController(
           }
 
       session!!.setSingleRepeatingRequest(
-          captureRequestBuilder.build(), cameraExecutor, object : CaptureCallback() {})
+          captureRequestBuilder.build(),
+          cameraExecutor,
+          object : CaptureCallback() {},
+      )
 
       // setup our image reader to receive frames
 
@@ -266,7 +273,8 @@ class CameraController(
               isProcessingFrame.set(false)
             }
           },
-          imageReaderHandler)
+          imageReaderHandler,
+      )
     } catch (e: Exception) {
       e.printStackTrace()
       this.stop()
@@ -286,7 +294,7 @@ class CameraController(
   private suspend fun openCamera(
       manager: CameraManager,
       cameraId: String,
-      executor: Executor
+      executor: Executor,
   ): CameraDevice = suspendCoroutine { cont ->
     Log.d(TAG, "openCamera")
 
@@ -323,7 +331,8 @@ class CameraController(
 
             cont.resumeWithException(ex)
           }
-        })
+        },
+    )
   }
 
   /**
@@ -339,7 +348,7 @@ class CameraController(
   private suspend fun createCameraPreviewSession(
       device: CameraDevice,
       targets: List<Surface>,
-      executor: Executor
+      executor: Executor,
   ): CameraCaptureSession = suspendCoroutine { cont ->
     Log.d(TAG, "createCameraPreviewSession")
 
@@ -362,7 +371,8 @@ class CameraController(
 
                 cont.resumeWithException(exc)
               }
-            }))
+            },
+        ))
   }
 
   /**

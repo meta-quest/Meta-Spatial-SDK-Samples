@@ -14,7 +14,7 @@ class TweenPanelLayerAlphaAccessor : TweenAccessor<TweenPanelLayerAlpha> {
   override fun getValues(
       target: TweenPanelLayerAlpha,
       tweenType: Int,
-      returnValues: FloatArray
+      returnValues: FloatArray,
   ): Int {
     val component = target.entity.getComponent<PanelLayerAlpha>()
     return when (tweenType) {

@@ -70,7 +70,8 @@ object MediaStoreQueryBuilder {
         "${MediaStore.Files.FileColumns.MEDIA_TYPE} = ? OR ${MediaStore.Files.FileColumns.MEDIA_TYPE} = ?",
         arrayOf(
             "${MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE}",
-            "${MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO}"),
+            "${MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO}",
+        ),
     )
   }
 

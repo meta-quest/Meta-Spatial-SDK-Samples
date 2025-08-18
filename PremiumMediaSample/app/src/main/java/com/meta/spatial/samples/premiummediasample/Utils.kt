@@ -60,7 +60,7 @@ fun projectRayOntoPlane(
     rayOrigin: Vector3,
     rayDirection: Vector3,
     planePoint: Vector3,
-    planeNormal: Vector3
+    planeNormal: Vector3,
 ): Vector3? {
   // Normalize the plane normal and ray direction
   val normalizedPlaneNormal = planeNormal.normalize()
@@ -92,7 +92,7 @@ fun hitTestBox(
     point: Vector3,
     boxCenter: Vector3,
     boxSize: Vector3,
-    boxRotation: Quaternion
+    boxRotation: Quaternion,
 ): Boolean {
   // Transform the point into the box's local space
   val inverseRotation = boxRotation.inverse()
@@ -139,7 +139,8 @@ fun fromAxisAngle(axis: Vector3, angle: Float): Quaternion {
       axis.x * sinHalfAngle,
       axis.y * sinHalfAngle,
       axis.z * sinHalfAngle,
-      kotlin.math.cos(halfAngle))
+      kotlin.math.cos(halfAngle),
+  )
 }
 
 // Converts from Global to Local Pose
@@ -273,7 +274,7 @@ fun placeInFrontOfHead(
     distanceAway: Float = 1f,
     offset: Vector3 = Vector3(0f, 0f, 0f),
     pivotType: GrabbableType = GrabbableType.PIVOT_Y,
-    angleYAxisFromHead: Float = 0f
+    angleYAxisFromHead: Float = 0f,
 ) {
   val pose = getPoseInFrontOfHead(distanceAway, offset, pivotType, angleYAxisFromHead)
 
@@ -291,7 +292,7 @@ fun getPoseInFrontOfHead(
     offset: Vector3 = Vector3(0f, 0f, 0f),
     pivotType: GrabbableType = GrabbableType.PIVOT_Y,
     angleYAxisFromHead: Float = 0f,
-    useHeadY: Boolean = true
+    useHeadY: Boolean = true,
 ): Pose {
   // Get head position
   val pose = getHeadPose()
@@ -301,7 +302,8 @@ fun getPoseInFrontOfHead(
       offset = offset,
       pivotType = pivotType,
       angleYAxisFromHead = angleYAxisFromHead,
-      useHeadY = useHeadY)
+      useHeadY = useHeadY,
+  )
 }
 
 fun getPoseInFrontOfVector(
@@ -310,7 +312,7 @@ fun getPoseInFrontOfVector(
     offset: Vector3 = Vector3(0f, 0f, 0f),
     pivotType: GrabbableType = GrabbableType.PIVOT_Y,
     angleYAxisFromHead: Float = 0f,
-    useHeadY: Boolean = true
+    useHeadY: Boolean = true,
 ): Pose {
   val vectorHead = Pose(vector.t, vector.q)
   // Get head position
@@ -345,7 +347,7 @@ fun quadTriangleMesh(
     height: Float = 1f,
     material: SceneMaterial,
     xSubDivisions: Int = 1,
-    ySubdivisions: Int = 1
+    ySubdivisions: Int = 1,
 ): TriangleMesh {
   val halfWidth = width * 0.5f
   val halfHeight = height * 0.5f
@@ -359,11 +361,11 @@ fun quadTriangleMesh(
           trianglesLength * 3,
           intArrayOf(
               0,
-              trianglesLength *
-                  3), // what range of materials (fromMat0, toMat0, fromMat1, toMat1, fromMat2,
+              trianglesLength * 3,
+          ), // what range of materials (fromMat0, toMat0, fromMat1, toMat1, fromMat2,
           // toMat2) do the materials array apply to
-          arrayOf(material) // Materials
-          )
+          arrayOf(material), // Materials
+      )
 
   // Array Creations
   val vertices = FloatArray(vertexLength * 3)
@@ -428,7 +430,8 @@ fun getSize(entity: Entity): Vector3 {
     return Vector3(
         panelDimensions.dimensions.x * scale.scale.x,
         panelDimensions.dimensions.y * scale.scale.y,
-        scale.scale.z)
+        scale.scale.z,
+    )
   } else if (panelDimensions != null)
       return Vector3(panelDimensions.dimensions.x, panelDimensions.dimensions.y, 1f)
   else if (scale != null) return scale.scale
@@ -461,7 +464,7 @@ fun setDistanceAndSize(
     eyeAngle: Float = 0f,
     axisAngle: Float = 0f,
     angleContent: Boolean = false,
-    vector: Pose = getHeadPose()
+    vector: Pose = getHeadPose(),
 ) {
   val pose = getPoseInFrontOfVector(vector, distance, angleYAxisFromHead = axisAngle)
 
@@ -480,7 +483,7 @@ fun updateSizeFromFov(
     entity: Entity,
     fov: Float,
     basedOnWidth: Boolean = true,
-    vector: Pose = getHeadPose()
+    vector: Pose = getHeadPose(),
 ) {
   val t = getAbsoluteTransform(entity)
   val distance = (vector.t - t.t).length()
@@ -520,7 +523,7 @@ fun setDistanceFov(
     eyeAngle: Float = 0f,
     axisAngle: Float = 0f,
     angleContent: Boolean = false,
-    vector: Pose = getHeadPose()
+    vector: Pose = getHeadPose(),
 ) {
   // Convert FOV from degrees to radians
   val newSize = getSizeFromFov(entity, distance, fov, basedOnWidth)

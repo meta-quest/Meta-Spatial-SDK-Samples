@@ -26,25 +26,28 @@ fun StartScreen(onStartClicked: () -> Unit) {
   Column(
       verticalArrangement = Arrangement.Top,
       horizontalAlignment = Alignment.CenterHorizontally,
-      modifier = Modifier.fillMaxSize()) {
-        SecondaryPanel(
-            modifier =
-                Modifier.fillMaxWidth().height(dimensionResource(R.dimen.short_panel_height))) {
-              Column(
-                  verticalArrangement = Arrangement.SpaceEvenly,
-                  horizontalAlignment = Alignment.CenterHorizontally,
-                  modifier = Modifier.fillMaxSize()) {
-                    Text(
-                        text = stringResource(id = R.string.quiz_welcome),
-                        textAlign = TextAlign.Center,
-                        style = LocalTypography.current.headline3Strong)
-                    PrimaryButton(
-                        label = stringResource(id = R.string.quiz_start),
-                        onClick = onStartClicked,
-                        expanded = true)
-                  }
-            }
-      }
+      modifier = Modifier.fillMaxSize(),
+  ) {
+    SecondaryPanel(
+        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.short_panel_height))) {
+          Column(
+              verticalArrangement = Arrangement.SpaceEvenly,
+              horizontalAlignment = Alignment.CenterHorizontally,
+              modifier = Modifier.fillMaxSize(),
+          ) {
+            Text(
+                text = stringResource(id = R.string.quiz_welcome),
+                textAlign = TextAlign.Center,
+                style = LocalTypography.current.headline3Strong,
+            )
+            PrimaryButton(
+                label = stringResource(id = R.string.quiz_start),
+                onClick = onStartClicked,
+                expanded = true,
+            )
+          }
+        }
+  }
 }
 
 @Preview(widthDp = 570, heightDp = 480, showBackground = true, backgroundColor = 0xFFECEFE8)

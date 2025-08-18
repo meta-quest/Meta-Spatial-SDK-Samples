@@ -24,7 +24,7 @@ class SpatialTask(
     ctx: SpatialContext,
     var uuid: Int,
     val new: Boolean,
-    var pose: Pose = Pose()
+    var pose: Pose = Pose(),
 ) {
 
   init {
@@ -123,7 +123,8 @@ class SpatialTask(
                       ?.updateTaskData(
                           uuid,
                           title = titleTextInput?.text.toString(),
-                          body = bodyTextInput?.text.toString())
+                          body = bodyTextInput?.text.toString(),
+                      )
                   ImmersiveActivity.instance.get()?.cleanAndLoadTasks(true)
                 }
                 addEditTextListeners(titleTextInput, ::onComplete)

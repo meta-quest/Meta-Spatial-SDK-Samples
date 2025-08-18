@@ -100,9 +100,11 @@ class CinemaStateHandler(private val immersiveViewModel: ImmersiveViewModel) {
               if (homeItem != null) {
                 putBoolean(
                     "lightingEnabled",
-                    !drmEnabled && homeItem.media.videoShape !== MediaSource.VideoShape.Equirect180)
+                    !drmEnabled && homeItem.media.videoShape !== MediaSource.VideoShape.Equirect180,
+                )
               }
-            })
+            },
+        )
       }
     }
 
@@ -117,7 +119,9 @@ class CinemaStateHandler(private val immersiveViewModel: ImmersiveViewModel) {
               recenter()
             } else {
               PoseAndSize.applyToEntity(
-                  immersiveViewModel.currentExoPanel!!.entity, lastTvPoseSize!!)
+                  immersiveViewModel.currentExoPanel!!.entity,
+                  lastTvPoseSize!!,
+              )
             }
           }
           CinemaState.TV -> {
@@ -145,7 +149,10 @@ class CinemaStateHandler(private val immersiveViewModel: ImmersiveViewModel) {
           cinema =
               VRCinemaEntity(
                   VRCinemaEntity.VRCinemaConfig(
-                      floorOnly = true, screenSize = cinemaScreenSize, distanceToScreen = 15f))
+                      floorOnly = true,
+                      screenSize = cinemaScreenSize,
+                      distanceToScreen = 15f,
+                  ))
         }
         val cinemaPose = getHeadPose()
         cinemaPose.q =
@@ -154,7 +161,8 @@ class CinemaStateHandler(private val immersiveViewModel: ImmersiveViewModel) {
 
         setSize(
             immersiveViewModel.currentExoPanel!!.entity,
-            Vector3(cinemaScreenSize.x, cinemaScreenSize.y, 0f))
+            Vector3(cinemaScreenSize.x, cinemaScreenSize.y, 0f),
+        )
         immersiveViewModel.currentExoPanel!!
             .entity
             .setComponent(Transform(cinema!!.getScreenPose()))
@@ -183,7 +191,8 @@ class CinemaStateHandler(private val immersiveViewModel: ImmersiveViewModel) {
             immersiveViewModel.currentExoPanel!!.entity,
             ANCHOR_SPAWN_DISTANCE,
             SCREEN_FOV,
-            vector = getHeadPose())
+            vector = getHeadPose(),
+        )
         systemManager
             .findSystem<AnchorSnappingSystem>()
             .snapToAnchorViaGaze(immersiveViewModel.currentExoPanel!!.entity, getHeadPose())

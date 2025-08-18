@@ -92,7 +92,8 @@ fun Modifier.drawOutlineCircularShadowGradient(
               1f to color.copy(alpha = 0f), // At the outer edge with 0 alpha
               center = center,
               radius = totalRadius,
-              tileMode = androidx.compose.ui.graphics.TileMode.Clamp)
+              tileMode = androidx.compose.ui.graphics.TileMode.Clamp,
+          )
       drawCircle(brush = gradientBrush, radius = totalRadius, center = center)
     }
 
@@ -102,7 +103,7 @@ fun Modifier.dropShadow(
     blur: Dp = 4.dp,
     offsetY: Dp = 4.dp,
     offsetX: Dp = 0.dp,
-    spread: Dp = 0.dp
+    spread: Dp = 0.dp,
 ) =
     this.drawBehind {
       val shadowSize = Size(size.width + spread.toPx(), size.height + spread.toPx())
@@ -131,7 +132,7 @@ fun FadeIcon(
     iconFade: Painter,
     fadeOpacity: Float,
     modifier: Modifier = Modifier,
-    color: Color = Color.White
+    color: Color = Color.White,
 ) {
   Box() {
     // Icons stacked
@@ -140,7 +141,8 @@ fun FadeIcon(
         modifier = modifier,
         painter = iconFade,
         tint = color.copy(alpha = fadeOpacity),
-        contentDescription = "IconFade")
+        contentDescription = "IconFade",
+    )
   }
 }
 
@@ -206,9 +208,10 @@ fun HoverButton(
                   }
                 }
               },
-      onClick = onClick) {
-        icon?.invoke()
-      }
+      onClick = onClick,
+  ) {
+    icon?.invoke()
+  }
 }
 
 @Composable
@@ -222,7 +225,7 @@ fun MetaButton(
     paddingHorizontal: Dp = 14.dp,
     textSizeModifier: Float = .667f,
     shadowOpacity: Float = 0.5f,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
   var isHovered by remember { mutableStateOf(ControlsPanelConstants.controlsDebugHover) }
 
@@ -258,22 +261,26 @@ fun MetaButton(
                       blur = shadowBlurTween,
                       offsetX = 0.dp,
                       offsetY = 0.dp,
-                      color = color.copy(shadowOpacityTween))
+                      color = color.copy(shadowOpacityTween),
+                  )
                 } else this
               },
       shape = buttonShape,
       onClick = onClick,
       elevation = null,
-      colors = ButtonDefaults.buttonColors(backgroundColor = color)) {
-        Text(
-            text,
-            modifier = Modifier.padding(paddingHorizontal, paddingVertical),
-            style =
-                TextStyle(
-                    fontFamily = Inter18,
-                    fontSize = (14f * textSizeModifier).sp,
-                    fontWeight = FontWeight.Normal,
-                    lineHeight = (20f * textSizeModifier).sp),
-            color = Color.White)
-      }
+      colors = ButtonDefaults.buttonColors(backgroundColor = color),
+  ) {
+    Text(
+        text,
+        modifier = Modifier.padding(paddingHorizontal, paddingVertical),
+        style =
+            TextStyle(
+                fontFamily = Inter18,
+                fontSize = (14f * textSizeModifier).sp,
+                fontWeight = FontWeight.Normal,
+                lineHeight = (20f * textSizeModifier).sp,
+            ),
+        color = Color.White,
+    )
+  }
 }

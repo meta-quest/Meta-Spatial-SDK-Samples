@@ -69,7 +69,8 @@ class WhatsNewActivity : ComponentActivity() {
                     .border(
                         width = 1.dp,
                         color = AppColor.MetaBlu,
-                        shape = RoundedCornerShape(Dimens.radiusMedium))
+                        shape = RoundedCornerShape(Dimens.radiusMedium),
+                    )
                     .clip(shape = RoundedCornerShape(Dimens.radiusMedium))) {
               val uriHandler = LocalUriHandler.current
 
@@ -87,16 +88,18 @@ class WhatsNewActivity : ComponentActivity() {
                       Column(
                           horizontalAlignment = Alignment.CenterHorizontally,
                           verticalArrangement = Arrangement.Center,
-                          modifier = Modifier.fillMaxSize()) {
-                            Image(
-                                rememberAsyncImagePainter(R.drawable.logo),
-                                "logo",
-                            )
-                            Box(modifier = Modifier.height(Dimens.small))
-                            RoundedButton(
-                                onClick = { uriHandler.openUri(Constants.WEBSITE_URL) },
-                                title = "Visit Our Website")
-                          }
+                          modifier = Modifier.fillMaxSize(),
+                      ) {
+                        Image(
+                            rememberAsyncImagePainter(R.drawable.logo),
+                            "logo",
+                        )
+                        Box(modifier = Modifier.height(Dimens.small))
+                        RoundedButton(
+                            onClick = { uriHandler.openUri(Constants.WEBSITE_URL) },
+                            title = "Visit Our Website",
+                        )
+                      }
                     }
 
                 Column(
@@ -109,14 +112,16 @@ class WhatsNewActivity : ComponentActivity() {
                       Row(
                           modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                           horizontalArrangement = Arrangement.SpaceBetween,
-                          verticalAlignment = Alignment.Top) {
-                            Text(
-                                "V ${BuildConfig.VERSION_NAME} Updates",
-                                color = AppColor.White,
-                                textAlign = TextAlign.Start,
-                                style = MaterialTheme.typography.titleMedium)
-                            CloseButton(onPressed = { viewModel.close() })
-                          }
+                          verticalAlignment = Alignment.Top,
+                      ) {
+                        Text(
+                            "V ${BuildConfig.VERSION_NAME} Updates",
+                            color = AppColor.White,
+                            textAlign = TextAlign.Start,
+                            style = MaterialTheme.typography.titleMedium,
+                        )
+                        CloseButton(onPressed = { viewModel.close() })
+                      }
 
                       Box(modifier = Modifier.height(Dimens.small))
 
@@ -134,26 +139,27 @@ class WhatsNewActivity : ComponentActivity() {
                             contentPadding =
                                 PaddingValues(
                                     vertical = Dimens.small,
-                                )) {
-                              items(items = whatsNew) { releaseNote ->
-                                Column {
-                                  Text(
-                                      releaseNote.title,
-                                      color = AppColor.White,
-                                      textAlign = TextAlign.Start,
-                                      fontWeight = FontWeight.Bold,
-                                      style = MaterialTheme.typography.bodyMedium,
-                                  )
-                                  Text(
-                                      releaseNote.description,
-                                      color = AppColor.White60,
-                                      textAlign = TextAlign.Start,
-                                      style = MaterialTheme.typography.bodySmall,
-                                      fontSize = 10.sp,
-                                  )
-                                }
-                              }
+                                ),
+                        ) {
+                          items(items = whatsNew) { releaseNote ->
+                            Column {
+                              Text(
+                                  releaseNote.title,
+                                  color = AppColor.White,
+                                  textAlign = TextAlign.Start,
+                                  fontWeight = FontWeight.Bold,
+                                  style = MaterialTheme.typography.bodyMedium,
+                              )
+                              Text(
+                                  releaseNote.description,
+                                  color = AppColor.White60,
+                                  textAlign = TextAlign.Start,
+                                  style = MaterialTheme.typography.bodySmall,
+                                  fontSize = 10.sp,
+                              )
                             }
+                          }
+                        }
                       }
 
                       HorizontalDivider()

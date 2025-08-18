@@ -43,7 +43,9 @@ fun getNewUUID(): Int {
       ImmersiveActivity.instance
           .get()!!
           .getSharedPreferences(
-              "com.meta.theelectricfactory.focus.MySavedData", Activity.MODE_PRIVATE)
+              "com.meta.theelectricfactory.focus.MySavedData",
+              Activity.MODE_PRIVATE,
+          )
   val uuid = savedData.getInt("currentUUID", -1)
 
   with(savedData.edit()) {
@@ -68,7 +70,7 @@ fun addDeleteButton(entity: Entity, panel: PanelSceneObject? = null) {
               sourceOfInput: Entity,
               changed: Int,
               clicked: Int,
-              downTime: Long
+              downTime: Long,
           ): Boolean {
             // Check if panel has been clicked/tapped with button A, X, triggers o squeezers
             if ((changed and ButtonBits.ButtonA) != 0 ||
@@ -98,7 +100,8 @@ fun addDeleteButton(entity: Entity, panel: PanelSceneObject? = null) {
         entity,
         fun() {
           ImmersiveActivity.instance.get()?.selectElement(entity)
-        })
+        },
+    )
   }
 }
 
@@ -229,7 +232,10 @@ fun placeInFront(entity: Entity?, offset: Vector3 = Vector3(0f), bigPanel: Boole
 
   newRot *=
       Quaternion(
-          billboardOrientationEuler.x, billboardOrientationEuler.y, billboardOrientationEuler.z)
+          billboardOrientationEuler.x,
+          billboardOrientationEuler.y,
+          billboardOrientationEuler.z,
+      )
 
   entity.setComponent(Transform(Pose(newPos, newRot)))
 }
@@ -249,7 +255,7 @@ fun pxToDp(px: Float): Float {
 fun addEditTextListeners(
     editText: EditText?,
     onComplete: () -> (Unit),
-    updateWithoutEnter: Boolean = false
+    updateWithoutEnter: Boolean = false,
 ) {
 
   // Detect Enter keyboard (Done) to perform action
@@ -294,7 +300,8 @@ fun addEditTextListeners(
                     onComplete()
                   }
                 },
-                typingInterval)
+                typingInterval,
+            )
           }
         })
   }

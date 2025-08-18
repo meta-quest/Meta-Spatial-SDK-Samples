@@ -113,10 +113,12 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
                             "Furniture/Plant1.glb",
                             "Furniture/Plant2.glb",
                             "Furniture/Plant3.glb",
-                            "Furniture/Plant4.glb")),
+                            "Furniture/Plant4.glb",
+                        )),
                 MRUKLabel.WALL_ART to
                     AnchorMeshSpawner.AnchorMeshGroup(listOf("Furniture/WallArt.glb")),
-            ))
+            ),
+        )
 
     // Setup the AnchorProceduralMesh. The AnchorProceduralMesh will generate meshes in place of
     // scene anchors. For example floor, ceiling, and walls.
@@ -139,7 +141,9 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
                 MRUKLabel.BED to AnchorProceduralMeshConfig(null, true),
                 MRUKLabel.FLOOR to AnchorProceduralMeshConfig(floorMaterial, true),
                 MRUKLabel.WALL_FACE to AnchorProceduralMeshConfig(wallMaterial, true),
-                MRUKLabel.CEILING to AnchorProceduralMeshConfig(wallMaterial, true)))
+                MRUKLabel.CEILING to AnchorProceduralMeshConfig(wallMaterial, true),
+            ),
+        )
 
     mrukFeature.addSceneEventListener(this)
 
@@ -195,7 +199,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
   override fun onRequestPermissionsResult(
       requestCode: Int,
       permissions: Array<out String>,
-      grantResults: IntArray
+      grantResults: IntArray,
   ) {
     if (requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
         permissions.size == 1 &&
@@ -217,10 +221,16 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
         ambientColor = Vector3(0.2f),
         sunColor = Vector3(1.0f, 1.0f, 1.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
 
     Entity.createPanelEntity(
-        panelId, R.layout.ui_anchor_mesh_menu, Transform(), Visible(showUiPanel), Grabbable())
+        panelId,
+        R.layout.ui_anchor_mesh_menu,
+        Transform(),
+        Visible(showUiPanel),
+        Grabbable(),
+    )
   }
 
   override fun onSpatialShutdown() {
@@ -292,7 +302,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
       globalMeshSpawner =
           AnchorProceduralMesh(
               mrukFeature,
-              mapOf(MRUKLabel.GLOBAL_MESH to AnchorProceduralMeshConfig(wallMaterial, false)))
+              mapOf(MRUKLabel.GLOBAL_MESH to AnchorProceduralMeshConfig(wallMaterial, false)),
+          )
     } else {
       globalMeshSpawner?.destroy()
       globalMeshSpawner = null
@@ -354,7 +365,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
             ArrayAdapter.createFromResource(
                     rootView?.context!!,
                     R.array.json_rooms_array,
-                    android.R.layout.simple_spinner_item)
+                    android.R.layout.simple_spinner_item,
+                )
                 .also { adapter ->
                   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                   jsonFileSpinner.adapter = adapter
@@ -396,7 +408,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
                   PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(
                     arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE)
+                    REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE,
+                )
               } else {
                 val fileName = "scene_${UUID.randomUUID()}.json"
                 writeStringToFile(applicationContext, fileName, mrukFeature.saveSceneToJsonString())
@@ -408,7 +421,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
               returnTo2DActivity(
                   this@MrukAnchorMeshSampleActivity,
                   applicationContext,
-                  MrukSampleStartMenuActivity::class.java)
+                  MrukSampleStartMenuActivity::class.java,
+              )
             }
           }
         })

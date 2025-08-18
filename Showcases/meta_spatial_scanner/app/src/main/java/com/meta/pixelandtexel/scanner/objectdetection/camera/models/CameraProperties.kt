@@ -36,7 +36,7 @@ class CameraProperties(
     val rotation: Quaternion,
     val focalLength: Vector2,
     val principalPoint: Vector2,
-    val resolution: Size
+    val resolution: Size,
 ) {
   val fov: Float
 
@@ -74,7 +74,8 @@ class CameraProperties(
         Vector3(
                 x = (screenPoint.x - principalPoint.x) / focalLength.x,
                 y = ((resolution.height - screenPoint.y) - principalPoint.y) / focalLength.y,
-                z = 1f)
+                z = 1f,
+            )
             .normalize()
     return direction
   }

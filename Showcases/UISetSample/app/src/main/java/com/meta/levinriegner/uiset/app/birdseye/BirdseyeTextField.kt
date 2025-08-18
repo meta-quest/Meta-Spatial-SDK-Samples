@@ -41,7 +41,8 @@ fun BirdseyeTextField() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground))
+                    color = LocalColorScheme.current.primaryAlphaBackground),
+        )
         Spacer(modifier = Modifier.height(20.dp))
         Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
           Box(modifier = Modifier.width(300.dp)) {
@@ -66,7 +67,8 @@ fun BirdseyeTextField() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground))
+                color = LocalColorScheme.current.primaryAlphaBackground),
+    )
     Spacer(modifier = Modifier.height(40.dp))
 
     Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
@@ -134,7 +136,8 @@ fun BirdseyeTextField() {
               onValueChange = onChanged,
               initialState = FieldValidationState.Valid,
               autoValidate = true,
-              validationPredicate = { flow { FieldValidationState.Valid } })
+              validationPredicate = { flow { FieldValidationState.Valid } },
+          )
         }
         StatefulWrapper(initialValue = "") { value, onChanged ->
           SpatialTextField(
@@ -145,7 +148,8 @@ fun BirdseyeTextField() {
               onValueChange = onChanged,
               initialState = FieldValidationState.Invalid,
               autoValidate = true,
-              validationPredicate = { flow { FieldValidationState.Invalid } })
+              validationPredicate = { flow { FieldValidationState.Invalid } },
+          )
         }
         StatefulWrapper(initialValue = "") { value, onChanged ->
           SpatialTextField(
@@ -156,7 +160,8 @@ fun BirdseyeTextField() {
               onValueChange = onChanged,
               initialState = FieldValidationState.Validating,
               autoValidate = true,
-              validationPredicate = { flow { FieldValidationState.Invalid } })
+              validationPredicate = { flow { FieldValidationState.Invalid } },
+          )
         }
         StatefulWrapper(initialValue = "") { value, onChanged ->
           SpatialTextField(
@@ -166,7 +171,8 @@ fun BirdseyeTextField() {
               value = value,
               onValueChange = onChanged,
               autoValidate = false,
-              helperText = "Helper")
+              helperText = "Helper",
+          )
         }
       }
     }

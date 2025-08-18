@@ -109,7 +109,12 @@ object WitAiService {
     try {
       recorder =
           AudioRecord(
-              MediaRecorder.AudioSource.MIC, SAMPLE_RATE, CHANNEL, AUDIO_FORMAT, BUFFER_SIZE)
+              MediaRecorder.AudioSource.MIC,
+              SAMPLE_RATE,
+              CHANNEL,
+              AUDIO_FORMAT,
+              BUFFER_SIZE,
+          )
       recorder?.startRecording()
       isRecordingInProgress.set(true)
       isRecordingCanceled.set(false)

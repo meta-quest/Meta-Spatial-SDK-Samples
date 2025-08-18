@@ -118,16 +118,20 @@ class PermissionActivity : ComponentActivity() {
 
               PermissionState.RequestPermission -> {
                 RequestPermissionRationale(
-                    modifier = Modifier.padding(innerPadding), denied = false) {
-                      requestStoragePermission()
-                    }
+                    modifier = Modifier.padding(innerPadding),
+                    denied = false,
+                ) {
+                  requestStoragePermission()
+                }
               }
 
               PermissionState.PermissionDenied -> {
                 RequestPermissionRationale(
-                    modifier = Modifier.padding(innerPadding), denied = true) {
-                      requestStoragePermission()
-                    }
+                    modifier = Modifier.padding(innerPadding),
+                    denied = true,
+                ) {
+                  requestStoragePermission()
+                }
               }
 
               PermissionState.PermissionAccepted -> {
@@ -224,7 +228,8 @@ private fun RequestPermissionRationale(
       Text(
           text = stringResource(id = R.string.storage_permission_rationale_title),
           textAlign = TextAlign.Center,
-          style = MaterialTheme.typography.titleMedium)
+          style = MaterialTheme.typography.titleMedium,
+      )
       Spacer(modifier = Modifier.height(Dimens.small))
       Text(
           text =
@@ -233,7 +238,8 @@ private fun RequestPermissionRationale(
                       if (denied) R.string.storage_permission_rationale_denied
                       else R.string.storage_permission_rationale_description),
           textAlign = TextAlign.Center,
-          style = MaterialTheme.typography.bodyMedium)
+          style = MaterialTheme.typography.bodyMedium,
+      )
       Spacer(modifier = Modifier.height(Dimens.large))
       OutlinedButton(
           onClick = onRequest,

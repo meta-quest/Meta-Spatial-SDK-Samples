@@ -38,7 +38,7 @@ fun QuestionScreen(
     question: String,
     answers: List<String>,
     correctAnswerIdx: Int,
-    onUserAnswered: (idx: Int) -> Unit
+    onUserAnswered: (idx: Int) -> Unit,
 ) {
   val correctAnswerText = stringResource(id = R.string.quiz_answer_correct)
   val incorrectAnswerText = stringResource(id = R.string.quiz_answer_incorrect)
@@ -71,54 +71,59 @@ fun QuestionScreen(
   Column(
       verticalArrangement = Arrangement.Top,
       horizontalAlignment = Alignment.CenterHorizontally,
-      modifier = Modifier.fillMaxSize()) {
-        SecondaryPanel(
-            modifier =
-                Modifier.fillMaxWidth().height(dimensionResource(R.dimen.medium_panel_height))) {
-              Column(
-                  verticalArrangement = Arrangement.SpaceEvenly,
-                  horizontalAlignment = Alignment.CenterHorizontally,
-                  modifier = Modifier.fillMaxSize()) {
-                    Row(
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxWidth().heightIn(min = 40.dp)) {
-                          if (answeredCorrectly.value != null) {
-                            Icon(
-                                imageVector = iconImageVector,
-                                contentDescription = "Answer icon",
-                                tint = iconColor,
-                                modifier = Modifier.size(40.dp))
-                          }
-                          Text(
-                              text = titleText.value,
-                              color = questionColor,
-                              style = LocalTypography.current.headline3Strong)
-                        }
-
-                    for (i in 0..2) {
-                      QuizButton(
-                          label = answers[i],
-                          isEnabled = answeredCorrectly.value == null,
-                          hasSelectedAnswer = answeredCorrectly.value != null,
-                          didAnswerCorrectly = answeredCorrectly.value == true,
-                          isCorrectAnswer = i == correctAnswerIdx,
-                          onClick = {
-                            onUserAnswered(i)
-
-                            val isCorrect = i == correctAnswerIdx
-                            if (isCorrect) {
-                              titleText.value = correctAnswerText
-                            } else {
-                              titleText.value = incorrectAnswerText
-                            }
-
-                            answeredCorrectly.value = isCorrect
-                          })
-                    }
-                  }
+      modifier = Modifier.fillMaxSize(),
+  ) {
+    SecondaryPanel(
+        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.medium_panel_height))) {
+          Column(
+              verticalArrangement = Arrangement.SpaceEvenly,
+              horizontalAlignment = Alignment.CenterHorizontally,
+              modifier = Modifier.fillMaxSize(),
+          ) {
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth().heightIn(min = 40.dp),
+            ) {
+              if (answeredCorrectly.value != null) {
+                Icon(
+                    imageVector = iconImageVector,
+                    contentDescription = "Answer icon",
+                    tint = iconColor,
+                    modifier = Modifier.size(40.dp),
+                )
+              }
+              Text(
+                  text = titleText.value,
+                  color = questionColor,
+                  style = LocalTypography.current.headline3Strong,
+              )
             }
-      }
+
+            for (i in 0..2) {
+              QuizButton(
+                  label = answers[i],
+                  isEnabled = answeredCorrectly.value == null,
+                  hasSelectedAnswer = answeredCorrectly.value != null,
+                  didAnswerCorrectly = answeredCorrectly.value == true,
+                  isCorrectAnswer = i == correctAnswerIdx,
+                  onClick = {
+                    onUserAnswered(i)
+
+                    val isCorrect = i == correctAnswerIdx
+                    if (isCorrect) {
+                      titleText.value = correctAnswerText
+                    } else {
+                      titleText.value = incorrectAnswerText
+                    }
+
+                    answeredCorrectly.value = isCorrect
+                  },
+              )
+            }
+          }
+        }
+  }
 }
 
 @Preview(widthDp = 570, heightDp = 480, showBackground = true, backgroundColor = 0xFFECEFE8)
@@ -128,6 +133,7 @@ private fun QuestionScreenPreview() {
     QuestionScreen(
         "What is the longest river in the world?",
         listOf("The Nile", "The Amazon River", "The Mystic River"),
-        1) {}
+        1,
+    ) {}
   }
 }

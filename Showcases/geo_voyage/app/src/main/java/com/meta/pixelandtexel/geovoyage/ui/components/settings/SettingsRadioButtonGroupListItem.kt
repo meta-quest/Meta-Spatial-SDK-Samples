@@ -23,7 +23,7 @@ fun SettingsRadioButtonGroupListItem(
     headlineText: String,
     selectedIdx: MutableIntState,
     options: List<String>,
-    onOptionSelected: (idx: Int) -> Unit
+    onOptionSelected: (idx: Int) -> Unit,
 ) {
   Column(verticalArrangement = Arrangement.SpaceBetween) {
     Row(modifier = Modifier.padding(start = 12.dp, end = 12.dp, bottom = 8.dp).fillMaxWidth()) {
@@ -33,15 +33,17 @@ fun SettingsRadioButtonGroupListItem(
       Row(
           verticalAlignment = Alignment.CenterVertically,
           horizontalArrangement = Arrangement.SpaceBetween,
-          modifier = Modifier.padding(24.dp, 8.dp).fillMaxWidth()) {
-            Text(label, style = LocalTypography.current.body1)
-            SpatialRadioButton(
-                selected = index == selectedIdx.intValue,
-                onClick = {
-                  selectedIdx.intValue = index
-                  onOptionSelected(index)
-                })
-          }
+          modifier = Modifier.padding(24.dp, 8.dp).fillMaxWidth(),
+      ) {
+        Text(label, style = LocalTypography.current.body1)
+        SpatialRadioButton(
+            selected = index == selectedIdx.intValue,
+            onClick = {
+              selectedIdx.intValue = index
+              onOptionSelected(index)
+            },
+        )
+      }
     }
   }
   HorizontalDivider(color = Color.White)

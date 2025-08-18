@@ -184,7 +184,8 @@ private fun RadioGroupDemo() {
               .fillMaxWidth(),
       items = deviceTypes,
       selection = currentSelection.value,
-      onItemClick = { clickedItem -> currentSelection.value = clickedItem })
+      onItemClick = { clickedItem -> currentSelection.value = clickedItem },
+  )
 }
 
 @Composable
@@ -192,7 +193,7 @@ private fun RadioGroup(
     modifier: Modifier,
     items: List<String>,
     selection: String,
-    onItemClick: ((String) -> Unit)
+    onItemClick: ((String) -> Unit),
 ) {
   Column(modifier = modifier) {
     items.forEach { item ->

@@ -24,7 +24,7 @@ class WebView(
     ctx: SpatialContext,
     url: String = "https://www.google.com/",
     var uuid: Int = -1,
-    pose: Pose = Pose()
+    pose: Pose = Pose(),
 ) {
 
   var id = getDisposableID()
@@ -91,7 +91,7 @@ class WebView(
                     object : WebViewClient() {
                       override fun shouldOverrideUrlLoading(
                           view: WebView?,
-                          request: WebResourceRequest?
+                          request: WebResourceRequest?,
                       ): Boolean {
                         // Handle internal URL changes here
                         val _url = request?.url.toString()
@@ -155,7 +155,8 @@ class WebView(
               url,
               0f, // not relevant
               0f, // not relevant
-              ent.getComponent<Transform>().transform)
+              ent.getComponent<Transform>().transform,
+          )
     }
 
     // ToolComponent is added to web view to save properties and identify it

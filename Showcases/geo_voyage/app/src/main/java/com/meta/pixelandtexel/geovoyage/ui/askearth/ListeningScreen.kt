@@ -50,45 +50,51 @@ fun ListeningScreen(amplitude: Int = 0, onStopListeningClicked: () -> Unit) {
   Column(
       verticalArrangement = Arrangement.Center,
       horizontalAlignment = Alignment.CenterHorizontally,
-      modifier = Modifier.fillMaxSize()) {
-        SecondaryPanel(
-            modifier =
-                Modifier.width(dimensionResource(R.dimen.centered_panel_width))
-                    .height(dimensionResource(R.dimen.centered_panel_height))) {
-              Column(
-                  modifier = Modifier.fillMaxSize(),
-                  verticalArrangement = Arrangement.SpaceEvenly,
-                  horizontalAlignment = Alignment.CenterHorizontally,
-              ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()) {
-                      Image(
-                          painterResource(id = imageId),
-                          contentDescription = "Ask Earth Amplitude",
-                          contentScale = ContentScale.FillWidth,
-                          colorFilter = ColorFilter.tint(Color.Black),
-                          modifier = Modifier.graphicsLayer(rotationZ = 90f).width(80.dp))
-                      Image(
-                          painterResource(id = R.drawable.askearth_speaking_mic),
-                          contentDescription = "Ask Earth Mic",
-                          colorFilter = ColorFilter.tint(Color.Black),
-                          contentScale = ContentScale.FillWidth,
-                          modifier = Modifier.padding(12.dp).width(36.dp))
-                      Image(
-                          painterResource(id = imageId),
-                          contentDescription = "Ask Earth Amplitude",
-                          contentScale = ContentScale.FillWidth,
-                          colorFilter = ColorFilter.tint(Color.Black),
-                          modifier = Modifier.graphicsLayer(rotationZ = -90f).width(80.dp))
-                    }
-                PrimaryButton(
-                    label = stringResource(id = R.string.finished_speaking),
-                    onClick = onStopListeningClicked)
-              }
+      modifier = Modifier.fillMaxSize(),
+  ) {
+    SecondaryPanel(
+        modifier =
+            Modifier.width(dimensionResource(R.dimen.centered_panel_width))
+                .height(dimensionResource(R.dimen.centered_panel_height))) {
+          Column(
+              modifier = Modifier.fillMaxSize(),
+              verticalArrangement = Arrangement.SpaceEvenly,
+              horizontalAlignment = Alignment.CenterHorizontally,
+          ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+              Image(
+                  painterResource(id = imageId),
+                  contentDescription = "Ask Earth Amplitude",
+                  contentScale = ContentScale.FillWidth,
+                  colorFilter = ColorFilter.tint(Color.Black),
+                  modifier = Modifier.graphicsLayer(rotationZ = 90f).width(80.dp),
+              )
+              Image(
+                  painterResource(id = R.drawable.askearth_speaking_mic),
+                  contentDescription = "Ask Earth Mic",
+                  colorFilter = ColorFilter.tint(Color.Black),
+                  contentScale = ContentScale.FillWidth,
+                  modifier = Modifier.padding(12.dp).width(36.dp),
+              )
+              Image(
+                  painterResource(id = imageId),
+                  contentDescription = "Ask Earth Amplitude",
+                  contentScale = ContentScale.FillWidth,
+                  colorFilter = ColorFilter.tint(Color.Black),
+                  modifier = Modifier.graphicsLayer(rotationZ = -90f).width(80.dp),
+              )
             }
-      }
+            PrimaryButton(
+                label = stringResource(id = R.string.finished_speaking),
+                onClick = onStopListeningClicked,
+            )
+          }
+        }
+  }
 }
 
 @Preview(widthDp = 570, heightDp = 480, showBackground = true, backgroundColor = 0xFFECEFE8)

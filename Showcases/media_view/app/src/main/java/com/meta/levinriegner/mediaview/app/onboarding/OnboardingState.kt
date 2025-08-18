@@ -10,7 +10,7 @@ sealed class OnboardingState(open val isFirstTime: Boolean) {
   data class OnboardingStarted(
       override val isFirstTime: Boolean,
       val steps: List<StepModel>,
-      var currentPage: Int
+      var currentPage: Int,
   ) : OnboardingState(isFirstTime)
 
   data class Error(override val isFirstTime: Boolean, val reason: String) :

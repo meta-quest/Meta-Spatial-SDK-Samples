@@ -74,7 +74,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 
 enum class MovieSceneState {
   VR,
-  SURROUND
+  SURROUND,
 }
 
 // default activity
@@ -135,9 +135,15 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
                 animationScope!!.launch {
                   // animate sky box in
                   animateTransitionMask(
-                      arrayOf(skyBoxMaterial!!), 1f, 0f, "customParams", 1f, true) {
-                        skyVideoPanel?.setComponent(Visible(false))
-                      }
+                      arrayOf(skyBoxMaterial!!),
+                      1f,
+                      0f,
+                      "customParams",
+                      1f,
+                      true,
+                  ) {
+                    skyVideoPanel?.setComponent(Visible(false))
+                  }
                   playRandomSfx()
                   animateTransitionMask(sceneMaterials!!, 1f, 0f, "roughness", 1f, false) // show VR
                   skyPanelVisible = false
@@ -181,7 +187,8 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
         listOf(
             "sounds/system_transition_mrvr_01.wav",
             "sounds/system_transition_mrvr_02.wav",
-            "sounds/system_transition_mrvr_03.wav")
+            "sounds/system_transition_mrvr_03.wav",
+        )
 
     val asset = SceneAudioAsset.loadLocalFile(sfxList.random())
     scene.playSound(asset, 2.0f)
@@ -201,7 +208,10 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
   override fun registerFeatures(): List<SpatialFeature> {
     val features =
         mutableListOf<SpatialFeature>(
-            VRFeature(this), ComposeFeature(), IsdkFeature(this, spatial, systemManager))
+            VRFeature(this),
+            ComposeFeature(),
+            IsdkFeature(this, spatial, systemManager),
+        )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -222,7 +232,9 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     requestScenePermissionIfNeeded()
 
     NetworkedAssetLoader.init(
-        File(applicationContext.getCacheDir().canonicalPath), OkHttpAssetFetcher())
+        File(applicationContext.getCacheDir().canonicalPath),
+        OkHttpAssetFetcher(),
+    )
 
     loadGLXF { composition ->
       environment = composition.getNodeByName("Environment").entity
@@ -260,7 +272,8 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     scene.setLightingEnvironment(
         ambientColor = Vector3(LIGHTS_UP_AMBIENT),
         sunColor = Vector3(0f, 0f, 0f),
-        sunDirection = -Vector3(1.0f, 3.0f, 2.0f))
+        sunDirection = -Vector3(1.0f, 3.0f, 2.0f),
+    )
     scene.updateIBLEnvironment("chromatic.env")
 
     skyVideoPanel = createSkyViewer()
@@ -294,7 +307,8 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
             themeResourceId = R.style.ThemeTransparent
           }
           composePanel { setContent { MRApp() } }
-        })
+        },
+    )
   }
 
   fun playVideo(videoUrl: String) {
@@ -358,11 +372,15 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
         // make it look like a movie screen is being projected on the room.
         roomMaterial.setTexture("emissive", videoTexture!!)
         roomMaterial.setTexture(
-            "occlusion", SceneTexture(getDrawable(R.drawable.media_room_screen_mask)))
+            "occlusion",
+            SceneTexture(getDrawable(R.drawable.media_room_screen_mask)),
+        )
 
         foliageMaterial.setTexture("emissive", videoTexture!!)
         foliageMaterial.setTexture(
-            "occlusion", SceneTexture(getDrawable(R.drawable.media_room_screen_mask)))
+            "occlusion",
+            SceneTexture(getDrawable(R.drawable.media_room_screen_mask)),
+        )
 
         sceneMaterials = arrayOf(roomMaterial, foliageMaterial, groundMaterial)
         sceneMaterials!!.forEach { material -> material.setMetalRoughness(0.0f) }
@@ -384,7 +402,8 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
 
                     // define the custom material attributes.
                     SceneMaterialAttribute("customParams", SceneMaterialDataType.Vector4),
-                ))
+                ),
+            )
             .apply {
               setBlendMode(BlendMode.TRANSLUCENT)
 
@@ -398,7 +417,9 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
               systemManager
                   .findSystem<SceneObjectSystem>()
                   .addSceneObject(
-                      entity, CompletableFuture<SceneObject>().apply { complete(sceneObject) })
+                      entity,
+                      CompletableFuture<SceneObject>().apply { complete(sceneObject) },
+                  )
             }
 
     return entity
@@ -432,7 +453,9 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     systemManager
         .findSystem<SceneObjectSystem>()
         .addSceneObject(
-            entity, CompletableFuture<SceneObject>().apply { complete(panelSceneObject) })
+            entity,
+            CompletableFuture<SceneObject>().apply { complete(panelSceneObject) },
+        )
 
     exoPlayer =
         ExoPlayer.Builder(this).build().apply {
@@ -449,7 +472,7 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
       propertyName: String = "roughness",
       time: Float = 1.0f,
       accelerate: Boolean = true,
-      onEnd: () -> Unit = {}
+      onEnd: () -> Unit = {},
   ) =
       suspendCancellableCoroutine<Unit> { continuation ->
         // Create an ObjectAnimator to animate a float value from start to end
@@ -498,7 +521,8 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          onLoaded = onLoaded)
+          onLoaded = onLoaded,
+      )
     }
   }
 

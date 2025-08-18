@@ -64,7 +64,8 @@ class MixedRealitySampleActivity : AppSystemActivity() {
             PhysicsFeature(spatial, worldBounds = PhysicsWorldBounds(minY = -100.0f)),
             VRFeature(this),
             IsdkFeature(this, spatial, systemManager),
-            mrukFeature)
+            mrukFeature,
+        )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -89,7 +90,9 @@ class MixedRealitySampleActivity : AppSystemActivity() {
                 MRUKLabel.WALL_FACE to AnchorProceduralMeshConfig(null, true),
                 MRUKLabel.CEILING to AnchorProceduralMeshConfig(null, true),
                 MRUKLabel.TABLE to AnchorProceduralMeshConfig(null, true),
-                MRUKLabel.OTHER to AnchorProceduralMeshConfig(null, true)))
+                MRUKLabel.OTHER to AnchorProceduralMeshConfig(null, true),
+            ),
+        )
 
     // Enable MR mode
     systemManager.findSystem<LocomotionSystem>().enableLocomotion(false)
@@ -147,14 +150,15 @@ class MixedRealitySampleActivity : AppSystemActivity() {
         ambientColor = Vector3(0f),
         sunColor = Vector3(7.0f, 7.0f, 7.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
     scene.updateIBLEnvironment("environment.env")
   }
 
   override fun onRequestPermissionsResult(
       requestCode: Int,
       permissions: Array<out String>,
-      grantResults: IntArray
+      grantResults: IntArray,
   ) {
     if (requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
         permissions.size == 1 &&
@@ -213,7 +217,8 @@ class MixedRealitySampleActivity : AppSystemActivity() {
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
           keyName = GLXF_SCENE,
-          onLoaded = onLoaded)
+          onLoaded = onLoaded,
+      )
     }
   }
 

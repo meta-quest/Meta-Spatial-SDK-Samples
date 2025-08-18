@@ -24,7 +24,7 @@ enum class StickyColor {
   Pink,
   Orange,
   Blue,
-  Purple
+  Purple,
 }
 
 // Class to create a Sticky Note
@@ -34,7 +34,7 @@ class StickyNote(
     var uuid: Int = -1,
     var message: String = "",
     var color: StickyColor,
-    var pose: Pose = Pose()
+    var pose: Pose = Pose(),
 ) {
 
   init {
@@ -154,7 +154,8 @@ class StickyNote(
               ImmersiveActivity.instance.get()?.currentProject?.uuid,
               color,
               message,
-              sticky.getComponent<Transform>().transform)
+              sticky.getComponent<Transform>().transform,
+          )
       ImmersiveActivity.instance
           .get()
           ?.playCreationSound(sticky.getComponent<Transform>().transform.t)

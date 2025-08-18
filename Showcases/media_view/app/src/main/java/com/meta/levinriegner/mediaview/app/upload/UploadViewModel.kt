@@ -41,11 +41,16 @@ constructor(
                       (_state.value as UploadState.Uploading).fileId != driveMedia.fileId)) {
                 Timber.i("Creating new media file for file ${driveMedia.fileId}")
                 galleryRepository.createMediaFile(
-                    driveMedia.fileName, driveMedia.mimeType, null, StorageType.GoogleDrive)
+                    driveMedia.fileName,
+                    driveMedia.mimeType,
+                    null,
+                    StorageType.GoogleDrive,
+                )
               } else {
                 Pair(
                     (_state.value as UploadState.Uploading).contentValues,
-                    (_state.value as UploadState.Uploading).uri)
+                    (_state.value as UploadState.Uploading).uri,
+                )
               }
           // Write data to file
           galleryRepository.writeMediaFile(uri!!) { fos -> fos.write(driveMedia.blob) }
@@ -67,7 +72,8 @@ constructor(
                     driveMedia.progress.first,
                     driveMedia.progress.second,
                     contentValues,
-                    uri)
+                    uri,
+                )
           }
         } catch (t: Throwable) {
           Timber.w(t, "Download failed")

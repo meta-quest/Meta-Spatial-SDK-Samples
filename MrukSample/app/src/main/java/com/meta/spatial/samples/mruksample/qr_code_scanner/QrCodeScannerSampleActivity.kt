@@ -86,11 +86,17 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
         ambientColor = Vector3(0f),
         sunColor = Vector3(0.1f, 0.1f, 0.1f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.2f)
+        environmentIntensity = 0.2f,
+    )
     scene.updateIBLEnvironment("environment.env")
 
     Entity.createPanelEntity(
-        panelId, R.layout.ui_qrcode_scanner_menu, Transform(), Visible(showUiPanel), Grabbable())
+        panelId,
+        R.layout.ui_qrcode_scanner_menu,
+        Transform(),
+        Visible(showUiPanel),
+        Grabbable(),
+    )
   }
 
   override fun onRecenter() {
@@ -170,7 +176,8 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
               returnTo2DActivity(
                   this@QrCodeScannerSampleActivity,
                   applicationContext,
-                  MrukSampleStartMenuActivity::class.java)
+                  MrukSampleStartMenuActivity::class.java,
+              )
             }
 
             startStopTrackerButton = rootView?.findViewById<Button>(R.id.start_stop_tracker)
@@ -184,7 +191,8 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
             }
             updateStartStopTrackerButton(trackerRunning)
           }
-        })
+        },
+    )
   }
 
   @OptIn(SpatialSDKExperimentalAPI::class)
@@ -223,7 +231,7 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
   override fun onRequestPermissionsResult(
       requestCode: Int,
       permissions: Array<out String>,
-      grantResults: IntArray
+      grantResults: IntArray,
   ) {
     if (requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
         permissions.size == 1 &&

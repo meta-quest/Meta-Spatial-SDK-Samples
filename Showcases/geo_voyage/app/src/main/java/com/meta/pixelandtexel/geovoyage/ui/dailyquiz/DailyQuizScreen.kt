@@ -34,13 +34,14 @@ val QuestionRoutes =
         Routes.QUESTION_2_ROUTE,
         Routes.QUESTION_3_ROUTE,
         Routes.QUESTION_4_ROUTE,
-        Routes.QUESTION_5_ROUTE)
+        Routes.QUESTION_5_ROUTE,
+    )
 
 @Composable
 fun DailyQuizScreen(
     vm: QuizViewModel = viewModel(),
     setTitle: ((text: String) -> Unit)? = null,
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
 ) {
   val route by vm.route
   val title by vm.title

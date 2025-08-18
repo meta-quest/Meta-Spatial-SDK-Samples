@@ -5,5 +5,5 @@ package com.meta.pixelandtexel.scanner.objectdetection.camera.enums
 enum class CameraEye {
   UNKNOWN,
   LEFT,
-  RIGHT
+  RIGHT,
 }

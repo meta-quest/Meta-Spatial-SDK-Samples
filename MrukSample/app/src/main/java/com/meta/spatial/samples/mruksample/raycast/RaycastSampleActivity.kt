@@ -108,21 +108,37 @@ class RaycastSampleActivity : AppSystemActivity() {
                     SceneMaterialAttribute("albedoUVTransformM00", SceneMaterialDataType.Vector4),
                     SceneMaterialAttribute("albedoUVTransformM10", SceneMaterialDataType.Vector4),
                     SceneMaterialAttribute(
-                        "roughnessMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "roughnessMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "roughnessMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "roughnessMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "emissiveMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "emissiveMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "emissiveMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "emissiveMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "occlusionMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "occlusionMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "occlusionMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "occlusionMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "normalMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "normalMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "normalMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "normalMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                 ),
             )
             .apply {
@@ -157,10 +173,16 @@ class RaycastSampleActivity : AppSystemActivity() {
         ambientColor = Vector3(0.2f),
         sunColor = Vector3(1.0f, 1.0f, 1.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
 
     Entity.createPanelEntity(
-        panelId, R.layout.ui_raycast_menu, Transform(), Visible(showUiPanel), Grabbable())
+        panelId,
+        R.layout.ui_raycast_menu,
+        Transform(),
+        Visible(showUiPanel),
+        Grabbable(),
+    )
   }
 
   private fun setProcMeshVisibility(visible: Boolean) {
@@ -181,7 +203,8 @@ class RaycastSampleActivity : AppSystemActivity() {
                   MRUKLabel.BED to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
                   MRUKLabel.FLOOR to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
                   MRUKLabel.WALL_FACE to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
-                  MRUKLabel.CEILING to AnchorProceduralMeshConfig(roomOutlineMaterial, true)),
+                  MRUKLabel.CEILING to AnchorProceduralMeshConfig(roomOutlineMaterial, true),
+              ),
               MRUKSpawnMode.CURRENT_ROOM_ONLY,
               MRUKWallTexCoordModeU.STRETCH_SECTION,
               MRUKWallTexCoordModeV.STRETCH,
@@ -199,7 +222,8 @@ class RaycastSampleActivity : AppSystemActivity() {
       globalMeshSpawner =
           AnchorProceduralMesh(
               mrukFeature,
-              mapOf(MRUKLabel.GLOBAL_MESH to AnchorProceduralMeshConfig(wallMaterial, false)))
+              mapOf(MRUKLabel.GLOBAL_MESH to AnchorProceduralMeshConfig(wallMaterial, false)),
+          )
     }
   }
 
@@ -224,7 +248,8 @@ class RaycastSampleActivity : AppSystemActivity() {
             ArrayAdapter.createFromResource(
                     rootView?.context!!,
                     R.array.json_rooms_array,
-                    android.R.layout.simple_spinner_item)
+                    android.R.layout.simple_spinner_item,
+                )
                 .also { adapter ->
                   adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                   jsonFileSpinner.adapter = adapter
@@ -259,7 +284,10 @@ class RaycastSampleActivity : AppSystemActivity() {
             if (context != null) {
               val adapter =
                   ArrayAdapter.createFromResource(
-                      context, R.array.raycast_type_array, android.R.layout.simple_spinner_item)
+                      context,
+                      R.array.raycast_type_array,
+                      android.R.layout.simple_spinner_item,
+                  )
               adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
               raycastTypeSpinner?.adapter = adapter
             }
@@ -282,7 +310,7 @@ class RaycastSampleActivity : AppSystemActivity() {
                       parent: AdapterView<*>?,
                       view: View?,
                       position: Int,
-                      id: Long
+                      id: Long,
                   ) {
                     when (position) {
                       RAYCAST_TYPE_SCENE -> {
@@ -341,7 +369,8 @@ class RaycastSampleActivity : AppSystemActivity() {
               returnTo2DActivity(
                   this@RaycastSampleActivity,
                   applicationContext,
-                  MrukSampleStartMenuActivity::class.java)
+                  MrukSampleStartMenuActivity::class.java,
+              )
             }
           }
         })
@@ -350,7 +379,7 @@ class RaycastSampleActivity : AppSystemActivity() {
   override fun onRequestPermissionsResult(
       requestCode: Int,
       permissions: Array<out String>,
-      grantResults: IntArray
+      grantResults: IntArray,
   ) {
     if (requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
         permissions.size == 1 &&

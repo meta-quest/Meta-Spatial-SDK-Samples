@@ -38,7 +38,7 @@ import com.meta.pixelandtexel.geovoyage.viewmodels.ExploreViewModel
 fun ExploreScreen(
     vm: ExploreViewModel = viewModel(),
     setTitle: ((text: String) -> Unit)? = null,
-    onReportVRProblem: (url: String) -> Unit
+    onReportVRProblem: (url: String) -> Unit,
 ) {
   val title by vm.title
   val resultMessage by vm.result
@@ -56,71 +56,71 @@ fun ExploreScreen(
   Column(
       verticalArrangement = Arrangement.Top,
       horizontalAlignment = Alignment.CenterHorizontally,
-      modifier = Modifier.fillMaxSize()) {
-        SecondaryPanel(
-            modifier =
-                Modifier.fillMaxWidth().height(dimensionResource(R.dimen.tall_panel_height))) {
-              Column(
-                  horizontalAlignment = Alignment.CenterHorizontally,
-                  verticalArrangement = Arrangement.SpaceAround,
-                  modifier = Modifier.fillMaxSize(),
+      modifier = Modifier.fillMaxSize(),
+  ) {
+    SecondaryPanel(
+        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.tall_panel_height))) {
+          Column(
+              horizontalAlignment = Alignment.CenterHorizontally,
+              verticalArrangement = Arrangement.SpaceAround,
+              modifier = Modifier.fillMaxSize(),
+          ) {
+            ScrollableTextAreaWithScrollBar(text = resultMessage, modifier = Modifier.weight(1f))
+            Spacer(Modifier.height(12.dp))
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom,
+                modifier = Modifier.fillMaxWidth(),
+            ) {
+              Row(
+                  horizontalArrangement = Arrangement.spacedBy(12.dp),
               ) {
-                ScrollableTextAreaWithScrollBar(
-                    text = resultMessage, modifier = Modifier.weight(1f))
-                Spacer(Modifier.height(12.dp))
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.Bottom,
-                    modifier = Modifier.fillMaxWidth()) {
-                      Row(
-                          horizontalArrangement = Arrangement.spacedBy(12.dp),
-                      ) {
-                        ToggleChip(
-                            selected = landmarksEnabled,
-                            text = "Landmarks",
-                        ) {
-                          vm.onLandmarksToggled(!landmarksEnabled)
-                        }
-                        ToggleChip(
-                            selected = vrModeEnabled,
-                            enabled = panoData != null,
-                            text = "VR Mode",
-                        ) {
-                          vm.onEnterVRClicked()
-                        }
-                      }
-                      if (true || shouldDisplayCopyright) {
-                        val copyrightText =
-                            "${stringResource(R.string.explore_copyright)}: ${panoData?.copyright}" +
-                                if (!panoData?.date.isNullOrEmpty()) ", ${panoData?.date}" else ""
-                        Column(
-                            horizontalAlignment = Alignment.End,
-                            verticalArrangement = Arrangement.Bottom,
-                        ) {
-                          Image(
-                              painterResource(id = R.mipmap.google_on_white),
-                              contentDescription = "Google",
-                              contentScale = ContentScale.Fit,
-                              modifier = Modifier.requiredSizeIn(91.dp, 27.dp))
-                          Text(
-                              text = copyrightText,
-                              textAlign = TextAlign.Right,
-                              style = MaterialTheme.typography.bodySmall,
-                          )
-                          Text(
-                              text = stringResource(id = R.string.explore_report_problem),
-                              textAlign = TextAlign.Right,
-                              style = MaterialTheme.typography.bodySmall,
-                              modifier =
-                                  Modifier.clickable {
-                                    onReportVRProblem(panoData!!.reportProblemLink)
-                                  })
-                        }
-                      }
-                    }
+                ToggleChip(
+                    selected = landmarksEnabled,
+                    text = "Landmarks",
+                ) {
+                  vm.onLandmarksToggled(!landmarksEnabled)
+                }
+                ToggleChip(
+                    selected = vrModeEnabled,
+                    enabled = panoData != null,
+                    text = "VR Mode",
+                ) {
+                  vm.onEnterVRClicked()
+                }
+              }
+              if (true || shouldDisplayCopyright) {
+                val copyrightText =
+                    "${stringResource(R.string.explore_copyright)}: ${panoData?.copyright}" +
+                        if (!panoData?.date.isNullOrEmpty()) ", ${panoData?.date}" else ""
+                Column(
+                    horizontalAlignment = Alignment.End,
+                    verticalArrangement = Arrangement.Bottom,
+                ) {
+                  Image(
+                      painterResource(id = R.mipmap.google_on_white),
+                      contentDescription = "Google",
+                      contentScale = ContentScale.Fit,
+                      modifier = Modifier.requiredSizeIn(91.dp, 27.dp),
+                  )
+                  Text(
+                      text = copyrightText,
+                      textAlign = TextAlign.Right,
+                      style = MaterialTheme.typography.bodySmall,
+                  )
+                  Text(
+                      text = stringResource(id = R.string.explore_report_problem),
+                      textAlign = TextAlign.Right,
+                      style = MaterialTheme.typography.bodySmall,
+                      modifier =
+                          Modifier.clickable { onReportVRProblem(panoData!!.reportProblemLink) },
+                  )
+                }
               }
             }
-      }
+          }
+        }
+  }
 }
 
 @Preview(widthDp = 570, heightDp = 480, showBackground = true, backgroundColor = 0xFFECEFE8)

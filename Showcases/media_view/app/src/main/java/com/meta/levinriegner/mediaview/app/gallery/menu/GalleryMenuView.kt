@@ -53,38 +53,39 @@ fun GalleryMenuView(
   ) {
     Row(
         modifier = Modifier.fillMaxSize().padding(16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween) {
-          Text(
-              text =
-                  if (canOpenMore)
-                      pluralStringResource(
-                          id = R.plurals.n_files_open,
-                          openCount,
-                          openCount,
-                      )
-                  else stringResource(id = R.string.max_files_open, openCount),
-              color = Color.White,
-              fontSize = 20.sp,
-              fontWeight = FontWeight.Bold,
-              textAlign = TextAlign.Left,
-              modifier = Modifier.offset(0.dp, 5.dp))
-          Spacer(modifier = Modifier.padding(Dimens.medium))
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+      Text(
+          text =
+              if (canOpenMore)
+                  pluralStringResource(
+                      id = R.plurals.n_files_open,
+                      openCount,
+                      openCount,
+                  )
+              else stringResource(id = R.string.max_files_open, openCount),
+          color = Color.White,
+          fontSize = 20.sp,
+          fontWeight = FontWeight.Bold,
+          textAlign = TextAlign.Left,
+          modifier = Modifier.offset(0.dp, 5.dp),
+      )
+      Spacer(modifier = Modifier.padding(Dimens.medium))
 
-          OutlinedButton(
-              colors =
-                  ButtonDefaults.buttonColors(
-                      contentColor = AppColor.White,
-                      containerColor = Color.Transparent,
-                  ),
-              onClick = { onCloseAll() }) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                  Icon(
-                      painter = painterResource(id = R.drawable.icon_close),
-                      contentDescription = "Close")
-                  Spacer(modifier = Modifier.size(Dimens.xSmall))
-                  Text(stringResource(id = R.string.files_close_all_button))
-                }
-              }
+      OutlinedButton(
+          colors =
+              ButtonDefaults.buttonColors(
+                  contentColor = AppColor.White,
+                  containerColor = Color.Transparent,
+              ),
+          onClick = { onCloseAll() },
+      ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+          Icon(painter = painterResource(id = R.drawable.icon_close), contentDescription = "Close")
+          Spacer(modifier = Modifier.size(Dimens.xSmall))
+          Text(stringResource(id = R.string.files_close_all_button))
         }
+      }
+    }
   }
 }

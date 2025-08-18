@@ -171,7 +171,8 @@ class ImmersiveActivity : AppSystemActivity() {
         registerBoardSubPanel(),
         registerShapesSubPanel(),
         registerStickerSubPanel(),
-        registerTimerSubPanel())
+        registerTimerSubPanel(),
+    )
   }
 
   override fun onPause() {
@@ -369,7 +370,8 @@ class ImmersiveActivity : AppSystemActivity() {
               spatialContext,
               source,
               uuid,
-              Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
+              Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)),
+          )
         } else {
           Tool(
               type = type,
@@ -377,7 +379,8 @@ class ImmersiveActivity : AppSystemActivity() {
               size = size,
               uuid = uuid,
               pose = Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)),
-              deleteButtonHeight = deleteHeight)
+              deleteButtonHeight = deleteHeight,
+          )
         }
         toolsCursor.moveToNext()
       }
@@ -424,7 +427,8 @@ class ImmersiveActivity : AppSystemActivity() {
             uuid,
             message,
             color!!,
-            Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
+            Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)),
+        )
 
         stickiesCursor.moveToNext()
       }
@@ -482,21 +486,29 @@ class ImmersiveActivity : AppSystemActivity() {
           project.uuid,
           AssetType.TASKS_PANEL,
           true,
-          tasksPanel.getComponent<Transform>().transform)
+          tasksPanel.getComponent<Transform>().transform,
+      )
       DB.createUniqueAsset(
           aiPanelUUID,
           project.uuid,
           AssetType.AI_PANEL,
           true,
-          aiExchangePanel.getComponent<Transform>().transform)
+          aiExchangePanel.getComponent<Transform>().transform,
+      )
       DB.createUniqueAsset(
-          clockUUID, project.uuid, AssetType.CLOCK, true, clock.getComponent<Transform>().transform)
+          clockUUID,
+          project.uuid,
+          AssetType.CLOCK,
+          true,
+          clock.getComponent<Transform>().transform,
+      )
       DB.createUniqueAsset(
           speakerUUID,
           project.uuid,
           AssetType.SPEAKER,
           true,
-          speaker.getComponent<Transform>().transform)
+          speaker.getComponent<Transform>().transform,
+      )
 
       // Initial Web View tool created as an example
       WebView(scene, spatialContext)
@@ -564,7 +576,8 @@ class ImmersiveActivity : AppSystemActivity() {
             Grabbable(true, GrabbableType.PIVOT_Y),
             IsdkGrabbable(billboardOrientation = Vector3(0f, 180f, 0f)),
             // Empty UUID since the asset is not linked with any project for now
-            UniqueAssetComponent(type = AssetType.SPEAKER))
+            UniqueAssetComponent(type = AssetType.SPEAKER),
+        )
 
     val size = 0.05f
     // Image entity showing state On/Off of the speaker.
@@ -581,7 +594,8 @@ class ImmersiveActivity : AppSystemActivity() {
             },
             Transform(Pose(Vector3(0f, -0.01f, 0.045f), Quaternion(-30f, 0f, 0f))),
             // We make this entity child to the speaker entity
-            TransformParent(speaker))
+            TransformParent(speaker),
+        )
 
     // Add listener to detect when user is selecting the object and stop or play sound
     addOnSelectListener(
@@ -592,7 +606,8 @@ class ImmersiveActivity : AppSystemActivity() {
           } else {
             playAmbientSound()
           }
-        })
+        },
+    )
   }
 
   // Clock composed object created by two entities, one with a Mesh component and the other with a
@@ -634,7 +649,8 @@ class ImmersiveActivity : AppSystemActivity() {
             IsdkGrabbable(billboardOrientation = Vector3(0f, 180f, 0f)),
             Visible(false),
             // Empty UUID since the asset is not linked with any project for now
-            UniqueAssetComponent(type = AssetType.CLOCK))
+            UniqueAssetComponent(type = AssetType.CLOCK),
+        )
 
     // Making panel entity child of clock entity
     clockPanel.setComponent(TransformParent(clock))
@@ -677,7 +693,8 @@ class ImmersiveActivity : AppSystemActivity() {
         deleteButton,
         fun() {
           deleteObject(currentObjectSelected, true)
-        })
+        },
+    )
   }
 
   // All panels in scene are created and referenced in variables to control them
@@ -730,7 +747,8 @@ class ImmersiveActivity : AppSystemActivity() {
               unlit = true // Prevent scene lighting from affecting the skybox
             },
             Visible(false),
-            Transform(Pose(Vector3(0f))))
+            Transform(Pose(Vector3(0f))),
+        )
   }
 
   // Init app is called after app logo has been showed
@@ -907,7 +925,9 @@ class ImmersiveActivity : AppSystemActivity() {
               placeInFront(tasksPanel, bigPanel = true)
               tasksPanel.setComponent(Visible(true))
               DB.updateUniqueAsset(
-                  tasksPanel.getComponent<UniqueAssetComponent>().uuid, state = true)
+                  tasksPanel.getComponent<UniqueAssetComponent>().uuid,
+                  state = true,
+              )
             }
 
             val buttonWebView: ImageButton? =
@@ -920,7 +940,9 @@ class ImmersiveActivity : AppSystemActivity() {
                 placeInFront(aiExchangePanel, bigPanel = true)
                 aiExchangePanel.setComponent(Visible(true))
                 DB.updateUniqueAsset(
-                    aiExchangePanel.getComponent<UniqueAssetComponent>().uuid, state = true)
+                    aiExchangePanel.getComponent<UniqueAssetComponent>().uuid,
+                    state = true,
+                )
               }
             } else {
               val parent = rootView?.findViewById<LinearLayout>(R.id.toolsContainer)
@@ -990,7 +1012,8 @@ class ImmersiveActivity : AppSystemActivity() {
                     scene = scene,
                     ctx = spatialContext,
                     message = "",
-                    color = StickyColor.entries[i])
+                    color = StickyColor.entries[i],
+                )
                 closeSubPanels()
               }
             }
@@ -1027,7 +1050,8 @@ class ImmersiveActivity : AppSystemActivity() {
                     type = AssetType.LABEL,
                     source = labels[i].toString(),
                     size = 0.065f,
-                    deleteButtonHeight = 0.05f)
+                    deleteButtonHeight = 0.05f,
+                )
                 closeSubPanels()
               }
             }
@@ -1064,7 +1088,8 @@ class ImmersiveActivity : AppSystemActivity() {
                     type = AssetType.ARROW,
                     source = arrows[i].toString(),
                     size = 0.1f,
-                    deleteButtonHeight = getDeleteButtonHeight(AssetType.ARROW, i))
+                    deleteButtonHeight = getDeleteButtonHeight(AssetType.ARROW, i),
+                )
                 closeSubPanels()
               }
             }
@@ -1101,7 +1126,8 @@ class ImmersiveActivity : AppSystemActivity() {
                     type = AssetType.BOARD,
                     source = boards[i].toString(),
                     size = getAssetSize(AssetType.BOARD, i),
-                    deleteButtonHeight = getDeleteButtonHeight(AssetType.BOARD, i))
+                    deleteButtonHeight = getDeleteButtonHeight(AssetType.BOARD, i),
+                )
                 closeSubPanels()
               }
             }
@@ -1140,7 +1166,8 @@ class ImmersiveActivity : AppSystemActivity() {
                     type = type,
                     source = shapes[i].toString(),
                     size = getAssetSize(type, i),
-                    deleteButtonHeight = deleteHeight)
+                    deleteButtonHeight = deleteHeight,
+                )
                 closeSubPanels()
               }
             }
@@ -1241,7 +1268,9 @@ class ImmersiveActivity : AppSystemActivity() {
             buttonClose?.setOnClickListener {
               tasksPanel.setComponent(Visible(false))
               DB.updateUniqueAsset(
-                  tasksPanel.getComponent<UniqueAssetComponent>().uuid, state = false)
+                  tasksPanel.getComponent<UniqueAssetComponent>().uuid,
+                  state = false,
+              )
             }
           }
         }
@@ -1272,7 +1301,9 @@ class ImmersiveActivity : AppSystemActivity() {
             buttonClose?.setOnClickListener {
               aiExchangePanel.setComponent(Visible(false))
               DB.updateUniqueAsset(
-                  aiExchangePanel.getComponent<UniqueAssetComponent>().uuid, state = false)
+                  aiExchangePanel.getComponent<UniqueAssetComponent>().uuid,
+                  state = false,
+              )
             }
 
             val textPrompt: EditText? = rootView?.findViewById<EditText>(R.id.textPrompt)
@@ -1333,7 +1364,8 @@ class ImmersiveActivity : AppSystemActivity() {
             R.layout.activity_main,
             Transform(Pose(Vector3(0f))),
             Grabbable(true, GrabbableType.FACE),
-            Visible(false))
+            Visible(false),
+        )
   }
 
   fun createToolbarPanel() {
@@ -1342,7 +1374,8 @@ class ImmersiveActivity : AppSystemActivity() {
             R.layout.toolbar_panel,
             Transform(Pose(Vector3(0f))),
             Grabbable(true, GrabbableType.FACE),
-            Visible(false))
+            Visible(false),
+        )
   }
 
   fun createStickySubPanel() {
@@ -1351,7 +1384,8 @@ class ImmersiveActivity : AppSystemActivity() {
             R.layout.sticky_sub_panel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
-            TransformParent(toolbarPanel))
+            TransformParent(toolbarPanel),
+        )
 
     subpanels.add(stickySubPanel)
   }
@@ -1362,7 +1396,8 @@ class ImmersiveActivity : AppSystemActivity() {
             R.layout.label_sub_panel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
-            TransformParent(toolbarPanel))
+            TransformParent(toolbarPanel),
+        )
 
     subpanels.add(labelSubPanel)
   }
@@ -1373,7 +1408,8 @@ class ImmersiveActivity : AppSystemActivity() {
             R.layout.arrow_sub_panel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
-            TransformParent(toolbarPanel))
+            TransformParent(toolbarPanel),
+        )
 
     subpanels.add(arrowSubPanel)
   }
@@ -1384,7 +1420,8 @@ class ImmersiveActivity : AppSystemActivity() {
             R.layout.board_sub_panel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
-            TransformParent(toolbarPanel))
+            TransformParent(toolbarPanel),
+        )
 
     subpanels.add(boardSubPanel)
   }
@@ -1395,7 +1432,8 @@ class ImmersiveActivity : AppSystemActivity() {
             R.layout.shape_sub_panel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
-            TransformParent(toolbarPanel))
+            TransformParent(toolbarPanel),
+        )
 
     subpanels.add(shapeSubPanel)
   }
@@ -1406,7 +1444,8 @@ class ImmersiveActivity : AppSystemActivity() {
             R.layout.sticker_sub_panel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
-            TransformParent(toolbarPanel))
+            TransformParent(toolbarPanel),
+        )
 
     subpanels.add(stickerSubPanel)
   }
@@ -1417,7 +1456,8 @@ class ImmersiveActivity : AppSystemActivity() {
             R.layout.timer_sub_panel,
             Transform(Pose(Vector3(0f, 0.06f, -0.05f))),
             Visible(false),
-            TransformParent(toolbarPanel))
+            TransformParent(toolbarPanel),
+        )
 
     subpanels.add(timerSubPanel)
   }
@@ -1448,7 +1488,8 @@ class ImmersiveActivity : AppSystemActivity() {
             Grabbable(true, GrabbableType.FACE),
             Visible(false),
             // Empty UUID since the asset is not linked with any project for now
-            UniqueAssetComponent(type = AssetType.TASKS_PANEL))
+            UniqueAssetComponent(type = AssetType.TASKS_PANEL),
+        )
   }
 
   // Clean TasksPanel and load corresponding tasks
@@ -1495,7 +1536,8 @@ class ImmersiveActivity : AppSystemActivity() {
           templateTitleText?.text.toString(),
           templateBodyText?.text.toString(),
           templateState,
-          templatePriority)
+          templatePriority,
+      )
 
       // reset template task values
       templateTitleText?.setText("")
@@ -1557,7 +1599,8 @@ class ImmersiveActivity : AppSystemActivity() {
             detach = detach,
             pose = Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)),
             fromSpatialTask = fromSpatialTask,
-            createSpatial = createSpatial)
+            createSpatial = createSpatial,
+        )
         tasksCursor.moveToNext()
       }
     }
@@ -1576,7 +1619,7 @@ class ImmersiveActivity : AppSystemActivity() {
       detach: Int? = null,
       pose: Pose? = null,
       fromSpatialTask: Boolean = false,
-      createSpatial: Boolean = true
+      createSpatial: Boolean = true,
   ): View {
     // We get the scrollview from the TasksPanel
     val scrollTable: TableLayout? = panel?.rootView?.findViewById<TableLayout>(R.id.scrollViewTable)
@@ -1612,7 +1655,13 @@ class ImmersiveActivity : AppSystemActivity() {
     // Save new task in database
     if (isNewTask) {
       DB.createTask(
-          _uuid, currentProject?.uuid, taskTitle, taskBody, templateState, templatePriority)
+          _uuid,
+          currentProject?.uuid,
+          taskTitle,
+          taskBody,
+          templateState,
+          templatePriority,
+      )
 
       // scroll to the bottom of the scrollview
       val scrollParent: ScrollView? = panel?.rootView?.findViewById(R.id.scrollView)
@@ -1624,7 +1673,8 @@ class ImmersiveActivity : AppSystemActivity() {
                   scrollParent.viewTreeObserver.removeOnGlobalLayoutListener(this)
                   scrollParent.postDelayed(
                       { scrollParent.fullScroll(ScrollView.FOCUS_DOWN) },
-                      100) // Delay to ensure the scrolling happens after layout
+                      100,
+                  ) // Delay to ensure the scrolling happens after layout
                 }
               })
       // if is not a new task, we check if a corresponding Spatial Task should be created
@@ -1680,7 +1730,10 @@ class ImmersiveActivity : AppSystemActivity() {
     // should update corresponding spatial tasks and database too
     fun onComplete() {
       DB.updateTaskData(
-          _uuid, title = titleTextInput.text.toString(), body = bodyTextInput.text.toString())
+          _uuid,
+          title = titleTextInput.text.toString(),
+          body = bodyTextInput.text.toString(),
+      )
       updateSpatialTask(_uuid)
     }
     addEditTextListeners(titleTextInput, ::onComplete)
@@ -1797,7 +1850,8 @@ class ImmersiveActivity : AppSystemActivity() {
             Grabbable(true, GrabbableType.FACE),
             Visible(false),
             // Empty UUID since the asset is not linked with any project for now
-            UniqueAssetComponent(type = AssetType.AI_PANEL))
+            UniqueAssetComponent(type = AssetType.AI_PANEL),
+        )
   }
 
   // Loading state of a button while the AI is processing the request
@@ -1855,7 +1909,11 @@ class ImmersiveActivity : AppSystemActivity() {
           response = "Error: Empty response"
         }
         StickyNote(
-            scene = scene, ctx = spatialContext, message = response, color = StickyColor.Purple)
+            scene = scene,
+            ctx = spatialContext,
+            message = response,
+            color = StickyColor.Purple,
+        )
       }
     }
   }
@@ -1930,7 +1988,8 @@ class ImmersiveActivity : AppSystemActivity() {
                 scrollView.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 scrollView.postDelayed(
                     { scrollView.fullScroll(ScrollView.FOCUS_DOWN) },
-                    100) // Delay to ensure the scrolling happens after layout
+                    100,
+                ) // Delay to ensure the scrolling happens after layout
               }
             })
 
@@ -1971,7 +2030,9 @@ class ImmersiveActivity : AppSystemActivity() {
                 Quaternion(
                     billboardOrientationEuler.x,
                     billboardOrientationEuler.y,
-                    billboardOrientationEuler.z))))
+                    billboardOrientationEuler.z,
+                ),
+            )))
     deleteButton.setComponent(TransformParent(ent))
     deleteButton.setComponent(Visible(true))
   }
@@ -1980,7 +2041,7 @@ class ImmersiveActivity : AppSystemActivity() {
   fun deleteObject(
       entity: Entity?,
       deleteFromDB: Boolean = false,
-      cleaningProject: Boolean = false
+      cleaningProject: Boolean = false,
   ) {
 
     val position = entity!!.getComponent<Transform>().transform.t

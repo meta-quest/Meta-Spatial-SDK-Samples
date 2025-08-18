@@ -17,7 +17,7 @@ import org.json.JSONObject
 data class AIResponse<T>(
     @SerializedName("success") val success: Boolean,
     @SerializedName("data") val data: T?,
-    @SerializedName("errmsg") val errmsg: String?
+    @SerializedName("errmsg") val errmsg: String?,
 )
 
 data class AskQuestionResponse(@SerializedName("answer") val answer: String)

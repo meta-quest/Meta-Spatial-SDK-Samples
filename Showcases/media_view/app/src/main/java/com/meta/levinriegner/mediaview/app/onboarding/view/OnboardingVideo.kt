@@ -17,5 +17,6 @@ fun OnboardingVideo(exoPlayer: ExoPlayer, modifier: Modifier = Modifier) {
           useController = false
         }
       },
-      modifier = modifier)
+      modifier = modifier,
+  )
 }

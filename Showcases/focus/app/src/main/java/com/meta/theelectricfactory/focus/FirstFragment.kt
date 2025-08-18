@@ -24,7 +24,7 @@ class FirstFragment : Fragment() {
   override fun onCreateView(
       inflater: LayoutInflater,
       container: ViewGroup?,
-      savedInstanceState: Bundle?
+      savedInstanceState: Bundle?,
   ): View {
     FirstFragment.instance = WeakReference(this)
 

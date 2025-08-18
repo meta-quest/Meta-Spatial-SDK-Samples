@@ -64,9 +64,10 @@ fun DebugPanel(debugData: DebugData) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier =
-                Modifier.fillMaxWidth().wrapContentHeight().padding(start = 16.dp, end = 16.dp)) {
-              items(items = debugData.items) { item -> DebugPanelItem(item) }
-            }
+                Modifier.fillMaxWidth().wrapContentHeight().padding(start = 16.dp, end = 16.dp),
+        ) {
+          items(items = debugData.items) { item -> DebugPanelItem(item) }
+        }
       }
 }
 
@@ -97,35 +98,37 @@ fun DebugPanelStringArray(slider: DebugStringArrayItem) {
         modifier =
             Modifier.height(40.dp)
                 .fillMaxWidth()
-                .background(DebugControlsPanelConstants.BackgroundColor)) {
-          Column(modifier = Modifier.width(110.dp)) {
-            Text(
-                text = slider.label,
-                style =
-                    TextStyle(
-                        fontSize = 12.sp,
-                    ),
-                color = Color.White,
-            )
-            Text(
-                text = debugValue,
-                style =
-                    TextStyle(
-                        fontSize = 12.sp,
-                    ),
-                color = Color.White,
-            )
-          }
-          Slider(
-              value = values.indexOf(debugValue).toFloat(),
-              steps = count - 2,
-              valueRange = 0f..(count - 1).toFloat(),
-              onValueChange = { value ->
-                debugValue = values[value.roundToInt()]
-                slider.onValueChanged.invoke(debugValue)
-              },
-              modifier = Modifier.width(240.dp))
-        }
+                .background(DebugControlsPanelConstants.BackgroundColor),
+    ) {
+      Column(modifier = Modifier.width(110.dp)) {
+        Text(
+            text = slider.label,
+            style =
+                TextStyle(
+                    fontSize = 12.sp,
+                ),
+            color = Color.White,
+        )
+        Text(
+            text = debugValue,
+            style =
+                TextStyle(
+                    fontSize = 12.sp,
+                ),
+            color = Color.White,
+        )
+      }
+      Slider(
+          value = values.indexOf(debugValue).toFloat(),
+          steps = count - 2,
+          valueRange = 0f..(count - 1).toFloat(),
+          onValueChange = { value ->
+            debugValue = values[value.roundToInt()]
+            slider.onValueChanged.invoke(debugValue)
+          },
+          modifier = Modifier.width(240.dp),
+      )
+    }
   }
 }
 
@@ -150,35 +153,37 @@ fun DebugPanelEnumSlider(slider: DebugEnumItem) {
         modifier =
             Modifier.height(40.dp)
                 .fillMaxWidth()
-                .background(DebugControlsPanelConstants.BackgroundColor)) {
-          Column(modifier = Modifier.width(110.dp)) {
-            Text(
-                text = slider.label,
-                style =
-                    TextStyle(
-                        fontSize = 12.sp,
-                    ),
-                color = Color.White,
-            )
-            Text(
-                text = debugValue.name,
-                style =
-                    TextStyle(
-                        fontSize = 12.sp,
-                    ),
-                color = Color.White,
-            )
-          }
-          Slider(
-              value = debugValue.ordinal.toFloat(),
-              steps = count - 2,
-              valueRange = 0f..(count - 1).toFloat(),
-              onValueChange = { value ->
-                debugValue = intToValue[value.roundToInt()] ?: debugValue
-                slider.onValueChanged.invoke(debugValue)
-              },
-              modifier = Modifier.width(240.dp))
-        }
+                .background(DebugControlsPanelConstants.BackgroundColor),
+    ) {
+      Column(modifier = Modifier.width(110.dp)) {
+        Text(
+            text = slider.label,
+            style =
+                TextStyle(
+                    fontSize = 12.sp,
+                ),
+            color = Color.White,
+        )
+        Text(
+            text = debugValue.name,
+            style =
+                TextStyle(
+                    fontSize = 12.sp,
+                ),
+            color = Color.White,
+        )
+      }
+      Slider(
+          value = debugValue.ordinal.toFloat(),
+          steps = count - 2,
+          valueRange = 0f..(count - 1).toFloat(),
+          onValueChange = { value ->
+            debugValue = intToValue[value.roundToInt()] ?: debugValue
+            slider.onValueChanged.invoke(debugValue)
+          },
+          modifier = Modifier.width(240.dp),
+      )
+    }
   }
 }
 
@@ -193,35 +198,39 @@ fun DebugPanelSlider(slider: DebugSliderItem) {
         modifier =
             Modifier.height(40.dp)
                 .fillMaxWidth()
-                .background(DebugControlsPanelConstants.BackgroundColor)) {
-          Text(
-              text = slider.label,
-              style =
-                  TextStyle(
-                      fontSize = 12.sp,
-                  ),
-              color = Color.White,
-              modifier = Modifier.width(110.dp))
-          Slider(
-              value = debugValue,
-              steps = slider.steps,
-              valueRange = slider.range,
-              onValueChange = { value ->
-                debugValue = value
-                if (slider.roundToInt) debugValue.roundToInt().toFloat()
-                slider.onValueChanged(debugValue)
-              },
-              modifier = Modifier.width(190.dp))
+                .background(DebugControlsPanelConstants.BackgroundColor),
+    ) {
+      Text(
+          text = slider.label,
+          style =
+              TextStyle(
+                  fontSize = 12.sp,
+              ),
+          color = Color.White,
+          modifier = Modifier.width(110.dp),
+      )
+      Slider(
+          value = debugValue,
+          steps = slider.steps,
+          valueRange = slider.range,
+          onValueChange = { value ->
+            debugValue = value
+            if (slider.roundToInt) debugValue.roundToInt().toFloat()
+            slider.onValueChanged(debugValue)
+          },
+          modifier = Modifier.width(190.dp),
+      )
 
-          Text(
-              text = (if (slider.roundToInt) "%.0f" else "%.2f").format(debugValue),
-              style =
-                  TextStyle(
-                      fontSize = 12.sp,
-                  ),
-              color = Color.White,
-              modifier = Modifier.width(50.dp))
-        }
+      Text(
+          text = (if (slider.roundToInt) "%.0f" else "%.2f").format(debugValue),
+          style =
+              TextStyle(
+                  fontSize = 12.sp,
+              ),
+          color = Color.White,
+          modifier = Modifier.width(50.dp),
+      )
+    }
   }
 }
 
@@ -236,22 +245,25 @@ fun DebugPanelToggle(toggle: DebugToggleItem) {
         modifier =
             Modifier.height(40.dp)
                 .fillMaxWidth()
-                .background(DebugControlsPanelConstants.BackgroundColor)) {
-          Text(
-              text = toggle.label,
-              style =
-                  TextStyle(
-                      fontSize = 12.sp,
-                  ),
-              color = Color.White,
-              modifier = Modifier.width(110.dp))
-          Switch(
-              checked = debugValue,
-              onCheckedChange = {
-                debugValue = it
-                toggle.onValueChanged(debugValue)
-              })
-        }
+                .background(DebugControlsPanelConstants.BackgroundColor),
+    ) {
+      Text(
+          text = toggle.label,
+          style =
+              TextStyle(
+                  fontSize = 12.sp,
+              ),
+          color = Color.White,
+          modifier = Modifier.width(110.dp),
+      )
+      Switch(
+          checked = debugValue,
+          onCheckedChange = {
+            debugValue = it
+            toggle.onValueChanged(debugValue)
+          },
+      )
+    }
   }
 }
 
@@ -264,15 +276,17 @@ fun DebugPanelButton(button: DebugButtonItem) {
         modifier =
             Modifier.height(40.dp)
                 .fillMaxWidth()
-                .background(DebugControlsPanelConstants.BackgroundColor)) {
-          Button(onClick = button.onClick) {
-            Text(
-                text = button.label,
-                style = TextStyle(fontSize = 12.sp, textAlign = TextAlign.Center),
-                color = Color.White,
-                modifier = Modifier.width(180.dp))
-          }
-        }
+                .background(DebugControlsPanelConstants.BackgroundColor),
+    ) {
+      Button(onClick = button.onClick) {
+        Text(
+            text = button.label,
+            style = TextStyle(fontSize = 12.sp, textAlign = TextAlign.Center),
+            color = Color.White,
+            modifier = Modifier.width(180.dp),
+        )
+      }
+    }
   }
 }
 
@@ -287,26 +301,31 @@ fun DebugPanelPreview() {
                   DebugSliderItem(
                       label = "Test 1",
                       initialValue = 0.5f,
-                      onValueChanged = { value -> println(" item 1 value changed $value") }),
+                      onValueChanged = { value -> println(" item 1 value changed $value") },
+                  ),
                   DebugSliderItem(
                       label = "Test 2",
                       initialValue = 0.5f,
-                      onValueChanged = { value -> println(" item 2 value changed $value") }),
+                      onValueChanged = { value -> println(" item 2 value changed $value") },
+                  ),
                   DebugSliderItem(
                       label = "Test 3",
                       initialValue = 1f,
                       range = 1f..10f,
                       steps = 8,
                       roundToInt = true,
-                      onValueChanged = { value -> println(" item 3 value changed $value") }),
+                      onValueChanged = { value -> println(" item 3 value changed $value") },
+                  ),
                   DebugToggleItem(
                       label = "Toggle Test 1",
                       initialValue = true,
-                      onValueChanged = { value -> println(" toggle 1 value changed $value") }),
+                      onValueChanged = { value -> println(" toggle 1 value changed $value") },
+                  ),
                   DebugToggleItem(
                       label = "Toggle Test 2",
                       initialValue = false,
-                      onValueChanged = { value -> println(" toggle 2 value changed $value") }),
+                      onValueChanged = { value -> println(" toggle 2 value changed $value") },
+                  ),
                   DebugButtonItem(
                       label = "Button 1",
                       onClick = { println("clicked button 1") },
@@ -314,7 +333,8 @@ fun DebugPanelPreview() {
                   DebugButtonItem(
                       label = "Button 2",
                       onClick = { println("clicked button 2") },
-                  )))
+                  ),
+              ))
 
   DebugPanel(debugData)
 }

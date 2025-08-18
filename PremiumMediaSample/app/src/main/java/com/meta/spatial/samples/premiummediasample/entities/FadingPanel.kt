@@ -26,7 +26,7 @@ abstract class FadingPanel(val tweenEngine: TweenEngine) {
       targetAlpha: Float,
       duration: Float = 1f,
       easing: TweenEquations,
-      onComplete: (() -> Unit)? = null
+      onComplete: (() -> Unit)? = null,
   ): Tween<TweenPanelLayerAlpha> {
     return tweenEngine
         .to(TweenPanelLayerAlpha(entity), TweenPanelLayerAlpha.ALPHA_VALUE, duration)
@@ -47,7 +47,7 @@ abstract class FadingPanel(val tweenEngine: TweenEngine) {
       isVisible: Boolean,
       fullDuration: Float,
       easing: TweenEquations,
-      onComplete: (() -> Unit)? = null
+      onComplete: (() -> Unit)? = null,
   ) {
     val plaComp = getDefaultAlphaComponent(isVisible)
 

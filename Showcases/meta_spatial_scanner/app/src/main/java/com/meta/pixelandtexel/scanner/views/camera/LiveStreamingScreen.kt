@@ -45,54 +45,61 @@ fun LiveStreamingScreen(vm: LiveStreamingViewModel = viewModel()) {
       Column(
           verticalArrangement = Arrangement.SpaceBetween,
           horizontalAlignment = Alignment.CenterHorizontally,
-          modifier = Modifier.fillMaxSize()) {
-            Column {
-              Box(
-                  contentAlignment = Alignment.BottomEnd,
+          modifier = Modifier.fillMaxSize(),
+      ) {
+        Column {
+          Box(
+              contentAlignment = Alignment.BottomEnd,
+              modifier =
+                  Modifier.fillMaxWidth()
+                      .aspectRatio(16f / 9f)
+                      .background(Color.Black, SpatialTheme.shapes.medium)
+                      .clip(SpatialTheme.shapes.medium)
+                      .padding(8.dp),
+          ) {
+            if (permissionGranted) {
+              CameraPreviewView(
+                  onSurfaceAvailable = { vm.onSurfaceAvailable(it) },
+                  onSurfaceDestroyed = { vm.onSurfaceDestroyed(it) },
                   modifier =
-                      Modifier.fillMaxWidth()
-                          .aspectRatio(16f / 9f)
-                          .background(Color.Black, SpatialTheme.shapes.medium)
-                          .clip(SpatialTheme.shapes.medium)
-                          .padding(8.dp)) {
-                    if (permissionGranted) {
-                      CameraPreviewView(
-                          onSurfaceAvailable = { vm.onSurfaceAvailable(it) },
-                          onSurfaceDestroyed = { vm.onSurfaceDestroyed(it) },
-                          modifier =
-                              Modifier.fillMaxWidth(0.33f)
-                                  .aspectRatio(aspectRatio)
-                                  .clip(SpatialTheme.shapes.small))
-                    }
-                  }
-              if (ipAddress != null) {
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    "Streaming on ${ipAddress!!}",
-                    style = SpatialTheme.typography.body2,
-                    color = Color.White,
-                    modifier = Modifier.align(Alignment.End))
-              }
-            }
-            Row {
-              IconButton(
-                  onClick = vm.requestPermission,
-                  enabled = !permissionGranted,
-                  colors =
-                      IconButtonColors(
-                          containerColor = SpatialTheme.colorScheme.secondaryButton,
-                          contentColor = Color.White,
-                          disabledContainerColor = SpatialTheme.colorScheme.secondaryButton,
-                          disabledContentColor = Color.White),
-                  modifier = Modifier.size(64.dp)) {
-                    Icon(
-                        painter = painterResource(UIKitDrawable.ic_video_capture_24),
-                        contentDescription = "",
-                        tint = if (permissionGranted) SpatialColor.white30 else Color.White,
-                        modifier = Modifier.size(48.dp))
-                  }
+                      Modifier.fillMaxWidth(0.33f)
+                          .aspectRatio(aspectRatio)
+                          .clip(SpatialTheme.shapes.small),
+              )
             }
           }
+          if (ipAddress != null) {
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                "Streaming on ${ipAddress!!}",
+                style = SpatialTheme.typography.body2,
+                color = Color.White,
+                modifier = Modifier.align(Alignment.End),
+            )
+          }
+        }
+        Row {
+          IconButton(
+              onClick = vm.requestPermission,
+              enabled = !permissionGranted,
+              colors =
+                  IconButtonColors(
+                      containerColor = SpatialTheme.colorScheme.secondaryButton,
+                      contentColor = Color.White,
+                      disabledContainerColor = SpatialTheme.colorScheme.secondaryButton,
+                      disabledContentColor = Color.White,
+                  ),
+              modifier = Modifier.size(64.dp),
+          ) {
+            Icon(
+                painter = painterResource(UIKitDrawable.ic_video_capture_24),
+                contentDescription = "",
+                tint = if (permissionGranted) SpatialColor.white30 else Color.White,
+                modifier = Modifier.size(48.dp),
+            )
+          }
+        }
+      }
     }
   }
 }
@@ -102,7 +109,10 @@ fun LiveStreamingScreen(vm: LiveStreamingViewModel = viewModel()) {
 private fun LiveStreamingScreenPreview() {
   LiveStreamingScreen(
       LiveStreamingViewModel(
-          requestPermission = {}, onSurfaceAvailable = {}, onSurfaceDestroyed = {}))
+          requestPermission = {},
+          onSurfaceAvailable = {},
+          onSurfaceDestroyed = {},
+      ))
 }
 
 @Preview(widthDp = 400, heightDp = 400)
@@ -110,5 +120,9 @@ private fun LiveStreamingScreenPreview() {
 private fun LiveStreamingScreenPermissionGrantedPreview() {
   LiveStreamingScreen(
       LiveStreamingViewModel(
-          true, requestPermission = {}, onSurfaceAvailable = {}, onSurfaceDestroyed = {}))
+          true,
+          requestPermission = {},
+          onSurfaceAvailable = {},
+          onSurfaceDestroyed = {},
+      ))
 }

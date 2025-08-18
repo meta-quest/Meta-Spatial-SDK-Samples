@@ -44,15 +44,17 @@ fun TitleBar(
         Column(
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center,
-            modifier = modifier.fillMaxWidth()) {
-              Text(
-                  text = label,
-                  style =
-                      LocalTypography.current.headline3.copy(
-                          fontWeight = FontWeight.Normal,
-                      ),
-                  modifier = Modifier.padding(24.dp, 12.dp).fillMaxWidth())
-            }
+            modifier = modifier.fillMaxWidth(),
+        ) {
+          Text(
+              text = label,
+              style =
+                  LocalTypography.current.headline3.copy(
+                      fontWeight = FontWeight.Normal,
+                  ),
+              modifier = Modifier.padding(24.dp, 12.dp).fillMaxWidth(),
+          )
+        }
       }
 }
 

@@ -111,7 +111,8 @@ class PanelActivity : ActivityCompat.OnRequestPermissionsResultCallback, Compone
                   text = getString(R.string.quiz),
                   route = Routes.DAILY_QUIZ_ROUTE,
                   iconImage = SpatialIcons.Regular.Trophy,
-              ))
+              ),
+          )
 
       // instantiate our view models
       panelVM = viewModel()
@@ -164,7 +165,8 @@ class PanelActivity : ActivityCompat.OnRequestPermissionsResultCallback, Compone
             modifier =
                 Modifier.size(
                         dimensionResource(R.dimen.panel_width),
-                        dimensionResource(R.dimen.panel_height))
+                        dimensionResource(R.dimen.panel_height),
+                    )
                     .padding(0.dp)) {
               PrimaryPanel {
                 if (userAcceptedNotice) {
@@ -172,33 +174,36 @@ class PanelActivity : ActivityCompat.OnRequestPermissionsResultCallback, Compone
                     NavHost(
                         navController = navController,
                         startDestination = Routes.INTRO_ROUTE,
-                        modifier = Modifier) {
-                          // routes
-                          composable(route = Routes.INTRO_ROUTE) { IntroScreen() }
-                          composable(route = Routes.EXPLORE_ROUTE) {
-                            ExploreScreen(
-                                vm = exploreVM,
-                                setTitle = { panelVM.setTitle(it) },
-                                onReportVRProblem = {
-                                  val uri = Uri.parse(it)
-                                  val browserIntent = Intent(Intent.ACTION_VIEW, uri)
-                                  startActivity(browserIntent)
-                                })
-                          }
-                          composable(route = Routes.ASK_EARTH_ROUTE) {
-                            AskEarthScreen(
-                                vm = askVM,
-                                onUserRejectedPermission = { panelVM.navTo(Routes.INTRO_ROUTE) },
-                                setTitle = { panelVM.setTitle(it) })
-                          }
-                          composable(route = Routes.TODAY_IN_HISTORY_ROUTE) {
-                            TodayInHistoryScreen(vm = todayVM, setTitle = { panelVM.setTitle(it) })
-                          }
-                          composable(route = Routes.DAILY_QUIZ_ROUTE) {
-                            DailyQuizScreen(vm = quizVM, setTitle = { panelVM.setTitle(it) })
-                          }
-                          composable(route = Routes.SETTINGS_ROUTE) { SettingsScreen() }
-                        }
+                        modifier = Modifier,
+                    ) {
+                      // routes
+                      composable(route = Routes.INTRO_ROUTE) { IntroScreen() }
+                      composable(route = Routes.EXPLORE_ROUTE) {
+                        ExploreScreen(
+                            vm = exploreVM,
+                            setTitle = { panelVM.setTitle(it) },
+                            onReportVRProblem = {
+                              val uri = Uri.parse(it)
+                              val browserIntent = Intent(Intent.ACTION_VIEW, uri)
+                              startActivity(browserIntent)
+                            },
+                        )
+                      }
+                      composable(route = Routes.ASK_EARTH_ROUTE) {
+                        AskEarthScreen(
+                            vm = askVM,
+                            onUserRejectedPermission = { panelVM.navTo(Routes.INTRO_ROUTE) },
+                            setTitle = { panelVM.setTitle(it) },
+                        )
+                      }
+                      composable(route = Routes.TODAY_IN_HISTORY_ROUTE) {
+                        TodayInHistoryScreen(vm = todayVM, setTitle = { panelVM.setTitle(it) })
+                      }
+                      composable(route = Routes.DAILY_QUIZ_ROUTE) {
+                        DailyQuizScreen(vm = quizVM, setTitle = { panelVM.setTitle(it) })
+                      }
+                      composable(route = Routes.SETTINGS_ROUTE) { SettingsScreen() }
+                    }
                   }
                 } else {
                   InterstitialScreen { panelVM.userAcceptedNotice() }
@@ -281,7 +286,8 @@ class PanelActivity : ActivityCompat.OnRequestPermissionsResultCallback, Compone
                         option3 = option3,
                         difficulty = difficulty,
                         latitude = latitude,
-                        longitude = longitude)
+                        longitude = longitude,
+                    )
                 questions.add(currentQuestion)
               } else {
                 throw Exception("Invalid trivia question xml $query")

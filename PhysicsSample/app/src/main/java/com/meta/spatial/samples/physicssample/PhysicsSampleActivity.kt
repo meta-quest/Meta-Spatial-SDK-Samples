@@ -54,7 +54,7 @@ class BallRunActivity : AppSystemActivity() {
   enum class BallRunState {
     READY,
     PLAYING,
-    FINISHED
+    FINISHED,
   }
 
   private var state_: BallRunState = BallRunState.READY
@@ -87,7 +87,8 @@ class BallRunActivity : AppSystemActivity() {
         mutableListOf<SpatialFeature>(
             PhysicsFeature(spatial, useGrabbablePhysics = false),
             VRFeature(this),
-            IsdkFeature(this, spatial, systemManager))
+            IsdkFeature(this, spatial, systemManager),
+        )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -100,7 +101,9 @@ class BallRunActivity : AppSystemActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     NetworkedAssetLoader.init(
-        File(applicationContext.getCacheDir().canonicalPath), OkHttpAssetFetcher())
+        File(applicationContext.getCacheDir().canonicalPath),
+        OkHttpAssetFetcher(),
+    )
 
     // After definitions, we need to register the systems and components
     componentManager.registerComponent<Trigger>(Trigger.Companion)
@@ -138,7 +141,8 @@ class BallRunActivity : AppSystemActivity() {
             layerConfig = LayerConfig()
             enableTransparent = true
           }
-        })
+        },
+    )
   }
 
   override fun onSceneReady() {
@@ -151,7 +155,8 @@ class BallRunActivity : AppSystemActivity() {
         ambientColor = Vector3(0f),
         sunColor = Vector3(7.0f, 7.0f, 7.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
     scene.updateIBLEnvironment("environment.env")
     scene.setViewOrigin(0.0f, 0.5f, 0.0f, 0.0f)
 
@@ -162,7 +167,8 @@ class BallRunActivity : AppSystemActivity() {
               baseTextureAndroidResourceId = R.drawable.skydome
               unlit = true // Prevent scene lighting from affecting the skybox
             },
-            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
+            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
+        ))
 
     // spatial.enablePhysicsDebugLines(true)
   }
@@ -278,7 +284,8 @@ class BallRunActivity : AppSystemActivity() {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          onLoaded = onLoaded)
+          onLoaded = onLoaded,
+      )
     }
   }
 }

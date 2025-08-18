@@ -27,7 +27,7 @@ interface ButtonEvent {
 
 class ButtonController(
     private val activity: AnimationsSampleActivity,
-    private val buttonName: String = "startButton"
+    private val buttonName: String = "startButton",
 ) {
   private val unhoveredColor = 0xff5722
   private val hoveredColor = 0xb84fff

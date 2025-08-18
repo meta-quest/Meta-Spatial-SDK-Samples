@@ -20,7 +20,7 @@ enum class AssetType {
   SHAPE_2D,
   TIMER,
   ARROW,
-  BOARD
+  BOARD,
 }
 
 // GENERAL DATA
@@ -33,7 +33,8 @@ val arrows =
         R.drawable.arrow3,
         R.drawable.arrow4,
         R.drawable.arrow5,
-        R.drawable.arrow6)
+        R.drawable.arrow6,
+    )
 val labels =
     arrayOf(
         R.drawable.label1,
@@ -41,7 +42,8 @@ val labels =
         R.drawable.label3,
         R.drawable.label4,
         R.drawable.label5,
-        R.drawable.label6)
+        R.drawable.label6,
+    )
 val boards = arrayOf(R.drawable.board1, R.drawable.board2, R.drawable.board3, R.drawable.board4)
 val shapes =
     arrayOf(
@@ -50,7 +52,8 @@ val shapes =
         R.drawable.shape3,
         "cube.glb",
         R.drawable.shape5,
-        "rhombus.glb")
+        "rhombus.glb",
+    )
 val stickers =
     arrayOf(
         R.drawable.sticker1,
@@ -58,7 +61,8 @@ val stickers =
         R.drawable.sticker3,
         R.drawable.sticker4,
         R.drawable.sticker5,
-        R.drawable.sticker6)
+        R.drawable.sticker6,
+    )
 
 // toolbar button references
 val stickyButtons =
@@ -67,7 +71,8 @@ val stickyButtons =
         R.id.buttonSticky2,
         R.id.buttonSticky3,
         R.id.buttonSticky4,
-        R.id.buttonSticky5)
+        R.id.buttonSticky5,
+    )
 val labelButtons =
     arrayOf(
         R.id.buttonLabel1,
@@ -75,7 +80,8 @@ val labelButtons =
         R.id.buttonLabel3,
         R.id.buttonLabel4,
         R.id.buttonLabel5,
-        R.id.buttonLabel6)
+        R.id.buttonLabel6,
+    )
 val arrowButtons =
     arrayOf(
         R.id.buttonArrow1,
@@ -83,7 +89,8 @@ val arrowButtons =
         R.id.buttonArrow3,
         R.id.buttonArrow4,
         R.id.buttonArrow5,
-        R.id.buttonArrow6)
+        R.id.buttonArrow6,
+    )
 val boardButtons =
     arrayOf(R.id.buttonBoard1, R.id.buttonBoard2, R.id.buttonBoard3, R.id.buttonBoard4)
 val shapesButtons =
@@ -93,7 +100,8 @@ val shapesButtons =
         R.id.buttonShape3,
         R.id.buttonShape4,
         R.id.buttonShape5,
-        R.id.buttonShape6)
+        R.id.buttonShape6,
+    )
 val stickerButtons =
     arrayOf(
         R.id.buttonSticker1,
@@ -101,7 +109,8 @@ val stickerButtons =
         R.id.buttonSticker3,
         R.id.buttonSticker4,
         R.id.buttonSticker5,
-        R.id.buttonSticker6)
+        R.id.buttonSticker6,
+    )
 val timerButtons =
     arrayOf(
         R.id.buttonTimer1,
@@ -109,7 +118,8 @@ val timerButtons =
         R.id.buttonTimer3,
         R.id.buttonTimer4,
         R.id.buttonTimer5,
-        R.id.buttonTimer6)
+        R.id.buttonTimer6,
+    )
 
 // State and priority labels for tasks
 val stateLabels =
@@ -129,7 +139,8 @@ val defaultToolResources =
         R.drawable.boards,
         R.drawable.shapes,
         R.drawable.stickers,
-        R.drawable.timer)
+        R.drawable.timer,
+    )
 val pressedToolResources =
     arrayOf(
         R.drawable.sticky_pressed,
@@ -138,7 +149,8 @@ val pressedToolResources =
         R.drawable.board_pressed,
         R.drawable.shape_pressed,
         R.drawable.sticker_pressed,
-        R.drawable.timer_pressed)
+        R.drawable.timer_pressed,
+    )
 
 // Sizes of tools
 val boardSizeArray = arrayOf(0.335f, 0.45f, 0.397f, 0.45f)

@@ -20,7 +20,7 @@ fun SettingsTextFieldListItem(
     label: String,
     placeholder: String,
     textFieldValue: MutableState<String>,
-    onChanged: (String) -> Unit
+    onChanged: (String) -> Unit,
 ) {
   Row(modifier = Modifier.padding(start = 24.dp, end = 12.dp).fillMaxWidth()) {
     SpatialTextField(
@@ -34,7 +34,8 @@ fun SettingsTextFieldListItem(
         autoValidate = false,
         capitalization = KeyboardCapitalization.None,
         keyboardType = KeyboardType.Uri,
-        modifier = Modifier.fillMaxWidth())
+        modifier = Modifier.fillMaxWidth(),
+    )
   }
   HorizontalDivider(color = Color.White)
 }

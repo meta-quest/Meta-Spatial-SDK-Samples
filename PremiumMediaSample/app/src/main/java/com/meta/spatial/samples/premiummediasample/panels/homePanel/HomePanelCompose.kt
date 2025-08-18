@@ -82,14 +82,16 @@ object HomePanelConstants {
           fontFamily = Inter18,
           fontSize = 28f.sp,
           fontWeight = FontWeight.Bold,
-          lineHeight = 40f.sp)
+          lineHeight = 40f.sp,
+      )
 
   val descriptionStyle =
       TextStyle(
           fontFamily = Inter18,
           fontSize = 22f.sp,
           fontWeight = FontWeight.Normal,
-          lineHeight = 32f.sp)
+          lineHeight = 32f.sp,
+      )
 
   val badgeStyle =
       TextStyle(
@@ -101,7 +103,8 @@ object HomePanelConstants {
 
 @Preview(
     widthDp = HomePanelConstants.PANEL_WIDTH_DP.toInt(),
-    heightDp = HomePanelConstants.PANEL_HEIGHT_DP.toInt())
+    heightDp = HomePanelConstants.PANEL_HEIGHT_DP.toInt(),
+)
 @Composable
 fun HomeViewPreview() {
   val viewModelPreview = HomePanelViewModel()
@@ -131,11 +134,12 @@ fun HomeItems(items: List<HomeItem>, homeViewModel: HomePanelViewModel) {
       verticalAlignment = Alignment.Bottom,
       contentPadding = PaddingValues(HomePanelConstants.padding),
       horizontalArrangement = Arrangement.spacedBy(HomePanelConstants.padding),
-      modifier = Modifier.fillMaxWidth()) {
-        items(items = items.filter { it.showInMenu }) { homePrototypeItem ->
-          HomeItem(homePrototypeItem, homeViewModel)
-        }
-      }
+      modifier = Modifier.fillMaxWidth(),
+  ) {
+    items(items = items.filter { it.showInMenu }) { homePrototypeItem ->
+      HomeItem(homePrototypeItem, homeViewModel)
+    }
+  }
 }
 
 @Composable
@@ -157,7 +161,8 @@ fun HomeItem(item: HomeItem, homeViewModel: HomePanelViewModel) {
         HoverContent(
             isVisible = (isHovered || HomePanelConstants.homePanelDebugHover),
             item = item,
-            homeViewModel = homeViewModel)
+            homeViewModel = homeViewModel,
+        )
       }
 }
 
@@ -166,56 +171,58 @@ private fun HoverContent(isVisible: Boolean, item: HomeItem, homeViewModel: Home
   AnimatedVisibility(visible = isVisible, enter = fadeIn(initialAlpha = 0.1f), exit = fadeOut()) {
     Column(
         verticalArrangement = Arrangement.Top,
-        modifier = Modifier.fillMaxSize().background(HomePanelConstants.linear)) {
-          Box(
+        modifier = Modifier.fillMaxSize().background(HomePanelConstants.linear),
+    ) {
+      Box(modifier = Modifier.fillMaxHeight().fillMaxWidth().padding(HomePanelConstants.padding)) {
+        Column(
+            verticalArrangement = Arrangement.Top,
+            modifier =
+                Modifier.matchParentSize()
+                    .padding(
+                        top = HomePanelConstants.smallPadding,
+                        start = HomePanelConstants.smallPadding,
+                    ),
+        ) {
+          Text(
+              text = item.description?.title ?: item.id,
+              textAlign = TextAlign.Left,
+              style = HomePanelConstants.titleStyle,
+              color = Color.White,
+              modifier = Modifier.fillMaxWidth(),
+          )
+          Text(
+              text = item.description?.description ?: "",
+              textAlign = TextAlign.Left,
+              style = HomePanelConstants.descriptionStyle,
+              color = Color(0x99FFFFFF),
               modifier =
-                  Modifier.fillMaxHeight().fillMaxWidth().padding(HomePanelConstants.padding)) {
-                Column(
-                    verticalArrangement = Arrangement.Top,
-                    modifier =
-                        Modifier.matchParentSize()
-                            .padding(
-                                top = HomePanelConstants.smallPadding,
-                                start = HomePanelConstants.smallPadding)) {
-                      Text(
-                          text = item.description?.title ?: item.id,
-                          textAlign = TextAlign.Left,
-                          style = HomePanelConstants.titleStyle,
-                          color = Color.White,
-                          modifier = Modifier.fillMaxWidth())
-                      Text(
-                          text = item.description?.description ?: "",
-                          textAlign = TextAlign.Left,
-                          style = HomePanelConstants.descriptionStyle,
-                          color = Color(0x99FFFFFF),
-                          modifier =
-                              Modifier.fillMaxWidth()
-                                  .padding(
-                                      top = HomePanelConstants.smallPadding,
-                                      bottom = HomePanelConstants.smallPadding))
-                      Row(
-                          horizontalArrangement =
-                              Arrangement.spacedBy(HomePanelConstants.rowSpacing),
-                      ) {
-                        SteroModeBadge(item.media.stereoMode)
-                      }
-                      Box(
-                          modifier = Modifier.weight(1f).fillMaxWidth(),
-                          contentAlignment = Alignment.Center) {
-                            MetaButton(
-                                text = "PLAY",
-                                cornerRadius = 36f.dp,
-                                paddingHorizontal = 21f.dp,
-                                paddingVertical = 10.5f.dp,
-                                textSizeModifier = 1f,
-                                onClick = {
-                                  Log.d(TAG, ">>> PLAY clicked")
-                                  homeViewModel.onItemSelectedHandler.invoke(item)
-                                })
-                          }
-                    }
-              }
+                  Modifier.fillMaxWidth()
+                      .padding(
+                          top = HomePanelConstants.smallPadding,
+                          bottom = HomePanelConstants.smallPadding,
+                      ),
+          )
+          Row(
+              horizontalArrangement = Arrangement.spacedBy(HomePanelConstants.rowSpacing),
+          ) {
+            SteroModeBadge(item.media.stereoMode)
+          }
+          Box(modifier = Modifier.weight(1f).fillMaxWidth(), contentAlignment = Alignment.Center) {
+            MetaButton(
+                text = "PLAY",
+                cornerRadius = 36f.dp,
+                paddingHorizontal = 21f.dp,
+                paddingVertical = 10.5f.dp,
+                textSizeModifier = 1f,
+                onClick = {
+                  Log.d(TAG, ">>> PLAY clicked")
+                  homeViewModel.onItemSelectedHandler.invoke(item)
+                },
+            )
+          }
         }
+      }
+    }
   }
 }
 
@@ -234,18 +241,20 @@ fun BadgeBox(label: String) {
           Modifier.padding(top = HomePanelConstants.rowSpacing)
               .wrapContentSize()
               .clip(RoundedCornerShape(HomePanelConstants.badgeCornerRadius))
-              .background(Color.White)) {
-        Box(
-            modifier =
-                Modifier.padding(
-                    vertical = HomePanelConstants.badgePadding,
-                    horizontal = HomePanelConstants.badgeHorizontalPadding)) {
-              Text(
-                  text = label,
-                  textAlign = TextAlign.Center,
-                  style = HomePanelConstants.badgeStyle,
-                  color = Color(0x99333333),
-              )
-            }
-      }
+              .background(Color.White),
+  ) {
+    Box(
+        modifier =
+            Modifier.padding(
+                vertical = HomePanelConstants.badgePadding,
+                horizontal = HomePanelConstants.badgeHorizontalPadding,
+            )) {
+          Text(
+              text = label,
+              textAlign = TextAlign.Center,
+              style = HomePanelConstants.badgeStyle,
+              color = Color(0x99333333),
+          )
+        }
+  }
 }

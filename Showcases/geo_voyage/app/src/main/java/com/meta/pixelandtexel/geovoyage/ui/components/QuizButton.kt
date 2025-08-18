@@ -114,7 +114,8 @@ private fun PreviewQuizButtonAnsweredThisCorrectly() {
         onClick = {},
         hasSelectedAnswer = true,
         didAnswerCorrectly = true,
-        isCorrectAnswer = true)
+        isCorrectAnswer = true,
+    )
   }
 }
 
@@ -127,7 +128,8 @@ private fun PreviewQuizButtonAnsweredCorrectly() {
         onClick = {},
         hasSelectedAnswer = true,
         didAnswerCorrectly = true,
-        isCorrectAnswer = false)
+        isCorrectAnswer = false,
+    )
   }
 }
 
@@ -139,6 +141,7 @@ private fun PreviewQuizButtonAnsweredIncorrectly() {
         label = "Primary Button",
         onClick = {},
         hasSelectedAnswer = true,
-        didAnswerCorrectly = false)
+        didAnswerCorrectly = false,
+    )
   }
 }

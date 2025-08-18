@@ -57,13 +57,33 @@ class TouchScalableSystem(private val minScale: Float = 0.5f, private val maxSca
     corners =
         arrayOf(
             ImageBoxEntity.create(
-                R.drawable.corner_round, cornerSize, cornerSize, Transform(), Visible(false)),
+                R.drawable.corner_round,
+                cornerSize,
+                cornerSize,
+                Transform(),
+                Visible(false),
+            ),
             ImageBoxEntity.create(
-                R.drawable.corner_round, cornerSize, cornerSize, Transform(), Visible(false)),
+                R.drawable.corner_round,
+                cornerSize,
+                cornerSize,
+                Transform(),
+                Visible(false),
+            ),
             ImageBoxEntity.create(
-                R.drawable.corner_round, cornerSize, cornerSize, Transform(), Visible(false)),
+                R.drawable.corner_round,
+                cornerSize,
+                cornerSize,
+                Transform(),
+                Visible(false),
+            ),
             ImageBoxEntity.create(
-                R.drawable.corner_round, cornerSize, cornerSize, Transform(), Visible(false)),
+                R.drawable.corner_round,
+                cornerSize,
+                cornerSize,
+                Transform(),
+                Visible(false),
+            ),
         )
   }
 
@@ -138,7 +158,8 @@ class TouchScalableSystem(private val minScale: Float = 0.5f, private val maxSca
     val offset =
         Vector2(
             panelDimensions.dimensions.x * scale.scale.x * 0.5f,
-            panelDimensions.dimensions.y * scale.scale.y * 0.5f)
+            panelDimensions.dimensions.y * scale.scale.y * 0.5f,
+        )
     val offsets =
         arrayOf(
             pose.right() * -(offset.x - cornerOffsetPivot) +
@@ -233,7 +254,11 @@ class TouchScalableSystem(private val minScale: Float = 0.5f, private val maxSca
 
       val resultPoint =
           projectRayOntoPlane(
-              controllerOrigin, controllerForward, planeTransform.t, planeTransform.forward())
+              controllerOrigin,
+              controllerForward,
+              planeTransform.t,
+              planeTransform.forward(),
+          )
       if (resultPoint != null) {
         val distanceToPlaneCenter = (resultPoint - planeTransform.t).length()
         if (viewData.containsKey(entity)) {

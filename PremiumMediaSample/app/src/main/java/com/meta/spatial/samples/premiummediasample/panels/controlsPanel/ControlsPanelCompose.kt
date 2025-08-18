@@ -59,7 +59,8 @@ fun ControlsPanel(viewModel: ControlsPanelViewModel) {
       onSeekTo = viewModel::onSeekTo,
       onStopWatching = viewModel::onStopWatching,
       onUpdatePassthrough = viewModel::onUpdatePassthrough,
-      onUpdateLighting = viewModel::onUpdateLighting)
+      onUpdateLighting = viewModel::onUpdateLighting,
+  )
 }
 
 @Composable
@@ -73,7 +74,7 @@ fun ControlsPanel(
     onSeekTo: (Float) -> Unit,
     onStopWatching: () -> Unit,
     onUpdatePassthrough: (Float) -> Float,
-    onUpdateLighting: (Float) -> Float
+    onUpdateLighting: (Float) -> Float,
 ) {
   var isScrubbing by remember { mutableStateOf(false) }
   var displayProgress by remember {
@@ -104,160 +105,167 @@ fun ControlsPanel(
               .clip(RoundedCornerShape(cornerRadius))
               .background(ControlsPanelConstants.controlsBackgroundColor)
               .padding(0.dp, boxPadding),
-      verticalArrangement = Arrangement.SpaceBetween) {
-        // Top Controls (Audio, Rewind, Play/Pause, Stop Watching)
+      verticalArrangement = Arrangement.SpaceBetween,
+  ) {
+    // Top Controls (Audio, Rewind, Play/Pause, Stop Watching)
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(boxPadding, 0.dp),
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+      Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.TopStart) {
+          HoverIconButton(
+              iconPainter =
+                  painterResource(
+                      id =
+                          if (mediaState.isMuted) R.drawable.controls_volume_off
+                          else R.drawable.controls_volume_on),
+              onClick = { onMuteToggle(!mediaState.isMuted) },
+          )
+        }
+
         Row(
-            modifier = Modifier.fillMaxWidth().padding(boxPadding, 0.dp),
-            horizontalArrangement = Arrangement.SpaceAround,
-            verticalAlignment = Alignment.CenterVertically) {
-              Row(
-                  horizontalArrangement = Arrangement.SpaceEvenly,
-                  modifier = Modifier.fillMaxWidth()) {
-                    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.TopStart) {
-                      HoverIconButton(
-                          iconPainter =
-                              painterResource(
-                                  id =
-                                      if (mediaState.isMuted) R.drawable.controls_volume_off
-                                      else R.drawable.controls_volume_on),
-                          onClick = { onMuteToggle(!mediaState.isMuted) })
-                    }
-
-                    Row(
-                        modifier = Modifier.weight(1f),
-                        horizontalArrangement =
-                            Arrangement.spacedBy(0.dp, Alignment.CenterHorizontally),
-                    ) {
-                      HoverIconButton(
-                          iconPainter = painterResource(id = R.drawable.controls_seek_back_10),
-                          onClick = { onSeekTo(displayProgress - 10f) })
-                      HoverButton(
-                          glowInside = true,
-                          haloOpacity = 0.1f,
-                          haloSize = 39.5.dp,
-                          haloBorderWidth = 10.dp,
-                          iconTint = Color.White,
-                          onClick = { onPlayPauseToggle(!mediaState.isPlaying) }) {
-                            Box(contentAlignment = Alignment.Center) {
-                              Icon(
-                                  modifier = Modifier.align(Alignment.Center),
-                                  tint = Color.White,
-                                  painter =
-                                      painterResource(
-                                          id =
-                                              if (mediaState.isPlaying)
-                                                  R.drawable.controls_btn_pause
-                                              else R.drawable.controls_btn_play),
-                                  contentDescription = "")
-                              if (mediaState.isBuffering) {
-                                CircularProgressIndicator(
-                                    modifier =
-                                        Modifier.size(
-                                                32.dp) // Adjust the size of the progress circle
-                                            .align(Alignment.Center)
-                                            .offset(-0.dp, 0.25.dp),
-                                    color = Color(0x33FFFFFF),
-                                    strokeWidth = 1.5.dp,
-                                )
-                              }
-                            }
-                          }
-                      HoverIconButton(
-                          iconPainter = painterResource(id = R.drawable.controls_seek_forward_10),
-                          onClick = { onSeekTo(displayProgress + 10f) })
-                    }
-
-                    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.TopEnd) {
-                      MetaButton("Stop Watching", Modifier, onClick = onStopWatching)
-                    }
-                  }
-            }
-
-        // Slider (Progress Bar)
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally) {
-              Slider(
-                  value = displayProgress,
-                  onValueChange = { newValue ->
-                    isScrubbing = true
-                    displayProgress = newValue
-                  },
-                  onValueChangeFinished = {
-                    isScrubbing = false
-                    onSeekTo(displayProgress) // Seek when scrubbing stops
-                  },
-                  modifier =
-                      Modifier.fillMaxWidth().padding(boxPadding - sliderPaddingNegate, 0.dp),
-                  colors =
-                      SliderDefaults.colors(
-                          thumbColor = Color.White,
-                          activeTrackColor = ControlsPanelConstants.controlsBlueColor,
-                          inactiveTrackColor = ControlsPanelConstants.controlsDisabledColor),
-                  valueRange = 0f..max(mediaState.duration, 0f))
-              Row(
-                  modifier =
-                      Modifier.offset(0.dp, -8.dp)
-                          .padding(boxPadding, 0.dp, boxPadding, 10.dp)
-                          .fillMaxWidth(),
-                  horizontalArrangement = Arrangement.SpaceBetween) {
-                    Text(formatTime(displayProgress), fontSize = 11.sp, color = Color.Gray)
-                    Text(formatTime(mediaState.duration), fontSize = 11.sp, color = Color.Gray)
-                  }
-            }
-
-        // Toggle Options (Curve Screen, Passthrough, Lighting + Buttons)
-        Box(modifier = Modifier.height(48.dp).padding(horizontal = boxPadding).fillMaxWidth()) {
-          Box(
-              modifier =
-                  Modifier.clip(RoundedCornerShape(cornerRadius))
-                      .background(ControlsPanelConstants.controlsBackgroundSecondary)
-                      .fillMaxWidth()
-                      .padding(horizontal = cornerRadius),
-              contentAlignment = Alignment.TopStart,
+            modifier = Modifier.weight(1f),
+            horizontalArrangement = Arrangement.spacedBy(0.dp, Alignment.CenterHorizontally),
+        ) {
+          HoverIconButton(
+              iconPainter = painterResource(id = R.drawable.controls_seek_back_10),
+              onClick = { onSeekTo(displayProgress - 10f) },
+          )
+          HoverButton(
+              glowInside = true,
+              haloOpacity = 0.1f,
+              haloSize = 39.5.dp,
+              haloBorderWidth = 10.dp,
+              iconTint = Color.White,
+              onClick = { onPlayPauseToggle(!mediaState.isPlaying) },
           ) {
-            Row(
-                modifier = Modifier.padding(6.dp, 0.dp, 0.dp, 0.dp).fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(slidersSpacingRow, Alignment.Start),
-                verticalAlignment = Alignment.CenterVertically) {
-                  FadeSlider(
-                      passthroughValue,
-                      passthroughState,
-                      R.drawable.controls_passthrough_off,
-                      R.drawable.controls_passthrough_on,
-                      spacingBetweenIconAndSlider,
-                      sliderWidth,
-                      flipIconFade = true) {
-                        passthroughValue = onUpdatePassthrough(it)
-                      }
-                  FadeSlider(
-                      lightingValue,
-                      lightingState,
-                      R.drawable.controls_lighting_off_v2,
-                      R.drawable.controls_lighting_on_v2,
-                      spacingBetweenIconAndSlider,
-                      sliderWidth,
-                      minimumOpacity = 0.25f) {
-                        lightingValue = onUpdateLighting(it)
-                      }
-                }
-            Row(
-                modifier = Modifier.fillMaxHeight().offset(x = cornerRadius - 4.dp).fillMaxWidth(),
-                horizontalArrangement =
-                    Arrangement.spacedBy(buttonSpacing, Alignment.End), // Space evenly
-                verticalAlignment = Alignment.CenterVertically) {
-                  for (buttonData in controlButtons) {
-                    MetaButton(
-                        buttonData.buttonName,
-                        color = Color(0xFF3d4c55),
-                        blurSize = 0.dp,
-                        modifier = Modifier.height(40.dp),
-                        onClick = buttonData.onClick)
-                  }
-                }
+            Box(contentAlignment = Alignment.Center) {
+              Icon(
+                  modifier = Modifier.align(Alignment.Center),
+                  tint = Color.White,
+                  painter =
+                      painterResource(
+                          id =
+                              if (mediaState.isPlaying) R.drawable.controls_btn_pause
+                              else R.drawable.controls_btn_play),
+                  contentDescription = "",
+              )
+              if (mediaState.isBuffering) {
+                CircularProgressIndicator(
+                    modifier =
+                        Modifier.size(32.dp) // Adjust the size of the progress circle
+                            .align(Alignment.Center)
+                            .offset(-0.dp, 0.25.dp),
+                    color = Color(0x33FFFFFF),
+                    strokeWidth = 1.5.dp,
+                )
+              }
+            }
+          }
+          HoverIconButton(
+              iconPainter = painterResource(id = R.drawable.controls_seek_forward_10),
+              onClick = { onSeekTo(displayProgress + 10f) },
+          )
+        }
+
+        Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.TopEnd) {
+          MetaButton("Stop Watching", Modifier, onClick = onStopWatching)
+        }
+      }
+    }
+
+    // Slider (Progress Bar)
+    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+      Slider(
+          value = displayProgress,
+          onValueChange = { newValue ->
+            isScrubbing = true
+            displayProgress = newValue
+          },
+          onValueChangeFinished = {
+            isScrubbing = false
+            onSeekTo(displayProgress) // Seek when scrubbing stops
+          },
+          modifier = Modifier.fillMaxWidth().padding(boxPadding - sliderPaddingNegate, 0.dp),
+          colors =
+              SliderDefaults.colors(
+                  thumbColor = Color.White,
+                  activeTrackColor = ControlsPanelConstants.controlsBlueColor,
+                  inactiveTrackColor = ControlsPanelConstants.controlsDisabledColor,
+              ),
+          valueRange = 0f..max(mediaState.duration, 0f),
+      )
+      Row(
+          modifier =
+              Modifier.offset(0.dp, -8.dp)
+                  .padding(boxPadding, 0.dp, boxPadding, 10.dp)
+                  .fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceBetween,
+      ) {
+        Text(formatTime(displayProgress), fontSize = 11.sp, color = Color.Gray)
+        Text(formatTime(mediaState.duration), fontSize = 11.sp, color = Color.Gray)
+      }
+    }
+
+    // Toggle Options (Curve Screen, Passthrough, Lighting + Buttons)
+    Box(modifier = Modifier.height(48.dp).padding(horizontal = boxPadding).fillMaxWidth()) {
+      Box(
+          modifier =
+              Modifier.clip(RoundedCornerShape(cornerRadius))
+                  .background(ControlsPanelConstants.controlsBackgroundSecondary)
+                  .fillMaxWidth()
+                  .padding(horizontal = cornerRadius),
+          contentAlignment = Alignment.TopStart,
+      ) {
+        Row(
+            modifier = Modifier.padding(6.dp, 0.dp, 0.dp, 0.dp).fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(slidersSpacingRow, Alignment.Start),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+          FadeSlider(
+              passthroughValue,
+              passthroughState,
+              R.drawable.controls_passthrough_off,
+              R.drawable.controls_passthrough_on,
+              spacingBetweenIconAndSlider,
+              sliderWidth,
+              flipIconFade = true,
+          ) {
+            passthroughValue = onUpdatePassthrough(it)
+          }
+          FadeSlider(
+              lightingValue,
+              lightingState,
+              R.drawable.controls_lighting_off_v2,
+              R.drawable.controls_lighting_on_v2,
+              spacingBetweenIconAndSlider,
+              sliderWidth,
+              minimumOpacity = 0.25f,
+          ) {
+            lightingValue = onUpdateLighting(it)
+          }
+        }
+        Row(
+            modifier = Modifier.fillMaxHeight().offset(x = cornerRadius - 4.dp).fillMaxWidth(),
+            horizontalArrangement =
+                Arrangement.spacedBy(buttonSpacing, Alignment.End), // Space evenly
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+          for (buttonData in controlButtons) {
+            MetaButton(
+                buttonData.buttonName,
+                color = Color(0xFF3d4c55),
+                blurSize = 0.dp,
+                modifier = Modifier.height(40.dp),
+                onClick = buttonData.onClick,
+            )
           }
         }
       }
+    }
+  }
 }
 
 @Composable
@@ -270,30 +278,34 @@ fun FadeSlider(
     sliderWidth: Dp,
     minimumOpacity: Float = 0f,
     flipIconFade: Boolean = false,
-    onValueChange: (Float) -> Unit
+    onValueChange: (Float) -> Unit,
 ) {
   if (state.isVisible) {
     Row(
         horizontalArrangement = Arrangement.spacedBy(spacing),
-        verticalAlignment = Alignment.CenterVertically) {
-          FadeIcon(
-              iconBG = painterResource(iconBG),
-              iconFade = painterResource(iconFade),
-              fadeOpacity =
-                  ((if (flipIconFade) 1f - sliderValue else sliderValue) * (1f - minimumOpacity)) +
-                      minimumOpacity,
-              color = if (state.isInteractable) Color.White else Color(0.5f, 0.5f, 0.5f, 1f))
-          Slider(
-              enabled = state.isInteractable,
-              value = sliderValue,
-              onValueChange = onValueChange,
-              modifier = Modifier.width(sliderWidth),
-              colors =
-                  SliderDefaults.colors(
-                      thumbColor = Color.White,
-                      activeTrackColor = ControlsPanelConstants.controlsBlueColor,
-                      inactiveTrackColor = ControlsPanelConstants.controlsDisabledColor))
-        }
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+      FadeIcon(
+          iconBG = painterResource(iconBG),
+          iconFade = painterResource(iconFade),
+          fadeOpacity =
+              ((if (flipIconFade) 1f - sliderValue else sliderValue) * (1f - minimumOpacity)) +
+                  minimumOpacity,
+          color = if (state.isInteractable) Color.White else Color(0.5f, 0.5f, 0.5f, 1f),
+      )
+      Slider(
+          enabled = state.isInteractable,
+          value = sliderValue,
+          onValueChange = onValueChange,
+          modifier = Modifier.width(sliderWidth),
+          colors =
+              SliderDefaults.colors(
+                  thumbColor = Color.White,
+                  activeTrackColor = ControlsPanelConstants.controlsBlueColor,
+                  inactiveTrackColor = ControlsPanelConstants.controlsDisabledColor,
+              ),
+      )
+    }
   }
 }
 

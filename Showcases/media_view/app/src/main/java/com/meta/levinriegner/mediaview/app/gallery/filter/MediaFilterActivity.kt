@@ -66,14 +66,18 @@ class MediaFilterActivity : ComponentActivity() {
             modifier =
                 Modifier.fillMaxSize()
                     .border(
-                        width = 4.dp, color = AppColor.MetaBlu, shape = RoundedCornerShape(24.dp))
+                        width = 4.dp,
+                        color = AppColor.MetaBlu,
+                        shape = RoundedCornerShape(24.dp),
+                    )
                     .clip(RoundedCornerShape(24.dp))) { innerPadding ->
               Column(
                   modifier = Modifier.padding(innerPadding).background(AppColor.BackgroundSweep)) {
                     FilterList(
                         pickerFilter = filters.value,
                         onFilterSelected = { viewModel.onFilterSelected(it) },
-                        onUpload = { viewModel.onUpload() })
+                        onUpload = { viewModel.onUpload() },
+                    )
                   }
             }
       }
@@ -101,18 +105,21 @@ private fun FilterList(
                         else Color.Transparent,
                     contentColor = AppColor.White,
                 ),
-            onClick = { onFilterSelected(pickerFilter[index]) }) {
-              IconTextLayoutForButton(
-                  stringResource(pickerFilter[index].type.titleResId()),
-                  pickerFilter[index].type.iconResId())
-            }
+            onClick = { onFilterSelected(pickerFilter[index]) },
+        ) {
+          IconTextLayoutForButton(
+              stringResource(pickerFilter[index].type.titleResId()),
+              pickerFilter[index].type.iconResId(),
+          )
+        }
       }
     }
 
     Row(
         modifier = Modifier.fillMaxWidth().weight(0.5F).background(Color.Transparent),
         horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically) {}
+        verticalAlignment = Alignment.CenterVertically,
+    ) {}
 
     Row(verticalAlignment = Alignment.Bottom) {
       OutlinedButton(
@@ -123,9 +130,10 @@ private fun FilterList(
                   contentColor = AppColor.White,
                   containerColor = Color.Transparent,
               ),
-          onClick = { onUpload() }) {
-            IconTextLayoutForButton("Download Media", R.drawable.icon_upload)
-          }
+          onClick = { onUpload() },
+      ) {
+        IconTextLayoutForButton("Download Media", R.drawable.icon_upload)
+      }
     }
   }
 }
@@ -139,21 +147,22 @@ private fun IconTextLayoutForButton(
   Row(
       verticalAlignment = Alignment.CenterVertically,
       horizontalArrangement = Arrangement.Absolute.Left,
-      modifier = Modifier.fillMaxWidth()
+      modifier = Modifier.fillMaxWidth(),
       // .fillMaxSize()
-      ) {
-        Icon(
-            painter = painterResource(id = iconAsset),
-            contentDescription = "Button Icon",
-            modifier = Modifier.size(128.dp))
+  ) {
+    Icon(
+        painter = painterResource(id = iconAsset),
+        contentDescription = "Button Icon",
+        modifier = Modifier.size(128.dp),
+    )
 
-        Spacer(modifier = Modifier.width(40.dp))
-        Text(
-            text = textToDisplay,
-            color = Color.White,
-            fontSize = 35.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Left,
-        )
-      }
+    Spacer(modifier = Modifier.width(40.dp))
+    Text(
+        text = textToDisplay,
+        color = Color.White,
+        fontSize = 35.sp,
+        fontWeight = FontWeight.Bold,
+        textAlign = TextAlign.Left,
+    )
+  }
 }

@@ -39,7 +39,8 @@ fun BirdseyeSideNavItem() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground))
+                    color = LocalColorScheme.current.primaryAlphaBackground),
+        )
         Spacer(modifier = Modifier.height(20.dp))
         Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.width(300.dp)) {
           Spacer(modifier = Modifier.width(20.dp))
@@ -48,7 +49,8 @@ fun BirdseyeSideNavItem() {
               selected = true,
               showExpandedIcon = false,
               icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-              onClick = {})
+              onClick = {},
+          )
         }
         Spacer(modifier = Modifier.height(20.dp))
       }
@@ -59,7 +61,8 @@ fun BirdseyeSideNavItem() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground))
+                color = LocalColorScheme.current.primaryAlphaBackground),
+    )
     Spacer(modifier = Modifier.height(40.dp))
 
     Row(Modifier.fillMaxSize()) {
@@ -80,14 +83,16 @@ fun BirdseyeSideNavItem() {
             selected = false,
             showExpandedIcon = false,
             icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-            onClick = {})
+            onClick = {},
+        )
         Spacer(Modifier.height(48.dp))
         SpatialSideNavItem(
             primaryLabel = "Label",
             selected = true,
             showExpandedIcon = false,
             icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-            onClick = {})
+            onClick = {},
+        )
         Spacer(Modifier.height(48.dp))
         SpatialSideNavItem(
             primaryLabel = "Label",
@@ -95,7 +100,8 @@ fun BirdseyeSideNavItem() {
             selected = false,
             showExpandedIcon = false,
             icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-            onClick = {})
+            onClick = {},
+        )
         Spacer(Modifier.height(48.dp))
         SpatialSideNavItem(
             primaryLabel = "Label",
@@ -103,7 +109,8 @@ fun BirdseyeSideNavItem() {
             selected = true,
             showExpandedIcon = false,
             icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-            onClick = {})
+            onClick = {},
+        )
       }
       Spacer(Modifier.width(65.dp))
       Column(
@@ -122,14 +129,16 @@ fun BirdseyeSideNavItem() {
             selected = false,
             showExpandedIcon = true,
             icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-            onClick = {})
+            onClick = {},
+        )
         Spacer(Modifier.height(48.dp))
         SpatialSideNavItem(
             primaryLabel = "Label",
             selected = true,
             showExpandedIcon = true,
             icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-            onClick = {})
+            onClick = {},
+        )
         Spacer(Modifier.height(48.dp))
         SpatialSideNavItem(
             primaryLabel = "Label",
@@ -137,7 +146,8 @@ fun BirdseyeSideNavItem() {
             selected = false,
             showExpandedIcon = true,
             icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-            onClick = {})
+            onClick = {},
+        )
         Spacer(Modifier.height(48.dp))
         SpatialSideNavItem(
             primaryLabel = "Label",
@@ -145,7 +155,8 @@ fun BirdseyeSideNavItem() {
             selected = true,
             showExpandedIcon = true,
             icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-            onClick = {})
+            onClick = {},
+        )
       }
       Spacer(Modifier.width(65.dp))
       Column(
@@ -165,7 +176,8 @@ fun BirdseyeSideNavItem() {
             showExpandedIcon = false,
             collapsed = true,
             icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-            onClick = {})
+            onClick = {},
+        )
         Spacer(Modifier.height(48.dp))
         SpatialSideNavItem(
             primaryLabel = "Label",
@@ -173,7 +185,8 @@ fun BirdseyeSideNavItem() {
             showExpandedIcon = false,
             collapsed = true,
             icon = { Icon(SpatialIcons.Regular.CategoryAll, "") },
-            onClick = {})
+            onClick = {},
+        )
       }
       Spacer(Modifier.width(65.dp))
 

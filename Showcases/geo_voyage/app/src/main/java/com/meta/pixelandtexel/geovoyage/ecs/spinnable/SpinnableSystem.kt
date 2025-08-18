@@ -53,7 +53,7 @@ private data class SpinningInfo(
     // both used for calculating the rotation speed, and spin inertia for
     // gradually slowing down
     var lastYawOffsetDeg: Float = 0f,
-    var yawInertiaDeg: Float = 0f
+    var yawInertiaDeg: Float = 0f,
 )
 
 class SpinnableSystem : SystemBase() {
@@ -109,7 +109,7 @@ class SpinnableSystem : SystemBase() {
                   sourceOfInput: Entity,
                   changed: Int,
                   clicked: Int,
-                  downTime: Long
+                  downTime: Long,
               ): Boolean {
                 // entity already grabbed
                 val spinnable = entity.getComponent<Spinnable>()
@@ -172,7 +172,8 @@ class SpinnableSystem : SystemBase() {
                           initialYawOffset,
                           initialPitchOffset,
                           Quaternion(0f, yaw * 180f / PIf, 0f),
-                          grabbable != null)
+                          grabbable != null,
+                      )
                 }
 
                 return true

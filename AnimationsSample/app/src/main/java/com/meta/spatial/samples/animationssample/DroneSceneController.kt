@@ -133,7 +133,8 @@ class DroneSceneController() {
           Animated(
               System.currentTimeMillis(),
               playbackState = PlaybackState.PAUSED,
-              track = animClipMap.get("openarm")!!)
+              track = animClipMap.get("openarm")!!,
+          )
       droneEnt.setComponent(anim)
     }
 
@@ -169,7 +170,8 @@ class DroneSceneController() {
             System.currentTimeMillis(),
             playbackState = PlaybackState.PLAYING,
             playbackType = playbackType,
-            track = track)
+            track = track,
+        )
     droneEnt.setComponent(anim)
   }
 
@@ -226,7 +228,10 @@ class DroneSceneController() {
     grabPanel.setComponent(Visible(true))
 
     droneTargetEnt.setComponents(
-        Mesh(Uri.parse("mesh://sphere")), Sphere(0.2f), defaultTargetMaterial)
+        Mesh(Uri.parse("mesh://sphere")),
+        Sphere(0.2f),
+        defaultTargetMaterial,
+    )
   }
 
   private fun delayAction(action: () -> Unit, duration: Long): TimerTask {

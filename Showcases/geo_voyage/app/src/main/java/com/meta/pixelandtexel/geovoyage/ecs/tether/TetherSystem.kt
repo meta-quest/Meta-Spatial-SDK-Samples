@@ -18,7 +18,7 @@ private data class TetherInfo(
     val entity: Entity,
     var targetPosition: Vector3 = Vector3(0f),
     var targetRotation: Quaternion = Quaternion(),
-    var snapToTarget: Boolean = false
+    var snapToTarget: Boolean = false,
 )
 
 class TetherSystem : SystemBase() {

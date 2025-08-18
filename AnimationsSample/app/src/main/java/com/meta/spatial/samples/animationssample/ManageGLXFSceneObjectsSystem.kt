@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture
 
 class ManageGLXFSceneObjectsSystem(
     val animationsSampleActivity: AnimationsSampleActivity,
-    val waitForGLXFSceneObjects: CompletableFuture<SceneObject>
+    val waitForGLXFSceneObjects: CompletableFuture<SceneObject>,
 ) : SystemBase() {
 
   override fun execute() {
