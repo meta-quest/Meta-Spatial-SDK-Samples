@@ -59,7 +59,9 @@ class StarterSampleActivity : AppSystemActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     NetworkedAssetLoader.init(
-        File(applicationContext.getCacheDir().canonicalPath), OkHttpAssetFetcher())
+        File(applicationContext.getCacheDir().canonicalPath),
+        OkHttpAssetFetcher(),
+    )
 
     // wait for GLXF to load before accessing nodes inside it
     loadGLXF { composition ->
@@ -81,7 +83,8 @@ class StarterSampleActivity : AppSystemActivity() {
         ambientColor = Vector3(0f),
         sunColor = Vector3(7.0f, 7.0f, 7.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
     scene.updateIBLEnvironment("environment.env")
 
     scene.setViewOrigin(0.0f, 0.0f, 2.0f, 180.0f)
@@ -93,7 +96,8 @@ class StarterSampleActivity : AppSystemActivity() {
               baseTextureAndroidResourceId = R.drawable.skydome
               unlit = true // Prevent scene lighting from affecting the skybox
             },
-            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
+            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
+        ))
   }
 
   override fun registerPanels(): List<PanelRegistration> {
@@ -116,7 +120,8 @@ class StarterSampleActivity : AppSystemActivity() {
       glXFManager.inflateGLXF(
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
-          onLoaded = onLoaded)
+          onLoaded = onLoaded,
+      )
     }
   }
 }

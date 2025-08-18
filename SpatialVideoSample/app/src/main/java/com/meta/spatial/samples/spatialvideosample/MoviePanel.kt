@@ -74,12 +74,16 @@ data class Movie(val id: Int, val uri: Uri, val title: String) {
         Movie(
             id,
             Uri.parse("android.resource://" + SpatialVideoSampleActivity.appPackageName + "/" + id),
-            title)
+            title,
+        )
 
     fun fromRawVideo(rawName: String, title: String): Movie? {
       val resId =
           SpatialVideoSampleActivity.appContext.resources.getIdentifier(
-              rawName, "raw", SpatialVideoSampleActivity.appPackageName)
+              rawName,
+              "raw",
+              SpatialVideoSampleActivity.appPackageName,
+          )
       return if (resId != 0) fromLocalVideo(resId, title) else null
     }
   }
@@ -97,7 +101,8 @@ class MovieViewModel : ViewModel() {
                   Movie.fromRawVideo("doggie", "Doggie"),
                   Movie.fromRawVideo("mediagiant", "Media Giant"),
                   Movie.fromRawVideo("carousel", "Carousel"),
-                  Movie.fromRawVideo("salmon", "Salmon"))
+                  Movie.fromRawVideo("salmon", "Salmon"),
+              )
               .filterNotNull()
       // Example of loading from a CDN url
       // Movie(
@@ -168,7 +173,8 @@ fun MovieListScreen(
               fontWeight = FontWeight(700),
               color = Color(0xFFF0F0F0),
               textAlign = TextAlign.Start,
-              modifier = Modifier.padding(top = 8.dp, bottom = 12.dp))
+              modifier = Modifier.padding(top = 8.dp, bottom = 12.dp),
+          )
         }
         LazyVerticalGrid(columns = GridCells.Fixed(1)) {
           items(movies) { movie -> MovieListItem(movie = movie) { viewModel.selectMovie(it) } }
@@ -185,7 +191,7 @@ fun VideoThumbnail(
     video: Uri,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
   val context = LocalContext.current
   val thumbnail = remember(video) { mutableStateOf<Bitmap?>(null) }
@@ -225,7 +231,8 @@ fun VideoThumbnail(
               // Set the scale of the images directly so they don't "double animate"
               scaleX = 1.0f
               scaleY = 1.0f
-            })
+            },
+    )
   }
 }
 
@@ -235,24 +242,27 @@ fun MovieListItem(movie: Movie, onMovieSelected: (Movie) -> Unit) {
     Box(
         modifier =
             Modifier.fillMaxWidth().height(150.dp).padding(8.dp).clip(RoundedCornerShape(16.dp)),
-        contentAlignment = Alignment.Center) {
-          VideoThumbnail(movie.uri) { onMovieSelected(movie) }
-        }
+        contentAlignment = Alignment.Center,
+    ) {
+      VideoThumbnail(movie.uri) { onMovieSelected(movie) }
+    }
     Box(
         modifier = Modifier.fillMaxSize().padding(start = (8.dp), bottom = (10.dp)),
-        contentAlignment = Alignment.BottomStart) {
-          Text(
-              text = movie.title,
-              minLines = 1,
-              style =
-                  TextStyle(
-                      fontSize = 14.sp,
-                      lineHeight = 13.49.sp,
-                      fontFamily = FontFamily(Font(R.font.noto_sans_regular)),
-                      fontWeight = FontWeight(400),
-                      color = Color(0xFFF0F0F0)),
-          )
-        }
+        contentAlignment = Alignment.BottomStart,
+    ) {
+      Text(
+          text = movie.title,
+          minLines = 1,
+          style =
+              TextStyle(
+                  fontSize = 14.sp,
+                  lineHeight = 13.49.sp,
+                  fontFamily = FontFamily(Font(R.font.noto_sans_regular)),
+                  fontWeight = FontWeight(400),
+                  color = Color(0xFFF0F0F0),
+              ),
+      )
+    }
   }
 }
 
