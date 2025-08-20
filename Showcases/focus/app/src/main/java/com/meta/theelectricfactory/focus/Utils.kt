@@ -73,19 +73,23 @@ fun addDeleteButton(entity: Entity, panel: PanelSceneObject? = null) {
               downTime: Long,
           ): Boolean {
             // Check if panel has been clicked/tapped with button A, X, triggers o squeezers
-            if ((changed and ButtonBits.ButtonA) != 0 ||
-                (changed and ButtonBits.ButtonX) != 0 ||
-                (changed and ButtonBits.ButtonTriggerR) != 0 ||
-                (changed and ButtonBits.ButtonTriggerL) != 0 ||
-                (changed and ButtonBits.ButtonSqueezeR) != 0 ||
-                (changed and ButtonBits.ButtonSqueezeL) != 0) {
+            if (
+                (changed and ButtonBits.ButtonA) != 0 ||
+                    (changed and ButtonBits.ButtonX) != 0 ||
+                    (changed and ButtonBits.ButtonTriggerR) != 0 ||
+                    (changed and ButtonBits.ButtonTriggerL) != 0 ||
+                    (changed and ButtonBits.ButtonSqueezeR) != 0 ||
+                    (changed and ButtonBits.ButtonSqueezeL) != 0
+            ) {
 
-              if ((clicked and ButtonBits.ButtonA) != 0 ||
-                  (clicked and ButtonBits.ButtonX) != 0 ||
-                  (clicked and ButtonBits.ButtonTriggerR) != 0 ||
-                  (clicked and ButtonBits.ButtonTriggerL) != 0 ||
-                  (clicked and ButtonBits.ButtonSqueezeR) != 0 ||
-                  (clicked and ButtonBits.ButtonSqueezeL) != 0) {
+              if (
+                  (clicked and ButtonBits.ButtonA) != 0 ||
+                      (clicked and ButtonBits.ButtonX) != 0 ||
+                      (clicked and ButtonBits.ButtonTriggerR) != 0 ||
+                      (clicked and ButtonBits.ButtonTriggerL) != 0 ||
+                      (clicked and ButtonBits.ButtonSqueezeR) != 0 ||
+                      (clicked and ButtonBits.ButtonSqueezeL) != 0
+              ) {
 
                 ImmersiveActivity.instance.get()?.selectElement(entity)
                 return true
@@ -93,7 +97,8 @@ fun addDeleteButton(entity: Entity, panel: PanelSceneObject? = null) {
             }
             return false
           }
-        })
+        }
+    )
     // If entity has a Mesh component, object is selected with a registerEventListener
   } else {
     addOnSelectListener(
@@ -114,10 +119,12 @@ fun addOnSelectListener(entity: Entity, onClick: () -> (Unit)) {
     entity.registerEventListener<ButtonDownEventArgs>(ButtonDownEventArgs.EVENT_NAME) {
         ent,
         eventArgs ->
-      if (eventArgs.button == ControllerButton.A ||
-          eventArgs.button == ControllerButton.X ||
-          eventArgs.button == ControllerButton.RightTrigger ||
-          eventArgs.button == ControllerButton.LeftTrigger) {
+      if (
+          eventArgs.button == ControllerButton.A ||
+              eventArgs.button == ControllerButton.X ||
+              eventArgs.button == ControllerButton.RightTrigger ||
+              eventArgs.button == ControllerButton.LeftTrigger
+      ) {
         onClick()
       }
     }
@@ -126,12 +133,14 @@ fun addOnSelectListener(entity: Entity, onClick: () -> (Unit)) {
     entity.registerEventListener<ButtonDownEventArgs>(ButtonDownEventArgs.EVENT_NAME) {
         ent,
         eventArgs ->
-      if (eventArgs.button == ControllerButton.A ||
-          eventArgs.button == ControllerButton.X ||
-          eventArgs.button == ControllerButton.RightTrigger ||
-          eventArgs.button == ControllerButton.LeftTrigger ||
-          eventArgs.button == ControllerButton.RightSqueeze ||
-          eventArgs.button == ControllerButton.LeftSqueeze) {
+      if (
+          eventArgs.button == ControllerButton.A ||
+              eventArgs.button == ControllerButton.X ||
+              eventArgs.button == ControllerButton.RightTrigger ||
+              eventArgs.button == ControllerButton.LeftTrigger ||
+              eventArgs.button == ControllerButton.RightSqueeze ||
+              eventArgs.button == ControllerButton.LeftSqueeze
+      ) {
         onClick()
       }
     }
@@ -264,8 +273,10 @@ fun addEditTextListeners(
     val waitingInterval: Long = (0.5f * 1000).toLong() // 0.5 seconds
 
     editText?.setOnEditorActionListener { v, actionId, event ->
-      if (actionId == EditorInfo.IME_ACTION_DONE ||
-          event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER) {
+      if (
+          actionId == EditorInfo.IME_ACTION_DONE ||
+              event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER
+      ) {
 
         // To avoid multiple events to trigger the same action
         if (System.currentTimeMillis() - enterTime >= waitingInterval) {
@@ -303,6 +314,7 @@ fun addEditTextListeners(
                 typingInterval,
             )
           }
-        })
+        }
+    )
   }
 }

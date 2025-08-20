@@ -33,9 +33,11 @@ class HeapMetrics() : OVRMetricsGroup() {
                     Group = groupName,
                     RangeMax = (Runtime.getRuntime().maxMemory() / (1024 * 1024)).toInt(),
                     ShowStat = true,
-                )) {
-                  usedMemory()
-                })
+                )
+            ) {
+              usedMemory()
+            }
+        )
   }
 
   private fun usedMemory(): Int {

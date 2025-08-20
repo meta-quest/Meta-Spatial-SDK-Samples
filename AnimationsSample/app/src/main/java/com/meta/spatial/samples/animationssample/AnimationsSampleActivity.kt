@@ -117,7 +117,8 @@ class AnimationsSampleActivity : AppSystemActivity() {
                     PanelQuadCylinderAnimation(
                         startTime = DataModel.getLocalDataModelTime(),
                         animationType = PanelQuadCylinderAnimationType.CYLINDER_TO_QUAD,
-                    ))
+                    )
+                )
               } else {
                 transformButton.text = "Change to Quad Shape"
                 ent.setComponent(
@@ -125,7 +126,8 @@ class AnimationsSampleActivity : AppSystemActivity() {
                         startTime = DataModel.getLocalDataModelTime(),
                         animationType = PanelQuadCylinderAnimationType.QUAD_TO_CYLINDER,
                         targetRadius = Random.nextFloat() * 2f + 0.5f,
-                    ))
+                    )
+                )
               }
             }
           }
@@ -174,7 +176,8 @@ class AnimationsSampleActivity : AppSystemActivity() {
               unlit = true
             },
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-        ))
+        )
+    )
   }
 
   private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {

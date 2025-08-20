@@ -46,7 +46,8 @@ class Timer(scene: Scene, ctx: SpatialContext, totalTime: Int) {
               panel {
                 rootView?.findViewById<TextView>(R.id.totalTime)?.text = totalTime.toString() + "'"
               }
-            })
+            }
+        )
 
     // Create an entity with the timer.glb model
     val timerObj =
@@ -74,7 +75,8 @@ class Timer(scene: Scene, ctx: SpatialContext, totalTime: Int) {
             type = AssetType.TIMER,
             totalTime = totalTime,
             startTime = System.currentTimeMillis(),
-        ))
+        )
+    )
     // We make panel entity child to the timer model entity
     timerPanel.setComponent(TransformParent(timerObj))
 

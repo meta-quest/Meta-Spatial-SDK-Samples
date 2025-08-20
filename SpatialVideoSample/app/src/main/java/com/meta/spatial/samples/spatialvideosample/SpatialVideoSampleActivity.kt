@@ -184,7 +184,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
       environmentGLXF?.let {
         val environmentMesh = it.getComponent<Mesh>()
         it.setComponent(
-            environmentMesh.apply { defaultShaderOverride = SceneMaterial.UNLIT_SHADER })
+            environmentMesh.apply { defaultShaderOverride = SceneMaterial.UNLIT_SHADER }
+        )
       }
       setMrMode(scene.isSystemPassthroughEnabled())
     }
@@ -258,7 +259,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                 },
                 Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
                 Visible(false),
-            ))
+            )
+        )
 
     scene.updateIBLEnvironment("chromatic.env")
   }
@@ -284,28 +286,33 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                   Grabbable(type = GrabbableType.PIVOT_Y, minHeight = 0.75f, maxHeight = 2.5f),
                   SpatializedAudioPanel(),
                   Transform(initialPose * Pose(Vector3(0f, 1.25f, 2f), Quaternion(0f, 0f, 0f))),
-              ))
+              )
+          )
       Entity(R.integer.video_selector_panel)
           .setComponents(
               listOf(
                   Grabbable(),
                   Panel(R.integer.video_selector_panel),
                   Transform(
-                      initialPose * Pose(Vector3(-1f, 1.25f, 1.2f), Quaternion(0f, -45f, 0f))),
-              ))
+                      initialPose * Pose(Vector3(-1f, 1.25f, 1.2f), Quaternion(0f, -45f, 0f))
+                  ),
+              )
+          )
       Entity(R.integer.controls_id)
           .setComponents(
               listOf(
                   Panel(R.layout.controls),
                   TransformParent(Entity(R.integer.spatialized_video_panel)),
-              ))
+              )
+          )
       Entity(R.integer.mr_panel)
           .setComponents(
               listOf(
                   Panel(R.integer.mr_panel),
                   Transform(Pose(Vector3(0.0f, -0.6f, -0.1f))),
                   TransformParent(Entity(R.integer.video_selector_panel)),
-              ))
+              )
+          )
       environmentGLXF?.setComponents(listOf(Visible(false), Transform(initialPose)))
       if (DEBUG) {
         Entity(R.integer.debug_panel)
@@ -314,7 +321,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                     Grabbable(),
                     Panel(R.layout.debug),
                     Transform(initialPose * Pose(Vector3(1f, 1.25f, 1f), Quaternion(0f, 45f, 0f))),
-                ))
+                )
+            )
       }
       mrPanelPose = Entity(R.integer.spatialized_video_panel).getComponent<Transform>().transform
       setMrMode(scene.isSystemPassthroughEnabled())
@@ -495,7 +503,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                     setUri?.let { uri -> setVideo(uri) }
                     Log.e("ExoPlayer", "Player encountered an error: $error")
                   }
-                })
+                }
+            )
 
             it.setOnSeekBarChangeListener(
                 object : SeekBar.OnSeekBarChangeListener {
@@ -524,7 +533,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                       player.playWhenReady = true
                     }
                   }
-                })
+                }
+            )
           }
 
           addInputListener(
@@ -555,7 +565,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                   resetControllerFadeOutTimer()
                   return false
                 }
-              })
+              }
+          )
 
           // Default media
           Movie.fromRawVideo("doggie", "Doggie")?.let { movie -> setVideo(movie.uri) }
@@ -629,7 +640,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
               override fun onStartTrackingTouch(seekBar: SeekBar) = Unit
 
               override fun onStopTrackingTouch(seekBar: SeekBar) = Unit
-            })
+            }
+        )
       }
     }
   }
@@ -832,7 +844,8 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
       environmentGLXF?.setComponent(Visible(false))
       skydome?.setComponent(Visible(false))
       videoPanelEntity.setComponents(
-          listOf(Scale(1.0f), Transform(mrPanelPose), TransformParent(Entity.nullEntity())))
+          listOf(Scale(1.0f), Transform(mrPanelPose), TransformParent(Entity.nullEntity()))
+      )
       Entity(R.integer.controls_id)
           .setComponent(Transform(Pose(Vector3(0.0f, -0.43f, -0.15f), Quaternion(20f, 0f, 0f))))
     } else {
@@ -840,10 +853,12 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
           listOf(
               Scale(SpatialVideoSampleActivity.VR_SCREEN_RATIO),
               Transform(Pose(Vector3(0.2f, 1.7f, 4.5f), Quaternion(0f, 0f, 0f))),
-          ))
+          )
+      )
       Entity(R.integer.controls_id)
           .setComponents(
-              listOf(Transform(Pose(Vector3(0.0f, -1.1f, -2.0f), Quaternion(20f, 0f, 0f)))))
+              listOf(Transform(Pose(Vector3(0.0f, -1.1f, -2.0f), Quaternion(20f, 0f, 0f))))
+          )
     }
 
     val sceneObjectSystem = systemManager.findSystem<SceneObjectSystem>()

@@ -39,7 +39,8 @@ fun BirdseyeSideNavItem() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground),
+                    color = LocalColorScheme.current.primaryAlphaBackground
+                ),
         )
         Spacer(modifier = Modifier.height(20.dp))
         Row(horizontalArrangement = Arrangement.Center, modifier = Modifier.width(300.dp)) {
@@ -61,7 +62,8 @@ fun BirdseyeSideNavItem() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground),
+                color = LocalColorScheme.current.primaryAlphaBackground
+            ),
     )
     Spacer(modifier = Modifier.height(40.dp))
 
@@ -75,7 +77,8 @@ fun BirdseyeSideNavItem() {
             text = "Default",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.height(48.dp))
         SpatialSideNavItem(
@@ -121,7 +124,8 @@ fun BirdseyeSideNavItem() {
             text = "Expanded Icon",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.height(48.dp))
         SpatialSideNavItem(
@@ -167,7 +171,8 @@ fun BirdseyeSideNavItem() {
             text = "Collapsed",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.height(48.dp))
         SpatialSideNavItem(
@@ -196,7 +201,8 @@ fun BirdseyeSideNavItem() {
             text = "",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(5.dp))
         Column(
@@ -207,25 +213,29 @@ fun BirdseyeSideNavItem() {
               text = "Unselected",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  ),
           )
           Text(
               text = "Selected",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  ),
           )
           Text(
               text = "Secondary Label (Unselected)",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  ),
           )
           Text(
               text = "Secondary Label (Selected)",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  ),
           )
         }
       }

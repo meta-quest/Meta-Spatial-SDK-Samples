@@ -270,60 +270,74 @@ class ImmersiveActivity : AppSystemActivity() {
       while (!uniqueAssetsCursor.isAfterLast) {
         val uuid =
             uniqueAssetsCursor.getInt(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_UUID))
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_UUID)
+            )
         val rawType =
             uniqueAssetsCursor.getString(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_TYPE))
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_TYPE)
+            )
         val type = AssetType.entries.find { it.name == rawType }
         val state =
             uniqueAssetsCursor.getInt(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_STATE))
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_STATE)
+            )
 
         val posX =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_X))
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_X)
+            )
         val posY =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_Y))
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_Y)
+            )
         val posZ =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_Z))
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_Z)
+            )
 
         val rotW =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_W))
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_W)
+            )
         val rotX =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_X))
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_X)
+            )
         val rotY =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_Y))
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_Y)
+            )
         val rotZ =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_Z))
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_Z)
+            )
 
         when (type) {
           AssetType.TASKS_PANEL -> {
             tasksPanel.setComponent(UniqueAssetComponent(uuid, AssetType.TASKS_PANEL))
             tasksPanel.setComponent(Visible(if (state == 1) true else false))
             tasksPanel.setComponent(
-                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ))))
+                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
+            )
           }
           AssetType.AI_PANEL -> {
             aiExchangePanel.setComponent(UniqueAssetComponent(uuid, AssetType.AI_PANEL))
             aiExchangePanel.setComponent(Visible(if (state == 1) true else false))
             aiExchangePanel.setComponent(
-                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ))))
+                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
+            )
           }
           AssetType.CLOCK -> {
             clock.setComponent(UniqueAssetComponent(uuid, AssetType.CLOCK))
             clock.setComponent(
-                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ))))
+                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
+            )
           }
           AssetType.SPEAKER -> {
             speaker.setComponent(UniqueAssetComponent(uuid, AssetType.SPEAKER))
             speaker.setComponent(
-                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ))))
+                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
+            )
             speakerIsOn = if (state == 1) true else false
             if (speakerIsOn) playAmbientSound() else stopAmbientSound()
           }
@@ -400,26 +414,33 @@ class ImmersiveActivity : AppSystemActivity() {
 
         val posX =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_X))
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_X)
+            )
         val posY =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_Y))
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_Y)
+            )
         val posZ =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_Z))
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_Z)
+            )
 
         val rotW =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_W))
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_W)
+            )
         val rotX =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_X))
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_X)
+            )
         val rotY =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_Y))
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_Y)
+            )
         val rotZ =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_Z))
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_Z)
+            )
 
         StickyNote(
             scene,
@@ -627,7 +648,8 @@ class ImmersiveActivity : AppSystemActivity() {
             layoutHeightInDp = _dp * (height / width)
             includeGlass = false
           }
-        })
+        }
+    )
 
     // Entity with panel component created
     val clockPanel: Entity =
@@ -775,7 +797,8 @@ class ImmersiveActivity : AppSystemActivity() {
         Material().apply {
           baseTextureAndroidResourceId = R.drawable.speaker_on
           alphaMode = 1
-        })
+        }
+    )
     // Project audio state updated in database
     DB.updateUniqueAsset(speaker.getComponent<UniqueAssetComponent>().uuid, state = speakerIsOn)
     // Change texture to audio button state image in toolbar
@@ -792,7 +815,8 @@ class ImmersiveActivity : AppSystemActivity() {
         Material().apply {
           baseTextureAndroidResourceId = R.drawable.speaker_off
           alphaMode = 1
-        })
+        }
+    )
     // Project audio state updated in database
     DB.updateUniqueAsset(speaker.getComponent<UniqueAssetComponent>().uuid, state = speakerIsOn)
     // Change texture to audio button state image in toolbar
@@ -1335,7 +1359,8 @@ class ImmersiveActivity : AppSystemActivity() {
             // Add disclaimer text with AI information
             val spannableString =
                 SpannableString(
-                    "This application uses generative AI to respond to queries, and those responses may be inaccurate or inappropriate. Learn More. \n\n Your queries and the generative AI responses are not retained by Meta.")
+                    "This application uses generative AI to respond to queries, and those responses may be inaccurate or inappropriate. Learn More. \n\n Your queries and the generative AI responses are not retained by Meta."
+                )
 
             // Create web view showing privacy police information for META AI
             val clickableSpan =
@@ -1514,7 +1539,8 @@ class ImmersiveActivity : AppSystemActivity() {
       templateLabel1.layoutParams.width =
           resources
               .getDimension(
-                  if (templateState == 1) R.dimen.max_label1_size else R.dimen.min_label1_size)
+                  if (templateState == 1) R.dimen.max_label1_size else R.dimen.min_label1_size
+              )
               .toInt()
     }
 
@@ -1676,7 +1702,8 @@ class ImmersiveActivity : AppSystemActivity() {
                       100,
                   ) // Delay to ensure the scrolling happens after layout
                 }
-              })
+              }
+          )
       // if is not a new task, we check if a corresponding Spatial Task should be created
     } else {
       if (detach == 1) {
@@ -1702,7 +1729,8 @@ class ImmersiveActivity : AppSystemActivity() {
         buttonLabel1.layoutParams.width =
             resources
                 .getDimension(
-                    if (newState == 1) R.dimen.max_label1_size else R.dimen.min_label1_size)
+                    if (newState == 1) R.dimen.max_label1_size else R.dimen.min_label1_size
+                )
                 .toInt()
         DB.updateTaskData(_uuid, state = newState)
         updateSpatialTask(_uuid)
@@ -1949,11 +1977,13 @@ class ImmersiveActivity : AppSystemActivity() {
             textView.layoutParams.height = (lineHeight * 2 + (lineHeight * textView.lineCount))
             textView.requestLayout()
           }
-        })
+        }
+    )
 
     val color =
         ColorStateList.valueOf(
-            getColor(if (ai) R.color.aiTextView else R.color.userTextView)) // Example color
+            getColor(if (ai) R.color.aiTextView else R.color.userTextView)
+        ) // Example color
     textView.backgroundTintList = color
 
     // Delete layout avatar depending on message is from AI or User
@@ -1991,7 +2021,8 @@ class ImmersiveActivity : AppSystemActivity() {
                     100,
                 ) // Delay to ensure the scrolling happens after layout
               }
-            })
+            }
+        )
 
     // New message added to the AIExchangePanel
     scrollViewTable?.addView(newMessage)
@@ -2032,7 +2063,9 @@ class ImmersiveActivity : AppSystemActivity() {
                     billboardOrientationEuler.y,
                     billboardOrientationEuler.z,
                 ),
-            )))
+            )
+        )
+    )
     deleteButton.setComponent(TransformParent(ent))
     deleteButton.setComponent(Visible(true))
   }

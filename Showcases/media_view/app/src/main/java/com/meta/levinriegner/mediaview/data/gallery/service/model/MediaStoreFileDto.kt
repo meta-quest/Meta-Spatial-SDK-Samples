@@ -168,7 +168,9 @@ data class MediaStoreFileDto(
               ContentUris.withAppendedId(
                   MediaStore.Files.getContentUri(
                       cursor.getString(
-                          cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.VOLUME_NAME))),
+                          cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.VOLUME_NAME)
+                      )
+                  ),
                   cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns._ID)),
               ),
           albumArtist =

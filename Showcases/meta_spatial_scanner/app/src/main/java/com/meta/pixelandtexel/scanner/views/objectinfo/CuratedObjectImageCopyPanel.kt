@@ -37,6 +37,7 @@ private fun CuratedObjectTilesPanelPreview() {
                 "- Share pictures, stream music and videos, access recipes, control your smart devices and Alexa all from the fridge.\n" +
                 "- Enjoy your favorite beverage with your choice of ice. Choose from cubed ice or Ice Bites from the Dual Auto Ice Maker in the freezer drawer, or choose from curved or crushed ice from the external dispenser.\n" +
                 "- A flat-front fridge design with recessed drawer handle blends beautifully into the kitchen.",
-        ))
+        )
+    )
   }
 }

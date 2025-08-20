@@ -48,8 +48,9 @@ class BoardParentingSystem : SystemBase() {
       var grabbingController = Entity.nullEntity()
       for (entity in controllers.eval()) {
         val controller = entity.getComponent<Controller>()
-        if (controller.buttonState and (ButtonBits.ButtonSqueezeL or ButtonBits.ButtonSqueezeR) !=
-            0) {
+        if (
+            controller.buttonState and (ButtonBits.ButtonSqueezeL or ButtonBits.ButtonSqueezeR) != 0
+        ) {
           grabbingController = entity
         }
       }
@@ -75,7 +76,8 @@ class BoardParentingSystem : SystemBase() {
       // If the dummy point is close to the board, we stick the object to the board
       if (distance < 0.08f) {
         grabbedChild.setComponent(
-            Transform(Pose(dummyPoint, board.getComponent<Transform>().transform.q)))
+            Transform(Pose(dummyPoint, board.getComponent<Transform>().transform.q))
+        )
       }
     }
   }

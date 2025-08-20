@@ -73,7 +73,8 @@ class WallLightingSystem(
     for (materialEntry in materialsMap!!) {
       if (!validLabels.contains(materialEntry.key.label)) {
         throw IllegalArgumentException(
-            "Cannot use a material map with label type: ${materialEntry.key.label}")
+            "Cannot use a material map with label type: ${materialEntry.key.label}"
+        )
       }
 
       // Add labels for quick search later
@@ -139,7 +140,8 @@ class WallLightingSystem(
               Hittable(MeshCollision.NoCollision),
               Scale(if (_isVisible) scale else Vector3(0f)),
               Visible(_isVisible),
-          ))
+          )
+      )
     }
   }
 

@@ -35,10 +35,12 @@ constructor(
         try {
           // Create or Get media file
           val (contentValues, uri) =
-              if (_state.value is UploadState.Idle ||
-                  _state.value is UploadState.Completed ||
-                  (_state.value is UploadState.Uploading &&
-                      (_state.value as UploadState.Uploading).fileId != driveMedia.fileId)) {
+              if (
+                  _state.value is UploadState.Idle ||
+                      _state.value is UploadState.Completed ||
+                      (_state.value is UploadState.Uploading &&
+                          (_state.value as UploadState.Uploading).fileId != driveMedia.fileId)
+              ) {
                 Timber.i("Creating new media file for file ${driveMedia.fileId}")
                 galleryRepository.createMediaFile(
                     driveMedia.fileName,

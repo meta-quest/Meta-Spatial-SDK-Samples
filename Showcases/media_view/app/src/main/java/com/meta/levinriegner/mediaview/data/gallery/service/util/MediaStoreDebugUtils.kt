@@ -40,7 +40,8 @@ object MediaStoreDebugUtils {
               Timber.w(
                   "ENTRY #${cursor.position}: Failed to get column ${
                             cursor.getColumnName(i)
-                        }. Reason: ${e.message}")
+                        }. Reason: ${e.message}"
+              )
               "null,"
             }
       }

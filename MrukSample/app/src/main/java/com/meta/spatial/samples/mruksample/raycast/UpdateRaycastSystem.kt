@@ -53,7 +53,8 @@ class UpdateRaycastSystem(
         if (depthRaycastResult.result == MRUKEnvironmentRaycastHitResult.SUCCESS) {
           if (arrowEntities.isEmpty()) {
             arrowEntities.add(
-                Entity.create(listOf(Mesh(Uri.parse("arrow.glb")), Transform(Pose()))))
+                Entity.create(listOf(Mesh(Uri.parse("arrow.glb")), Transform(Pose())))
+            )
           }
           val arrowPose =
               Pose(
@@ -106,7 +107,8 @@ class UpdateRaycastSystem(
         for (i in hits.indices) {
           if (i >= arrowEntities.size) {
             arrowEntities.add(
-                Entity.create(listOf(Mesh(Uri.parse("arrow.glb")), Transform(Pose()))))
+                Entity.create(listOf(Mesh(Uri.parse("arrow.glb")), Transform(Pose())))
+            )
           }
           val hit = hits[i]
           val entity = arrowEntities[i]

@@ -42,9 +42,9 @@ class GeneralSystem() : SystemBase() {
         initTime = System.currentTimeMillis()
 
         // We load the skybox later, to improve app performance
-      } else if (deltaTime >= 1 &&
-          logo?.getComponent<Visible>()?.isVisible == true &&
-          !skyboxLoaded) {
+      } else if (
+          deltaTime >= 1 && logo?.getComponent<Visible>()?.isVisible == true && !skyboxLoaded
+      ) {
         skyboxLoaded = true
         ImmersiveActivity.instance.get()?.createSkybox(R.drawable.skybox1)
         // App is initialized after logo has been shown
@@ -62,10 +62,12 @@ class GeneralSystem() : SystemBase() {
     val controllers = Query.where { has(Controller.id) }
     for (entity in controllers.eval()) {
       val controller = entity.getComponent<Controller>()
-      if ((controller.buttonState.inv() and controller.changedButtons and ButtonBits.ButtonB) !=
-          0 ||
-          (controller.buttonState.inv() and controller.changedButtons and ButtonBits.ButtonY) !=
-              0) {
+      if (
+          (controller.buttonState.inv() and controller.changedButtons and ButtonBits.ButtonB) !=
+              0 ||
+              (controller.buttonState.inv() and controller.changedButtons and ButtonBits.ButtonY) !=
+                  0
+      ) {
         placeInFront(ImmersiveActivity.instance.get()?.toolbarPanel)
       }
     }

@@ -43,41 +43,43 @@ fun ScrollableColumn(content: @Composable () -> Unit) {
       modifier =
           Modifier.fillMaxSize().onGloballyPositioned { coordinates ->
             viewportHeight = coordinates.size.height
-          }) {
-        Column(
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.Start,
-            modifier =
-                Modifier.fillMaxSize()
-                    .padding(0.dp)
-                    .verticalScroll(scrollState)
-                    .onGloballyPositioned { coordinates ->
-                      contentHeight = coordinates.size.height
-                    },
-        ) {
-          content.invoke()
-        }
+          }
+  ) {
+    Column(
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.Start,
+        modifier =
+            Modifier.fillMaxSize().padding(0.dp).verticalScroll(scrollState).onGloballyPositioned {
+                coordinates ->
+              contentHeight = coordinates.size.height
+            },
+    ) {
+      content.invoke()
+    }
 
-        if (showArrow) {
-          Box(
-              modifier =
-                  Modifier.fillMaxWidth()
-                      .height(60.dp)
-                      .align(Alignment.BottomCenter)
-                      .background(
-                          brush =
-                              Brush.verticalGradient(
-                                  colors =
-                                      listOf(
-                                          Color.Transparent,
-                                          SpatialColor.RLDSpanelBlackGradientBottom,
-                                      ))))
-          Icon(
-              imageVector = SpatialIcons.Regular.ArrowDown,
-              contentDescription = "Scroll down",
-              tint = Color.White,
-              modifier = Modifier.align(Alignment.BottomCenter),
-          )
-        }
-      }
+    if (showArrow) {
+      Box(
+          modifier =
+              Modifier.fillMaxWidth()
+                  .height(60.dp)
+                  .align(Alignment.BottomCenter)
+                  .background(
+                      brush =
+                          Brush.verticalGradient(
+                              colors =
+                                  listOf(
+                                      Color.Transparent,
+                                      SpatialColor.RLDSpanelBlackGradientBottom,
+                                  )
+                          )
+                  )
+      )
+      Icon(
+          imageVector = SpatialIcons.Regular.ArrowDown,
+          contentDescription = "Scroll down",
+          tint = Color.White,
+          modifier = Modifier.align(Alignment.BottomCenter),
+      )
+    }
+  }
 }

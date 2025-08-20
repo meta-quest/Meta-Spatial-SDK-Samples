@@ -136,7 +136,8 @@ class WebView(
                   this.entity?.destroy()
                 }
               }
-            })
+            }
+        )
 
     val ent: Entity =
         Entity.createPanelEntity(id, Transform(pose), Grabbable(true, GrabbableType.FACE))

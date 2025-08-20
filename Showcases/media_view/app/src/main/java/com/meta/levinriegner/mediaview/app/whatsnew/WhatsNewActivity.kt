@@ -71,119 +71,123 @@ class WhatsNewActivity : ComponentActivity() {
                         color = AppColor.MetaBlu,
                         shape = RoundedCornerShape(Dimens.radiusMedium),
                     )
-                    .clip(shape = RoundedCornerShape(Dimens.radiusMedium))) {
-              val uriHandler = LocalUriHandler.current
+                    .clip(shape = RoundedCornerShape(Dimens.radiusMedium))
+        ) {
+          val uriHandler = LocalUriHandler.current
 
-              val whatsNew = viewModel.releaseNotes.collectAsState().value
+          val whatsNew = viewModel.releaseNotes.collectAsState().value
 
-              Row(modifier = Modifier.fillMaxSize()) {
-                Box(
-                    modifier =
-                        Modifier.fillMaxWidth(fraction = .30f)
-                            .fillMaxHeight()
-                            .background(AppColor.DarkBackgroundSweep)
-                            .padding(
-                                horizontal = Dimens.small,
-                            )) {
-                      Column(
-                          horizontalAlignment = Alignment.CenterHorizontally,
-                          verticalArrangement = Arrangement.Center,
-                          modifier = Modifier.fillMaxSize(),
-                      ) {
-                        Image(
-                            rememberAsyncImagePainter(R.drawable.logo),
-                            "logo",
+          Row(modifier = Modifier.fillMaxSize()) {
+            Box(
+                modifier =
+                    Modifier.fillMaxWidth(fraction = .30f)
+                        .fillMaxHeight()
+                        .background(AppColor.DarkBackgroundSweep)
+                        .padding(
+                            horizontal = Dimens.small,
                         )
-                        Box(modifier = Modifier.height(Dimens.small))
-                        RoundedButton(
-                            onClick = { uriHandler.openUri(Constants.WEBSITE_URL) },
-                            title = "Visit Our Website",
-                        )
-                      }
-                    }
-
-                Column(
-                    modifier =
-                        Modifier.fillMaxSize()
-                            .background(AppColor.BackgroundSweep)
-                            .padding(Dimens.small)) {
-
-                      // Top bar with close button
-                      Row(
-                          modifier = Modifier.fillMaxWidth().wrapContentHeight(),
-                          horizontalArrangement = Arrangement.SpaceBetween,
-                          verticalAlignment = Alignment.Top,
-                      ) {
-                        Text(
-                            "V ${BuildConfig.VERSION_NAME} Updates",
-                            color = AppColor.White,
-                            textAlign = TextAlign.Start,
-                            style = MaterialTheme.typography.titleMedium,
-                        )
-                        CloseButton(onPressed = { viewModel.close() })
-                      }
-
-                      Box(modifier = Modifier.height(Dimens.small))
-
-                      HorizontalDivider()
-
-                      // Content
-                      Box(modifier = Modifier.fillMaxWidth().fillMaxHeight(.80f)) {
-                        LazyVerticalStaggeredGrid(
-                            columns = StaggeredGridCells.Fixed(2),
-                            horizontalArrangement =
-                                Arrangement.spacedBy(
-                                    Dimens.small,
-                                ),
-                            verticalItemSpacing = Dimens.small,
-                            contentPadding =
-                                PaddingValues(
-                                    vertical = Dimens.small,
-                                ),
-                        ) {
-                          items(items = whatsNew) { releaseNote ->
-                            Column {
-                              Text(
-                                  releaseNote.title,
-                                  color = AppColor.White,
-                                  textAlign = TextAlign.Start,
-                                  fontWeight = FontWeight.Bold,
-                                  style = MaterialTheme.typography.bodyMedium,
-                              )
-                              Text(
-                                  releaseNote.description,
-                                  color = AppColor.White60,
-                                  textAlign = TextAlign.Start,
-                                  style = MaterialTheme.typography.bodySmall,
-                                  fontSize = 10.sp,
-                              )
-                            }
-                          }
-                        }
-                      }
-
-                      HorizontalDivider()
-
-                      // Bottom bar with Checkbox
-                      Row(
-                          modifier = Modifier.fillMaxWidth().fillMaxHeight(),
-                          horizontalArrangement = Arrangement.End,
-                          verticalAlignment = Alignment.CenterVertically,
-                      ) {
-                        Box(
-                            modifier =
-                                Modifier.padding(
-                                    horizontal = Dimens.xSmall,
-                                ))
-
-                        RoundedButton(
-                            onClick = { viewModel.close() },
-                            title = "Continue",
-                        )
-                      }
-                    }
+            ) {
+              Column(
+                  horizontalAlignment = Alignment.CenterHorizontally,
+                  verticalArrangement = Arrangement.Center,
+                  modifier = Modifier.fillMaxSize(),
+              ) {
+                Image(
+                    rememberAsyncImagePainter(R.drawable.logo),
+                    "logo",
+                )
+                Box(modifier = Modifier.height(Dimens.small))
+                RoundedButton(
+                    onClick = { uriHandler.openUri(Constants.WEBSITE_URL) },
+                    title = "Visit Our Website",
+                )
               }
             }
+
+            Column(
+                modifier =
+                    Modifier.fillMaxSize()
+                        .background(AppColor.BackgroundSweep)
+                        .padding(Dimens.small)
+            ) {
+
+              // Top bar with close button
+              Row(
+                  modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+                  horizontalArrangement = Arrangement.SpaceBetween,
+                  verticalAlignment = Alignment.Top,
+              ) {
+                Text(
+                    "V ${BuildConfig.VERSION_NAME} Updates",
+                    color = AppColor.White,
+                    textAlign = TextAlign.Start,
+                    style = MaterialTheme.typography.titleMedium,
+                )
+                CloseButton(onPressed = { viewModel.close() })
+              }
+
+              Box(modifier = Modifier.height(Dimens.small))
+
+              HorizontalDivider()
+
+              // Content
+              Box(modifier = Modifier.fillMaxWidth().fillMaxHeight(.80f)) {
+                LazyVerticalStaggeredGrid(
+                    columns = StaggeredGridCells.Fixed(2),
+                    horizontalArrangement =
+                        Arrangement.spacedBy(
+                            Dimens.small,
+                        ),
+                    verticalItemSpacing = Dimens.small,
+                    contentPadding =
+                        PaddingValues(
+                            vertical = Dimens.small,
+                        ),
+                ) {
+                  items(items = whatsNew) { releaseNote ->
+                    Column {
+                      Text(
+                          releaseNote.title,
+                          color = AppColor.White,
+                          textAlign = TextAlign.Start,
+                          fontWeight = FontWeight.Bold,
+                          style = MaterialTheme.typography.bodyMedium,
+                      )
+                      Text(
+                          releaseNote.description,
+                          color = AppColor.White60,
+                          textAlign = TextAlign.Start,
+                          style = MaterialTheme.typography.bodySmall,
+                          fontSize = 10.sp,
+                      )
+                    }
+                  }
+                }
+              }
+
+              HorizontalDivider()
+
+              // Bottom bar with Checkbox
+              Row(
+                  modifier = Modifier.fillMaxWidth().fillMaxHeight(),
+                  horizontalArrangement = Arrangement.End,
+                  verticalAlignment = Alignment.CenterVertically,
+              ) {
+                Box(
+                    modifier =
+                        Modifier.padding(
+                            horizontal = Dimens.xSmall,
+                        )
+                )
+
+                RoundedButton(
+                    onClick = { viewModel.close() },
+                    title = "Continue",
+                )
+              }
+            }
+          }
+        }
       }
     }
   }

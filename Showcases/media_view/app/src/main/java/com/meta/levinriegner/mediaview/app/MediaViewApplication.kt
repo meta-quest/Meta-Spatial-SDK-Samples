@@ -38,7 +38,8 @@ class MediaViewApplication : Application() {
         ImageLoader.Builder(this)
             .components { add(VideoFrameDecoder.Factory()) }
             .crossfade(true)
-            .build())
+            .build()
+    )
   }
 
   private fun initDatadog() {

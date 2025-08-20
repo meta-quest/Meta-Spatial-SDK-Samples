@@ -87,7 +87,8 @@ class SpatialTask(
                             ?.resources!!
                             .getDimension(
                                 if (newState == 1) R.dimen.max_label1_size
-                                else R.dimen.min_label1_size)
+                                else R.dimen.min_label1_size
+                            )
                             .toInt()
                     ImmersiveActivity.instance.get()?.DB?.updateTaskData(uuid, state = newState)
                     ImmersiveActivity.instance.get()?.cleanAndLoadTasks(true)
@@ -130,7 +131,8 @@ class SpatialTask(
                 addEditTextListeners(titleTextInput, ::onComplete)
                 addEditTextListeners(bodyTextInput, ::onComplete, true)
               }
-            })
+            }
+        )
 
     // Create an entity with a panel component
     val task: Entity =

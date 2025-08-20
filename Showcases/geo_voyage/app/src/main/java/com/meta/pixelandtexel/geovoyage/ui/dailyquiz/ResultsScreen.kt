@@ -57,32 +57,33 @@ fun ResultsScreen(numCorrectAnswers: Int, numTotalAnswers: Int) {
       modifier = Modifier.fillMaxSize(),
   ) {
     SecondaryPanel(
-        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.short_panel_height))) {
-          Column(
-              verticalArrangement = Arrangement.SpaceEvenly,
-              horizontalAlignment = Alignment.CenterHorizontally,
-              modifier = Modifier.fillMaxSize(),
-          ) {
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth(),
-            ) {
-              Icon(
-                  imageVector = SpatialIcons.Regular.CheckAlt,
-                  contentDescription = "Answer icon",
-                  tint = colorResource(R.color.quiz_correct_green),
-                  modifier = Modifier.size(40.dp),
-              )
-              Text(text = tallyText, style = LocalTypography.current.headline1Strong)
-            }
-            Text(
-                text = reminderText,
-                style = LocalTypography.current.headline3Strong,
-                textAlign = TextAlign.Center,
-            )
-          }
+        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.short_panel_height))
+    ) {
+      Column(
+          verticalArrangement = Arrangement.SpaceEvenly,
+          horizontalAlignment = Alignment.CenterHorizontally,
+          modifier = Modifier.fillMaxSize(),
+      ) {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+          Icon(
+              imageVector = SpatialIcons.Regular.CheckAlt,
+              contentDescription = "Answer icon",
+              tint = colorResource(R.color.quiz_correct_green),
+              modifier = Modifier.size(40.dp),
+          )
+          Text(text = tallyText, style = LocalTypography.current.headline1Strong)
         }
+        Text(
+            text = reminderText,
+            style = LocalTypography.current.headline3Strong,
+            textAlign = TextAlign.Center,
+        )
+      }
+    }
   }
 }
 

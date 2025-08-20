@@ -121,10 +121,13 @@ class StickyNote(
                                         ?.resources!!
                                         .getDimension(
                                             if (textView.lineCount <= 7) R.dimen.sticky_text_size
-                                            else R.dimen.sticky_text_smaller_size))
+                                            else R.dimen.sticky_text_smaller_size
+                                        )
+                                )
                             textView.requestLayout()
                           }
-                        })
+                        }
+                    )
 
                 // We add an EditText listener to identify when text has been edited and we update
                 // it in database
@@ -136,7 +139,8 @@ class StickyNote(
                 }
                 addEditTextListeners(textView, ::onComplete, true)
               }
-            })
+            }
+        )
 
     // Create a grabbable entity with a Panel
     val sticky: Entity =

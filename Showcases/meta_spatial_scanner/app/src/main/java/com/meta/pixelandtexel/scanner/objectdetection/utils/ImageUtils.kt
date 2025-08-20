@@ -14,7 +14,8 @@ object ImageUtils {
   fun Image.getByteBuffer(): ByteBuffer {
     if (this.format != ImageFormat.YUV_420_888) {
       throw IllegalArgumentException(
-          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}")
+          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}"
+      )
     }
 
     val width = this.width
@@ -91,7 +92,8 @@ object ImageUtils {
   fun Image.getBitmap(): Bitmap {
     if (this.format != ImageFormat.YUV_420_888) {
       throw IllegalArgumentException(
-          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}")
+          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}"
+      )
     }
 
     val width = this.width
@@ -177,16 +179,18 @@ object ImageUtils {
   fun Image.getBitmap(crop: Rect): Bitmap {
     if (this.format != ImageFormat.YUV_420_888) {
       throw IllegalArgumentException(
-          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}")
+          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}"
+      )
     }
 
     // validate our bounds
 
     require(!crop.isEmpty) { "Bounds empty" }
     require(
-        crop.left >= 0 && crop.top >= 0 && crop.right <= this.width && crop.bottom <= this.height) {
-          "Bounds not within image dimensions"
-        }
+        crop.left >= 0 && crop.top >= 0 && crop.right <= this.width && crop.bottom <= this.height
+    ) {
+      "Bounds not within image dimensions"
+    }
     require(crop.width() > 0 && crop.height() > 0) { "Bounds must be non zero" }
 
     val width = crop.width()

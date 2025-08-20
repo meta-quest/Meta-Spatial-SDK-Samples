@@ -372,7 +372,8 @@ class CameraController(
                 cont.resumeWithException(exc)
               }
             },
-        ))
+        )
+    )
   }
 
   /**

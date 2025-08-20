@@ -17,6 +17,7 @@ class PinnableLoader : BaseLoader() {
           if (meshNameValue != null) {
             meshName = meshNameValue
           }
-        })
+        }
+    )
   }
 }

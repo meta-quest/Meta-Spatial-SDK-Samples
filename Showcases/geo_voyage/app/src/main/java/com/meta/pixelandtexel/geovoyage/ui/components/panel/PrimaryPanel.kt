@@ -30,9 +30,10 @@ fun PrimaryPanel(
           modifier
               .clip(LocalShapes.current.large)
               .background(brush = LocalColorScheme.current.panel, shape = LocalShapes.current.large)
-              .padding(dimensionResource(R.dimen.standard_margin))) {
-        content.invoke()
-      }
+              .padding(dimensionResource(R.dimen.standard_margin))
+  ) {
+    content.invoke()
+  }
 }
 
 @Preview(widthDp = 600, heightDp = 400)

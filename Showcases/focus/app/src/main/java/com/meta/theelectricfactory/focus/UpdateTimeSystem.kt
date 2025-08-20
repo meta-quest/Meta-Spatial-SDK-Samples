@@ -102,9 +102,11 @@ class UpdateTimeSystem : SystemBase() {
           ?.scene
           ?.playSound(ImmersiveActivity.instance.get()?.timerSound!!, entity, 1f)
       // Make the timer sound 3 times
-    } else if (asset.complete &&
-        ((asset.loop == 1 && (timeLeft / 1000) < -2) ||
-            (asset.loop == 2 && (timeLeft / 1000) < -4))) {
+    } else if (
+        asset.complete &&
+            ((asset.loop == 1 && (timeLeft / 1000) < -2) ||
+                (asset.loop == 2 && (timeLeft / 1000) < -4))
+    ) {
       ImmersiveActivity.instance
           .get()
           ?.scene

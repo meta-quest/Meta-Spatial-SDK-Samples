@@ -88,7 +88,8 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
       val environmentEntity: Entity = composition.getNodeByName("Environment").entity
       val environmentMesh = environmentEntity.getComponent<Mesh>()
       environmentEntity.setComponent(
-          environmentMesh.apply { defaultShaderOverride = SceneMaterial.UNLIT_SHADER })
+          environmentMesh.apply { defaultShaderOverride = SceneMaterial.UNLIT_SHADER }
+      )
 
       // get the robot and the basketBall entities the composition
       val robot = composition.getNodeByName("robot").entity
@@ -110,7 +111,8 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
             layerConfig = LayerConfig()
             enableTransparent = true
           }
-        })
+        }
+    )
   }
 
   override fun onSceneReady() {
@@ -137,7 +139,8 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
               unlit = true // Prevent scene lighting from affecting the skybox
             },
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-        ))
+        )
+    )
   }
 
   private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {

@@ -57,8 +57,10 @@ constructor(
   }
 
   fun onSaveImagePressed() {
-    if (_state.value is ImmersiveMenuState.Editing &&
-        (_state.value as ImmersiveMenuState.Editing).saveLoading) {
+    if (
+        _state.value is ImmersiveMenuState.Editing &&
+            (_state.value as ImmersiveMenuState.Editing).saveLoading
+    ) {
       // Skip if already saving
       return
     }

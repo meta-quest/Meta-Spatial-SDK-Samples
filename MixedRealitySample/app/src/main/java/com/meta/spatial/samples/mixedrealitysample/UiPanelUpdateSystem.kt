@@ -53,7 +53,8 @@ class UiPanelUpdateSystem() : SystemBase() {
 
     // set physics on panel after position is set (otherwise physics interferes with position)
     panel.entity.setComponent(
-        Physics("box", dimensions = Vector3(1.0f, 0.75f, 0f), restitution = 0.9f))
+        Physics("box", dimensions = Vector3(1.0f, 0.75f, 0f), restitution = 0.9f)
+    )
 
     return true
   }

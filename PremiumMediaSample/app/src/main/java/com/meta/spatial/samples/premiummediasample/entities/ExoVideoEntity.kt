@@ -214,7 +214,8 @@ class ExoVideoEntity(
               exoPlayer.prepare()
               exoPlayer.setHighQuality()
             }
-          })
+          }
+      )
     }
     entity = Entity.create(Panel(id), Transform(), Visible(false), PanelLayerAlpha(0f))
   }

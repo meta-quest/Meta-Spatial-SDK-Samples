@@ -129,7 +129,8 @@ class AskEarthViewModel(
                 _errorMessage.value = "Wit.ai Error: $reason"
                 _route.value = Routes.ERROR_ROUTE
               }
-            })
+            }
+        )
 
     if (startResult != WitAiStartResult.SUCCESS) {
       Log.e("AUDIO ERROR", startResult.toString())

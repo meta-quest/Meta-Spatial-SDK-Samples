@@ -28,7 +28,8 @@ class UpdateRoomSystem(
       prevRoomCount = roomsCount
       getRoomTextView()
           ?.setText(
-              "Number of rooms: $roomsCount\nCurrent room: ${currentRoom?.anchor?.uuid ?: "None"}")
+              "Number of rooms: $roomsCount\nCurrent room: ${currentRoom?.anchor?.uuid ?: "None"}"
+          )
     }
   }
 }

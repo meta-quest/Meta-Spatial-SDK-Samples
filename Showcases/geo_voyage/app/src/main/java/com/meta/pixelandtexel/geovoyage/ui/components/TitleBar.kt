@@ -40,22 +40,23 @@ fun TitleBar(
                   shape = LocalShapes.current.small,
               )
               .background(GeoVoyageColors.navContainer, LocalShapes.current.small)
-              .height(48.dp)) {
-        Column(
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.Center,
-            modifier = modifier.fillMaxWidth(),
-        ) {
-          Text(
-              text = label,
-              style =
-                  LocalTypography.current.headline3.copy(
-                      fontWeight = FontWeight.Normal,
-                  ),
-              modifier = Modifier.padding(24.dp, 12.dp).fillMaxWidth(),
-          )
-        }
-      }
+              .height(48.dp)
+  ) {
+    Column(
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.Center,
+        modifier = modifier.fillMaxWidth(),
+    ) {
+      Text(
+          text = label,
+          style =
+              LocalTypography.current.headline3.copy(
+                  fontWeight = FontWeight.Normal,
+              ),
+          modifier = Modifier.padding(24.dp, 12.dp).fillMaxWidth(),
+      )
+    }
+  }
 }
 
 @Preview(showBackground = true, backgroundColor = 0xFFECEFE8)

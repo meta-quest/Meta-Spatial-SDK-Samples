@@ -61,13 +61,14 @@ fun ScrollableTextAreaWithScrollBar(text: String, modifier: Modifier = Modifier)
                 .padding(end = 16.dp) // Add some padding to the end to make space for the scrollbar
                 .onGloballyPositioned { layoutCoordinates ->
                   contentHeight.intValue = layoutCoordinates.size.height
-                }) {
-          MarkdownText(
-              markdown = text,
-              modifier = Modifier.fillMaxWidth(),
-              style = LocalTypography.current.body1,
-          )
-        }
+                }
+    ) {
+      MarkdownText(
+          markdown = text,
+          modifier = Modifier.fillMaxWidth(),
+          style = LocalTypography.current.body1,
+      )
+    }
 
     // Custom Scroll Bar
     if (contentHeight.intValue > containerHeight.intValue) {
@@ -86,27 +87,29 @@ fun ScrollableTextAreaWithScrollBar(text: String, modifier: Modifier = Modifier)
                       change.consume()
                       coroutineScope.launch { scrollState.scrollBy(dragAmount) }
                     }
-                  }) {
-            val minThumbHeight = 48.dp
-            val visibleRatio = containerHeight.intValue.toFloat() / contentHeight.intValue.toFloat()
-            val thumbHeight =
-                (containerHeight.intValue * visibleRatio).coerceAtLeast(minThumbHeight.toPx())
+                  }
+      ) {
+        val minThumbHeight = 48.dp
+        val visibleRatio = containerHeight.intValue.toFloat() / contentHeight.intValue.toFloat()
+        val thumbHeight =
+            (containerHeight.intValue * visibleRatio).coerceAtLeast(minThumbHeight.toPx())
 
-            val maxScroll = scrollState.maxValue.toFloat()
-            val scrollFraction = (scrollState.value / maxScroll).coerceIn(0f, 1f)
-            val thumbOffset = scrollFraction * (containerHeight.intValue - thumbHeight)
+        val maxScroll = scrollState.maxValue.toFloat()
+        val scrollFraction = (scrollState.value / maxScroll).coerceIn(0f, 1f)
+        val thumbOffset = scrollFraction * (containerHeight.intValue - thumbHeight)
 
-            Box(
-                modifier =
-                    Modifier.offset {
-                          val safeThumbOffset = if (thumbOffset.isNaN()) 0f else thumbOffset
-                          IntOffset(x = 0, y = safeThumbOffset.roundToInt())
-                        }
-                        .clip(RoundedCornerShape(20.0.dp))
-                        .width(8.dp)
-                        .height(with(LocalDensity.current) { thumbHeight.toDp() })
-                        .background(GeoVoyageColors.textColor.copy(alpha = 0.5f)))
-          }
+        Box(
+            modifier =
+                Modifier.offset {
+                      val safeThumbOffset = if (thumbOffset.isNaN()) 0f else thumbOffset
+                      IntOffset(x = 0, y = safeThumbOffset.roundToInt())
+                    }
+                    .clip(RoundedCornerShape(20.0.dp))
+                    .width(8.dp)
+                    .height(with(LocalDensity.current) { thumbHeight.toDp() })
+                    .background(GeoVoyageColors.textColor.copy(alpha = 0.5f))
+        )
+      }
     }
   }
 }

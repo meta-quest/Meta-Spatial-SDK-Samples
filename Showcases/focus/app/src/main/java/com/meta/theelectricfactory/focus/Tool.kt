@@ -62,11 +62,13 @@ class Tool(
     // We add an AttachableComponent to the object to be able to "stick" it to the boards
     if (type == AssetType.BOARD) {
       obj.setComponent(AttachableComponent(1))
-    } else if (type == AssetType.STICKY_NOTE ||
-        type == AssetType.LABEL ||
-        type == AssetType.ARROW ||
-        type == AssetType.SHAPE_2D ||
-        type == AssetType.STICKER) {
+    } else if (
+        type == AssetType.STICKY_NOTE ||
+            type == AssetType.LABEL ||
+            type == AssetType.ARROW ||
+            type == AssetType.SHAPE_2D ||
+            type == AssetType.STICKER
+    ) {
 
       obj.setComponent(AttachableComponent())
     }

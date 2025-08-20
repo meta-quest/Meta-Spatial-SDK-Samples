@@ -42,168 +42,169 @@ fun SamplesStateView(
               .clip(RoundedCornerShape(Dimens.radiusMedium))
               .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(Dimens.radiusMedium))
               .background(
-                  Brush.horizontalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd)))) {
-        when (state) {
-          is UiSamplesState.Idle -> {
-            Box(Modifier)
-          }
+                  Brush.horizontalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd))
+              )
+  ) {
+    when (state) {
+      is UiSamplesState.Idle -> {
+        Box(Modifier)
+      }
 
-          is UiSamplesState.NoInternet -> {
-            Row(
-                modifier = Modifier.padding(Dimens.medium),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-              Text(
-                  text = stringResource(R.string.sample_media_no_internet),
-                  modifier = Modifier.weight(1f),
-                  color = AppColor.White,
-              )
-              Box(Modifier.padding(Dimens.medium))
-              OutlinedButton(
-                  colors =
-                      ButtonDefaults.buttonColors(
-                          contentColor = AppColor.White,
-                          containerColor = Color.Transparent,
-                      ),
-                  onClick = onRefresh,
-              ) {
-                Text(
-                    text = stringResource(R.string.retry),
-                    color = AppColor.White,
-                )
-              }
-              Box(Modifier.padding(Dimens.small))
-              TextButton(onClick = { onDismiss() }) {
-                Text(
-                    text = stringResource(R.string.dismiss),
-                    color = AppColor.White,
-                )
-              }
-            }
+      is UiSamplesState.NoInternet -> {
+        Row(
+            modifier = Modifier.padding(Dimens.medium),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Text(
+              text = stringResource(R.string.sample_media_no_internet),
+              modifier = Modifier.weight(1f),
+              color = AppColor.White,
+          )
+          Box(Modifier.padding(Dimens.medium))
+          OutlinedButton(
+              colors =
+                  ButtonDefaults.buttonColors(
+                      contentColor = AppColor.White,
+                      containerColor = Color.Transparent,
+                  ),
+              onClick = onRefresh,
+          ) {
+            Text(
+                text = stringResource(R.string.retry),
+                color = AppColor.White,
+            )
           }
-
-          is UiSamplesState.Loading -> {
-            Row(
-                modifier = Modifier.padding(Dimens.medium),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-              Text(
-                  text = stringResource(R.string.sample_media_loading),
-                  modifier = Modifier.weight(1f),
-                  color = AppColor.White,
-              )
-              Box(Modifier.padding(Dimens.medium))
-              CircularProgressIndicator(
-                  color = AppColor.White,
-              )
-            }
-          }
-
-          is UiSamplesState.NewSamplesAvailable -> {
-            Row(
-                modifier = Modifier.padding(Dimens.medium),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-              Text(
-                  text = stringResource(R.string.sample_media_available),
-                  modifier = Modifier.weight(1f),
-                  color = AppColor.White,
-              )
-              Box(Modifier.padding(Dimens.medium))
-              OutlinedButton(
-                  colors =
-                      ButtonDefaults.buttonColors(
-                          contentColor = AppColor.White,
-                          containerColor = Color.Transparent,
-                      ),
-                  onClick = { onDownload(state.samples) },
-              ) {
-                Text(
-                    text = stringResource(R.string.download),
-                    color = AppColor.White,
-                )
-              }
-              Box(Modifier.padding(Dimens.small))
-              TextButton(onClick = { onDismiss() }) {
-                Text(
-                    text = stringResource(R.string.dismiss),
-                    color = AppColor.White,
-                )
-              }
-            }
-          }
-
-          is UiSamplesState.DownloadingSamples -> {
-            Row(
-                modifier = Modifier.padding(Dimens.medium),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-              Text(
-                  text =
-                      stringResource(R.string.sample_media_downloading, state.current, state.total),
-                  modifier = Modifier.weight(1f),
-                  color = AppColor.White,
-              )
-              Box(Modifier.padding(Dimens.medium))
-              CircularProgressIndicator(
-                  color = AppColor.White,
-              )
-            }
-          }
-
-          is UiSamplesState.DownloadError -> {
-            Row(
-                modifier = Modifier.padding(Dimens.medium),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-              Text(
-                  text = stringResource(R.string.sample_media_error, state.message),
-                  modifier = Modifier.weight(1f),
-                  color = AppColor.White,
-              )
-              Box(Modifier.padding(Dimens.medium))
-              OutlinedButton(
-                  colors =
-                      ButtonDefaults.buttonColors(
-                          contentColor = AppColor.White,
-                          containerColor = Color.Transparent,
-                      ),
-                  onClick = onRefresh,
-              ) {
-                Text(
-                    text = stringResource(R.string.retry),
-                    color = AppColor.White,
-                )
-              }
-              Box(Modifier.padding(Dimens.small))
-              TextButton(onClick = { onDismiss() }) {
-                Text(
-                    text = stringResource(R.string.dismiss),
-                    color = AppColor.White,
-                )
-              }
-            }
-          }
-
-          is UiSamplesState.DownloadSuccess -> {
-            Row(
-                modifier = Modifier.padding(Dimens.medium),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-              Text(
-                  text = stringResource(R.string.sample_media_success),
-                  modifier = Modifier.weight(1f),
-                  color = AppColor.White,
-              )
-              Box(Modifier.padding(Dimens.medium))
-              TextButton(onClick = { onDismiss() }) {
-                Text(
-                    text = stringResource(R.string.dismiss),
-                    color = AppColor.White,
-                )
-              }
-            }
+          Box(Modifier.padding(Dimens.small))
+          TextButton(onClick = { onDismiss() }) {
+            Text(
+                text = stringResource(R.string.dismiss),
+                color = AppColor.White,
+            )
           }
         }
       }
+
+      is UiSamplesState.Loading -> {
+        Row(
+            modifier = Modifier.padding(Dimens.medium),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Text(
+              text = stringResource(R.string.sample_media_loading),
+              modifier = Modifier.weight(1f),
+              color = AppColor.White,
+          )
+          Box(Modifier.padding(Dimens.medium))
+          CircularProgressIndicator(
+              color = AppColor.White,
+          )
+        }
+      }
+
+      is UiSamplesState.NewSamplesAvailable -> {
+        Row(
+            modifier = Modifier.padding(Dimens.medium),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Text(
+              text = stringResource(R.string.sample_media_available),
+              modifier = Modifier.weight(1f),
+              color = AppColor.White,
+          )
+          Box(Modifier.padding(Dimens.medium))
+          OutlinedButton(
+              colors =
+                  ButtonDefaults.buttonColors(
+                      contentColor = AppColor.White,
+                      containerColor = Color.Transparent,
+                  ),
+              onClick = { onDownload(state.samples) },
+          ) {
+            Text(
+                text = stringResource(R.string.download),
+                color = AppColor.White,
+            )
+          }
+          Box(Modifier.padding(Dimens.small))
+          TextButton(onClick = { onDismiss() }) {
+            Text(
+                text = stringResource(R.string.dismiss),
+                color = AppColor.White,
+            )
+          }
+        }
+      }
+
+      is UiSamplesState.DownloadingSamples -> {
+        Row(
+            modifier = Modifier.padding(Dimens.medium),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Text(
+              text = stringResource(R.string.sample_media_downloading, state.current, state.total),
+              modifier = Modifier.weight(1f),
+              color = AppColor.White,
+          )
+          Box(Modifier.padding(Dimens.medium))
+          CircularProgressIndicator(
+              color = AppColor.White,
+          )
+        }
+      }
+
+      is UiSamplesState.DownloadError -> {
+        Row(
+            modifier = Modifier.padding(Dimens.medium),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Text(
+              text = stringResource(R.string.sample_media_error, state.message),
+              modifier = Modifier.weight(1f),
+              color = AppColor.White,
+          )
+          Box(Modifier.padding(Dimens.medium))
+          OutlinedButton(
+              colors =
+                  ButtonDefaults.buttonColors(
+                      contentColor = AppColor.White,
+                      containerColor = Color.Transparent,
+                  ),
+              onClick = onRefresh,
+          ) {
+            Text(
+                text = stringResource(R.string.retry),
+                color = AppColor.White,
+            )
+          }
+          Box(Modifier.padding(Dimens.small))
+          TextButton(onClick = { onDismiss() }) {
+            Text(
+                text = stringResource(R.string.dismiss),
+                color = AppColor.White,
+            )
+          }
+        }
+      }
+
+      is UiSamplesState.DownloadSuccess -> {
+        Row(
+            modifier = Modifier.padding(Dimens.medium),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+          Text(
+              text = stringResource(R.string.sample_media_success),
+              modifier = Modifier.weight(1f),
+              color = AppColor.White,
+          )
+          Box(Modifier.padding(Dimens.medium))
+          TextButton(onClick = { onDismiss() }) {
+            Text(
+                text = stringResource(R.string.dismiss),
+                color = AppColor.White,
+            )
+          }
+        }
+      }
+    }
+  }
 }

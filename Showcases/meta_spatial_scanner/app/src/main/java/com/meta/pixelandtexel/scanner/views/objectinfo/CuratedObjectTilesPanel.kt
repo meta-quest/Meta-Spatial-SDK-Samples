@@ -70,6 +70,7 @@ private fun CuratedObjectTilesPanelPreview() {
                 TileContent("How To:", "Prepare for Wall Mounting", R.drawable.tv_mount),
                 TileContent("How To:", "Connect a Sound System", R.drawable.tv_sound),
             ),
-        ))
+        )
+    )
   }
 }

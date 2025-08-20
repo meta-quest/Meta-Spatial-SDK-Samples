@@ -114,7 +114,8 @@ class ButtonController(
             val clickSound = SceneAudioAsset.loadLocalFile("click.ogg")
             activity.scene.playSound(clickSound, hitInfo.point, 1f)
           }
-        })
+        }
+    )
   }
 
   private fun getPositionFromMatrix(matrix: Matrix44): Vector3 {

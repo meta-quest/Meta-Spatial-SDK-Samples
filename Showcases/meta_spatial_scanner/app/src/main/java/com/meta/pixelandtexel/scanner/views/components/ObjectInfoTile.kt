@@ -65,7 +65,8 @@ fun ObjectInfoTile(
             color = SpatialColor.white100,
             style =
                 SpatialTheme.typography.body1Strong.merge(
-                    TextStyle(shadow = Shadow(blurRadius = 4.dp.value))),
+                    TextStyle(shadow = Shadow(blurRadius = 4.dp.value))
+                ),
         )
 
         Spacer(Modifier.height(2.dp))
@@ -74,7 +75,8 @@ fun ObjectInfoTile(
             color = SpatialColor.gray30,
             style =
                 SpatialTheme.typography.body2.merge(
-                    TextStyle(shadow = Shadow(blurRadius = 4.dp.value))),
+                    TextStyle(shadow = Shadow(blurRadius = 4.dp.value))
+                ),
         )
       }
     }

@@ -87,7 +87,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
               }
             }
           }
-        })
+        }
+    )
 
     activity.registerPanel(
         PanelRegistration(R.integer.no_objects_tip_panel_id) { _ ->
@@ -112,7 +113,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
               }
             }
           }
-        })
+        }
+    )
 
     activity.registerPanel(
         PanelRegistration(R.integer.find_objects_tip_panel_id) { _ ->
@@ -137,7 +139,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
               }
             }
           }
-        })
+        }
+    )
 
     activity.registerPanel(
         PanelRegistration(R.integer.help_tip_panel_id) { _ ->
@@ -162,7 +165,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
               }
             }
           }
-        })
+        }
+    )
   }
 
   /**

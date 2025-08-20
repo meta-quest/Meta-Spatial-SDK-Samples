@@ -48,7 +48,8 @@ fun GalleryMenuView(
               .clip(RoundedCornerShape(40.dp))
               .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(40.dp))
               .background(
-                  Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd))),
+                  Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd))
+              ),
       contentAlignment = Alignment.Center,
   ) {
     Row(

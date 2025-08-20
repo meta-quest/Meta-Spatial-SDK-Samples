@@ -66,7 +66,8 @@ class SpatialAudioSystem(
                   left_level.toFloat(),
                   right_level.toFloat(),
               ),
-          ))
+          )
+      )
     }
   }
 
