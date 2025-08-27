@@ -125,7 +125,8 @@ class Object3DSampleActivity : AppSystemActivity() {
                   unlit = true
                 },
                 Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-            ))
+            )
+        )
 
     // uncomment to see the physics debug lines
     // spatial.enablePhysicsDebugLines(true)
@@ -205,7 +206,8 @@ class Object3DSampleActivity : AppSystemActivity() {
                           )
                           .applyMaterial(PhysicsMaterial.WOOD),
                       Transform(Pose(Vector3(0f, 1.2f, 2.1f), Quaternion(0f, 180f, 0f))),
-                  ))
+                  )
+              )
 
           scaleUp(objModel, scale)
 
@@ -216,7 +218,8 @@ class Object3DSampleActivity : AppSystemActivity() {
                     startTime = System.currentTimeMillis(),
                     playbackState = PlaybackState.PLAYING,
                     playbackType = PlaybackType.LOOP,
-                ))
+                )
+            )
           }
         }
     button?.setOnClickListener(createObject)

@@ -52,7 +52,9 @@ fun PanelNavContainer(
       Spacer(
           Modifier.width(
               dimensionResource(R.dimen.nav_column_width) +
-                  dimensionResource(R.dimen.standard_margin)))
+                  dimensionResource(R.dimen.standard_margin)
+          )
+      )
       TitleBar(
           label = titleText,
           modifier = Modifier.weight(1f),
@@ -70,32 +72,34 @@ fun PanelNavContainer(
     }
     Row(modifier = Modifier.fillMaxSize()) {
       Column(
-          modifier = Modifier.width(dimensionResource(R.dimen.nav_column_width)).fillMaxHeight()) {
-            Spacer(Modifier.height(dimensionResource(R.dimen.standard_margin)))
-            navButtonStates.forEach { state ->
-              SpatialSideNavItem(
-                  icon = {
-                    Icon(
-                        imageVector = state.iconImage,
-                        contentDescription = state.text,
-                        tint = GeoVoyageColors.navIcons,
-                    )
-                  },
-                  primaryLabel = state.text,
-                  selected = state.route == currentRoute,
-                  onClick = { navigateTo(state.route) },
-              )
-            }
-          }
+          modifier = Modifier.width(dimensionResource(R.dimen.nav_column_width)).fillMaxHeight()
+      ) {
+        Spacer(Modifier.height(dimensionResource(R.dimen.standard_margin)))
+        navButtonStates.forEach { state ->
+          SpatialSideNavItem(
+              icon = {
+                Icon(
+                    imageVector = state.iconImage,
+                    contentDescription = state.text,
+                    tint = GeoVoyageColors.navIcons,
+                )
+              },
+              primaryLabel = state.text,
+              selected = state.route == currentRoute,
+              onClick = { navigateTo(state.route) },
+          )
+        }
+      }
       Column(
           modifier =
               Modifier.fillMaxSize()
                   .padding(
                       start = dimensionResource(R.dimen.standard_margin),
                       top = dimensionResource(R.dimen.standard_margin),
-                  )) {
-            content.invoke()
-          }
+                  )
+      ) {
+        content.invoke()
+      }
     }
   }
 }

@@ -169,20 +169,19 @@ fun MovieApp(viewModel: MovieViewModel) {
           Modifier.fillMaxSize()
               .clip(RoundedCornerShape(10.dp))
               .background(Color(0xFF0f0f0f))
-              .padding(8.dp)) {
-        NavHost(
-            navController = navController,
-            startDestination = "movieList",
-            contentAlignment = Alignment.Center,
-        ) {
-          composable("movieList", enterTransition = null) {
-            MovieListScreen(navController, viewModel)
-          }
-          composable("movieDetail", enterTransition = null) {
-            MovieDetailScreen(navController, viewModel)
-          }
-        }
+              .padding(8.dp)
+  ) {
+    NavHost(
+        navController = navController,
+        startDestination = "movieList",
+        contentAlignment = Alignment.Center,
+    ) {
+      composable("movieList", enterTransition = null) { MovieListScreen(navController, viewModel) }
+      composable("movieDetail", enterTransition = null) {
+        MovieDetailScreen(navController, viewModel)
       }
+    }
+  }
 }
 
 @Composable
@@ -302,7 +301,8 @@ fun MovieDetailScreen(navController: NavController, viewModel: MovieViewModel) {
         if (movie.id == -1) {
           SpatialActivityManager.executeOnVrActivity<MediaPlayerSampleActivity> { activity ->
             activity.playVideo(
-                "android.resource://" + context.getPackageName() + "/" + R.raw.soloist)
+                "android.resource://" + context.getPackageName() + "/" + R.raw.soloist
+            )
           }
         } else {
           SpatialActivityManager.executeOnVrActivity<MediaPlayerSampleActivity> { activity ->

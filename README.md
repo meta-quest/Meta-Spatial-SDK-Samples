@@ -74,27 +74,13 @@ The documentation for Meta Spatial SDK can be found [here](https://developers.me
 
 Find our official release notes [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
 
-## 0.7.1 Updates
-
-### Added
-
-- MRUK: Added Environment Raycasting
-  - Allows users to raycast against the environment without going through space setup
-  - Available for exploration in the `MrukSample` project
-- Added UISet Feature
-  - A set of Jetpack Compose components that allow you to build with Meta Quest's design system
-
-
-### Changed
-
-- ISDK pointer only shows up when pointing at an object in range
+## 0.7.2 Updates
 
 ### Fixed
 
-- Fixed ISDK interaction with scaled panels
-- Fixed race condition with `NetworkedAssetLoader`
-- Fixed a bug where Gradle daemon would crash after a failed project sync.
-- Fixed animation pointers not working on metallic-factor
+- Fixed crash when clicking on panels without `CastInputForward` feature included in build
+- Fixed extra dependencies getting pulled into `CastInputForward` feature
+
 ## Spatial SDK Gradle Plugin
 
 The samples all include the Spatial SDK Gradle Plugin in their build files. This plugin is used for the [Spatial Editor integration](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-editor#use-the-spatial-sdk-gradle-plugin) and for build-related features like [custom shaders](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-custom-shaders).

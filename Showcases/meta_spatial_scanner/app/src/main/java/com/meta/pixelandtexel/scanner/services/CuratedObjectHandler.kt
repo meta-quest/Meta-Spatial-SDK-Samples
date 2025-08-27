@@ -133,7 +133,8 @@ class CuratedObjectHandler(
 
                   return true
                 }
-              })
+              }
+          )
 
           // cache our animation track info
 
@@ -254,7 +255,8 @@ class CuratedObjectHandler(
               Quad(),
               Material(),
               Hittable(MeshCollision.NoCollision),
-          ))
+          )
+      )
     }
 
     viewingCuratedObjectSelection = true
@@ -372,7 +374,8 @@ class CuratedObjectHandler(
               playbackState = PlaybackState.PAUSED,
               playbackType = PlaybackType.CLAMP,
               curatedObject.initialAnimationTrack ?: 0,
-          ))
+          )
+      )
     }
   }
 
@@ -399,7 +402,8 @@ class CuratedObjectHandler(
               playbackState = PlaybackState.PAUSED,
               playbackType = PlaybackType.CLAMP,
               curatedObject.initialAnimationTrack ?: 0,
-          ))
+          )
+      )
     }
 
     // resets the internal state of the entity collider
@@ -588,7 +592,8 @@ class CuratedObjectHandler(
                               currentPanelTitle,
                               currentPanelAnimationTrack,
                               currentPanelTiles,
-                          ))
+                          )
+                      )
                     }
                   }
 
@@ -605,7 +610,8 @@ class CuratedObjectHandler(
                             currentPanelAnimationTrack,
                             currentPanelImageResId,
                             body,
-                        ))
+                        )
+                    )
                   }
 
                   else ->
@@ -623,9 +629,11 @@ class CuratedObjectHandler(
             }
 
             "object" -> {
-              if (currentObjectName != null &&
-                  currentMatchingLabels != null &&
-                  currentUiPanels != null) {
+              if (
+                  currentObjectName != null &&
+                      currentMatchingLabels != null &&
+                      currentUiPanels != null
+              ) {
                 assert(currentMatchingLabels.isNotEmpty() && currentUiPanels.isNotEmpty())
 
                 val curatedObject =

@@ -59,8 +59,10 @@ constructor(
           PlayerState.Image2D(
               mediaModel.uri,
               cropState =
-                  if (mediaModel.editOptions.contains(MediaEditOption.Crop) &&
-                      FeatureFlags.MEDIA_EDIT_ENABLED)
+                  if (
+                      mediaModel.editOptions.contains(MediaEditOption.Crop) &&
+                          FeatureFlags.MEDIA_EDIT_ENABLED
+                  )
                       CropState.Disabled
                   else CropState.NotSupported,
           )

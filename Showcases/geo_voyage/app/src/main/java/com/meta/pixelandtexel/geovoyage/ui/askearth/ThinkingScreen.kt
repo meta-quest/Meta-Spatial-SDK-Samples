@@ -42,27 +42,28 @@ fun ThinkingScreen(transcription: String) {
     SecondaryPanel(
         modifier =
             Modifier.width(dimensionResource(R.dimen.centered_panel_width))
-                .height(dimensionResource(R.dimen.centered_panel_height))) {
-          Box {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize(),
-            ) {
-              Image(
-                  painter = painterResource(id = R.drawable.askearth_thinking_darr),
-                  contentDescription = stringResource(id = R.string.thinking),
-                  colorFilter = ColorFilter.tint(Color.Black),
-                  contentScale = ContentScale.FillWidth,
-                  modifier = Modifier.padding(30.dp).width(120.dp),
-              )
-              Text(
-                  text = stringResource(id = R.string.thinking),
-                  style = SpatialTheme.typography.headline3,
-              )
-            }
-          }
+                .height(dimensionResource(R.dimen.centered_panel_height))
+    ) {
+      Box {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize(),
+        ) {
+          Image(
+              painter = painterResource(id = R.drawable.askearth_thinking_darr),
+              contentDescription = stringResource(id = R.string.thinking),
+              colorFilter = ColorFilter.tint(Color.Black),
+              contentScale = ContentScale.FillWidth,
+              modifier = Modifier.padding(30.dp).width(120.dp),
+          )
+          Text(
+              text = stringResource(id = R.string.thinking),
+              style = SpatialTheme.typography.headline3,
+          )
         }
+      }
+    }
   }
 }
 

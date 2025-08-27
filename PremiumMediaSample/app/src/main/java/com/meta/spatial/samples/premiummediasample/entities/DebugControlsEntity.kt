@@ -77,7 +77,8 @@ class DebugControlsEntity() {
               ),
               Panel(id),
               Transform(),
-          ))
+          )
+      )
     }
 
     private fun panelRegistration(id: Int, debugData: DebugData): PanelRegistration {

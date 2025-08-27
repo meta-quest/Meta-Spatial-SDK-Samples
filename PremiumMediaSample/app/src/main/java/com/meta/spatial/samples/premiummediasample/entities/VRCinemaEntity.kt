@@ -79,12 +79,14 @@ class VRCinemaEntity(val config: VRCinemaConfig) {
                       negHalfCinemaSize * faces[index] +
                           Vector3(0f, 0f, cinemaSize.z * 0.5f - config.distanceBehindScreen),
                       rotations[index],
-                  )),
+                  )
+              ),
               Hittable(MeshCollision.NoCollision),
               Scale(bigSize),
               TransformParent(entity),
               Visible(_isVisible),
-          ))
+          )
+      )
     } else {
       faces.forEachIndexed { index, faceDirection ->
         planes.add(
@@ -95,7 +97,8 @@ class VRCinemaEntity(val config: VRCinemaConfig) {
                 Scale(sizes[index]),
                 TransformParent(entity),
                 Visible(_isVisible),
-            ))
+            )
+        )
       }
     }
 

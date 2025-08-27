@@ -70,16 +70,16 @@ class MediaFilterActivity : ComponentActivity() {
                         color = AppColor.MetaBlu,
                         shape = RoundedCornerShape(24.dp),
                     )
-                    .clip(RoundedCornerShape(24.dp))) { innerPadding ->
-              Column(
-                  modifier = Modifier.padding(innerPadding).background(AppColor.BackgroundSweep)) {
-                    FilterList(
-                        pickerFilter = filters.value,
-                        onFilterSelected = { viewModel.onFilterSelected(it) },
-                        onUpload = { viewModel.onUpload() },
-                    )
-                  }
-            }
+                    .clip(RoundedCornerShape(24.dp))
+        ) { innerPadding ->
+          Column(modifier = Modifier.padding(innerPadding).background(AppColor.BackgroundSweep)) {
+            FilterList(
+                pickerFilter = filters.value,
+                onFilterSelected = { viewModel.onFilterSelected(it) },
+                onUpload = { viewModel.onUpload() },
+            )
+          }
+        }
       }
     }
   }

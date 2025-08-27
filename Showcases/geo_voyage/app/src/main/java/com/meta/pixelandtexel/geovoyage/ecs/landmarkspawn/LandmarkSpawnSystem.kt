@@ -149,7 +149,8 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
                 Transform(Pose(position, rotation)),
                 TransformParent(earth),
                 Visible(false),
-            ))
+            )
+        )
 
     return entity
   }
@@ -240,7 +241,8 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
 
                 return true
               }
-            })
+            }
+        )
       }
     }
   }

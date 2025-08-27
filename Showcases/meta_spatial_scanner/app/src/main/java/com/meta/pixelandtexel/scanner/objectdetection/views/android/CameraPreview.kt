@@ -46,7 +46,8 @@ class CameraPreview : ViewGroup, ISurfaceProvider {
             _surface?.release()
             _surface = null
           }
-        })
+        }
+    )
 
     addView(surfaceView)
   }

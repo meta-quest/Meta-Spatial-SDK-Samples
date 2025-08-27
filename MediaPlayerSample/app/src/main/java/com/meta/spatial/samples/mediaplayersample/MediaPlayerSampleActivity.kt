@@ -123,7 +123,8 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
           environment?.setComponent(Visible(!mrState_)) // hide environment
           locomotionSystem.enableLocomotion(!mrState_)
           videoPanel?.setComponents(
-              listOf(Grabbable(mrState_), Transform(Pose(Vector3(0f, 1.32f, 4.85f)))))
+              listOf(Grabbable(mrState_), Transform(Pose(Vector3(0f, 1.32f, 4.85f))))
+          )
 
           // only animate if the sky panel is not visible.
           if (skyPanelVisible) {
@@ -499,7 +500,8 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
                 continuation.resume(Unit)
                 onEnd()
               }
-            })
+            }
+        )
 
         animator.start()
         continuation.invokeOnCancellation {

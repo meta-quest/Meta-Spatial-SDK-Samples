@@ -114,7 +114,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
                             "Furniture/Plant2.glb",
                             "Furniture/Plant3.glb",
                             "Furniture/Plant4.glb",
-                        )),
+                        )
+                    ),
                 MRUKLabel.WALL_ART to
                     AnchorMeshSpawner.AnchorMeshGroup(listOf("Furniture/WallArt.glb")),
             ),
@@ -201,9 +202,11 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
       permissions: Array<out String>,
       grantResults: IntArray,
   ) {
-    if (requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
-        permissions.size == 1 &&
-        permissions[0] == PERMISSION_USE_SCENE) {
+    if (
+        requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
+            permissions.size == 1 &&
+            permissions[0] == PERMISSION_USE_SCENE
+    ) {
       val granted = grantResults[0] == PackageManager.PERMISSION_GRANTED
       if (granted) {
         Log.i(TAG, "Use scene permission has been granted")
@@ -404,8 +407,10 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
 
             val saveSceneToJsonButton = rootView?.findViewById<Button>(R.id.save_to_json)
             saveSceneToJsonButton?.setOnClickListener {
-              if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
-                  PackageManager.PERMISSION_GRANTED) {
+              if (
+                  checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                      PackageManager.PERMISSION_GRANTED
+              ) {
                 requestPermissions(
                     arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
                     REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE,
@@ -425,7 +430,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
               )
             }
           }
-        })
+        }
+    )
   }
 
   companion object {

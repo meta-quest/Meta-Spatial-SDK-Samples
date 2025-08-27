@@ -619,7 +619,8 @@ fun BirdseyeIconLibrary() {
             "For optimal sizing, small icons should not exceed 32px, while large icons can start at size 33px and above.",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground),
+                    color = LocalColorScheme.current.primaryAlphaBackground
+                ),
         )
       }
       Spacer(modifier = Modifier.height(20.dp))
@@ -630,7 +631,8 @@ fun BirdseyeIconLibrary() {
               "  Component",
               style =
                   LocalTypography.current.headline1Strong.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground),
+                      color = LocalColorScheme.current.primaryAlphaBackground
+                  ),
           )
           Spacer(modifier = Modifier.height(20.dp))
           Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
@@ -657,7 +659,8 @@ fun BirdseyeIconLibrary() {
                     icon["name"] as String,
                     style =
                         LocalTypography.current.body1.copy(
-                            color = LocalColorScheme.current.primaryAlphaBackground),
+                            color = LocalColorScheme.current.primaryAlphaBackground
+                        ),
                 )
               }
               Box(modifier = Modifier.size(dimensionResource(R.dimen.button_icon_size))) {
@@ -691,7 +694,8 @@ fun BirdseyeIconLibrary() {
                     icon["name"] as String,
                     style =
                         LocalTypography.current.body1.copy(
-                            color = LocalColorScheme.current.primaryAlphaBackground),
+                            color = LocalColorScheme.current.primaryAlphaBackground
+                        ),
                 )
               }
               Box(modifier = Modifier.size(dimensionResource(R.dimen.button_icon_size))) {
@@ -725,7 +729,8 @@ fun BirdseyeIconLibrary() {
                     icon["name"] as String,
                     style =
                         LocalTypography.current.body1.copy(
-                            color = LocalColorScheme.current.primaryAlphaBackground),
+                            color = LocalColorScheme.current.primaryAlphaBackground
+                        ),
                 )
               }
               Box(modifier = Modifier.size(dimensionResource(R.dimen.button_icon_size))) {

@@ -200,7 +200,8 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
                   else -> {} // No-op for other event types
                 }
               }
-            })
+            }
+        )
   }
 
   override fun onSceneReady() {
@@ -228,14 +229,16 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
                   unlit = true
                 },
                 Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-            ))
+            )
+        )
 
     Entity.create(
         listOf(
             Panel(R.layout.scrolling),
             Transform(Pose(Vector3(x = -0.3f, y = 1f, z = 0.2f))),
             Grabbable(),
-        ))
+        )
+    )
 
     // uncomment to see the physics debug lines
     // spatial.enablePhysicsDebugLines(true)
@@ -319,7 +322,8 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
                           )
                           .applyMaterial(PhysicsMaterial.WOOD),
                       Transform(Pose(Vector3(0f, 1.2f, 2.1f), Quaternion(0f, 180f, 0f))),
-                  ))
+                  )
+              )
 
           scaleUp(objModel, scale.scale)
 
@@ -330,7 +334,8 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
                     startTime = System.currentTimeMillis(),
                     playbackState = PlaybackState.PLAYING,
                     playbackType = PlaybackType.LOOP,
-                ))
+                )
+            )
           }
         }
     button?.setOnClickListener(createObject)

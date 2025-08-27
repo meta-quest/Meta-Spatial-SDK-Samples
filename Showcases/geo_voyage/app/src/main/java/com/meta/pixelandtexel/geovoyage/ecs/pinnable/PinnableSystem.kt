@@ -165,7 +165,8 @@ class PinnableSystem(private val glxfManager: GLXFManager) : SystemBase() {
 
                 return true
               }
-            })
+            }
+        )
 
         pinnableEntities.add(entity)
       }

@@ -162,24 +162,25 @@ fun MovieListScreen(
               .clip(RoundedCornerShape(16.dp))
               .background(Color(0xFF1C2E33).copy(alpha = 1.0f))
               .graphicsLayer { alpha = 1.0f }
-              .padding(16.2.dp)) {
-        Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
-          Text(
-              text = "Spatial Video Library",
-              minLines = 1,
-              fontFamily = FontFamily(Font(R.font.noto_sans_regular)),
-              fontSize = 20.sp,
-              lineHeight = 18.88.sp,
-              fontWeight = FontWeight(700),
-              color = Color(0xFFF0F0F0),
-              textAlign = TextAlign.Start,
-              modifier = Modifier.padding(top = 8.dp, bottom = 12.dp),
-          )
-        }
-        LazyVerticalGrid(columns = GridCells.Fixed(1)) {
-          items(movies) { movie -> MovieListItem(movie = movie) { viewModel.selectMovie(it) } }
-        }
-      }
+              .padding(16.2.dp)
+  ) {
+    Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
+      Text(
+          text = "Spatial Video Library",
+          minLines = 1,
+          fontFamily = FontFamily(Font(R.font.noto_sans_regular)),
+          fontSize = 20.sp,
+          lineHeight = 18.88.sp,
+          fontWeight = FontWeight(700),
+          color = Color(0xFFF0F0F0),
+          textAlign = TextAlign.Start,
+          modifier = Modifier.padding(top = 8.dp, bottom = 12.dp),
+      )
+    }
+    LazyVerticalGrid(columns = GridCells.Fixed(1)) {
+      items(movies) { movie -> MovieListItem(movie = movie) { viewModel.selectMovie(it) } }
+    }
+  }
 }
 
 /**

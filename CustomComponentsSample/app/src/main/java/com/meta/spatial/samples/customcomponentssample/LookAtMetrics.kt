@@ -50,7 +50,8 @@ class LookAtMetrics(init: LookAtMetrics.() -> Unit = {}) : OVRMetricsGroup() {
                 ShowStat = false,
             ),
             { angle(getRotation().x) },
-        ))
+        )
+    )
   }
 
   fun yaw() {
@@ -64,7 +65,8 @@ class LookAtMetrics(init: LookAtMetrics.() -> Unit = {}) : OVRMetricsGroup() {
                 ShowStat = false,
             ),
             { angle(getRotation().y) },
-        ))
+        )
+    )
   }
 
   fun roll() {
@@ -78,7 +80,8 @@ class LookAtMetrics(init: LookAtMetrics.() -> Unit = {}) : OVRMetricsGroup() {
                 ShowStat = false,
             ),
             { angle(getRotation().z) },
-        ))
+        )
+    )
   }
 
   private fun getLookAtEnt(): Entity? {

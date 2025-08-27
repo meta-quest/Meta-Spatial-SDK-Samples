@@ -45,7 +45,8 @@ fun TouchDebugGridView(
                         .clickable {
                           Timber.i("Touched $index")
                           touchedIndexes.add(index)
-                        })
+                        }
+            )
           }
         }
       }

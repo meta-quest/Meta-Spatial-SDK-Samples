@@ -50,7 +50,8 @@ class HomePanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
               Visible(false),
               PanelDimensions(Vector2(widthInMeters, heightInMeters)),
               PanelLayerAlpha(0f),
-          ))
+          )
+      )
     }
 
     fun panelRegistration(): PanelRegistration {

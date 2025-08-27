@@ -59,16 +59,16 @@ fun DebugPanel(debugData: DebugData) {
           Modifier.clip(RoundedCornerShape(20.dp))
               .background(DebugControlsPanelConstants.BackgroundColor)
               .wrapContentHeight()
-              .fillMaxWidth()) {
-        LazyColumn(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp),
-            modifier =
-                Modifier.fillMaxWidth().wrapContentHeight().padding(start = 16.dp, end = 16.dp),
-        ) {
-          items(items = debugData.items) { item -> DebugPanelItem(item) }
-        }
-      }
+              .fillMaxWidth()
+  ) {
+    LazyColumn(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.fillMaxWidth().wrapContentHeight().padding(start = 16.dp, end = 16.dp),
+    ) {
+      items(items = debugData.items) { item -> DebugPanelItem(item) }
+    }
+  }
 }
 
 @Composable
@@ -334,7 +334,8 @@ fun DebugPanelPreview() {
                       label = "Button 2",
                       onClick = { println("clicked button 2") },
                   ),
-              ))
+              )
+      )
 
   DebugPanel(debugData)
 }

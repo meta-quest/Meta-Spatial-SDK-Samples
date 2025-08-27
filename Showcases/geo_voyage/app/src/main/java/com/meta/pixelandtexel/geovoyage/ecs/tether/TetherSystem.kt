@@ -111,8 +111,10 @@ class TetherSystem : SystemBase() {
       val pose = transformComp.transform
 
       // exit early if we're close enough to our target position and rotation
-      if ((info.targetPosition - pose.t).lengthSq() < 0.00001f &&
-          info.targetRotation.dot(pose.q) > 0.999f) {
+      if (
+          (info.targetPosition - pose.t).lengthSq() < 0.00001f &&
+              info.targetRotation.dot(pose.q) > 0.999f
+      ) {
         transformComp.recycle()
         return@forEach
       }

@@ -17,6 +17,7 @@ class GrabbableNoRotationLoader : BaseLoader() {
           if (enabledValue != null) {
             enabled = enabledValue
           }
-        })
+        }
+    )
   }
 }

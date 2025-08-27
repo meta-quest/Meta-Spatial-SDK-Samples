@@ -74,55 +74,56 @@ fun QuestionScreen(
       modifier = Modifier.fillMaxSize(),
   ) {
     SecondaryPanel(
-        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.medium_panel_height))) {
-          Column(
-              verticalArrangement = Arrangement.SpaceEvenly,
-              horizontalAlignment = Alignment.CenterHorizontally,
-              modifier = Modifier.fillMaxSize(),
-          ) {
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.fillMaxWidth().heightIn(min = 40.dp),
-            ) {
-              if (answeredCorrectly.value != null) {
-                Icon(
-                    imageVector = iconImageVector,
-                    contentDescription = "Answer icon",
-                    tint = iconColor,
-                    modifier = Modifier.size(40.dp),
-                )
-              }
-              Text(
-                  text = titleText.value,
-                  color = questionColor,
-                  style = LocalTypography.current.headline3Strong,
-              )
-            }
-
-            for (i in 0..2) {
-              QuizButton(
-                  label = answers[i],
-                  isEnabled = answeredCorrectly.value == null,
-                  hasSelectedAnswer = answeredCorrectly.value != null,
-                  didAnswerCorrectly = answeredCorrectly.value == true,
-                  isCorrectAnswer = i == correctAnswerIdx,
-                  onClick = {
-                    onUserAnswered(i)
-
-                    val isCorrect = i == correctAnswerIdx
-                    if (isCorrect) {
-                      titleText.value = correctAnswerText
-                    } else {
-                      titleText.value = incorrectAnswerText
-                    }
-
-                    answeredCorrectly.value = isCorrect
-                  },
-              )
-            }
+        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.medium_panel_height))
+    ) {
+      Column(
+          verticalArrangement = Arrangement.SpaceEvenly,
+          horizontalAlignment = Alignment.CenterHorizontally,
+          modifier = Modifier.fillMaxSize(),
+      ) {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth().heightIn(min = 40.dp),
+        ) {
+          if (answeredCorrectly.value != null) {
+            Icon(
+                imageVector = iconImageVector,
+                contentDescription = "Answer icon",
+                tint = iconColor,
+                modifier = Modifier.size(40.dp),
+            )
           }
+          Text(
+              text = titleText.value,
+              color = questionColor,
+              style = LocalTypography.current.headline3Strong,
+          )
         }
+
+        for (i in 0..2) {
+          QuizButton(
+              label = answers[i],
+              isEnabled = answeredCorrectly.value == null,
+              hasSelectedAnswer = answeredCorrectly.value != null,
+              didAnswerCorrectly = answeredCorrectly.value == true,
+              isCorrectAnswer = i == correctAnswerIdx,
+              onClick = {
+                onUserAnswered(i)
+
+                val isCorrect = i == correctAnswerIdx
+                if (isCorrect) {
+                  titleText.value = correctAnswerText
+                } else {
+                  titleText.value = incorrectAnswerText
+                }
+
+                answeredCorrectly.value = isCorrect
+              },
+          )
+        }
+      }
+    }
   }
 }
 

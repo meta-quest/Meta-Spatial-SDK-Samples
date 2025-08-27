@@ -259,7 +259,8 @@ object WitAiService {
                     // in case wit.ai returns an error
                     if (witAiResponse.error != null) {
                       throw Exception(
-                          "chunk:\ncode: '${witAiResponse.code}'\nerror: '${witAiResponse.error}'")
+                          "chunk:\ncode: '${witAiResponse.code}'\nerror: '${witAiResponse.error}'"
+                      )
                     }
 
                     var understoodResponse: WitAiUnderstoodResponse? = null
@@ -281,8 +282,10 @@ object WitAiService {
                       Handler(Looper.getMainLooper()).post {
                         handler.onFinished(understoodResponse)
                       }
-                    } else if (witAiResponse.type == WitAiResponseType.PARTIAL_TRANSCRIPTION ||
-                        witAiResponse.type == WitAiResponseType.FINAL_TRANSCRIPTION) {
+                    } else if (
+                        witAiResponse.type == WitAiResponseType.PARTIAL_TRANSCRIPTION ||
+                            witAiResponse.type == WitAiResponseType.FINAL_TRANSCRIPTION
+                    ) {
                       Handler(Looper.getMainLooper()).post { handler.onPartial(witAiResponse.text) }
                     }
                   }

@@ -99,9 +99,11 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
       permissions: Array<out String>,
       grantResults: IntArray,
   ) {
-    if (requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
-        permissions.size == 1 &&
-        permissions[0] == PERMISSION_USE_SCENE) {
+    if (
+        requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
+            permissions.size == 1 &&
+            permissions[0] == PERMISSION_USE_SCENE
+    ) {
       val granted = grantResults[0] == PackageManager.PERMISSION_GRANTED
       if (granted) {
         Log.i(TAG, "Use scene permission has been granted")
@@ -133,7 +135,8 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
               unlit = true // Prevent scene lighting from affecting the skybox
             },
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-        ))
+        )
+    )
 
     Entity.createPanelEntity(
         panelId,
@@ -235,7 +238,8 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
             }
             updateStartStopTrackerButton(trackerRunning)
           }
-        })
+        }
+    )
   }
 
   companion object {

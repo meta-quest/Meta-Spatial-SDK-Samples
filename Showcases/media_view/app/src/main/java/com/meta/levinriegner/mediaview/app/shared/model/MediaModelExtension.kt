@@ -72,7 +72,8 @@ fun MediaModel.textureWidthAndHeight(): Pair<Int, Int> {
       dpToPx(defaultTextureDp) + dpToPx(mediaPanelSpacingOffsetDp),
       dpToPx(
           (defaultTextureDp * (panelHeight / panelWidth)).toInt() +
-              dpToPx(mediaPanelSpacingOffsetDp)),
+              dpToPx(mediaPanelSpacingOffsetDp)
+      ),
   )
 }
 

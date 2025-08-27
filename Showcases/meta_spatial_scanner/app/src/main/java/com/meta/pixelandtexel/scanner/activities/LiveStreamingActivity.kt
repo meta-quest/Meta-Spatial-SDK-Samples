@@ -164,7 +164,8 @@ class LiveStreamingActivity :
 
             setContent { LiveStreamingScreen(liveStreamingViewModel) }
           }
-        })
+        }
+    )
   }
 
   /** Starts the camera session, or initializes if the camera controller isn't initialized yet. */
@@ -173,8 +174,8 @@ class LiveStreamingActivity :
       cameraController.start(
           surfaceProviders =
               listOfNotNull(
-                  if (::cameraViewSurfaceProvider.isInitialized) cameraViewSurfaceProvider
-                  else null),
+                  if (::cameraViewSurfaceProvider.isInitialized) cameraViewSurfaceProvider else null
+              ),
           imageAvailableListener = this,
       )
       return
@@ -192,7 +193,8 @@ class LiveStreamingActivity :
    */
   private fun onCameraPropertiesChanged(properties: CameraProperties) {
     liveStreamingViewModel.updateAspectRatio(
-        properties.resolution.width.toFloat() / properties.resolution.height)
+        properties.resolution.width.toFloat() / properties.resolution.height
+    )
 
     startCamera()
   }

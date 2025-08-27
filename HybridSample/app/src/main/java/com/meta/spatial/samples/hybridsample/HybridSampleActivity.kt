@@ -101,7 +101,8 @@ class HybridSampleActivity : AppSystemActivity() {
               unlit = true // Prevent scene lighting from affecting the skybox
             },
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-        ))
+        )
+    )
   }
 
   fun launchPanelModeInHome() {
@@ -146,7 +147,8 @@ class HybridSampleActivity : AppSystemActivity() {
             val button: Button? = rootView?.findViewById<Button>(R.id.chosen)
             button?.setOnClickListener { launchPanelModeInHome() }
           }
-        })
+        }
+    )
   }
 
   private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {

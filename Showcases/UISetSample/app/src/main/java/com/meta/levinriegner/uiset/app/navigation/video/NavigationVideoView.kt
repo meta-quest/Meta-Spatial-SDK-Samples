@@ -36,7 +36,8 @@ fun NavigationVideoView() {
   val player = remember {
     ExoPlayer.Builder(context).build().apply {
       setMediaItem(
-          MediaItem.fromUri("android.resource://${context.packageName}/${R.raw.demo_video}"))
+          MediaItem.fromUri("android.resource://${context.packageName}/${R.raw.demo_video}")
+      )
       repeatMode = Player.REPEAT_MODE_ALL
       prepare()
       playWhenReady = true
@@ -67,7 +68,8 @@ fun NavigationVideoView() {
             text = "UI Set based on the Meta Horizon Design System",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground),
+                    color = LocalColorScheme.current.primaryAlphaBackground
+                ),
             textAlign = TextAlign.Center,
         )
         Spacer(Modifier.size(12.dp))
@@ -76,7 +78,8 @@ fun NavigationVideoView() {
                 "In the realm of design, UI components serve as the building blocks of user interfaces. They include buttons, sliders, and navigation bars, each crafted to enhance user interaction and experience.",
             style =
                 LocalTypography.current.body2Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground),
+                    color = LocalColorScheme.current.primaryAlphaBackground
+                ),
             textAlign = TextAlign.Center,
         )
       }

@@ -51,9 +51,11 @@ class BallShooter(private val mesh: Mesh) : SystemBase() {
     val controllers = Query.where { has(Controller.id) }.eval().filter { it.isLocal() }
     controllers.forEach { controller ->
       val c = controller.getComponent<Controller>()
-      if ((c.buttonState and
-          c.changedButtons and
-          (ButtonBits.ButtonTriggerL or ButtonBits.ButtonTriggerR)) != 0) {
+      if (
+          (c.buttonState and
+              c.changedButtons and
+              (ButtonBits.ButtonTriggerL or ButtonBits.ButtonTriggerR)) != 0
+      ) {
         if (enabled) shootBall(controller.getComponent<Transform>().transform)
       }
     }

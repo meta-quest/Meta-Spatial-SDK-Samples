@@ -106,12 +106,14 @@ class AnchorSnappingSystem() : SystemBase() {
     val movementOffset = (anchorablePose.t - headPosition)
 
     // Check if anchorable object centerpoint is hitting the walls/floor/ceiling
-    if (hitTestBox(
-        anchorablePose.t,
-        planeTransform.t,
-        Vector3(planeSize.x, planeSize.y, planeSnapSize),
-        planeTransform.q,
-    )) {
+    if (
+        hitTestBox(
+            anchorablePose.t,
+            planeTransform.t,
+            Vector3(planeSize.x, planeSize.y, planeSnapSize),
+            planeTransform.q,
+        )
+    ) {
       // Snap to plane
       snapToAnchorViaGrab(
           anchorable,
@@ -164,12 +166,14 @@ class AnchorSnappingSystem() : SystemBase() {
 
       // Lock rotation on walls
       anchorable.setComponent(
-          Transform(fromAbsoluteToLocal(Pose(snappedPosition, slerpedRotation), anchorable)))
+          Transform(fromAbsoluteToLocal(Pose(snappedPosition, slerpedRotation), anchorable))
+      )
       rotationMap[anchorable] = slerpedRotation
     } else {
       // Snap just position (not rotation) to ceiling and floor
       anchorable.setComponent(
-          Transform(fromAbsoluteToLocal(Pose(snappedPosition, anchorablePose.q), anchorable)))
+          Transform(fromAbsoluteToLocal(Pose(snappedPosition, anchorablePose.q), anchorable))
+      )
     }
   }
 
@@ -335,8 +339,10 @@ class AnchorSnappingSystem() : SystemBase() {
     val minBounds = mrukPlane.min
     val maxBounds = mrukPlane.max
 
-    if (!((distanceOnRight >= minBounds.x && distanceOnRight <= maxBounds.x) &&
-        (distanceOnUp >= minBounds.y && distanceOnUp <= maxBounds.y))) {
+    if (
+        !((distanceOnRight >= minBounds.x && distanceOnRight <= maxBounds.x) &&
+            (distanceOnUp >= minBounds.y && distanceOnUp <= maxBounds.y))
+    ) {
       return null
     }
 

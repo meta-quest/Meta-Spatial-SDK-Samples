@@ -85,39 +85,40 @@ fun GalleryView(
                     color = AppColor.MetaBlu,
                     shape = RoundedCornerShape(Dimens.radiusMedium),
                 )
-                .clip(RoundedCornerShape(Dimens.radiusMedium))) { innerPadding ->
-          when (uiState) {
-            UiState.Idle -> Box(Modifier)
-            UiState.Loading -> LoadingView(modifier = Modifier.fillMaxSize())
-            is UiState.Success ->
-                Column(
-                    modifier = Modifier.fillMaxSize().background(AppColor.BackgroundSweep),
-                ) {
-                  Header(
-                      filter = filter,
-                      sortBy = sortBy,
-                      onSortBy = onSortBy,
-                      fileCount = uiState.data.size,
-                      showMetadata = showMetadata,
-                      onToggleMetadata = onToggleMetadata,
-                      onOnboardingButtonPressed = onOnboardingButtonPressed,
-                  )
-                  MediaGrid(
-                      media = uiState.data,
-                      showMetadata = showMetadata,
-                      modifier = Modifier.padding(innerPadding),
-                      onItemClicked = onMediaSelected,
-                  )
-                }
+                .clip(RoundedCornerShape(Dimens.radiusMedium))
+    ) { innerPadding ->
+      when (uiState) {
+        UiState.Idle -> Box(Modifier)
+        UiState.Loading -> LoadingView(modifier = Modifier.fillMaxSize())
+        is UiState.Success ->
+            Column(
+                modifier = Modifier.fillMaxSize().background(AppColor.BackgroundSweep),
+            ) {
+              Header(
+                  filter = filter,
+                  sortBy = sortBy,
+                  onSortBy = onSortBy,
+                  fileCount = uiState.data.size,
+                  showMetadata = showMetadata,
+                  onToggleMetadata = onToggleMetadata,
+                  onOnboardingButtonPressed = onOnboardingButtonPressed,
+              )
+              MediaGrid(
+                  media = uiState.data,
+                  showMetadata = showMetadata,
+                  modifier = Modifier.padding(innerPadding),
+                  onItemClicked = onMediaSelected,
+              )
+            }
 
-            is UiState.Error ->
-                ErrorView(
-                    modifier = Modifier.fillMaxSize(),
-                    description = uiState.message,
-                    onActionButtonPressed = onRefresh,
-                )
-          }
-        }
+        is UiState.Error ->
+            ErrorView(
+                modifier = Modifier.fillMaxSize(),
+                description = uiState.message,
+                onActionButtonPressed = onRefresh,
+            )
+      }
+    }
   }
 }
 
@@ -190,55 +191,59 @@ private fun Header(
             }
 
             MaterialTheme(
-                shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(16.dp))) {
-                  DropdownMenu(
-                      expanded = sortExpanded,
-                      onDismissRequest = { sortExpanded = false },
-                      modifier =
-                          Modifier.shadow(2.dp)
-                              .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(16.dp))
-                              .background(
-                                  Brush.verticalGradient(
-                                      listOf(AppColor.GradientStart, AppColor.GradientEnd))),
-                  ) {
-                    for (option in MediaSortBy.entries) {
-                      DropdownMenuItem(
-                          contentPadding = PaddingValues(10.dp),
-                          trailingIcon =
-                              if (option == sortBy)
-                                  ({
-                                    Icon(
-                                        imageVector = Icons.Default.Check,
-                                        contentDescription = null,
-                                        modifier = Modifier.size(15.dp),
-                                    )
-                                  })
-                              else null,
-                          text = {
-                            Text(
-                                fontSize = 10.sp,
-                                text =
-                                    stringResource(
-                                        when (option) {
-                                          MediaSortBy.DateDesc -> R.string.sort_by_date_desc
-                                          MediaSortBy.DateAsc -> R.string.sort_by_date_asc
-                                          MediaSortBy.SizeAsc -> R.string.sort_by_size_asc
-                                          MediaSortBy.SizeDesc -> R.string.sort_by_size_desc
-                                          MediaSortBy.NameAsc -> R.string.sort_by_name_asc
-                                          MediaSortBy.NameDesc -> R.string.sort_by_name_desc
-                                        }),
-                            )
-                          },
-                          onClick = {
-                            sortExpanded = false
-                            onSortBy(option)
-                          },
-                      )
-                      if (option != MediaSortBy.NameDesc)
-                          HorizontalDivider(color = AppColor.White15, thickness = 1.dp)
-                    }
-                  }
+                shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(16.dp))
+            ) {
+              DropdownMenu(
+                  expanded = sortExpanded,
+                  onDismissRequest = { sortExpanded = false },
+                  modifier =
+                      Modifier.shadow(2.dp)
+                          .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(16.dp))
+                          .background(
+                              Brush.verticalGradient(
+                                  listOf(AppColor.GradientStart, AppColor.GradientEnd)
+                              )
+                          ),
+              ) {
+                for (option in MediaSortBy.entries) {
+                  DropdownMenuItem(
+                      contentPadding = PaddingValues(10.dp),
+                      trailingIcon =
+                          if (option == sortBy)
+                              ({
+                                Icon(
+                                    imageVector = Icons.Default.Check,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(15.dp),
+                                )
+                              })
+                          else null,
+                      text = {
+                        Text(
+                            fontSize = 10.sp,
+                            text =
+                                stringResource(
+                                    when (option) {
+                                      MediaSortBy.DateDesc -> R.string.sort_by_date_desc
+                                      MediaSortBy.DateAsc -> R.string.sort_by_date_asc
+                                      MediaSortBy.SizeAsc -> R.string.sort_by_size_asc
+                                      MediaSortBy.SizeDesc -> R.string.sort_by_size_desc
+                                      MediaSortBy.NameAsc -> R.string.sort_by_name_asc
+                                      MediaSortBy.NameDesc -> R.string.sort_by_name_desc
+                                    }
+                                ),
+                        )
+                      },
+                      onClick = {
+                        sortExpanded = false
+                        onSortBy(option)
+                      },
+                  )
+                  if (option != MediaSortBy.NameDesc)
+                      HorizontalDivider(color = AppColor.White15, thickness = 1.dp)
                 }
+              }
+            }
           }
 
           Box(modifier = Modifier.size(Dimens.medium))

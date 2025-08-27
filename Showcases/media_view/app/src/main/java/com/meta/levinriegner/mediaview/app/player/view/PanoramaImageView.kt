@@ -29,7 +29,7 @@ fun PanoramaImageView(
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .override(4096, 2048) // Load the image at its original size
                     .fitCenter() // Ensure the image fits within the view boundaries
-                )
+            )
             .into(imageView)
       },
       modifier = modifier.fillMaxSize(),

@@ -175,7 +175,8 @@ class TouchScalableSystem(private val minScale: Float = 0.5f, private val maxSca
     // Update position, and alpha of corners
     corners.forEachIndexed { index, corner ->
       corner.setComponent(
-          Transform(Pose(pose.t + offsets[index], pose.q.times(cornerRotations[index]))))
+          Transform(Pose(pose.t + offsets[index], pose.q.times(cornerRotations[index])))
+      )
     }
 
     if (resetTime) hidingTime = 0f

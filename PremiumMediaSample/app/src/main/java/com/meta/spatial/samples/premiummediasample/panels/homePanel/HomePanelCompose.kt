@@ -122,9 +122,10 @@ fun HomeView(homeViewModel: HomePanelViewModel) {
     Box(
         modifier =
             Modifier.clip(RoundedCornerShape(HomePanelConstants.padding))
-                .background(HomePanelConstants.backgroundColour)) {
-          HomeItems(homeViewModel.items, homeViewModel)
-        }
+                .background(HomePanelConstants.backgroundColour)
+    ) {
+      HomeItems(homeViewModel.items, homeViewModel)
+    }
   }
 }
 
@@ -157,13 +158,14 @@ fun HomeItem(item: HomeItem, homeViewModel: HomePanelViewModel) {
                   painter = image,
                   contentScale = ContentScale.FillBounds,
               )
-              .hoverable(interactionSource = interactionSource)) {
-        HoverContent(
-            isVisible = (isHovered || HomePanelConstants.homePanelDebugHover),
-            item = item,
-            homeViewModel = homeViewModel,
-        )
-      }
+              .hoverable(interactionSource = interactionSource)
+  ) {
+    HoverContent(
+        isVisible = (isHovered || HomePanelConstants.homePanelDebugHover),
+        item = item,
+        homeViewModel = homeViewModel,
+    )
+  }
 }
 
 @Composable
@@ -248,13 +250,14 @@ fun BadgeBox(label: String) {
             Modifier.padding(
                 vertical = HomePanelConstants.badgePadding,
                 horizontal = HomePanelConstants.badgeHorizontalPadding,
-            )) {
-          Text(
-              text = label,
-              textAlign = TextAlign.Center,
-              style = HomePanelConstants.badgeStyle,
-              color = Color(0x99333333),
-          )
-        }
+            )
+    ) {
+      Text(
+          text = label,
+          textAlign = TextAlign.Center,
+          style = HomePanelConstants.badgeStyle,
+          color = Color(0x99333333),
+      )
+    }
   }
 }

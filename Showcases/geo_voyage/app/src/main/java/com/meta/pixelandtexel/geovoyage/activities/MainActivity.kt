@@ -138,7 +138,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             panelShader = SceneMaterial.HOLE_PUNCH_PANEL_SHADER
             alphaMode = AlphaMode.HOLE_PUNCH
           }
-        })
+        }
+    )
   }
 
   override fun onSceneReady() {

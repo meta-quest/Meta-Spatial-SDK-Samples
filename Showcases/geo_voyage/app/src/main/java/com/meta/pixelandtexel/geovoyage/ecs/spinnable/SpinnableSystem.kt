@@ -132,8 +132,10 @@ class SpinnableSystem : SystemBase() {
 
                 // don't process any eye control
                 val controller = sourceOfInput.getComponent<Controller>()
-                if (controller.type != ControllerType.CONTROLLER &&
-                    controller.type != ControllerType.HAND) {
+                if (
+                    controller.type != ControllerType.CONTROLLER &&
+                        controller.type != ControllerType.HAND
+                ) {
                   return true
                 }
 
@@ -178,7 +180,8 @@ class SpinnableSystem : SystemBase() {
 
                 return true
               }
-            })
+            }
+        )
       }
     }
   }
@@ -263,8 +266,10 @@ class SpinnableSystem : SystemBase() {
         info.entity.setComponent(Transform(spinnablePose))
 
         // user just released spin
-        if (controller.buttonState and interactionButtons == 0 &&
-            controller.changedButtons and interactionButtons != 0) {
+        if (
+            controller.buttonState and interactionButtons == 0 &&
+                controller.changedButtons and interactionButtons != 0
+        ) {
           // save our framerate-independent yaw delta to our info
           info.yawInertiaDeg = (yawOffsetDeg - info.lastYawOffsetDeg) / dt
 

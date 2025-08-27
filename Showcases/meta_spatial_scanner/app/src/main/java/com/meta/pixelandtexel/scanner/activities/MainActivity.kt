@@ -213,17 +213,19 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
 
                         override val onBackPressedDispatcher: OnBackPressedDispatcher
                           get() = OnBackPressedDispatcher()
-                      }) {
-                    WelcomeScreen(
-                        onLinkClicked = {
-                          val uri = it.toUri()
-                          val browserIntent = Intent(Intent.ACTION_VIEW, uri)
-                          startActivity(browserIntent)
-                        }) {
-                          welcomePanelEntity?.destroy()
-                          welcomePanelEntity = null
-                        }
-                  }
+                      }
+              ) {
+                WelcomeScreen(
+                    onLinkClicked = {
+                      val uri = it.toUri()
+                      val browserIntent = Intent(Intent.ACTION_VIEW, uri)
+                      startActivity(browserIntent)
+                    }
+                ) {
+                  welcomePanelEntity?.destroy()
+                  welcomePanelEntity = null
+                }
+              }
             }
           }
         },
@@ -349,13 +351,14 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
 
                         override val onBackPressedDispatcher: OnBackPressedDispatcher
                           get() = OnBackPressedDispatcher()
-                      }) {
-                    CuratedObjectInfoScreen(
-                        vm,
-                        onResume = ::startScanning,
-                        onClose = ::dismissInfoPanel,
-                    )
-                  }
+                      }
+              ) {
+                CuratedObjectInfoScreen(
+                    vm,
+                    onResume = ::startScanning,
+                    onClose = ::dismissInfoPanel,
+                )
+              }
             }
           }
         },
@@ -400,7 +403,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
         when (newStatus) {
           CameraStatus.PAUSED -> com.meta.spatial.uiset.R.drawable.ic_play_circle_24
           CameraStatus.SCANNING -> com.meta.spatial.uiset.R.drawable.ic_pause_circle_24
-        })
+        }
+    )
   }
 
   /**

@@ -118,7 +118,8 @@ class DroneSceneController() {
             unfold()
             glxf.getNodeByName("infoPanel").entity.setComponent(Visible(false))
           }
-        })
+        }
+    )
 
     // create a map of anim clip names to indices so we can play them by name
     sos.getSceneObject(droneEnt)?.thenAccept { drone: SceneObject ->
@@ -222,7 +223,8 @@ class DroneSceneController() {
           scaleAnim.start()
           // apply pulsing animation to the target
           Handler(Looper.getMainLooper()).postDelayed({ pulseAnim.start() }, 800)
-        }))
+        })
+    )
 
     // show the grab instruction panel
     grabPanel.setComponent(Visible(true))

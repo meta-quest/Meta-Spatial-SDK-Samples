@@ -127,7 +127,8 @@ class PanelManager(
 
           ent.setComponent(
               // Transform relative to the parent
-              Transform(Pose(Vector3(0f, 0f, -0.025f), Quaternion(0f, 0f, 0f))))
+              Transform(Pose(Vector3(0f, 0f, -0.025f), Quaternion(0f, 0f, 0f)))
+          )
 
           createUploadPanel(ent)
         }
@@ -287,7 +288,8 @@ class PanelManager(
       return playerEntity
     } else {
       throw RuntimeException(
-          "No panel registered for media with id ${mediaModel.id}. Please register it before trying to create an associated Entity.")
+          "No panel registered for media with id ${mediaModel.id}. Please register it before trying to create an associated Entity."
+      )
     }
   }
 
@@ -349,16 +351,20 @@ class PanelManager(
                         0f,
                     ),
                     Quaternion(0f, 0f, 0f),
-                )))
+                )
+            )
+        )
 
         return popUpMenuButtonEntity
       } else {
         throw RuntimeException(
-            "No panel registered for media pop up button with id ${mediaModel.id}. Please register it before trying to create an associated Entity.")
+            "No panel registered for media pop up button with id ${mediaModel.id}. Please register it before trying to create an associated Entity."
+        )
       }
     } else {
       throw RuntimeException(
-          "Can't create a Player Menu Entity without a Player Entity for the media with id ${mediaModel.id}. Please, register and create the Player Entity first")
+          "Can't create a Player Menu Entity without a Player Entity for the media with id ${mediaModel.id}. Please, register and create the Player Entity first"
+      )
     }
   }
 
@@ -396,7 +402,8 @@ class PanelManager(
       )
     } else {
       throw RuntimeException(
-          "No panel registered for immersive media with id ${mediaModel.id}. Please register it before trying to create an associated Entity.")
+          "No panel registered for immersive media with id ${mediaModel.id}. Please register it before trying to create an associated Entity."
+      )
     }
   }
 
@@ -432,7 +439,8 @@ class PanelManager(
       )
     } else {
       throw RuntimeException(
-          "No panel registered for Download Media. Please register it before trying to create an associated Entity.")
+          "No panel registered for Download Media. Please register it before trying to create an associated Entity."
+      )
     }
   }
 
@@ -499,7 +507,9 @@ class PanelManager(
                           Pose(
                               mediaModel.maximizedBottomCenterPanelVector3(),
                               Quaternion(0f, 0f, 0f),
-                          )))
+                          )
+                      )
+                  )
                 },
                 100,
             )

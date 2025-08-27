@@ -46,21 +46,22 @@ fun TodayInHistoryScreen(
       modifier = Modifier.fillMaxSize(),
   ) {
     SecondaryPanel(
-        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.tall_panel_height))) {
-          Column(
-              horizontalAlignment = Alignment.CenterHorizontally,
-              verticalArrangement = Arrangement.SpaceAround,
-              modifier = Modifier.fillMaxSize(),
-          ) {
-            ScrollableTextAreaWithScrollBar(text = result, modifier = Modifier.weight(1f))
-            Spacer(Modifier.height(20.dp))
-            PrimaryButton(
-                label = stringResource(id = R.string.today_show_another),
-                isEnabled = !busy,
-                onClick = { vm.startTodayInHistoryQuery() },
-            )
-          }
-        }
+        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.tall_panel_height))
+    ) {
+      Column(
+          horizontalAlignment = Alignment.CenterHorizontally,
+          verticalArrangement = Arrangement.SpaceAround,
+          modifier = Modifier.fillMaxSize(),
+      ) {
+        ScrollableTextAreaWithScrollBar(text = result, modifier = Modifier.weight(1f))
+        Spacer(Modifier.height(20.dp))
+        PrimaryButton(
+            label = stringResource(id = R.string.today_show_another),
+            isEnabled = !busy,
+            onClick = { vm.startTodayInHistoryQuery() },
+        )
+      }
+    }
   }
 }
 
