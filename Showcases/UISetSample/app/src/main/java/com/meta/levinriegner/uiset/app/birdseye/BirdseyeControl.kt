@@ -43,7 +43,9 @@ fun BirdseyeControl() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground))
+                    color = LocalColorScheme.current.primaryAlphaBackground
+                ),
+        )
         Spacer(modifier = Modifier.height(20.dp))
         Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
           StatefulWrapper(true) { value, onChanged ->
@@ -62,7 +64,9 @@ fun BirdseyeControl() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground))
+                color = LocalColorScheme.current.primaryAlphaBackground
+            ),
+    )
     Spacer(modifier = Modifier.height(40.dp))
 
     Row() {
@@ -102,7 +106,8 @@ fun BirdseyeControl() {
                 text = "OFF",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -118,7 +123,8 @@ fun BirdseyeControl() {
                 text = "ON",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -131,7 +137,8 @@ fun BirdseyeControl() {
                 text = "OFF Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -144,7 +151,8 @@ fun BirdseyeControl() {
                 text = "ON Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -185,7 +193,8 @@ fun BirdseyeControl() {
                 text = "OFF",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -201,7 +210,8 @@ fun BirdseyeControl() {
                 text = "ON",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -214,7 +224,8 @@ fun BirdseyeControl() {
                 text = "OFF Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -227,7 +238,8 @@ fun BirdseyeControl() {
                 text = "ON Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -268,7 +280,8 @@ fun BirdseyeControl() {
                 text = "OFF",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -284,7 +297,8 @@ fun BirdseyeControl() {
                 text = "ON",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -297,7 +311,8 @@ fun BirdseyeControl() {
                 text = "OFF Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -310,7 +325,8 @@ fun BirdseyeControl() {
                 text = "ON Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground),
+                        color = LocalColorScheme.current.primaryAlphaBackground
+                    ),
             )
           }
         }
@@ -324,7 +340,9 @@ fun BirdseyeControl() {
         "  Radio Group",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground))
+                color = LocalColorScheme.current.primaryAlphaBackground
+            ),
+    )
     Row() { RadioGroupDemo() }
   }
 }
@@ -338,7 +356,8 @@ private fun RadioGroupDemo() {
       modifier = Modifier.padding(16.dp).fillMaxWidth(),
       items = deviceTypes,
       selection = currentSelection.value,
-      onItemClick = { clickedItem -> currentSelection.value = clickedItem })
+      onItemClick = { clickedItem -> currentSelection.value = clickedItem },
+  )
 }
 
 @Composable
@@ -346,12 +365,15 @@ private fun RadioGroup(
     modifier: Modifier,
     items: List<String>,
     selection: String,
-    onItemClick: ((String) -> Unit)
+    onItemClick: ((String) -> Unit),
 ) {
   Column(modifier = modifier) {
     items.forEach { item ->
       LabelledRadioButton(
-          label = item, selected = item == selection, onClick = { onItemClick(item) })
+          label = item,
+          selected = item == selection,
+          onClick = { onItemClick(item) },
+      )
     }
   }
 }

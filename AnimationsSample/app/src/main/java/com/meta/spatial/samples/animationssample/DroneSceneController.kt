@@ -118,7 +118,8 @@ class DroneSceneController() {
             unfold()
             glxf.getNodeByName("infoPanel").entity.setComponent(Visible(false))
           }
-        })
+        }
+    )
 
     // create a map of anim clip names to indices so we can play them by name
     sos.getSceneObject(droneEnt)?.thenAccept { drone: SceneObject ->
@@ -133,7 +134,8 @@ class DroneSceneController() {
           Animated(
               System.currentTimeMillis(),
               playbackState = PlaybackState.PAUSED,
-              track = animClipMap.get("openarm")!!)
+              track = animClipMap.get("openarm")!!,
+          )
       droneEnt.setComponent(anim)
     }
 
@@ -169,7 +171,8 @@ class DroneSceneController() {
             System.currentTimeMillis(),
             playbackState = PlaybackState.PLAYING,
             playbackType = playbackType,
-            track = track)
+            track = track,
+        )
     droneEnt.setComponent(anim)
   }
 
@@ -220,13 +223,17 @@ class DroneSceneController() {
           scaleAnim.start()
           // apply pulsing animation to the target
           Handler(Looper.getMainLooper()).postDelayed({ pulseAnim.start() }, 800)
-        }))
+        })
+    )
 
     // show the grab instruction panel
     grabPanel.setComponent(Visible(true))
 
     droneTargetEnt.setComponents(
-        Mesh(Uri.parse("mesh://sphere")), Sphere(0.2f), defaultTargetMaterial)
+        Mesh(Uri.parse("mesh://sphere")),
+        Sphere(0.2f),
+        defaultTargetMaterial,
+    )
   }
 
   private fun delayAction(action: () -> Unit, duration: Long): TimerTask {

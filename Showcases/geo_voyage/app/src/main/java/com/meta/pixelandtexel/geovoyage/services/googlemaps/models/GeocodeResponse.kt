@@ -7,7 +7,7 @@ import com.meta.pixelandtexel.geovoyage.services.googlemaps.enums.GeocodeStatus
 data class GeocodeResponse(
     val status: GeocodeStatus,
     val plus_code: GeocodePlusCode,
-    val results: List<GeocodeResult>
+    val results: List<GeocodeResult>,
 )
 
 sealed class GeocodeResponseWrapper {

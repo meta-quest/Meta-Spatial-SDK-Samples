@@ -40,8 +40,10 @@ object MathUtils {
    */
   fun rayPlaneIntersection(ray: Ray, plane: Plane): Vector3? {
     // direction vectors are too close to 0
-    if (plane.normal.lengthSquared() < EPSILON * EPSILON ||
-        ray.direction.lengthSquared() < EPSILON * EPSILON) {
+    if (
+        plane.normal.lengthSquared() < EPSILON * EPSILON ||
+            ray.direction.lengthSquared() < EPSILON * EPSILON
+    ) {
       return null
     }
 

@@ -14,7 +14,7 @@ import com.meta.spatial.mruk.MRUKRoom
 
 class UpdateRoomSystem(
     private val mrukFeature: MRUKFeature,
-    private val getRoomTextView: () -> TextView?
+    private val getRoomTextView: () -> TextView?,
 ) : SystemBase() {
 
   private var prevRoom: MRUKRoom? = null
@@ -28,7 +28,8 @@ class UpdateRoomSystem(
       prevRoomCount = roomsCount
       getRoomTextView()
           ?.setText(
-              "Number of rooms: $roomsCount\nCurrent room: ${currentRoom?.anchor?.uuid ?: "None"}")
+              "Number of rooms: $roomsCount\nCurrent room: ${currentRoom?.anchor?.uuid ?: "None"}"
+          )
     }
   }
 }

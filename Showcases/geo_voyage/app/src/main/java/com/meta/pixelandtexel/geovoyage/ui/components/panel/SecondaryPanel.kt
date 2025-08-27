@@ -33,11 +33,12 @@ fun SecondaryPanel(
           modifier.shadow(
               elevation = 16.dp,
               shape = LocalShapes.current.small,
-          )) {
-        Box(modifier = Modifier.padding(dimensionResource(R.dimen.standard_margin))) {
-          content.invoke()
-        }
-      }
+          ),
+  ) {
+    Box(modifier = Modifier.padding(dimensionResource(R.dimen.standard_margin))) {
+      content.invoke()
+    }
+  }
 }
 
 @Preview(widthDp = 600, heightDp = 400)

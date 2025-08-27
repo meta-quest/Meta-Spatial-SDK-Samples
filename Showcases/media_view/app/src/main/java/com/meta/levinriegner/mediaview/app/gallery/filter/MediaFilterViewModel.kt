@@ -23,9 +23,8 @@ constructor(
 
   private val _filters =
       MutableStateFlow(
-          MediaFilter.entries.map { filter ->
-            UiMediaFilter(filter, filter == MediaFilter.initial)
-          })
+          MediaFilter.entries.map { filter -> UiMediaFilter(filter, filter == MediaFilter.initial) }
+      )
   val filters = _filters.asStateFlow()
 
   fun onFilterSelected(filter: UiMediaFilter) {

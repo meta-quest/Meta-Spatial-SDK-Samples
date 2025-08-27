@@ -27,7 +27,8 @@ class LookAtHeadSystem : SystemBase() {
         continue
       }
       Timber.d(
-          "Entity ${entity.id} is looking at head. Once: ${lookAtHead.once}, HasLooked: ${lookAtHead.hasLooked}")
+          "Entity ${entity.id} is looking at head. Once: ${lookAtHead.once}, HasLooked: ${lookAtHead.hasLooked}"
+      )
 
       val forward = headPose.q * Vector3(0f, 0f, lookAtHead.zOffset)
       val panelPose = Pose(Vector3(0f, 0f, 0f), Quaternion(1f, 0f, 0f, 0f))

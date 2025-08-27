@@ -38,7 +38,7 @@ import org.xmlpull.v1.XmlPullParser
 private class LandmarkData(
     val info: Landmark,
     val entity: Entity,
-    var sceneObject: SceneObject? = null
+    var sceneObject: SceneObject? = null,
 )
 
 class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceContext: Context) :
@@ -116,7 +116,8 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
                     latitude = latitude,
                     longitude = longitude,
                     landmarkName = name,
-                    description = description)
+                    description = description,
+                )
             landmarks.add(landmark)
           }
         }
@@ -147,7 +148,9 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
                 Scale(Vector3(landmark.scale)),
                 Transform(Pose(position, rotation)),
                 TransformParent(earth),
-                Visible(false)))
+                Visible(false),
+            )
+        )
 
     return entity
   }
@@ -212,7 +215,7 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
                   sourceOfInput: Entity,
                   changed: Int,
                   clicked: Int,
-                  downTime: Long
+                  downTime: Long,
               ): Boolean {
                 if (!landmarksEnabled) {
                   return true
@@ -230,12 +233,16 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
                       ?.userSelectedLandmark(
                           mapEntry.value.info,
                           GeoCoordinates(
-                              mapEntry.value.info.latitude, mapEntry.value.info.longitude))
+                              mapEntry.value.info.latitude,
+                              mapEntry.value.info.longitude,
+                          ),
+                      )
                 }
 
                 return true
               }
-            })
+            }
+        )
       }
     }
   }

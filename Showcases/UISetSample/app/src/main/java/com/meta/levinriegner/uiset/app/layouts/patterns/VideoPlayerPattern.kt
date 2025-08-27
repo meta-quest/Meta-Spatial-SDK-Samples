@@ -53,118 +53,121 @@ fun VideoPlayerPattern() {
             onClick = {},
         )
       },
-      overrideColorScheme = AppTheme.DARK.colorScheme) {
-        Column(
-            modifier =
-                Modifier.fillMaxSize()
-                    .verticalScroll(state = rememberScrollState())
-                    .background(
-                        color = SpatialColor.b50,
+      overrideColorScheme = AppTheme.DARK.colorScheme,
+  ) {
+    Column(
+        modifier =
+            Modifier.fillMaxSize()
+                .verticalScroll(state = rememberScrollState())
+                .background(
+                    color = SpatialColor.b50,
+                ),
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.Bottom,
+    ) {
+      var isVolumeVisible by remember { mutableStateOf(false) }
+      Row(
+          modifier =
+              Modifier.size(100.dp)
+                  .padding(14.dp)
+                  .rotate(-90f)
+                  .alpha(if (isVolumeVisible) 1f else 0f),
+          verticalAlignment = Alignment.Top,
+      ) {
+        StatefulWrapper(0.5f) { value, onChanged ->
+          SpatialSliderSmall(
+              modifier = Modifier.weight(1f),
+              value = value,
+              onChanged = onChanged,
+              thumbIcon = {
+                Icon(
+                    imageVector = SpatialIcons.Regular.VolumeOn,
+                    contentDescription = "Volume",
+                )
+              },
+          )
+        }
+      }
+      Row(
+          modifier = Modifier.fillMaxWidth(),
+          horizontalArrangement = Arrangement.SpaceBetween,
+      ) {
+        BorderlessCircleButton(
+            icon = { Icon(SpatialIcons.Regular.VolumeOn, "") },
+            onClick = { isVolumeVisible = !isVolumeVisible },
+        )
+
+        Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+          BorderlessCircleButton(
+              icon = { Icon(SpatialIcons.Regular.TenSecondsBackward, "") },
+              onClick = {},
+          )
+          StatefulWrapper(initialValue = false) { value, onValueChange ->
+            SecondaryCircleButton(
+                icon = {
+                  Icon(
+                      if (value) SpatialIcons.Regular.Play else SpatialIcons.Regular.Pause,
+                      "",
+                  )
+                },
+                onClick = { onValueChange(!value) },
+            )
+          }
+          BorderlessCircleButton(
+              icon = { Icon(SpatialIcons.Regular.TenSecondsForward, "") },
+              onClick = {},
+          )
+        }
+
+        BorderlessCircleButton(
+            icon = { Icon(SpatialIcons.Regular.MoreHorizontal, "") },
+            onClick = {},
+        )
+      }
+
+      Box(
+          modifier = Modifier.height(32.dp),
+      )
+
+      Column {
+        StatefulWrapper(0.10f) { value, onChanged ->
+          SpatialSliderSmall(
+              helperText =
+                  Pair(
+                      "0:10",
+                      "1:00",
+                  ),
+              value = value,
+              onChanged = onChanged,
+          )
+        }
+      }
+
+      Box(
+          modifier = Modifier.height(24.dp),
+      )
+
+      LazyRow(
+          horizontalArrangement = Arrangement.spacedBy(12.dp),
+      ) {
+        items(10) {
+          StatefulWrapper(initialValue = false) { value, onChanged ->
+            TextTileButton(
+                modifier =
+                    Modifier.size(
+                        width = 235.dp,
+                        height = 124.dp,
                     ),
-            horizontalAlignment = Alignment.Start,
-            verticalArrangement = Arrangement.Bottom,
-        ) {
-          var isVolumeVisible by remember { mutableStateOf(false) }
-          Row(
-              modifier =
-                  Modifier.size(100.dp)
-                      .padding(14.dp)
-                      .rotate(-90f)
-                      .alpha(if (isVolumeVisible) 1f else 0f),
-              verticalAlignment = Alignment.Top) {
-                StatefulWrapper(0.5f) { value, onChanged ->
-                  SpatialSliderSmall(
-                      modifier = Modifier.weight(1f),
-                      value = value,
-                      onChanged = onChanged,
-                      thumbIcon = {
-                        Icon(
-                            imageVector = SpatialIcons.Regular.VolumeOn,
-                            contentDescription = "Volume",
-                        )
-                      })
-                }
-              }
-          Row(
-              modifier = Modifier.fillMaxWidth(),
-              horizontalArrangement = Arrangement.SpaceBetween,
-          ) {
-            BorderlessCircleButton(
-                icon = { Icon(SpatialIcons.Regular.VolumeOn, "") },
-                onClick = { isVolumeVisible = !isVolumeVisible },
+                label = "Label",
+                secondaryLabel = "Secondary",
+                selected = value,
+                onSelectionChange = { onChanged(!value) },
             )
-
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
-              BorderlessCircleButton(
-                  icon = { Icon(SpatialIcons.Regular.TenSecondsBackward, "") },
-                  onClick = {},
-              )
-              StatefulWrapper(initialValue = false) { value, onValueChange ->
-                SecondaryCircleButton(
-                    icon = {
-                      Icon(
-                          if (value) SpatialIcons.Regular.Play else SpatialIcons.Regular.Pause,
-                          "",
-                      )
-                    },
-                    onClick = { onValueChange(!value) },
-                )
-              }
-              BorderlessCircleButton(
-                  icon = { Icon(SpatialIcons.Regular.TenSecondsForward, "") },
-                  onClick = {},
-              )
-            }
-
-            BorderlessCircleButton(
-                icon = { Icon(SpatialIcons.Regular.MoreHorizontal, "") },
-                onClick = {},
-            )
-          }
-
-          Box(
-              modifier = Modifier.height(32.dp),
-          )
-
-          Column {
-            StatefulWrapper(0.10f) { value, onChanged ->
-              SpatialSliderSmall(
-                  helperText =
-                      Pair(
-                          "0:10",
-                          "1:00",
-                      ),
-                  value = value,
-                  onChanged = onChanged,
-              )
-            }
-          }
-
-          Box(
-              modifier = Modifier.height(24.dp),
-          )
-
-          LazyRow(
-              horizontalArrangement = Arrangement.spacedBy(12.dp),
-          ) {
-            items(10) {
-              StatefulWrapper(initialValue = false) { value, onChanged ->
-                TextTileButton(
-                    modifier =
-                        Modifier.size(
-                            width = 235.dp,
-                            height = 124.dp,
-                        ),
-                    label = "Label",
-                    secondaryLabel = "Secondary",
-                    selected = value,
-                    onSelectionChange = { onChanged(!value) },
-                )
-              }
-            }
           }
         }
       }
+    }
+  }
 }
 
 @Preview(

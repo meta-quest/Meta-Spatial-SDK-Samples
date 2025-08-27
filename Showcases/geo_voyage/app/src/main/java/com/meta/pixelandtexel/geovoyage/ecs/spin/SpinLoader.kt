@@ -25,6 +25,7 @@ class SpinLoader : BaseLoader() {
           axisArray?.let {
             axis = Vector3(it[0].toFloat(), it[1].toFloat(), it[2].toFloat()).normalize()
           }
-        })
+        }
+    )
   }
 }

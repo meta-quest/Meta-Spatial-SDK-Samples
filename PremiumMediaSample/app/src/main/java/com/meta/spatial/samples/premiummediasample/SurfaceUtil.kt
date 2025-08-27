@@ -34,7 +34,8 @@ object SurfaceUtil {
           0,
           EGL_STENCIL_SIZE,
           0,
-          EGL_NONE)
+          EGL_NONE,
+      )
 
   private fun chooseEglConfig(egl: EGL10, eglDisplay: EGLDisplay): EGLConfig {
     val configsCount = intArrayOf(0)
@@ -54,7 +55,8 @@ object SurfaceUtil {
             eglDisplay,
             eglConfig,
             EGL_NO_CONTEXT,
-            intArrayOf(EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE))
+            intArrayOf(EGL_CONTEXT_CLIENT_VERSION, 2, EGL_NONE),
+        )
     val eglSurface = egl.eglCreateWindowSurface(eglDisplay, eglConfig, surface, null)
 
     egl.eglMakeCurrent(eglDisplay, eglSurface, eglSurface, eglContext)

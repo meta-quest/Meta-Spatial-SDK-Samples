@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
  */
 class ObjectInfoViewModel(
     private val infoRequest: ObjectInfoRequest,
-    private val queryTemplate: String
+    private val queryTemplate: String,
 ) : ViewModel() {
   private val _resultMessage = mutableStateOf("")
   private val _title = mutableStateOf(infoRequest.name.replaceFirstChar { it.uppercaseChar() })
@@ -58,7 +58,8 @@ class ObjectInfoViewModel(
                 override fun onError(reason: String) {
                   _resultMessage.value = reason
                 }
-              })
+              },
+      )
     }
   }
 }

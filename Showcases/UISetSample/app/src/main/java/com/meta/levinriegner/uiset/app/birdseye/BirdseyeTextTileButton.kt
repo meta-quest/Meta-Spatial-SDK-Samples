@@ -39,7 +39,9 @@ fun BirdseyeTextTileButton() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground))
+                    color = LocalColorScheme.current.primaryAlphaBackground
+                ),
+        )
         Spacer(modifier = Modifier.height(20.dp))
         Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
           TextTileButton(
@@ -57,7 +59,9 @@ fun BirdseyeTextTileButton() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground))
+                color = LocalColorScheme.current.primaryAlphaBackground
+            ),
+    )
     Spacer(modifier = Modifier.height(40.dp))
     Row(
         Modifier.fillMaxSize(),
@@ -71,7 +75,8 @@ fun BirdseyeTextTileButton() {
             text = "Primary",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(29.dp))
         TextTileButton(
@@ -100,7 +105,8 @@ fun BirdseyeTextTileButton() {
             text = "Primary + Secondary",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(29.dp))
         TextTileButton(
@@ -132,7 +138,8 @@ fun BirdseyeTextTileButton() {
             text = "With Icon",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(29.dp))
         TextTileButton(
@@ -164,7 +171,8 @@ fun BirdseyeTextTileButton() {
             text = "Secondary with Icon",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(29.dp))
         TextTileButton(
@@ -198,7 +206,8 @@ fun BirdseyeTextTileButton() {
             text = "",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(5.dp))
         Column(
@@ -209,19 +218,22 @@ fun BirdseyeTextTileButton() {
               text = "Default",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  ),
           )
           Text(
               text = "Selected",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  ),
           )
           Text(
               text = "Disabled",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  ),
           )
         }
       }

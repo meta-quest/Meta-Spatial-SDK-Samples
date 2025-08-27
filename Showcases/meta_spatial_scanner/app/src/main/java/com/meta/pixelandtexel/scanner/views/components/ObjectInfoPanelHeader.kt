@@ -31,44 +31,48 @@ fun ObjectInfoPanelHeader(
   Row(
       modifier = Modifier.fillMaxWidth(),
       horizontalArrangement = Arrangement.SpaceBetween,
-      verticalAlignment = Alignment.CenterVertically) {
-        Text(
-            title,
-            color = SpatialColor.white100,
-            style = SpatialTheme.typography.headline1Strong,
-            modifier = Modifier.padding(bottom = 4.dp))
-        Row {
-          // using the spatial side nav item until the icon button is built
-          if (true) {
-            SpatialSideNavItem(
-                modifier = Modifier.width(48.dp).height(48.dp),
-                primaryLabel = "",
-                icon = {
-                  Image(
-                      SpatialIcons.Regular.PlayCircle,
-                      "Resume scanning",
-                  )
-                },
-                onClick = { onResume?.invoke() },
-                collapsed = true,
-                dense = true,
-                selected = false)
-            SpatialSideNavItem(
-                modifier = Modifier.width(48.dp).height(48.dp),
-                primaryLabel = "",
-                icon = { Image(SpatialIcons.Regular.CloseCircle, "Close panel") },
-                onClick = { onClose?.invoke() },
-                collapsed = true,
-                dense = true,
-                selected = false)
-          } else {
-            IconButton(onClick = { onResume?.invoke() }) {
-              Image(SpatialIcons.Regular.CloseCircle, "Resume scanning")
-            }
-            IconButton(onClick = { onClose?.invoke() }) {
-              Image(SpatialIcons.Regular.CloseCircle, "Close panel")
-            }
-          }
+      verticalAlignment = Alignment.CenterVertically,
+  ) {
+    Text(
+        title,
+        color = SpatialColor.white100,
+        style = SpatialTheme.typography.headline1Strong,
+        modifier = Modifier.padding(bottom = 4.dp),
+    )
+    Row {
+      // using the spatial side nav item until the icon button is built
+      if (true) {
+        SpatialSideNavItem(
+            modifier = Modifier.width(48.dp).height(48.dp),
+            primaryLabel = "",
+            icon = {
+              Image(
+                  SpatialIcons.Regular.PlayCircle,
+                  "Resume scanning",
+              )
+            },
+            onClick = { onResume?.invoke() },
+            collapsed = true,
+            dense = true,
+            selected = false,
+        )
+        SpatialSideNavItem(
+            modifier = Modifier.width(48.dp).height(48.dp),
+            primaryLabel = "",
+            icon = { Image(SpatialIcons.Regular.CloseCircle, "Close panel") },
+            onClick = { onClose?.invoke() },
+            collapsed = true,
+            dense = true,
+            selected = false,
+        )
+      } else {
+        IconButton(onClick = { onResume?.invoke() }) {
+          Image(SpatialIcons.Regular.CloseCircle, "Resume scanning")
+        }
+        IconButton(onClick = { onClose?.invoke() }) {
+          Image(SpatialIcons.Regular.CloseCircle, "Close panel")
         }
       }
+    }
+  }
 }

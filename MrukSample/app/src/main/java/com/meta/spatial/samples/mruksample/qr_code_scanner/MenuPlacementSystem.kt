@@ -35,7 +35,9 @@ class MenuPlacementSystem() : SystemBase() {
                   entity
                       .getComponent<Scale>()
                       .scale
-                      .lerp(Vector3(targetScale.target), targetScale.speed)))
+                      .lerp(Vector3(targetScale.target), targetScale.speed)
+              )
+          )
         }
     Query.where { has(TransformParentFollow.id) }
         .eval()
@@ -51,7 +53,8 @@ class MenuPlacementSystem() : SystemBase() {
           // 0 when qr is on wall (vertical), 1 when qr is on floor (laying down)
           val amountY: Float =
               Math.abs(
-                  (parentTransform.q * Vector3(0.0f, 0.0f, 1.0f)).dot(Vector3(0.0f, 1.0f, 0.0f)))
+                  (parentTransform.q * Vector3(0.0f, 0.0f, 1.0f)).dot(Vector3(0.0f, 1.0f, 0.0f))
+              )
           val scale: Vector3 = child.getComponent<Scale>().scale
           val panelHeight: Float = QrCodeScannerSampleActivity.panelHeight / 2 * scale.y
           // position the panel so it won't clip into the floor if the QR is on the floor

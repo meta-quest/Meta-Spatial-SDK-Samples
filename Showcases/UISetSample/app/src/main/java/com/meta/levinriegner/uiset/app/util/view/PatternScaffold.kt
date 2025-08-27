@@ -51,32 +51,30 @@ fun PatternScaffold(
                       )
                     } else {
                       LocalColorScheme.current.panel
-                    })) {
-          PanelToolbar(
-              leading = leading,
-              title = "Title",
-              actions = {
-                BorderlessCircleButton(
-                    icon = {
-                      Icon(SpatialIcons.Regular.Minimize, "", modifier = Modifier.size(16.dp))
-                    },
-                    onClick = {},
-                )
+                    }
+            )
+    ) {
+      PanelToolbar(
+          leading = leading,
+          title = "Title",
+          actions = {
+            BorderlessCircleButton(
+                icon = { Icon(SpatialIcons.Regular.Minimize, "", modifier = Modifier.size(16.dp)) },
+                onClick = {},
+            )
 
-                BorderlessCircleButton(
-                    icon = {
-                      Icon(SpatialIcons.Regular.Close, "", modifier = Modifier.size(16.dp))
-                    },
-                    onClick = {},
-                )
-              },
-          )
+            BorderlessCircleButton(
+                icon = { Icon(SpatialIcons.Regular.Close, "", modifier = Modifier.size(16.dp)) },
+                onClick = {},
+            )
+          },
+      )
 
-          Box(
-              modifier = Modifier.padding(24.dp),
-          ) {
-            content()
-          }
-        }
+      Box(
+          modifier = Modifier.padding(24.dp),
+      ) {
+        content()
+      }
+    }
   }
 }

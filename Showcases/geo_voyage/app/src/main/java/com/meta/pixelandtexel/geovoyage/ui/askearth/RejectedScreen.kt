@@ -42,16 +42,21 @@ fun RejectedScreen(onAskExampleQuestion: (question: String) -> Unit) {
                   fontWeight = FontWeight.Black,
                   fontStyle = FontStyle.Italic,
               ),
-          textAlign = TextAlign.Center)
+          textAlign = TextAlign.Center,
+      )
       Column(
           horizontalAlignment = Alignment.CenterHorizontally,
           verticalArrangement = Arrangement.spacedBy(12.dp),
-          modifier = Modifier.padding(top = 24.dp)) {
-            shuffledQuestions.forEach { question ->
-              PrimaryButton(
-                  label = question, onClick = { onAskExampleQuestion(question) }, expanded = true)
-            }
-          }
+          modifier = Modifier.padding(top = 24.dp),
+      ) {
+        shuffledQuestions.forEach { question ->
+          PrimaryButton(
+              label = question,
+              onClick = { onAskExampleQuestion(question) },
+              expanded = true,
+          )
+        }
+      }
     }
   }
 }
@@ -163,4 +168,5 @@ val questions =
         "In which country is the city of Lisbon located?",
         "What is the national animal of Australia?",
         "Which country is famous for its maple leaves?",
-        "What is the capital of the Netherlands?")
+        "What is the capital of the Netherlands?",
+    )

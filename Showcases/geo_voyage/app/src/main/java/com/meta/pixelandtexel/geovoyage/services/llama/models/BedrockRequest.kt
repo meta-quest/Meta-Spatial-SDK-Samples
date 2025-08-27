@@ -9,5 +9,5 @@ data class BedrockRequest(
     val prompt: String,
     val temperature: Float = .5f,
     val top_p: Float = .9f,
-    val max_gen_len: Int = 512
+    val max_gen_len: Int = 512,
 )

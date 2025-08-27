@@ -44,7 +44,9 @@ fun BirdseyeDropdown() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground))
+                    color = LocalColorScheme.current.primaryAlphaBackground
+                ),
+        )
         Spacer(modifier = Modifier.height(20.dp))
         Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
           Box {
@@ -67,7 +69,9 @@ fun BirdseyeDropdown() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground))
+                color = LocalColorScheme.current.primaryAlphaBackground
+            ),
+    )
     Spacer(modifier = Modifier.height(40.dp))
     Row(
         Modifier.fillMaxSize(),
@@ -80,7 +84,8 @@ fun BirdseyeDropdown() {
             text = "Standard",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(38.dp))
         Box {
@@ -136,7 +141,8 @@ fun BirdseyeDropdown() {
             text = "Standard with Icon",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(38.dp))
         Box {
@@ -196,7 +202,8 @@ fun BirdseyeDropdown() {
             text = "Rounded Standard",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(38.dp))
         Box {
@@ -268,7 +275,8 @@ fun BirdseyeDropdown() {
             text = "Rounded with Icon",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(38.dp))
         Box {
@@ -342,35 +350,40 @@ fun BirdseyeDropdown() {
             text = "",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(38.dp))
         Text(
             text = "Context Menu Default",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(65.dp))
         Text(
             text = "Context Menu Selected",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(60.dp))
         Text(
             text = "Disabled",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(65.dp))
         Text(
             text = "Disabled",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
       }
     }

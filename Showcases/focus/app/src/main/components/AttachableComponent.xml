@@ -5,5 +5,6 @@
             In BoardParentingSystem.kt, we detect the distance between this objects and the boards, and give the sensation that we are sticking to them."
   >
         <IntAttribute name="type" defaultValue="0" />
+        <IntAttribute name="parentUuid" defaultValue="-1" />
     </Component>
 </ComponentSchema>

@@ -118,16 +118,20 @@ class PermissionActivity : ComponentActivity() {
 
               PermissionState.RequestPermission -> {
                 RequestPermissionRationale(
-                    modifier = Modifier.padding(innerPadding), denied = false) {
-                      requestStoragePermission()
-                    }
+                    modifier = Modifier.padding(innerPadding),
+                    denied = false,
+                ) {
+                  requestStoragePermission()
+                }
               }
 
               PermissionState.PermissionDenied -> {
                 RequestPermissionRationale(
-                    modifier = Modifier.padding(innerPadding), denied = true) {
-                      requestStoragePermission()
-                    }
+                    modifier = Modifier.padding(innerPadding),
+                    denied = true,
+                ) {
+                  requestStoragePermission()
+                }
               }
 
               PermissionState.PermissionAccepted -> {
@@ -148,7 +152,8 @@ class PermissionActivity : ComponentActivity() {
     } else {
       viewModel.onCheckPermissionResult(
           ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) ==
-              PackageManager.PERMISSION_GRANTED)
+              PackageManager.PERMISSION_GRANTED
+      )
     }
   }
 
@@ -214,7 +219,8 @@ private fun RequestPermissionRationale(
               .clip(RoundedCornerShape(40.dp))
               .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(40.dp))
               .background(
-                  Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd))),
+                  Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd))
+              ),
   ) {
     Column(
         modifier = modifier.fillMaxSize().padding(Dimens.medium),
@@ -224,16 +230,19 @@ private fun RequestPermissionRationale(
       Text(
           text = stringResource(id = R.string.storage_permission_rationale_title),
           textAlign = TextAlign.Center,
-          style = MaterialTheme.typography.titleMedium)
+          style = MaterialTheme.typography.titleMedium,
+      )
       Spacer(modifier = Modifier.height(Dimens.small))
       Text(
           text =
               stringResource(
                   id =
                       if (denied) R.string.storage_permission_rationale_denied
-                      else R.string.storage_permission_rationale_description),
+                      else R.string.storage_permission_rationale_description
+              ),
           textAlign = TextAlign.Center,
-          style = MaterialTheme.typography.bodyMedium)
+          style = MaterialTheme.typography.bodyMedium,
+      )
       Spacer(modifier = Modifier.height(Dimens.large))
       OutlinedButton(
           onClick = onRequest,

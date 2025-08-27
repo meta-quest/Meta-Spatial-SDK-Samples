@@ -108,13 +108,18 @@ class ControlsPanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
             Transform(),
             PanelLayerAlpha(0f),
             Visible(false),
-            TransformParent(Entity.nullEntity()))
+            TransformParent(Entity.nullEntity()),
+        )
   }
 
   fun fadeVisibility(isVisible: Boolean, onComplete: (() -> Unit)? = null) {
     val easing = if (isVisible) TweenEquations.Circle_In else TweenEquations.Circle_Out
     super.fadeVisibility(
-        isVisible, TIMINGS.CONTROL_PANEL_FADE_BOTH.millisToFloat(), easing, onComplete)
+        isVisible,
+        TIMINGS.CONTROL_PANEL_FADE_BOTH.millisToFloat(),
+        easing,
+        onComplete,
+    )
   }
 
   fun movePanelForCinema(videoEntity: Entity) {
@@ -134,7 +139,8 @@ class ControlsPanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
         true,
         -controlsAngle,
         vector = headPose,
-        angleContent = false)
+        angleContent = false,
+    )
     // Force same rotation as screen
     val controlsPose = entity.getComponent<Transform>()
     controlsPose.transform.q = videoPosition.transform.q

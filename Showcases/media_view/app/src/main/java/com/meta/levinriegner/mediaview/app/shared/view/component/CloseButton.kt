@@ -29,7 +29,8 @@ fun CloseButton(
           IconButtonDefaults.iconButtonColors(
               contentColor = AppColor.White,
           ),
-      onClick = { onPressed() }) {
-        Icon(Icons.Filled.Close, contentDescription = "Close", modifier = Modifier.padding(6.dp))
-      }
+      onClick = { onPressed() },
+  ) {
+    Icon(Icons.Filled.Close, contentDescription = "Close", modifier = Modifier.padding(6.dp))
+  }
 }

@@ -34,4 +34,5 @@ val Typography =
                 fontWeight = FontWeight.Normal,
                 fontSize = 14.4.sp,
                 lineHeight = 16.sp,
-            ))
+            ),
+    )

@@ -31,7 +31,8 @@ fun OnboardingSlide(
         color = AppColor.White,
         textAlign = TextAlign.Start,
         fontWeight = FontWeight.Bold,
-        style = MaterialTheme.typography.titleSmall)
+        style = MaterialTheme.typography.titleSmall,
+    )
     Text(
         description,
         color = AppColor.White60,

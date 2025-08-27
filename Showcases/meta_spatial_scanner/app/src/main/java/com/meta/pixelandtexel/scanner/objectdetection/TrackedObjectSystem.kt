@@ -77,7 +77,7 @@ class TrackedObjectSystem(
     private var screenPointToRayInCamera: ((Vector2) -> Vector3) = { _ -> Vector3.Forward },
     private var screenPointToPointOnViewPlane: ((Vector2, Float) -> Vector3) = { _, _ ->
       Vector3.Forward
-    }
+    },
 ) : SystemBase() {
   companion object {
     private const val TAG: String = "TrackedObjectSystem"
@@ -125,7 +125,8 @@ class TrackedObjectSystem(
 
             setContent { ObjectLabelScreen(info.uiVM) { onTrackedObjectClicked(info.entity) } }
           }
-        })
+        }
+    )
   }
 
   /**
@@ -208,7 +209,8 @@ class TrackedObjectSystem(
             SceneMesh.quad(
                 Vector3(-0.5f, -0.5f, 0f),
                 Vector3(0.5f, 0.5f, 0f),
-                trackedObjects[id]!!.outlineMaterial)
+                trackedObjects[id]!!.outlineMaterial,
+            )
         it.setSceneMesh(quadMesh, "trackedObjectQuad")
 
         // add our on click listener
@@ -221,7 +223,7 @@ class TrackedObjectSystem(
                   sourceOfInput: Entity,
                   changed: Int,
                   buttonState: Int,
-                  downTime: Long
+                  downTime: Long,
               ): Boolean {
                 val selectButtons: Int =
                     ButtonBits.ButtonA or
@@ -236,7 +238,8 @@ class TrackedObjectSystem(
 
                 return true
               }
-            })
+            }
+        )
       }
     }
   }
@@ -290,7 +293,8 @@ class TrackedObjectSystem(
                     SceneMaterialAttribute("sliceSize", SceneMaterialDataType.Vector4),
                     SceneMaterialAttribute("tintColor", SceneMaterialDataType.Vector4),
                     SceneMaterialAttribute("stereoParams", SceneMaterialDataType.Vector4),
-                ))
+                ),
+            )
             .apply {
               setBlendMode(BlendMode.TRANSLUCENT)
               setSortOrder(SortOrder.TRANSLUCENT)
@@ -311,7 +315,9 @@ class TrackedObjectSystem(
                       SpatialColor.b70.red,
                       SpatialColor.b70.green,
                       SpatialColor.b70.blue,
-                      PPU_MULTIPLIER))
+                      PPU_MULTIPLIER,
+                  ),
+              )
             }
 
     val entity =
@@ -323,7 +329,8 @@ class TrackedObjectSystem(
             Quad(),
             Material(),
             Visible(false),
-            Hittable(MeshCollision.NoCollision))
+            Hittable(MeshCollision.NoCollision),
+        )
     val labelPanelEntity =
         Entity.createPanelEntity(
             R.integer.object_label_panel_id,
@@ -456,7 +463,9 @@ class TrackedObjectSystem(
 
     val bottomLeft =
         screenPointToPointOnViewPlane(
-            Vector2(bounds.left.toFloat(), bounds.bottom.toFloat()), Z_DIST)
+            Vector2(bounds.left.toFloat(), bounds.bottom.toFloat()),
+            Z_DIST,
+        )
     val blWorldRayDir = cameraPose.q.times(bottomLeft).normalize()
     val blPosition = MathUtils.rayPlaneIntersection(Ray(cameraPose.t, blWorldRayDir), viewPlane)!!
 
@@ -504,7 +513,7 @@ class TrackedObjectSystem(
       var cameraRayToObject: Vector3 = Vector3.Forward,
       var cameraFrameBounds: Rect = Rect(),
       var targetPose: Pose = Pose(),
-      var targetScale: Vector3 = Vector3(0f)
+      var targetScale: Vector3 = Vector3(0f),
   ) : IPoolable {
     var shouldTeleport = false
 

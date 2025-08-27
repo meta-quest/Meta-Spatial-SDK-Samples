@@ -16,7 +16,7 @@ fun ToggleChip(
     selected: Boolean = true,
     enabled: Boolean = true,
     text: String = "",
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
   if (enabled && !selected) {
     SecondaryButton(label = text, leading = null, isEnabled = true, onClick = onClick)
@@ -35,7 +35,8 @@ fun ToggleChip(
               null
             },
         isEnabled = enabled,
-        onClick = onClick)
+        onClick = onClick,
+    )
   }
 }
 

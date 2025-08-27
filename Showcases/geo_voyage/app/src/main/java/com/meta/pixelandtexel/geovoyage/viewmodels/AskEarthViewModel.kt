@@ -55,7 +55,9 @@ class AskEarthViewModel(
   private fun hasMicPermissions(): Boolean {
     val recordAudioResult =
         ContextCompat.checkSelfPermission(
-            PanelActivity.instance.get()!!, Manifest.permission.RECORD_AUDIO)
+            PanelActivity.instance.get()!!,
+            Manifest.permission.RECORD_AUDIO,
+        )
 
     return recordAudioResult == PackageManager.PERMISSION_GRANTED
   }
@@ -127,7 +129,8 @@ class AskEarthViewModel(
                 _errorMessage.value = "Wit.ai Error: $reason"
                 _route.value = Routes.ERROR_ROUTE
               }
-            })
+            }
+        )
 
     if (startResult != WitAiStartResult.SUCCESS) {
       Log.e("AUDIO ERROR", startResult.toString())
@@ -164,7 +167,8 @@ class AskEarthViewModel(
                 _errorMessage.value = "Llama Error \n $reason"
                 _route.value = Routes.ERROR_ROUTE
               }
-            })
+            },
+    )
   }
 
   fun navTo(dest: String) {

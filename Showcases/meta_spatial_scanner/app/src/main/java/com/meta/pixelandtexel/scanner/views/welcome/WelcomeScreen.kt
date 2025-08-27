@@ -27,7 +27,7 @@ fun WelcomeScreen(
     vm: WelcomeViewModel = viewModel(),
     navController: NavHostController = rememberNavController(),
     onLinkClicked: ((String) -> Unit)? = null,
-    dismissPanel: (() -> Unit)? = null
+    dismissPanel: (() -> Unit)? = null,
 ) {
   val route by vm.route
 

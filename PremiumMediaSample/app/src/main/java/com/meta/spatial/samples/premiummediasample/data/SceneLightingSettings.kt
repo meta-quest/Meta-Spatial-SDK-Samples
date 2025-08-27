@@ -11,7 +11,7 @@ enum class CinemaState {
   Cinema,
   TV,
   Equirect180,
-  Home
+  Home,
 }
 
 data class LightMultipliers(
@@ -32,20 +32,25 @@ data class LightMultipliers(
 
 data class SceneLightingSettings(
     val playingLighting: LightMultipliers = LightMultipliers(),
-    val pausedLighting: LightMultipliers = LightMultipliers()
+    val pausedLighting: LightMultipliers = LightMultipliers(),
 ) {
   companion object {
     val lightingDefaults =
         mapOf(
             CinemaState.Cinema to
                 SceneLightingSettings(
-                    LightMultipliers.CINEMA_PLAYING, LightMultipliers.CINEMA_PAUSED),
+                    LightMultipliers.CINEMA_PLAYING,
+                    LightMultipliers.CINEMA_PAUSED,
+                ),
             CinemaState.TV to
                 SceneLightingSettings(LightMultipliers.TV_PLAYING, LightMultipliers.TV_PAUSED),
             CinemaState.Equirect180 to
                 SceneLightingSettings(
-                    LightMultipliers.EQUIRECT_180_PLAYING, LightMultipliers.EQUIRECT_180_PAUSED),
+                    LightMultipliers.EQUIRECT_180_PLAYING,
+                    LightMultipliers.EQUIRECT_180_PAUSED,
+                ),
             CinemaState.Home to
-                SceneLightingSettings(LightMultipliers.HOME_PLAYING, LightMultipliers.HOME_PAUSED))
+                SceneLightingSettings(LightMultipliers.HOME_PLAYING, LightMultipliers.HOME_PAUSED),
+        )
   }
 }

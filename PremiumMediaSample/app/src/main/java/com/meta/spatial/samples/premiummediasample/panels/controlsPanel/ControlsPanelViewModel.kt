@@ -38,7 +38,8 @@ class ControlsPanelViewModel(private val ipcServiceConnection: IPCServiceConnect
     ipcServiceConnection?.messageProcess(
         IPCService.IMMERSIVE_CHANNEL,
         ImmersiveActivityCodes.CONTROL_PANEL_SET_CINEMA_STATE.ordinal,
-        Bundle().apply { putSerializable("cinemaState", cinemaState) })
+        Bundle().apply { putSerializable("cinemaState", cinemaState) },
+    )
   }
 
   // Function to update Passthrough level
@@ -60,28 +61,32 @@ class ControlsPanelViewModel(private val ipcServiceConnection: IPCServiceConnect
     ipcServiceConnection?.messageProcess(
         IPCService.IMMERSIVE_CHANNEL,
         ImmersiveActivityCodes.CONTROL_PANEL_TOGGLE_PLAY.ordinal,
-        Bundle().apply { putBoolean("isPlaying", shouldPlay) })
+        Bundle().apply { putBoolean("isPlaying", shouldPlay) },
+    )
   }
 
   fun onMuteToggle(shouldMute: Boolean) {
     ipcServiceConnection?.messageProcess(
         IPCService.IMMERSIVE_CHANNEL,
         ImmersiveActivityCodes.CONTROL_PANEL_TOGGLE_MUTE.ordinal,
-        Bundle().apply { putBoolean("isMute", shouldMute) })
+        Bundle().apply { putBoolean("isMute", shouldMute) },
+    )
   }
 
   fun onSeekTo(position: Float) {
     ipcServiceConnection?.messageProcess(
         IPCService.IMMERSIVE_CHANNEL,
         ImmersiveActivityCodes.CONTROL_PANEL_SEEK_TO.ordinal,
-        Bundle().apply { putFloat("position", position) })
+        Bundle().apply { putFloat("position", position) },
+    )
   }
 
   fun onUpdatePassthrough(passthrough: Float): Float {
     ipcServiceConnection?.messageProcess(
         IPCService.IMMERSIVE_CHANNEL,
         ImmersiveActivityCodes.CONTROL_PANEL_SET_PASSTHROUGH.ordinal,
-        Bundle().apply { putFloat("passthrough", passthrough) })
+        Bundle().apply { putFloat("passthrough", passthrough) },
+    )
 
     updatePassthroughLevel(passthrough)
     return passthrough
@@ -91,14 +96,17 @@ class ControlsPanelViewModel(private val ipcServiceConnection: IPCServiceConnect
     ipcServiceConnection?.messageProcess(
         IPCService.IMMERSIVE_CHANNEL,
         ImmersiveActivityCodes.CONTROL_PANEL_SET_LIGHTING.ordinal,
-        Bundle().apply { putFloat("value", lighting) })
+        Bundle().apply { putFloat("value", lighting) },
+    )
     updateLightingLevel(lighting)
     return lighting
   }
 
   fun onStopWatching() {
     ipcServiceConnection?.messageProcess(
-        IPCService.IMMERSIVE_CHANNEL, ImmersiveActivityCodes.CONTROL_PANEL_CLOSE_PLAYER.ordinal)
+        IPCService.IMMERSIVE_CHANNEL,
+        ImmersiveActivityCodes.CONTROL_PANEL_CLOSE_PLAYER.ordinal,
+    )
   }
 
   fun updateState(
@@ -106,7 +114,7 @@ class ControlsPanelViewModel(private val ipcServiceConnection: IPCServiceConnect
       isBuffering: Boolean,
       isMuted: Boolean,
       progress: Float,
-      duration: Float
+      duration: Float,
   ) {
     _mediaState.value =
         MediaState(
@@ -132,7 +140,7 @@ data class MediaState(
     val isBuffering: Boolean = false,
     val isMuted: Boolean = false,
     val progress: Float = 0f,
-    val duration: Float = 0f
+    val duration: Float = 0f,
 )
 
 data class SliderState(var value: Float, var isInteractable: Boolean, var isVisible: Boolean)

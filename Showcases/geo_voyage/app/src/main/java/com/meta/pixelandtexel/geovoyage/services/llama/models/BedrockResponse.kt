@@ -9,5 +9,5 @@ data class BedrockResponse(
     val generation: String,
     val prompt_token_count: Int,
     val generation_token_count: Int,
-    val stop_reason: String
+    val stop_reason: String,
 )

@@ -42,7 +42,8 @@ fun TooltipsLayout() {
           text = "Default",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
       Spacer(Modifier.width(226.dp))
       SpatialTooltipContent(
@@ -61,7 +62,8 @@ fun TooltipsLayout() {
           text = "Tooltip with Icon & Subtitle",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
     }
     Spacer(Modifier.height(46.dp))
@@ -78,7 +80,8 @@ fun TooltipsLayout() {
           text = "Default with Subtitle",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
       Spacer(Modifier.width(142.dp))
       SpatialTooltipContent(
@@ -96,7 +99,8 @@ fun TooltipsLayout() {
           text = "Tooltip with Image",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
     }
     Spacer(Modifier.height(46.dp))
@@ -119,7 +123,8 @@ fun TooltipsLayout() {
           text = "Tooltip with Icon",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
       Spacer(Modifier.width(164.dp))
       SpatialTooltipContent(
@@ -138,7 +143,8 @@ fun TooltipsLayout() {
           text = "Tooltip with Image & Subtitle",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
     }
   }

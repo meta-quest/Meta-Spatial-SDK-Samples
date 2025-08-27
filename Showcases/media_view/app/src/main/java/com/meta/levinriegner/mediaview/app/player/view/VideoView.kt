@@ -126,10 +126,13 @@ fun VideoView(
             useController = false
             layoutParams =
                 FrameLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                )
           }
         },
-        modifier = Modifier.fillMaxSize().clickable { shouldShowControls = !shouldShowControls })
+        modifier = Modifier.fillMaxSize().clickable { shouldShowControls = !shouldShowControls },
+    )
     PlayerControls(
         modifier = Modifier.fillMaxSize(),
         isVisible = { shouldShowControls },
@@ -218,11 +221,13 @@ private fun PlayerControls(
               Modifier.fillMaxWidth(fraction = if (is360Video) 0.50f else 0.95f)
                   .animateEnterExit(
                       enter = slideInVertically(initialOffsetY = { fullHeight: Int -> fullHeight }),
-                      exit = slideOutVertically(targetOffsetY = { fullHeight: Int -> fullHeight })),
+                      exit = slideOutVertically(targetOffsetY = { fullHeight: Int -> fullHeight }),
+                  ),
           totalDuration = totalDuration,
           currentTime = currentTime,
           bufferedPercentage = bufferedPercentage,
-          onSeekChanged = onSeekChanged)
+          onSeekChanged = onSeekChanged,
+      )
     }
   }
 }
@@ -267,7 +272,8 @@ private fun CenterControls(
       },
       modifier = Modifier.size(40.dp),
       tint = AppColor.White,
-      contentDescription = "Play/Pause")
+      contentDescription = "Play/Pause",
+  )
 }
 
 @Composable
@@ -276,7 +282,7 @@ private fun BottomControls(
     totalDuration: () -> Long,
     currentTime: () -> Long,
     bufferedPercentage: () -> Int,
-    onSeekChanged: (timeMs: Float) -> Unit
+    onSeekChanged: (timeMs: Float) -> Unit,
 ) {
 
   val duration = remember(totalDuration()) { totalDuration() }
@@ -294,7 +300,10 @@ private fun BottomControls(
           valueRange = 0f..100f,
           colors =
               SliderDefaults.colors(
-                  disabledThumbColor = Color.Transparent, disabledActiveTrackColor = Color.Gray))
+                  disabledThumbColor = Color.Transparent,
+                  disabledActiveTrackColor = Color.Gray,
+              ),
+      )
 
       Slider(
           modifier = Modifier.fillMaxWidth(),
@@ -306,24 +315,26 @@ private fun BottomControls(
                   thumbColor = AppColor.White,
                   activeTrackColor = AppColor.White,
                   inactiveTrackColor = AppColor.White30,
-              ))
+              ),
+      )
     }
 
     Row(
         modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
-        horizontalArrangement = Arrangement.SpaceBetween) {
-          Text(
-              modifier = Modifier.padding(horizontal = 16.dp),
-              text = videoTime.coerceAtLeast(0L).formatMinSec(),
-              color = AppColor.White,
-          )
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+      Text(
+          modifier = Modifier.padding(horizontal = 16.dp),
+          text = videoTime.coerceAtLeast(0L).formatMinSec(),
+          color = AppColor.White,
+      )
 
-          Text(
-              modifier = Modifier.padding(horizontal = 16.dp),
-              text = duration.formatMinSec(),
-              color = AppColor.White,
-          )
-        }
+      Text(
+          modifier = Modifier.padding(horizontal = 16.dp),
+          text = duration.formatMinSec(),
+          color = AppColor.White,
+      )
+    }
   }
 }
 
@@ -333,5 +344,6 @@ fun Long.formatMinSec(): String {
       "%02d:%02d",
       TimeUnit.MILLISECONDS.toMinutes(this),
       TimeUnit.MILLISECONDS.toSeconds(this) -
-          TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(this)))
+          TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(this)),
+  )
 }

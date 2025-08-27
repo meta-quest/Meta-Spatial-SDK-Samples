@@ -49,16 +49,18 @@ fun MRApp(isMrModeDefault: Boolean) {
           Modifier.fillMaxSize()
               .clip(RoundedCornerShape(16.dp))
               .background(Color(0xFF1C2E33))
-              .padding(10.dp)) {
-        MRSwitch(
-            MRCheckedState,
-            { isMrMode ->
-              setMRCheckedState(isMrMode)
-              SpatialActivityManager.executeOnVrActivity<SpatialVideoSampleActivity> { activity ->
-                activity.setMrMode(isMrMode)
-              }
-            })
-      }
+              .padding(10.dp),
+  ) {
+    MRSwitch(
+        MRCheckedState,
+        { isMrMode ->
+          setMRCheckedState(isMrMode)
+          SpatialActivityManager.executeOnVrActivity<SpatialVideoSampleActivity> { activity ->
+            activity.setMrMode(isMrMode)
+          }
+        },
+    )
+  }
 }
 
 @Composable
@@ -70,20 +72,22 @@ fun MRSwitch(MRCheckedState: Boolean, onMR: (state: Boolean) -> Unit) {
         modifier =
             Modifier.width(184.dp)
                 .height(40.dp)
-                .padding(start = 12.dp, top = 8.dp, end = 12.dp, bottom = 8.dp)) {
-          Text(
-              text = "Passthrough",
-              style =
-                  TextStyle(
-                      fontSize = 12.sp,
-                      lineHeight = 20.sp,
-                      fontFamily = FontFamily(Font(R.font.noto_sans_regular)),
-                      fontWeight = FontWeight(400),
-                      color = Color(0xFFF1F4F7),
-                  ))
-          Spacer(modifier = Modifier.width(2.dp))
-          Switch(checked = MRCheckedState, onCheckedChange = { onMR(it) })
-        }
+                .padding(start = 12.dp, top = 8.dp, end = 12.dp, bottom = 8.dp),
+    ) {
+      Text(
+          text = "Passthrough",
+          style =
+              TextStyle(
+                  fontSize = 12.sp,
+                  lineHeight = 20.sp,
+                  fontFamily = FontFamily(Font(R.font.noto_sans_regular)),
+                  fontWeight = FontWeight(400),
+                  color = Color(0xFFF1F4F7),
+              ),
+      )
+      Spacer(modifier = Modifier.width(2.dp))
+      Switch(checked = MRCheckedState, onCheckedChange = { onMR(it) })
+    }
   }
 }
 

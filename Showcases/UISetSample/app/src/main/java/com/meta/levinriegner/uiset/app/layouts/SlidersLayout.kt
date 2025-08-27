@@ -42,7 +42,8 @@ fun SlidersLayout() {
           textAlign = TextAlign.Center,
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
       Spacer(Modifier.width(32.dp))
       Text(
@@ -51,7 +52,8 @@ fun SlidersLayout() {
           textAlign = TextAlign.Center,
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
       Spacer(Modifier.width(32.dp))
       Text(
@@ -60,7 +62,8 @@ fun SlidersLayout() {
           textAlign = TextAlign.Center,
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
       Spacer(Modifier.width(74.dp))
       Text(
@@ -68,7 +71,8 @@ fun SlidersLayout() {
           text = "",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
     }
     Spacer(Modifier.size(35.dp))
@@ -140,7 +144,8 @@ fun SlidersLayout() {
           text = "Large Slider",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
     }
     Spacer(Modifier.size(100.dp))
@@ -200,7 +205,8 @@ fun SlidersLayout() {
           text = "Medium Slider",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
     }
     Spacer(Modifier.size(100.dp))
@@ -271,7 +277,8 @@ fun SlidersLayout() {
             text = "Small Slider",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
       }
     }

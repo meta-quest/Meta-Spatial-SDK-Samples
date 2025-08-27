@@ -53,7 +53,7 @@ private data class SpinningInfo(
     // both used for calculating the rotation speed, and spin inertia for
     // gradually slowing down
     var lastYawOffsetDeg: Float = 0f,
-    var yawInertiaDeg: Float = 0f
+    var yawInertiaDeg: Float = 0f,
 )
 
 class SpinnableSystem : SystemBase() {
@@ -109,7 +109,7 @@ class SpinnableSystem : SystemBase() {
                   sourceOfInput: Entity,
                   changed: Int,
                   clicked: Int,
-                  downTime: Long
+                  downTime: Long,
               ): Boolean {
                 // entity already grabbed
                 val spinnable = entity.getComponent<Spinnable>()
@@ -132,8 +132,10 @@ class SpinnableSystem : SystemBase() {
 
                 // don't process any eye control
                 val controller = sourceOfInput.getComponent<Controller>()
-                if (controller.type != ControllerType.CONTROLLER &&
-                    controller.type != ControllerType.HAND) {
+                if (
+                    controller.type != ControllerType.CONTROLLER &&
+                        controller.type != ControllerType.HAND
+                ) {
                   return true
                 }
 
@@ -172,12 +174,14 @@ class SpinnableSystem : SystemBase() {
                           initialYawOffset,
                           initialPitchOffset,
                           Quaternion(0f, yaw * 180f / PIf, 0f),
-                          grabbable != null)
+                          grabbable != null,
+                      )
                 }
 
                 return true
               }
-            })
+            }
+        )
       }
     }
   }
@@ -262,8 +266,10 @@ class SpinnableSystem : SystemBase() {
         info.entity.setComponent(Transform(spinnablePose))
 
         // user just released spin
-        if (controller.buttonState and interactionButtons == 0 &&
-            controller.changedButtons and interactionButtons != 0) {
+        if (
+            controller.buttonState and interactionButtons == 0 &&
+                controller.changedButtons and interactionButtons != 0
+        ) {
           // save our framerate-independent yaw delta to our info
           info.yawInertiaDeg = (yawOffsetDeg - info.lastYawOffsetDeg) / dt
 

@@ -37,14 +37,15 @@ fun ObjectInfoView(
     painter: Painter? = null,
     copy: String? = null,
     onResume: (() -> Unit)? = null,
-    onClose: (() -> Unit)? = null
+    onClose: (() -> Unit)? = null,
 ) {
   Column {
     ObjectInfoPanelHeader(title, onResume = onResume, onClose = onClose)
     HorizontalDivider(
         modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
         thickness = 1.dp,
-        color = Color.White)
+        color = Color.White,
+    )
     ScrollableColumn {
       if (painter != null) {
         Spacer(Modifier.height(24.dp))
@@ -55,7 +56,8 @@ fun ObjectInfoView(
               contentScale = ContentScale.FillWidth,
               modifier =
                   Modifier.fillMaxWidth()
-                      .clip(RoundedCornerShape(SpatialTheme.shapes.medium.topEnd)))
+                      .clip(RoundedCornerShape(SpatialTheme.shapes.medium.topEnd)),
+          )
         }
       }
 
@@ -65,13 +67,15 @@ fun ObjectInfoView(
             CircularProgressIndicator(
                 color = SpatialTheme.colorScheme.progressOnBackground,
                 trackColor = SpatialTheme.colorScheme.progressBarOnBackground,
-                modifier = Modifier.padding(40.dp))
+                modifier = Modifier.padding(40.dp),
+            )
           }
         } else {
           Spacer(Modifier.height(24.dp))
           MarkdownText(
               copy,
-              style = SpatialTheme.typography.body1.merge(TextStyle(color = SpatialColor.white100)))
+              style = SpatialTheme.typography.body1.merge(TextStyle(color = SpatialColor.white100)),
+          )
         }
       }
     }
@@ -93,6 +97,7 @@ private fun ObjectInfoViewPreview() {
             "\n" +
             "- Share pictures, stream music and videos, access recipes, control your smart devices and Alexa all from the fridge.\n" +
             "- Enjoy your favorite beverage with your choice of ice. Choose from cubed ice or Ice Bites from the Dual Auto Ice Maker in the freezer drawer, or choose from curved or crushed ice from the external dispenser.\n" +
-            "- A flat-front fridge design with recessed drawer handle blends beautifully into the kitchen.")
+            "- A flat-front fridge design with recessed drawer handle blends beautifully into the kitchen.",
+    )
   }
 }

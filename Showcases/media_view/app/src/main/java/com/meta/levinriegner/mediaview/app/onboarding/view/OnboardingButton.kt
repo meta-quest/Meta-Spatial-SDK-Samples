@@ -29,10 +29,12 @@ fun OnboardingButton(
           IconButtonDefaults.iconButtonColors(
               contentColor = AppColor.White,
           ),
-      onClick = { onPressed() }) {
-        Icon(
-            Icons.Filled.QuestionMark,
-            contentDescription = "Open Onboarding",
-            modifier = Modifier.padding(Dimens.xSmall))
-      }
+      onClick = { onPressed() },
+  ) {
+    Icon(
+        Icons.Filled.QuestionMark,
+        contentDescription = "Open Onboarding",
+        modifier = Modifier.padding(Dimens.xSmall),
+    )
+  }
 }

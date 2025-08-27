@@ -23,7 +23,7 @@ import dorkbox.tweenEngine.TweenEngine
 class LightingPassthroughHandler(
     private val scene: Scene,
     private val heroLightingSystem: HeroLightingSystem,
-    private val tweenEngine: TweenEngine
+    private val tweenEngine: TweenEngine,
 ) {
 
   // Base passthrough. Slider on controls panel modifies this.
@@ -58,7 +58,8 @@ class LightingPassthroughHandler(
   fun fadeLightingMultiplier() {
     transitionLighting(
         LightMultipliers(lightingMultiplier = 0f, passthroughMultiplier = tintMultiplier),
-        TIMINGS.LIGHTING_PLAYING_FADE.millisToFloat())
+        TIMINGS.LIGHTING_PLAYING_FADE.millisToFloat(),
+    )
   }
 
   fun setLighting(value: Float) {
@@ -93,7 +94,8 @@ class LightingPassthroughHandler(
           .to(
               TweenLightingPassthrough(this),
               TweenLightingPassthrough.TINT_MULTIPLIER,
-              tweenDuration)
+              tweenDuration,
+          )
           .value(lightingData.passthroughMultiplier)
           .start()
     }
@@ -104,7 +106,8 @@ class LightingPassthroughHandler(
           .to(
               TweenLightingPassthrough(this),
               TweenLightingPassthrough.LIGHTING_MULTIPLIER,
-              tweenDuration)
+              tweenDuration,
+          )
           .value(lightingData.lightingMultiplier)
           .start()
     }
@@ -152,7 +155,7 @@ class TweenLightingPassthroughAccessor : TweenAccessor<TweenLightingPassthrough>
   override fun getValues(
       target: TweenLightingPassthrough,
       tweenType: Int,
-      returnValues: FloatArray
+      returnValues: FloatArray,
   ): Int {
     // val component = target.entity.getComponent<Scale>()
     return when (tweenType) {

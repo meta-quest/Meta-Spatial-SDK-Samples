@@ -4,6 +4,13 @@ Check out our official [release notes](https://developers.meta.com/horizon/docum
 
 This format is roughly based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 0.7.2 - 2025-08-26
+
+### Fixed
+
+- Fixed crash when clicking on panels without `CastInputForward` feature included in build
+- Fixed extra dependencies getting pulled into `CastInputForward` feature
+
 ## 0.7.1 - 2025-08-14
 
 ### Added
@@ -25,6 +32,7 @@ This format is roughly based on [Keep a Changelog](https://keepachangelog.com/en
 - Fixed race condition with `NetworkedAssetLoader`
 - Fixed a bug where Gradle daemon would crash after a failed project sync.
 - Fixed animation pointers not working on metallic-factor
+
 
 ## 0.7.0 - 2025-06-25
 

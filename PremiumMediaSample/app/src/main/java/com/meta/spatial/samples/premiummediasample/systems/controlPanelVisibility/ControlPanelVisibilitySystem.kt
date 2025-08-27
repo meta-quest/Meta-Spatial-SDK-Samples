@@ -52,11 +52,13 @@ class ControlPanelVisibilitySystem(private val controlsPanel: ControlsPanelEntit
     if (getAnyKeyDown()) {
       if (activelyTracking) {
         // If we are scaling, hide controls
-        if (controlsPanel.parentEntity !== null &&
-            systemManager
-                .findSystem<TouchScalableSystem>()
-                .currentlyScaling
-                .contains(controlsPanel.parentEntity)) {
+        if (
+            controlsPanel.parentEntity !== null &&
+                systemManager
+                    .findSystem<TouchScalableSystem>()
+                    .currentlyScaling
+                    .contains(controlsPanel.parentEntity)
+        ) {
           setControlsVisibility(isVisible = false, fade = false)
         } else {
           // Show on click if controls are hidden or pointing at controls
@@ -64,7 +66,8 @@ class ControlPanelVisibilitySystem(private val controlsPanel: ControlsPanelEntit
           setControlsVisibility(
               systemManager.findSystem<PointerInfoSystem>().checkHover(controlsPanel.entity) ||
                   !controlsVisible,
-              false)
+              false,
+          )
         }
       }
     }

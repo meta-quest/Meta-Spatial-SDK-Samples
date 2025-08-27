@@ -1,0 +1,63 @@
+// (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
+
+package com.meta.theelectricfactory.focus.systems
+
+import com.meta.spatial.core.Query
+import com.meta.spatial.core.SystemBase
+import com.meta.spatial.toolkit.Grabbable
+import com.meta.spatial.toolkit.Transform
+import com.meta.theelectricfactory.focus.AssetType
+import com.meta.theelectricfactory.focus.ImmersiveActivity
+import com.meta.theelectricfactory.focus.ToolComponent
+import com.meta.theelectricfactory.focus.UniqueAssetComponent
+import com.meta.theelectricfactory.focus.managers.ProjectManager
+
+// Custom system created to update the poses of the objects that had been moved in the database
+class DatabaseUpdateSystem : SystemBase() {
+
+    private var lastTime = System.currentTimeMillis()
+
+    override fun execute() {
+        val immA = ImmersiveActivity.getInstance()
+
+        if (immA?.appStarted == false) return
+
+        val currentTime = System.currentTimeMillis()
+
+        // if there is no current project, we don't update database
+        if (ProjectManager.instance.currentProject == null) {
+            lastTime = currentTime
+        }
+
+        // Check if objects are being moved and save new position
+        // We do this each 0.2 seconds to improve performance
+        val deltaTime = (currentTime - lastTime) / 1000f
+        if (deltaTime > 0.2) {
+            lastTime = currentTime
+
+            // Update pose of tool assets
+            val tools = Query.where { has(ToolComponent.id) }
+            for (entity in tools.eval()) {
+                val asset = entity.getComponent<ToolComponent>()
+                val pose = entity.getComponent<Transform>().transform
+                val isGrabbed = entity.getComponent<Grabbable>().isGrabbed
+
+                if (isGrabbed) {
+                    if (asset.type != AssetType.TIMER)
+                        immA?.DB?.updateAssetPose(asset.uuid, asset.type, pose)
+                }
+            }
+
+            // Update pose of unique assets
+            val uniqueAssets = Query.where { has(UniqueAssetComponent.id) }
+            for (entity in uniqueAssets.eval()) {
+                val uniqueAsset = entity.getComponent<UniqueAssetComponent>()
+                val pose = entity.getComponent<Transform>().transform
+                val isGrabbed = entity.getComponent<Grabbable>().isGrabbed
+
+                if (isGrabbed)
+                    immA?.DB?.updateUniqueAsset(uniqueAsset.uuid, pose)
+            }
+        }
+    }
+}

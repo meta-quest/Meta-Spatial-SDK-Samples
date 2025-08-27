@@ -7,5 +7,5 @@ enum class PlayMode {
   EXPLORE,
   ASK_EARTH,
   TODAY_IN_HISTORY,
-  DAILY_QUIZ
+  DAILY_QUIZ,
 }

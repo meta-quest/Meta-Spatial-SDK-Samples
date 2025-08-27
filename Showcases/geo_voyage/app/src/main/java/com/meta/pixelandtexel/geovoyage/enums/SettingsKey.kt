@@ -9,5 +9,5 @@ enum class SettingsKey(val value: String) {
   SILENCE_DETECTION_ENABLED("silence_detection_enabled"),
   LANDMARKS_ENABLED("landmarks_enabled"),
   LAST_DAILY_QUIZ("last_daily_quiz"),
-  ACCEPTED_NOTICE("accepted_user_notice")
+  ACCEPTED_NOTICE("accepted_user_notice"),
 }

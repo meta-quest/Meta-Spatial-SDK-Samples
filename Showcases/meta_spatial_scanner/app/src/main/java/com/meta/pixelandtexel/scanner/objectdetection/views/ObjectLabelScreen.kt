@@ -42,34 +42,34 @@ fun ObjectLabelScreen(vm: ObjectLabelViewModel = viewModel(), onClick: (() -> Un
   SpatialTheme {
     Column(
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally) {
-          Button(
-              onClick = { onClick?.invoke() },
-              colors =
-                  ButtonColors(
-                      containerColor = Color.Transparent,
-                      contentColor = Color.Transparent,
-                      disabledContainerColor = Color.Transparent,
-                      disabledContentColor = Color.Transparent),
-              shape = CutCornerShape(0.dp),
-              contentPadding = PaddingValues(0.dp),
-              modifier = Modifier.fillMaxSize()) {
-                Box(
-                    contentAlignment = Alignment.Center,
-                    modifier =
-                        Modifier.background(
-                                color = SpatialColor.b70, shape = SpatialTheme.shapes.large)
-                            .clip(SpatialTheme.shapes.large)
-                            .padding(horizontal = 20.dp)
-                            .height(40.dp)
-                            .wrapContentWidth()) {
-                      Text(
-                          name,
-                          color = SpatialColor.white100,
-                          style = SpatialTheme.typography.body1)
-                    }
-              }
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+      Button(
+          onClick = { onClick?.invoke() },
+          colors =
+              ButtonColors(
+                  containerColor = Color.Transparent,
+                  contentColor = Color.Transparent,
+                  disabledContainerColor = Color.Transparent,
+                  disabledContentColor = Color.Transparent,
+              ),
+          shape = CutCornerShape(0.dp),
+          contentPadding = PaddingValues(0.dp),
+          modifier = Modifier.fillMaxSize(),
+      ) {
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier =
+                Modifier.background(color = SpatialColor.b70, shape = SpatialTheme.shapes.large)
+                    .clip(SpatialTheme.shapes.large)
+                    .padding(horizontal = 20.dp)
+                    .height(40.dp)
+                    .wrapContentWidth(),
+        ) {
+          Text(name, color = SpatialColor.white100, style = SpatialTheme.typography.body1)
         }
+      }
+    }
   }
 }
 

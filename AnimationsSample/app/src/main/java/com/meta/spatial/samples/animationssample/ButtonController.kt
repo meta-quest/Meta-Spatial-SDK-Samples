@@ -27,7 +27,7 @@ interface ButtonEvent {
 
 class ButtonController(
     private val activity: AnimationsSampleActivity,
-    private val buttonName: String = "startButton"
+    private val buttonName: String = "startButton",
 ) {
   private val unhoveredColor = 0xff5722
   private val hoveredColor = 0xb84fff
@@ -114,7 +114,8 @@ class ButtonController(
             val clickSound = SceneAudioAsset.loadLocalFile("click.ogg")
             activity.scene.playSound(clickSound, hitInfo.point, 1f)
           }
-        })
+        }
+    )
   }
 
   private fun getPositionFromMatrix(matrix: Matrix44): Vector3 {

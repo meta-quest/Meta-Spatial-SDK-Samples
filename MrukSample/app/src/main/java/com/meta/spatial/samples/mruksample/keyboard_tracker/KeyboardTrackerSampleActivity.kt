@@ -97,11 +97,13 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
   override fun onRequestPermissionsResult(
       requestCode: Int,
       permissions: Array<out String>,
-      grantResults: IntArray
+      grantResults: IntArray,
   ) {
-    if (requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
-        permissions.size == 1 &&
-        permissions[0] == PERMISSION_USE_SCENE) {
+    if (
+        requestCode == REQUEST_CODE_PERMISSION_USE_SCENE &&
+            permissions.size == 1 &&
+            permissions[0] == PERMISSION_USE_SCENE
+    ) {
       val granted = grantResults[0] == PackageManager.PERMISSION_GRANTED
       if (granted) {
         Log.i(TAG, "Use scene permission has been granted")
@@ -121,7 +123,8 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
         ambientColor = Vector3(0f),
         sunColor = Vector3(7.0f, 7.0f, 7.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
     scene.updateIBLEnvironment("environment.env")
 
     Entity.create(
@@ -131,10 +134,17 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
               baseTextureAndroidResourceId = R.drawable.skydome
               unlit = true // Prevent scene lighting from affecting the skybox
             },
-            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
+            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
+        )
+    )
 
     Entity.createPanelEntity(
-        panelId, R.layout.ui_keyboard_tracker_menu, Transform(), Visible(showUiPanel), Grabbable())
+        panelId,
+        R.layout.ui_keyboard_tracker_menu,
+        Transform(),
+        Visible(showUiPanel),
+        Grabbable(),
+    )
   }
 
   override fun onSpatialShutdown() {
@@ -208,7 +218,8 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
               returnTo2DActivity(
                   this@KeyboardTrackerSampleActivity,
                   applicationContext,
-                  MrukSampleStartMenuActivity::class.java)
+                  MrukSampleStartMenuActivity::class.java,
+              )
             }
 
             scenePermissionTextView = rootView?.findViewById<TextView>(R.id.scene_permission_text)
@@ -227,7 +238,8 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
             }
             updateStartStopTrackerButton(trackerRunning)
           }
-        })
+        }
+    )
   }
 
   companion object {

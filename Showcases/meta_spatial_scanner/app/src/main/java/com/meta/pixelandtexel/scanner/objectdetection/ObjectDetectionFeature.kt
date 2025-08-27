@@ -158,7 +158,8 @@ class ObjectDetectionFeature(
             // start the camera automatically after initialization
             this@ObjectDetectionFeature.scan()
           }
-        })
+        }
+    )
 
     activity.registerPanel(
         PanelRegistration(R.layout.ui_camera_status_view) {
@@ -177,7 +178,8 @@ class ObjectDetectionFeature(
                 rootView?.findViewById(R.id.camera_status)
                     ?: throw RuntimeException("Missing camera status text view")
           }
-        })
+        }
+    )
   }
 
   override fun systemsToRegister(): List<SystemBase> {
@@ -208,7 +210,10 @@ class ObjectDetectionFeature(
     return listOf(
         ComponentRegistration.createConfig<ViewLocked>(ViewLocked.Companion, SendRate.DEFAULT),
         ComponentRegistration.createConfig<TrackedObject>(
-            TrackedObject.Companion, SendRate.DEFAULT))
+            TrackedObject.Companion,
+            SendRate.DEFAULT,
+        ),
+    )
   }
 
   override fun onSceneReady() {
@@ -219,7 +224,8 @@ class ObjectDetectionFeature(
             R.layout.ui_camera_status_view,
             Transform(),
             Hittable(MeshCollision.NoCollision),
-            ViewLocked(Vector3(-0.16f, 0.15f, 0.7f), Vector3(0f), false))
+            ViewLocked(Vector3(-0.16f, 0.15f, 0.7f), Vector3(0f), false),
+        )
   }
 
   /**
@@ -231,7 +237,8 @@ class ObjectDetectionFeature(
     if (cameraController.isInitialized) {
       cameraController.start(
           surfaceProviders = listOfNotNull(cameraPreviewView as? ISurfaceProvider),
-          imageAvailableListener = this)
+          imageAvailableListener = this,
+      )
       updateCameraStatus(CameraStatus.SCANNING)
       return
     }
@@ -292,7 +299,8 @@ class ObjectDetectionFeature(
             R.layout.ui_camera_view,
             Transform(),
             Hittable(MeshCollision.NoCollision),
-            ViewLocked(offsetPose.t, offsetPose.q.toEuler(), true))
+            ViewLocked(offsetPose.t, offsetPose.q.toEuler(), true),
+        )
   }
 
   /**
@@ -365,7 +373,10 @@ class ObjectDetectionFeature(
     // draw the bounding boxes on the overlay Canvas
     if (spawnCameraViewPanel) {
       graphicOverlayView?.drawResults(
-          result.objects, result.inputImageWidth, result.inputImageHeight)
+          result.objects,
+          result.inputImageWidth,
+          result.inputImageHeight,
+      )
     }
 
     // keep track of our inference time, and display those stats

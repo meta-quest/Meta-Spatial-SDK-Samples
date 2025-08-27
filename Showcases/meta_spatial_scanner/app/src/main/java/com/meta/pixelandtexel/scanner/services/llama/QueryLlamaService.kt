@@ -58,7 +58,7 @@ object QueryLlamaService {
       query: String,
       creativity: Float = .1f, // temperature
       diversity: Float = .9f, // top_p
-      handler: IQueryLlamaServiceHandler
+      handler: IQueryLlamaServiceHandler,
   ) {
     // Embed the prompt in Llama 3's instruction format.
     val instruction =
@@ -99,7 +99,7 @@ object QueryLlamaService {
       imageData: Bitmap,
       creativity: Float = .1f, // temperature
       diversity: Float = .9f, // top_p
-      handler: IQueryLlamaServiceHandler
+      handler: IQueryLlamaServiceHandler,
   ) {
     val resizedImage = resizeToFit(imageData, MAX_IMAGE_DIMENSION, MAX_IMAGE_DIMENSION)
     val imageString = convertBitmapToBase64(resizedImage)
@@ -187,7 +187,7 @@ object QueryLlamaService {
       bitmap: Bitmap,
       maxWidth: Int,
       maxHeight: Int,
-      filter: Boolean = true
+      filter: Boolean = true,
   ): Bitmap {
     val width = bitmap.width
     val height = bitmap.height

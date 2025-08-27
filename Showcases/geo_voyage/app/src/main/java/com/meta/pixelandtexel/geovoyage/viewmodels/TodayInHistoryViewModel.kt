@@ -76,6 +76,7 @@ class TodayInHistoryViewModel : ViewModel(), IPlayModeViewModel {
 
                 _busy.value = false
               }
-            })
+            },
+    )
   }
 }

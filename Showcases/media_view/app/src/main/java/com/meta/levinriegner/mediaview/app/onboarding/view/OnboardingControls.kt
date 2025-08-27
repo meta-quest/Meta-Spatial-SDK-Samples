@@ -36,60 +36,67 @@ fun OnboardingControls(
   Row(
       modifier = Modifier.fillMaxSize(),
       horizontalArrangement = Arrangement.SpaceBetween,
-      verticalAlignment = Alignment.CenterVertically) {
-        IconButton(
-            modifier =
-                Modifier.border(width = 1.dp, color = AppColor.White30, shape = CircleShape)
-                    .size(Dimens.large),
-            colors =
-                IconButtonDefaults.iconButtonColors(
-                    contentColor = AppColor.White,
-                ),
-            onClick = onPreviousButtonPressed) {
-              Icon(
-                  Icons.AutoMirrored.Filled.ArrowBack,
-                  contentDescription = "Go to previous step",
-                  modifier = Modifier.padding(Dimens.xSmall))
-            }
+      verticalAlignment = Alignment.CenterVertically,
+  ) {
+    IconButton(
+        modifier =
+            Modifier.border(width = 1.dp, color = AppColor.White30, shape = CircleShape)
+                .size(Dimens.large),
+        colors =
+            IconButtonDefaults.iconButtonColors(
+                contentColor = AppColor.White,
+            ),
+        onClick = onPreviousButtonPressed,
+    ) {
+      Icon(
+          Icons.AutoMirrored.Filled.ArrowBack,
+          contentDescription = "Go to previous step",
+          modifier = Modifier.padding(Dimens.xSmall),
+      )
+    }
 
-        Text(
-            "$currentStep of $totalSteps",
-            style = MaterialTheme.typography.bodySmall,
-            color = AppColor.White30,
-            modifier = Modifier.align(alignment = Alignment.CenterVertically),
+    Text(
+        "$currentStep of $totalSteps",
+        style = MaterialTheme.typography.bodySmall,
+        color = AppColor.White30,
+        modifier = Modifier.align(alignment = Alignment.CenterVertically),
+    )
+
+    if (onFinishButtonPressed != null) {
+      IconButton(
+          modifier =
+              Modifier.border(width = 1.dp, color = AppColor.MetaBlu, shape = CircleShape)
+                  .size(Dimens.large),
+          colors =
+              IconButtonDefaults.iconButtonColors(
+                  contentColor = AppColor.White,
+                  containerColor = AppColor.MetaBlu,
+              ),
+          onClick = onFinishButtonPressed,
+      ) {
+        Icon(
+            Icons.Filled.Check,
+            contentDescription = "Finish",
+            modifier = Modifier.padding(Dimens.xSmall),
         )
-
-        if (onFinishButtonPressed != null) {
-          IconButton(
-              modifier =
-                  Modifier.border(width = 1.dp, color = AppColor.MetaBlu, shape = CircleShape)
-                      .size(Dimens.large),
-              colors =
-                  IconButtonDefaults.iconButtonColors(
-                      contentColor = AppColor.White,
-                      containerColor = AppColor.MetaBlu,
-                  ),
-              onClick = onFinishButtonPressed) {
-                Icon(
-                    Icons.Filled.Check,
-                    contentDescription = "Finish",
-                    modifier = Modifier.padding(Dimens.xSmall))
-              }
-        } else {
-          IconButton(
-              modifier =
-                  Modifier.border(width = 1.dp, color = AppColor.MetaBlu, shape = CircleShape)
-                      .size(Dimens.large),
-              colors =
-                  IconButtonDefaults.iconButtonColors(
-                      contentColor = AppColor.White,
-                  ),
-              onClick = onNextButtonPressed) {
-                Icon(
-                    Icons.AutoMirrored.Filled.ArrowForward,
-                    contentDescription = "Go to next step",
-                    modifier = Modifier.padding(Dimens.xSmall))
-              }
-        }
       }
+    } else {
+      IconButton(
+          modifier =
+              Modifier.border(width = 1.dp, color = AppColor.MetaBlu, shape = CircleShape)
+                  .size(Dimens.large),
+          colors =
+              IconButtonDefaults.iconButtonColors(
+                  contentColor = AppColor.White,
+              ),
+          onClick = onNextButtonPressed,
+      ) {
+        Icon(
+            Icons.AutoMirrored.Filled.ArrowForward,
+            contentDescription = "Go to next step",
+            modifier = Modifier.padding(Dimens.xSmall),
+        )
+      }
+    }
+  }
 }

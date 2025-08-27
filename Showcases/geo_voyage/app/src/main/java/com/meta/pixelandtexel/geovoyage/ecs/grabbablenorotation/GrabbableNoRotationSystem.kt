@@ -73,7 +73,7 @@ class GrabbableNoRotationSystem : SystemBase() {
                   sourceOfInput: Entity,
                   changed: Int,
                   clicked: Int,
-                  downTime: Long
+                  downTime: Long,
               ): Boolean {
                 val anyButtonDown: Int = changed and clicked
 
@@ -115,7 +115,8 @@ class GrabbableNoRotationSystem : SystemBase() {
 
                 return true
               }
-            })
+            }
+        )
       }
     }
   }
@@ -152,7 +153,8 @@ class GrabbableNoRotationSystem : SystemBase() {
       grabbedTransform =
           grabbedTransform.lerp(
               Pose(t = newTranslation - worldOffset, q = grabbedTransform.q),
-              MathUtils.smoothOver(dt, interpolationRate))
+              MathUtils.smoothOver(dt, interpolationRate),
+          )
 
       if (info.grabbedEntity.hasComponent<TransformParent>()) {
         val transformParentComponent = info.grabbedEntity.getComponent<TransformParent>()

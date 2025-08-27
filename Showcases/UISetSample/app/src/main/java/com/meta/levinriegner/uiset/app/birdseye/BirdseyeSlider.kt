@@ -44,7 +44,9 @@ fun BirdseyeSlider() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground))
+                    color = LocalColorScheme.current.primaryAlphaBackground
+                ),
+        )
         Spacer(modifier = Modifier.height(20.dp))
         Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
           Box(modifier = Modifier.width(300.dp)) {
@@ -71,7 +73,9 @@ fun BirdseyeSlider() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground))
+                color = LocalColorScheme.current.primaryAlphaBackground
+            ),
+    )
     Spacer(modifier = Modifier.height(40.dp))
 
     Row(
@@ -84,7 +88,8 @@ fun BirdseyeSlider() {
           textAlign = TextAlign.Center,
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
       Spacer(Modifier.width(32.dp))
       Text(
@@ -93,7 +98,8 @@ fun BirdseyeSlider() {
           textAlign = TextAlign.Center,
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
       Spacer(Modifier.width(74.dp))
       Text(
@@ -101,7 +107,8 @@ fun BirdseyeSlider() {
           text = "",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
     }
     Spacer(Modifier.size(35.dp))
@@ -143,7 +150,8 @@ fun BirdseyeSlider() {
           text = "Large Slider",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
     }
     Spacer(Modifier.size(100.dp))
@@ -173,7 +181,8 @@ fun BirdseyeSlider() {
           text = "Medium Slider",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
     }
     Spacer(Modifier.size(100.dp))
@@ -215,7 +224,8 @@ fun BirdseyeSlider() {
           text = "Small Slider",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+              ),
       )
     }
   }

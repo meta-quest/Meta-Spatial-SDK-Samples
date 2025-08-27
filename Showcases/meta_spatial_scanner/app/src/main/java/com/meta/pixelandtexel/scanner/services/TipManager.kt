@@ -34,7 +34,7 @@ enum class UserEvent {
   DETECTED_OBJECT,
   SELECTED_OBJECT,
   SELECTED_CURATED_OBJECT,
-  DISMISSED_INFO_PANEL
+  DISMISSED_INFO_PANEL,
 }
 
 /**
@@ -87,7 +87,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
               }
             }
           }
-        })
+        }
+    )
 
     activity.registerPanel(
         PanelRegistration(R.integer.no_objects_tip_panel_id) { _ ->
@@ -112,7 +113,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
               }
             }
           }
-        })
+        }
+    )
 
     activity.registerPanel(
         PanelRegistration(R.integer.find_objects_tip_panel_id) { _ ->
@@ -137,7 +139,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
               }
             }
           }
-        })
+        }
+    )
 
     activity.registerPanel(
         PanelRegistration(R.integer.help_tip_panel_id) { _ ->
@@ -162,7 +165,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
               }
             }
           }
-        })
+        }
+    )
   }
 
   /**
@@ -184,7 +188,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
                     Entity.createPanelEntity(
                         R.integer.no_objects_tip_panel_id,
                         Transform(getTipSpawnPose()),
-                        Grabbable(type = GrabbableType.PIVOT_Y))
+                        Grabbable(type = GrabbableType.PIVOT_Y),
+                    )
               }
         }
         hasUserScanned = true
@@ -209,7 +214,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
                     Entity.createPanelEntity(
                         R.integer.select_object_tip_panel_id,
                         Transform(getTipSpawnPose()),
-                        Grabbable(type = GrabbableType.PIVOT_Y))
+                        Grabbable(type = GrabbableType.PIVOT_Y),
+                    )
               }
         }
         hasUserDetectedObject = true
@@ -244,7 +250,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
               Entity.createPanelEntity(
                   R.integer.find_objects_tip_panel_id,
                   Transform(getTipSpawnPose()),
-                  Grabbable(type = GrabbableType.PIVOT_Y))
+                  Grabbable(type = GrabbableType.PIVOT_Y),
+              )
         }
       }
     }
@@ -265,7 +272,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
         Entity.createPanelEntity(
             R.integer.help_tip_panel_id,
             Transform(getTipSpawnPose()),
-            Grabbable(type = GrabbableType.PIVOT_Y))
+            Grabbable(type = GrabbableType.PIVOT_Y),
+        )
   }
 
   /** Dismisses all currently active tip panels by destroying their associated entities. */

@@ -39,7 +39,9 @@ fun BirdseyeButtonShelf() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground))
+                    color = LocalColorScheme.current.primaryAlphaBackground
+                ),
+        )
         Spacer(modifier = Modifier.height(20.dp))
         Row(horizontalArrangement = Arrangement.SpaceAround, modifier = Modifier.fillMaxWidth()) {
           ButtonShelf(
@@ -57,7 +59,9 @@ fun BirdseyeButtonShelf() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground))
+                color = LocalColorScheme.current.primaryAlphaBackground
+            ),
+    )
     Spacer(modifier = Modifier.height(40.dp))
 
     Row(
@@ -71,7 +75,8 @@ fun BirdseyeButtonShelf() {
             text = "Default",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(29.dp))
         ButtonShelf(
@@ -88,7 +93,8 @@ fun BirdseyeButtonShelf() {
             text = "Selected",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(29.dp))
         ButtonShelf(
@@ -106,7 +112,8 @@ fun BirdseyeButtonShelf() {
             text = "Disabled",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(29.dp))
         ButtonShelf(
@@ -124,7 +131,8 @@ fun BirdseyeButtonShelf() {
             text = "Selected Disabled",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(29.dp))
         ButtonShelf(
@@ -142,7 +150,8 @@ fun BirdseyeButtonShelf() {
             text = "",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(5.dp))
         Column(
@@ -153,7 +162,8 @@ fun BirdseyeButtonShelf() {
               text = "Label with Icon",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  ),
           )
         }
       }

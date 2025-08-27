@@ -25,5 +25,5 @@ data class DetectedObject(
     val bounds: Rect,
     val label: String,
     val confidence: Float,
-    val id: Int? = null
+    val id: Int? = null,
 )

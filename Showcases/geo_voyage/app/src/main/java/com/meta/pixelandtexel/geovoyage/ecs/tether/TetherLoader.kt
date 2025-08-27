@@ -39,7 +39,8 @@ class TetherLoader : BaseLoader() {
           if (yOffsetValue != null) {
             yOffset = yOffsetValue
           }
-        })
+        }
+    )
   }
 
   companion object {

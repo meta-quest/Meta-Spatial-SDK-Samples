@@ -10,5 +10,5 @@ package com.meta.spatial.samples.premiummediasample.data.debug
 data class DebugToggleItem(
     val label: String,
     val initialValue: Boolean,
-    var onValueChanged: (value: Boolean) -> Unit
+    var onValueChanged: (value: Boolean) -> Unit,
 ) : DebugItem()

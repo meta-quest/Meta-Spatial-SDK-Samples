@@ -24,18 +24,21 @@ fun InterstitialScreen(onAccepted: () -> Unit) {
   val noticeText = stringResource(id = R.string.notice)
 
   Column(
-      verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxSize().padding(80.dp)) {
-        Column(
-            verticalArrangement = Arrangement.spacedBy(30.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-          MarkdownText(
-              markdown = noticeText,
-              modifier = Modifier.selectable(false, false) {},
-              style = LocalTypography.current.body1)
-          PrimaryButton(label = stringResource(id = R.string._continue), onClick = onAccepted)
-        }
-      }
+      verticalArrangement = Arrangement.Center,
+      modifier = Modifier.fillMaxSize().padding(80.dp),
+  ) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(30.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+      MarkdownText(
+          markdown = noticeText,
+          modifier = Modifier.selectable(false, false) {},
+          style = LocalTypography.current.body1,
+      )
+      PrimaryButton(label = stringResource(id = R.string._continue), onClick = onAccepted)
+    }
+  }
 }
 
 @Preview(widthDp = 570, heightDp = 480, showBackground = true, backgroundColor = 0xFFECEFE8)

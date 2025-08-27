@@ -83,7 +83,8 @@ class PanelManager(
             PanelCreator(PanelRegistrationIds.WHATS_NEW) { ent -> createWhatsNewPanel(ent) },
             PanelCreator(PanelRegistrationIds.PRIVACY_POLICY) { ent ->
               createPrivacyPolicyPanel(ent)
-            })
+            },
+        )
 
     panelRegistrations.forEach { panelRegistration ->
       registeredPanels[panelRegistration.registrationId] =
@@ -126,7 +127,8 @@ class PanelManager(
 
           ent.setComponent(
               // Transform relative to the parent
-              Transform(Pose(Vector3(0f, 0f, -0.025f), Quaternion(0f, 0f, 0f))))
+              Transform(Pose(Vector3(0f, 0f, -0.025f), Quaternion(0f, 0f, 0f)))
+          )
 
           createUploadPanel(ent)
         }
@@ -259,7 +261,8 @@ class PanelManager(
           addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
         },
         ent,
-        config)
+        config,
+    )
   }
 
   fun createPlayerEntity(mediaModel: MediaModel): Entity {
@@ -277,14 +280,16 @@ class PanelManager(
                     .then(rotateY(135f))
               },
               Grabbable(),
-              Scale(0.5f))
+              Scale(0.5f),
+          )
 
       mediaModel.entityId = playerEntity.id
 
       return playerEntity
     } else {
       throw RuntimeException(
-          "No panel registered for media with id ${mediaModel.id}. Please register it before trying to create an associated Entity.")
+          "No panel registered for media with id ${mediaModel.id}. Please register it before trying to create an associated Entity."
+      )
     }
   }
 
@@ -309,7 +314,8 @@ class PanelManager(
           addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
         },
         ent,
-        config)
+        config,
+    )
   }
 
   fun createPlayerMenuEntity(mediaModel: MediaModel, playerEntity: Entity): Entity {
@@ -322,13 +328,15 @@ class PanelManager(
             Entity.createPanelEntity(
                     appPanelRegistration.registrationId,
                     Transform.build { move(0f, 0f, 0f) },
-                    Scale(2f))
+                    Scale(2f),
+                )
                 .also { mediaModel.minimizedMenuEntityId = it.id }
         val (playerWidth, playerHeight) = mediaModel.panelWidthAndHeight()
         val (menuWidth, menuHeight) =
             Pair(
                 dpToPx(Dimens.playerMenuTotalWidth) * PIXELS_TO_METERS,
-                dpToPx(Dimens.playerMenuTotalHeight) * PIXELS_TO_METERS)
+                dpToPx(Dimens.playerMenuTotalHeight) * PIXELS_TO_METERS,
+            )
 
         // Anchor the menu to the player panel
         popUpMenuButtonEntity.setComponent(TransformParent(playerEntity))
@@ -340,17 +348,23 @@ class PanelManager(
                             menuWidth +
                             (dpToPx(Dimens.medium.value.toInt()) * PIXELS_TO_METERS),
                         playerHeight / 4 - menuHeight / 2,
-                        0f),
-                    Quaternion(0f, 0f, 0f))))
+                        0f,
+                    ),
+                    Quaternion(0f, 0f, 0f),
+                )
+            )
+        )
 
         return popUpMenuButtonEntity
       } else {
         throw RuntimeException(
-            "No panel registered for media pop up button with id ${mediaModel.id}. Please register it before trying to create an associated Entity.")
+            "No panel registered for media pop up button with id ${mediaModel.id}. Please register it before trying to create an associated Entity."
+        )
       }
     } else {
       throw RuntimeException(
-          "Can't create a Player Menu Entity without a Player Entity for the media with id ${mediaModel.id}. Please, register and create the Player Entity first")
+          "Can't create a Player Menu Entity without a Player Entity for the media with id ${mediaModel.id}. Please, register and create the Player Entity first"
+      )
     }
   }
 
@@ -374,7 +388,8 @@ class PanelManager(
           addFlags(Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
         },
         ent,
-        config)
+        config,
+    )
   }
 
   private fun createImmersiveMenuEntity(mediaModel: MediaModel): Entity {
@@ -382,10 +397,13 @@ class PanelManager(
 
     if (appPanelRegistration != null) {
       return Entity.createPanelEntity(
-          PanelRegistrationIds.mediaImmersive(mediaModel.id), Transform.createDefaultInstance())
+          PanelRegistrationIds.mediaImmersive(mediaModel.id),
+          Transform.createDefaultInstance(),
+      )
     } else {
       throw RuntimeException(
-          "No panel registered for immersive media with id ${mediaModel.id}. Please register it before trying to create an associated Entity.")
+          "No panel registered for immersive media with id ${mediaModel.id}. Please register it before trying to create an associated Entity."
+      )
     }
   }
 
@@ -416,10 +434,13 @@ class PanelManager(
 
     if (appPanelRegistration != null) {
       return Entity.createPanelEntity(
-          appPanelRegistration.registrationId, transform = Transform.createDefaultInstance())
+          appPanelRegistration.registrationId,
+          transform = Transform.createDefaultInstance(),
+      )
     } else {
       throw RuntimeException(
-          "No panel registered for Download Media. Please register it before trying to create an associated Entity.")
+          "No panel registered for Download Media. Please register it before trying to create an associated Entity."
+      )
     }
   }
 
@@ -485,9 +506,13 @@ class PanelManager(
                       Transform(
                           Pose(
                               mediaModel.maximizedBottomCenterPanelVector3(),
-                              Quaternion(0f, 0f, 0f))))
+                              Quaternion(0f, 0f, 0f),
+                          )
+                      )
+                  )
                 },
-                100)
+                100,
+            )
       }
     }
   }
@@ -506,7 +531,9 @@ class PanelManager(
             }
     // Reset the player panel configuration
     panelTransformations.applyNewPanelConfiguration(
-        entity, mediaModel.minimizedPanelConfigOptions())
+        entity,
+        mediaModel.minimizedPanelConfigOptions(),
+    )
     // Enable grabbable
     panelTransformations.setGrabbable(entity, true)
 

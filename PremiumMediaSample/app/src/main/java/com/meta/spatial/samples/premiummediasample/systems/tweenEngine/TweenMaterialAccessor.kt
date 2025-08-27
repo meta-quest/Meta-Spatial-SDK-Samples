@@ -29,7 +29,11 @@ class TweenMaterialAccessor : TweenAccessor<TweenMaterial> {
       TweenMaterial.BASE_COLOR_COLOR4_RGBA -> {
         target.material.baseColor =
             Color4(
-                red = newValues[0], green = newValues[1], blue = newValues[2], alpha = newValues[3])
+                red = newValues[0],
+                green = newValues[1],
+                blue = newValues[2],
+                alpha = newValues[3],
+            )
       }
     }
   }

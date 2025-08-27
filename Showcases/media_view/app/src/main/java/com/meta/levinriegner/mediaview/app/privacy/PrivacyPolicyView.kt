@@ -43,7 +43,8 @@ fun PrivacyPolicyView(
             id = R.string.privacy_policy_dialog_description,
             stringResource(R.string.privacy_policy_accept_button),
             termsText,
-            privacyText)
+            privacyText,
+        )
     val termsRange = (str.indexOf(termsText)..(str.indexOf(termsText) + termsText.length))
     val privacyRange = (str.indexOf(privacyText)..(str.indexOf(privacyText) + privacyText.length))
 
@@ -64,7 +65,8 @@ fun PrivacyPolicyView(
     addUrlAnnotation(
         UrlAnnotation(Constants.TERMS_AND_CONDITIONS_URL),
         start = termsRange.first,
-        end = termsRange.last)
+        end = termsRange.last,
+    )
 
     // Privacy Policy
     addStyle(
@@ -81,7 +83,8 @@ fun PrivacyPolicyView(
     addUrlAnnotation(
         UrlAnnotation(Constants.PRIVACY_POLICY_URL),
         start = privacyRange.first,
-        end = privacyRange.last)
+        end = privacyRange.last,
+    )
   }
   val uriHandler = LocalUriHandler.current
 
@@ -100,12 +103,15 @@ fun PrivacyPolicyView(
         text = annotatedString,
         style =
             MaterialTheme.typography.bodyLarge.copy(
-                color = AppColor.White, textAlign = TextAlign.Center),
+                color = AppColor.White,
+                textAlign = TextAlign.Center,
+            ),
         onClick = {
           annotatedString.getUrlAnnotations(it, it).firstOrNull()?.let { annotation ->
             uriHandler.openUri(annotation.item.url)
           }
-        })
+        },
+    )
     Spacer(modifier = Modifier.height(Dimens.large))
     OutlinedButton(
         onClick = onAccepted,
@@ -117,7 +123,8 @@ fun PrivacyPolicyView(
     ) {
       Text(
           text = stringResource(id = R.string.privacy_policy_accept_button),
-          style = MaterialTheme.typography.titleMedium)
+          style = MaterialTheme.typography.titleMedium,
+      )
     }
   }
 }

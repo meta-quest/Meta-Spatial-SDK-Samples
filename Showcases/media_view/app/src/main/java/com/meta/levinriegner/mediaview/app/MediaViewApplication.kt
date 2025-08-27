@@ -38,7 +38,8 @@ class MediaViewApplication : Application() {
         ImageLoader.Builder(this)
             .components { add(VideoFrameDecoder.Factory()) }
             .crossfade(true)
-            .build())
+            .build()
+    )
   }
 
   private fun initDatadog() {
@@ -49,7 +50,8 @@ class MediaViewApplication : Application() {
         Configuration.Builder(
                 clientToken = BuildConfig.DATADOG_CLIENT_TOKEN,
                 env = environmentName,
-                variant = appVariantName)
+                variant = appVariantName,
+            )
             .useSite(DatadogSite.US1)
             .build()
     Datadog.initialize(this, configuration, TrackingConsent.GRANTED)

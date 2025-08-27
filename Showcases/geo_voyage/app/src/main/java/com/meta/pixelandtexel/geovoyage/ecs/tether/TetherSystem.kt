@@ -18,7 +18,7 @@ private data class TetherInfo(
     val entity: Entity,
     var targetPosition: Vector3 = Vector3(0f),
     var targetRotation: Quaternion = Quaternion(),
-    var snapToTarget: Boolean = false
+    var snapToTarget: Boolean = false,
 )
 
 class TetherSystem : SystemBase() {
@@ -111,8 +111,10 @@ class TetherSystem : SystemBase() {
       val pose = transformComp.transform
 
       // exit early if we're close enough to our target position and rotation
-      if ((info.targetPosition - pose.t).lengthSq() < 0.00001f &&
-          info.targetRotation.dot(pose.q) > 0.999f) {
+      if (
+          (info.targetPosition - pose.t).lengthSq() < 0.00001f &&
+              info.targetRotation.dot(pose.q) > 0.999f
+      ) {
         transformComp.recycle()
         return@forEach
       }

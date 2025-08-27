@@ -63,21 +63,37 @@ class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
                     SceneMaterialAttribute("albedoUVTransformM00", SceneMaterialDataType.Vector4),
                     SceneMaterialAttribute("albedoUVTransformM10", SceneMaterialDataType.Vector4),
                     SceneMaterialAttribute(
-                        "roughnessMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "roughnessMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "roughnessMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "roughnessMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "emissiveMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "emissiveMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "emissiveMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "emissiveMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "occlusionMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "occlusionMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "occlusionMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "occlusionMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "normalMetallicUVTransformM00", SceneMaterialDataType.Vector4),
+                        "normalMetallicUVTransformM00",
+                        SceneMaterialDataType.Vector4,
+                    ),
                     SceneMaterialAttribute(
-                        "normalMetallicUVTransformM10", SceneMaterialDataType.Vector4),
+                        "normalMetallicUVTransformM10",
+                        SceneMaterialDataType.Vector4,
+                    ),
                 ),
             )
             .apply {
@@ -103,7 +119,8 @@ class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
           volumeMax.x,
           volumeMax.y,
           volumeMax.z,
-          ptCutoutMaterial)
+          ptCutoutMaterial,
+      )
     }
   }
 }

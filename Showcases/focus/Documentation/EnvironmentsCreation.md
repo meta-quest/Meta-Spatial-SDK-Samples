@@ -40,8 +40,7 @@ If you need the skyboxes to be shown at the same time, to combine them for examp
 
 ## Load and switch between 3D model scenes
 
-3D environments are just like any other custom 3D object of your scene. You can create an entity with a mesh component dynamically from your activity.
-We chose to do it the second way:
+3D environments are just like any other custom 3D object of your scene. You can create an entity with a mesh component dynamically from your activity:
 ```kotlin
 environment = Entity.create(
     Mesh(mesh = Uri.parse("environment1.glb")),

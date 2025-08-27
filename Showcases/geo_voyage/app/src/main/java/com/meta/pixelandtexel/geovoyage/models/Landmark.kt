@@ -10,5 +10,5 @@ data class Landmark(
     val latitude: Float,
     val longitude: Float,
     val landmarkName: String,
-    val description: String
+    val description: String,
 )

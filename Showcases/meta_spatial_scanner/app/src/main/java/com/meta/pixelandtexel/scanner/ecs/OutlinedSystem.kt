@@ -111,7 +111,8 @@ class OutlinedSystem(activity: AppSystemActivity) : SystemBase() {
                 SceneMaterialAttribute("sliceSize", SceneMaterialDataType.Vector4),
                 SceneMaterialAttribute("tintColor", SceneMaterialDataType.Vector4),
                 SceneMaterialAttribute("stereoParams", SceneMaterialDataType.Vector4),
-            ))
+            ),
+        )
         .apply {
           setBlendMode(BlendMode.TRANSLUCENT)
           setSortOrder(SortOrder.TRANSLUCENT)
@@ -132,7 +133,9 @@ class OutlinedSystem(activity: AppSystemActivity) : SystemBase() {
                   SpatialColor.b70.red,
                   SpatialColor.b70.green,
                   SpatialColor.b70.blue,
-                  PPU_MULTIPLIER))
+                  PPU_MULTIPLIER,
+              ),
+          )
         }
   }
 
@@ -144,6 +147,6 @@ class OutlinedSystem(activity: AppSystemActivity) : SystemBase() {
    */
   private data class OutlinedObjectInfo(
       val outlineEntity: Entity,
-      val outlineMaterial: SceneMaterial
+      val outlineMaterial: SceneMaterial,
   )
 }

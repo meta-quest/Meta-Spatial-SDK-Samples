@@ -53,12 +53,14 @@ class UpdateRaycastSystem(
         if (depthRaycastResult.result == MRUKEnvironmentRaycastHitResult.SUCCESS) {
           if (arrowEntities.isEmpty()) {
             arrowEntities.add(
-                Entity.create(listOf(Mesh(Uri.parse("arrow.glb")), Transform(Pose()))))
+                Entity.create(listOf(Mesh(Uri.parse("arrow.glb")), Transform(Pose())))
+            )
           }
           val arrowPose =
               Pose(
                   depthRaycastResult.point,
-                  Quaternion.lookRotation(depthRaycastResult.normal.normalize()))
+                  Quaternion.lookRotation(depthRaycastResult.normal.normalize()),
+              )
           val entity = arrowEntities[0]
           entity.setComponent(Transform(arrowPose))
           entity.setComponent(Visible(true))
@@ -73,7 +75,8 @@ class UpdateRaycastSystem(
                         rightHandPose.t,
                         rightHandDirection,
                         maxDistance,
-                        SurfaceType.PLANE_VOLUME)
+                        SurfaceType.PLANE_VOLUME,
+                    )
                 if (hit != null) arrayOf(hit) else emptyArray()
               }
               RaycastMode.ALL -> {
@@ -82,7 +85,8 @@ class UpdateRaycastSystem(
                     rightHandPose.t,
                     rightHandDirection,
                     maxDistance,
-                    SurfaceType.PLANE_VOLUME)
+                    SurfaceType.PLANE_VOLUME,
+                )
               }
               RaycastMode.GLOBAL_MESH -> {
                 val hit =
@@ -91,7 +95,8 @@ class UpdateRaycastSystem(
                         rightHandPose.t,
                         rightHandDirection,
                         maxDistance,
-                        SurfaceType.MESH)
+                        SurfaceType.MESH,
+                    )
                 if (hit != null) arrayOf(hit) else emptyArray()
               }
               RaycastMode.DEPTH -> {
@@ -102,7 +107,8 @@ class UpdateRaycastSystem(
         for (i in hits.indices) {
           if (i >= arrowEntities.size) {
             arrowEntities.add(
-                Entity.create(listOf(Mesh(Uri.parse("arrow.glb")), Transform(Pose()))))
+                Entity.create(listOf(Mesh(Uri.parse("arrow.glb")), Transform(Pose())))
+            )
           }
           val hit = hits[i]
           val entity = arrowEntities[i]

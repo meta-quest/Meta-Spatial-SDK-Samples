@@ -113,10 +113,12 @@ class TweenTransformAccessor : TweenAccessor<TweenTransform> {
 
   fun isOrientationValid(orientation: Quaternion): Boolean {
     // Check if each component is finite
-    if (!orientation.x.isFinite() ||
-        !orientation.y.isFinite() ||
-        !orientation.z.isFinite() ||
-        !orientation.w.isFinite()) {
+    if (
+        !orientation.x.isFinite() ||
+            !orientation.y.isFinite() ||
+            !orientation.z.isFinite() ||
+            !orientation.w.isFinite()
+    ) {
       return false
     }
 
@@ -126,7 +128,8 @@ class TweenTransformAccessor : TweenAccessor<TweenTransform> {
             orientation.x * orientation.x +
                 orientation.y * orientation.y +
                 orientation.z * orientation.z +
-                orientation.w * orientation.w)
+                orientation.w * orientation.w
+        )
     return magnitude > 0.999 && magnitude < 1.001
   }
 

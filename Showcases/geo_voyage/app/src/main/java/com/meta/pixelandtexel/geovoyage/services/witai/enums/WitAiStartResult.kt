@@ -7,5 +7,5 @@ enum class WitAiStartResult(val result: Int) {
   SUCCESS(0),
   ALREADY_RUNNING(1),
   PERMISSION_DENIED(2),
-  UNKNOWN_ERROR(3)
+  UNKNOWN_ERROR(3),
 }

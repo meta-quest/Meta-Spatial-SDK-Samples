@@ -116,7 +116,7 @@ class CuratedObjectHandler(
                     sourceOfInput: Entity,
                     changed: Int,
                     buttonState: Int,
-                    downTime: Long
+                    downTime: Long,
                 ): Boolean {
                   val selectButtons: Int =
                       ButtonBits.ButtonA or
@@ -133,7 +133,8 @@ class CuratedObjectHandler(
 
                   return true
                 }
-              })
+              }
+          )
 
           // cache our animation track info
 
@@ -253,7 +254,9 @@ class CuratedObjectHandler(
               Mesh(Uri.parse("mesh://quad")),
               Quad(),
               Material(),
-              Hittable(MeshCollision.NoCollision)))
+              Hittable(MeshCollision.NoCollision),
+          )
+      )
     }
 
     viewingCuratedObjectSelection = true
@@ -370,7 +373,9 @@ class CuratedObjectHandler(
               pausedTime = 0f,
               playbackState = PlaybackState.PAUSED,
               playbackType = PlaybackType.CLAMP,
-              curatedObject.initialAnimationTrack ?: 0))
+              curatedObject.initialAnimationTrack ?: 0,
+          )
+      )
     }
   }
 
@@ -396,7 +401,9 @@ class CuratedObjectHandler(
               pausedTime = 0f,
               playbackState = PlaybackState.PAUSED,
               playbackType = PlaybackType.CLAMP,
-              curatedObject.initialAnimationTrack ?: 0))
+              curatedObject.initialAnimationTrack ?: 0,
+          )
+      )
     }
 
     // resets the internal state of the entity collider
@@ -547,7 +554,10 @@ class CuratedObjectHandler(
               val resName = imageRefText.substringAfter("@drawable/")
               currentPanelImageResId =
                   context.resources.getIdentifier(
-                      resName, "drawable", "com.meta.pixelandtexel.scanner")
+                      resName,
+                      "drawable",
+                      "com.meta.pixelandtexel.scanner",
+                  )
               assert(currentPanelImageResId != 0)
             }
 
@@ -561,7 +571,10 @@ class CuratedObjectHandler(
               val resName = copyRefText.substringAfter("@string/")
               currentPanelCopyResId =
                   context.resources.getIdentifier(
-                      resName, "string", "com.meta.pixelandtexel.scanner")
+                      resName,
+                      "string",
+                      "com.meta.pixelandtexel.scanner",
+                  )
               assert(currentPanelCopyResId != 0)
             }
           }
@@ -576,7 +589,11 @@ class CuratedObjectHandler(
                     if (currentPanelTiles != null) {
                       currentUiPanels.add(
                           TilesPanelContent(
-                              currentPanelTitle, currentPanelAnimationTrack, currentPanelTiles))
+                              currentPanelTitle,
+                              currentPanelAnimationTrack,
+                              currentPanelTiles,
+                          )
+                      )
                     }
                   }
 
@@ -592,7 +609,9 @@ class CuratedObjectHandler(
                             currentPanelTitle,
                             currentPanelAnimationTrack,
                             currentPanelImageResId,
-                            body))
+                            body,
+                        )
+                    )
                   }
 
                   else ->
@@ -610,9 +629,11 @@ class CuratedObjectHandler(
             }
 
             "object" -> {
-              if (currentObjectName != null &&
-                  currentMatchingLabels != null &&
-                  currentUiPanels != null) {
+              if (
+                  currentObjectName != null &&
+                      currentMatchingLabels != null &&
+                      currentUiPanels != null
+              ) {
                 assert(currentMatchingLabels.isNotEmpty() && currentUiPanels.isNotEmpty())
 
                 val curatedObject =
@@ -620,7 +641,8 @@ class CuratedObjectHandler(
                             currentObjectName,
                             currentMatchingLabels.toList(),
                             currentUiPanels.toList(),
-                            curatedObjects.size)
+                            curatedObjects.size,
+                        )
                         .apply {
                           currentMeshPositionOffset?.let { meshPositionOffset = it }
                           currentMeshRotationOffset?.let { meshRotationOffset = it }

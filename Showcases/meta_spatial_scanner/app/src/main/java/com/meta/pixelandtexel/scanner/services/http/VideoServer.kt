@@ -48,19 +48,20 @@ class VideoServer(val port: Int = 5000) {
             get("/") {
               call.respondOutputStream(
                   ContentType.parse("multipart/x-mixed-replace;boundary=frame"),
-                  HttpStatusCode.OK) {
-                    // first close the current client if we have one
-                    client?.close()
-                    client = this
+                  HttpStatusCode.OK,
+              ) {
+                // first close the current client if we have one
+                client?.close()
+                client = this
 
-                    try {
-                      awaitCancellation()
-                    } finally {
-                      if (client == this) {
-                        client = null
-                      }
-                    }
+                try {
+                  awaitCancellation()
+                } finally {
+                  if (client == this) {
+                    client = null
                   }
+                }
+              }
             }
           }
         }

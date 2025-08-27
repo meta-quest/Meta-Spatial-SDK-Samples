@@ -15,13 +15,16 @@ fun AnimatedOpacity(
     visible: Boolean,
     modifier: Modifier = Modifier,
     durationMillis: Int = 300,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
   val targetAlpha = if (visible) 1f else 0f
 
   val alpha by
       animateFloatAsState(
-          targetValue = targetAlpha, animationSpec = tween(durationMillis), label = "Opacity State")
+          targetValue = targetAlpha,
+          animationSpec = tween(durationMillis),
+          label = "Opacity State",
+      )
 
   Box(modifier = modifier.graphicsLayer(alpha = alpha)) { content() }
 }

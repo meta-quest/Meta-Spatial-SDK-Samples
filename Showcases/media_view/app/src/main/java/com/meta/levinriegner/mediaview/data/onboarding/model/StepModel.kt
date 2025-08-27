@@ -11,5 +11,5 @@ data class StepModel(
     val resourceId: Int,
     val title: String,
     val description: String,
-    val isVideo: Boolean
+    val isVideo: Boolean,
 ) : Parcelable

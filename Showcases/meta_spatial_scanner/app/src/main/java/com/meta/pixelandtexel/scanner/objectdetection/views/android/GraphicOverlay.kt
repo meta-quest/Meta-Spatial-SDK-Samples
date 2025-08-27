@@ -162,12 +162,17 @@ class GraphicOverlay : View {
               bottom,
               (centerX - textWidth / 2) + textWidth + padding,
               bottom + textHeight + padding,
-              textBackgroundPaint)
+              textBackgroundPaint,
+          )
 
           // draw text for detected object
 
           canvas.drawText(
-              drawableText, centerX - textWidth / 2, bottom + bounds.height(), textPaint)
+              drawableText,
+              centerX - textWidth / 2,
+              bottom + bounds.height(),
+              textPaint,
+          )
         }
 
     // draw our inference stats near the top left

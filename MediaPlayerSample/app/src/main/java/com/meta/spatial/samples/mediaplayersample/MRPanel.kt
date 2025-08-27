@@ -40,17 +40,18 @@ fun MRApp() {
           Modifier.fillMaxSize()
               .clip(RoundedCornerShape(10.dp))
               .background(Color(0xFF0f0f0f))
-              .padding(8.dp)) {
-        MRSwitch(mrCheckedState) { state ->
-          setMRCheckedState(state)
-          SpatialActivityManager.executeOnVrActivity<MediaPlayerSampleActivity> { activity ->
-            activity.scene.enablePassthrough(state)
-            activity.scene.enableEnvironmentDepth(state)
+              .padding(8.dp),
+  ) {
+    MRSwitch(mrCheckedState) { state ->
+      setMRCheckedState(state)
+      SpatialActivityManager.executeOnVrActivity<MediaPlayerSampleActivity> { activity ->
+        activity.scene.enablePassthrough(state)
+        activity.scene.enableEnvironmentDepth(state)
 
-            activity.mrState = state
-          }
-        }
+        activity.mrState = state
       }
+    }
+  }
 }
 
 @Composable
@@ -61,7 +62,8 @@ fun MRSwitch(MRCheckedState: Boolean, onMR: (state: Boolean) -> Unit) {
           text = "Passthrough",
           minLines = 1,
           style = MaterialTheme.typography.subtitle2,
-          color = Color.White)
+          color = Color.White,
+      )
       Spacer(modifier = Modifier.width(8.dp))
       Switch(checked = MRCheckedState, onCheckedChange = { onMR(it) })
     }

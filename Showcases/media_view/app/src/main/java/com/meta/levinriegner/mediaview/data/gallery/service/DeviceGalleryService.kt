@@ -50,8 +50,11 @@ constructor(
         val dto = MediaStoreFileDto.fromCursor(cursor)
         if (dto.mimeType == null) continue
         // Check if the media is a sample
-        if (dto.relativePath?.startsWith(
-            "$SAVED_MEDIA_FOLDER_NAME/$SAMPLES_DEVICE_SUBFOLDER_NAME") == true) {
+        if (
+            dto.relativePath?.startsWith(
+                "$SAVED_MEDIA_FOLDER_NAME/$SAMPLES_DEVICE_SUBFOLDER_NAME"
+            ) == true
+        ) {
           if (filter == MediaFilter.SAMPLE_MEDIA) {
             media.add(dto)
           } else {
@@ -92,7 +95,8 @@ constructor(
                     StorageType.Sample -> "/$SAMPLES_DEVICE_SUBFOLDER_NAME"
                     StorageType.GoogleDrive -> "/$DRIVE_ASSET_SUBFOLDER_NAME"
                   } +
-                  (relativeSubPath?.takeIf { it.isNotEmpty() }?.let { "/$it" } ?: ""))
+                  (relativeSubPath?.takeIf { it.isNotEmpty() }?.let { "/$it" } ?: ""),
+          )
           put(MediaStore.MediaColumns.IS_PENDING, 1)
         }
     val mediaUri = contentResolver.insert(MediaStoreQueryBuilder.collectionUri, contentValues)

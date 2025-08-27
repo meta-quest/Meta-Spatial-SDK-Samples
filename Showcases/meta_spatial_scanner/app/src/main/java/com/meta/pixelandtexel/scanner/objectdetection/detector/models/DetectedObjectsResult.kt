@@ -20,7 +20,7 @@ data class DetectedObjectsResult(
     val objects: List<DetectedObject>,
     val inferenceTime: Long,
     val inputImageWidth: Int,
-    val inputImageHeight: Int
+    val inputImageHeight: Int,
 ) {
   companion object {
     /**
@@ -40,7 +40,7 @@ data class DetectedObjectsResult(
         mpDetectedObjects: List<com.google.mediapipe.tasks.components.containers.Detection>,
         inferenceTime: Long,
         inputImageWidth: Int,
-        inputImageHeight: Int
+        inputImageHeight: Int,
     ): DetectedObjectsResult {
       val detectedObjects =
           mpDetectedObjects.mapNotNull {
@@ -57,7 +57,11 @@ data class DetectedObjectsResult(
           }
 
       return DetectedObjectsResult(
-          detectedObjects, inferenceTime, inputImageWidth, inputImageHeight)
+          detectedObjects,
+          inferenceTime,
+          inputImageWidth,
+          inputImageHeight,
+      )
     }
 
     /**
@@ -76,7 +80,7 @@ data class DetectedObjectsResult(
         mlkitDetectedObjects: List<com.google.mlkit.vision.objects.DetectedObject>,
         inferenceTime: Long,
         inputImageWidth: Int,
-        inputImageHeight: Int
+        inputImageHeight: Int,
     ): DetectedObjectsResult {
       val detectedObjects =
           mlkitDetectedObjects.mapNotNull {
@@ -92,7 +96,11 @@ data class DetectedObjectsResult(
           }
 
       return DetectedObjectsResult(
-          detectedObjects, inferenceTime, inputImageWidth, inputImageHeight)
+          detectedObjects,
+          inferenceTime,
+          inputImageWidth,
+          inputImageHeight,
+      )
     }
 
     /**
@@ -111,7 +119,7 @@ data class DetectedObjectsResult(
         cvDetectedObjects: List<OpenCVObjectDetector.CvDetectedObject>,
         inferenceTime: Long,
         inputImageWidth: Int,
-        inputImageHeight: Int
+        inputImageHeight: Int,
     ): DetectedObjectsResult {
       val detectedObjects =
           cvDetectedObjects.map {
@@ -121,7 +129,11 @@ data class DetectedObjectsResult(
           }
 
       return DetectedObjectsResult(
-          detectedObjects, inferenceTime, inputImageWidth, inputImageHeight)
+          detectedObjects,
+          inferenceTime,
+          inputImageWidth,
+          inputImageHeight,
+      )
     }
   }
 }

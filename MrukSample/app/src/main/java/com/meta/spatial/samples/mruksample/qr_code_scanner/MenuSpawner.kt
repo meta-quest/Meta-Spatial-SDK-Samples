@@ -35,7 +35,8 @@ class MenuSpawner() : SystemBase() {
                     // start with a scale of 0 to scale up once we load in
                     Scale(0.0f),
                     Panel(R.layout.ui_qrcode_scanner),
-                    Menu(qrCodeEnt.getComponent<TrackedQrCode>().getPayloadAsString()))
+                    Menu(qrCodeEnt.getComponent<TrackedQrCode>().getPayloadAsString()),
+                )
             qrCodeToEntity[qrCodeEnt] = menu
           }
         }

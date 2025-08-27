@@ -36,7 +36,8 @@ fun ErrorView(
     Text(
         text = description,
         textAlign = TextAlign.Center,
-        style = MaterialTheme.typography.bodyMedium)
+        style = MaterialTheme.typography.bodyMedium,
+    )
     Spacer(modifier = Modifier.height(Dimens.large))
     Button(onClick = onActionButtonPressed) { Text(text = actionButtonText) }
   }

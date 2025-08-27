@@ -42,54 +42,64 @@ fun PanelNavContainer(
     currentRoute: String,
     navButtonStates: List<NavButtonState>,
     navigateTo: (route: String) -> Unit,
-    content: @Composable () -> Unit = {}
+    content: @Composable () -> Unit = {},
 ) {
   Column {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().height(48.dp)) {
-          Spacer(
-              Modifier.width(
-                  dimensionResource(R.dimen.nav_column_width) +
-                      dimensionResource(R.dimen.standard_margin)))
-          TitleBar(
-              label = titleText,
-              modifier = Modifier.weight(1f),
+        modifier = Modifier.fillMaxWidth().height(48.dp),
+    ) {
+      Spacer(
+          Modifier.width(
+              dimensionResource(R.dimen.nav_column_width) +
+                  dimensionResource(R.dimen.standard_margin)
           )
-          Spacer(Modifier.width(12.dp))
-          SecondaryCircleButton(
-              icon = {
-                Icon(
-                    imageVector = SpatialIcons.Regular.Settings,
-                    contentDescription = "contentDescription")
-              },
-              onClick = { navigateTo(Routes.SETTINGS_ROUTE) })
-        }
+      )
+      TitleBar(
+          label = titleText,
+          modifier = Modifier.weight(1f),
+      )
+      Spacer(Modifier.width(12.dp))
+      SecondaryCircleButton(
+          icon = {
+            Icon(
+                imageVector = SpatialIcons.Regular.Settings,
+                contentDescription = "contentDescription",
+            )
+          },
+          onClick = { navigateTo(Routes.SETTINGS_ROUTE) },
+      )
+    }
     Row(modifier = Modifier.fillMaxSize()) {
       Column(
-          modifier = Modifier.width(dimensionResource(R.dimen.nav_column_width)).fillMaxHeight()) {
-            Spacer(Modifier.height(dimensionResource(R.dimen.standard_margin)))
-            navButtonStates.forEach { state ->
-              SpatialSideNavItem(
-                  icon = {
-                    Icon(
-                        imageVector = state.iconImage,
-                        contentDescription = state.text,
-                        tint = GeoVoyageColors.navIcons)
-                  },
-                  primaryLabel = state.text,
-                  selected = state.route == currentRoute,
-                  onClick = { navigateTo(state.route) })
-            }
-          }
+          modifier = Modifier.width(dimensionResource(R.dimen.nav_column_width)).fillMaxHeight()
+      ) {
+        Spacer(Modifier.height(dimensionResource(R.dimen.standard_margin)))
+        navButtonStates.forEach { state ->
+          SpatialSideNavItem(
+              icon = {
+                Icon(
+                    imageVector = state.iconImage,
+                    contentDescription = state.text,
+                    tint = GeoVoyageColors.navIcons,
+                )
+              },
+              primaryLabel = state.text,
+              selected = state.route == currentRoute,
+              onClick = { navigateTo(state.route) },
+          )
+        }
+      }
       Column(
           modifier =
               Modifier.fillMaxSize()
                   .padding(
                       start = dimensionResource(R.dimen.standard_margin),
-                      top = dimensionResource(R.dimen.standard_margin))) {
-            content.invoke()
-          }
+                      top = dimensionResource(R.dimen.standard_margin),
+                  )
+      ) {
+        content.invoke()
+      }
     }
   }
 }
@@ -118,7 +128,8 @@ private fun PanelNavContainerPreview() {
               text = "Quiz",
               route = Routes.DAILY_QUIZ_ROUTE,
               iconImage = SpatialIcons.Regular.Trophy,
-          ))
+          ),
+      )
 
   GeoVoyageTheme {
     PrimaryPanel {

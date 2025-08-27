@@ -14,7 +14,7 @@ class TweenSceneMaterialAccessor : TweenAccessor<TweenSceneMaterial> {
   override fun getValues(
       target: TweenSceneMaterial,
       tweenType: Int,
-      returnValues: FloatArray
+      returnValues: FloatArray,
   ): Int {
     return when (tweenType) {
       TweenSceneMaterial.SET_ATTRIBUTE_VECTOR4 -> {

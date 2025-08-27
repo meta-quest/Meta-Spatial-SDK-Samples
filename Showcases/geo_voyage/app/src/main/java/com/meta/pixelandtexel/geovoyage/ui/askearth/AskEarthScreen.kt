@@ -41,7 +41,7 @@ fun AskEarthScreen(
     vm: AskEarthViewModel = viewModel(),
     onUserRejectedPermission: (() -> Unit)? = null,
     setTitle: ((text: String) -> Unit)? = null,
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
 ) {
   val route by vm.route
   val title by vm.title
@@ -94,35 +94,40 @@ fun AskEarthScreen(
               containerColor = LocalColorScheme.current.primaryButton,
               contentColor = Color.White,
               // remove shadow
-              elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp)) {
-                Icon(
-                    imageVector = SpatialIcons.Regular.MicrophoneOn,
-                    contentDescription = "Ask another question",
-                    modifier = Modifier.size(24.dp))
-              }
+              elevation = FloatingActionButtonDefaults.elevation(0.dp, 0.dp, 0.dp, 0.dp),
+          ) {
+            Icon(
+                imageVector = SpatialIcons.Regular.MicrophoneOn,
+                contentDescription = "Ask another question",
+                modifier = Modifier.size(24.dp),
+            )
+          }
         }
-      }) { innerPadding ->
-        NavHost(
-            navController = navController,
-            startDestination = Routes.PERMISSIONS_ROUTE,
-            modifier = Modifier.padding(innerPadding)) {
-              composable(Routes.PERMISSIONS_ROUTE) {
-                PermissionsScreen(
-                    onNotNowClicked = { vm.userDelayedPermissions() },
-                    onEnableClicked = { vm.userRequestedPermissions() })
-              }
-              composable(Routes.LISTENING_ROUTE) { ListeningScreen(volume) { vm.stopListening() } }
-              composable(Routes.THINKING_ROUTE) { ThinkingScreen(title) }
-              composable(Routes.SUCCESS_ROUTE) { SuccessScreen(successAnswer) }
-              composable(Routes.REJECTED_ROUTE) {
-                RejectedScreen { query ->
-                  vm.navTo(Routes.THINKING_ROUTE)
-                  vm.askLlamaQuestion(query)
-                }
-              }
-              composable(Routes.ERROR_ROUTE) { ErrorScreen(errorMessage) }
-            }
+      },
+  ) { innerPadding ->
+    NavHost(
+        navController = navController,
+        startDestination = Routes.PERMISSIONS_ROUTE,
+        modifier = Modifier.padding(innerPadding),
+    ) {
+      composable(Routes.PERMISSIONS_ROUTE) {
+        PermissionsScreen(
+            onNotNowClicked = { vm.userDelayedPermissions() },
+            onEnableClicked = { vm.userRequestedPermissions() },
+        )
       }
+      composable(Routes.LISTENING_ROUTE) { ListeningScreen(volume) { vm.stopListening() } }
+      composable(Routes.THINKING_ROUTE) { ThinkingScreen(title) }
+      composable(Routes.SUCCESS_ROUTE) { SuccessScreen(successAnswer) }
+      composable(Routes.REJECTED_ROUTE) {
+        RejectedScreen { query ->
+          vm.navTo(Routes.THINKING_ROUTE)
+          vm.askLlamaQuestion(query)
+        }
+      }
+      composable(Routes.ERROR_ROUTE) { ErrorScreen(errorMessage) }
+    }
+  }
 }
 
 @Preview(widthDp = 570, heightDp = 480, showBackground = true, backgroundColor = 0xFFEBF5E9)

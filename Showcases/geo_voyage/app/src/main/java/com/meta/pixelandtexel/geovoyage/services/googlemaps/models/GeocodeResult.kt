@@ -6,5 +6,5 @@ data class GeocodeResult(
     val address_components: List<GeocodeAddressComponent>,
     val formatted_address: String,
     val place_id: String,
-    val types: List<String>
+    val types: List<String>,
 )

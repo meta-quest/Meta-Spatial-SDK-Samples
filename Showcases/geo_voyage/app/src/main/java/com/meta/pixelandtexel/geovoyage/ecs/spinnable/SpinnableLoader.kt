@@ -21,6 +21,7 @@ class SpinnableLoader : BaseLoader() {
           if (dragValue != null) {
             drag = dragValue
           }
-        })
+        }
+    )
   }
 }

@@ -40,7 +40,9 @@ class TweenEngineSystem : SystemBase() {
     tweenBuilder.registerAccessor(TweenPanelLayerAlpha::class.java, TweenPanelLayerAlphaAccessor())
 
     tweenBuilder.registerAccessor(
-        TweenLightingPassthrough::class.java, TweenLightingPassthroughAccessor())
+        TweenLightingPassthrough::class.java,
+        TweenLightingPassthroughAccessor(),
+    )
 
     tweenEngine = tweenBuilder.build()
   }

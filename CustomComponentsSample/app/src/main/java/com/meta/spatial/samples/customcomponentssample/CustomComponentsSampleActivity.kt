@@ -61,7 +61,9 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
                   pitch()
                   yaw()
                   roll()
-                }))
+                },
+            ),
+        )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(DataModelInspectorFeature(spatial, this.componentManager))
@@ -72,7 +74,9 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     NetworkedAssetLoader.init(
-        File(applicationContext.getCacheDir().canonicalPath), OkHttpAssetFetcher())
+        File(applicationContext.getCacheDir().canonicalPath),
+        OkHttpAssetFetcher(),
+    )
 
     // After definitions, we need to register the system and component
     componentManager.registerComponent<LookAt>(LookAt.Companion)
@@ -84,7 +88,8 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
       val environmentEntity: Entity = composition.getNodeByName("Environment").entity
       val environmentMesh = environmentEntity.getComponent<Mesh>()
       environmentEntity.setComponent(
-          environmentMesh.apply { defaultShaderOverride = SceneMaterial.UNLIT_SHADER })
+          environmentMesh.apply { defaultShaderOverride = SceneMaterial.UNLIT_SHADER }
+      )
 
       // get the robot and the basketBall entities the composition
       val robot = composition.getNodeByName("robot").entity
@@ -106,7 +111,8 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
             layerConfig = LayerConfig()
             enableTransparent = true
           }
-        })
+        }
+    )
   }
 
   override fun onSceneReady() {
@@ -119,7 +125,8 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
         ambientColor = Vector3(0f),
         sunColor = Vector3(7.0f, 7.0f, 7.0f),
         sunDirection = -Vector3(1.0f, 3.0f, -2.0f),
-        environmentIntensity = 0.3f)
+        environmentIntensity = 0.3f,
+    )
     scene.updateIBLEnvironment("environment.env")
 
     scene.setViewOrigin(0.0f, 0.0f, -1.0f, 0.0f)
@@ -131,7 +138,9 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
               baseTextureAndroidResourceId = R.drawable.skydome
               unlit = true // Prevent scene lighting from affecting the skybox
             },
-            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f)))))
+            Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
+        )
+    )
   }
 
   private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
@@ -141,7 +150,8 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
           Uri.parse("apk:///scenes/Composition.glxf"),
           rootEntity = gltfxEntity!!,
           keyName = "example_key_name",
-          onLoaded = onLoaded)
+          onLoaded = onLoaded,
+      )
     }
   }
 }

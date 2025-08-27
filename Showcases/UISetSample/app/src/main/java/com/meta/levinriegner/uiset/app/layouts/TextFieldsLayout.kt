@@ -38,7 +38,8 @@ fun TextFieldsLayout() {
             text = "Default",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.height(48.dp))
         StatefulWrapper(initialValue = "") { query, onQueryChange ->
@@ -59,7 +60,8 @@ fun TextFieldsLayout() {
             text = "With Microphone",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.height(48.dp))
         StatefulWrapper(initialValue = "") { query, onQueryChange ->
@@ -80,7 +82,8 @@ fun TextFieldsLayout() {
             text = "Default",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.height(20.dp))
         StatefulWrapper(initialValue = "") { value, onChanged ->
@@ -102,7 +105,8 @@ fun TextFieldsLayout() {
             text = "With Icon",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.height(20.dp))
         StatefulWrapper(initialValue = "") { value, onChanged ->

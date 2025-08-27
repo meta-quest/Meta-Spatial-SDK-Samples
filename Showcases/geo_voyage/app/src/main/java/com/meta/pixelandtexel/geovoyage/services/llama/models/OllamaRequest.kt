@@ -7,12 +7,12 @@ data class OllamaRequest(
     val prompt: String,
     val options: OllamaRequestParams = OllamaRequestParams(),
     val model: String = "llama3",
-    val stream: Boolean = true
+    val stream: Boolean = true,
 )
 
 // https://github.com/ollama/ollama/blob/main/docs/modelfile.md#valid-parameters-and-values
 data class OllamaRequestParams(
     val temperature: Float = .8f,
     val top_p: Float = .9f,
-    val num_predict: Int = 128
+    val num_predict: Int = 128,
 )

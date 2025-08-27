@@ -39,9 +39,11 @@ class WristAttachedSystem : SystemBase() {
     // get our head and hands/controllers transforms
 
     val playerBody = getAvatarBody()
-    if (!playerBody.head.hasComponent<Transform>() ||
-        !playerBody.leftHand.hasComponent<Transform>() ||
-        !playerBody.rightHand.hasComponent<Transform>()) {
+    if (
+        !playerBody.head.hasComponent<Transform>() ||
+            !playerBody.leftHand.hasComponent<Transform>() ||
+            !playerBody.rightHand.hasComponent<Transform>()
+    ) {
       // Failed to find transform components on avatar body parts; controllers may be
       // disconnected and hands out of view
       return

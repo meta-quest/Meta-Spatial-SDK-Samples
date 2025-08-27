@@ -50,7 +50,8 @@ class HomePanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
               Visible(false),
               PanelDimensions(Vector2(widthInMeters, heightInMeters)),
               PanelLayerAlpha(0f),
-          ))
+          )
+      )
     }
 
     fun panelRegistration(): PanelRegistration {
@@ -76,6 +77,10 @@ class HomePanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
   fun fadeVisibility(isVisible: Boolean, onComplete: (() -> Unit)? = null) {
     val easing = if (isVisible) TweenEquations.Circle_In else TweenEquations.Circle_Out
     super.fadeVisibility(
-        isVisible, TIMINGS.HOME_PANEL_FADE_BOTH.millisToFloat(), easing, onComplete)
+        isVisible,
+        TIMINGS.HOME_PANEL_FADE_BOTH.millisToFloat(),
+        easing,
+        onComplete,
+    )
   }
 }

@@ -26,22 +26,26 @@ fun SelectObjectTipScreen(onDismiss: (() -> Unit)? = null) {
       Column(
           verticalArrangement = Arrangement.SpaceBetween,
           horizontalAlignment = Alignment.CenterHorizontally,
-          modifier = Modifier.fillMaxSize()) {
-            Text(
-                stringResource(R.string.select_object_title),
-                color = Color.White,
-                style = SpatialTheme.typography.headline3Strong,
-                modifier = Modifier.padding(top = 6.dp))
-            Text(
-                stringResource(R.string.select_object_copy),
-                color = Color.White,
-                style = SpatialTheme.typography.body2,
-                modifier = Modifier.padding(bottom = 8.dp))
-            PrimaryButton(
-                stringResource(R.string.btn_dismiss),
-                expanded = true,
-                onClick = { onDismiss?.invoke() })
-          }
+          modifier = Modifier.fillMaxSize(),
+      ) {
+        Text(
+            stringResource(R.string.select_object_title),
+            color = Color.White,
+            style = SpatialTheme.typography.headline3Strong,
+            modifier = Modifier.padding(top = 6.dp),
+        )
+        Text(
+            stringResource(R.string.select_object_copy),
+            color = Color.White,
+            style = SpatialTheme.typography.body2,
+            modifier = Modifier.padding(bottom = 8.dp),
+        )
+        PrimaryButton(
+            stringResource(R.string.btn_dismiss),
+            expanded = true,
+            onClick = { onDismiss?.invoke() },
+        )
+      }
     }
   }
 }

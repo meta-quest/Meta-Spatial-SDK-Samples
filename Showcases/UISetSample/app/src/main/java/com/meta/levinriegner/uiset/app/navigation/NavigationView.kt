@@ -47,7 +47,8 @@ fun NavigationView(
             section.displayText,
             style =
                 SpatialTheme.typography.headline2Strong.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground),
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                ),
         )
         Spacer(Modifier.size(24.dp))
         LazyVerticalGrid(
@@ -60,7 +61,8 @@ fun NavigationView(
                 modifier =
                     Modifier.padding(
                         end = if (index % 3 == 2) 0.dp else 12.dp,
-                        bottom = if (index >= items.size - 3) 0.dp else 12.dp),
+                        bottom = if (index >= items.size - 3) 0.dp else 12.dp,
+                    ),
                 icon = { Icon(SpatialIcons.Regular.CategoryAll, contentDescription = "") },
                 label = item.label,
                 secondaryLabel = item.secondaryLabel,

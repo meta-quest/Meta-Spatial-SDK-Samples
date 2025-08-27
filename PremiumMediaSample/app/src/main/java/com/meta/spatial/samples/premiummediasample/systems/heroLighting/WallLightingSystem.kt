@@ -42,7 +42,7 @@ import java.util.UUID
 
 class WallLightingSystem(
     private var materialsMap: Map<WallLightingFace, SceneMaterial>? = null,
-    private var _isVisible: Boolean = true
+    private var _isVisible: Boolean = true,
 ) : SystemBase() {
   private var planes = mutableListOf<Entity>()
   private var planeScales = mutableListOf<Vector3>()
@@ -73,7 +73,8 @@ class WallLightingSystem(
     for (materialEntry in materialsMap!!) {
       if (!validLabels.contains(materialEntry.key.label)) {
         throw IllegalArgumentException(
-            "Cannot use a material map with label type: ${materialEntry.key.label}")
+            "Cannot use a material map with label type: ${materialEntry.key.label}"
+        )
       }
 
       // Add labels for quick search later
@@ -92,7 +93,9 @@ class WallLightingSystem(
       // Allow creation of custom mesh with material
       activity.registerMeshCreator(meshName) {
         SceneMesh.fromTriangleMesh(
-            quadTriangleMesh(1f, 1f, materialEntry.value, 4, 4), false) // Crazy subdivided mesh
+            quadTriangleMesh(1f, 1f, materialEntry.value, 4, 4),
+            false,
+        ) // Crazy subdivided mesh
       }
 
       // Register material with lighting
@@ -136,7 +139,9 @@ class WallLightingSystem(
               Transform(transform.transform),
               Hittable(MeshCollision.NoCollision),
               Scale(if (_isVisible) scale else Vector3(0f)),
-              Visible(_isVisible)))
+              Visible(_isVisible),
+          )
+      )
     }
   }
 
@@ -171,7 +176,7 @@ class WallLightingSystem(
   data class MeshNameLabel(
       var label: MRUKLabel,
       var defaultMesh: String?,
-      var directions: MutableMap<Vector3, String>
+      var directions: MutableMap<Vector3, String>,
   )
 
   companion object {
@@ -193,21 +198,24 @@ class WallLightingSystem(
     private fun getDefaultCustomShader(
         shaderName: String,
         albedoTexture: SceneTexture = SceneTexture(Color()),
-        depthWrite: DepthWrite = DepthWrite.DISABLE
+        depthWrite: DepthWrite = DepthWrite.DISABLE,
     ): SceneMaterial {
       return SceneMaterial.custom(
               shaderName,
               arrayOf(
                   SceneMaterialAttribute("albedoSampler", SceneMaterialDataType.Texture2D),
                   SceneMaterialAttribute(
-                      "roughnessMetallicTexture", SceneMaterialDataType.Texture2D),
+                      "roughnessMetallicTexture",
+                      SceneMaterialDataType.Texture2D,
+                  ),
                   SceneMaterialAttribute("emissive", SceneMaterialDataType.Texture2D),
                   SceneMaterialAttribute("occlusion", SceneMaterialDataType.Texture2D),
                   SceneMaterialAttribute("emissiveFactor", SceneMaterialDataType.Vector4),
                   SceneMaterialAttribute("albedoFactor", SceneMaterialDataType.Vector4),
                   SceneMaterialAttribute("matParams", SceneMaterialDataType.Vector4),
                   SceneMaterialAttribute("stereoParams", SceneMaterialDataType.Vector4),
-              ))
+              ),
+          )
           .apply {
             // Render behind everything
             setDepthWrite(depthWrite)

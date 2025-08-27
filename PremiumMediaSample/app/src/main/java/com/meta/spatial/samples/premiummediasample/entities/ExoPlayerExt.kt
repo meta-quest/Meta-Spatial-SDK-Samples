@@ -47,8 +47,8 @@ fun buildCustomExoPlayer(context: Context, isRemote: Boolean): ExoPlayer {
                 10_000, // Minimum buffer before playback can start or resume
                 30_000, // Maximum buffer size to hold
                 1_000, // Buffer required to start playback after user action
-                2_000 // Buffer required to resume after a rebuffer
-                )
+                2_000, // Buffer required to resume after a rebuffer
+            )
             .build()
     exoBuilder.setLoadControl(loadControl)
   }
@@ -60,7 +60,7 @@ fun buildCustomExoPlayer(context: Context, isRemote: Boolean): ExoPlayer {
 
 fun ExoPlayer.setMediaSource(
     mediaItem: com.meta.spatial.samples.premiummediasample.data.MediaSource,
-    context: Context
+    context: Context,
 ) {
   when (mediaItem.videoSource) {
     is VideoSource.Raw -> {
@@ -73,7 +73,8 @@ fun ExoPlayer.setMediaSource(
           Uri.parse(mediaItem.videoSource.videoUrl),
           context,
           mediaItem.videoSource.drmLicenseUrl,
-          mediaItem.position)
+          mediaItem.position,
+      )
     }
   }
 }
@@ -82,7 +83,7 @@ fun ExoPlayer.setMediaSource(
     uri: Uri,
     context: Context,
     licenseServer: String? = null,
-    position: Long = 0L
+    position: Long = 0L,
 ) {
   if (uri.toString().endsWith(".mpd")) {
     // Setup Dash Sources
@@ -91,7 +92,8 @@ fun ExoPlayer.setMediaSource(
         DefaultHttpDataSource.Factory()
             .setUserAgent(userAgent)
             .setTransferListener(
-                DefaultBandwidthMeter.Builder(context).setResetOnNetworkTypeChange(false).build())
+                DefaultBandwidthMeter.Builder(context).setResetOnNetworkTypeChange(false).build()
+            )
     val dashChunkSourceFactory: DashChunkSource.Factory =
         DefaultDashChunkSource.Factory(defaultHttpDataSourceFactory)
     val manifestDataSourceFactory = DefaultHttpDataSource.Factory().setUserAgent(userAgent)
@@ -105,7 +107,8 @@ fun ExoPlayer.setMediaSource(
       mediaItemBuilder.setDrmConfiguration(
           MediaItem.DrmConfiguration.Builder(C.WIDEVINE_UUID)
               .setLicenseUri(Uri.parse(licenseServer))
-              .build())
+              .build()
+      )
     }
 
     // Set dash factory with settings for DRM
@@ -139,37 +142,39 @@ fun ExoPlayer.addAnalyticLogs(logId: Int? = null) {
 
         override fun onVideoSizeChanged(
             eventTime: AnalyticsListener.EventTime,
-            videoSize: VideoSize
+            videoSize: VideoSize,
         ) {
           Log.d(
               EXO_PLAYER_TAG,
-              "[Video${id}] Video size changed: ${videoSize.width}x${videoSize.height}")
+              "[Video${id}] Video size changed: ${videoSize.width}x${videoSize.height}",
+          )
         }
 
         override fun onDroppedVideoFrames(
             eventTime: AnalyticsListener.EventTime,
             droppedFrames: Int,
-            elapsedMs: Long
+            elapsedMs: Long,
         ) {
           Log.d(EXO_PLAYER_TAG, "[Video${id}] On Dropped Video Frames: $droppedFrames")
         }
 
         override fun onIsPlayingChanged(
             eventTime: AnalyticsListener.EventTime,
-            isPlaying: Boolean
+            isPlaying: Boolean,
         ) {
           Log.d(EXO_PLAYER_TAG, "[Video${id}] IsPlayingChanged: $isPlaying")
         }
 
         override fun onDownstreamFormatChanged(
             eventTime: AnalyticsListener.EventTime,
-            mediaLoadData: MediaLoadData
+            mediaLoadData: MediaLoadData,
         ) {
           if (mediaLoadData.trackType == C.TRACK_TYPE_VIDEO) {
             val bitrate = mediaLoadData.trackFormat?.bitrate ?: 0
             Log.d(
                 EXO_PLAYER_TAG,
-                "[Video${id}] Quality changed: New video bitrate = ${bitrate / 1000} kbps")
+                "[Video${id}] Quality changed: New video bitrate = ${bitrate / 1000} kbps",
+            )
           }
         }
 
@@ -182,34 +187,40 @@ fun ExoPlayer.addAnalyticLogs(logId: Int? = null) {
               val format = trackGroup.getTrackFormat(j)
               Log.d(
                   EXO_PLAYER_TAG,
-                  "[Video${id}] Track ${j + 1} in group ${i + 1}: Bitrate = ${format.bitrate}, Resolution = ${format.width}x${format.height}, Language = ${format.language}")
+                  "[Video${id}] Track ${j + 1} in group ${i + 1}: Bitrate = ${format.bitrate}, Resolution = ${format.width}x${format.height}, Language = ${format.language}",
+              )
             }
           }
         }
 
         override fun onTrackSelectionParametersChanged(
             eventTime: AnalyticsListener.EventTime,
-            trackSelectionParameters: TrackSelectionParameters
+            trackSelectionParameters: TrackSelectionParameters,
         ) {
           Log.d(
               EXO_PLAYER_TAG,
-              "[Video${id}] track selection parameters changed $trackSelectionParameters")
+              "[Video${id}] track selection parameters changed $trackSelectionParameters",
+          )
         }
 
         override fun onAudioDecoderInitialized(
             eventTime: AnalyticsListener.EventTime,
             decoderName: String,
             initializedTimestampMs: Long,
-            initializationDurationMs: Long
+            initializationDurationMs: Long,
         ) {
           super.onAudioDecoderInitialized(
-              eventTime, decoderName, initializedTimestampMs, initializationDurationMs)
+              eventTime,
+              decoderName,
+              initializedTimestampMs,
+              initializationDurationMs,
+          )
           Log.d(EXO_PLAYER_TAG, "Using audio codec: $decoderName")
         }
 
         override fun onVideoCodecError(
             eventTime: AnalyticsListener.EventTime,
-            videoCodecError: Exception
+            videoCodecError: Exception,
         ) {
           Log.d(EXO_PLAYER_TAG, "onVideoCodecError: $videoCodecError")
           super.onVideoCodecError(eventTime, videoCodecError)
@@ -217,7 +228,7 @@ fun ExoPlayer.addAnalyticLogs(logId: Int? = null) {
 
         override fun onPlayerError(
             eventTime: AnalyticsListener.EventTime,
-            error: PlaybackException
+            error: PlaybackException,
         ) {
           Log.d(EXO_PLAYER_TAG, "onPlayerError: $error")
           super.onPlayerError(eventTime, error)
@@ -227,21 +238,26 @@ fun ExoPlayer.addAnalyticLogs(logId: Int? = null) {
             eventTime: AnalyticsListener.EventTime,
             decoderName: String,
             initializedTimestampMs: Long,
-            initializationDurationMs: Long
+            initializationDurationMs: Long,
         ) {
           super.onVideoDecoderInitialized(
-              eventTime, decoderName, initializedTimestampMs, initializationDurationMs)
+              eventTime,
+              decoderName,
+              initializedTimestampMs,
+              initializationDurationMs,
+          )
           Log.d(EXO_PLAYER_TAG, "Using video codec: $decoderName")
         }
 
         override fun onDrmSessionManagerError(
             eventTime: AnalyticsListener.EventTime,
-            error: Exception
+            error: Exception,
         ) {
           super.onDrmSessionManagerError(eventTime, error)
           Log.d(EXO_PLAYER_TAG, "onDrmSessionManagerError: $error")
         }
-      })
+      }
+  )
 }
 
 fun ExoPlayer.setHighQuality() {
@@ -250,7 +266,8 @@ fun ExoPlayer.setHighQuality() {
       getLastTrackIndex(groupIndex) // In the Sintel video, higher track index is higher resolution
   Log.d(
       EXO_PLAYER_TAG,
-      "Setting highQuality, setting group ${groupIndex + 1} to track ${trackIndex + 1}")
+      "Setting highQuality, setting group ${groupIndex + 1} to track ${trackIndex + 1}",
+  )
 
   setQualityForTrackGroup(groupIndex, trackIndex)
 }
