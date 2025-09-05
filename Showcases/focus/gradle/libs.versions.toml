@@ -1,5 +1,5 @@
 [versions]
-agp = "8.4.0"
+agp = "8.11.1"
 kotlin = "2.1.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -11,6 +11,10 @@ constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
 sqliteBundledAndroid = "2.5.0-alpha05"
+composeBom = "2025.02.00"
+gson = "2.8.9"
+okhttp = "4.12.0"
+soloader = "0.11.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -23,6 +27,17 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
 androidx-sqlite-bundled-android = { group = "androidx.sqlite", name = "sqlite-bundled-android", version.ref = "sqliteBundledAndroid" }
+androidx-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
+google-gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+squareup-okhttp3 = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
+squareup-okhttp3-boom = { group = "com.squareup.okhttp3", name = "okhttp-bom", version.ref = "okhttp" }
+squareup-okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+squareup-okhttp3-mockwebserver = { group = "com.squareup.okhttp3", name = "mockwebserver", version.ref = "okhttp" }
+facebook-soloader = { group = "com.facebook.soloader", name = "soloader", version.ref = "soloader" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

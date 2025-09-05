@@ -9,9 +9,7 @@
 
     <fragment
     android:id="@+id/FirstFragment"
-    android:name="com.meta.theelectricfactory.focus.FirstFragment"
-    android:label="@string/first_fragment_label"
-    tools:layout="@layout/fragment_first"
+    android:name="com.meta.theelectricfactory.focus.fragments.FirstFragment"
   >
 
         <action
@@ -21,9 +19,7 @@
     </fragment>
     <fragment
     android:id="@+id/SecondFragment"
-    android:name="com.meta.theelectricfactory.focus.SecondFragment"
-    android:label="@string/second_fragment_label"
-    tools:layout="@layout/fragment_second"
+    android:name="com.meta.theelectricfactory.focus.fragments.SecondFragment"
   >
 
         <action
