@@ -197,13 +197,14 @@ dependencies {
   androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
   // Meta Spatial SDK libs (local AAR files)
-  implementation(files("libs/meta-spatial-sdk-0.7.2.aar"))
-  implementation(files("libs/meta-spatial-sdk-ovrmetrics-0.7.2.aar"))
-  implementation(files("libs/meta-spatial-sdk-physics-0.7.2.aar"))
-  implementation(files("libs/meta-spatial-sdk-toolkit-0.7.2.aar"))
-  implementation(files("libs/meta-spatial-sdk-vr-0.7.2.aar"))
-  implementation(files("libs/meta-spatial-sdk-mruk-0.7.2.aar"))
-  implementation(files("libs/meta-spatial-sdk-castinputforward-0.7.2.aar"))
+  implementation(files("libs/meta-spatial-sdk-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-ovrmetrics-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-physics-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-toolkit-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-vr-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-mruk-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-castinputforward-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-isdk-0.8.0.aar"))
 
   // Meta Spatial SDK dependencies
   implementation("com.squareup.okhttp3:okhttp:4.12.0")
