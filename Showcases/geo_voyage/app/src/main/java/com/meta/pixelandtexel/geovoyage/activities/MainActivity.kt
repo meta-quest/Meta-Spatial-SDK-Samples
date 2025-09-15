@@ -5,7 +5,6 @@ package com.meta.pixelandtexel.geovoyage.activities
 import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
@@ -55,6 +54,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import androidx.core.net.toUri
 
 class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSystemActivity() {
   companion object {
@@ -64,7 +64,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
     lateinit var instance: WeakReference<MainActivity>
   }
 
-  private var CurrentMode: PlayMode = PlayMode.INTRO
+  private var currentMode: PlayMode = PlayMode.INTRO
 
   private var startedSpeakingSoundAsset: SceneAudioAsset? = null
   private var finishedSpeakingSoundAsset: SceneAudioAsset? = null
@@ -120,7 +120,6 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   }
 
   override fun registerPanels(): List<PanelRegistration> {
-    // all of our panels share a common panel config, except for width/height values
     return listOf(
         PanelRegistration(R.integer.panel_id) {
           activityClass = PanelActivity::class.java
@@ -172,7 +171,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
 
       Entity(R.integer.skybox_id)
           .setComponents(
-              Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
+              Mesh("mesh://skybox".toUri(), hittable = MeshCollision.NoCollision),
               Material().apply { unlit = true },
               Transform(),
               Visible(false),
@@ -196,7 +195,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
     glxfEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
-          Uri.parse("scenes/Composition.glxf"),
+          "scenes/Composition.glxf".toUri(),
           rootEntity = glxfEntity!!,
           keyName = "scene",
       )
@@ -220,7 +219,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   }
 
   fun tryStartMode(mode: PlayMode) {
-    if (mode == CurrentMode) {
+    if (mode == currentMode) {
       return
     }
 
@@ -237,11 +236,11 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
       else -> {}
     }
 
-    CurrentMode = mode
+    currentMode = mode
   }
 
   private fun exitCurrentMode() {
-    when (CurrentMode) {
+    when (currentMode) {
       PlayMode.EXPLORE -> {
         toggleSkybox(false)
 
@@ -259,7 +258,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   // user interactions during explore mode
 
   fun userDroppedPin(coords: GeoCoordinates) {
-    if (CurrentMode !== PlayMode.EXPLORE) {
+    if (currentMode !== PlayMode.EXPLORE) {
       return
     }
 
@@ -269,7 +268,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   }
 
   fun userSelectedLandmark(info: Landmark, coords: GeoCoordinates) {
-    if (CurrentMode !== PlayMode.EXPLORE) {
+    if (currentMode !== PlayMode.EXPLORE) {
       return
     }
 
@@ -283,7 +282,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   }
 
   fun userToggledLandmarks(enabled: Boolean) {
-    if (CurrentMode !== PlayMode.EXPLORE) {
+    if (currentMode !== PlayMode.EXPLORE) {
       return
     }
 
@@ -323,7 +322,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
               val sceneTexture = SceneTexture(bitmap)
               sceneMaterial.setAlbedoTexture(sceneTexture)
 
-              if (CurrentMode == PlayMode.EXPLORE) {
+              if (currentMode == PlayMode.EXPLORE) {
                 toggleSkybox(true)
               }
 
