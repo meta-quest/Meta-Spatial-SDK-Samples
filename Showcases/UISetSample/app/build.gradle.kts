@@ -35,8 +35,8 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 5
-    versionName = "0.0.12"
+    versionCode = 6
+    versionName = "0.0.13"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }
@@ -107,8 +107,6 @@ android {
 }
 
 dependencies {
-  implementation(files("libs/meta-spatial-uiset-1.0.1.aar"))
-
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.activity.compose)
@@ -128,16 +126,17 @@ dependencies {
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
 
-  // Meta Spatial SDK libs
-  implementation(libs.meta.spatial.sdk)
-  implementation(libs.meta.spatial.sdk.ovrmetrics)
-  implementation(libs.meta.spatial.sdk.physics)
-  implementation(libs.meta.spatial.sdk.toolkit)
-  implementation(libs.meta.spatial.sdk.vr)
-  implementation(libs.meta.spatial.sdk.isdk)
-  implementation(libs.meta.spatial.sdk.mruk)
-  implementation(libs.meta.spatial.sdk.castinputforward)
-  implementation(libs.meta.spatial.sdk.compose)
+  // Meta Spatial SDK libs - Local AAR files
+  implementation(files("libs/meta-spatial-sdk-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-castinputforward-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-compose-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-isdk-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-mruk-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-ovrmetrics-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-physics-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-toolkit-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-uiset-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-vr-0.8.0.aar"))
 
   // Utilities
   implementation(libs.jakewharton.timber)
