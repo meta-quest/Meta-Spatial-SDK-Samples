@@ -31,7 +31,6 @@ import com.meta.pixelandtexel.geovoyage.services.googlemaps.IPanoramaServiceHand
 import com.meta.pixelandtexel.geovoyage.services.llama.QueryLlamaService
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.runtime.AlphaMode
 import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.SceneAudioAsset
@@ -55,6 +54,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import androidx.core.net.toUri
+import com.meta.spatial.runtime.PanelShapeLayerBlendType
 
 class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSystemActivity() {
   companion object {
@@ -80,7 +80,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   private lateinit var permissionsResultCallback: (granted: Boolean) -> Unit
 
   override fun registerFeatures(): List<SpatialFeature> {
-    return listOf(VRFeature(this), IsdkFeature(this, spatial, systemManager))
+    return listOf(VRFeature(this))
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -130,7 +130,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             layoutHeightInDp = 600f
             includeGlass = false
             themeResourceId = R.style.PanelAppThemeTransparent
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
             forceSceneTexture = true
             // Enable better looking panels
             layerConfig = LayerConfig()
