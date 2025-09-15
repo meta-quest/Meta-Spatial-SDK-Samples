@@ -27,7 +27,6 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
@@ -68,8 +67,7 @@ class LiveStreamingActivity :
   private lateinit var cameraViewSurfaceProvider: ISurfaceProvider
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf(VRFeature(this), ComposeFeature(), IsdkFeature(this, spatial, systemManager))
+    val features = mutableListOf(VRFeature(this), ComposeFeature())
     return features
   }
 

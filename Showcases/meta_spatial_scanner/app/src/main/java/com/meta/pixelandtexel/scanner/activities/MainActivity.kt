@@ -45,7 +45,6 @@ import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SendRate
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
@@ -118,12 +117,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             onTrackedObjectSelected = ::showInfoPanelForObject,
         )
 
-    return listOf(
-        VRFeature(this),
-        ComposeFeature(),
-        objectDetectionFeature,
-        IsdkFeature(this, spatial, systemManager),
-    )
+    return listOf(VRFeature(this), ComposeFeature(), objectDetectionFeature)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {

@@ -18,7 +18,7 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 11
+    versionCode = 12
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -89,20 +89,11 @@ dependencies {
 
   // Meta Spatial SDK libs
   implementation(libs.meta.spatial.sdk.base)
-  // implementation(libs.meta.spatial.sdk.ovrmetrics)
-  implementation(libs.meta.spatial.sdk.toolkit)
-  // implementation(libs.meta.spatial.sdk.physics)
-  implementation(libs.meta.spatial.sdk.vr)
-  // implementation(libs.meta.spatial.sdk.castinputforward)
-  // implementation(libs.meta.spatial.sdk.hotreload)
-  // implementation(libs.meta.spatial.sdk.datamodelinspector)
-  implementation(libs.meta.spatial.sdk.isdk)
-  // implementation(libs.meta.spatial.sdk.animation)
   implementation(libs.meta.spatial.sdk.compose)
-  // implementation(libs.meta.spatial.sdk.mruk)
-
-  // Meta Spatial SDK UI Toolkit
-  implementation(files("libs/meta-spatial-uiset-1.0.1.aar"))
+  implementation(libs.meta.spatial.sdk.isdk)
+  implementation(libs.meta.spatial.sdk.toolkit)
+  implementation(libs.meta.spatial.sdk.uiset)
+  implementation(libs.meta.spatial.sdk.vr)
 
   // Mediapipe CV object detection
   implementation(libs.google.mediapipe.tasks.vision)
