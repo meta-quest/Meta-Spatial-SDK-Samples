@@ -14,6 +14,7 @@ entities:
             - ref:VideoPlayerPattern
             - ref:CustomUIPattern31
             - ref:Navigator
+            - ref:CardsLayout
       tag: Scene
   com.meta.models.SceneNode:
     - components:
@@ -556,5 +557,30 @@ entities:
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: Navigator
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: CardsLayout
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 2
+            - 1.79999995
+            - 1
+          translation:
+            - 2.92031813
+            - -1.40771508
+            - 0
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/12"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: CardsLayout
 metadata:
-  version: 1.32
+  version: 1.33

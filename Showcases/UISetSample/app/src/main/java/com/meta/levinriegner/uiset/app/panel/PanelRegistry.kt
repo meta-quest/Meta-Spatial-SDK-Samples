@@ -13,6 +13,7 @@ import com.meta.levinriegner.uiset.app.layouts.SlidersLayout
 import com.meta.levinriegner.uiset.app.layouts.TextFieldsLayout
 import com.meta.levinriegner.uiset.app.layouts.TextTileButtonsLayout
 import com.meta.levinriegner.uiset.app.layouts.TooltipsLayout
+import com.meta.levinriegner.uiset.app.layouts.CardsLayout
 import com.meta.levinriegner.uiset.app.layouts.patterns.CustomPattern2x4
 import com.meta.levinriegner.uiset.app.layouts.patterns.CustomPattern3x3
 import com.meta.levinriegner.uiset.app.layouts.patterns.CustomPatternThree
@@ -99,6 +100,13 @@ class PanelRegistry {
             layoutHeight = 1263f,
         ) {
           DialogsLayout()
+        },
+        panelRegistration(
+            PanelRegistrationIds.PANEL_CARDS_LAYOUT,
+            layoutWidth = 1363f,
+            layoutHeight = 1080f,
+        ) {
+          CardsLayout()
         },
         panelRegistration(
             PanelRegistrationIds.PANEL_HORIZON_OS_PATTERN1,
