@@ -48,6 +48,7 @@ import com.meta.spatial.core.Vector3
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
+import com.meta.spatial.runtime.PanelShapeLayerBlendType
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Grabbable
@@ -194,7 +195,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             width = 0.368f
             height = 0.404f
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
             effectShader = "customPanel.frag" // just for demonstration purposes
           }
           composePanel {
@@ -231,7 +233,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             width = 0.04f
             height = 0.04f
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
           }
           panel {
             val helpBtn =
@@ -258,7 +261,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             width = 0.04f
             height = 0.04f
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
           }
           panel {
             cameraControlsBtn =
@@ -300,7 +304,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             width = 0.632f
             height = 0.644f
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
           }
           composePanel {
             val vm =
@@ -330,7 +335,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             width = 0.708f
             height = 0.644f
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
           }
           composePanel {
             val vm = CuratedObjectInfoViewModel(pendingCuratedObject!!.ui, curatedObjectEntity)

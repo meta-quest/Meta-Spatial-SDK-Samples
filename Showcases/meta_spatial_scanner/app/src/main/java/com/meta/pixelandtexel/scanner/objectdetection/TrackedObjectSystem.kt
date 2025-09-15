@@ -33,6 +33,7 @@ import com.meta.spatial.runtime.DepthTest
 import com.meta.spatial.runtime.HitInfo
 import com.meta.spatial.runtime.InputListener
 import com.meta.spatial.runtime.LayerConfig
+import com.meta.spatial.runtime.PanelShapeLayerBlendType
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneMaterialAttribute
 import com.meta.spatial.runtime.SceneMaterialDataType
@@ -116,7 +117,8 @@ class TrackedObjectSystem(
             width = 0.5f
             height = 0.1f
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
           }
           composePanel {
             val info =

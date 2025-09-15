@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.res.XmlResourceParser
 import android.net.Uri
 import android.util.Log
+import com.meta.pixelandtexel.scanner.BuildConfig
 import com.meta.pixelandtexel.scanner.Outlined
 import com.meta.pixelandtexel.scanner.models.CuratedObject
 import com.meta.pixelandtexel.scanner.models.ImageCopyPanelContent
@@ -556,7 +557,7 @@ class CuratedObjectHandler(
                   context.resources.getIdentifier(
                       resName,
                       "drawable",
-                      "com.meta.pixelandtexel.scanner",
+                      BuildConfig.APPLICATION_ID,
                   )
               assert(currentPanelImageResId != 0)
             }
@@ -573,7 +574,7 @@ class CuratedObjectHandler(
                   context.resources.getIdentifier(
                       resName,
                       "string",
-                      "com.meta.pixelandtexel.scanner",
+                      BuildConfig.APPLICATION_ID,
                   )
               assert(currentPanelCopyResId != 0)
             }
