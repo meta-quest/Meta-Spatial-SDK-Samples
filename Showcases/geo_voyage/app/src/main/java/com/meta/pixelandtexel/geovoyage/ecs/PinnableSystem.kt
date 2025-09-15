@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.pixelandtexel.geovoyage.ecs.pinnable
+package com.meta.pixelandtexel.geovoyage.ecs
 
 import android.util.Log
 import com.meta.pixelandtexel.geovoyage.Pinnable

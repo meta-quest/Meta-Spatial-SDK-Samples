@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.pixelandtexel.geovoyage.ecs.spin
+package com.meta.pixelandtexel.geovoyage.ecs
 
 import com.meta.pixelandtexel.geovoyage.Spin
 import com.meta.pixelandtexel.geovoyage.utils.MathUtils.fromAxisAngle

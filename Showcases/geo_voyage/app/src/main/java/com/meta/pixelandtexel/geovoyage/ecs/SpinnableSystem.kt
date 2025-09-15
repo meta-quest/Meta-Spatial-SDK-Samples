@@ -1,6 +1,6 @@
 // (c) Meta Platforms, Inc. and affiliates. Confidential and proprietary.
 
-package com.meta.pixelandtexel.geovoyage.ecs.spinnable
+package com.meta.pixelandtexel.geovoyage.ecs
 
 import android.util.Log
 import com.meta.pixelandtexel.geovoyage.GrabbableNoRotation
