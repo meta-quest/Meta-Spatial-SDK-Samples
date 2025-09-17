@@ -197,8 +197,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             layerConfig = LayerConfig()
             layerBlendType = PanelShapeLayerBlendType.MASKED
             enableLayerFeatheredEdge = true
-            // NOTE temporarily removed to circumvent shader reference bug in Spatial SDK 0.8.0
-            // effectShader = "customPanel.frag" // just for demonstration purposes
+            effectShader = "customPanel.frag" // just for demonstration purposes
           }
           composePanel {
             setContent {
