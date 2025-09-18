@@ -143,6 +143,7 @@ private fun Header(
           Text(
               text = stringResource(filter.titleResId()),
               style = MaterialTheme.typography.titleMedium.copy(color = AppColor.White),
+              style = MaterialTheme.typography.titleMedium.copy(color = AppColor.White),
           )
           Spacer(Modifier.size(Dimens.xSmall))
           Text(
