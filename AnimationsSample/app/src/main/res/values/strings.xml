@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="ui_panel_title">Panel Animation Sample</string>
+  <string
+    name="ui_panel_description"
+  >This sample demonstrates panel shape animations between cylinder and quad shapes.</string>
+  <string name="change_to_quad_shape">Change to quad shape</string>
+  <string name="change_to_cylinder_shape">Change to cylinder shape</string>
+  <string name="about_panel_title">Animations Sample</string>
+  <string
+    name="about_panel_description"
+  >This sample shows how to play animation clips, create reusable animation drivers, and demonstrates frame-based procedural animation.</string>
+  <string name="info_panel">Press the button to start the drone</string>
+  <string name="grab_panel_title">Follow modes</string>
+  <string
+    name="grab_panel"
+  >Grab the orb and move it around to fly the drone. If you click the button, it will change between a custom follow mode and the built in Followable system.</string>
+  <string name="change_to_followable">Change to followable mode</string>
+  <string name="change_to_custom">Change to custom mode</string>
+</resources>

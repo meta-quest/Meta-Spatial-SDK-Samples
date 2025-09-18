@@ -1,6 +1,10 @@
-<?xml version="1.0" ?>
-<ComponentSchema packageName="com.meta.spatial.samples.physicssample">
-  <Component name="Spinner" description="A Component that spins an object.">
+<?xml version="1.0" encoding="utf-8" ?>
+<ComponentSchema
+  packageName="com.meta.spatial.samples.physicssample"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.8.0/ComponentSchema.xsd"
+>
+<Component name="Spinner" description="A Component that spins an object.">
     <FloatAttribute name="speed" defaultValue="50.0f" />
   </Component>
 </ComponentSchema>

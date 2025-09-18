@@ -7,38 +7,29 @@
 
 package com.meta.spatial.samples.mruksample
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
 import com.meta.spatial.samples.mruksample.anchor_mesh.MrukAnchorMeshSampleActivity
 import com.meta.spatial.samples.mruksample.keyboard_tracker.KeyboardTrackerSampleActivity
 import com.meta.spatial.samples.mruksample.qr_code_scanner.QrCodeScannerSampleActivity
 import com.meta.spatial.samples.mruksample.raycast.RaycastSampleActivity
 
 /** Basic activity that shows a menu to choose between the different sample activities. */
-class MrukSampleStartMenuActivity : Activity() {
+class MrukSampleStartMenuActivity : ComponentActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    setContentView(R.layout.ui_mruk_start_menu)
-
-    val anchorMeshButton = findViewById<Button>(R.id.button_sample_anchor_mesh)
-    anchorMeshButton?.setOnClickListener {
-      startSampleActivity(MrukAnchorMeshSampleActivity::class.java)
-    }
-
-    val raycastButton = findViewById<Button>(R.id.button_sample_raycast)
-    raycastButton?.setOnClickListener { startSampleActivity(RaycastSampleActivity::class.java) }
-
-    val keyboardTrackerButton = findViewById<Button>(R.id.button_sample_keyboard_tracker)
-    keyboardTrackerButton?.setOnClickListener {
-      startSampleActivity(KeyboardTrackerSampleActivity::class.java)
-    }
-
-    val qrCodeScannerButton = findViewById<Button>(R.id.button_sample_qr_code_scanner)
-    qrCodeScannerButton?.setOnClickListener {
-      startSampleActivity(QrCodeScannerSampleActivity::class.java)
+    setContent {
+      StartMenuLayout(
+          onAnchorMeshClick = { startSampleActivity(MrukAnchorMeshSampleActivity::class.java) },
+          onRaycastClick = { startSampleActivity(RaycastSampleActivity::class.java) },
+          onKeyboardTrackerClick = {
+            startSampleActivity(KeyboardTrackerSampleActivity::class.java)
+          },
+          onQrCodeScannerClick = { startSampleActivity(QrCodeScannerSampleActivity::class.java) },
+      )
     }
   }
 

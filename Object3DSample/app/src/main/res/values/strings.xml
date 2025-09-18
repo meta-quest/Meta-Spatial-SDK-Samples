@@ -1,3 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="panel_title">Object Library</string>
+  <string
+    name="panel_description"
+  >Select an object from the rack and see it spawn into the world. You can change the physics properties in the Meta Spatial Editor project for different effects.</string>
 </resources>

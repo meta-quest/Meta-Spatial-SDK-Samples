@@ -4,6 +4,107 @@ Check out our official [release notes](https://developers.meta.com/horizon/docum
 
 This format is roughly based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 0.8.0 - 2025-09-17
+
+### Added
+
+- New Panel Registration APIs
+  - `ComposeViewPanelRegistration`: Panel registration for Jetpack Compose-based panels.
+  - `ViewPanelRegistration`: Panel registration for dynamically created View-based panels.
+  - `LayoutXMLPanelRegistration`: Panel registration for XML layout view-based panels.
+  - `IntentPanelRegistration`: Panel registration for Intent-based panels that launch Activities.
+  - `ActivityPanelRegistration`: Panel registration for Activity-based panels that launch specific Activity classes.
+  - `VideoSurfacePanelRegistration`: Panel registration for direct-to-surface media rendering.
+  - `ReadableVideoSurfacePanelRegistration`: Panel registration for when you want both post-processing and a simple surface to render on.
+  - The new APIs are focused on simplifying panel configuration, for more information see our [documentation page on panel registration](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-2dpanel-registration)
+- Shader hot reload
+  - You can now hot reload your custom shader code. More information is available in [our documentation](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-hot-reload/#shader-hot-reload).
+- `preloadMesh()` support
+  - This method loads and caches a mesh from the specified URI so that when it's later assigned to an entity via the Mesh component, it will be available immediately. This is useful for performance optimization, especially during app startup when you can front-load your meshes.
+  - Example code:
+
+    ```kotlin
+    systemManager.findSystem<MeshCreationSystem>()
+    meshCreationSystem.preloadMesh(Uri.parse(meshFile))
+    ```
+
+- Panel graphics changes
+  - New `layerBlendType`, replaces the `enableTransparent` control for panels. Now supports the ability to set the layer as:
+    - `OPAQUE`: Alpha/transparency is ignored
+    - `MASKED`: This is what `enableTransparent` previously enabled, panels can become transparent but will not blend with the background (the alpha is essentially force to be only 0 or 1)
+    - `ALPHA_BLEND`: Alpha is blended accurately, resulting in higher quality edges. However, it is slower and can result in blending artifacts when overlapping with semitransparent meshes.
+  - New `enableLayerFeatheredEdge` option in `PanelRenderSettings`, this will allow you to remove sharp black outlines on the edge of panels
+- UISet
+  - Bordered buttons
+    - New composables: `BorderedButton`, `BorderedIconButton` (`com.meta.spatial.uiset.button`).
+    - New defaults and colors: `BorderedButtonDefaults`, `BorderedButtonColors` (`com.meta.spatial.uiset.button.foundation`).
+    - New button variants: `ButtonVariant.Regular.Bordered`, `ButtonVariant.Circled.Bordered`.
+  - Card components
+    - New composables: `PrimaryCard`, `SecondaryCard`, `OutlinedCard` (`com.meta.spatial.uiset.card.SpatialCard`).
+    - Foundation: `CardImpl`, `CardDefaults`, `CardVariant`.
+- Experimental: `Entity.markComponentChanged()` API
+  - Marks a component as "changed" without setting new component data
+  - This is useful in rare cases where you want the component to be considered "changed" for change detection purposes, even when the actual component data hasn't been modified. This will trigger component change listeners and queries that look for changed components.
+
+
+### Changed
+
+- ISDK
+  - [ISDK](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-isdk-overview) is now the default input system.
+  - Opt-out of ISDK via a new argument on VRFeature
+
+    ```kotlin
+    override fun registerFeatures(): List<SpatialFeature> {
+      return listOf(
+          // Set the inputSystemType to SIMPLE_CONTROLLER to turn off ISDK
+          VRFeature(this, inputSystemType = VrInputSystemType.SIMPLE_CONTROLLER),
+      )
+    }
+    ```
+
+    - Adds near-field touch limiting & grabbing of objects
+    - Some updates to your app may be required - interactions no longer support 2 sided panels. ensure panels and buttons are oriented with their normal vector pointing forwards.
+  - `com.meta.spatial.vr.InputSystem` is no longer enabled by default. (`com.meta.spatial.isdk.IsdkSystem` now controls input)
+  - `com.meta.spatial.toolkit.GrabbableSystem`  is no longer enabled by default (`com.meta.spatial.isdk.IsdkSystem` now controls grabbing & transforms)
+  - `IsdkGrabbableFollowableSystem` fixes behavior when Entity has both `Grabbable` and `Followable` components.
+  - `IsdkDefaultCursorSystem`: made some non-user-servicable fields private
+  - Support for microgestures, check out `MicrogestureBits`
+- Cast input forwarding
+  - The debug lines (green lines that would appear during input forwarding) have now been removed.
+  - Cursor placement for input forwarding is most accurate when the eye is set to "Right Eye" in MQDH Cast
+- Spatial gradle plugin
+  - The `export` step of the Gradle build process is now always executed and cannot be opted-out. If you don’t specify the Spatial Editor asset folder, the export step will not generate a GLXF file.
+- UISet
+  - Buttons foundation (`ButtonImpl`)
+    - Signature extended with `modifier`, `colors`, `borderColor`, `labelTextStyle`, `contentAlignment`.
+    - Color resolution updated to use provided `*ButtonColors` per variant; falls back to defaults when `colors` is null.
+    - Border rendering added for bordered variants (1.dp, configurable via `borderColor`).
+    - Content alignment is now configurable (affects container alignment and row arrangement).
+  - Primary and Secondary buttons
+    - `PrimaryButton` and `SecondaryButton` signatures extended with `modifier`, `colors`, `labelTextStyle`, `contentAlignment`.
+  - Existing `PrimaryIconButton`, `PrimaryCircleButton`, `SecondaryIconButton`, and `SecondaryCircleButton` functions were updated to support `modifier`,   `colors`, and other customization parameters.
+  - Switch (`SpatialSwitch` and `SwitchImpl`)
+    - `SpatialSwitch` signature was updated to accept `colors` and `thumbContent`, and the `modifier` parameter was reordered.
+    - `SwitchImpl` updated to accept and render optional `thumbContent`.
+    - `SwitchColors` now exposes `iconColor(enabled, checked)` for thumb content tinting.
+  - Dropdown
+    - `SpatialDropdown` and `SpatialIconDropdown` signatures were extended with `menuModifier`, `showChevron`, and `showDividers` parameters.
+    - `SpatialDropdownItem` data class now includes an optional `suffix` composable property.
+    - Chevron visibility is now conditional for `DropdownPillVariant.Standard`.
+    - `DropdownMenu` styling updated to support custom `menuModifier` and optional dividers.
+    - Menu item layout was refined to support `suffix`.
+  - Navigation (`SpatialSideNavItem` and defaults)
+    - `SpatialSideNavItem` signature extended with `colors`, `primaryTextStyle`, `secondaryTextStyle`, and `selectedBackgroundColor`.
+    - Text styling is now configurable via `primaryTextStyle` / `secondaryTextStyle`.
+    - Selected background color can be overridden via `selectedBackgroundColor`.
+    - Removed fixed icon size wrappers to allow flexible icon sizing.
+  - Theme
+    - `SpatialShapes` and `SpatialShapeSizes` were extended with an `xLarge` size (32.dp).
+- Component XML Schema
+  - A new schema definition is available at: [https://developers.meta.com/horizon/spatial-sdk/0.8.0/ComponentSchema.xsd/](https://developers.meta.com/horizon/spatial-sdk/0.8.0/ComponentSchema.xsd/)
+- Removed APIs
+  - `com.meta.spatial.toolkit.BodyJoint` and `com.meta.spatial.toolkit.TrackedBody` have been removed as they were not implemented
+
 ## 0.7.2 - 2025-08-26
 
 ### Fixed

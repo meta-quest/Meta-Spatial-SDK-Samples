@@ -9,11 +9,15 @@ package com.meta.spatial.samples.animationssample
 
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.ComposeView
+import androidx.core.net.toUri
 import com.meta.spatial.animation.PanelAnimationFeature
 import com.meta.spatial.animation.PanelQuadCylinderAnimation
 import com.meta.spatial.animation.PanelQuadCylinderAnimationType
 import com.meta.spatial.castinputforward.CastInputForwardFeature
+import com.meta.spatial.compose.ComposeFeature
+import com.meta.spatial.compose.ComposeViewPanelRegistration
 import com.meta.spatial.core.DataModel
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
@@ -22,28 +26,36 @@ import com.meta.spatial.core.SpatialSDKExperimentalAPI
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.runtime.PanelShapeType
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneObject
-import com.meta.spatial.runtime.panel.PanelConfigOptions2
-import com.meta.spatial.runtime.panel.cylinder
-import com.meta.spatial.runtime.panel.layer
-import com.meta.spatial.runtime.panel.onPanelCreation
-import com.meta.spatial.runtime.panel.resolution
-import com.meta.spatial.runtime.panel.shapeType
-import com.meta.spatial.runtime.panel.style
+import com.meta.spatial.samples.animationssample.panel.ABOUT_PANEL_HEIGHT
+import com.meta.spatial.samples.animationssample.panel.ABOUT_PANEL_WIDTH
+import com.meta.spatial.samples.animationssample.panel.ANIMATION_PANEL_HEIGHT
+import com.meta.spatial.samples.animationssample.panel.ANIMATION_PANEL_WIDTH
+import com.meta.spatial.samples.animationssample.panel.AboutPanel
+import com.meta.spatial.samples.animationssample.panel.GRAB_PANEL_HEIGHT
+import com.meta.spatial.samples.animationssample.panel.GRAB_PANEL_WIDTH
+import com.meta.spatial.samples.animationssample.panel.GrabPanel
+import com.meta.spatial.samples.animationssample.panel.INFO_PANEL_HEIGHT
+import com.meta.spatial.samples.animationssample.panel.INFO_PANEL_WIDTH
+import com.meta.spatial.samples.animationssample.panel.InfoPanel
+import com.meta.spatial.samples.animationssample.panel.PanelAnimationPanel
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.DpPerMeterDisplayOptions
 import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.MeshCollision
 import com.meta.spatial.toolkit.PanelRegistration
+import com.meta.spatial.toolkit.PanelStyleOptions
+import com.meta.spatial.toolkit.QuadShapeOptions
 import com.meta.spatial.toolkit.SceneObjectSystem
 import com.meta.spatial.toolkit.Transform
+import com.meta.spatial.toolkit.UIPanelSettings
 import com.meta.spatial.vr.VRFeature
 import java.util.concurrent.CompletableFuture
 import kotlin.random.Random
@@ -58,7 +70,7 @@ import kotlinx.coroutines.launch
  */
 @OptIn(SpatialSDKExperimentalAPI::class)
 class AnimationsSampleActivity : AppSystemActivity() {
-  public val GLXF_DRONE_SCENE = "GLXF_DRONE_SCENE"
+  val GLXF_DRONE_SCENE = "GLXF_DRONE_SCENE"
 
   private var gltfxEntity: Entity? = null
   private val activityScope = CoroutineScope(Dispatchers.Main)
@@ -70,7 +82,7 @@ class AnimationsSampleActivity : AppSystemActivity() {
     val features =
         mutableListOf<SpatialFeature>(
             VRFeature(this),
-            IsdkFeature(this, spatial, systemManager),
+            ComposeFeature(),
             PanelAnimationFeature(),
         )
     if (BuildConfig.DEBUG) {
@@ -104,48 +116,74 @@ class AnimationsSampleActivity : AppSystemActivity() {
   }
 
   override fun registerPanels(): List<PanelRegistration> {
-    val defaultOptions =
-        PanelConfigOptions2.style(themeResourceId = R.style.PanelAppThemeTransparent).layer()
     return listOf(
-        PanelRegistration(R.layout.ui_panel).fromConfigOptions2 { ent ->
-          defaultOptions.cylinder(1.0f).resolution(widthInDp = 720f).onPanelCreation { ent ->
-            val transformButton = rootView?.findViewById<Button>(R.id.transform_button)!!
-            transformButton.setOnClickListener {
-              if (shapeType == PanelShapeType.CYLINDER) {
-                transformButton.text = "Change to Cylinder Shape"
-                ent.setComponent(
-                    PanelQuadCylinderAnimation(
-                        startTime = DataModel.getLocalDataModelTime(),
-                        animationType = PanelQuadCylinderAnimationType.CYLINDER_TO_QUAD,
-                    )
-                )
-              } else {
-                transformButton.text = "Change to Quad Shape"
-                ent.setComponent(
-                    PanelQuadCylinderAnimation(
-                        startTime = DataModel.getLocalDataModelTime(),
-                        animationType = PanelQuadCylinderAnimationType.QUAD_TO_CYLINDER,
-                        targetRadius = Random.nextFloat() * 2f + 0.5f,
-                    )
-                )
-              }
-            }
-          }
-        },
-        PanelRegistration(R.layout.ui_about).fromConfigOptions2 { defaultOptions },
-        PanelRegistration(R.layout.ui_info).fromConfigOptions2 { defaultOptions },
-        PanelRegistration(R.layout.ui_grab).fromConfigOptions2 { ent ->
-          defaultOptions.onPanelCreation { ent ->
-            val followModeButton = rootView?.findViewById<Button>(R.id.follow_mode_button)!!
-            followModeButton.setOnClickListener {
-              if (droneSceneController != null) {
-                droneSceneController!!.toggleFollowTargetMode()
-                if (droneSceneController!!.getFollowTargetIsBuiltInFollower()) {
-                  followModeButton.text = "Change to Custom"
-                } else {
-                  followModeButton.text = "Change to Builtin"
+        ComposeViewPanelRegistration(
+            R.id.ui_panel,
+            composeViewCreator = { _, context ->
+              // Create ComposeView without content
+              ComposeView(context)
+            },
+            panelSetupWithComposeView = { composeView, panelSceneObject, entity ->
+              // Set content here where you have access to panelSceneObject!
+              composeView.setContent {
+                PanelAnimationPanel {
+                  val animationDurationMs =
+                      resources.getInteger(R.integer.animation_duration_ms).toLong()
+                  val startTime = entity.tryGetComponent<PanelQuadCylinderAnimation>()?.startTime
+                  if (
+                      startTime != null &&
+                          startTime + animationDurationMs > DataModel.getLocalDataModelTime()
+                  ) {
+                    false
+                  } else {
+                    if (
+                        panelSceneObject.getPanelShapeConfig()?.panelShapeType ==
+                            PanelShapeType.CYLINDER
+                    ) {
+                      entity.setComponent(
+                          PanelQuadCylinderAnimation(
+                              startTime = DataModel.getLocalDataModelTime(),
+                              animationType = PanelQuadCylinderAnimationType.CYLINDER_TO_QUAD,
+                              durationInMs = animationDurationMs,
+                          )
+                      )
+                    } else {
+                      entity.setComponent(
+                          PanelQuadCylinderAnimation(
+                              startTime = DataModel.getLocalDataModelTime(),
+                              animationType = PanelQuadCylinderAnimationType.QUAD_TO_CYLINDER,
+                              targetRadius = Random.nextFloat() * 2f + 0.5f,
+                              durationInMs = animationDurationMs,
+                          )
+                      )
+                    }
+                    true
+                  }
                 }
               }
+            },
+            settingsCreator = {
+              UIPanelSettings(
+                  shape =
+                      QuadShapeOptions(
+                          width = ANIMATION_PANEL_WIDTH,
+                          height = ANIMATION_PANEL_HEIGHT,
+                      ),
+                  style = PanelStyleOptions(themeResourceId = R.style.PanelAppThemeTransparent),
+                  display = DpPerMeterDisplayOptions(),
+              )
+            },
+        ),
+        createSimpleComposePanel(R.id.about_panel, ABOUT_PANEL_WIDTH, ABOUT_PANEL_HEIGHT) {
+          AboutPanel()
+        },
+        createSimpleComposePanel(R.id.info_panel, INFO_PANEL_WIDTH, INFO_PANEL_HEIGHT) {
+          InfoPanel()
+        },
+        createSimpleComposePanel(R.id.grab_panel, GRAB_PANEL_WIDTH, GRAB_PANEL_HEIGHT) {
+          GrabPanel {
+            if (droneSceneController != null) {
+              droneSceneController!!.toggleFollowTargetMode()
             }
           }
         },
@@ -180,11 +218,30 @@ class AnimationsSampleActivity : AppSystemActivity() {
     )
   }
 
+  private fun createSimpleComposePanel(
+      panelId: Int,
+      width: Float,
+      height: Float,
+      content: @Composable () -> Unit,
+  ): ComposeViewPanelRegistration {
+    return ComposeViewPanelRegistration(
+        panelId,
+        composeViewCreator = { _, ctx -> ComposeView(ctx).apply { setContent { content() } } },
+        settingsCreator = {
+          UIPanelSettings(
+              shape = QuadShapeOptions(width = width, height = height),
+              style = PanelStyleOptions(themeResourceId = R.style.PanelAppThemeTransparent),
+              display = DpPerMeterDisplayOptions(),
+          )
+        },
+    )
+  }
+
   private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
-          Uri.parse("apk:///scenes/droneScene.glxf"),
+          "apk:///scenes/droneScene.glxf".toUri(),
           rootEntity = gltfxEntity!!,
           keyName = GLXF_DRONE_SCENE,
           onLoaded = onLoaded,
@@ -192,7 +249,7 @@ class AnimationsSampleActivity : AppSystemActivity() {
     }
   }
 
-  public fun getSceneObjectByName(name: String): CompletableFuture<SceneObject>? {
+  fun getSceneObjectByName(name: String): CompletableFuture<SceneObject>? {
     try {
       val sos = systemManager.findSystem<SceneObjectSystem>()
       val glxf = glXFManager.getGLXFInfo(GLXF_DRONE_SCENE)

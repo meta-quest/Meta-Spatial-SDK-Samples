@@ -7,31 +7,35 @@
 
 package com.meta.spatial.samples.customcomponentssample
 
-import android.net.Uri
 import android.os.Bundle
+import androidx.compose.ui.platform.ComposeView
+import androidx.core.net.toUri
 import com.meta.spatial.castinputforward.CastInputForwardFeature
+import com.meta.spatial.compose.ComposeFeature
+import com.meta.spatial.compose.ComposeViewPanelRegistration
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
-import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
-import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.DpPerMeterDisplayOptions
 import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.MeshCollision
 import com.meta.spatial.toolkit.PanelRegistration
+import com.meta.spatial.toolkit.PanelStyleOptions
+import com.meta.spatial.toolkit.QuadShapeOptions
 import com.meta.spatial.toolkit.Transform
+import com.meta.spatial.toolkit.UIPanelSettings
 import com.meta.spatial.vr.VRFeature
 import java.io.File
 import kotlinx.coroutines.CoroutineScope
@@ -48,8 +52,8 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
     val features =
         mutableListOf<SpatialFeature>(
             VRFeature(this),
-            IsdkFeature(this, spatial, systemManager),
             HotReloadFeature(this),
+            ComposeFeature(),
             OVRMetricsFeature(
                 this,
                 OVRMetricsDataModel() {
@@ -102,16 +106,19 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
 
   override fun registerPanels(): List<PanelRegistration> {
     return listOf(
-        PanelRegistration(R.layout.ui_example) { entity ->
-          config {
-            themeResourceId = R.style.PanelAppThemeTransparent
-            includeGlass = false
-            width = 2.0f
-            height = 1.5f
-            layerConfig = LayerConfig()
-            enableTransparent = true
-          }
-        }
+        ComposeViewPanelRegistration(
+            R.id.welcome_panel,
+            composeViewCreator = { _, context ->
+              ComposeView(context).apply { setContent { WelcomePanel() } }
+            },
+            settingsCreator = {
+              UIPanelSettings(
+                  shape = QuadShapeOptions(width = PANEL_WIDTH, height = PANEL_HEIGHT),
+                  style = PanelStyleOptions(themeResourceId = R.style.PanelAppThemeTransparent),
+                  display = DpPerMeterDisplayOptions(),
+              )
+            },
+        )
     )
   }
 
@@ -133,7 +140,7 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
 
     Entity.create(
         listOf(
-            Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
+            Mesh("mesh://skybox".toUri(), hittable = MeshCollision.NoCollision),
             Material().apply {
               baseTextureAndroidResourceId = R.drawable.skydome
               unlit = true // Prevent scene lighting from affecting the skybox
@@ -147,7 +154,7 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
-          Uri.parse("apk:///scenes/Composition.glxf"),
+          "apk:///scenes/Composition.glxf".toUri(),
           rootEntity = gltfxEntity!!,
           keyName = "example_key_name",
           onLoaded = onLoaded,

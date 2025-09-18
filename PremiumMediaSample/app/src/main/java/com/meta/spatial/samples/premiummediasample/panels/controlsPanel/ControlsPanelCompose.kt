@@ -32,6 +32,7 @@ import kotlin.math.max
 object ControlsPanelConstants {
   const val PANEL_WIDTH_DP = 800f
   const val PANEL_HEIGHT_DP = 220f
+  const val PANEL_DP_PER_METER = 1000f
 
   val controlsBackgroundColor = Color(0xFF1c2b33)
   val controlsBackgroundSecondary = Color(0xFF283943)

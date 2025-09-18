@@ -48,6 +48,7 @@ import com.meta.spatial.samples.premiummediasample.systems.scalable.AnalogScalab
 import com.meta.spatial.samples.premiummediasample.systems.scalable.TouchScalableSystem
 import com.meta.spatial.samples.premiummediasample.systems.scaleChildren.ScaleChildrenSystem
 import com.meta.spatial.samples.premiummediasample.systems.tweenEngine.TweenEngineSystem
+import com.meta.spatial.spatialaudio.SpatialAudioFeature
 import com.meta.spatial.toolkit.AvatarSystem
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.vr.LocomotionSystem
@@ -56,8 +57,10 @@ import java.io.File
 class ImmersiveActivity : BaseMrukActivity(), IPCMessageHandler {
   val ipcServiceConnection: IPCServiceConnection =
       IPCServiceConnection(this, this, IPCService.IMMERSIVE_CHANNEL)
+  val spatialAudioFeature = SpatialAudioFeature()
 
-  val immersiveViewModel = ImmersiveViewModel(ipcServiceConnection, systemManager)
+  val immersiveViewModel =
+      ImmersiveViewModel(ipcServiceConnection, systemManager, spatialAudioFeature)
 
   override fun registerFeatures(): List<SpatialFeature> {
     val parentFeatures = super.registerFeatures()
@@ -65,6 +68,7 @@ class ImmersiveActivity : BaseMrukActivity(), IPCMessageHandler {
         mutableListOf(
             OVRMetricsFeature(this, HeapMetrics()),
             ComposeFeature(),
+            spatialAudioFeature,
         )
     if (BuildConfig.DEBUG) {
       additionalFeatures.add(CastInputForwardFeature(this))
@@ -212,7 +216,10 @@ class ImmersiveActivity : BaseMrukActivity(), IPCMessageHandler {
   }
 
   override fun registerPanels(): List<PanelRegistration> {
-    return listOf(HomePanelEntity.panelRegistration(), ControlsPanelEntity.panelRegistration())
+    return listOf(
+        HomePanelEntity.panelRegistration(scene, spatialContext),
+        ControlsPanelEntity.panelRegistration(scene, spatialContext),
+    )
   }
 
   companion object {

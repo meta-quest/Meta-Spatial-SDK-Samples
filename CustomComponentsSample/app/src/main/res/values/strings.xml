@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
   <string name="app_name">LookAt</string>
+  <string name="panel_title">Custom Components Sample</string>
+  <string
+    name="panel_description"
+  >This sample shows how you can create custom Meta Spatial SDK components for your project. This panel will always face you.</string>
 </resources>

@@ -18,22 +18,27 @@ entities:
           documentReference: projref:MediaRoom/Main.metaspatialobj
         com.meta.components.Name:
           name: Environment
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.SupportsLocomotion:
           {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: true
       tag: Environment
     - components:
         com.meta.components.Animatable:
           {}
         com.meta.components.Name:
           name: VideoPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -44,20 +49,23 @@ entities:
             - -6.13085729e-16
             - 1.32000005
             - 4.8499999
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Grabbable:
           enabled: false
         com.meta.spatial.toolkit.Panel:
-          panel: "@integer/video_id"
+          panel: "@id/video_id"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: true
       tag: VideoPanel
     - components:
         com.meta.components.Animatable:
           {}
         com.meta.components.Name:
           name: ListPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 2.72346128e-08
@@ -69,10 +77,13 @@ entities:
             - 1.5
             - 2
             - 1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Grabbable:
           {}
         com.meta.spatial.toolkit.Panel:
-          panel: "@integer/list_panel"
+          panel: "@id/list_panel"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: ListPanel
@@ -81,6 +92,8 @@ entities:
           {}
         com.meta.components.Name:
           name: panels
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0
@@ -96,15 +109,20 @@ entities:
             - -1.66999996
             - 1.33000004
             - 1.72000003
+          componentVersion: 1
           children:
             - ref:ListPanel
             - ref:MRPanel
+        com.meta.components.Visibility:
+          visible: true
       tag: panels
     - components:
         com.meta.components.Animatable:
           {}
         com.meta.components.Name:
           name: MRPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -115,10 +133,13 @@ entities:
             - -0.0439346731
             - -0.809792161
             - -0.200919628
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
-          panel: "@integer/mr_panel"
+          panel: "@id/mr_panel"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: MRPanel
 metadata:
-  version: 1.0
+  version: 1.34

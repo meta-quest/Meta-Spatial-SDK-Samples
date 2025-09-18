@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-
+  <string name="ui_example_title">Physics Sample</string>
+  <string
+    name="ui_example_description"
+  >This sample shows how the physics component can be added and properties can be adjusted in Meta Spatial Editor.</string>
+  <string
+    name="info_panel"
+  >Press the button to start the marbles rolling.\nPress it again to reset.</string>
 </resources>

@@ -1,6 +1,10 @@
-<?xml version="1.0" ?>
-<ComponentSchema packageName="com.meta.spatial.samples.mruksample">
-  <Component name="TargetScale">
+<?xml version="1.0" encoding="utf-8" ?>
+<ComponentSchema
+  packageName="com.meta.spatial.samples.mruksample"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.8.0/ComponentSchema.xsd"
+>
+<Component name="TargetScale">
     <FloatAttribute name="target" defaultValue="1.0f" />
     <FloatAttribute name="speed" defaultValue="0.1f" />
   </Component>

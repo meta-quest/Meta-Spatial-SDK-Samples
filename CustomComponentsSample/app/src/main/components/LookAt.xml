@@ -1,6 +1,10 @@
-<?xml version="1.0" ?>
-<ComponentSchema packageName="com.meta.spatial.samples.customcomponentssample">
-  <Enum name="LookAtAxis">
+<?xml version="1.0" encoding="utf-8" ?>
+<ComponentSchema
+  packageName="com.meta.spatial.samples.customcomponentssample"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.8.0/ComponentSchema.xsd"
+>
+<Enum name="LookAtAxis">
     <EnumValue value="ALL" />
     <EnumValue value="Y" />
   </Enum>

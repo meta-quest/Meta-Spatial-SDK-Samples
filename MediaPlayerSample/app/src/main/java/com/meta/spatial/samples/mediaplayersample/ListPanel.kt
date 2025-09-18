@@ -98,9 +98,9 @@ class MovieViewModel : ViewModel() {
             ),
             Movie(
                 id = 0,
-                title = "Fitness on Meta Quest 3 | Not Moved",
+                title = "Meta Quest | Get Into It",
                 poster_path = R.drawable.movie00,
-                youtubeId = "UDzllafQLGI",
+                youtubeId = "zZIB1xJdamo",
             ),
             Movie(
                 id = 1,
@@ -364,5 +364,13 @@ class ListPanel : ComponentActivity() {
     super.onCreate(savedInstanceState)
     val viewModel: MovieViewModel by viewModels()
     setContent { MovieApp(viewModel) }
+  }
+
+  companion object {
+    const val WIDTH_IN_DP = 461f
+    const val HEIGHT_IN_DP = 615f
+    const val WIDTH_IN_METERS = 1.5f
+    const val HEIGHT_IN_METERS = 2f
+    const val DPI = 260
   }
 }

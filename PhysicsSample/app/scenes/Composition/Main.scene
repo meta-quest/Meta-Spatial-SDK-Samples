@@ -27,20 +27,25 @@ entities:
           {}
         com.meta.components.DocumentReference:
           transformType: None
-          documentReference: projref:environment/Main.metaspatialobj
+          documentReference: projref:collab_room/Main.metaspatialobj
         com.meta.components.Name:
           name: Environment
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.physics.Physics:
-          shape: environment_collisions.glb
-          densityInternal: 1
-          state: 0
           restitution: 0.10000000100000001
+          state: 0
+          densityInternal: 1
+          shape: room_collision.glb
         com.meta.spatial.toolkit.SupportsLocomotion:
           {}
       tag: Environment
@@ -49,6 +54,8 @@ entities:
           {}
         com.meta.components.Name:
           name: Panel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0
@@ -57,15 +64,18 @@ entities:
             - 0
           rotation.format: Euler
           scale:
-            - 2
-            - 1.5
+            - 2.04999995
+            - 1.25
             - 1
           translation:
             - 0
             - 1.10000002
             - -1.70000005
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
-          panel: "@layout/ui_example"
+          panel: "@id/ui_example"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: Panel
@@ -77,6 +87,8 @@ entities:
           documentReference: projref:ballPurple/Main.metaspatialobj
         com.meta.components.Name:
           name: ball0
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 1
@@ -92,24 +104,27 @@ entities:
             - 1.20000005
             - 2.38000011
             - 2.02361226
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.Trigger:
           size:
             - 0.0399999991
             - 0.0399999991
             - 0.0399999991
         com.meta.spatial.physics.Physics:
-          state: 1
-          restitution: 0.01
-          densityInternal: 50
-          dimensions:
-            - 0.0399999991
-            - 0.0399999991
-            - 0.0399999991
+          shape: sphere
           frictionInternal:
             - 0
             - 0
             - 0
-          shape: sphere
+          dimensions:
+            - 0.0399999991
+            - 0.0399999991
+            - 0.0399999991
+          densityInternal: 50
+          restitution: 0.01
+          state: 1
         com.meta.spatial.toolkit.Grabbable:
           {}
       tag: ball0
@@ -121,6 +136,8 @@ entities:
           documentReference: projref:cubePrimitive/Main.metaspatialobj
         com.meta.components.Name:
           name: triggerArea3
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 4.25148308e-08
@@ -136,13 +153,16 @@ entities:
             - -0.750840366
             - 0.185904026
             - -0.412973434
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.TriggerArea:
-          value: 40
-          eventName: speed_up
           size:
             - 1
             - 0.25
             - 0.219999999
+          eventName: speed_up
+          value: 40
       tag: triggerArea31
     - components:
         com.meta.components.Animatable:
@@ -152,6 +172,8 @@ entities:
           documentReference: projref:marbleRunRamps/Main.metaspatialobj
         com.meta.components.Name:
           name: ramps
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -162,15 +184,18 @@ entities:
             - 0
             - 1.44247222
             - 0.438352346
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.physics.Physics:
-          frictionInternal:
-            - 0
-            - 0
-            - 0
-          shape: marbleRun_collision.glb
-          state: 0
-          restitution: 0
           linearVelocity:
+            - 0
+            - 0
+            - 0
+          restitution: 0
+          state: 0
+          shape: marbleRun_collision.glb
+          frictionInternal:
             - 0
             - 0
             - 0
@@ -183,6 +208,8 @@ entities:
           documentReference: projref:ballBlue/Main.metaspatialobj
         com.meta.components.Name:
           name: ball1
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 1
@@ -198,24 +225,27 @@ entities:
             - 1.20000005
             - 2.38000011
             - 2.13876486
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.Trigger:
           size:
             - 0.0399999991
             - 0.0399999991
             - 0.0399999991
         com.meta.spatial.physics.Physics:
-          shape: sphere
-          frictionInternal:
-            - 0
-            - 0
-            - 0
+          state: 1
+          restitution: 0.01
+          densityInternal: 50
           dimensions:
             - 0.0399999991
             - 0.0399999991
             - 0.0399999991
-          densityInternal: 50
-          restitution: 0.01
-          state: 1
+          frictionInternal:
+            - 0
+            - 0
+            - 0
+          shape: sphere
         com.meta.spatial.toolkit.Grabbable:
           {}
       tag: ball1
@@ -227,6 +257,8 @@ entities:
           documentReference: projref:ballGreen/Main.metaspatialobj
         com.meta.components.Name:
           name: ball2
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 1
@@ -242,24 +274,27 @@ entities:
             - 1.20000005
             - 2.38000011
             - 2.25
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.Trigger:
           size:
             - 0.0399999991
             - 0.0399999991
             - 0.0399999991
         com.meta.spatial.physics.Physics:
-          state: 1
-          shape: sphere
-          frictionInternal:
-            - 0
-            - 0
-            - 0
+          restitution: 0.01
           dimensions:
             - 0.0399999991
             - 0.0399999991
             - 0.0399999991
+          frictionInternal:
+            - 0
+            - 0
+            - 0
+          shape: sphere
           densityInternal: 50
-          restitution: 0.01
+          state: 1
         com.meta.spatial.toolkit.Grabbable:
           {}
       tag: ball2
@@ -268,22 +303,25 @@ entities:
           {}
         com.meta.components.Name:
           name: InfoPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
-            - 0.800000012
-            - 0.200000003
+            - 0.639999986
+            - 0.159999996
             - 1
           translation:
             - -0.393686354
             - 1.76591182
             - 1.35805571
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Panel:
-          panel: "@layout/ui_info"
+          panel: "@id/ui_info"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: true
       tag: InfoPanel
     - components:
         com.meta.components.Animatable:
@@ -293,6 +331,8 @@ entities:
           documentReference: projref:cubePrimitive/Main.metaspatialobj
         com.meta.components.Name:
           name: triggerArea0
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0.761159301
@@ -308,13 +348,16 @@ entities:
             - -0.555736065
             - 1.83244526
             - 2.1440146
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.TriggerArea:
-          value: 70
+          eventName: speed_up
           size:
             - 1
             - 0.25
             - 0.300000012
-          eventName: speed_up
+          value: 70
       tag: triggerArea01
     - components:
         com.meta.components.Animatable:
@@ -324,6 +367,8 @@ entities:
           documentReference: projref:button/Main.metaspatialobj
         com.meta.components.Name:
           name: button
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -334,12 +379,15 @@ entities:
             - -0.396609545
             - 1.60354686
             - 1.34796953
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.Button:
+          eventName: start
           downOffset:
             - 0
             - -0.0120000001
             - 0
-          eventName: start
       tag: button1
     - components:
         com.meta.components.Animatable:
@@ -349,6 +397,8 @@ entities:
           documentReference: projref:cubePrimitive/Main.metaspatialobj
         com.meta.components.Name:
           name: triggerArea1
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0.700485766
@@ -364,13 +414,16 @@ entities:
             - -0.545801878
             - 1.59150541
             - 1.64545465
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.TriggerArea:
-          value: 110
+          eventName: speed_up
           size:
             - 1
             - 0.25
             - 0.300000012
-          eventName: speed_up
+          value: 110
       tag: triggerArea1
     - components:
         com.meta.components.Animatable:
@@ -380,6 +433,8 @@ entities:
           documentReference: projref:cubePrimitive/Main.metaspatialobj
         com.meta.components.Name:
           name: triggerArea4
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 1
@@ -395,13 +450,16 @@ entities:
             - -0.759775043
             - 0.189125776
             - 0.239514321
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.TriggerArea:
-          value: 0
+          eventName: finish
           size:
             - 1
             - 0.25
             - 0.5
-          eventName: finish
+          value: 0
       tag: triggerArea4
     - components:
         com.meta.components.Animatable:
@@ -411,6 +469,8 @@ entities:
           documentReference: projref:cubePrimitive/Main.metaspatialobj
         com.meta.components.Name:
           name: triggerArea2
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0.688876092
@@ -426,13 +486,16 @@ entities:
             - -0.348231375
             - 0.314254284
             - -1.24815714
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.TriggerArea:
+          value: 80
+          eventName: speed_up
           size:
             - 1
             - 0.25
             - 0.5
-          eventName: speed_up
-          value: 80
       tag: triggerArea2
     - components:
         com.meta.components.Animatable:
@@ -442,6 +505,8 @@ entities:
           documentReference: projref:blockRotating/Main.metaspatialobj
         com.meta.components.Name:
           name: rotatingBlock
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - -0.17453292
@@ -457,24 +522,27 @@ entities:
             - 1.38971519
             - 1.01999998
             - -0.541150033
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.Spinner:
           {}
         com.meta.spatial.physics.Physics:
-          restitution: 0
-          state: 2
-          dimensions:
-            - 0.140000001
-            - 0.00999999978
-            - 0.0299999993
-          linearVelocity:
-            - 0
-            - 0
-            - 0
-          shape: box
           frictionInternal:
             - 0
             - 0
             - 0
+          shape: box
+          linearVelocity:
+            - 0
+            - 0
+            - 0
+          dimensions:
+            - 0.140000001
+            - 0.00999999978
+            - 0.0299999993
+          state: 2
+          restitution: 0
       tag: rotatingBlock
     - components:
         com.meta.components.Animatable:
@@ -484,6 +552,8 @@ entities:
           documentReference: projref:block/Main.metaspatialobj
         com.meta.components.Name:
           name: block0
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0.17453292
@@ -499,20 +569,25 @@ entities:
             - -0.284147024
             - 0.209999993
             - 0.241951585
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.UpAndDown:
           offset: 0
         com.meta.spatial.physics.Physics:
+          state: 2
           dimensions:
             - 0.0500000007
             - 0.0399999991
             - 0.0700000003
-          state: 2
       tag: block0
     - components:
         com.meta.components.Animatable:
           {}
         com.meta.components.Name:
           name: blocks
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -523,12 +598,15 @@ entities:
             - -0.37365818
             - 0.0172368288
             - -1.20899975
+          componentVersion: 1
           children:
             - ref:block0
             - ref:block1
             - ref:block2
             - ref:block3
             - ref:block4
+        com.meta.components.Visibility:
+          visible: true
       tag: blocks
     - components:
         com.meta.components.Animatable:
@@ -538,6 +616,8 @@ entities:
           documentReference: projref:block/Main.metaspatialobj
         com.meta.components.Name:
           name: block1
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0.17453292
@@ -553,14 +633,17 @@ entities:
             - -0.477880239
             - 0.209999993
             - 0.241951585
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.UpAndDown:
           offset: 0.20000000000000001
         com.meta.spatial.physics.Physics:
-          state: 2
           dimensions:
             - 0.0500000007
             - 0.0399999991
             - 0.0700000003
+          state: 2
       tag: block1
     - components:
         com.meta.components.Animatable:
@@ -570,6 +653,8 @@ entities:
           documentReference: projref:block/Main.metaspatialobj
         com.meta.components.Name:
           name: block2
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0.17453292
@@ -585,18 +670,21 @@ entities:
             - -0.383126259
             - 0.170000002
             - 0.427457571
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.UpAndDown:
           offset: 0.40000000000000002
         com.meta.spatial.physics.Physics:
-          state: 2
-          dimensions:
-            - 0.0500000007
-            - 0.0399999991
-            - 0.0700000003
           linearVelocity:
             - 0
             - 0
             - 0
+          dimensions:
+            - 0.0500000007
+            - 0.0399999991
+            - 0.0700000003
+          state: 2
       tag: block2
     - components:
         com.meta.components.Animatable:
@@ -606,6 +694,8 @@ entities:
           documentReference: projref:block/Main.metaspatialobj
         com.meta.components.Name:
           name: block3
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0.17453292
@@ -621,14 +711,17 @@ entities:
             - -0.49000001
             - 0.129999995
             - 0.610000014
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.UpAndDown:
           offset: 0.59999999999999998
         com.meta.spatial.physics.Physics:
-          state: 2
           dimensions:
             - 0.0500000007
             - 0.0399999991
             - 0.0700000003
+          state: 2
       tag: block3
     - components:
         com.meta.components.Animatable:
@@ -638,6 +731,8 @@ entities:
           documentReference: projref:block/Main.metaspatialobj
         com.meta.components.Name:
           name: block4
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0.17453292
@@ -653,14 +748,17 @@ entities:
             - -0.284147024
             - 0.129999995
             - 0.611506104
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.samples.physicssample.UpAndDown:
           offset: 0.80000000000000004
         com.meta.spatial.physics.Physics:
+          state: 2
           dimensions:
             - 0.0500000007
             - 0.0399999991
             - 0.0700000003
-          state: 2
       tag: block4
 metadata:
-  version: 1.0
+  version: 1.34

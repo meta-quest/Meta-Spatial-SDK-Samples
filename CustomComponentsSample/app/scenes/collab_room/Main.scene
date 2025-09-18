@@ -1,0 +1,124 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:Room
+            - ref:Seating
+            - ref:Texture Group
+            - ref:Wood
+            - ref:Windows
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Windows
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.707106829
+            - 0.707106829
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 0.00999999978
+            - 0.00999999978
+            - 0.00999999978
+          componentVersion: 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Mesh.002
+      tag: Windows
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Wood
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.707106829
+            - 0.707106829
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 0.00999999978
+            - 0.00999999978
+            - 0.00999999978
+          componentVersion: 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Mesh.001
+      tag: Wood
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Texture Group
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.707106829
+            - 0.707106829
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 0.00999999978
+            - 0.00999999978
+            - 0.00999999978
+          componentVersion: 1
+      tag: Texture Group
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Seating
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.707106829
+            - 0.707106829
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 0.00999999978
+            - 0.00999999978
+            - 0.00999999978
+          componentVersion: 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Mesh
+      tag: Seating
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: Room
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.707106829
+            - 0.707106829
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 0.00999999978
+            - 0.00999999978
+            - 0.00999999978
+          componentVersion: 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:Mesh.003
+      tag: Room
+metadata:
+  version: 1.33

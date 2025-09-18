@@ -16,15 +16,18 @@ entities:
           {}
         com.meta.components.DocumentReference:
           transformType: None
-          documentReference: projref:environment/Main.metaspatialobj
+          documentReference: projref:collab_room/Main.metaspatialobj
         com.meta.components.Name:
           name: Environment
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
+          componentVersion: 1
         com.meta.spatial.toolkit.SupportsLocomotion:
           {}
       tag: Environment
@@ -33,6 +36,8 @@ entities:
           {}
         com.meta.components.Name:
           name: Panel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 6.12323426e-17
@@ -41,18 +46,19 @@ entities:
             - -3.74939976e-33
           rotation.format: Quaternion
           scale:
-            - 2
-            - 1.5
+            - 2.03999996
+            - 1.25999999
             - 1
           translation:
             - -5.40345346e-16
             - 1.10000002
             - 2.65985823
+          componentVersion: 1
         com.meta.spatial.samples.customcomponentssample.LookAt:
-          axis: 1
           lookAtHead: true
+          axis: 1
         com.meta.spatial.toolkit.Panel:
-          panel: "@layout/ui_example"
+          panel: "@id/welcome_panel"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: Panel
@@ -64,6 +70,8 @@ entities:
           documentReference: projref:robot/Main.metaspatialobj
         com.meta.components.Name:
           name: robot
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -72,8 +80,9 @@ entities:
             - 1
           translation:
             - -0.699999988
-            - 0.800000012
+            - 0.777624488
             - 0.699999988
+          componentVersion: 1
         com.meta.spatial.toolkit.Grabbable:
           {}
       tag: robot
@@ -85,6 +94,8 @@ entities:
           documentReference: projref:basketBall/Main.metaspatialobj
         com.meta.components.Name:
           name: basketBall
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -93,10 +104,11 @@ entities:
             - 1
           translation:
             - 0.699999988
-            - 0.800000012
+            - 0.559190452
             - 0.699999988
+          componentVersion: 1
         com.meta.spatial.toolkit.Grabbable:
           {}
       tag: basketBall
 metadata:
-  version: 1.0
+  version: 1.33

@@ -1,3 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <!-- Mixed Reality Sample strings -->
+  <string
+    name="mixedrealitysample_title"
+    description="Content description for the mixed reality sample cover image"
+  >Mixed Reality Sample</string>
+  <string
+    name="mixedrealitysample_description"
+    description="Description text for the mixed reality sample application"
+  >This sample shows how to create a physics collision mesh.</string>
+  <string
+    name="setup_room_instruction"
+    description="Instruction for setting up the room"
+  >Set up your room in Quest settings</string>
+  <string
+    name="setup_room"
+    description="Button label for setting up the room"
+  >Set up room</string>
+  <string
+    name="toggle_debug_instruction"
+    description="Instruction for toggling debug mode"
+  >Toggle debug if desired</string>
+  <string
+    name="toggle_debug"
+    description="Button label for toggling debug mode"
+  >Toggle debug</string>
+  <string
+    name="fire_balls"
+    description="Instruction for toggling debug mode"
+  >Use the trigger to fire basketballs</string>
 </resources>

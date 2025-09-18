@@ -1,3 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="hybridsample_title">Hybrid Sample</string>
+  <string
+    name="hybridsample_description"
+  >This sample shows how you can create a sample app. Click the button switch between the 2D panel view and an immersive view.</string>
+  <string name="switch_to_immersive_view">Switch to immersive view</string>
+  <string name="switch_to_2d_view">Switch to 2D view</string>
 </resources>

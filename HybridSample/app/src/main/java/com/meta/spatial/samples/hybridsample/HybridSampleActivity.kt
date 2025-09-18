@@ -9,17 +9,18 @@ package com.meta.spatial.samples.hybridsample
 
 import android.app.PendingIntent
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
+import androidx.compose.ui.res.stringResource
+import androidx.core.net.toUri
 import com.meta.spatial.castinputforward.CastInputForwardFeature
+import com.meta.spatial.compose.ComposeFeature
+import com.meta.spatial.compose.composePanel
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
@@ -27,7 +28,6 @@ import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
-import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Material
@@ -50,7 +50,10 @@ class HybridSampleActivity : AppSystemActivity() {
 
   override fun registerFeatures(): List<SpatialFeature> {
     val features =
-        mutableListOf<SpatialFeature>(VRFeature(this), IsdkFeature(this, spatial, systemManager))
+        mutableListOf<SpatialFeature>(
+            VRFeature(this),
+            ComposeFeature(),
+        )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -95,7 +98,7 @@ class HybridSampleActivity : AppSystemActivity() {
 
     Entity.create(
         listOf(
-            Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
+            Mesh("mesh://skybox".toUri(), hittable = MeshCollision.NoCollision),
             Material().apply {
               baseTextureAndroidResourceId = R.drawable.skydome
               unlit = true // Prevent scene lighting from affecting the skybox
@@ -132,20 +135,20 @@ class HybridSampleActivity : AppSystemActivity() {
   }
 
   override fun registerPanels(): List<PanelRegistration> {
-
     return listOf(
-        PanelRegistration(R.layout.ui_pancake) {
+        PanelRegistration(R.id.hybrid_panel) {
           config {
             themeResourceId = R.style.PanelAppThemeTransparent
-            includeGlass = false
-            width = 2.0f
-            height = 1.5f
+            layoutWidthInDp = 1024f
+            layoutHeightInDp = 627f
             layerConfig = LayerConfig()
             enableTransparent = true
+            includeGlass = false
           }
-          panel {
-            val button: Button? = rootView?.findViewById<Button>(R.id.chosen)
-            button?.setOnClickListener { launchPanelModeInHome() }
+          composePanel {
+            setContent {
+              HybridPanel(stringResource(R.string.switch_to_2d_view)) { launchPanelModeInHome() }
+            }
           }
         }
     )
@@ -155,7 +158,7 @@ class HybridSampleActivity : AppSystemActivity() {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
-          Uri.parse("apk:///scenes/Composition.glxf"),
+          "apk:///scenes/Composition.glxf".toUri(),
           rootEntity = gltfxEntity!!,
           onLoaded = onLoaded,
       )

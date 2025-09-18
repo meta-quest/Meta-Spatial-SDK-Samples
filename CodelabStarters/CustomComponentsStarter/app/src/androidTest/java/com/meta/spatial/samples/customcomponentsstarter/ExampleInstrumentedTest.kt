@@ -24,6 +24,9 @@ class ExampleInstrumentedTest {
   fun useAppContext() {
     // Context of the app under test.
     val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-    assertEquals("com.meta.spatial.samples.customcomponentsstarter", appContext.packageName)
+    assertEquals(
+        "com.meta.spatial.samples.customcomponentsstarter",
+        appContext.packageName,
+    )
   }
 }

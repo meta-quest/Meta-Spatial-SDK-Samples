@@ -5,33 +5,36 @@ entities:
           {}
         com.meta.components.Scene:
           nodes:
-            - ref:aboutPanel
-            - ref:infoPanel
-            - ref:grabPanel
-            - ref:startButton
-            - ref:droneTarget
-            - ref:drone
-            - ref:environment
-            - ref:uiPanel
-      tag: Scene
+            - ref:aboutPanel1
+            - ref:infoPanel1
+            - ref:grabPanel1
+            - ref:startButton1
+            - ref:droneTarget1
+            - ref:drone1
+            - ref:environment1
+            - ref:uiPanel1
+      tag: Scene1
   com.meta.models.SceneNode:
     - components:
         com.meta.components.Animatable:
           {}
         com.meta.components.DocumentReference:
           transformType: None
-          documentReference: projref:environmentDesk/Main.metaspatialobj
+          documentReference: projref:CollabRoom02/Main.metaspatialobj
         com.meta.components.Name:
           name: environment
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
+          componentVersion: 1
         com.meta.spatial.toolkit.SupportsLocomotion:
           {}
-      tag: environment
+      tag: environment1
     - components:
         com.meta.components.Animatable:
           {}
@@ -40,6 +43,8 @@ entities:
           documentReference: projref:followTarget/Main.metaspatialobj
         com.meta.components.Name:
           name: droneTarget
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -50,13 +55,14 @@ entities:
             - -2.04576707
             - 2.49322987
             - 1.2892642
+          componentVersion: 1
         com.meta.spatial.samples.animationssample.FollowerTarget:
           targetName: droneTarget
         com.meta.spatial.toolkit.Grabbable:
           {}
         com.meta.spatial.toolkit.Visible:
           isVisible: false
-      tag: droneTarget
+      tag: droneTarget1
     - components:
         com.meta.components.Animatable:
           {}
@@ -65,6 +71,8 @@ entities:
           documentReference: projref:drone/Main.metaspatialobj
         com.meta.components.Name:
           name: drone
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0
@@ -77,9 +85,10 @@ entities:
             - 1
             - 1
           translation:
-            - 0
-            - 0.956133604
-            - 2.10795021
+            - -1.37358143e-07
+            - 0.554705262
+            - 0.536756158
+          componentVersion: 1
         com.meta.spatial.samples.animationssample.DroneComponent:
           tiltFactor: 0.25
           enabled: false
@@ -97,7 +106,37 @@ entities:
         com.meta.spatial.toolkit.Followable:
           active: false
           speed: 0.050000000000000003
-      tag: drone
+      tag: drone1
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: grabPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - -0.785398185
+            - -0.785398185
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 0.800000012
+            - 0.379999995
+            - 1
+          translation:
+            - -2.2419796
+            - 2.16199994
+            - 1.49828434
+          componentVersion: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@id/grab_panel"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+        com.meta.spatial.toolkit.Visible:
+          isVisible: false
+      tag: grabPanel1
     - components:
         com.meta.components.Animatable:
           {}
@@ -106,6 +145,8 @@ entities:
           documentReference: projref:button/Main.metaspatialobj
         com.meta.components.Name:
           name: startButton
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -114,36 +155,42 @@ entities:
             - 1.82169425
           translation:
             - -0.803201437
-            - 0.909077525
-            - 1.77456629
-      tag: startButton
+            - 0.527697563
+            - 0.466137886
+          componentVersion: 1
+      tag: startButton1
     - components:
         com.meta.components.Animatable:
           {}
         com.meta.components.Name:
           name: infoPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
-            - 0.800000012
-            - 0.200000003
+            - 0.600000024
+            - 0.150000006
             - 1
           translation:
             - -0.804939508
-            - 1.13493752
-            - 1.76999998
+            - 0.754277229
+            - 0.658523202
+          componentVersion: 1
         com.meta.spatial.toolkit.Panel:
-          panel: "@layout/ui_info"
+          panel: "@id/info_panel"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
         com.meta.spatial.toolkit.Visible:
           isVisible: true
-      tag: infoPanel
+      tag: infoPanel1
     - components:
         com.meta.components.Animatable:
           {}
         com.meta.components.Name:
           name: aboutPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0
@@ -152,50 +199,26 @@ entities:
             - 0
           rotation.format: Euler
           scale:
-            - 2
-            - 1.20000005
+            - 2.04999995
+            - 1.25
             - 1
           translation:
-            - 0
+            - -6.68971509e-08
             - 1.10000002
-            - -1.70000005
+            - -2.5
+          componentVersion: 1
         com.meta.spatial.toolkit.Panel:
-          panel: "@layout/ui_about"
+          panel: "@id/about_panel"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-      tag: aboutPanel
-    - components:
-        com.meta.components.Animatable:
-          {}
-        com.meta.components.Name:
-          name: grabPanel
-        com.meta.components.SceneNode:
-          rotation.data:
-            - -0.785398185
-            - -0.785398185
-            - 0
-            - 0
-          rotation.format: Euler
-          scale:
-            - 1.60000002
-            - 0.800000012
-            - 1
-          translation:
-            - -2.34168649
-            - 2.02099371
-            - 1.59799087
-        com.meta.spatial.toolkit.Panel:
-          panel: "@layout/ui_grab"
-        com.meta.spatial.toolkit.PanelDimensions:
-          {}
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
-      tag: grabPanel
+      tag: aboutPanel1
     - components:
         com.meta.components.Animatable:
           {}
         com.meta.components.Name:
           name: uiPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0.999971151
@@ -204,17 +227,18 @@ entities:
             - 2.84210819e-05
           rotation.format: Quaternion
           scale:
-            - 1.5
-            - 0.899999976
+            - 2.04999995
+            - 1.25
             - 1
           translation:
             - -0.217558056
             - 1.77296293
             - 2.82507014
+          componentVersion: 1
         com.meta.spatial.toolkit.Panel:
-          panel: "@layout/ui_panel"
+          panel: "@id/ui_panel"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
-      tag: uiPanel
+      tag: uiPanel1
 metadata:
-  version: 1.0
+  version: 1.33

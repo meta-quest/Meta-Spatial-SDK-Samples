@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
+  <item type="id" name="controls_id" />
+  <item type="id" name="video_selector_panel" />
+  <item type="id" name="mr_panel" />
+  <item type="id" name="spatialized_video_panel" />
+  <item type="id" name="debug_panel" />
 </resources>

@@ -18,12 +18,13 @@ import android.view.View
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.webkit.WebView
+import androidx.compose.ui.platform.ComposeView
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.meta.spatial.castinputforward.CastInputForwardFeature
 import com.meta.spatial.compose.ComposeFeature
-import com.meta.spatial.compose.composePanel
+import com.meta.spatial.compose.ComposeViewPanelRegistration
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
@@ -31,16 +32,11 @@ import com.meta.spatial.core.Vector3
 import com.meta.spatial.core.Vector4
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.runtime.BlendMode
-import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
-import com.meta.spatial.runtime.PanelConfigOptions
-import com.meta.spatial.runtime.PanelSceneObject
-import com.meta.spatial.runtime.PanelShapeType
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneMaterial
@@ -52,14 +48,27 @@ import com.meta.spatial.runtime.SceneTexture
 import com.meta.spatial.runtime.StereoMode
 import com.meta.spatial.runtime.panel.material
 import com.meta.spatial.runtime.panel.style
+import com.meta.spatial.toolkit.ActivityPanelRegistration
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.DpDisplayOptions
+import com.meta.spatial.toolkit.Equirect360ShapeOptions
 import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Grabbable
+import com.meta.spatial.toolkit.LayoutXMLPanelRegistration
+import com.meta.spatial.toolkit.MediaPanelRenderOptions
+import com.meta.spatial.toolkit.MediaPanelSettings
 import com.meta.spatial.toolkit.Mesh
+import com.meta.spatial.toolkit.Panel
 import com.meta.spatial.toolkit.PanelRegistration
+import com.meta.spatial.toolkit.PanelStyleOptions
+import com.meta.spatial.toolkit.PixelDisplayOptions
+import com.meta.spatial.toolkit.QuadShapeOptions
 import com.meta.spatial.toolkit.SceneObjectSystem
+import com.meta.spatial.toolkit.ScreenFractionDisplayOptions
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
+import com.meta.spatial.toolkit.UIPanelSettings
+import com.meta.spatial.toolkit.VideoSurfacePanelRegistration
 import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.vr.LocomotionSystem
 import com.meta.spatial.vr.VRFeature
@@ -207,12 +216,7 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
   }
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf<SpatialFeature>(
-            VRFeature(this),
-            ComposeFeature(),
-            IsdkFeature(this, spatial, systemManager),
-        )
+    val features = mutableListOf<SpatialFeature>(VRFeature(this), ComposeFeature())
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
@@ -277,7 +281,7 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     )
     scene.updateIBLEnvironment("chromatic.env")
 
-    skyVideoPanel = createSkyViewer()
+    skyVideoPanel = Entity.create(Panel(R.id.video_panel_360), Transform(), Visible(false))
 
     sky = createSkyBox()
   }
@@ -285,30 +289,56 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
   override fun registerPanels(): List<PanelRegistration> {
     return listOf(
         videoPanelRegistration(),
-        PanelRegistration(R.integer.list_panel) {
-          activityClass = ListPanel::class.java
-          config {
-            width = 1.5f
-            height = 2f
-            layoutWidthInPx = 750
-            layoutHeightInPx = 1000
-            layoutDpi = 260
-            includeGlass = false
-            layerConfig = LayerConfig()
-            enableTransparent = true
-          }
-        },
-        PanelRegistration(R.integer.mr_panel) {
-          config {
-            fractionOfScreen = 0.15f
-            height = .2f
-            width = .6f
-            enableTransparent = true
-            includeGlass = false
-            themeResourceId = R.style.ThemeTransparent
-          }
-          composePanel { setContent { MRApp() } }
-        },
+        ActivityPanelRegistration(
+            R.id.list_panel,
+            classIdCreator = { ListPanel::class.java },
+            settingsCreator = {
+              UIPanelSettings(
+                  shape =
+                      QuadShapeOptions(
+                          width = ListPanel.WIDTH_IN_METERS,
+                          height = ListPanel.HEIGHT_IN_METERS,
+                      ),
+                  display =
+                      DpDisplayOptions(
+                          width = ListPanel.WIDTH_IN_DP,
+                          height = ListPanel.HEIGHT_IN_DP,
+                          dpi = ListPanel.DPI,
+                      ),
+              )
+            },
+        ),
+        ComposeViewPanelRegistration(
+            R.id.mr_panel,
+            composeViewCreator = { _, ctx -> ComposeView(ctx).apply { setContent { MRApp() } } },
+            settingsCreator = {
+              UIPanelSettings(
+                  shape = QuadShapeOptions(width = .6f, height = .2f),
+                  style = PanelStyleOptions(themeResourceId = R.style.ThemeTransparent),
+                  display = ScreenFractionDisplayOptions(fraction = 0.15f),
+              )
+            },
+        ),
+        VideoSurfacePanelRegistration(
+            R.id.video_panel_360,
+            surfaceConsumer = { _, surface ->
+              exoPlayer =
+                  ExoPlayer.Builder(this).build().apply {
+                    repeatMode = Player.REPEAT_MODE_ONE
+                    setVideoSurface(surface)
+                  }
+            },
+            settingsCreator = {
+              val SPHERE_RADIUS: Float = 300.0f
+              MediaPanelSettings(
+                  shape = Equirect360ShapeOptions(radius = SPHERE_RADIUS),
+                  // DisplayOptions will be ignored for surface panels
+                  display = PixelDisplayOptions(width = 100, height = 100),
+                  // always render the layer first (behind all the other layers)
+                  rendering = MediaPanelRenderOptions(stereoMode = StereoMode.UpDown, zIndex = -1),
+              )
+            },
+        ),
     )
   }
 
@@ -335,27 +365,24 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
   }
 
   private fun videoPanelRegistration(): PanelRegistration {
-    return PanelRegistration(R.integer.video_id) {
-      layoutResourceId = R.layout.video_layout
-      config {
-        includeGlass = false
-        layoutWidthInPx = 1920
-        layoutHeightInPx = 1080
-        height = 2.25f
-        width = 4f
-        layerConfig = LayerConfig()
-        // we want access to the video panel to perform lighting effects
-        forceSceneTexture = true
-        panel {
-          webView = rootView?.findViewById<WebView>(R.id.web_view)
+    return LayoutXMLPanelRegistration(
+        R.id.video_id,
+        layoutIdCreator = { R.layout.video_layout },
+        settingsCreator = {
+          UIPanelSettings(
+              shape = QuadShapeOptions(width = 4f, height = 2.25f),
+              display = DpDisplayOptions(width = 1065f, height = 599f),
+          )
+        },
+        panelSetupWithRootView = { rootView, so, _ ->
+          webView = rootView.findViewById<WebView>(R.id.web_view)
           val webSettings = webView!!.getSettings()
           webSettings.setJavaScriptEnabled(true)
           webSettings.setMediaPlaybackRequiresUserGesture(false)
           // have the panel influence the theatre
-          updateTextures(getTexture()!!)
-        }
-      }
-    }
+          updateTextures(so.getTexture()!!)
+        },
+    )
   }
 
   private fun updateTextures(texture: SceneTexture?) {
@@ -423,46 +450,6 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
                   )
             }
 
-    return entity
-  }
-
-  private fun createSkyViewer(): Entity {
-    val entity = Entity.create(Transform(), Visible(false))
-    val SPHERE_RADIUS: Float = 300.0f
-    val panelConfig =
-        PanelConfigOptions().apply {
-          // height doesn't matter since surface will get resized
-          layoutWidthInPx = 100
-          layoutHeightInPx = 100
-          stereoMode = StereoMode.UpDown
-          panelShapeType = PanelShapeType.EQUIRECT
-          radiusForCylinderOrSphere = SPHERE_RADIUS
-          includeGlass = false
-          // enable direct-to-compositor rendering
-          mips = 1
-          // always render the layer first (behind all the other layers)
-          layerConfig = LayerConfig(zIndex = -1)
-        }
-
-    val panelSceneObject =
-        PanelSceneObject(
-            scene,
-            entity,
-            panelConfig,
-        )
-
-    systemManager
-        .findSystem<SceneObjectSystem>()
-        .addSceneObject(
-            entity,
-            CompletableFuture<SceneObject>().apply { complete(panelSceneObject) },
-        )
-
-    exoPlayer =
-        ExoPlayer.Builder(this).build().apply {
-          repeatMode = Player.REPEAT_MODE_ONE
-          setVideoSurface(panelSceneObject.getSurface())
-        }
     return entity
   }
 

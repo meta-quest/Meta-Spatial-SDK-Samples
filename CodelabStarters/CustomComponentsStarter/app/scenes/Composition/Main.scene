@@ -14,15 +14,18 @@ entities:
           {}
         com.meta.components.DocumentReference:
           transformType: None
-          documentReference: projref:environment/Main.metaspatialobj
+          documentReference: projref:collab_room/Main.metaspatialobj
         com.meta.components.Name:
           name: Environment
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
+          componentVersion: 1
         com.meta.spatial.toolkit.SupportsLocomotion:
           {}
       tag: Environment
@@ -31,6 +34,8 @@ entities:
           {}
         com.meta.components.Name:
           name: Panel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -41,10 +46,11 @@ entities:
             - -5.40345346e-16
             - 1.10000002
             - 2.65985823
+          componentVersion: 1
         com.meta.spatial.toolkit.Panel:
           panel: "@layout/ui_example"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: Panel
 metadata:
-  version: 1.0
+  version: 1.33

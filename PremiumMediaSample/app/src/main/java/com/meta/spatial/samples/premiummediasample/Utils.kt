@@ -263,8 +263,8 @@ fun getKeyUp(controller: Controller, buttonBitsMask: Int): Boolean {
 fun getHeadPose(): Pose {
   val head =
       Query.where { has(AvatarAttachment.id) }
+          .filter { isLocal() and by(AvatarAttachment.typeData).isEqualTo("head") }
           .eval()
-          .filter { it.isLocal() && it.getComponent<AvatarAttachment>().type == "head" }
           .first()
   return head.getComponent<Transform>().transform
 }

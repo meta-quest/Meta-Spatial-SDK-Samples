@@ -60,6 +60,7 @@ object HomePanelConstants {
   // Panel DP
   const val PANEL_WIDTH_DP = 1296f
   const val PANEL_HEIGHT_DP = 650f
+  const val PANEL_DP_PER_METER = 1178f
   // UI Constants
   val backgroundColour = Color(0xFF1C2B33)
   val linear = Brush.verticalGradient(listOf(Color(0xf0000000), Color(0x40000000)))

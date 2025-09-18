@@ -98,7 +98,7 @@ class DroneSceneController() {
         grabPanel.setComponent(Visible(false))
       } else if (event.type == PointerEventType.Unselect.id) {
         val transformComp = droneTargetEnt.getComponent<Transform>()
-        transformComp.transform.t.y -= 0.75f
+        transformComp.transform.t.y -= 0.45f
 
         val scene: Scene = sos.getScene()
         val headPose: Pose = scene.getViewerPose()

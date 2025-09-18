@@ -8,8 +8,9 @@
 package com.meta.spatial.samples.premiummediasample.entities
 
 import com.meta.spatial.core.Entity
+import com.meta.spatial.core.SpatialContext
 import com.meta.spatial.core.Vector2
-import com.meta.spatial.runtime.LayerConfig
+import com.meta.spatial.runtime.Scene
 import com.meta.spatial.samples.premiummediasample.AnchorOnLoad
 import com.meta.spatial.samples.premiummediasample.Anchorable
 import com.meta.spatial.samples.premiummediasample.MAX_SPAWN_DISTANCE
@@ -19,12 +20,17 @@ import com.meta.spatial.samples.premiummediasample.TIMINGS
 import com.meta.spatial.samples.premiummediasample.millisToFloat
 import com.meta.spatial.samples.premiummediasample.panels.homePanel.HomePanelActivity
 import com.meta.spatial.samples.premiummediasample.panels.homePanel.HomePanelConstants
+import com.meta.spatial.toolkit.ActivityPanelRegistration
+import com.meta.spatial.toolkit.DpPerMeterDisplayOptions
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.Panel
 import com.meta.spatial.toolkit.PanelDimensions
 import com.meta.spatial.toolkit.PanelRegistration
+import com.meta.spatial.toolkit.PanelStyleOptions
+import com.meta.spatial.toolkit.QuadShapeOptions
 import com.meta.spatial.toolkit.Transform
+import com.meta.spatial.toolkit.UIPanelSettings
 import com.meta.spatial.toolkit.Visible
 import dorkbox.tweenEngine.TweenEngine
 import dorkbox.tweenEngine.TweenEquations
@@ -32,10 +38,11 @@ import dorkbox.tweenEngine.TweenEquations
 class HomePanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
   companion object {
 
-    private val ratio = HomePanelConstants.PANEL_WIDTH_DP / HomePanelConstants.PANEL_HEIGHT_DP
-    private val widthInMeters = 1.1f
-    private val heightInMeters = widthInMeters / ratio
-    val homePanelFov = 55f
+    private const val WIDTH_IN_METERS =
+        HomePanelConstants.PANEL_WIDTH_DP / HomePanelConstants.PANEL_DP_PER_METER
+    private const val HEIGHT_IN_METERS =
+        HomePanelConstants.PANEL_HEIGHT_DP / HomePanelConstants.PANEL_DP_PER_METER
+    const val homePanelFov = 55f
 
     fun create(): Entity {
       return Entity.create(
@@ -48,27 +55,25 @@ class HomePanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
               Anchorable(0.02f),
               AnchorOnLoad(distanceCheck = MAX_SPAWN_DISTANCE + 0.5f, scaleProportional = true),
               Visible(false),
-              PanelDimensions(Vector2(widthInMeters, heightInMeters)),
+              PanelDimensions(Vector2(WIDTH_IN_METERS, HEIGHT_IN_METERS)),
               PanelLayerAlpha(0f),
           )
       )
     }
 
-    fun panelRegistration(): PanelRegistration {
-      return PanelRegistration(R.id.HomePanel) {
-        config {
-          mips = 1
-          height = heightInMeters
-          width = widthInMeters
-          layoutWidthInDp = HomePanelConstants.PANEL_WIDTH_DP
-          layoutHeightInDp = HomePanelConstants.PANEL_HEIGHT_DP
-          layerConfig = LayerConfig()
-          enableTransparent = true
-          includeGlass = false
-          themeResourceId = R.style.PanelAppThemeTransparent
-        }
-        activityClass = HomePanelActivity::class.java
-      }
+    fun panelRegistration(scene: Scene, context: SpatialContext): PanelRegistration {
+      return ActivityPanelRegistration(
+          R.id.HomePanel,
+          classIdCreator = { HomePanelActivity::class.java },
+          settingsCreator = {
+            UIPanelSettings(
+                shape = QuadShapeOptions(width = WIDTH_IN_METERS, height = HEIGHT_IN_METERS),
+                display =
+                    DpPerMeterDisplayOptions(dpPerMeter = HomePanelConstants.PANEL_DP_PER_METER),
+                style = PanelStyleOptions(themeResourceId = R.style.PanelAppThemeTransparent),
+            )
+          },
+      )
     }
   }
 

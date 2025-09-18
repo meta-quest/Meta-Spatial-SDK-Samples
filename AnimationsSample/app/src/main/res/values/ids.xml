@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
   <item type="id" name="is_built_in" />
+  <item type="id" name="ui_panel" />
+  <item type="id" name="about_panel" />
+  <item type="id" name="info_panel" />
+  <item type="id" name="grab_panel" />
 </resources>

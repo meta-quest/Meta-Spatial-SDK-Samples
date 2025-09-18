@@ -8,19 +8,18 @@
 package com.meta.spatial.samples.mixedrealitysample
 
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
-import android.view.View
-import android.widget.Button
+import androidx.compose.ui.platform.ComposeView
+import androidx.core.net.toUri
 import com.meta.spatial.castinputforward.CastInputForwardFeature
+import com.meta.spatial.compose.ComposeFeature
+import com.meta.spatial.compose.ComposeViewPanelRegistration
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.mruk.AnchorProceduralMesh
 import com.meta.spatial.mruk.AnchorProceduralMeshConfig
 import com.meta.spatial.mruk.MRUKFeature
@@ -32,12 +31,14 @@ import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.physics.PhysicsWorldBounds
-import com.meta.spatial.runtime.LayerConfig
-import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.DpPerMeterDisplayOptions
 import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.PanelRegistration
+import com.meta.spatial.toolkit.PanelStyleOptions
+import com.meta.spatial.toolkit.QuadShapeOptions
+import com.meta.spatial.toolkit.UIPanelSettings
 import com.meta.spatial.vr.LocomotionSystem
 import com.meta.spatial.vr.VRFeature
 import kotlinx.coroutines.CoroutineScope
@@ -63,7 +64,7 @@ class MixedRealitySampleActivity : AppSystemActivity() {
         mutableListOf(
             PhysicsFeature(spatial, worldBounds = PhysicsWorldBounds(minY = -100.0f)),
             VRFeature(this),
-            IsdkFeature(this, spatial, systemManager),
+            ComposeFeature(),
             mrukFeature,
         )
     if (BuildConfig.DEBUG) {
@@ -117,7 +118,7 @@ class MixedRealitySampleActivity : AppSystemActivity() {
       mrukFeature.addSceneEventListener(sceneEventListener)
 
       if (checkSelfPermission(PERMISSION_USE_SCENE) != PackageManager.PERMISSION_GRANTED) {
-        log("Scene permission has not been granted, requesting " + PERMISSION_USE_SCENE)
+        log("Scene permission has not been granted, requesting $PERMISSION_USE_SCENE")
         requestPermissions(arrayOf(PERMISSION_USE_SCENE), REQUEST_CODE_PERMISSION_USE_SCENE)
       } else {
         log("Scene permission has already been granted!")
@@ -130,7 +131,7 @@ class MixedRealitySampleActivity : AppSystemActivity() {
     log("Loading scene from device...")
     mrukFeature.loadSceneFromDevice().whenComplete { result: MRUKLoadDeviceResult, _ ->
       if (result != MRUKLoadDeviceResult.SUCCESS) {
-        log("Error loading scene from device: ${result}")
+        log("Error loading scene from device: $result")
       } else {
         log("Scene loaded from device")
       }
@@ -177,47 +178,37 @@ class MixedRealitySampleActivity : AppSystemActivity() {
 
   override fun registerPanels(): List<PanelRegistration> {
     return listOf(
-        PanelRegistration(R.layout.about) {
-          config {
-            themeResourceId = R.style.PanelAppThemeTransparent
-            includeGlass = false
-            layerConfig = LayerConfig()
-            enableTransparent = true
-          }
-          panel {
-            val configButton = rootView?.findViewById<Button>(R.id.configure_button)
-            configButton?.setOnClickListener({ scene.requestSceneCapture() })
-            configButton?.setOnHoverListener(::onHoverButton)
-
-            val debugButton = rootView?.findViewById<Button>(R.id.toggle_debug)
-            debugButton?.setOnClickListener({
-              debug = !debug
-              spatial.enablePhysicsDebugLines(debug)
-            })
-            debugButton?.setOnHoverListener(::onHoverButton)
-          }
-        }
+        ComposeViewPanelRegistration(
+            R.id.panel,
+            composeViewCreator = { _, ctx ->
+              ComposeView(ctx).apply {
+                setContent {
+                  AboutPanelLayout(
+                      onConfigureRoomClick = { scene.requestSceneCapture() },
+                      onToggleDebugClick = {
+                        debug = !debug
+                        spatial.enablePhysicsDebugLines(debug)
+                      },
+                  )
+                }
+              }
+            },
+            settingsCreator = {
+              UIPanelSettings(
+                  shape = QuadShapeOptions(width = ABOUT_PANEL_WIDTH, height = ABOUT_PANEL_HEIGHT),
+                  style = PanelStyleOptions(themeResourceId = R.style.PanelAppThemeTransparent),
+                  display = DpPerMeterDisplayOptions(),
+              )
+            },
+        )
     )
-  }
-
-  fun onHoverButton(v: View, event: MotionEvent): Boolean {
-    // don't shoot balls while hovering over the buttons
-    when (event.action) {
-      MotionEvent.ACTION_HOVER_ENTER -> {
-        ballShooter?.enabled = false
-      }
-      MotionEvent.ACTION_HOVER_EXIT -> {
-        ballShooter?.enabled = true
-      }
-    }
-    return true
   }
 
   private fun loadGLXF(onLoaded: ((GLXFInfo) -> Unit) = {}): Job {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
-          Uri.parse("apk:///scenes/Composition.glxf"),
+          "apk:///scenes/Composition.glxf".toUri(),
           rootEntity = gltfxEntity!!,
           keyName = GLXF_SCENE,
           onLoaded = onLoaded,

@@ -32,6 +32,7 @@ import com.meta.spatial.samples.premiummediasample.systems.heroLighting.HeroLigh
 import com.meta.spatial.samples.premiummediasample.systems.panelReady.PanelReadySystem
 import com.meta.spatial.samples.premiummediasample.systems.scalable.TouchScalableSystem
 import com.meta.spatial.samples.premiummediasample.systems.tweenEngine.TweenEngineSystem
+import com.meta.spatial.spatialaudio.SpatialAudioFeature
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.SpatialActivityManager
 import dorkbox.tweenEngine.TweenEngine
@@ -39,6 +40,7 @@ import dorkbox.tweenEngine.TweenEngine
 class ImmersiveViewModel(
     val ipcServiceConnection: IPCServiceConnection,
     val systemManager: SystemManager,
+    val spatialAudioFeature: SpatialAudioFeature,
 ) {
   private lateinit var tweenEngine: TweenEngine
   private lateinit var controlVisibilitySystem: ControlPanelVisibilitySystem
@@ -170,7 +172,14 @@ class ImmersiveViewModel(
   }
 
   private fun createExoPanel(mediaItem: MediaSource) {
-    currentExoPanel = ExoVideoEntity.create(exoPlayer, mediaItem, tweenEngine, ipcServiceConnection)
+    currentExoPanel =
+        ExoVideoEntity.create(
+            exoPlayer,
+            mediaItem,
+            tweenEngine,
+            ipcServiceConnection,
+            spatialAudioFeature,
+        )
     currentExoPanel?.let { exoPanel ->
       exoPanel.entity.registerEventListener<ExoPlayerEvent>(ExoPlayerEvent.ON_END) { _, _ ->
         lightingPassthroughHandler.transitionLighting(

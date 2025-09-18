@@ -9,16 +9,19 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.jetbrains.kotlin.android)
   alias(libs.plugins.meta.spatial.plugin)
+  alias(libs.plugins.compose.compiler)
 }
 
 android {
   namespace = "com.meta.spatial.samples.object3dsample"
+  //noinspection GradleDependency
   compileSdk = 34
 
   defaultConfig {
     applicationId = "com.meta.spatial.samples.object3dsample"
-    minSdk = 29
-    //noinspection ExpiredTargetSdkVersion
+    minSdk = 34
+    // HorizonOS is Android 14 (API level 34)
+    //noinspection OldTargetApi,ExpiredTargetSdkVersion
     targetSdk = 34
     versionCode = 1
     versionName = "1.0"
@@ -55,18 +58,29 @@ dependencies {
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
 
+  // compose
+  implementation(libs.androidx.activity.compose)
+  implementation(platform(libs.androidx.compose.bom))
+  implementation(libs.androidx.ui)
+  implementation(libs.androidx.ui.graphics)
+  implementation(libs.androidx.material3)
+  implementation(libs.androidx.material.icons.extended)
+  implementation(libs.androidx.ui.tooling.preview)
+  debugImplementation(libs.androidx.ui.tooling)
+
   // Meta Spatial SDK libs
   implementation(libs.meta.spatial.sdk.base)
+  implementation(libs.meta.spatial.sdk.compose)
   implementation(libs.meta.spatial.sdk.ovrmetrics)
   implementation(libs.meta.spatial.sdk.toolkit)
   implementation(libs.meta.spatial.sdk.physics)
   implementation(libs.meta.spatial.sdk.vr)
+  implementation(libs.meta.spatial.sdk.isdk)
   implementation(libs.meta.spatial.sdk.castinputforward)
   implementation(libs.meta.spatial.sdk.hotreload)
   implementation(libs.meta.spatial.sdk.datamodelinspector)
+  implementation(libs.meta.spatial.sdk.uiset)
 }
-
-afterEvaluate { tasks.named("assembleDebug") { dependsOn("export") } }
 
 val projectDir = layout.projectDirectory
 val sceneDirectory = projectDir.dir("scenes")

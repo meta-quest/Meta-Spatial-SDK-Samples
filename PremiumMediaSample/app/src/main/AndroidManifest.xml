@@ -3,7 +3,6 @@
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:horizonos="http://schemas.horizonos/sdk"
   xmlns:tools="http://schemas.android.com/tools"
-  package="com.meta.spatial.samples.premiummediasample"
   android:installLocation="auto"
   android:versionCode="1"
   android:versionName="1.0"

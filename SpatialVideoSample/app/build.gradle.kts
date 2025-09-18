@@ -14,12 +14,14 @@ plugins {
 
 android {
   namespace = "com.meta.spatial.samples.spatialvideosample"
+  //noinspection GradleDependency
   compileSdk = 34
 
   defaultConfig {
     applicationId = "com.meta.spatial.samples.spatialvideosample"
-    minSdk = 29
-    //noinspection ExpiredTargetSdkVersion
+    minSdk = 34
+    // HorizonOS is Android 14 (API level 34)
+    //noinspection OldTargetApi,ExpiredTargetSdkVersion
     targetSdk = 34
     versionCode = 1
     versionName = "1.0"
@@ -86,8 +88,6 @@ dependencies {
   implementation("androidx.media3:media3-ui:1.4.1")
   implementation("androidx.navigation:navigation-compose:2.8.2")
 }
-
-afterEvaluate { tasks.named("assembleDebug") { dependsOn("export") } }
 
 val projectDir = layout.projectDirectory
 val sceneDirectory = projectDir.dir("scenes")

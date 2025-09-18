@@ -7,10 +7,14 @@
 
 package com.meta.spatial.samples.physicssample
 
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.ComposeView
+import androidx.core.net.toUri
 import com.meta.spatial.castinputforward.CastInputForwardFeature
+import com.meta.spatial.compose.ComposeFeature
+import com.meta.spatial.compose.ComposeViewPanelRegistration
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.EventArgs
 import com.meta.spatial.core.Pose
@@ -18,26 +22,27 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.debugtools.HotReloadFeature
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
 import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.physics.Physics
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.physics.PhysicsState
-import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
-import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.DpPerMeterDisplayOptions
 import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.GLXFNode
 import com.meta.spatial.toolkit.Material
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.MeshCollision
 import com.meta.spatial.toolkit.PanelRegistration
+import com.meta.spatial.toolkit.PanelStyleOptions
+import com.meta.spatial.toolkit.QuadShapeOptions
 import com.meta.spatial.toolkit.Transform
+import com.meta.spatial.toolkit.UIPanelSettings
 import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.vr.VRFeature
 import java.io.File
@@ -86,8 +91,8 @@ class BallRunActivity : AppSystemActivity() {
     val features =
         mutableListOf<SpatialFeature>(
             PhysicsFeature(spatial, useGrabbablePhysics = false),
+            ComposeFeature(),
             VRFeature(this),
-            IsdkFeature(this, spatial, systemManager),
         )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
@@ -122,26 +127,8 @@ class BallRunActivity : AppSystemActivity() {
 
   override fun registerPanels(): List<PanelRegistration> {
     return listOf(
-        PanelRegistration(R.layout.ui_example) {
-          config {
-            themeResourceId = R.style.PanelAppThemeTransparent
-            includeGlass = false
-            width = 2.0f
-            height = 1.5f
-            layerConfig = LayerConfig()
-            enableTransparent = true
-          }
-        },
-        PanelRegistration(R.layout.ui_info) {
-          config {
-            themeResourceId = R.style.PanelAppThemeTransparent
-            includeGlass = false
-            width = 0.5f
-            height = 0.3f
-            layerConfig = LayerConfig()
-            enableTransparent = true
-          }
-        },
+        createSimpleComposePanel(R.id.ui_example, 2.048f, 1.254f) { WelcomePanel() },
+        createSimpleComposePanel(R.id.ui_info, 0.64f, 0.158f) { InfoPanel() },
     )
   }
 
@@ -162,7 +149,7 @@ class BallRunActivity : AppSystemActivity() {
 
     Entity.create(
         listOf(
-            Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
+            Mesh("mesh://skybox".toUri(), hittable = MeshCollision.NoCollision),
             Material().apply {
               baseTextureAndroidResourceId = R.drawable.skydome
               unlit = true // Prevent scene lighting from affecting the skybox
@@ -229,6 +216,25 @@ class BallRunActivity : AppSystemActivity() {
     }
   }
 
+  private fun createSimpleComposePanel(
+      panelId: Int,
+      width: Float,
+      height: Float,
+      content: @Composable () -> Unit,
+  ): ComposeViewPanelRegistration {
+    return ComposeViewPanelRegistration(
+        panelId,
+        composeViewCreator = { _, ctx -> ComposeView(ctx).apply { setContent { content() } } },
+        settingsCreator = { _ ->
+          UIPanelSettings(
+              shape = QuadShapeOptions(width = width, height = height),
+              style = PanelStyleOptions(themeResourceId = R.style.PanelAppThemeTransparent),
+              display = DpPerMeterDisplayOptions(),
+          )
+        },
+    )
+  }
+
   private fun onBallFinish(ball: GLXFNode) {
     val physics = ball.entity.getComponent<Physics>()
     physics.state = PhysicsState.KINEMATIC
@@ -283,7 +289,7 @@ class BallRunActivity : AppSystemActivity() {
     gltfxEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
-          Uri.parse("apk:///scenes/Composition.glxf"),
+          "apk:///scenes/Composition.glxf".toUri(),
           rootEntity = gltfxEntity!!,
           onLoaded = onLoaded,
       )

@@ -5,8 +5,8 @@ entities:
         com.meta.components.AssetMetadata:
           {}
         com.meta.components.AssetRoot:
-          defaultScene: ref:Scene
+          defaultScene: ref:Scene1
           scenes:
-            - ref:Scene
+            - ref:Scene1
 metadata:
-  version: 1.0
+  version: 1.33

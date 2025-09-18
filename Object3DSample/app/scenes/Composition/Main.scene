@@ -8,7 +8,6 @@ entities:
             - ref:spawnableObjects
             - ref:Environment
             - ref:libraryPanel
-            - ref:aboutPanel
       tag: Scene
   com.meta.models.SceneNode:
     - components:
@@ -16,58 +15,42 @@ entities:
           {}
         com.meta.components.Name:
           name: libraryPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
-            - 2
-            - 1.5
+            - 2.04999995
+            - 1.25
             - 1
           translation:
             - 2.35256469e-17
             - 1.69210148
             - 2.5
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Hittable:
           hittable: 1
         com.meta.spatial.toolkit.Panel:
-          panel: "@layout/library_panel"
+          panel: "@id/library_panel"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: libraryPanel
     - components:
         com.meta.components.Animatable:
           {}
-        com.meta.components.DocumentReference:
-          transformType: None
-          documentReference: projref:environmentDesk/Main.metaspatialobj
-        com.meta.components.Name:
-          name: Environment
-        com.meta.components.SceneNode:
-          rotation.format: Euler
-          scale:
-            - 1
-            - 1
-            - 1
-          translation:
-            - 0
-            - -0.106921583
-            - 0
-        com.meta.spatial.physics.Physics:
-          shape: environmentDeskCollisions.gltf
-          state: 0
-        com.meta.spatial.toolkit.SupportsLocomotion:
-          {}
-      tag: Environment
-    - components:
-        com.meta.components.Animatable:
-          {}
         com.meta.components.Name:
           name: spawnableObjects
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
+          componentVersion: 1
           children:
             - ref:colliderDimensionSizer
             - ref:robot
@@ -76,6 +59,8 @@ entities:
             - ref:drone
             - ref:plant
             - ref:deskLamp
+        com.meta.components.Visibility:
+          visible: true
       tag: spawnableObjects
     - components:
         com.meta.components.Animatable:
@@ -85,14 +70,17 @@ entities:
           documentReference: projref:deskLamp/Main.metaspatialobj
         com.meta.components.Name:
           name: deskLamp
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
       tag: deskLamp
     - components:
         com.meta.components.Animatable:
@@ -102,14 +90,17 @@ entities:
           documentReference: projref:easyChair/Main.metaspatialobj
         com.meta.components.Name:
           name: easyChair
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
       tag: easyChair
     - components:
         com.meta.components.Animatable:
@@ -119,14 +110,17 @@ entities:
           documentReference: projref:drone/Main.metaspatialobj
         com.meta.components.Name:
           name: drone
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
       tag: drone
     - components:
         com.meta.components.Animatable:
@@ -136,14 +130,17 @@ entities:
           documentReference: projref:plantSansevieria/Main.metaspatialobj
         com.meta.components.Name:
           name: plant
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
       tag: plant
     - components:
         com.meta.components.Animatable:
@@ -153,6 +150,8 @@ entities:
           documentReference: projref:sculptureLoop/Main.metaspatialobj
         com.meta.components.Name:
           name: sculpture
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -163,8 +162,9 @@ entities:
             - 0
             - 1
             - 0
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
       tag: sculpture
     - components:
         com.meta.components.Animatable:
@@ -174,14 +174,17 @@ entities:
           documentReference: projref:robot/Main.metaspatialobj
         com.meta.components.Name:
           name: robot
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 0.5
             - 0.5
             - 0.5
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
       tag: robot
     - components:
         com.meta.components.Animatable:
@@ -191,6 +194,8 @@ entities:
           documentReference: projref:cube/Main.metaspatialobj
         com.meta.components.Name:
           name: colliderDimensionSizer
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -201,35 +206,34 @@ entities:
             - 0
             - 0.99000001
             - 0
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
       tag: colliderDimensionSizer
     - components:
         com.meta.components.Animatable:
           {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:collab_room/Main.metaspatialobj
         com.meta.components.Name:
-          name: aboutPanel
+          name: Environment
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
-          rotation.data:
-            - 0
-            - 3.14159274
-            - 0
-            - 0
           rotation.format: Euler
           scale:
-            - 2
-            - 1.5
             - 1
-          translation:
-            - 2.35256469e-17
-            - 1.10000002
-            - -1.70000005
-        com.meta.spatial.toolkit.Hittable:
-          hittable: 1
-        com.meta.spatial.toolkit.Panel:
-          panel: "@layout/about"
-        com.meta.spatial.toolkit.PanelDimensions:
+            - 1
+            - 1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+        com.meta.spatial.physics.Physics:
+          state: 0
+          shape: room_collision.glb
+        com.meta.spatial.toolkit.SupportsLocomotion:
           {}
-      tag: aboutPanel
+      tag: Environment
 metadata:
-  version: 1.0
+  version: 1.34

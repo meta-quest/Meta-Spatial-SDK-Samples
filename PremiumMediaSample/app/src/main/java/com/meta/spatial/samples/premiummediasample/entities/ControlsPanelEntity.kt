@@ -10,9 +10,10 @@ package com.meta.spatial.samples.premiummediasample.entities
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
+import com.meta.spatial.core.SpatialContext
 import com.meta.spatial.core.Vector2
 import com.meta.spatial.core.Vector3
-import com.meta.spatial.runtime.LayerConfig
+import com.meta.spatial.runtime.Scene
 import com.meta.spatial.samples.premiummediasample.PanelLayerAlpha
 import com.meta.spatial.samples.premiummediasample.R
 import com.meta.spatial.samples.premiummediasample.ScaledChild
@@ -23,14 +24,19 @@ import com.meta.spatial.samples.premiummediasample.panels.controlsPanel.Controls
 import com.meta.spatial.samples.premiummediasample.panels.controlsPanel.ControlsPanelConstants
 import com.meta.spatial.samples.premiummediasample.setDistanceFov
 import com.meta.spatial.samples.premiummediasample.systems.scaleChildren.ScaleChildrenSystem
+import com.meta.spatial.toolkit.ActivityPanelRegistration
 import com.meta.spatial.toolkit.AppSystemActivity
+import com.meta.spatial.toolkit.DpPerMeterDisplayOptions
 import com.meta.spatial.toolkit.Panel
 import com.meta.spatial.toolkit.PanelDimensions
 import com.meta.spatial.toolkit.PanelRegistration
+import com.meta.spatial.toolkit.PanelStyleOptions
+import com.meta.spatial.toolkit.QuadShapeOptions
 import com.meta.spatial.toolkit.Scale
 import com.meta.spatial.toolkit.SpatialActivityManager
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
+import com.meta.spatial.toolkit.UIPanelSettings
 import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.toolkit.getAbsoluteTransform
 import dorkbox.tweenEngine.TweenEngine
@@ -38,25 +44,26 @@ import dorkbox.tweenEngine.TweenEquations
 
 class ControlsPanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
   companion object {
-    private val widthDp = ControlsPanelConstants.PANEL_WIDTH_DP
-    private val heightDp = ControlsPanelConstants.PANEL_HEIGHT_DP
-    private const val scale = 0.001f
+    private const val WIDTH_IN_METERS =
+        ControlsPanelConstants.PANEL_WIDTH_DP / ControlsPanelConstants.PANEL_DP_PER_METER
+    private const val HEIGHT_IN_METERS =
+        ControlsPanelConstants.PANEL_HEIGHT_DP / ControlsPanelConstants.PANEL_DP_PER_METER
 
-    fun panelRegistration(): PanelRegistration {
-      return PanelRegistration(R.id.ControlsPanel) {
-        config {
-          mips = 1
-          layerConfig = LayerConfig()
-          layoutWidthInDp = widthDp
-          layoutHeightInDp = heightDp
-          width = widthDp * scale
-          height = heightDp * scale
-          enableTransparent = true
-          includeGlass = false
-          themeResourceId = R.style.PanelAppThemeTransparent
-        }
-        activityClass = ControlsPanelActivity::class.java
-      }
+    fun panelRegistration(scene: Scene, context: SpatialContext): PanelRegistration {
+      return ActivityPanelRegistration(
+          R.id.ControlsPanel,
+          classIdCreator = { ControlsPanelActivity::class.java },
+          settingsCreator = {
+            UIPanelSettings(
+                shape = QuadShapeOptions(width = WIDTH_IN_METERS, height = HEIGHT_IN_METERS),
+                display =
+                    DpPerMeterDisplayOptions(
+                        dpPerMeter = ControlsPanelConstants.PANEL_DP_PER_METER
+                    ),
+                style = PanelStyleOptions(themeResourceId = R.style.PanelAppThemeTransparent),
+            )
+          },
+      )
     }
   }
 
@@ -103,7 +110,7 @@ class ControlsPanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
   init {
     entity =
         Entity.create(
-            PanelDimensions(Vector2(widthDp * scale, heightDp * scale)),
+            PanelDimensions(Vector2(WIDTH_IN_METERS, HEIGHT_IN_METERS)),
             Panel(R.id.ControlsPanel),
             Transform(),
             PanelLayerAlpha(0f),

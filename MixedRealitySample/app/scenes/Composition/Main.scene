@@ -18,6 +18,8 @@ entities:
           {}
         com.meta.components.Name:
           name: Panel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 6.12323426e-17
@@ -26,18 +28,21 @@ entities:
             - -3.74939976e-33
           rotation.format: Quaternion
           scale:
-            - 2
-            - 1.5
+            - 2.04999995
+            - 1.25
             - 1
           translation:
             - 0
             - 1.10000002
             - -1.70000005
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.toolkit.Grabbable:
           enabled: true
           type: 0
         com.meta.spatial.toolkit.Panel:
-          panel: "@layout/about"
+          panel: "@id/panel"
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: Panel
@@ -49,14 +54,17 @@ entities:
           documentReference: projref:BasketBall/Main.metaspatialobj
         com.meta.components.Name:
           name: BasketBall
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
             - 1
             - 1
             - 1
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
       tag: BasketBall
     - components:
         com.meta.components.Animatable:
@@ -66,6 +74,8 @@ entities:
           documentReference: projref:cube/Main.metaspatialobj
         com.meta.components.Name:
           name: defaultFloor
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.format: Euler
           scale:
@@ -76,6 +86,9 @@ entities:
             - 0
             - -0.0500000007
             - 0
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
         com.meta.spatial.physics.Physics:
           dimensions:
             - 10
@@ -84,8 +97,6 @@ entities:
           state: 0
           restitution: 0.80000000000000004
           shape: box
-        com.meta.spatial.toolkit.Visible:
-          isVisible: false
       tag: defaultFloor
     - components:
         com.meta.components.Animatable:
@@ -95,6 +106,8 @@ entities:
           documentReference: projref:target/Main.metaspatialobj
         com.meta.components.Name:
           name: target0
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0.863767862
@@ -110,6 +123,9 @@ entities:
             - -1.8855685
             - 1.25126576
             - 1.13587368
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.physics.Physics:
           shape: target.glb
           restitution: 0.80000000000000004
@@ -125,6 +141,8 @@ entities:
           documentReference: projref:target/Main.metaspatialobj
         com.meta.components.Name:
           name: target1
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - -0.325533599
@@ -140,6 +158,9 @@ entities:
             - -1.8855685
             - 1.96000004
             - -1.31692994
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.physics.Physics:
           state: 0
           restitution: 0.80000000000000004
@@ -155,6 +176,8 @@ entities:
           documentReference: projref:target/Main.metaspatialobj
         com.meta.components.Name:
           name: target2
+        com.meta.components.PointerNodeInverseComponent:
+          {}
         com.meta.components.SceneNode:
           rotation.data:
             - 0.520660996
@@ -170,6 +193,9 @@ entities:
             - 1.90848315
             - 1.96000004
             - -0.800049663
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
         com.meta.spatial.physics.Physics:
           shape: target.glb
           restitution: 0.80000000000000004
@@ -178,4 +204,4 @@ entities:
           type: 0
       tag: target2
 metadata:
-  version: 1.0
+  version: 1.34

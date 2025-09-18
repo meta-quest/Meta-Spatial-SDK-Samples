@@ -8,4 +8,26 @@
     <item description="Option to raycast to global mesh">Global Mesh</item>
     <item description="Option to raycast to depth buffer">Depth</item>
   </string-array>
+
+  <!-- Start Menu strings -->
+  <string
+    name="mruksample_title"
+    description="Title for the MRUK sample application start menu"
+  >MRUK Sample</string>
+  <string
+    name="anchor_mesh_sample"
+    description="Button label for the anchor mesh sample in the start menu"
+  >Anchor mesh sample</string>
+  <string
+    name="raycast_sample"
+    description="Button label for the raycast sample in the start menu"
+  >Raycast sample</string>
+  <string
+    name="keyboard_tracker_sample"
+    description="Button label for the keyboard tracker sample in the start menu"
+  >Keyboard tracker sample</string>
+  <string
+    name="qr_code_scanner_sample"
+    description="Button label for the QR code scanner sample in the start menu"
+  >QR code scanner sample</string>
 </resources>

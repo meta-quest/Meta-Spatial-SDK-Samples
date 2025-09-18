@@ -14,12 +14,14 @@ plugins {
 
 android {
   namespace = "com.meta.spatial.samples.premiummediasample"
+  //noinspection GradleDependency
   compileSdk = 34
 
   defaultConfig {
     applicationId = "com.meta.spatial.samples.premiummediasample"
-    minSdk = 29
-    //noinspection ExpiredTargetSdkVersion
+    minSdk = 34
+    // HorizonOS is Android 14 (API level 34)
+    //noinspection OldTargetApi,ExpiredTargetSdkVersion
     targetSdk = 34
     versionCode = 1
     versionName = "1.0"
@@ -100,6 +102,7 @@ dependencies {
   implementation(libs.meta.spatial.sdk.compose)
   implementation(libs.meta.spatial.sdk.mruk)
   implementation(libs.meta.spatial.sdk.datamodelinspector)
+  implementation(libs.meta.spatial.sdk.spatialaudio)
 }
 
 spatial { shaders { sources.add(project.layout.projectDirectory.dir("src/shaders")) } }

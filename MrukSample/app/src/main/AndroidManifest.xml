@@ -2,7 +2,6 @@
 <manifest
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:horizonos="http://schemas.horizonos/sdk"
-  package="com.meta.spatial.samples.mruksample"
   android:versionCode="1"
   android:versionName="1.0"
   android:installLocation="auto"
@@ -73,6 +72,7 @@
     />
     <activity
       android:name="com.meta.spatial.samples.mruksample.MrukSampleStartMenuActivity"
+      android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
       android:exported="true"
       android:resizeableActivity="true"
     >

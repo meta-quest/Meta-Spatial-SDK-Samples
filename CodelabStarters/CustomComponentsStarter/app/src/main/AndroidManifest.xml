@@ -2,7 +2,6 @@
 <manifest
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:horizonos="http://schemas.horizonos/sdk"
-  package="com.meta.spatial.samples.customcomponentsstarter"
   android:versionCode="1"
   android:versionName="1.0"
   android:installLocation="auto"
