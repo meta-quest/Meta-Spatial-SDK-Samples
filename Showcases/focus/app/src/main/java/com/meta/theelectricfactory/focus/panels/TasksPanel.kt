@@ -46,6 +46,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Quaternion
@@ -301,6 +302,10 @@ fun TaskCard(
     var taskTitleInput = remember() { mutableStateOf(task.title) }
     var taskBodyInput = remember() { mutableStateOf(task.body) }
 
+    var textDecoration = if (taskLabelState.intValue == 2) TextDecoration.LineThrough else TextDecoration.None
+    var textColor = if (taskLabelState.intValue == 2) FocusColors.mediumGray else FocusColors.darkGray
+
+
     val taskUpdated by FocusViewModel.instance.currentTaskUpdated.collectAsState()
     LaunchedEffect(taskUpdated) {
         if (isSpatial && task.uuid == FocusViewModel.instance.currentTaskUuid.value) {
@@ -446,7 +451,9 @@ fun TaskCard(
             ),
             textStyle = TextStyle(
                 fontSize = 23.sp,
-                fontFamily = focusFont
+                fontFamily = focusFont,
+                color = textColor,
+                textDecoration = textDecoration,
             ),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,
@@ -478,7 +485,8 @@ fun TaskCard(
             textStyle = TextStyle(
                 fontSize = 16.sp,
                 fontFamily = focusFont,
-                color = FocusColors.darkGray
+                color = textColor,
+                textDecoration = textDecoration,
             ),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color.Transparent,

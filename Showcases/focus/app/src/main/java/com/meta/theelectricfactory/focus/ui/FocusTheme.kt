@@ -76,6 +76,7 @@ object FocusColors {
     val gray = Color(0xFFD4D4DC)
     val darkGray = Color(0xFF434152)
     val darkGray2 = Color(0xFF59576D)
+    val mediumGray = Color(0xFF757486)
     val lightGray = Color(0xFFF1F0F3)
 
     val lightBlue = Color(0xFFECF6FF)
