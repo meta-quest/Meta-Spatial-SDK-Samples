@@ -3,9 +3,12 @@
 package com.meta.theelectricfactory.focus.systems
 
 import com.meta.spatial.core.Entity
+import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Query
 import com.meta.spatial.core.SystemBase
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.runtime.ButtonBits
+import com.meta.spatial.toolkit.Controller
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.SceneObjectSystem
 import com.meta.spatial.toolkit.Transform
@@ -39,50 +42,96 @@ class BoardParentingSystem : SystemBase() {
         // We check this just for the object that is being moved
         if (grabbedChild == null) return
 
+        // IMPORTANT NOTE: This method below is not working properly right now due to some issues with parenting property in the SDK.
+        // Instead of using this, we are imitating the parenting behaviour by making a "stick" effect when objects are close to a board.
+
+//        // Check position from the grabbed object to each board
+//        for (board in boards) {
+//
+//            // Get vertices of the board
+//            val vertices = getMeshBoundsAbsolutePosition(board)
+//            // Calculate absolute distance from sticker to board
+//            val distance =
+//                pointToRectangleDistance(getAbsoluteTransform(grabbedChild).t, vertices[0], vertices[1], vertices[2], vertices[3])
+//
+//            val uuid = grabbedChild.getComponent<ToolComponent>().uuid
+//            val assetType = grabbedChild.getComponent<ToolComponent>().type
+//
+//            // Detect if object is close to a board
+//            if ((!grabbedChild.hasComponent<TransformParent>() ||
+//                grabbedChild.hasComponent<TransformParent>() && grabbedChild.getComponent<TransformParent>().entity != board) &&
+//                distance < 0.08f) {
+//
+//                if (grabbedChild.hasComponent<TransformParent>() &&
+//                    grabbedChild.getComponent<TransformParent>().entity != Entity.nullEntity() &&
+//                    grabbedChild.getComponent<TransformParent>().entity != board) {
+//
+//                    val currentParentVertices = getMeshBoundsAbsolutePosition(grabbedChild.getComponent<TransformParent>().entity)
+//                    val distanceToCurrentParent = pointToRectangleDistance(getAbsoluteTransform(grabbedChild).t, currentParentVertices[0], currentParentVertices[1], currentParentVertices[2], currentParentVertices[3])
+//
+//                    // If the object is still close to its current parent, do not change parent
+//                    if (distanceToCurrentParent < 0.08f) {
+//                        break
+//                    }
+//                }
+//
+//                // Parent object with board
+//                val parentUuid = board.getComponent<ToolComponent>().uuid
+//
+//                grabbedChild.setComponent(TransformParent(board))
+//                grabbedChild.setComponent(AttachableComponent(parentUuid = parentUuid))
+//                ImmersiveActivity.getInstance()?.DB?.updateParent(uuid, assetType, parentUuid)
+//
+//            } else if ( grabbedChild.hasComponent<TransformParent>() &&
+//                grabbedChild.getComponent<TransformParent>().entity == board &&
+//                distance >= 0.08f) {
+//
+//                grabbedChild.setComponent(TransformParent(Entity.nullEntity()))
+//                grabbedChild.setComponent(AttachableComponent(parentUuid = -1))
+//                ImmersiveActivity.getInstance()?.DB?.updateParent(uuid, assetType, -1)
+//            }
+//        }
+
+        // IMPORTANT NOTE: Since the parenting property isn't working properly in the SDK, we are imitating the parenting behaviour by making a "stick" effect when objects are close to a board.
+
         // Check position from the grabbed object to each board
         for (board in boards) {
 
+            // Get the controller that is grabbing the sticker
+            val controllers = Query.where { has(Controller.id) }
+            var grabbingController = Entity.nullEntity()
+            for (entity in controllers.eval()) {
+                val controller = entity.getComponent<Controller>()
+                if (
+                    controller.buttonState and (ButtonBits.ButtonSqueezeL or ButtonBits.ButtonSqueezeR) != 0
+                ) {
+                    grabbingController = entity
+                }
+            }
+
+            if (grabbingController == Entity.nullEntity()) return
+
+            // Get absolute transform to compare real distance between controller and sticker
+            val grabDistance =
+                getAbsoluteTransform(grabbedChild)
+                    .t
+                    .distanceTo(getAbsoluteTransform(grabbingController).t)
+            // Save a dummy point in space representing the point relative to the controller (position and
+            // rotation) at which the sticker remains under normal circumstances
+            val grabVector = Vector3(0f, 0f, grabDistance)
+            val dummyPoint = grabbingController.getComponent<Transform>().transform.times(grabVector)
+
             // Get vertices of the board
             val vertices = getMeshBoundsAbsolutePosition(board)
-            // Calculate absolute distance from sticker to board
+            // Calculate distance from dummy point to board
             val distance =
-                pointToRectangleDistance(getAbsoluteTransform(grabbedChild).t, vertices[0], vertices[1], vertices[2], vertices[3])
+                pointToRectangleDistance(dummyPoint, vertices[0], vertices[1], vertices[2], vertices[3])
 
-            val uuid = grabbedChild.getComponent<ToolComponent>().uuid
-            val assetType = grabbedChild.getComponent<ToolComponent>().type
-
-            // Detect if object is close to a board
-            if ((!grabbedChild.hasComponent<TransformParent>() ||
-                grabbedChild.hasComponent<TransformParent>() && grabbedChild.getComponent<TransformParent>().entity != board) &&
-                distance < 0.08f) {
-
-                if (grabbedChild.hasComponent<TransformParent>() &&
-                    grabbedChild.getComponent<TransformParent>().entity != Entity.nullEntity() &&
-                    grabbedChild.getComponent<TransformParent>().entity != board) {
-
-                    val currentParentVertices = getMeshBoundsAbsolutePosition(grabbedChild.getComponent<TransformParent>().entity)
-                    val distanceToCurrentParent = pointToRectangleDistance(getAbsoluteTransform(grabbedChild).t, currentParentVertices[0], currentParentVertices[1], currentParentVertices[2], currentParentVertices[3])
-
-                    // If the object is still close to its current parent, do not change parent
-                    if (distanceToCurrentParent < 0.08f) {
-                        break
-                    }
-                }
-
-                // Parent object with board
-                val parentUuid = board.getComponent<ToolComponent>().uuid
-
-                grabbedChild.setComponent(TransformParent(board))
-                grabbedChild.setComponent(AttachableComponent(parentUuid = parentUuid))
-                ImmersiveActivity.getInstance()?.DB?.updateParent(uuid, assetType, parentUuid)
-
-            } else if ( grabbedChild.hasComponent<TransformParent>() &&
-                grabbedChild.getComponent<TransformParent>().entity == board &&
-                distance >= 0.08f) {
-
-                grabbedChild.setComponent(TransformParent(Entity.nullEntity()))
-                grabbedChild.setComponent(AttachableComponent(parentUuid = -1))
-                ImmersiveActivity.getInstance()?.DB?.updateParent(uuid, assetType, -1)
+            // If the dummy point is close to the board, we stick the object to the board
+            if (distance < 0.08f) {
+                grabbedChild.setComponent(
+                    Transform(Pose(dummyPoint, board.getComponent<Transform>().transform.q))
+                )
             }
         }
     }
