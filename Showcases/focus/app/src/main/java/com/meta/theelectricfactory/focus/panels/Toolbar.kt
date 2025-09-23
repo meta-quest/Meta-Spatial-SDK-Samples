@@ -252,7 +252,7 @@ fun ToolbarButton(
 
     SpatialTheme(shapes = focusShapes(FocusShapes.Squared)) {
         SpatialSideNavItem(
-            Modifier
+            modifier = Modifier
                 .size(60.dp)
                 .fillMaxHeight()
                 .background(backgroundColor, LocalShapes.current.small)

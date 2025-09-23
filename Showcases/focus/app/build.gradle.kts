@@ -76,8 +76,17 @@ dependencies {
     implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
     implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
     implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
-    implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:${metaSpatialSdkVersion}")
     implementation("com.meta.spatial:meta-spatial-sdk-isdk:$metaSpatialSdkVersion")
     implementation("com.meta.spatial:meta-spatial-sdk-compose:$metaSpatialSdkVersion")
     implementation("com.meta.spatial:meta-spatial-sdk-uiset:$metaSpatialSdkVersion")
+
+//    implementation(files("libs/meta-spatial-sdk-0.8.0.aar"))
+//    implementation(files("libs/meta-spatial-sdk-ovrmetrics-0.8.0.aar"))
+//    implementation(files("libs/meta-spatial-sdk-physics-0.8.0.aar"))
+//    implementation(files("libs/meta-spatial-sdk-toolkit-0.8.0.aar"))
+//    implementation(files("libs/meta-spatial-sdk-vr-0.8.0.aar"))
+//    implementation(files("libs/meta-spatial-sdk-mruk-0.8.0.aar"))
+//    implementation(files("libs/meta-spatial-sdk-isdk-0.8.0.aar"))
+//    implementation(files("libs/meta-spatial-sdk-compose-0.8.0.aar"))
+//    implementation(files("libs/meta-spatial-sdk-uiset-0.8.0.aar"))
 }

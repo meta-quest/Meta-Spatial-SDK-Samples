@@ -72,7 +72,7 @@ fun StickyButton(
         shapes = focusShapes(FocusShapes.FullRounded)
     ) {
         SpatialSideNavItem(
-            Modifier
+            modifier = Modifier
                 .size(40.dp)
                 .fillMaxHeight()
                 .background(color, LocalShapes.current.large),

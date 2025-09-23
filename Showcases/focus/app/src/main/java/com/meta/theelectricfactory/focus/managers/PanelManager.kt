@@ -8,6 +8,7 @@ import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.runtime.LayerConfig
+import com.meta.spatial.runtime.PanelShapeLayerBlendType
 import com.meta.spatial.toolkit.Grabbable
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.PanelRegistration
@@ -102,9 +103,10 @@ class PanelManager {
                 height = heightInMeters
                 layoutWidthInDp = FOCUS_DP * width
                 layerConfig = LayerConfig()
-                enableTransparent = true
+                layerBlendType = PanelShapeLayerBlendType.MASKED
                 includeGlass = false
                 themeResourceId = R.style.Theme_Focus_Transparent
+                enableLayerFeatheredEdge = true
             }
 
             if (homePanel) {

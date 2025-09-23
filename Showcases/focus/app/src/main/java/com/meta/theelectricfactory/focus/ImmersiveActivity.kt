@@ -11,7 +11,7 @@ import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector2
 import com.meta.spatial.core.Vector3
-import com.meta.spatial.isdk.IsdkFeature
+//import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.isdk.IsdkGrabbable
 import com.meta.spatial.isdk.IsdkPanelDimensions
 import com.meta.spatial.runtime.SceneAudioAsset
@@ -31,6 +31,7 @@ import com.meta.spatial.toolkit.TransformParent
 import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.vr.LocomotionSystem
 import com.meta.spatial.vr.VRFeature
+import com.meta.spatial.vr.VrInputSystemType
 import java.lang.ref.WeakReference
 import com.meta.spatial.compose.ComposeFeature
 import com.meta.theelectricfactory.focus.data.Project
@@ -71,8 +72,11 @@ class ImmersiveActivity : AppSystemActivity() {
     private val currentProject: Project? get() = ProjectManager.instance.currentProject
 
     override fun registerFeatures(): List<SpatialFeature> {
-        val features =
-            mutableListOf(VRFeature(this), ComposeFeature(), IsdkFeature(this, spatial, systemManager))
+        val features = mutableListOf(
+            VRFeature(this, inputSystemType = VrInputSystemType.SIMPLE_CONTROLLER),
+            ComposeFeature(),
+            //IsdkFeature(this, spatial, systemManager)
+        )
         return features
     }
 
@@ -86,6 +90,8 @@ class ImmersiveActivity : AppSystemActivity() {
         componentManager.registerComponent<ToolComponent>(ToolComponent.Companion)
         componentManager.registerComponent<TimeComponent>(TimeComponent.Companion)
         componentManager.registerComponent<AttachableComponent>(AttachableComponent.Companion)
+        componentManager.registerComponent<IsdkGrabbable>(IsdkGrabbable.Companion)
+        componentManager.registerComponent<IsdkPanelDimensions>(IsdkPanelDimensions.Companion)
 
         systemManager.registerSystem(DatabaseUpdateSystem())
         systemManager.registerSystem(UpdateTimeSystem())
