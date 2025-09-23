@@ -10,7 +10,7 @@ While Android Shared Preferences can be used for this purpose, SQLite might be a
 
 To add a SQLite database in your project you can follow this [Android Developer SQLite Guide](https://developer.android.com/training/data-storage/sqlite)
 
-Focus has implemented a [DatabaseManager](../app/src/main/java/com/meta/focus/DatabaseManager.kt) class to create, save, and retrieve data from a database.
+Focus has implemented a [DatabaseManager](../app/src/main/java/com/meta/theelectricfactory/focus/managers/DatabaseManager.kt) class to create, save, and retrieve data from a database.
 
 There are five tables with different elements and attributes: *Projects, Unique Assets, Tools, Sticky Notes and Tasks*.
 The DatabaseManager implements methods to create, get, update, and delete the elements in these tables.
@@ -24,10 +24,11 @@ In Focus, the elements are split in two categories:
 All these elements need to be updated in the database any time they change state or position.
 
 The core of Meta Spatial SDK is the **Entity Component System (ECS)**.
-To be able to identify different objects in Focus, we created three custom Components to attach to the Entities:
+To be able to identify different objects in Focus, we created four custom Components to attach to the Entities:
 - [UniqueAssetComponent](../app/src/main/components/UniqueAssetComponent.xml),
-- [ToolComponent](../app/src/main/components/ToolComponent.xml) and
-- [TimeComponent](../app/src/main/components/TimeComponent.xml)
+- [ToolComponent](../app/src/main/components/ToolComponent.xml),
+- [TimeComponent](../app/src/main/components/TimeComponent.xml) and
+- [AttachableComponent](../app/src/main/components/AttachableComponent.xml)
 
 Starting from Spatial SDK v0.5.5, you can define a component using an XML file under app/src/main/components. When you build your app, the Gradle plugin will pick up the XML files under app/src/main/components to generate Kotlin code first.
 
@@ -60,12 +61,19 @@ This way we are able to identify each spatial object in our scene and update the
 Here is just a small part of our *deleteObject()* function, where you can see how we identify the element type to be able to delete the correct object in the database:
 ```kotlin
 val asset = entity.getComponent<ToolComponent>()
-when(asset.type) {
+when (asset.type) {
     AssetType.STICKY_NOTE -> {
-      DB.deleteSticky(asset.uuid)
+        immA?.DB?.deleteSticky(asset.uuid)
+    }
+    AssetType.BOARD -> {
+        var children = getChildren(entity)
+        for (i in children.count() - 1 downTo 0) {
+            deleteObject(children[i], true)
+        }
+        immA?.DB?.deleteToolAsset(asset.uuid)
     }
     else -> {
-      DB.deleteToolAsset(asset.uuid)
+        immA?.DB?.deleteToolAsset(asset.uuid)
     }
 }
 ```
@@ -109,7 +117,8 @@ for (entity in uniqueAssets.eval()) {
     val pose = entity.getComponent<Transform>().transform
     val isGrabbed = entity.getComponent<Grabbable>().isGrabbed
 
-    if (isGrabbed) ImmersiveActivity.instance.get()?.DB?.updateUniqueAsset(uniqueAsset.uuid, pose)
+    if (isGrabbed)
+        immA?.DB?.updateUniqueAsset(uniqueAsset.uuid, pose)
 }
 ```
 
@@ -134,13 +143,14 @@ override fun execute() {
             val pose = entity.getComponent<Transform>().transform
             val isGrabbed = entity.getComponent<Grabbable>().isGrabbed
 
-            if (isGrabbed) ImmersiveActivity.instance.get()?.DB?.updateUniqueAsset(uniqueAsset.uuid, pose)
+            if (isGrabbed)
+                immA?.DB?.updateUniqueAsset(uniqueAsset.uuid, pose)
         }
     }
 }
 ```
 
-Check the entire code in [DatabaseUpdateSystem.kt](../app/src/main/java/com/meta/focus/DatabaseUpdateSystem.kt)
+Check the entire code in [DatabaseUpdateSystem.kt](../app/src/main/java/com/meta/theelectricfactory/focus/systems/DatabaseUpdateSystem.kt)
 
 
 ## Detection of keyboard events
@@ -151,106 +161,15 @@ Some of them are stored when we create the objects, as we saw earlier.
 Others, as text and state, can change during the project, demanding us to detect the best moment to update them on the database.
 
 Focus has several elements with text that need to be saved in the database, as the sticky notes, tasks, web view urls and name of the project itself.
-Most texts are just one line, which means the user can press enter in the virtual keyboard and confirm the action when it's done. To be able to detect this, we need to add two properties for the EditTExt in the .XML:
-```xml
-<EditText
-…
-android:inputType="text"
-android:imeOptions="actionDone" />
-```
-
-We also need to set an action listener to the EditText to perform an action once the user finishes writing (when they press enter or close the keyboard).
-You can do it this way:
+Most texts are just one line, which means the user can press enter in the virtual keyboard and confirm the action when it's done. To be able to detect this, we need to add two properties for the TextField in the Jetpack Compose panels:
 ```kotlin
-var enterTime:Long = 0
-val waitingInterval:Long = (0.5f * 1000).toLong() // 0.5 seconds
-
-editText?.setOnEditorActionListener { v, actionId, event ->
-    if (actionId == EditorInfo.IME_ACTION_DONE || event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER) {
-
-        // To avoid multiple events to trigger the same action
-        if (System.currentTimeMillis() - enterTime >= waitingInterval) {
-            enterTime = System.currentTimeMillis()
-            onComplete()
-            return@setOnEditorActionListener true
+TextField(
+    keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done),
+    keyboardActions = KeyboardActions(
+        onDone = {
+            // DoSomething()
         }
-    }
-    false
-}
+    ),
+)
 ```
 ![ActionListener](./Resources/actionlistener.gif)
-
-In Focus we also have texts that are not solely one line, as sticky notes or tasks body.
-As there is no enter in virtual keyboard for texts with multiple lines, we need to detect when the user stops writing to update.
-One good way to do it is to add a TextWatcher to the EditText, to detect when was the last time the user changed the text.
-
-We chose to wait 2 seconds to update the database, once the user stopped writing. You can do it this way:
-```kotlin
-var lastTextChangeTime:Long = 0
-val typingInterval:Long = 1 * 1000
-val handler = Handler(Looper.getMainLooper())
-
-editText?.addTextChangedListener(object : TextWatcher {
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-
-    // update lastTime if user is still writing
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        lastTextChangeTime = System.currentTimeMillis()
-    }
-
-    override fun afterTextChanged(s: Editable?) {
-        handler.postDelayed({
-            // Wait to perform action
-            if (System.currentTimeMillis() - lastTextChangeTime >= typingInterval) {
-                onComplete()
-            }
-        }, typingInterval)
-    }
-})
-```
-
-![TextWatcher](./Resources/textwatcher.gif)
-
-We also left you a helper function in [Utils.kt](../app/src/main/java/com/meta/focus/Utils.kt), called *addEditTextListeners()* to be able to add this two methods to any EditText and choose if you want them to be updated when action is done or when the user stops writing.
-```kotlin
-fun addEditTextListeners(editText: EditText?, onComplete: () -> (Unit), updateWithoutEnter:Boolean = false ) {
-
-    if (!updateWithoutEnter) {
-        var enterTime:Long = 0
-        val waitingInterval:Long = (0.5f * 1000).toLong() // 0.5 seconds
-
-        editText?.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_DONE || event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER) {
-
-                // To avoid multiple events to trigger the same action
-                if (System.currentTimeMillis() - enterTime >= waitingInterval) {
-                    enterTime = System.currentTimeMillis()
-                    onComplete()
-                    return@setOnEditorActionListener true
-                }
-            }
-            false
-        }
-    } else {
-        var lastTextChangeTime:Long = 0
-        val typingInterval:Long = 1 * 1000
-        val handler = Handler(Looper.getMainLooper())
-
-        editText?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                lastTextChangeTime = System.currentTimeMillis()
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                handler.postDelayed({
-                    if (System.currentTimeMillis() - lastTextChangeTime >= typingInterval) {
-                        onComplete()
-                    }
-                }, typingInterval)
-            }
-        })
-    }
-}
-```
