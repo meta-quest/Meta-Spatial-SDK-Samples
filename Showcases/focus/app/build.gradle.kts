@@ -5,6 +5,7 @@ val metaSpatialSdkVersion: String by project
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.jetbrains.kotlin.android)
+  alias(libs.plugins.compose.compiler)
   id("com.meta.spatial.plugin")
 }
 
@@ -17,7 +18,7 @@ android {
     minSdk = 28
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 21
+    versionCode = 24
     versionName = "1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -34,7 +35,11 @@ android {
     targetCompatibility = JavaVersion.VERSION_1_8
   }
   kotlinOptions { jvmTarget = "1.8" }
-  buildFeatures { viewBinding = true }
+  buildFeatures {
+    viewBinding = true
+    compose = true
+  }
+  composeOptions { kotlinCompilerExtensionVersion = "1.5.15" }
 }
 
 dependencies {
@@ -49,6 +54,21 @@ dependencies {
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
 
+  // Compose
+  implementation(platform(libs.androidx.compose.bom))
+  implementation(libs.androidx.material3)
+  implementation(libs.androidx.ui)
+  implementation(libs.androidx.ui.tooling)
+  implementation(libs.androidx.ui.tooling.preview)
+
+  // AI Integration dependencies
+  implementation(libs.google.gson)
+  implementation(libs.squareup.okhttp3)
+  implementation(platform(libs.squareup.okhttp3.boom))
+  implementation(libs.squareup.okhttp3.mockwebserver)
+  implementation(libs.squareup.okhttp3.logging.interceptor)
+  implementation(libs.facebook.soloader)
+
   // Meta Spatial SDK dependencies
   implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-ovrmetrics:$metaSpatialSdkVersion")
@@ -57,13 +77,16 @@ dependencies {
   implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
   implementation("com.meta.spatial:meta-spatial-sdk-isdk:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-compose:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-uiset:$metaSpatialSdkVersion")
 
-  // AI Integration dependencies
-  implementation("com.google.code.gson:gson:2.8.9")
-  implementation("com.squareup.okhttp3:okhttp:4.12.0")
-  implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
-  implementation("com.squareup.okhttp3:okhttp")
-  implementation("com.squareup.okhttp3:logging-interceptor")
-  testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
-  implementation("com.facebook.soloader:soloader:0.11.0")
+  //    implementation(files("libs/meta-spatial-sdk-0.8.0.aar"))
+  //    implementation(files("libs/meta-spatial-sdk-ovrmetrics-0.8.0.aar"))
+  //    implementation(files("libs/meta-spatial-sdk-physics-0.8.0.aar"))
+  //    implementation(files("libs/meta-spatial-sdk-toolkit-0.8.0.aar"))
+  //    implementation(files("libs/meta-spatial-sdk-vr-0.8.0.aar"))
+  //    implementation(files("libs/meta-spatial-sdk-mruk-0.8.0.aar"))
+  //    implementation(files("libs/meta-spatial-sdk-isdk-0.8.0.aar"))
+  //    implementation(files("libs/meta-spatial-sdk-compose-0.8.0.aar"))
+  //    implementation(files("libs/meta-spatial-sdk-uiset-0.8.0.aar"))
 }

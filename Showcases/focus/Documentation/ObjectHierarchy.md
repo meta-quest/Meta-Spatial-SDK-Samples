@@ -27,6 +27,7 @@ val timerObj = Entity.create(
     Mesh(mesh = Uri.parse("timer.glb")),
     Scale(0.1f),
     Grabbable(true, GrabbableType.PIVOT_Y),
+    IsdkGrabbable(billboardOrientation = Vector3(0f, 180f, 0f)),
     Transform(Pose(Vector3(0f)))
 )
 ```
@@ -100,7 +101,7 @@ scene.playSound(timerSound, entity, 1f)
 ## Custom helper functions
 
 In Focus project we built several useful **custom helper functions** to save time for developers when performing repetitive and common actions for spatial apps.
-You can find most of these functions in the script file [Utils.kt](../app/src/main/java/com/meta/focus/Utils.kt).
+You can find most of these functions in the script file [Utils.kt](../app/src/main/java/com/meta/theelectricfactory/focus/utils/Utils.kt).
 
 One of this functions is the *getChildren()*, which returns a list of entities that are children of an entity:
 ```kotlin
@@ -129,13 +130,12 @@ Nevertheless, deleting an entity that has child objects will lead to an app cras
 We can use our function *getChildren()* for that.
 
 ```kotlin
-if (asset.type == AssetType.TIMER) {
+if (asset.type == AssetType.TIMER || asset.type == AssetType.BOARD) {
     var children = getChildren(entity)
-    for (i in children.count() -1 downTo 0) {
-      children[i].destroy()
+    for (i in children.count() - 1 downTo 0) {
+        children[i].destroy()
     }
 }
-entity.destroy();
 ```
 
 **Note**: this example is just one level of depth recursivity. In case of more complex objects, the functions should also delete the children of the children.

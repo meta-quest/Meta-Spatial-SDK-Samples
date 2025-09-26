@@ -6,7 +6,6 @@
 >
 
     <uses-feature android:glEsVersion="0x00030000" android:required="true" />
-<!--    <uses-feature android:name="android.hardware.vulkan.version" android:required="false" />-->
     <uses-feature
     android:name="com.oculus.feature.RENDER_MODEL"
     android:required="false"
@@ -18,23 +17,25 @@
     <uses-feature
     android:name="oculus.software.overlay_keyboard"
     android:required="false"
-  /> <!-- App runs in 6DoF mode -->
+  />
+    <!-- App runs in 6DoF mode -->
     <uses-feature
     android:name="android.hardware.vr.headtracking"
     android:required="true"
-  /> <!-- Support passthrough (mixed-reality) -->
+  />
+    <!-- Support passthrough (mixed-reality) -->
     <uses-feature
     android:name="com.oculus.feature.PASSTHROUGH"
     android:required="false"
-  /> <!-- Support hand tracking -->
+  />
+    <!-- Support hand tracking -->
     <uses-feature
     android:name="oculus.software.handtracking"
     android:required="false"
   />
 
-    <uses-permission
-    android:name="com.oculus.permission.RENDER_MODEL"
-  /> <!-- Support Quest keyboard -->
+    <uses-permission android:name="com.oculus.permission.RENDER_MODEL" />
+    <!-- Support Quest keyboard -->
     <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
     <uses-permission
     android:name="com.oculus.permission.ACCESS_MR_SENSOR_DATA"
@@ -63,6 +64,7 @@
   >
         <activity
       android:name=".ImmersiveActivity"
+      android:screenOrientation="landscape"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"
       android:excludeFromRecents="false"
       android:exported="true"
@@ -90,7 +92,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
             </intent-filter>
         </activity>
     </application>
