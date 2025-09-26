@@ -191,11 +191,11 @@ object QueryLlamaService {
           // Embed the prompt in Llama 3's instruction format.
           val instruction =
               """
-                        <|begin_of_text|>
-                        <|start_header_id|>user<|end_header_id|>
-                        {{prompt}} <|eot_id|>
-                        <|start_header_id|>assistant<|end_header_id|>
-                    """
+              <|begin_of_text|>
+              <|start_header_id|>user<|end_header_id|>
+              {{prompt}} <|eot_id|>
+              <|start_header_id|>assistant<|end_header_id|>
+              """
                   .trimIndent()
                   .replace("{{prompt}}", query)
 

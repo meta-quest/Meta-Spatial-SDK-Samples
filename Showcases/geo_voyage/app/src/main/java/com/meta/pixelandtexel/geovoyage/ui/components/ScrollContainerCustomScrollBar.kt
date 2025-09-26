@@ -136,12 +136,12 @@ class ScrollableTextAreaProvider : PreviewParameterProvider<String> {
           "This is a medium answer".repeat(50),
           "This is a long answer".repeat(500),
           """
-            
-              # Sample  
-              * Markdown  
-              * [Link](https://example.com)  
-              ![Image](https://example.com/img.png "Image")  
-              <a href="https://www.google.com/">Google</a>  
+
+          # Sample  
+          * Markdown  
+          * [Link](https://example.com)  
+          ![Image](https://example.com/img.png "Image")  
+          <a href="https://www.google.com/">Google</a>  
           """
               .trimIndent(),
       )

@@ -217,12 +217,12 @@ class UploadActivity : AppCompatActivity() {
     } else {
       webView.evaluateJavascript(
           """
-            (function() {
-                document.getElementById("app-text").innerText = "Loading, please wait...";
-                document.getElementById("progress-bar").removeAttribute("value");
-                document.getElementById("progress-bar").removeAttribute("max");
-            })()
-        """
+          (function() {
+              document.getElementById("app-text").innerText = "Loading, please wait...";
+              document.getElementById("progress-bar").removeAttribute("value");
+              document.getElementById("progress-bar").removeAttribute("max");
+          })()
+          """
               .trimIndent()
       ) {}
     }
