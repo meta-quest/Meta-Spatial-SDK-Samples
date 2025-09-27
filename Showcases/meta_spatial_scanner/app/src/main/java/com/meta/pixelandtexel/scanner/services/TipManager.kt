@@ -15,6 +15,7 @@ import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.Query
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.runtime.LayerConfig
+import com.meta.spatial.runtime.PanelShapeLayerBlendType
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.AvatarAttachment
 import com.meta.spatial.toolkit.Grabbable
@@ -77,7 +78,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
             width = 0.368f
             height = 0.164f
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
           }
           composePanel {
             setContent {
@@ -99,7 +101,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
             width = 0.368f
             height = 0.440f
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
           }
           composePanel {
             setContent {
@@ -125,7 +128,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
             width = 0.368f
             height = 0.440f
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
           }
           composePanel {
             setContent {
@@ -151,7 +155,8 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
             width = 0.368f
             height = 0.440f
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
           }
           composePanel {
             setContent {

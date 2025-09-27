@@ -36,6 +36,7 @@ import com.meta.spatial.core.SystemBase
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.PanelConfigOptions
+import com.meta.spatial.runtime.PanelShapeLayerBlendType
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.Hittable
 import com.meta.spatial.toolkit.MeshCollision
@@ -143,7 +144,8 @@ class ObjectDetectionFeature(
             width = cameraOutputSize.width / (PanelConfigOptions.EYEBUFFER_WIDTH * 0.5f)
             height = cameraOutputSize.height / (PanelConfigOptions.EYEBUFFER_HEIGHT * 0.5f)
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
           }
           panel {
             cameraPreviewView = rootView?.findViewById(R.id.preview_view)
@@ -170,7 +172,8 @@ class ObjectDetectionFeature(
             width = 0.1f
             height = 0.05f
             layerConfig = LayerConfig()
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
           }
           panel {
             cameraStatusRootView = rootView
