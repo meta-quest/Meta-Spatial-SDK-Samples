@@ -583,6 +583,11 @@ class PanelManager(
       return
     }
     panel.entity.setComponent(Visible(show))
+    
+    if (show) {
+      panel.entity.setComponent(LookAtHead(once = true, zOffset = 1.0f))
+    }
+    
     // Set media filters visibility
     getComposition()
         .tryGetNodeByName(GLXFConstants.NODE_NAME_MEDIA_FILTERS)

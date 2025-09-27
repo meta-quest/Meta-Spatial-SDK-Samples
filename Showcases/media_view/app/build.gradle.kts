@@ -43,8 +43,8 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 22
-    versionName = "0.0.20"
+    versionCode = 25
+    versionName = "0.0.25"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }
@@ -196,14 +196,15 @@ dependencies {
   androidTestImplementation("androidx.test.ext:junit:1.2.1")
   androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
-  // Meta Spatial SDK libs
-  implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-ovrmetrics:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-physics:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
-  implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:$metaSpatialSdkVersion")
+  // Meta Spatial SDK libs (local AAR files)
+  implementation(files("libs/meta-spatial-sdk-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-ovrmetrics-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-physics-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-toolkit-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-vr-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-mruk-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-castinputforward-0.8.0.aar"))
+  implementation(files("libs/meta-spatial-sdk-isdk-0.8.0.aar"))
 
   // Meta Spatial SDK dependencies
   implementation("com.squareup.okhttp3:okhttp:4.12.0")
