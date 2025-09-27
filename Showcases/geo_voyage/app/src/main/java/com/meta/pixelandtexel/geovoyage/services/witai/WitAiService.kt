@@ -361,7 +361,7 @@ object WitAiService {
                 .host("api.wit.ai")
                 .addPathSegment("message")
                 .addQueryParameter("v", "20240304")
-                .addQueryParameter("q", "query")
+                .addQueryParameter("q", query)
                 .build()
 
         val request =
@@ -372,7 +372,7 @@ object WitAiService {
           throw IOException("Network request was not ok: ${response.message}")
         }
 
-        val responseBody = response.body.string() ?: throw IOException("Response body is null")
+        val responseBody = response.body.string()
 
         val understoodResponse = gson.fromJson(responseBody, WitAiUnderstoodResponse::class.java)
         WitAiResponse.Success(understoodResponse)

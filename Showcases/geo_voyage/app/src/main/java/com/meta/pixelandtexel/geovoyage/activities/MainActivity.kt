@@ -5,22 +5,22 @@ package com.meta.pixelandtexel.geovoyage.activities
 import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
+import androidx.core.net.toUri
 import com.meta.pixelandtexel.geovoyage.GrabbableNoRotation
 import com.meta.pixelandtexel.geovoyage.Pinnable
 import com.meta.pixelandtexel.geovoyage.R
 import com.meta.pixelandtexel.geovoyage.Spin
 import com.meta.pixelandtexel.geovoyage.Spinnable
 import com.meta.pixelandtexel.geovoyage.Tether
-import com.meta.pixelandtexel.geovoyage.ecs.grabbablenorotation.GrabbableNoRotationSystem
-import com.meta.pixelandtexel.geovoyage.ecs.landmarkspawn.LandmarkSpawnSystem
-import com.meta.pixelandtexel.geovoyage.ecs.pinnable.PinnableSystem
-import com.meta.pixelandtexel.geovoyage.ecs.spin.SpinSystem
-import com.meta.pixelandtexel.geovoyage.ecs.spinnable.SpinnableSystem
-import com.meta.pixelandtexel.geovoyage.ecs.tether.TetherSystem
+import com.meta.pixelandtexel.geovoyage.ecs.GrabbableNoRotationSystem
+import com.meta.pixelandtexel.geovoyage.ecs.LandmarkSpawnSystem
+import com.meta.pixelandtexel.geovoyage.ecs.PinnableSystem
+import com.meta.pixelandtexel.geovoyage.ecs.SpinSystem
+import com.meta.pixelandtexel.geovoyage.ecs.SpinnableSystem
+import com.meta.pixelandtexel.geovoyage.ecs.TetherSystem
 import com.meta.pixelandtexel.geovoyage.enums.PlayMode
 import com.meta.pixelandtexel.geovoyage.enums.SettingsKey
 import com.meta.pixelandtexel.geovoyage.models.GeoCoordinates
@@ -32,9 +32,9 @@ import com.meta.pixelandtexel.geovoyage.services.googlemaps.IPanoramaServiceHand
 import com.meta.pixelandtexel.geovoyage.services.llama.QueryLlamaService
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
-import com.meta.spatial.isdk.IsdkFeature
 import com.meta.spatial.runtime.AlphaMode
 import com.meta.spatial.runtime.LayerConfig
+import com.meta.spatial.runtime.PanelShapeLayerBlendType
 import com.meta.spatial.runtime.SceneAudioAsset
 import com.meta.spatial.runtime.SceneMaterial
 import com.meta.spatial.runtime.SceneObject
@@ -64,7 +64,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
     lateinit var instance: WeakReference<MainActivity>
   }
 
-  private var CurrentMode: PlayMode = PlayMode.INTRO
+  private var currentMode: PlayMode = PlayMode.INTRO
 
   private var startedSpeakingSoundAsset: SceneAudioAsset? = null
   private var finishedSpeakingSoundAsset: SceneAudioAsset? = null
@@ -80,7 +80,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   private lateinit var permissionsResultCallback: (granted: Boolean) -> Unit
 
   override fun registerFeatures(): List<SpatialFeature> {
-    return listOf(VRFeature(this), IsdkFeature(this, spatial, systemManager))
+    return listOf(VRFeature(this))
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -120,7 +120,6 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   }
 
   override fun registerPanels(): List<PanelRegistration> {
-    // all of our panels share a common panel config, except for width/height values
     return listOf(
         PanelRegistration(R.integer.panel_id) {
           activityClass = PanelActivity::class.java
@@ -131,7 +130,8 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             layoutHeightInDp = 600f
             includeGlass = false
             themeResourceId = R.style.PanelAppThemeTransparent
-            enableTransparent = true
+            layerBlendType = PanelShapeLayerBlendType.MASKED
+            enableLayerFeatheredEdge = true
             forceSceneTexture = true
             // Enable better looking panels
             layerConfig = LayerConfig()
@@ -172,7 +172,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
 
       Entity(R.integer.skybox_id)
           .setComponents(
-              Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
+              Mesh("mesh://skybox".toUri(), hittable = MeshCollision.NoCollision),
               Material().apply { unlit = true },
               Transform(),
               Visible(false),
@@ -196,7 +196,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
     glxfEntity = Entity.create()
     return activityScope.launch {
       glXFManager.inflateGLXF(
-          Uri.parse("scenes/Composition.glxf"),
+          "scenes/Composition.glxf".toUri(),
           rootEntity = glxfEntity!!,
           keyName = "scene",
       )
@@ -220,7 +220,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   }
 
   fun tryStartMode(mode: PlayMode) {
-    if (mode == CurrentMode) {
+    if (mode == currentMode) {
       return
     }
 
@@ -237,11 +237,11 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
       else -> {}
     }
 
-    CurrentMode = mode
+    currentMode = mode
   }
 
   private fun exitCurrentMode() {
-    when (CurrentMode) {
+    when (currentMode) {
       PlayMode.EXPLORE -> {
         toggleSkybox(false)
 
@@ -259,7 +259,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   // user interactions during explore mode
 
   fun userDroppedPin(coords: GeoCoordinates) {
-    if (CurrentMode !== PlayMode.EXPLORE) {
+    if (currentMode !== PlayMode.EXPLORE) {
       return
     }
 
@@ -269,7 +269,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   }
 
   fun userSelectedLandmark(info: Landmark, coords: GeoCoordinates) {
-    if (CurrentMode !== PlayMode.EXPLORE) {
+    if (currentMode !== PlayMode.EXPLORE) {
       return
     }
 
@@ -283,7 +283,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   }
 
   fun userToggledLandmarks(enabled: Boolean) {
-    if (CurrentMode !== PlayMode.EXPLORE) {
+    if (currentMode !== PlayMode.EXPLORE) {
       return
     }
 
@@ -323,7 +323,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
               val sceneTexture = SceneTexture(bitmap)
               sceneMaterial.setAlbedoTexture(sceneTexture)
 
-              if (CurrentMode == PlayMode.EXPLORE) {
+              if (currentMode == PlayMode.EXPLORE) {
                 toggleSkybox(true)
               }
 

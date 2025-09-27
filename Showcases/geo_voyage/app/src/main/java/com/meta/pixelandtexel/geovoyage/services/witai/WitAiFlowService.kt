@@ -2,6 +2,7 @@
 
 package com.meta.pixelandtexel.geovoyage.services.witai
 
+import android.util.Log
 import com.meta.pixelandtexel.geovoyage.enums.SettingsKey
 import com.meta.pixelandtexel.geovoyage.services.SettingsService
 import com.meta.pixelandtexel.geovoyage.services.witai.enums.WitAiEntityType
@@ -34,6 +35,9 @@ object WitAIFlowService {
     // accumulate the Wit.ai objects found within our response
     val responseEntities = getNamedEntitiesFromResponse(response)
     val responseIntents = getNamedIntentsFromResponse(response)
+
+    Log.d(TAG, "Found ${responseEntities.size} entities in response")
+    Log.d(TAG, "Found ${responseIntents.size} intents in response")
 
     // determine how many of our response Wit.ai objects intersect with our
     // predetermined list of objects which are acceptable for a Llama query

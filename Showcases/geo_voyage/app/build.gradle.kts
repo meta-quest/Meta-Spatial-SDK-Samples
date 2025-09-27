@@ -18,7 +18,7 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 25
+    versionCode = 26
     versionName = "1.1.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -72,11 +72,10 @@ dependencies {
 
   // Meta Spatial SDK libs
   implementation(libs.meta.spatial.sdk.base)
-  implementation(libs.meta.spatial.sdk.toolkit)
-  implementation(libs.meta.spatial.sdk.vr)
   implementation(libs.meta.spatial.sdk.isdk)
-
-  implementation(files("libs/meta-spatial-uiset-1.0.1.aar"))
+  implementation(libs.meta.spatial.sdk.toolkit)
+  implementation(libs.meta.spatial.sdk.uiset)
+  implementation(libs.meta.spatial.sdk.vr)
 
   // For parsing json
   implementation(libs.google.gson)
