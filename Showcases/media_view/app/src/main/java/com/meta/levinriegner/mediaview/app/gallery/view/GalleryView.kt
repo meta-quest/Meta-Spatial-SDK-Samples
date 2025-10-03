@@ -142,7 +142,7 @@ private fun Header(
         Column {
           Text(
               text = stringResource(filter.titleResId()),
-              style = MaterialTheme.typography.titleMedium,
+              style = MaterialTheme.typography.titleMedium.copy(color = AppColor.White),
           )
           Spacer(Modifier.size(Dimens.xSmall))
           Text(
@@ -221,6 +221,7 @@ private fun Header(
                       text = {
                         Text(
                             fontSize = 10.sp,
+                            color = AppColor.White,
                             text =
                                 stringResource(
                                     when (option) {
