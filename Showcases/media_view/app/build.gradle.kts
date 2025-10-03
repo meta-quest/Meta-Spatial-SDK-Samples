@@ -196,15 +196,15 @@ dependencies {
   androidTestImplementation("androidx.test.ext:junit:1.2.1")
   androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
 
-  // Meta Spatial SDK libs (local AAR files)
-  implementation(files("libs/meta-spatial-sdk-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-ovrmetrics-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-physics-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-toolkit-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-vr-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-mruk-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-castinputforward-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-isdk-0.8.0.aar"))
+  // Meta Spatial SDK
+  implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-ovrmetrics:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-physics:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-isdk:$metaSpatialSdkVersion")
 
   // Meta Spatial SDK dependencies
   implementation("com.squareup.okhttp3:okhttp:4.12.0")
@@ -224,7 +224,7 @@ dependencies {
   implementation("com.squareup.okhttp3:logging-interceptor")
 }
 
-val sceneProjectPath = "app/src/main/assets/scenes"
+val sceneProjectPath = "src/main/assets/scenes"
 
 spatial {
   allowUsageDataCollection.set(true)
@@ -234,7 +234,7 @@ spatial {
     exportItems {
       item {
         projectPath.set(File("$sceneProjectPath/Main.metaspatial"))
-        outputPath.set(File("app/src/main/assets/scenes"))
+        outputPath.set(File("src/main/assets/scenes"))
       }
     }
   }
