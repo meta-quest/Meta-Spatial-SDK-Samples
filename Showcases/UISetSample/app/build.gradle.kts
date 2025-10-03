@@ -3,6 +3,9 @@
 import java.io.FileInputStream
 import java.util.Properties
 
+// Retrieve Meta Spatial SDK Version from "gradle.properties"
+val metaSpatialSdkVersion: String by project
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
@@ -35,8 +38,8 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 5
-    versionName = "0.0.12"
+    versionCode = 7
+    versionName = "0.0.14"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }
@@ -107,8 +110,6 @@ android {
 }
 
 dependencies {
-  implementation(files("libs/meta-spatial-uiset-1.0.1.aar"))
-
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.activity.compose)
@@ -128,16 +129,17 @@ dependencies {
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
 
-  // Meta Spatial SDK libs
-  implementation(libs.meta.spatial.sdk)
-  implementation(libs.meta.spatial.sdk.ovrmetrics)
-  implementation(libs.meta.spatial.sdk.physics)
-  implementation(libs.meta.spatial.sdk.toolkit)
-  implementation(libs.meta.spatial.sdk.vr)
-  implementation(libs.meta.spatial.sdk.isdk)
-  implementation(libs.meta.spatial.sdk.mruk)
-  implementation(libs.meta.spatial.sdk.castinputforward)
-  implementation(libs.meta.spatial.sdk.compose)
+  // Meta Spatial SDK
+  implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-compose:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-isdk:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-ovrmetrics:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-physics:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-uiset:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
 
   // Utilities
   implementation(libs.jakewharton.timber)

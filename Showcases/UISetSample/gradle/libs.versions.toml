@@ -8,7 +8,7 @@ espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.0"
 composeBom = "2025.02.00"
-metaSpatialSdk = "0.7.0"
+metaSpatialSdk = "0.7.2"
 timber = "5.0.1"
 appcompat = "1.7.0"
 runtimeAndroid = "1.7.8"
@@ -31,15 +31,6 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-material-icons-extended = {  group = "androidx.compose.material", name = "material-icons-extended"}
-meta-spatial-sdk = { module = "com.meta.spatial:meta-spatial-sdk", version.ref = "metaSpatialSdk" }
-meta-spatial-sdk-castinputforward = { module = "com.meta.spatial:meta-spatial-sdk-castinputforward", version.ref = "metaSpatialSdk" }
-meta-spatial-sdk-mruk = { module = "com.meta.spatial:meta-spatial-sdk-mruk", version.ref = "metaSpatialSdk" }
-meta-spatial-sdk-vr = { module = "com.meta.spatial:meta-spatial-sdk-vr", version.ref = "metaSpatialSdk" }
-meta-spatial-sdk-isdk = { module = "com.meta.spatial:meta-spatial-sdk-isdk", version.ref = "metaSpatialSdk" }
-meta-spatial-sdk-toolkit = { module = "com.meta.spatial:meta-spatial-sdk-toolkit", version.ref = "metaSpatialSdk" }
-meta-spatial-sdk-physics = { module = "com.meta.spatial:meta-spatial-sdk-physics", version.ref = "metaSpatialSdk" }
-meta-spatial-sdk-ovrmetrics = { module = "com.meta.spatial:meta-spatial-sdk-ovrmetrics", version.ref = "metaSpatialSdk" }
-meta-spatial-sdk-compose = { module = "com.meta.spatial:meta-spatial-sdk-compose", version.ref = "metaSpatialSdk" }
 jakewharton-timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime-android", version.ref = "runtimeAndroid" }
