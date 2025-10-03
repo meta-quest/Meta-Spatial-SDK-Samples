@@ -3,6 +3,9 @@
 import java.io.FileInputStream
 import java.util.Properties
 
+// Retrieve Meta Spatial SDK Version from "gradle.properties"
+val metaSpatialSdkVersion: String by project
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
@@ -126,17 +129,17 @@ dependencies {
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
 
-  // Meta Spatial SDK libs - Local AAR files
-  implementation(files("libs/meta-spatial-sdk-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-castinputforward-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-compose-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-isdk-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-mruk-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-ovrmetrics-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-physics-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-toolkit-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-uiset-0.8.0.aar"))
-  implementation(files("libs/meta-spatial-sdk-vr-0.8.0.aar"))
+  // Meta Spatial SDK
+  implementation("com.meta.spatial:meta-spatial-sdk:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-castinputforward:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-compose:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-isdk:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-mruk:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-ovrmetrics:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-physics:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-toolkit:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-uiset:$metaSpatialSdkVersion")
+  implementation("com.meta.spatial:meta-spatial-sdk-vr:$metaSpatialSdkVersion")
 
   // Utilities
   implementation(libs.jakewharton.timber)
