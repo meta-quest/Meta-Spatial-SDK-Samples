@@ -17,6 +17,7 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.toolkit.PanelRegistration
 import com.meta.spatial.vr.LocomotionSystem
 import com.meta.spatial.vr.VRFeature
+import com.meta.spatial.vr.VrInputSystemType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -47,11 +48,12 @@ class ImmersiveActivity : ComponentAppSystemActivity(), PanelDelegate {
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features = mutableListOf<SpatialFeature>(VRFeature(this))
-    if (BuildConfig.DEBUG) {
-      features.add(CastInputForwardFeature(this))
-    }
-    return features
+    // if (BuildConfig.DEBUG) {
+    //   features.add(CastInputForwardFeature(this))
+    // }
+    return listOf(
+        VRFeature(this, inputSystemType = VrInputSystemType.SIMPLE_CONTROLLER),
+    )
   }
 
   override fun registerPanels(): List<PanelRegistration> {
