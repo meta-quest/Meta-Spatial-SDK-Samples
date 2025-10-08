@@ -35,8 +35,8 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 8
-    versionName = "0.0.15"
+    versionCode = 9
+    versionName = "0.0.16"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }
@@ -142,7 +142,7 @@ dependencies {
   implementation(libs.jakewharton.timber)
 }
 
-val sceneProjectPath = "app/src/main/assets/scenes"
+val sceneProjectPath = "src/main/assets/scenes"
 
 spatial {
   allowUsageDataCollection.set(true)
@@ -152,7 +152,7 @@ spatial {
     exportItems {
       item {
         projectPath.set(File("$sceneProjectPath/Main.metaspatial"))
-        outputPath.set(File("app/src/main/assets/scenes"))
+        outputPath.set(File("src/main/assets/scenes"))
       }
     }
   }
