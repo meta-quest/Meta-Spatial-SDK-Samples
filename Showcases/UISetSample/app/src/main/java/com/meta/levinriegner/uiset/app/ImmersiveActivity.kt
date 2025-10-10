@@ -33,7 +33,7 @@ class ImmersiveActivity : AppSystemActivity() {
   override fun registerFeatures(): List<SpatialFeature> {
     val features = mutableListOf(VRFeature(this), ComposeFeature())
     if (BuildConfig.DEBUG) {
-      // features.add(CastInputForwardFeature(this))
+      features.add(CastInputForwardFeature(this))
     }
     return features
   }
