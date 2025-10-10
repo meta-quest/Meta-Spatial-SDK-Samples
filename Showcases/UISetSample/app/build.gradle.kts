@@ -35,8 +35,8 @@ android {
     minSdk = 29
     //noinspection ExpiredTargetSdkVersion
     targetSdk = 32
-    versionCode = 5
-    versionName = "0.0.12"
+    versionCode = 9
+    versionName = "0.0.16"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables { useSupportLibrary = true }
@@ -107,8 +107,6 @@ android {
 }
 
 dependencies {
-  implementation(files("libs/meta-spatial-uiset-1.0.1.aar"))
-
   implementation(libs.androidx.core.ktx)
   implementation(libs.androidx.lifecycle.runtime.ktx)
   implementation(libs.androidx.activity.compose)
@@ -128,22 +126,23 @@ dependencies {
   debugImplementation(libs.androidx.ui.tooling)
   debugImplementation(libs.androidx.ui.test.manifest)
 
-  // Meta Spatial SDK libs
+  // Meta Spatial SDK
   implementation(libs.meta.spatial.sdk)
+  implementation(libs.meta.spatial.sdk.castinputforward)
+  implementation(libs.meta.spatial.sdk.compose)
+  implementation(libs.meta.spatial.sdk.isdk)
+  implementation(libs.meta.spatial.sdk.mruk)
   implementation(libs.meta.spatial.sdk.ovrmetrics)
   implementation(libs.meta.spatial.sdk.physics)
   implementation(libs.meta.spatial.sdk.toolkit)
+  implementation(libs.meta.spatial.sdk.uiset)
   implementation(libs.meta.spatial.sdk.vr)
-  implementation(libs.meta.spatial.sdk.isdk)
-  implementation(libs.meta.spatial.sdk.mruk)
-  implementation(libs.meta.spatial.sdk.castinputforward)
-  implementation(libs.meta.spatial.sdk.compose)
 
   // Utilities
   implementation(libs.jakewharton.timber)
 }
 
-val sceneProjectPath = "app/src/main/assets/scenes"
+val sceneProjectPath = "src/main/assets/scenes"
 
 spatial {
   allowUsageDataCollection.set(true)
@@ -153,7 +152,7 @@ spatial {
     exportItems {
       item {
         projectPath.set(File("$sceneProjectPath/Main.metaspatial"))
-        outputPath.set(File("app/src/main/assets/scenes"))
+        outputPath.set(File("src/main/assets/scenes"))
       }
     }
   }

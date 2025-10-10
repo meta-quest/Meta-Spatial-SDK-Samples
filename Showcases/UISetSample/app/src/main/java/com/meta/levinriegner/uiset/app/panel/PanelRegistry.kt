@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import com.meta.levinriegner.uiset.R
 import com.meta.levinriegner.uiset.app.layouts.ButtonShelvesLayout
 import com.meta.levinriegner.uiset.app.layouts.ButtonsLayout
+import com.meta.levinriegner.uiset.app.layouts.CardsLayout
 import com.meta.levinriegner.uiset.app.layouts.ControlsLayout
 import com.meta.levinriegner.uiset.app.layouts.DialogsLayout
 import com.meta.levinriegner.uiset.app.layouts.DropdownsLayout
@@ -99,6 +100,13 @@ class PanelRegistry {
             layoutHeight = 1263f,
         ) {
           DialogsLayout()
+        },
+        panelRegistration(
+            PanelRegistrationIds.PANEL_CARDS_LAYOUT,
+            layoutWidth = 1363f,
+            layoutHeight = 1080f,
+        ) {
+          CardsLayout()
         },
         panelRegistration(
             PanelRegistrationIds.PANEL_HORIZON_OS_PATTERN1,

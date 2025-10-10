@@ -55,6 +55,12 @@ enum class NavigationUiItem(
       "Dialog",
       "Secondary",
   ),
+  Card(
+      NavigationUiSection.Components,
+      listOf(PanelRegistrationIds.PANEL_CARDS_LAYOUT),
+      "Card",
+      "Secondary",
+  ),
   HorizonOsPatterns(
       NavigationUiSection.Patterns,
       listOf(
