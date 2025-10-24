@@ -184,7 +184,9 @@ class MixedRealitySampleActivity : AppSystemActivity() {
               ComposeView(ctx).apply {
                 setContent {
                   AboutPanelLayout(
-                      onConfigureRoomClick = { scene.requestSceneCapture() },
+                      onConfigureRoomClick = {
+                        scene.requestSceneCapture().whenComplete { _, _ -> loadSceneFromDevice() }
+                      },
                       onToggleDebugClick = {
                         debug = !debug
                         spatial.enablePhysicsDebugLines(debug)
