@@ -4,6 +4,17 @@ Check out our official [release notes](https://developers.meta.com/horizon/docum
 
 This format is roughly based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+
+## 0.8.1 - 2025-10-24
+
+### Fixed
+
+- Fix `VrActivity.onRecenter()` not getting called
+- Fix `spatial.setPerformanceLevel()` not being respected
+- Fix `scene.isSystemPassthroughEnabled()` always returning false
+- Fix panel flickering that could sometimes occur in passthrough
+- Fix `PanelRenderOptions` creating a layer panel even when the panel render mode is set to PanelRenderMode.Mesh
+
 ## 0.8.0 - 2025-09-17
 
 ### Added
