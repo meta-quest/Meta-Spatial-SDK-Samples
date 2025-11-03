@@ -12,6 +12,9 @@ Focus app demonstrates panel and object management, enabling the creation, reuse
 
 Focus serves as a practical template for developers looking to create similar applications or integrate these features into their own XR projects.
 
+
+**This project is deprecated. Its latest update is compatible with Meta Spatial SDK 0.8.0.**
+
 ![Focus overview](./Documentation/Resources/general.gif)
 
 
@@ -26,7 +29,7 @@ Download [Android Studio](https://developer.android.com/studio) and open the clo
 
 ### Meta Spatial SDK version
 
-Check that you are using the latest version of Meta Spatial SDK in Gradle dependencies.
+This project is deprecated. Its latest update is compatible with Meta Spatial SDK 0.8.0.
 
 You can check Spatial SDK version in *gradle.properties*.
 
@@ -48,7 +51,7 @@ From an end user point of view, Focus includes the following elements:
 
 **Task Panel**: allow users to create tasks with a title, body and select between different priority states. E.g.: *To do*, *High priority*.
 
-**AI Exchange Panel**: allows the user to chat with a virtual assistant, an artificial intelligence with whom to exchange ideas. Users can also create sticky notes with the answers of the virtual assistant.
+**AI Exchange Panel**: allows the user to chat with a virtual assistant, an artificial intelligence with whom to exchange ideas. Users can also create sticky notes with the answers of the virtual assistant (this feature is currently hidden, but it's still implemented in the codebase).
 
 **Clock**: shows time and date. Pretty useful when you are in an immersive space.
 

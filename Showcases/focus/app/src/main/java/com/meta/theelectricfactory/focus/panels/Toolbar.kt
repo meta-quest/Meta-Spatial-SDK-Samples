@@ -60,7 +60,7 @@ fun ToolbarPanel() {
           verticalAlignment = Alignment.CenterVertically,
       ) {
         Box(
-            Modifier.fillMaxWidth(0.24f)
+            Modifier.fillMaxWidth(0.27f)
                 .fillMaxHeight()
                 .clip(LocalShapes.current.medium)
                 .background(SpatialTheme.colorScheme.panel)
@@ -258,7 +258,7 @@ fun ToolbarButton(
 }
 
 @Preview(
-    widthDp = (0.65f * FOCUS_DP).toInt(),
+    widthDp = (0.62f * FOCUS_DP).toInt(),
     heightDp = (0.065f * FOCUS_DP).toInt(),
     uiMode = UI_MODE_TYPE_VR_HEADSET,
 )
