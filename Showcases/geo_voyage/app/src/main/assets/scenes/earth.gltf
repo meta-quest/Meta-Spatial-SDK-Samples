@@ -139,11 +139,6 @@
     },
     {
       "mimeType": "image/jpeg",
-      "name": "Earth_01_Earth_BaseColor",
-      "uri": "d640070a24ff67cc91631ef34caf224f.jpg"
-    },
-    {
-      "mimeType": "image/jpeg",
       "name": "earth1_ocean_Normal",
       "uri": "a16427217c28bebf721d72e128330c13.jpg"
     },
@@ -151,6 +146,11 @@
       "mimeType": "image/jpeg",
       "name": "ocean_occlusionRoughnessMetallic",
       "uri": "0783b781a7d301385f3ed1159aa8844f.jpg"
+    },
+    {
+      "mimeType": "image/jpeg",
+      "name": "Earth_01_Earth_BaseColor",
+      "uri": "d640070a24ff67cc91631ef34caf224f.jpg"
     },
     {
       "mimeType": "image/jpeg",
@@ -249,17 +249,17 @@
     {
       "name": "texture5",
       "sampler": 0,
-      "source": 1
+      "source": 3
     },
     {
       "name": "texture1",
       "sampler": 0,
-      "source": 2
+      "source": 1
     },
     {
       "name": "texture3",
       "sampler": 0,
-      "source": 3
+      "source": 2
     },
     {
       "name": "texture2",

@@ -113,7 +113,7 @@ fun getLocalProperty(key: String, project: Project): String {
 }
 
 val projectDir = layout.projectDirectory
-val sceneDirectory = projectDir.dir("src/main/assets/scenes")
+val sceneDirectory = projectDir.dir("scenes")
 
 spatial {
   scenes {
@@ -122,9 +122,13 @@ spatial {
     exportItems {
       item {
         projectPath.set(sceneDirectory.file("Main.metaspatial"))
-        outputPath.set(sceneDirectory)
+        outputPath.set(projectDir.dir("src/main/assets/scenes"))
       }
     }
-    componentGeneration { outputPath.set(sceneDirectory) }
+  }
+  hotReload {
+    appPackage.set("com.meta.pixelandtexel.geovoyage")
+    appMainActivity.set(".MainActivity")
+    assetsDir.set(File("src/main/assets"))
   }
 }
