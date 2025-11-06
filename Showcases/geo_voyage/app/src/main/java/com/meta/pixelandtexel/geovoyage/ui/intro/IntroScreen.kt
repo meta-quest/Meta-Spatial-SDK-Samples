@@ -14,11 +14,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.meta.pixelandtexel.geovoyage.R
 import com.meta.pixelandtexel.geovoyage.ui.components.panel.SecondaryPanel
 import com.meta.pixelandtexel.geovoyage.ui.theme.GeoVoyageTheme
+import com.meta.spatial.uiset.button.PrimaryButton
 import com.meta.spatial.uiset.theme.LocalTypography
 import dev.jeziellago.compose.markdowntext.MarkdownText
 
 @Composable
-fun IntroScreen() {
+fun IntroScreen(onStart: (() -> Unit)? = null) {
   val introText = stringResource(R.string.intro)
 
   Column(
@@ -28,7 +29,7 @@ fun IntroScreen() {
   ) {
     SecondaryPanel {
       Column(
-          verticalArrangement = Arrangement.SpaceAround,
+          verticalArrangement = Arrangement.Center,
           horizontalAlignment = Alignment.CenterHorizontally,
           modifier = Modifier.fillMaxSize(),
       ) {
@@ -37,6 +38,7 @@ fun IntroScreen() {
             modifier = Modifier.selectable(false, false) {},
             style = LocalTypography.current.body1Strong,
         )
+        PrimaryButton("Start", { onStart?.invoke() })
       }
     }
   }

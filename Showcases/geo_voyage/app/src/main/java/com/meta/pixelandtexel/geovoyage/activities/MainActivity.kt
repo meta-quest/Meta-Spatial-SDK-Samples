@@ -124,9 +124,9 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
         PanelRegistration(R.integer.panel_id) {
           activityClass = PanelActivity::class.java
           config {
-            width = 0.772f
+            width = 0.642f
             height = 0.6f
-            layoutWidthInDp = 772f
+            layoutWidthInDp = 642f
             layoutHeightInDp = 600f
             includeGlass = false
             themeResourceId = R.style.PanelAppThemeTransparent

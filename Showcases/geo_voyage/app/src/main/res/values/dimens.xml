@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-    <dimen name="panel_width">772dp</dimen>
+    <dimen name="panel_width">642dp</dimen>
     <dimen name="panel_height">600dp</dimen>
 
     <dimen name="nav_column_width">130dp</dimen>
