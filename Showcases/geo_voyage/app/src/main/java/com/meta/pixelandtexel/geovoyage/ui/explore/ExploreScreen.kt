@@ -101,5 +101,5 @@ fun ExploreScreen(
 @Preview(widthDp = 570, heightDp = 480, showBackground = true, backgroundColor = 0xFFECEFE8)
 @Composable
 private fun ExploreScreenPreview() {
-  GeoVoyageTheme { ExploreScreen(ExploreViewModel(true)) {} }
+  GeoVoyageTheme { ExploreScreen {} }
 }

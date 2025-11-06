@@ -2,7 +2,6 @@
 
 package com.meta.pixelandtexel.geovoyage.viewmodels
 
-import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -12,18 +11,8 @@ import com.meta.pixelandtexel.geovoyage.models.GeoCoordinates
 import com.meta.pixelandtexel.geovoyage.models.Landmark
 import com.meta.pixelandtexel.geovoyage.models.PanoMetadata
 import com.meta.pixelandtexel.geovoyage.services.SettingsService
-import com.meta.pixelandtexel.geovoyage.services.googlemaps.GoogleMapsService
-import com.meta.pixelandtexel.geovoyage.services.googlemaps.GoogleTilesService
-import com.meta.pixelandtexel.geovoyage.services.googlemaps.IGeocodeServiceHandler
-import com.meta.pixelandtexel.geovoyage.services.llama.IQueryLlamaServiceHandler
-import com.meta.pixelandtexel.geovoyage.services.llama.QueryLlamaService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-class ExploreViewModel(
-    skipLandmarksEnabledCheck: Boolean = false // for @Preview
-) : ViewModel(), IPlayModeViewModel {
+class ExploreViewModel() : ViewModel(), IPlayModeViewModel {
   companion object {
     private const val TAG: String = "ExploreViewModel"
   }
@@ -40,18 +29,11 @@ class ExploreViewModel(
   val vrModeEnabled: State<Boolean> = _vrModeEnabled
   val panoData: State<PanoMetadata?> = _panoData
 
-  private var busyQuerying = false
   private var busyFetchingTiles = false
   private var hasVRImage = false
   private var displayingLandmarkInfo = false
 
   private lateinit var placeholderMessage: String
-
-  init {
-    if (!skipLandmarksEnabledCheck) {
-      _landmarksEnabled.value = SettingsService.get(SettingsKey.LANDMARKS_ENABLED, true)
-    }
-  }
 
   override fun onPlayModeResumed() {
     if (_vrModeEnabled.value) {
@@ -81,71 +63,16 @@ class ExploreViewModel(
   }
 
   fun startQueryAtCoordinates(coords: GeoCoordinates, template: String) {
-    if (busyQuerying) {
-      return
-    }
-
     hasVRImage = false
     displayingLandmarkInfo = false
 
     _vrModeEnabled.value = false
     _panoData.value = null
-    busyQuerying = true
 
     _title.value = coords.toCommonNotation()
 
-    CoroutineScope(Dispatchers.Main).launch {
-      _panoData.value = GoogleTilesService.getPanoramaDataAt(coords)
-    }
-
-    // TODO show loading message/graphic
-
-    GoogleMapsService.getPlace(
-        coords,
-        object : IGeocodeServiceHandler {
-          override fun onFinished(place: String?) {
-            if (place.isNullOrEmpty()) {
-              _result.value = "Unknown place"
-              // TODO hide loading message/graphic
-              busyQuerying = false
-              return
-            }
-
-            val query = String.format(template, coords.toCommonNotation(), place)
-            Log.d(TAG, "Full query: $query")
-
-            QueryLlamaService.submitQuery(
-                query = query,
-                handler =
-                    object : IQueryLlamaServiceHandler {
-                      override fun onStreamStart() {
-                        // TODO hide loading message/graphic
-                      }
-
-                      override fun onPartial(partial: String) {
-                        _result.value = partial
-                      }
-
-                      override fun onFinished(answer: String) {
-                        Log.d(TAG, "Received llama response $answer")
-                        _result.value = answer
-                        busyQuerying = false
-                      }
-
-                      override fun onError(reason: String) {
-                        _result.value = "Llama error:\n$reason"
-                        busyQuerying = false
-                      }
-                    },
-            )
-          }
-
-          override fun onError(reason: String) {
-            _result.value = "Google Maps error:\n$reason"
-            busyQuerying = false
-          }
-        },
-    )
+    // just display the coordinates since we aren't fetching data
+    _result.value = ""
   }
 
   fun displayLandmarkInfo(info: Landmark, coords: GeoCoordinates) {
@@ -155,9 +82,14 @@ class ExploreViewModel(
     _vrModeEnabled.value = false
     _panoData.value = null
 
-    CoroutineScope(Dispatchers.Main).launch {
-      _panoData.value = GoogleTilesService.getPanoramaDataAt(coords)
-    }
+    // only using local landmark panoramas
+    _panoData.value =
+        PanoMetadata(info.landmarkName, 0, 0, 0, 0, "", null, "").apply {
+          if (info.hasPanorama) {
+            panoResId = info.panoResId
+            attribution = info.attribution
+          }
+        }
 
     _title.value = coords.toCommonNotation()
     _result.value =
