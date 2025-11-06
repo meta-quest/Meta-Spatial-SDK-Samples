@@ -134,8 +134,8 @@
   "images": [
     {
       "mimeType": "image/jpeg",
-      "name": "Earth_01_Earth_Normal",
-      "uri": "56ad97e6ead24107b433809f63cd98f2.jpg"
+      "name": "Earth_01_Earth_BaseColor",
+      "uri": "d640070a24ff67cc91631ef34caf224f.jpg"
     },
     {
       "mimeType": "image/jpeg",
@@ -144,13 +144,13 @@
     },
     {
       "mimeType": "image/jpeg",
-      "name": "ocean_occlusionRoughnessMetallic",
-      "uri": "0783b781a7d301385f3ed1159aa8844f.jpg"
+      "name": "Earth_01_Earth_Normal",
+      "uri": "56ad97e6ead24107b433809f63cd98f2.jpg"
     },
     {
       "mimeType": "image/jpeg",
-      "name": "Earth_01_Earth_BaseColor",
-      "uri": "d640070a24ff67cc91631ef34caf224f.jpg"
+      "name": "ocean_occlusionRoughnessMetallic",
+      "uri": "0783b781a7d301385f3ed1159aa8844f.jpg"
     },
     {
       "mimeType": "image/jpeg",
@@ -177,14 +177,14 @@
       "doubleSided": true,
       "name": "ocean",
       "normalTexture": {
-        "index": 2
+        "index": 3
       },
       "pbrMetallicRoughness": {
         "baseColorTexture": {
           "index": 4
         },
         "metallicRoughnessTexture": {
-          "index": 3
+          "index": 2
         }
       }
     }
@@ -244,10 +244,15 @@
     {
       "name": "texture4",
       "sampler": 0,
-      "source": 0
+      "source": 2
     },
     {
       "name": "texture5",
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "name": "texture3",
       "sampler": 0,
       "source": 3
     },
@@ -255,11 +260,6 @@
       "name": "texture1",
       "sampler": 0,
       "source": 1
-    },
-    {
-      "name": "texture3",
-      "sampler": 0,
-      "source": 2
     },
     {
       "name": "texture2",
