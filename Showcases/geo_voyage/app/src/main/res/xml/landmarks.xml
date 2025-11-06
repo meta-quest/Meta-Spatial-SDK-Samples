@@ -10,6 +10,7 @@
         <scale>1.0</scale>
         <yaw>0</yaw>
         <zOffset>0.37</zOffset>
+        <panoConfig name="@drawable/cobblestone_street_night_2k" attribution="Image taken by @coolpanoguy." />
     </landmark>
     <landmark>
         <name>Eiffel Tower</name>
@@ -21,6 +22,7 @@
         <scale>0.9</scale>
         <yaw>45</yaw>
         <zOffset>0.37</zOffset>
+        <panoConfig name="@drawable/cobblestone_street_night_2k" attribution="Image taken by @coolpanoguy." />
     </landmark>
     <landmark>
         <name>Chichén Itzá</name>
@@ -32,6 +34,7 @@
         <scale>1.0</scale>
         <yaw>25</yaw>
         <zOffset>0.36</zOffset>
+        <panoConfig name="@drawable/cobblestone_street_night_2k" attribution="Image taken by @coolpanoguy." />
     </landmark>
     <landmark>
         <name>Sydney Opera House</name>
@@ -43,6 +46,7 @@
         <scale>1.0</scale>
         <yaw>15</yaw>
         <zOffset>0.355</zOffset>
+        <panoConfig name="@drawable/cobblestone_street_night_2k" attribution="Image taken by @coolpanoguy." />
     </landmark>
     <landmark>
         <name>Taj Mahal</name>
@@ -54,6 +58,7 @@
         <scale>1.0</scale>
         <yaw>0</yaw>
         <zOffset>0.378</zOffset>
+        <panoConfig name="@drawable/cobblestone_street_night_2k" attribution="Image taken by @coolpanoguy." />
     </landmark>
     <landmark>
         <name>Christ the Redeemer</name>
@@ -65,6 +70,7 @@
         <scale>1.0</scale>
         <yaw>-95</yaw>
         <zOffset>0.356</zOffset>
+        <panoConfig name="@drawable/cobblestone_street_night_2k" attribution="Image taken by @coolpanoguy." />
     </landmark>
     <landmark>
         <name>The Colosseum</name>
@@ -76,6 +82,7 @@
         <scale>0.9</scale>
         <yaw>20</yaw>
         <zOffset>0.356</zOffset>
+        <panoConfig name="@drawable/cobblestone_street_night_2k" attribution="Image taken by @coolpanoguy." />
     </landmark>
     <landmark>
         <name>Mount Vinson</name>
@@ -98,5 +105,6 @@
         <scale>1.0</scale>
         <yaw>0</yaw>
         <zOffset>0.377</zOffset>
+        <panoConfig name="@drawable/cobblestone_street_night_2k" attribution="Image taken by @coolpanoguy." />
     </landmark>
 </landmarks>

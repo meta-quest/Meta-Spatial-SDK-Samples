@@ -2,6 +2,8 @@
 
 package com.meta.pixelandtexel.geovoyage.models
 
+import androidx.annotation.DrawableRes
+
 data class Landmark(
     val meshName: String,
     val scale: Float,
@@ -11,4 +13,8 @@ data class Landmark(
     val longitude: Float,
     val landmarkName: String,
     val description: String,
-)
+    @DrawableRes val panoResId: Int,
+    val attribution: String,
+) {
+  val hasPanorama = panoResId != 0
+}

@@ -32,7 +32,6 @@ import com.meta.spatial.toolkit.TransformParent
 import com.meta.spatial.toolkit.Visible
 import com.meta.spatial.toolkit.getAbsoluteTransform
 import kotlin.math.abs
-import kotlin.math.min
 import org.xmlpull.v1.XmlPullParser
 
 private class LandmarkData(
@@ -45,8 +44,6 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
     SystemBase() {
   companion object {
     private const val TAG: String = "LandmarkSpawnSystem"
-
-    private const val MAX_LANDMARKS_VISIBLE = 4
   }
 
   private var landmarksEnabled: Boolean = false
@@ -75,6 +72,8 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
     var scale = 1f
     var yaw = 0f
     var zOffset = 0.37f
+    var panoResId = 0
+    var attribution = ""
 
     while (eventType != XmlPullParser.END_DOCUMENT) {
       val tagName = parser.name
@@ -91,6 +90,8 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
               scale = 1f
               yaw = 0f
               zOffset = 0.37f
+              panoResId = 0
+              attribution = ""
             }
 
             "name" -> name = parser.nextText()
@@ -101,6 +102,12 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
             "scale" -> scale = parser.nextText().toFloatOrNull() ?: 1f
             "yaw" -> yaw = parser.nextText().toFloatOrNull() ?: 0f
             "zOffset" -> zOffset = parser.nextText().toFloatOrNull() ?: 0.37f
+            "panoConfig" -> {
+              try {
+                panoResId = parser.getAttributeResourceValue(null, "name", 0)
+                attribution = parser.getAttributeValue(null, "attribution")
+              } catch (_: Exception) {}
+            }
           }
         }
 
@@ -117,6 +124,8 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
                     longitude = longitude,
                     landmarkName = name,
                     description = description,
+                    panoResId = panoResId,
+                    attribution,
                 )
             landmarks.add(landmark)
           }
@@ -172,9 +181,8 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
 
   fun toggleLandmarks(enabled: Boolean) {
     if (enabled) {
-      val selectedLandmarks =
-          landmarksMap.values.shuffled().take(min(landmarksMap.size, MAX_LANDMARKS_VISIBLE))
-      selectedLandmarks.forEach { it.entity.setComponent(Visible(true)) }
+      // enable all landmarks
+      landmarksMap.forEach { it.value.entity.setComponent(Visible(true)) }
     } else {
       landmarksMap.forEach { it.value.entity.setComponent(Visible(false)) }
     }
