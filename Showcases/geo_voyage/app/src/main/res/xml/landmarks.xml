@@ -10,6 +10,7 @@
         <scale>1.0</scale>
         <yaw>0</yaw>
         <zOffset>0.37</zOffset>
+        <panoConfig name="@drawable/pyramids_of_giza" attribution="" />
     </landmark>
     <landmark>
         <name>Eiffel Tower</name>
@@ -21,6 +22,7 @@
         <scale>0.9</scale>
         <yaw>45</yaw>
         <zOffset>0.37</zOffset>
+        <panoConfig name="@drawable/paris" attribution="" />
     </landmark>
     <landmark>
         <name>Chichén Itzá</name>
@@ -32,6 +34,7 @@
         <scale>1.0</scale>
         <yaw>25</yaw>
         <zOffset>0.36</zOffset>
+        <panoConfig name="@drawable/yucatan" attribution="" />
     </landmark>
     <landmark>
         <name>Sydney Opera House</name>
@@ -43,6 +46,7 @@
         <scale>1.0</scale>
         <yaw>15</yaw>
         <zOffset>0.355</zOffset>
+        <panoConfig name="@drawable/sydney_opera_house" attribution="" />
     </landmark>
     <landmark>
         <name>Taj Mahal</name>
@@ -89,6 +93,7 @@
         <scale>1.0</scale>
         <yaw>0</yaw>
         <zOffset>0.37</zOffset>
+        <panoConfig name="@drawable/mt_vinson" attribution="" />
     </landmark>
     <landmark>
         <name>Victoria Falls</name>
@@ -100,5 +105,6 @@
         <scale>1.0</scale>
         <yaw>0</yaw>
         <zOffset>0.377</zOffset>
+        <panoConfig name="@drawable/victoria_falls" attribution="" />
     </landmark>
 </landmarks>
