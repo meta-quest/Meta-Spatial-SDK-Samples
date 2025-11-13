@@ -23,9 +23,9 @@
     </string>
     <string name="intro">
         ### Ahoy Geo Voyager, let’s explore the globe!\n
-        Press A while pointing at the globe to spin it, and use the forward trigger while in Explore mode to drop a pin and learn more.\n\n
-        Geo Voyage lets you challenge yourself with daily quizzes, discover historical events, and explore the world by asking the globe questions. You can even go VR Mode to immerse yourself in global travel.\n\n
-        **Bon Voyage!**
+        Press A while pointing at the globe to spin it! Use the forward trigger to learn more about one of the landmarks on the globe, and to explore it in VR mode.\n\n
+        Geo Voyage also lets you drop a pin to find the exact coordinates of any location on the globe (use the forward trigger to drop the pin).\n\n
+        **Immerse yourself in global travel — bon voyage!!**
     </string>
 
     <!-- Ask Earth -->

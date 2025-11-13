@@ -60,29 +60,29 @@ object WitAiService {
   // our http variables
   private val clientAccessToken: String = BuildConfig.WIT_AI_CLIENT_ACCESS_TOKEN
   private val gson = Gson()
-  private var requestBuilder: Request.Builder
+  private lateinit var requestBuilder: Request.Builder
 
   /** Setup our http request builder using the client token stored in secrets.properties */
   init {
-    if (clientAccessToken.isEmpty()) {
-      Log.e(TAG, "Missing wit.ai client access token from secrets.properties")
+    if (clientAccessToken.isNotEmpty()) {
+      // Speech
+      val url =
+          HttpUrl.Builder()
+              .scheme("https")
+              .host("api.wit.ai")
+              .addPathSegment("speech")
+              .addQueryParameter("v", "20240304") // Omit this to hit the most recent api version
+              .build()
+
+      requestBuilder =
+          Request.Builder()
+              .url(url)
+              .header("Authorization", "Bearer $clientAccessToken")
+              .header("Content-Type", "audio/raw")
+              .header("Transfer-Encoding", "chunked")
+    } else {
+      Log.w(TAG, "Missing wit.ai client access token from secrets.properties")
     }
-
-    // Speech
-    val url =
-        HttpUrl.Builder()
-            .scheme("https")
-            .host("api.wit.ai")
-            .addPathSegment("speech")
-            .addQueryParameter("v", "20240304") // Omit this to hit the most recent api version
-            .build()
-
-    requestBuilder =
-        Request.Builder()
-            .url(url)
-            .header("Authorization", "Bearer $clientAccessToken")
-            .header("Content-Type", "audio/raw")
-            .header("Transfer-Encoding", "chunked")
   }
 
   private var recorder: AudioRecord? = null
@@ -101,6 +101,11 @@ object WitAiService {
 
   /** Start the recording and send the audio data to Wit.ai for processing. */
   fun startSpeechToText(handler: IWitAiServiceHandler): WitAiStartResult {
+    if (!::requestBuilder.isInitialized) {
+      handler.onError("Failed to use wit.ai; requestBuilder is not initialized")
+      return WitAiStartResult.UNKNOWN_ERROR
+    }
+
     if (isRunning) {
       Log.w(TAG, "Speech to text service already running")
       return WitAiStartResult.ALREADY_RUNNING

@@ -39,32 +39,30 @@ object GoogleTilesService {
   private val gson = Gson()
   private val jsonMediaType = "application/json; charset=utf-8".toMediaTypeOrNull()
 
-  private val sessionUrl: HttpUrl
-  private val panoIdsUrl: HttpUrl
-  private val metadataUrl: HttpUrl
-  private val tileUrlBuilder: HttpUrl
+  private lateinit var sessionUrl: HttpUrl
+  private lateinit var metadataUrl: HttpUrl
+  private lateinit var tileUrlBuilder: HttpUrl
 
   private var sessionToken: String? = null
   private var sessionExpiry: ZonedDateTime? = null
 
   init {
-    if (apiKey.isEmpty()) {
-      Log.e(TAG, "Missing Google Maps API key from secrets.properties")
+    if (apiKey.isNotEmpty()) {
+      // create our base urls
+
+      val baseUrl =
+          HttpUrl.Builder()
+              .scheme("https")
+              .host("tile.googleapis.com")
+              .addPathSegments("v1")
+              .addQueryParameter("key", apiKey)
+              .build()
+      sessionUrl = baseUrl.newBuilder().addPathSegments("createSession").build()
+      metadataUrl = baseUrl.newBuilder().addPathSegments("streetview/metadata").build()
+      tileUrlBuilder = baseUrl.newBuilder().addPathSegments("streetview/tiles").build()
+    } else {
+      Log.w(TAG, "Missing Google Maps API key from secrets.properties")
     }
-
-    // create our base urls
-
-    val baseUrl =
-        HttpUrl.Builder()
-            .scheme("https")
-            .host("tile.googleapis.com")
-            .addPathSegments("v1")
-            .addQueryParameter("key", apiKey)
-            .build()
-    sessionUrl = baseUrl.newBuilder().addPathSegments("createSession").build()
-    panoIdsUrl = baseUrl.newBuilder().addPathSegments("streetview/panoIds").build()
-    metadataUrl = baseUrl.newBuilder().addPathSegments("streetview/metadata").build()
-    tileUrlBuilder = baseUrl.newBuilder().addPathSegments("streetview/tiles").build()
   }
 
   suspend fun getPanoramaDataAt(
@@ -189,6 +187,11 @@ object GoogleTilesService {
 
   /** https://developers.google.com/maps/documentation/tile/session_tokens */
   private suspend fun getSession(): SessionResponse? {
+    if (!::sessionUrl.isInitialized) {
+      Log.e(TAG, "Failed to get session; sessionUrl is not initialized")
+      return null
+    }
+
     return withContext(Dispatchers.IO) {
       try {
         val sessionRequest = SessionRequest("streetview")
@@ -217,6 +220,11 @@ object GoogleTilesService {
       coords: GeoCoordinates,
       radius: Int = 10000,
   ): PanoMetadata? {
+    if (!::metadataUrl.isInitialized) {
+      Log.e(TAG, "Failed to get pano metadata; metadataUrl is not initialized")
+      return null
+    }
+
     return withContext(Dispatchers.IO) {
       try {
         val url =
@@ -248,6 +256,11 @@ object GoogleTilesService {
   }
 
   private suspend fun getTileImage(id: String, x: Int, y: Int, zoom: Int): Bitmap? {
+    if (!::tileUrlBuilder.isInitialized) {
+      Log.e(TAG, "Failed to get pano metadata; tileUrlBuilder is not initialized")
+      return null
+    }
+
     return withContext(Dispatchers.IO) {
       try {
         val url =

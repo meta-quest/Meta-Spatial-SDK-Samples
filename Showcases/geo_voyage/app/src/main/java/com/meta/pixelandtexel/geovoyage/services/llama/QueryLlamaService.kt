@@ -41,7 +41,7 @@ object QueryLlamaService {
 
   // our http variables
   private val gson = Gson()
-  private var ollamaRequestBuilder: Request.Builder
+  private lateinit var ollamaRequestBuilder: Request.Builder
   private var bedrockClient: BedrockRuntimeClient
 
   private var queryTemplate: String? = null
@@ -51,23 +51,24 @@ object QueryLlamaService {
     // Ollama querying setup
 
     val ollamaServerURL: String = SettingsService.get(SettingsKey.OLLAMA_URL, "")
-    if (ollamaServerURL.isEmpty()) {
-      Log.e(TAG, "Missing ollama server URL from secrets.properties")
+    if (ollamaServerURL.isNotEmpty()) {
+      val ollamaApiEndpoint = "${ollamaServerURL}/api/generate"
+
+      ollamaRequestBuilder = Request.Builder().url(ollamaApiEndpoint)
+
+      SettingsService.subscribeToKeyUpdate(
+          SettingsKey.OLLAMA_URL.value,
+          object : ISettingsKeyChangeReceiver {
+            override fun onKeyUpdated(newValue: PreferenceValue) {
+              // user updated the ollama url in settings; update our request builder
+              val newURL = (newValue as PreferenceValue.StringValue).value
+              ollamaRequestBuilder = Request.Builder().url("${newURL}/api/generate")
+            }
+          },
+      )
+    } else {
+      Log.w(TAG, "Missing ollama server URL from secrets.properties")
     }
-    val ollamaApiEndpoint = "${ollamaServerURL}/api/generate"
-
-    ollamaRequestBuilder = Request.Builder().url(ollamaApiEndpoint)
-
-    SettingsService.subscribeToKeyUpdate(
-        SettingsKey.OLLAMA_URL.value,
-        object : ISettingsKeyChangeReceiver {
-          override fun onKeyUpdated(newValue: PreferenceValue) {
-            // user updated the ollama url in settings; update our request builder
-            val newURL = (newValue as PreferenceValue.StringValue).value
-            ollamaRequestBuilder = Request.Builder().url("${newURL}/api/generate")
-          }
-        },
-    )
 
     // AWS Bedrock querying setup
 
@@ -116,6 +117,10 @@ object QueryLlamaService {
       top_p: Float,
       handler: IQueryLlamaServiceHandler,
   ) {
+    if (!::ollamaRequestBuilder.isInitialized) {
+      handler.onError("Failed to invoke Ollama; ollamaRequestBuilder is not initialized")
+      return
+    }
     /** Perform the network request in a background thread */
     thread {
       try {

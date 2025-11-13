@@ -25,9 +25,11 @@
         <panoConfig name="@drawable/paris" attribution="" />
     </landmark>
     <landmark>
-        <name>Chichén Itzá</name>
+        <name>Kinich Kakmó</name>
         <description
-    >Chichén Itzá is an ancient Mayan city on Mexico's Yucatán Peninsula, built by the Itza civilization in the 10th century AD. This UNESCO World Heritage Site features the Pyramid of Kukulcán, temples, and ball courts, showcasing the advanced knowledge and sophisticated architecture of the Mayan civilization.</description>
+    >Kinich Kakmó is a geological site in Izamal, Yucatán, Mexico (about 60 kilometers north of Chichén Itzá) that features a pyramid. The pyramid is one of the largest in Mexico, with a volume of 700,000 cubic meters, dedicated to Kinich Kakmó, an aspect of the Mayan Sun God.
+
+            Archaeologists believe that Izamal was the seat of the most essential entities in Yucatán (economically and politically), based on the size of the pyramid and the vastness of the archaeological complex that accompanies it.</description>
         <latitude>20.683056</latitude>
         <longitude>-88.568611</longitude>
         <model>chichen_itza.glb</model>
