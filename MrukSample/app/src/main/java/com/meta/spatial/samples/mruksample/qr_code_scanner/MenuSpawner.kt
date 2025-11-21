@@ -19,25 +19,24 @@ import com.meta.spatial.toolkit.Panel
 import com.meta.spatial.toolkit.Scale
 import com.meta.spatial.toolkit.Transform
 
-class MenuSpawner() : SystemBase() {
-
+class MenuSpawner : SystemBase() {
   private val qrCodeToEntity = mutableMapOf<Entity, Entity>()
 
   override fun execute() {
     Query.where { changed(TrackedQrCode.id) }
         .eval()
-        .forEach { qrCodeEnt ->
-          if (!qrCodeToEntity.containsKey(qrCodeEnt)) {
+        .forEach { qrCodeEntity ->
+          if (!qrCodeToEntity.containsKey(qrCodeEntity)) {
             val menu =
                 Entity.create(
-                    TransformParentFollow(qrCodeEnt),
+                    TransformParentFollow(qrCodeEntity),
                     Transform(),
                     // start with a scale of 0 to scale up once we load in
                     Scale(0.0f),
                     Panel(R.layout.ui_qrcode_scanner),
-                    Menu(qrCodeEnt.getComponent<TrackedQrCode>().getPayloadAsString()),
+                    Menu(qrCodeEntity.getComponent<TrackedQrCode>().getPayloadAsString()),
                 )
-            qrCodeToEntity[qrCodeEnt] = menu
+            qrCodeToEntity[qrCodeEntity] = menu
           }
         }
   }

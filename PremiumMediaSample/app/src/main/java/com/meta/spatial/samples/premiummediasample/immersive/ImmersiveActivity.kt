@@ -184,8 +184,8 @@ class ImmersiveActivity : BaseMrukActivity(), IPCMessageHandler {
     }
   }
 
-  override fun onRecenter() {
-    super.onRecenter()
+  override fun onRecenter(isUserInitiated: Boolean) {
+    super.onRecenter(isUserInitiated)
     immersiveViewModel.center()
   }
 

@@ -33,10 +33,9 @@ class MrukSampleStartMenuActivity : ComponentActivity() {
     }
   }
 
-  private fun <T> startSampleActivity(c: Class<T>) {
-    val activity = this
+  private fun <T> startSampleActivity(activityClass: Class<T>) {
     val immersiveIntent =
-        Intent(activity, c).apply {
+        Intent(this, activityClass).apply {
           action = Intent.ACTION_MAIN
           addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }

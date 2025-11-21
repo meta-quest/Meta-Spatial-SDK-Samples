@@ -270,7 +270,7 @@ vec4 HeroLightingVertex(sampler2D tex,vec3 rectSpacePos,vec3 rectSpaceNormal,vec
 	bool iswall=dot(rectSpaceNormal,vec3(1,0,0))>=.99;
 	bool isback=dot(rectSpaceNormal,vec3(0,0,1))>=.99;
 
-	bool isFrontFace=rectSpacePos.z<0.;
+	bool isFrontFace=rectSpacePos.z>0.;
 
 	vec4 lightingParams=g_MaterialUniform.matParams;
 
@@ -352,7 +352,7 @@ vec4 HeroLightingVertex(sampler2D tex,vec3 rectSpacePos,vec3 rectSpaceNormal,vec
 		reflectionMask*=clamp01(sin(reflectionUV.y*3.14159)*edgeBleed);
 		reflectionMask*=clamp01(sin(reflectionUV.x*3.14159)*edgeBleed);// multiplied by 2 for stereo
 
-		reflectionMask*=rectSpacePos.z>0.?0.:1.;// remove reflection from backface
+		reflectionMask*=rectSpacePos.z<0.?0.:1.;// remove reflection from backface
 
 		float reflectionFade=abs(rectSpacePos.y-reflectionData.w);
 		reflectionFade=LightFalloff(reflectionFade,screenHalfSize.y,1.);
@@ -384,8 +384,10 @@ vec4 HeroLightingPixel(sampler2D tex,vec3 worldPos,vec3 worldNormal){
 	vec4 screenRotationData=g_MaterialUniform.albedoFactor;
 
 	vec3 screenPosition=screenPositionData.xyz;
+	// account for change in handedness in shader
+	screenPosition.z = -screenPosition.z;
 
-	vec3 screenAngles=-screenRotationData.xyz;
+	vec3 screenAngles=screenRotationData.xyz;
 	mat3 rotationMatrix=GetRotationMatrix(screenAngles);
 
 	vec3 screenSize=vec3(screenPositionData.w,screenRotationData.w,0.);
@@ -421,7 +423,9 @@ void GenerateHeroLightVertexData(vec3 worldPos,vec3 worldNormal,out vec3 rectSpa
 	vec4 screenRotationData=g_MaterialUniform.albedoFactor;
 
 	vec3 screenPosition=screenPositionData.xyz;
-	vec3 screenAngles=-screenRotationData.xyz;
+	// account for change in handedness in shader
+	screenPosition.z = -screenPosition.z;
+	vec3 screenAngles=screenRotationData.xyz;
 	mat3 rotationMatrix=GetRotationMatrix(screenAngles);
 
 	screenSize=vec3(screenPositionData.w,screenRotationData.w,0.);

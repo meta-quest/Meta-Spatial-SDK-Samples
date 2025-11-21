@@ -1,0 +1,9 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: New Texture
+    com.meta.components.Texture:
+      image: ref:cushion
+      sampler: ref:Sampler
+metadata:
+  version: 1.32
