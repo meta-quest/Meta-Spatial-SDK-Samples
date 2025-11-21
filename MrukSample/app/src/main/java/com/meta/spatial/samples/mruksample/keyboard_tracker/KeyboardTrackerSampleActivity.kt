@@ -41,7 +41,11 @@ import com.meta.spatial.toolkit.createPanelEntity
 import com.meta.spatial.vr.LocomotionSystem
 import com.meta.spatial.vr.VRFeature
 
-// default activity
+/**
+ * Activity that demonstrates keyboard tracking functionality using MRUK (Mixed Reality
+ * Understanding Kit). This activity manages scene permissions, keyboard tracker lifecycle, and
+ * provides a UI panel for controlling the keyboard tracking feature.
+ */
 class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
   private lateinit var mrukFeature: MRUKFeature
   private var scenePermissionTextView: TextView? = null
@@ -172,12 +176,12 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
     }
   }
 
-  override fun onRecenter() {
-    super.onRecenter()
+  override fun onRecenter(isUserInitiated: Boolean) {
+    super.onRecenter(isUserInitiated)
     recenterElementInView(getHmd(systemManager), Entity(panelId))
   }
 
-  fun toggleUiPanelVisibility() {
+  private fun toggleUiPanelVisibility() {
     setUIPanelVisibility(!showUiPanel)
   }
 
@@ -191,6 +195,7 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
   }
 
   private fun updateStartStopTrackerButton(running: Boolean) {
+    // Using hardcoded strings for demo purposes - in production, use string resources
     if (running) {
       startStopTrackerButton?.setText("Stop Tracker")
     } else {

@@ -17,7 +17,6 @@ import android.webkit.WebViewClient
 import android.widget.Button
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
-import com.meta.spatial.core.SpatialSDKExperimentalAPI
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKStartTrackerResult
@@ -43,6 +42,11 @@ import com.meta.spatial.vr.VRFeature
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 
+/**
+ * Activity that demonstrates QR code scanning functionality using MRUK (Mixed Reality Understanding
+ * Kit). This sample shows how to start/stop QR code trackers and display scanned content in web
+ * panels.
+ */
 class QrCodeScannerSampleActivity : AppSystemActivity() {
   private lateinit var mrukFeature: MRUKFeature
   private var showUiPanel = false
@@ -67,7 +71,6 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
     systemManager.registerSystem(MrukInputSystem(::toggleUiPanelVisibility))
 
     if (checkSelfPermission(PERMISSION_USE_SCENE) != PackageManager.PERMISSION_GRANTED) {
-
       // Request the scene permission if it hasn't already been granted. Make sure to hook into
       // onRequestPermissionsResult() to try to load the scene again.
       Log.i(TAG, "Scene permission has not been granted, requesting $PERMISSION_USE_SCENE")
@@ -99,11 +102,15 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
     )
   }
 
-  override fun onRecenter() {
-    super.onRecenter()
+  override fun onRecenter(isUserInitiated: Boolean) {
+    super.onRecenter(isUserInitiated)
     recenterElementInView(getHmd(systemManager), Entity(panelId))
   }
 
+  /**
+   * Toggles the visibility of the UI panel. This function is called by the input system when the
+   * user triggers the panel toggle.
+   */
   fun toggleUiPanelVisibility() {
     setUIPanelVisibility(!showUiPanel)
   }
@@ -117,7 +124,7 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
     }
   }
 
-  fun isValidUrl(url: String): Boolean {
+  private fun isValidUrl(url: String): Boolean {
     return Patterns.WEB_URL.matcher(url).matches()
   }
 
@@ -128,17 +135,17 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
             themeResourceId = R.style.PanelAppThemeTransparent
             includeGlass = false
             layerConfig = LayerConfig()
-            width = panelWidth
-            height = panelHeight
+            width = PANEL_WIDTH
+            height = PANEL_HEIGHT
           }
           panel {
-            val webView = rootView?.findViewById<WebView>(R.id.web_view)!!
+            val webView = rootView?.findViewById<WebView>(R.id.web_view) ?: return@panel
 
             webView.webViewClient =
                 object : WebViewClient() {
                   override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
-                    entity.setComponent(TargetScale(smallScale))
+                    entity.setComponent(TargetScale(SMALL_SCALE))
                   }
                 }
 
@@ -156,7 +163,7 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
                   entity.setComponent(TargetScale(1.0f))
                 }
                 MotionEvent.ACTION_HOVER_EXIT -> {
-                  entity.setComponent(TargetScale(smallScale))
+                  entity.setComponent(TargetScale(SMALL_SCALE))
                 }
               }
               true
@@ -195,29 +202,33 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
     )
   }
 
-  @OptIn(SpatialSDKExperimentalAPI::class)
+  /**
+   * Starts the QR code tracker. This function configures and starts the MRUK QR code tracking
+   * functionality. Updates the UI button state based on the tracker start result.
+   */
   fun startTracker() {
-    mrukFeature.configureTrackers(setOf(Tracker.QrCode)).whenComplete {
-        result: MRUKStartTrackerResult,
-        _ ->
-      if (result == MRUKStartTrackerResult.SUCCESS) {
-        updateStartStopTrackerButton(true)
-      } else {
-        updateStartStopTrackerButton(false)
-      }
+    mrukFeature.configureTrackers(setOf(Tracker.QrCode)).whenComplete { result, _ ->
+      val success = result == MRUKStartTrackerResult.SUCCESS
+      updateStartStopTrackerButton(success)
     }
   }
 
+  /** Stops all active trackers and updates the UI button state. */
   private fun stopTrackers() {
     mrukFeature.stopTrackers()
     updateStartStopTrackerButton(false)
   }
 
+  /**
+   * Updates the start/stop tracker button text and internal state based on tracker running status.
+   *
+   * @param running true if the tracker is running, false otherwise
+   */
   private fun updateStartStopTrackerButton(running: Boolean) {
     if (running) {
-      startStopTrackerButton?.setText("Stop Tracker")
+      startStopTrackerButton?.setText(STOP_TRACKER_TEXT)
     } else {
-      startStopTrackerButton?.setText("Start Tracker")
+      startStopTrackerButton?.setText(START_TRACKER_TEXT)
     }
 
     trackerRunning = running
@@ -249,12 +260,15 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
   }
 
   companion object {
-    const val TAG = "QrCodeScannerSampleActivity"
-    const val PERMISSION_USE_SCENE: String = "com.oculus.permission.USE_SCENE"
-    const val REQUEST_CODE_PERMISSION_USE_SCENE: Int = 1
+    private const val TAG = "QrCodeScannerSampleActivity"
+    private const val PERMISSION_USE_SCENE = "com.oculus.permission.USE_SCENE"
+    private const val REQUEST_CODE_PERMISSION_USE_SCENE = 1
 
-    const val panelWidth = 0.3f
-    const val panelHeight = 0.5f
-    const val smallScale = 0.2f
+    private const val PANEL_WIDTH = 0.3f
+    internal const val PANEL_HEIGHT = 0.5f
+    private const val SMALL_SCALE = 0.2f
+
+    private const val STOP_TRACKER_TEXT = "Stop Tracker"
+    private const val START_TRACKER_TEXT = "Start Tracker"
   }
 }

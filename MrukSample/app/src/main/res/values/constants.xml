@@ -13,5 +13,11 @@
     <item>Bedroom00</item>
     <item>Bedroom01</item>
     <item>Livingroom01</item>
+    <item>HiFiScene</item>
+  </string-array>
+  <string-array name="scene_models_array">
+    <item>Scene V1 (Basic Scene)</item>
+    <item>Scene V2 (High-Fidelity Scene)</item>
+    <item>Scene V2 with Fallback to Scene V1</item>
   </string-array>
 </resources>

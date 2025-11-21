@@ -25,6 +25,11 @@ import com.meta.spatial.toolkit.Transform
 
 class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
 
+  companion object {
+    private const val KEYBOARD_SCALE = 1.2f
+    private const val LOG_TAG = "MRUK SpawnKeyboardSystem"
+  }
+
   private var isInit = false
   private val trackableMeshId: String = "mesh://trackable"
   private lateinit var ptCutoutMaterial: SceneMaterial
@@ -53,18 +58,18 @@ class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
     ptCutoutMaterial =
         SceneMaterial.custom(
             "pt_cutout",
-            arrayOf<SceneMaterialAttribute>(
+            arrayOf(
                 SceneMaterialAttribute("roughnessMetallicUnlit", SceneMaterialDataType.Vector4)
             ),
         )
 
     // Create a mesh creator for creating a mesh for each tracked keyboard
     val meshManager = systemManager.findSystem<MeshCreationSystem>().meshManager
-    meshManager.meshCreators.put(trackableMeshId) { entity ->
-      Log.i("MRUK SpawnKeyboardSystem", "Create mesh in mesh creation system")
+    meshManager.meshCreators[trackableMeshId] = { entity ->
+      Log.i(LOG_TAG, "Create mesh in mesh creation system")
       val transform = entity.getComponent<Transform>().transform
       val volume = entity.getComponent<MRUKVolume>()
-      val keyboardScale = 1.2f
+      val keyboardScale = KEYBOARD_SCALE
       val volumeMin = volume.min * keyboardScale
       val volumeMax = volume.max * keyboardScale
       SceneMesh.box(
