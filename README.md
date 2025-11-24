@@ -74,15 +74,48 @@ The documentation for Meta Spatial SDK can be found [here](https://developers.me
 
 Find our official release notes [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
 
-## 0.8.1 Updates
+## 0.9.0 Updates
+
+### Added
+
+- GSplat support
+  - Accessible through the experimental Splat Feature.
+  - Currently limited to one Splat component at a time.
+  - Supported file types are “.spz” and “.ply”.
+  - Splats can be loaded from the APK, file system or downloaded from a URL.
+  - Splats support collisions and locomotion
+
+### Changed
+
+- Stereo Audio API
+  - AudioSessionStereoOffsets now behaves as expected and rotates as expected with the entity.
+  - Can set World Transform position of stereo objects instead of relative position
+- Recentering
+  - The onRecenter overridable method in VRActivity now contains an isUserInitiated flag. This allows the app to determine if the recenter is being driven by a user action (holding the Meta button) or a system recenter
+    - To update, replace `override fun onRecenter()` with `override fun onRecenter(isUserInitiated: Boolean)`
+- Updated UiSet
+  - Changed icon files
+  - Added new font files
+  - Adjusted the argument list order for a few composable components
 
 ### Fixed
+- Graphics
+  - Crash on cubic spline interpolation with rotation
+  - Normal map tangent generation using the wrong axes
+  - Samplers not being applied to layers
+  - Layer filters not being applied to layers
+- Assume headset is mounted on startup, prevents errant onHMDMounted() call from happening during application startup
+- Spatial SDK applications now explicitly kill the application process on shutdown, if this behavior is not desired you can explicitly turn it off by modifying the `killProcessOnDestroy` variable exposed in VrActivity. Not killing the process leads to issues upon app restart and is not recommended at this time.
+Example:
+```
+// In your ImmersiveActivity.kt
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    …
+    killProcessOnDestroy = false
+}
+```
 
-- Fix `VrActivity.onRecenter()` not getting called
-- Fix `spatial.setPerformanceLevel()` not being respected
-- Fix `scene.isSystemPassthroughEnabled()` always returning false
-- Fix panel flickering that could sometimes occur in passthrough
-- Fix `PanelRenderOptions` creating a layer panel even when the panel render mode is set to PanelRenderMode.Mesh
 
 ## Spatial SDK Gradle Plugin
 

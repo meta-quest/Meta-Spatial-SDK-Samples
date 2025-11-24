@@ -21,11 +21,6 @@
     android:required="false"
   />
   <uses-permission android:name="com.oculus.permission.HAND_TRACKING" />
-  <!-- Tell the system this app uses experimental extensions -->
-  <uses-feature
-    android:name="com.oculus.experimental.enabled"
-    android:required="true"
-  />
   <!-- Tell the system this app can render passthrough -->
   <uses-feature
     android:name="com.oculus.feature.PASSTHROUGH"

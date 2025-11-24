@@ -79,6 +79,7 @@ class CinemaStateHandler(private val immersiveViewModel: ImmersiveViewModel) {
       CinemaState.Cinema -> {
         if (newState !== CinemaState.Cinema) {
           cinema?.setVisible(false)
+          controlsPanel.attachedCinema = null
         }
       }
       CinemaState.TV -> {

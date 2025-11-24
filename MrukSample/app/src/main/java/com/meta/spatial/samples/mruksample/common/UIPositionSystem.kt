@@ -14,23 +14,22 @@ import com.meta.spatial.toolkit.Transform
 class UIPositionSystem(
     private val setUIPanelVisibility: (Boolean) -> Unit,
 ) : SystemBase() {
-
   private var uiPositionInitialized = false
 
   override fun execute() {
     // We need to wait until the HMD pose is initialized before we can position the UI panel.
     // Keep trying until it succeeds.
     if (!uiPositionInitialized) {
-      if (isHDMPoseInitialized()) {
+      if (isHmdPoseInitialized()) {
         uiPositionInitialized = true
         setUIPanelVisibility(true)
       }
     }
   }
 
-  private fun isHDMPoseInitialized(): Boolean {
+  private fun isHmdPoseInitialized(): Boolean {
     val head = getHmd(systemManager) ?: return false
     val headPose = head.tryGetComponent<Transform>()?.transform
-    return !(headPose == null || headPose == Pose())
+    return headPose != null && headPose != Pose()
   }
 }

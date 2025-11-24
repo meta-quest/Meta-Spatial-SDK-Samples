@@ -1,0 +1,61 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:Floor
+            - ref:Environment
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:Floor/Main.metaspatialobj
+        com.meta.components.Name:
+          name: Floor
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 100
+            - 0.100000001
+            - 100
+          translation:
+            - 0
+            - -0.100000001
+            - 0
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+        com.meta.spatial.toolkit.SupportsLocomotion:
+          {}
+      tag: Floor
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:CollabRoom02/Main.metaspatialobj
+        com.meta.components.Name:
+          name: Environment
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+        com.meta.spatial.toolkit.SupportsLocomotion:
+          {}
+      tag: Environment
+metadata:
+  version: 1.34

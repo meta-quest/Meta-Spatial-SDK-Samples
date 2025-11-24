@@ -32,7 +32,6 @@ import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKLabel
 import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.mruk.MRUKSpawnMode
-import com.meta.spatial.mruk.MRUKStartEnvrionmentRaycasterResult
 import com.meta.spatial.mruk.MRUKWallTexCoordModeU
 import com.meta.spatial.mruk.MRUKWallTexCoordModeV
 import com.meta.spatial.physics.PhysicsFeature
@@ -99,7 +98,7 @@ class RaycastSampleActivity : AppSystemActivity() {
     roomOutlineMaterial =
         SceneMaterial.custom(
                 "outline",
-                arrayOf<SceneMaterialAttribute>(
+                arrayOf(
                     SceneMaterialAttribute("roughnessMetallicUnlit", SceneMaterialDataType.Vector4),
                     SceneMaterialAttribute("minAlphaAlphaCutoff", SceneMaterialDataType.Vector4),
                     SceneMaterialAttribute("stereoParams", SceneMaterialDataType.Vector4),
@@ -158,8 +157,8 @@ class RaycastSampleActivity : AppSystemActivity() {
       loadScene(true)
 
       val result = mrukFeature.startEnvironmentRaycaster()
-      if (result == MRUKStartEnvrionmentRaycasterResult.SUCCESS) {
-        Log.i(TAG, "Environment raycaster started sucessfully")
+      if (result == MRUKStartEnvironmentRaycasterResult.SUCCESS) {
+        Log.i(TAG, "Environment raycaster started successfully")
       } else {
         Log.e(TAG, "Environment raycaster failed to start: $result")
       }
@@ -396,8 +395,8 @@ class RaycastSampleActivity : AppSystemActivity() {
       loadScene(granted)
 
       val result = mrukFeature.startEnvironmentRaycaster()
-      if (result == MRUKStartEnvrionmentRaycasterResult.SUCCESS) {
-        Log.i(TAG, "Environment raycaster started sucessfully")
+      if (result == MRUKStartEnvironmentRaycasterResult.SUCCESS) {
+        Log.i(TAG, "Environment raycaster started successfully")
       } else {
         Log.e(TAG, "Environment raycaster failed to start: $result")
       }
@@ -422,7 +421,7 @@ class RaycastSampleActivity : AppSystemActivity() {
     return true
   }
 
-  fun toggleUiPanelVisibility() {
+  private fun toggleUiPanelVisibility() {
     setUIPanelVisibility(!showUiPanel)
   }
 
@@ -435,8 +434,8 @@ class RaycastSampleActivity : AppSystemActivity() {
     }
   }
 
-  override fun onRecenter() {
-    super.onRecenter()
+  override fun onRecenter(isUserInitiated: Boolean) {
+    super.onRecenter(isUserInitiated)
     recenterUiPanelPosition()
   }
 
@@ -485,13 +484,13 @@ class RaycastSampleActivity : AppSystemActivity() {
   }
 
   companion object {
-    const val TAG: String = "MrukRaycastSample"
-    const val PERMISSION_USE_SCENE: String = "com.oculus.permission.USE_SCENE"
-    const val REQUEST_CODE_PERMISSION_USE_SCENE: Int = 1
+    const val TAG = "MrukRaycastSample"
+    const val PERMISSION_USE_SCENE = "com.oculus.permission.USE_SCENE"
+    const val REQUEST_CODE_PERMISSION_USE_SCENE = 1
 
     // Raycast type spinner position constants
-    const val RAYCAST_TYPE_SCENE: Int = 0
-    const val RAYCAST_TYPE_GLOBAL_MESH: Int = 1
-    const val RAYCAST_TYPE_DEPTH: Int = 2
+    const val RAYCAST_TYPE_SCENE = 0
+    const val RAYCAST_TYPE_GLOBAL_MESH = 1
+    const val RAYCAST_TYPE_DEPTH = 2
   }
 }

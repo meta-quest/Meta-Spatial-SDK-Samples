@@ -351,7 +351,8 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
       movieState = MovieSceneState.VR
 
       // load the youtube video into the webview.
-      webView!!.loadUrl(videoUrl)
+      val additionalHttpHeaders = mapOf("Referer" to "https://${packageName}")
+      webView!!.loadUrl(videoUrl, additionalHttpHeaders)
     } else {
 
       movieState = MovieSceneState.SURROUND
