@@ -11,22 +11,14 @@ import com.meta.pixelandtexel.geovoyage.ui.mainnavigator.Routes
 
 class PanelViewModel : ViewModel() {
   private val _title = mutableStateOf("")
-  private val _route = mutableStateOf("")
+  private val _route = mutableStateOf(Routes.INTRO_ROUTE)
   private val _prevRoute = mutableStateOf("")
-  private val _hasUserAcceptedNotice = mutableStateOf(false)
+  private val _hasUserAcceptedNotice = mutableStateOf(true)
 
   val title: State<String> = _title
   val route: State<String> = _route
   val prevRoute: State<String> = _prevRoute
   val hasUserAcceptedNotice: State<Boolean> = _hasUserAcceptedNotice
-
-  init {
-    _hasUserAcceptedNotice.value = SettingsService.get(SettingsKey.ACCEPTED_NOTICE, false)
-
-    if (_hasUserAcceptedNotice.value) {
-      _route.value = Routes.INTRO_ROUTE
-    }
-  }
 
   fun userAcceptedNotice() {
     SettingsService.set(SettingsKey.ACCEPTED_NOTICE, true)

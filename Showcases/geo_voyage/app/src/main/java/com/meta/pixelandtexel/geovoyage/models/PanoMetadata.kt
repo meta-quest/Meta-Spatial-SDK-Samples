@@ -2,6 +2,8 @@
 
 package com.meta.pixelandtexel.geovoyage.models
 
+import androidx.annotation.DrawableRes
+
 /** https://developers.google.com/maps/documentation/tile/streetview#street_view_metadata */
 data class PanoMetadata(
     val panoId: String,
@@ -18,4 +20,12 @@ data class PanoMetadata(
     val copyright: String,
     val date: String?,
     val reportProblemLink: String,
-)
+
+    // for local panoramic photos
+
+    @DrawableRes var panoResId: Int = 0,
+    var attribution: String? = null,
+) {
+  val hasLocalPanorama
+    get() = panoResId != 0
+}

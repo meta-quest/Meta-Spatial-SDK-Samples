@@ -2,8 +2,6 @@
 
 package com.meta.pixelandtexel.geovoyage.ui.explore
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,7 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.requiredSizeIn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,9 +16,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -47,7 +42,7 @@ fun ExploreScreen(
   val panoData by vm.panoData
 
   val placeholderMessage = stringResource(R.string.explore_screen_placeholder_message)
-  val shouldDisplayCopyright = panoData != null && vrModeEnabled
+  val shouldDisplayCopyright = vrModeEnabled && panoData?.attribution != null
 
   LaunchedEffect(null) { vm.updatePlaceholderMessage(placeholderMessage) }
 
@@ -77,43 +72,23 @@ fun ExploreScreen(
               horizontalArrangement = Arrangement.spacedBy(12.dp),
           ) {
             ToggleChip(
-                selected = landmarksEnabled,
-                text = "Landmarks",
-            ) {
-              vm.onLandmarksToggled(!landmarksEnabled)
-            }
-            ToggleChip(
                 selected = vrModeEnabled,
-                enabled = panoData != null,
+                enabled = panoData != null && panoData!!.hasLocalPanorama,
                 text = "VR Mode",
             ) {
               vm.onEnterVRClicked()
             }
           }
-          if (true || shouldDisplayCopyright) {
-            val copyrightText =
-                "${stringResource(R.string.explore_copyright)}: ${panoData?.copyright}" +
-                    if (!panoData?.date.isNullOrEmpty()) ", ${panoData?.date}" else ""
+          if (shouldDisplayCopyright) {
+            val attributionText = "${panoData?.attribution}"
             Column(
                 horizontalAlignment = Alignment.End,
                 verticalArrangement = Arrangement.Bottom,
             ) {
-              Image(
-                  painterResource(id = R.mipmap.google_on_white),
-                  contentDescription = "Google",
-                  contentScale = ContentScale.Fit,
-                  modifier = Modifier.requiredSizeIn(91.dp, 27.dp),
-              )
               Text(
-                  text = copyrightText,
+                  text = attributionText,
                   textAlign = TextAlign.Right,
                   style = MaterialTheme.typography.bodySmall,
-              )
-              Text(
-                  text = stringResource(id = R.string.explore_report_problem),
-                  textAlign = TextAlign.Right,
-                  style = MaterialTheme.typography.bodySmall,
-                  modifier = Modifier.clickable { onReportVRProblem(panoData!!.reportProblemLink) },
               )
             }
           }
@@ -126,5 +101,5 @@ fun ExploreScreen(
 @Preview(widthDp = 570, heightDp = 480, showBackground = true, backgroundColor = 0xFFECEFE8)
 @Composable
 private fun ExploreScreenPreview() {
-  GeoVoyageTheme { ExploreScreen(ExploreViewModel(true)) {} }
+  GeoVoyageTheme { ExploreScreen {} }
 }

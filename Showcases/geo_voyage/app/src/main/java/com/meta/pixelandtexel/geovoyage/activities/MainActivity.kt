@@ -5,6 +5,7 @@ package com.meta.pixelandtexel.geovoyage.activities
 import android.Manifest
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.core.app.ActivityCompat
@@ -22,13 +23,10 @@ import com.meta.pixelandtexel.geovoyage.ecs.SpinSystem
 import com.meta.pixelandtexel.geovoyage.ecs.SpinnableSystem
 import com.meta.pixelandtexel.geovoyage.ecs.TetherSystem
 import com.meta.pixelandtexel.geovoyage.enums.PlayMode
-import com.meta.pixelandtexel.geovoyage.enums.SettingsKey
 import com.meta.pixelandtexel.geovoyage.models.GeoCoordinates
 import com.meta.pixelandtexel.geovoyage.models.Landmark
 import com.meta.pixelandtexel.geovoyage.models.PanoMetadata
 import com.meta.pixelandtexel.geovoyage.services.SettingsService
-import com.meta.pixelandtexel.geovoyage.services.googlemaps.GoogleTilesService
-import com.meta.pixelandtexel.geovoyage.services.googlemaps.IPanoramaServiceHandler
 import com.meta.pixelandtexel.geovoyage.services.llama.QueryLlamaService
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.SpatialFeature
@@ -124,9 +122,9 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
         PanelRegistration(R.integer.panel_id) {
           activityClass = PanelActivity::class.java
           config {
-            width = 0.772f
+            width = 0.642f
             height = 0.6f
-            layoutWidthInDp = 772f
+            layoutWidthInDp = 642f
             layoutHeightInDp = 600f
             includeGlass = false
             themeResourceId = R.style.PanelAppThemeTransparent
@@ -186,7 +184,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
               R.integer.panel_id,
               R.integer.panel_id,
               Transform(),
-              Tether(globeEntity, -63f, 15f, 0.9f),
+              Tether(globeEntity, -63f, 15f, 0.835f),
               Visible(false),
           )
     }
@@ -230,7 +228,7 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
       PlayMode.EXPLORE -> {
         val landmarkSystem = systemManager.findSystem<LandmarkSpawnSystem>()
         val pinnableSystem = systemManager.findSystem<PinnableSystem>()
-        landmarkSystem.toggleLandmarks(SettingsService.get(SettingsKey.LANDMARKS_ENABLED, true))
+        landmarkSystem.toggleLandmarks(true)
         pinnableSystem.togglePinning(true)
       }
 
@@ -294,40 +292,13 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
   fun tryShowSkyboxAt(panoData: PanoMetadata, onFinished: (success: Boolean) -> Unit) {
     toggleSkybox(false)
 
-    val skyboxEntity = Entity(R.integer.skybox_id)
-
     getSkyboxSceneObject {
+      /*
       GoogleTilesService.getPanoramaBitmapFor(
           panoData,
           object : IPanoramaServiceHandler {
             override fun onFinished(bitmap: Bitmap) {
-              if (!skyboxEntity.hasComponent<Mesh>() || !skyboxEntity.hasComponent<Material>()) {
-                Log.w(TAG, "Skybox entity missing mesh or material")
-                onFinished(false)
-                return
-              }
-
-              val sceneMaterial = skyboxSceneObject!!.mesh?.materials?.get(0)
-              if (sceneMaterial == null) {
-                Log.w(TAG, "Skybox scene object material not found")
-                onFinished(false)
-                return
-              }
-
-              sceneMaterial.setRepeat(1f, 1f, 0.5f, 0f)
-
-              // destroy our old skybox texture
-              sceneMaterial.texture?.destroy()
-
-              // set our new texture
-              val sceneTexture = SceneTexture(bitmap)
-              sceneMaterial.setAlbedoTexture(sceneTexture)
-
-              if (currentMode == PlayMode.EXPLORE) {
-                toggleSkybox(true)
-              }
-
-              onFinished(true)
+              trySetSkyboxTexture(bitmap, onFinished)
             }
 
             override fun onError(reason: String) {
@@ -336,6 +307,30 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
             }
           },
       )
+      */
+
+      // load local panorama
+
+      if (!panoData.hasLocalPanorama) {
+        Log.w(TAG, "Landmark ${panoData.panoId} doesn't have local panorama")
+        onFinished(false)
+        return@getSkyboxSceneObject
+      }
+
+      try {
+        val bitmap =
+            BitmapFactory.decodeResource(
+                resources,
+                panoData.panoResId,
+                BitmapFactory.Options().apply { inPreferredConfig = Bitmap.Config.ARGB_8888 },
+            )
+
+        trySetSkyboxTexture(bitmap, onFinished)
+        onFinished(true)
+      } catch (e: Exception) {
+        Log.w(TAG, "Failed to get local panorama bitmap drawable: ${panoData.panoResId}")
+        onFinished(false)
+      }
     }
   }
 
@@ -354,6 +349,38 @@ class MainActivity : ActivityCompat.OnRequestPermissionsResultCallback, AppSyste
       skyboxSceneObject = sceneObject
       then()
     }
+  }
+
+  private fun trySetSkyboxTexture(bitmap: Bitmap, onFinished: (success: Boolean) -> Unit) {
+    val skyboxEntity = Entity(R.integer.skybox_id)
+
+    if (!skyboxEntity.hasComponent<Mesh>() || !skyboxEntity.hasComponent<Material>()) {
+      Log.w(TAG, "Skybox entity missing mesh or material")
+      onFinished(false)
+      return
+    }
+
+    val sceneMaterial = skyboxSceneObject!!.mesh?.materials?.get(0)
+    if (sceneMaterial == null) {
+      Log.w(TAG, "Skybox scene object material not found")
+      onFinished(false)
+      return
+    }
+
+    sceneMaterial.setRepeat(1f, 1f, 0.5f, 0f)
+
+    // destroy our old skybox texture
+    sceneMaterial.texture?.destroy()
+
+    // set our new texture
+    val sceneTexture = SceneTexture(bitmap)
+    sceneMaterial.setAlbedoTexture(sceneTexture)
+
+    if (currentMode == PlayMode.EXPLORE) {
+      toggleSkybox(true)
+    }
+
+    onFinished(true)
   }
 
   fun toggleSkybox(visible: Boolean? = null) {

@@ -27,25 +27,30 @@ object GoogleMapsService {
 
   private val apiKey: String = BuildConfig.GOOGLE_MAPS_API_KEY
   private val gson = Gson()
-  private val urlBuilder: HttpUrl
+  private lateinit var urlBuilder: HttpUrl
 
   init {
-    if (apiKey.isEmpty()) {
-      Log.e(TAG, "Missing Google Maps API key from secrets.properties")
+    if (apiKey.isNotEmpty()) {
+      urlBuilder =
+          HttpUrl.Builder()
+              .scheme("https")
+              .host("maps.googleapis.com")
+              .addPathSegments("maps/api/geocode/json")
+              .addQueryParameter("key", apiKey)
+              .addQueryParameter("result_type", resultTypeFilter.joinToString("|"))
+              .build()
+    } else {
+      Log.w(TAG, "Missing Google Maps API key from secrets.properties")
     }
-
-    urlBuilder =
-        HttpUrl.Builder()
-            .scheme("https")
-            .host("maps.googleapis.com")
-            .addPathSegments("maps/api/geocode/json")
-            .addQueryParameter("key", apiKey)
-            .addQueryParameter("result_type", resultTypeFilter.joinToString("|"))
-            .build()
   }
 
   /** https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding */
   fun getPlace(coords: GeoCoordinates, handler: IGeocodeServiceHandler) {
+    if (!::urlBuilder.isInitialized) {
+      handler.onError("Failed to get place; urlBuilder is not initialized")
+      return
+    }
+
     CoroutineScope(Dispatchers.Main).launch {
       try {
         val url =

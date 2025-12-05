@@ -10,6 +10,7 @@
         <scale>1.0</scale>
         <yaw>0</yaw>
         <zOffset>0.37</zOffset>
+        <panoConfig name="@drawable/pyramids_of_giza" attribution="" />
     </landmark>
     <landmark>
         <name>Eiffel Tower</name>
@@ -21,17 +22,21 @@
         <scale>0.9</scale>
         <yaw>45</yaw>
         <zOffset>0.37</zOffset>
+        <panoConfig name="@drawable/paris" attribution="" />
     </landmark>
     <landmark>
-        <name>Chichén Itzá</name>
+        <name>Kinich Kakmó</name>
         <description
-    >Chichén Itzá is an ancient Mayan city on Mexico's Yucatán Peninsula, built by the Itza civilization in the 10th century AD. This UNESCO World Heritage Site features the Pyramid of Kukulcán, temples, and ball courts, showcasing the advanced knowledge and sophisticated architecture of the Mayan civilization.</description>
+    >Kinich Kakmó is a geological site in Izamal, Yucatán, Mexico (about 60 kilometers north of Chichén Itzá) that features a pyramid. The pyramid is one of the largest in Mexico, with a volume of 700,000 cubic meters, dedicated to Kinich Kakmó, an aspect of the Mayan Sun God.
+
+            Archaeologists believe that Izamal was the seat of the most essential entities in Yucatán (economically and politically), based on the size of the pyramid and the vastness of the archaeological complex that accompanies it.</description>
         <latitude>20.683056</latitude>
         <longitude>-88.568611</longitude>
         <model>chichen_itza.glb</model>
         <scale>1.0</scale>
         <yaw>25</yaw>
         <zOffset>0.36</zOffset>
+        <panoConfig name="@drawable/yucatan" attribution="" />
     </landmark>
     <landmark>
         <name>Sydney Opera House</name>
@@ -43,6 +48,7 @@
         <scale>1.0</scale>
         <yaw>15</yaw>
         <zOffset>0.355</zOffset>
+        <panoConfig name="@drawable/sydney_opera_house" attribution="" />
     </landmark>
     <landmark>
         <name>Taj Mahal</name>
@@ -54,6 +60,7 @@
         <scale>1.0</scale>
         <yaw>0</yaw>
         <zOffset>0.378</zOffset>
+        <panoConfig name="@drawable/taj_mahal" attribution="" />
     </landmark>
     <landmark>
         <name>Christ the Redeemer</name>
@@ -76,6 +83,7 @@
         <scale>0.9</scale>
         <yaw>20</yaw>
         <zOffset>0.356</zOffset>
+        <panoConfig name="@drawable/colosseum" attribution="" />
     </landmark>
     <landmark>
         <name>Mount Vinson</name>
@@ -87,6 +95,7 @@
         <scale>1.0</scale>
         <yaw>0</yaw>
         <zOffset>0.37</zOffset>
+        <panoConfig name="@drawable/mt_vinson" attribution="" />
     </landmark>
     <landmark>
         <name>Victoria Falls</name>
@@ -98,5 +107,6 @@
         <scale>1.0</scale>
         <yaw>0</yaw>
         <zOffset>0.377</zOffset>
+        <panoConfig name="@drawable/victoria_falls" attribution="" />
     </landmark>
 </landmarks>

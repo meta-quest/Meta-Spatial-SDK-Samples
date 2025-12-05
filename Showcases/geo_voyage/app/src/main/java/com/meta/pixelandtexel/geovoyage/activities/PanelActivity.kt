@@ -178,7 +178,9 @@ class PanelActivity : ActivityCompat.OnRequestPermissionsResultCallback, Compone
                     modifier = Modifier,
                 ) {
                   // routes
-                  composable(route = Routes.INTRO_ROUTE) { IntroScreen() }
+                  composable(route = Routes.INTRO_ROUTE) {
+                    IntroScreen { panelVM.navTo(Routes.EXPLORE_ROUTE) }
+                  }
                   composable(route = Routes.EXPLORE_ROUTE) {
                     ExploreScreen(
                         vm = exploreVM,
