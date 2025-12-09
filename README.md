@@ -1,10 +1,21 @@
 # Meta Spatial SDK Samples
 
-This repository is a collection of code samples and projects that demonstrate the capabilities of Meta Spatial SDK. [Meta Spatial SDK](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-overview) is a new way to build immersive apps for Meta Horizon OS. Meta Spatial SDK lets you combine the rich ecosystem of Android development and the unique capabilities of Meta Quest via accessible APIs.
+This repository is a collection of code samples and projects that demonstrate
+the capabilities of Meta Spatial SDK.
+[Meta Spatial SDK](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-overview)
+is a new way to build immersive apps for Meta Horizon OS. Meta Spatial SDK lets
+you combine the rich ecosystem of Android development and the unique
+capabilities of Meta Quest via accessible APIs.
 
-The samples in this repository showcase various features of the SDK, such as spatial anchors, scene understanding, and object recognition. Each sample project includes source code, build scripts, and documentation to help developers understand how to use the SDK to build their own spatially-aware applications.
+The samples in this repository showcase various features of the SDK, such as
+spatial anchors, scene understanding, and object recognition. Each sample
+project includes source code, build scripts, and documentation to help
+developers understand how to use the SDK to build their own spatially-aware
+applications.
 
-Whether you're a seasoned developer or just starting out with Meta Quest/Horizon OS, the Meta Spatial SDK Samples are a valuable resource for learning how to leverage the power of spatial computing in your applications.
+Whether you're a seasoned developer or just starting out with Meta Quest/Horizon
+OS, the Meta Spatial SDK Samples are a valuable resource for learning how to
+leverage the power of spatial computing in your applications.
 
 ## Requirements
 
@@ -25,12 +36,17 @@ Then, to build and run a sample:
 1. Clone this repository to your computer
 2. Open the specific sample app with Android Studio
 3. Plug in your Quest device to your computer
-4. Click the "Run" button in the Android Studio toolbar, the app will now be running on your headset
+4. Click the "Run" button in the Android Studio toolbar, the app will now be
+   running on your headset
 
 **Notes**:
 
-- All samples, except **MRUKSample** and **PremiumMediaSample**, require you to install [Meta Spatial Editor](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-editor-overview).
-- MediaPlayerSample and PremiumMediaSample contain examples of custom shaders, which requires the NDK to be installed and set up in *app/build.gradle.kts* (ex. `ndkVersion = "27.0.12077973"`)
+- All samples, except **MRUKSample** and **PremiumMediaSample**, require you to
+  install
+  [Meta Spatial Editor](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-editor-overview).
+- MediaPlayerSample and PremiumMediaSample contain examples of custom shaders,
+  which requires the NDK to be installed and set up in _app/build.gradle.kts_
+  (ex. `ndkVersion = "27.0.12077973"`)
 - Our samples support our custom OVRMetrics integration
   - [Download & Enable OVRMetricsTool Steps](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-ovrmetrics)
 
@@ -38,24 +54,49 @@ Then, to build and run a sample:
 
 We have 11 sample apps, demonstrating various features of Meta Spatial SDK:
 
-- [AnimationsSample](/AnimationsSample) shows how to play animation clips, create reusable animation drivers, and demonstrates frame-based procedural animation.
-- [HybridSample](/HybridSample) shows how to begin with a standard Android-based 2D panel experience and switch between an immersive experience that hosts the same panel.
-- [CustomComponentsSample](/CustomComponentsSample) shows how to create a custom component that embodies the data shared across various instances of an application.
-- [PremiumMediaSample](/PremiumMediaSample) shows how to stream DRM-protected content, play 180-degree videos, and cast reflections from panels into the user's spatial setup with MRUK.
-- [MediaPlayerSample](/MediaPlayerSample) shows how to build an immersive video playback experience.
-- [MixedRealitySample](/MixedRealitySample) shows an immersive experience that interacts with the user's physical surroundings.
-- [MrukSample](/MrukSample) shows an immersive experience influenced by the user's physical surroundings.
-- [Object3DSample](/Object3DSample) shows inserting 3D objects into a scene and adjusting their properties in Meta Spatial Editor.
-- [PhysicsSample](/PhysicsSample) shows adding a physics component and adjusting its properties in Meta Spatial Editor.
-- [PremiumMediaSample](/PremiumMediaSample) shows a media streaming experience integrated into the users spatial environment.
-- [SpatialVideoSample](/SpatialVideoSample) shows how to play video with spatialized audio.
-- [StarterSample](/StarterSample) is a starter project that is part of [Getting Started](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-helloworld) with Meta Spatial SDK.
+- [AnimationsSample](/AnimationsSample) shows how to play animation clips,
+  create reusable animation drivers, and demonstrates frame-based procedural
+  animation.
+- [HybridSample](/HybridSample) shows how to begin with a standard Android-based
+  2D panel experience and switch between an immersive experience that hosts the
+  same panel.
+- [CustomComponentsSample](/CustomComponentsSample) shows how to create a custom
+  component that embodies the data shared across various instances of an
+  application.
+- [PremiumMediaSample](/PremiumMediaSample) shows how to stream DRM-protected
+  content, play 180-degree videos, and cast reflections from panels into the
+  user's spatial setup with MRUK.
+- [MediaPlayerSample](/MediaPlayerSample) shows how to build an immersive video
+  playback experience.
+- [MixedRealitySample](/MixedRealitySample) shows an immersive experience that
+  interacts with the user's physical surroundings.
+- [MrukSample](/MrukSample) shows an immersive experience influenced by the
+  user's physical surroundings.
+- [Object3DSample](/Object3DSample) shows inserting 3D objects into a scene and
+  adjusting their properties in Meta Spatial Editor.
+- [PhysicsSample](/PhysicsSample) shows adding a physics component and adjusting
+  its properties in Meta Spatial Editor.
+- [PremiumMediaSample](/PremiumMediaSample) shows a media streaming experience
+  integrated into the users spatial environment.
+- [SpatialVideoSample](/SpatialVideoSample) shows how to play video with
+  spatialized audio.
+- [StarterSample](/StarterSample) is a starter project that is part of
+  [Getting Started](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-helloworld)
+  with Meta Spatial SDK.
 
-We also have a starter app [CustomComponentsStarter](/CodelabStarters/CustomComponentsStarter), which only contains the boilerplate code of [CustomComponentsSample](/CustomComponentsSample). You can download this starter app and follow [this](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-editor-create-app-content) tutorial to build a LookAt app with Meta Spatial Editor and SDK.
+We also have a starter app
+[CustomComponentsStarter](/CodelabStarters/CustomComponentsStarter), which only
+contains the boilerplate code of
+[CustomComponentsSample](/CustomComponentsSample). You can download this starter
+app and follow
+[this](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-editor-create-app-content)
+tutorial to build a LookAt app with Meta Spatial Editor and SDK.
 
 ## Showcases
 
-The [Showcases](/Showcases) folder contains five apps. These are fully-featured applications built with Meta Spatial SDK, and are open-sourced here in this repository.
+The [Showcases](/Showcases) folder contains five apps. These are fully-featured
+applications built with Meta Spatial SDK, and are open-sourced here in this
+repository.
 
 - [Focus](/Showcases/focus)
   - [Download from the store](https://www.meta.com/experiences/focus/8625912667430203/)
@@ -68,67 +109,52 @@ The [Showcases](/Showcases) folder contains five apps. These are fully-featured 
 
 ## Documentation
 
-The documentation for Meta Spatial SDK can be found [here](https://developers.meta.com/horizon/develop/spatial-sdk).
+The documentation for Meta Spatial SDK can be found
+[here](https://developers.meta.com/horizon/develop/spatial-sdk).
 
 ## Release Notes
 
-Find our official release notes [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
+Find our official release notes
+[here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
 
 ## 0.9.0 Updates
 
-### Added
-
-- GSplat support
-  - Accessible through the experimental Splat Feature.
-  - Currently limited to one Splat component at a time.
-  - Supported file types are “.spz” and “.ply”.
-  - Splats can be loaded from the APK, file system or downloaded from a URL.
-  - Splats support collisions and locomotion
-
-### Changed
-
-- Stereo Audio API
-  - AudioSessionStereoOffsets now behaves as expected and rotates as expected with the entity.
-  - Can set World Transform position of stereo objects instead of relative position
-- Recentering
-  - The onRecenter overridable method in VRActivity now contains an isUserInitiated flag. This allows the app to determine if the recenter is being driven by a user action (holding the Meta button) or a system recenter
-    - To update, replace `override fun onRecenter()` with `override fun onRecenter(isUserInitiated: Boolean)`
-- Updated UiSet
-  - Changed icon files
-  - Added new font files
-  - Adjusted the argument list order for a few composable components
+## 0.9.1 - 2025-12-08
 
 ### Fixed
-- Graphics
-  - Crash on cubic spline interpolation with rotation
-  - Normal map tangent generation using the wrong axes
-  - Samplers not being applied to layers
-  - Layer filters not being applied to layers
-- Assume headset is mounted on startup, prevents errant onHMDMounted() call from happening during application startup
-- Spatial SDK applications now explicitly kill the application process on shutdown, if this behavior is not desired you can explicitly turn it off by modifying the `killProcessOnDestroy` variable exposed in VrActivity. Not killing the process leads to issues upon app restart and is not recommended at this time.
-Example:
-```
-// In your ImmersiveActivity.kt
-override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    …
-    killProcessOnDestroy = false
-}
-```
 
+- Panel corruption bug where some panels would appear distorted, invisible, or
+  copy content from another panel has been fixed.
 
 ## Spatial SDK Gradle Plugin
 
-The samples all include the Spatial SDK Gradle Plugin in their build files. This plugin is used for the [Spatial Editor integration](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-editor#use-the-spatial-sdk-gradle-plugin) and for build-related features like [custom shaders](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-custom-shaders).
+The samples all include the Spatial SDK Gradle Plugin in their build files. This
+plugin is used for the
+[Spatial Editor integration](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-editor#use-the-spatial-sdk-gradle-plugin)
+and for build-related features like
+[custom shaders](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-custom-shaders).
 
-Meta collects telemetry data from the Spatial SDK Gradle Plugin to help improve MPT Products. You can read the [Supplemental Meta Platforms Technologies Privacy Policy](https://www.meta.com/legal/privacy-policy/) to learn more.
+Meta collects telemetry data from the Spatial SDK Gradle Plugin to help improve
+MPT Products. You can read the
+[Supplemental Meta Platforms Technologies Privacy Policy](https://www.meta.com/legal/privacy-policy/)
+to learn more.
 
 ## License
 
 The Meta Spatial SDK Samples package is multi-licensed.
 
-The majority of the project is licensed under the [MIT License](https://github.com/meta-quest/Meta-Spatial-SDK-Samples/blob/main/LICENSE), as found in the LICENSE file.
+The majority of the project is licensed under the
+[MIT License](https://github.com/meta-quest/Meta-Spatial-SDK-Samples/blob/main/LICENSE),
+as found in the LICENSE file.
 
-The [Meta Platform Technologies SDK license](https://developer.oculus.com/licenses/oculussdk/) applies to the Meta Spatial SDK and supporting material, and to the assets used in the Meta Spatial SDK Samples package. The [MPT SDK license](https://github.com/meta-quest/Meta-Spatial-SDK-Samples/tree/main/MrukSample/app/src/main/assets/LICENSE.md) can be found in the asset folder of each sample.
+The
+[Meta Platform Technologies SDK license](https://developer.oculus.com/licenses/oculussdk/)
+applies to the Meta Spatial SDK and supporting material, and to the assets used
+in the Meta Spatial SDK Samples package. The
+[MPT SDK license](https://github.com/meta-quest/Meta-Spatial-SDK-Samples/tree/main/MrukSample/app/src/main/assets/LICENSE.md)
+can be found in the asset folder of each sample.
 
-Specifically, all the supporting materials in each sample's `app/src/main/res/raw` and `app/src/main/assets` folders including 3D models, videos, sounds, and others, are licensed under the [MPT SDK license](https://developer.oculus.com/licenses/oculussdk/).
+Specifically, all the supporting materials in each sample's
+`app/src/main/res/raw` and `app/src/main/assets` folders including 3D models,
+videos, sounds, and others, are licensed under the
+[MPT SDK license](https://developer.oculus.com/licenses/oculussdk/).

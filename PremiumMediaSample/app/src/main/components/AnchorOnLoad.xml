@@ -2,7 +2,7 @@
 <ComponentSchema
   packageName="com.meta.spatial.samples.premiummediasample"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.9.0/ComponentSchema.xsd"
+  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.9.1/ComponentSchema.xsd"
 >
 <Component name="AnchorOnLoad">
     <FloatAttribute name="distanceCheck" defaultValue="1f" />
