@@ -33,7 +33,7 @@ data class SummarizeTextResponse(@SerializedName("summary") val summary: String)
 class AIManager {
 
   // Enable or disable AI in project
-  val AIenabled: Boolean = true
+  val AIenabled: Boolean = false
 
   private val client = OkHttpClient()
   private val SERVER_URL = "https://api.focus.theelectricfactory.com/"

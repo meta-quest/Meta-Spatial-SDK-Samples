@@ -78,7 +78,7 @@ class PanelManager {
   fun registerFocusPanels(): List<PanelRegistration> {
     return listOf(
         panelRegistration(PanelRegistrationIds.HomePanel, 0.58f, 0.41f, true) {},
-        panelRegistration(PanelRegistrationIds.Toolbar, 0.65f, 0.065f) { ToolbarPanel() },
+        panelRegistration(PanelRegistrationIds.Toolbar, 0.62f, 0.065f) { ToolbarPanel() },
         panelRegistration(PanelRegistrationIds.TasksPanel, 0.275f, 0.5f) { TasksPanel() },
         panelRegistration(PanelRegistrationIds.AIPanel, 0.3f, 0.5f) { AIPanel() },
         panelRegistration(PanelRegistrationIds.StickySubPanel, 0.26f, 0.042f) { StickySubPanel() },

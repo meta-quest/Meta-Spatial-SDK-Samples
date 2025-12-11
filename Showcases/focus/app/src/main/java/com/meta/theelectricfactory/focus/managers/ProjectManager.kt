@@ -135,7 +135,7 @@ class ProjectManager {
                 UniqueAssetComponent(uuid, AssetType.AI_PANEL)
             )
             PanelManager.instance.aiExchangePanel.setComponent(
-                Visible(if (state == 1) true else false)
+                Visible(if (state == 1 && AIManager.instance.AIenabled) true else false)
             )
             PanelManager.instance.aiExchangePanel.setComponent(
                 Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
