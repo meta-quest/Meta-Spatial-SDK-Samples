@@ -6,6 +6,13 @@ Check out our official
 This format is roughly based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 0.9.2 - 2025-12-18
+
+### Added
+
+- Experimental support for body tracking
+  - Allows developers to access skeleton joint data including poses.
+
 ## 0.9.1 - 2025-12-08
 
 ### Fixed
@@ -23,6 +30,11 @@ This format is roughly based on
   - Supported file types are “.spz” and “.ply”.
   - Splats can be loaded from the APK, file system or downloaded from a URL.
   - Splats support collisions and locomotion
+- Added High-Fidelity Scene. This allows developers to access a representation
+  of the room that extends the existing single floor, ceiling and walls data
+  structure. It provides a more detailed version of the room layout that allows
+  features such as multiple floors, columns, and slanted ceilings to be queried
+  by the developer.
 
 ### Changed
 
@@ -41,6 +53,7 @@ This format is roughly based on
   - Changed icon files
   - Added new font files
   - Adjusted the argument list order for a few composable components
+- QR Code tracking support moved from experimental to public
 
 ### Fixed
 

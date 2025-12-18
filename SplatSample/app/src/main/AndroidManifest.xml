@@ -6,7 +6,7 @@
   android:versionName="1.0"
   android:installLocation="auto"
 >
-  
+
   <horizonos:uses-horizonos-sdk
     horizonos:minSdkVersion="69"
     horizonos:targetSdkVersion="69"
