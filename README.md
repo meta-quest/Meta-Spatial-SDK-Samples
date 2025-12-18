@@ -52,7 +52,7 @@ Then, to build and run a sample:
 
 ## Samples
 
-We have 11 sample apps, demonstrating various features of Meta Spatial SDK:
+We have 13 sample apps, demonstrating various features of Meta Spatial SDK:
 
 - [AnimationsSample](/AnimationsSample) shows how to play animation clips,
   create reusable animation drivers, and demonstrates frame-based procedural
@@ -83,6 +83,7 @@ We have 11 sample apps, demonstrating various features of Meta Spatial SDK:
 - [StarterSample](/StarterSample) is a starter project that is part of
   [Getting Started](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-helloworld)
   with Meta Spatial SDK.
+- [BodyTrackingSample](/BodyTrackingSample) shows how to access body tracking and utilize skeleton joint data.
 
 We also have a starter app
 [CustomComponentsStarter](/CodelabStarters/CustomComponentsStarter), which only
@@ -117,14 +118,12 @@ The documentation for Meta Spatial SDK can be found
 Find our official release notes
 [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
 
-## 0.9.0 Updates
+## 0.9.2 - 2025-12-08
 
-## 0.9.1 - 2025-12-08
+### Added
 
-### Fixed
-
-- Panel corruption bug where some panels would appear distorted, invisible, or
-  copy content from another panel has been fixed.
+- Experimental support for body tracking
+  - Allows developers to access skeleton joint data including poses.
 
 ## Spatial SDK Gradle Plugin
 
