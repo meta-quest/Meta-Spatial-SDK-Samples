@@ -1,0 +1,29 @@
+<FrameLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="#00000000"
+  android:clipToOutline="true"
+  android:orientation="vertical"
+>
+
+    <!-- View group which displays the camera preview view via the CameraController onto a Surface. -->
+    <com.meta.pixelandtexel.scanner.objectdetection.views.android.CameraPreview
+    android:id="@+id/preview_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent"
+  />
+
+    <!-- View which draws bounding boxes and labels for objects detected in the user's field of view.  -->
+    <com.meta.pixelandtexel.scanner.objectdetection.views.android.GraphicOverlay
+    android:id="@+id/graphic_overlay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@android:color/transparent"
+  />
+
+</FrameLayout>
