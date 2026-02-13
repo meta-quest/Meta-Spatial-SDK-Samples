@@ -196,12 +196,7 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
 
   private fun updateStartStopTrackerButton(running: Boolean) {
     // Using hardcoded strings for demo purposes - in production, use string resources
-    if (running) {
-      startStopTrackerButton?.setText("Stop Tracker")
-    } else {
-      startStopTrackerButton?.setText("Start Tracker")
-    }
-
+    startStopTrackerButton?.text = if (running) "Stop Tracker" else "Start Tracker"
     trackerRunning = running
   }
 
@@ -217,9 +212,8 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
             enableTransparent = true
           }
           panel {
-            requireNotNull(rootView)
-            val closeSampleButton = rootView?.findViewById<Button>(R.id.close_sample)
-            closeSampleButton?.setOnClickListener {
+            val root = requireNotNull(rootView)
+            root.findViewById<Button>(R.id.close_sample).setOnClickListener {
               returnTo2DActivity(
                   this@KeyboardTrackerSampleActivity,
                   applicationContext,
@@ -227,12 +221,12 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
               )
             }
 
-            scenePermissionTextView = rootView?.findViewById<TextView>(R.id.scene_permission_text)
+            scenePermissionTextView = root.findViewById(R.id.scene_permission_text)
             setScenePermissionText(isScenePermissionGiven)
-            keyboardTrackingTextView = rootView?.findViewById<TextView>(R.id.keyboard_tracking_text)
+            keyboardTrackingTextView = root.findViewById(R.id.keyboard_tracking_text)
             setKeyboardTrackerSettingText(isKeyboardTrackingEnabled)
 
-            startStopTrackerButton = rootView?.findViewById<Button>(R.id.start_stop_tracker)
+            startStopTrackerButton = root.findViewById(R.id.start_stop_tracker)
             startStopTrackerButton?.setOnClickListener {
               if (trackerRunning) {
                 mrukFeature.stopTrackers()
@@ -248,8 +242,8 @@ class KeyboardTrackerSampleActivity : AppSystemActivity(), MRUKSceneEventListene
   }
 
   companion object {
-    const val TAG: String = "KeyboardTrackerSampleActivity"
-    const val PERMISSION_USE_SCENE: String = "com.oculus.permission.USE_SCENE"
-    const val REQUEST_CODE_PERMISSION_USE_SCENE: Int = 1
+    const val TAG = "KeyboardTrackerSampleActivity"
+    const val PERMISSION_USE_SCENE = "com.oculus.permission.USE_SCENE"
+    const val REQUEST_CODE_PERMISSION_USE_SCENE = 1
   }
 }

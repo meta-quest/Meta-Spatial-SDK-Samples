@@ -33,7 +33,10 @@ android {
 
   packaging { resources.excludes.add("META-INF/LICENSE") }
 
-  lint { abortOnError = false }
+  lint {
+    abortOnError = false
+    checkReleaseBuilds = false
+  }
 
   buildTypes {
     release {

@@ -11,6 +11,7 @@ package com.meta.spatial.samples.premiummediasample.entities
 
 import android.content.Context
 import android.net.Uri
+import android.os.Handler
 import android.util.Log
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
@@ -23,21 +24,99 @@ import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.DefaultRenderersFactory
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.Renderer
+import androidx.media3.exoplayer.RenderersFactory
 import androidx.media3.exoplayer.analytics.AnalyticsListener
+import androidx.media3.exoplayer.audio.AudioRendererEventListener
 import androidx.media3.exoplayer.dash.DashChunkSource
 import androidx.media3.exoplayer.dash.DashMediaSource
 import androidx.media3.exoplayer.dash.DefaultDashChunkSource
+import androidx.media3.exoplayer.drm.DefaultDrmSessionManager
+import androidx.media3.exoplayer.drm.FrameworkMediaDrm
+import androidx.media3.exoplayer.drm.HttpMediaDrmCallback
+import androidx.media3.exoplayer.mediacodec.MediaCodecSelector
+import androidx.media3.exoplayer.metadata.MetadataOutput
 import androidx.media3.exoplayer.source.MediaLoadData
+import androidx.media3.exoplayer.text.TextOutput
 import androidx.media3.exoplayer.trackselection.DefaultTrackSelector
 import androidx.media3.exoplayer.upstream.DefaultBandwidthMeter
+import androidx.media3.exoplayer.video.MediaCodecVideoRenderer
+import androidx.media3.exoplayer.video.VideoRendererEventListener
+import com.meta.horizon.media.OculusMediaCodecVideoRenderer
 import com.meta.spatial.samples.premiummediasample.data.VideoSource
 import java.lang.Exception
 
-fun buildCustomExoPlayer(context: Context, isRemote: Boolean): ExoPlayer {
-  val renderersFactory =
+class OculusDecoderRenderersFactory(private val context: Context) : RenderersFactory {
+
+  companion object {
+    private const val CONNECT_TIMEOUT_MS = 15_000
+    private const val READ_TIMEOUT_MS = 30_000
+    private const val VIDEO_RENDERER_INDEX = 0
+    private const val ALLOWED_VIDEO_JOINING_TIME_MS = 5000L
+    private const val USER_AGENT = "ExoPlayer-DRM"
+    private const val LICENSE_URL = "https://cwip-shaka-proxy.appspot.com/no_auth"
+  }
+
+  private val base =
       DefaultRenderersFactory(context)
-          .forceEnableMediaCodecAsynchronousQueueing()
-          .setEnableDecoderFallback(true)
+          .setExtensionRendererMode(DefaultRenderersFactory.EXTENSION_RENDERER_MODE_PREFER)
+
+  override fun createRenderers(
+      eventHandler: Handler,
+      videoRendererEventListener: VideoRendererEventListener,
+      audioRendererEventListener: AudioRendererEventListener,
+      textRendererOutput: TextOutput,
+      metadataRendererOutput: MetadataOutput,
+  ): Array<Renderer> {
+
+    val all =
+        base.createRenderers(
+            eventHandler,
+            videoRendererEventListener,
+            audioRendererEventListener,
+            textRendererOutput,
+            metadataRendererOutput,
+        )
+
+    val renderers = all.filterNot { it is MediaCodecVideoRenderer }.toMutableList()
+
+    val httpFactory =
+        DefaultHttpDataSource.Factory()
+            .setUserAgent(USER_AGENT)
+            .setConnectTimeoutMs(CONNECT_TIMEOUT_MS)
+            .setReadTimeoutMs(READ_TIMEOUT_MS)
+            .setAllowCrossProtocolRedirects(true)
+
+    val licenseUrl = LICENSE_URL
+
+    val drmCallback = HttpMediaDrmCallback(licenseUrl, httpFactory)
+
+    val drmSessionManager: DefaultDrmSessionManager =
+        DefaultDrmSessionManager.Builder()
+            .setUuidAndExoMediaDrmProvider(C.WIDEVINE_UUID, FrameworkMediaDrm.DEFAULT_PROVIDER)
+            .setPlayClearSamplesWithoutKeys(true)
+            .setMultiSession(true)
+            .build(drmCallback)
+
+    renderers.add(
+        VIDEO_RENDERER_INDEX,
+        OculusMediaCodecVideoRenderer(
+            context,
+            MediaCodecSelector.DEFAULT,
+            ALLOWED_VIDEO_JOINING_TIME_MS,
+            drmSessionManager,
+            true,
+            eventHandler,
+            videoRendererEventListener,
+        ),
+    )
+
+    return renderers.toTypedArray()
+  }
+}
+
+fun buildCustomExoPlayer(context: Context, isRemote: Boolean): ExoPlayer {
+  val renderersFactory = OculusDecoderRenderersFactory(context)
 
   val exoBuilder = ExoPlayer.Builder(context, renderersFactory)
   if (isRemote) {

@@ -71,7 +71,6 @@ import com.meta.spatial.runtime.SceneObject
 import com.meta.spatial.runtime.SceneTexture
 import com.meta.spatial.runtime.StereoMode
 import com.meta.spatial.runtime.TriangleMesh
-import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.ActivityPanelRegistration
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.AvatarSystem

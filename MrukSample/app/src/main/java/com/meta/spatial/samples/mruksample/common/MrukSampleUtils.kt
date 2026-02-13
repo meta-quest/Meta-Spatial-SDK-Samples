@@ -131,11 +131,11 @@ fun recenterElementInView(head: Entity?, element: Entity?) {
   if (head == null || element == null) {
     return
   }
-  val headPose = head.tryGetComponent<Transform>()?.transform
+  var headPose = head.tryGetComponent<Transform>()?.transform
   if (headPose == null || headPose == Pose()) {
     return
   }
-  val forward = headPose.q * Vector3(0f, 0f, 1f)
+  var forward = headPose.q * Vector3(0f, 0f, 1f)
   forward.y = 0f
   headPose.q = Quaternion.lookRotation(forward)
   // Rotate it to face away from the hmd

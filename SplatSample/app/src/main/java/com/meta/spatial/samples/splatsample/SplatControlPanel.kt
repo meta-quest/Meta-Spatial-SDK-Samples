@@ -41,8 +41,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -86,6 +88,7 @@ private val panelInstructionText = buildAnnotatedString {
 fun ControlPanel(
     splatList: List<String>,
     selectedIndex: MutableState<Int>,
+    isPanelInteractive: State<Boolean>,
     loadSplatFunction: (String) -> Unit,
 ) {
   // Apply SpatialTheme to ensure consistent design across the panel
@@ -139,6 +142,10 @@ fun ControlPanel(
             ) {
               // Large clickable preview image
               val previewResource = getSplatPreviewResource(option)
+              // Visual feedback for loading state:
+              // When panel is not interactive (Splat is loading), reduce opacity to 40%
+              // This provides a clear visual cue that the panel is temporarily disabled
+              val imageAlpha = if (isPanelInteractive.value) 1f else 0.4f
               if (previewResource != null) {
                 Image(
                     painter = painterResource(id = previewResource),
@@ -146,6 +153,9 @@ fun ControlPanel(
                     modifier =
                         Modifier.fillMaxWidth()
                             .height(200.dp)
+                            // Apply alpha modifier for visual loading state feedback
+                            // 1.0 = fully visible (interactive), 0.4 = greyed out (loading)
+                            .alpha(imageAlpha)
                             .clip(RoundedCornerShape(12.dp))
                             .border(
                                 width = if (isSelected) 4.dp else 2.dp,
@@ -154,9 +164,10 @@ fun ControlPanel(
                                     else LocalColorScheme.current.primaryAlphaBackground,
                                 shape = RoundedCornerShape(12.dp),
                             )
-                            .clickable {
+                            // Disable click handling while Splat is loading
+                            // This prevents race conditions from concurrent load requests
+                            .clickable(enabled = isPanelInteractive.value) {
                               loadSplatFunction(option)
-                              // splatManager.loadSplat(option)
                               selectedIndex.value = index
                             },
                     contentScale = ContentScale.Crop,

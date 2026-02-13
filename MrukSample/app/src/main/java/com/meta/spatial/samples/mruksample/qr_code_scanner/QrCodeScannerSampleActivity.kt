@@ -170,7 +170,7 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
             }
           }
         },
-        PanelRegistration(R.layout.ui_qrcode_scanner_menu) { entity ->
+        PanelRegistration(R.layout.ui_qrcode_scanner_menu) { _ ->
           config {
             includeGlass = false
             layerConfig = LayerConfig()
@@ -206,7 +206,7 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
    * Starts the QR code tracker. This function configures and starts the MRUK QR code tracking
    * functionality. Updates the UI button state based on the tracker start result.
    */
-  fun startTracker() {
+  private fun startTracker() {
     mrukFeature.configureTrackers(setOf(Tracker.QrCode)).whenComplete { result, _ ->
       val success = result == MRUKStartTrackerResult.SUCCESS
       updateStartStopTrackerButton(success)
@@ -225,12 +225,7 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
    * @param running true if the tracker is running, false otherwise
    */
   private fun updateStartStopTrackerButton(running: Boolean) {
-    if (running) {
-      startStopTrackerButton?.setText(STOP_TRACKER_TEXT)
-    } else {
-      startStopTrackerButton?.setText(START_TRACKER_TEXT)
-    }
-
+    startStopTrackerButton?.text = if (running) STOP_TRACKER_TEXT else START_TRACKER_TEXT
     trackerRunning = running
   }
 
@@ -261,13 +256,17 @@ class QrCodeScannerSampleActivity : AppSystemActivity() {
 
   companion object {
     private const val TAG = "QrCodeScannerSampleActivity"
+
+    // Permission constants
     private const val PERMISSION_USE_SCENE = "com.oculus.permission.USE_SCENE"
     private const val REQUEST_CODE_PERMISSION_USE_SCENE = 1
 
+    // Panel constants
     private const val PANEL_WIDTH = 0.3f
     internal const val PANEL_HEIGHT = 0.5f
     private const val SMALL_SCALE = 0.2f
 
+    // Button text constants
     private const val STOP_TRACKER_TEXT = "Stop Tracker"
     private const val START_TRACKER_TEXT = "Start Tracker"
   }

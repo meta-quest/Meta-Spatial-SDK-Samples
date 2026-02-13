@@ -118,7 +118,7 @@ The documentation for Meta Spatial SDK can be found
 Find our official release notes
 [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
 
-## 0.9.2 - 2025-12-08
+## 0.9.2 Updates
 
 ### Added
 

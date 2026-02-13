@@ -15,12 +15,15 @@ import com.meta.spatial.compose.ComposeFeature
 import com.meta.spatial.compose.ComposeViewPanelRegistration
 import com.meta.spatial.core.Entity
 import com.meta.spatial.core.Pose
+import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector2
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
 import com.meta.spatial.isdk.IsdkGrabbable
 import com.meta.spatial.isdk.IsdkInputListenerSystem
+import com.meta.spatial.isdk.IsdkPanelResize
+import com.meta.spatial.isdk.ResizeMode
 import com.meta.spatial.physics.Physics
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.physics.PhysicsState
@@ -230,8 +233,19 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
     Entity.create(
         listOf(
             Panel(R.id.scroll_panel),
-            Transform(Pose(Vector3(x = -0.3f, y = 1f, z = 0.2f))),
+            Transform(
+                Pose(Vector3(x = -0.5f, y = 1f, z = 0.6f), Quaternion.fromEuler(0f, -45f, 0f))
+            ),
             Grabbable(),
+            IsdkPanelResize(resizeMode = ResizeMode.Relayout),
+        )
+    )
+    Entity.create(
+        listOf(
+            Panel(R.id.scroll_panel),
+            Transform(Pose(Vector3(x = 0.5f, y = 1f, z = 0.6f), Quaternion.fromEuler(0f, 45f, 0f))),
+            Grabbable(),
+            IsdkPanelResize(),
         )
     )
 

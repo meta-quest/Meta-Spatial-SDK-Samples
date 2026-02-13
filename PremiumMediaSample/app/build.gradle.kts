@@ -41,7 +41,10 @@ android {
     resources.excludes.add("LICENSE.MIT")
   }
 
-  lint { abortOnError = false }
+  lint {
+    abortOnError = false
+    checkReleaseBuilds = false
+  }
 
   buildTypes {
     release {
@@ -88,6 +91,9 @@ dependencies {
   implementation("androidx.media3:media3-exoplayer-dash:1.4.1")
   implementation("androidx.media3:media3-ui:1.4.1")
   implementation("androidx.media3:media3-effect:1.4.1")
+
+  // Extensions
+  implementation("com.meta.horizon.media:videoextensions:0.2.2")
 
   // Tween Engine
   implementation("com.dorkbox:TweenEngine:9.2")

@@ -16,6 +16,7 @@ import com.meta.spatial.core.Vector3
 import com.meta.spatial.mruk.MRUKEnvironmentRaycastHitResult
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKHit
+import com.meta.spatial.mruk.MRUKRoom
 import com.meta.spatial.mruk.SurfaceType
 import com.meta.spatial.samples.mruksample.common.getRightController
 import com.meta.spatial.toolkit.Mesh
@@ -34,16 +35,15 @@ enum class RaycastMode {
  * System responsible for updating raycast operations and managing arrow entities to visualize
  * raycast hit results in the MRUK environment.
  *
- * @param mrukFeature The MRUK feature instance for performing raycast operations
- * @param arrowEntities Mutable list of arrow entities used to visualize raycast hits
- * @param raycastMode The current raycast mode determining the type of raycast operation
+ * @property mrukFeature The MRUK feature instance for performing raycast operations
+ * @property arrowEntities Mutable list of arrow entities used to visualize raycast hits
+ * @property raycastMode The current raycast mode determining the type of raycast operation
  */
 class UpdateRaycastSystem(
     private val mrukFeature: MRUKFeature,
     private val arrowEntities: MutableList<Entity>,
     var raycastMode: RaycastMode = RaycastMode.ALL,
 ) : SystemBase() {
-
   override fun execute() {
     // Make all arrows invisible
     for (entity in arrowEntities) {
@@ -56,11 +56,11 @@ class UpdateRaycastSystem(
 
     if (rightHandPose != null) {
       val rightHandDirection = (rightHandPose.q * Vector3(0f, 0f, 1f)).normalize()
-      val maxDistance = Float.POSITIVE_INFINITY
 
       if (raycastMode == RaycastMode.DEPTH) {
         handleDepthRaycast(rightHandPose, rightHandDirection)
       } else if (currentRoom != null) {
+        val maxDistance = Float.POSITIVE_INFINITY
         val raycastHits =
             performRoomRaycast(
                 currentRoom,
@@ -98,7 +98,7 @@ class UpdateRaycastSystem(
   }
 
   private fun performRoomRaycast(
-      currentRoom: com.meta.spatial.mruk.MRUKRoom,
+      currentRoom: MRUKRoom,
       rightHandPose: Pose,
       rightHandDirection: Vector3,
       maxDistance: Float,

@@ -74,6 +74,12 @@
       android:required="true"
     />
     <service android:name=".service.IPCService" android:exported="false" />
+    <!--
+      Prevents activity recreation when configuration changes (e.g., detachable keyboard
+      attach/detach, screen rotation). This allows the app to handle these events gracefully
+      without restarting the activity.
+      See: https://developer.android.com/develop/ui/compose/quick-guides/content/manage-detachable-keyboards
+    -->
     <activity
       android:name=".immersive.ImmersiveActivity"
       android:configChanges="screenSize|screenLayout|orientation|keyboardHidden|keyboard|navigation|uiMode"

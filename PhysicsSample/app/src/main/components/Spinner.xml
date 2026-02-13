@@ -2,9 +2,33 @@
 <ComponentSchema
   packageName="com.meta.spatial.samples.physicssample"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.9.2/ComponentSchema.xsd"
+  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.10.0/ComponentSchema.xsd"
 >
-<Component name="Spinner" description="A Component that spins an object.">
+<Component name="Spinner">
+    <Description>
+Continuously rotates an entity around the Y-axis. Useful for display
+pedestals, collectibles, decorative elements, or loading indicators.
+
+Usage:
+  trophy.setComponent(Spinner(speed = 30f))  // 30 degrees per second
+
+System implementation:
+  class SpinnerSystem : SystemBase() {
+    private val query = Query.where { has(Spinner.id, Transform.id) }
+    override fun execute() {
+      val dt = systemManager.getDeltaTime()
+      for (entity in query.eval()) {
+        val spin = entity.getComponent&lt;Spinner&gt;()
+        val t = entity.getComponent&lt;Transform&gt;()
+        val rotation = Quaternion.fromAxisAngle(Vector3(0f, 1f, 0f), spin.speed * dt)
+        entity.setComponent(t.copy(pose = t.pose.rotate(rotation)))
+      }
+    }
+  }
+
+Attributes:
+  - speed: Rotation speed in degrees per second (default 50.0)
+    </Description>
     <FloatAttribute name="speed" defaultValue="50.0f" />
   </Component>
 </ComponentSchema>

@@ -25,7 +25,6 @@ import com.meta.spatial.ovrmetrics.OVRMetricsFeature
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
-import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.DpPerMeterDisplayOptions
 import com.meta.spatial.toolkit.GLXFInfo

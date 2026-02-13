@@ -32,7 +32,7 @@ import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKLabel
 import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.mruk.MRUKSpawnMode
-import com.meta.spatial.mruk.MRUKStartEnvrionmentRaycasterResult
+import com.meta.spatial.mruk.MRUKStartEnvironmentRaycasterResult
 import com.meta.spatial.mruk.MRUKWallTexCoordModeU
 import com.meta.spatial.mruk.MRUKWallTexCoordModeV
 import com.meta.spatial.physics.PhysicsFeature
@@ -158,7 +158,7 @@ class RaycastSampleActivity : AppSystemActivity() {
       loadScene(true)
 
       val result = mrukFeature.startEnvironmentRaycaster()
-      if (result == MRUKStartEnvrionmentRaycasterResult.SUCCESS) {
+      if (result == MRUKStartEnvironmentRaycasterResult.SUCCESS) {
         Log.i(TAG, "Environment raycaster started successfully")
       } else {
         Log.e(TAG, "Environment raycaster failed to start: $result")
@@ -246,7 +246,7 @@ class RaycastSampleActivity : AppSystemActivity() {
             val jsonFileSpinner =
                 requireNotNull(rootView?.findViewById<Spinner>(R.id.json_file_spinner))
             ArrayAdapter.createFromResource(
-                    rootView?.context!!,
+                    requireNotNull(rootView?.context),
                     R.array.json_rooms_array,
                     android.R.layout.simple_spinner_item,
                 )
@@ -396,7 +396,7 @@ class RaycastSampleActivity : AppSystemActivity() {
       loadScene(granted)
 
       val result = mrukFeature.startEnvironmentRaycaster()
-      if (result == MRUKStartEnvrionmentRaycasterResult.SUCCESS) {
+      if (result == MRUKStartEnvironmentRaycasterResult.SUCCESS) {
         Log.i(TAG, "Environment raycaster started successfully")
       } else {
         Log.e(TAG, "Environment raycaster failed to start: $result")

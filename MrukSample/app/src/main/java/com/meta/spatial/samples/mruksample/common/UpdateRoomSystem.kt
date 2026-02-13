@@ -19,8 +19,8 @@ import com.meta.spatial.mruk.MRUKRoom
  * When changes are detected, it updates the provided TextView with the current room count and the
  * UUID of the active room.
  *
- * @param mrukFeature The MRUK feature instance to monitor for room changes
- * @param getRoomTextView Callback function that provides the TextView to update with room
+ * @property mrukFeature The MRUK feature instance to monitor for room changes
+ * @property getRoomTextView Callback function that provides the TextView to update with room
  *   information
  */
 class UpdateRoomSystem(
@@ -32,13 +32,13 @@ class UpdateRoomSystem(
   private var prevRoomCount = -1
 
   override fun execute() {
-    val roomsCount = mrukFeature.rooms.size
+    val roomCount = mrukFeature.rooms.size
     val currentRoom = mrukFeature.getCurrentRoom()
-    if (roomsCount != prevRoomCount || currentRoom != prevRoom) {
+    if (roomCount != prevRoomCount || currentRoom != prevRoom) {
       prevRoom = currentRoom
-      prevRoomCount = roomsCount
+      prevRoomCount = roomCount
       getRoomTextView()?.text =
-          """Number of rooms: $roomsCount
+          """Number of rooms: $roomCount
 Current room: ${currentRoom?.anchor?.uuid ?: "None"}"""
     }
   }

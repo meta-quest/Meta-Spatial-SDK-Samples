@@ -2,9 +2,31 @@
 <ComponentSchema
   packageName="com.meta.spatial.samples.animationssample"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.9.2/ComponentSchema.xsd"
+  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.10.0/ComponentSchema.xsd"
 >
 <Component name="FollowerComponent">
+    <Description>
+Smoothly follows a target entity using exponential decay interpolation.
+Creates natural, eased movement for companions, cameras, or UI elements.
+
+Usage:
+  companion.setComponent(FollowerComponent(
+    targetName = "player",
+    followDistance = 1.5f,
+    followOffset = Vector3(0f, 1f, 0f)
+  ))
+
+System pattern:
+  Query.where { has(FollowerComponent.id, Transform.id) }
+    .filter { by(FollowerComponent.enabledData).isEqualTo(true) }
+
+Attributes:
+  - expDecay: Smoothing factor (higher = faster catch-up, default 8)
+  - targetName: Name of target entity (matched via Named component)
+  - enabled: Toggle following on/off
+  - followOffset: Offset from target position
+  - followDistance: Minimum distance to maintain from target
+    </Description>
     <FloatAttribute name="expDecay" defaultValue="8f" />
     <StringAttribute name="targetName" defaultValue="" />
     <BooleanAttribute name="enabled" defaultValue="true" />
@@ -12,10 +34,47 @@
     <FloatAttribute name="followDistance" defaultValue="0.5f" />
   </Component>
   <Component name="FollowerTarget">
+    <Description>
+Marks an entity as a valid follow target. Paired with FollowerComponent
+to create leader-follower relationships.
+
+Usage:
+  player.setComponent(FollowerTarget(targetName = "player"))
+
+Finding targets:
+  Query.where { has(FollowerTarget.id, Named.id) }
+    .filter { by(Named.nameData).isEqualTo(targetName) }
+    .eval().firstOrNull()
+
+Attributes:
+  - targetName: Unique identifier for this target (must match FollowerComponent.targetName)
+  - isBuiltInFollower: If true, uses built-in SDK follower behavior
+    </Description>
     <StringAttribute name="targetName" defaultValue="followerTarget" />
     <BooleanAttribute name="isBuiltInFollower" defaultValue="false" />
   </Component>
   <Component name="DroneComponent">
+    <Description>
+Flying drone behavior with smooth rotation and realistic tilt. Follows
+a target while banking into turns like a quadcopter.
+
+Usage:
+  drone.setComponent(DroneComponent(
+    targetName = "player",
+    rotationSpeed = 0.1f,
+    tiltFactor = 0.3f
+  ))
+
+Animation integration:
+  Combine with Animated component and blend tree for propeller spin,
+  banking animations based on movement direction.
+
+Attributes:
+  - targetName: Name of entity to follow
+  - enabled: Toggle drone behavior
+  - rotationSpeed: How fast the drone turns (0.0-1.0)
+  - tiltFactor: How much the drone tilts when turning (0 = none, 1 = aggressive)
+    </Description>
     <StringAttribute name="targetName" defaultValue="" />
     <BooleanAttribute name="enabled" defaultValue="true" />
     <FloatAttribute name="rotationSpeed" defaultValue=".05f" />

@@ -79,6 +79,12 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <!--
+      Prevents activity recreation when configuration changes (e.g., detachable keyboard
+      attach/detach, screen rotation). This allows the app to handle these events gracefully
+      without restarting the activity.
+      See: https://developer.android.com/develop/ui/compose/quick-guides/content/manage-detachable-keyboards
+    -->
     <activity
       android:name="com.meta.spatial.samples.mruksample.anchor_mesh.MrukAnchorMeshSampleActivity"
       android:launchMode="singleTask"
@@ -92,6 +98,12 @@
         <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </activity>
+    <!--
+      Prevents activity recreation when configuration changes (e.g., detachable keyboard
+      attach/detach, screen rotation). This allows the app to handle these events gracefully
+      without restarting the activity.
+      See: https://developer.android.com/develop/ui/compose/quick-guides/content/manage-detachable-keyboards
+    -->
     <activity
       android:name="com.meta.spatial.samples.mruksample.raycast.RaycastSampleActivity"
       android:launchMode="singleTask"
@@ -105,6 +117,12 @@
         <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </activity>
+    <!--
+      Prevents activity recreation when configuration changes (e.g., detachable keyboard
+      attach/detach, screen rotation). This allows the app to handle these events gracefully
+      without restarting the activity.
+      See: https://developer.android.com/develop/ui/compose/quick-guides/content/manage-detachable-keyboards
+    -->
     <activity
       android:name="com.meta.spatial.samples.mruksample.keyboard_tracker.KeyboardTrackerSampleActivity"
       android:launchMode="singleTask"
@@ -118,6 +136,12 @@
         <category android:name="android.intent.category.DEFAULT" />
       </intent-filter>
     </activity>
+    <!--
+      Prevents activity recreation when configuration changes (e.g., detachable keyboard
+      attach/detach, screen rotation). This allows the app to handle these events gracefully
+      without restarting the activity.
+      See: https://developer.android.com/develop/ui/compose/quick-guides/content/manage-detachable-keyboards
+    -->
     <activity
       android:name="com.meta.spatial.samples.mruksample.qr_code_scanner.QrCodeScannerSampleActivity"
       android:launchMode="singleTask"

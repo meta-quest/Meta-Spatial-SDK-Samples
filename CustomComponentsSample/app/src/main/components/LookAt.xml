@@ -2,13 +2,30 @@
 <ComponentSchema
   packageName="com.meta.spatial.samples.customcomponentssample"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.9.2/ComponentSchema.xsd"
+  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.10.0/ComponentSchema.xsd"
 >
 <Enum name="LookAtAxis">
     <EnumValue value="ALL" />
     <EnumValue value="Y" />
   </Enum>
   <Component name="LookAt">
+    <Description>
+Makes an entity continuously rotate to face a target entity. Useful for
+billboards, NPCs, turrets, or any object that should track another.
+
+Usage:
+  robot.setComponent(LookAt(target = player, speed = 0.2f, axis = LookAtAxis.Y))
+
+System query pattern:
+  Query.where { has(LookAt.id, Transform.id) }
+
+Attributes:
+  - target: The entity to look at (required)
+  - lookAtHead: If true, looks at head position instead of entity origin
+  - axis: LookAtAxis.ALL (full 3D) or LookAtAxis.Y (horizontal only, for grounded objects)
+  - speed: Interpolation speed (0.0-1.0), higher = faster rotation
+  - offset: Position offset from target to look at
+    </Description>
     <EntityAttribute name="target" />
     <BooleanAttribute name="lookAtHead" defaultValue="false" />
     <EnumAttribute name="axis" defaultValue="LookAtAxis.ALL" />

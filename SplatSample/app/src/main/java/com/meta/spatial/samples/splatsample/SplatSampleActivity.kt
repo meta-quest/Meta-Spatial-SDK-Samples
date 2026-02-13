@@ -57,6 +57,7 @@ import java.io.File
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @OptIn(SpatialSDKExperimentalSplatAPI::class)
@@ -74,6 +75,18 @@ class SplatSampleActivity : AppSystemActivity() {
 
   private val splatList: List<String> = listOf("apk://Menlo Park.spz", "apk://Los Angeles.spz")
   private var selectedIndex = mutableStateOf(0)
+  /**
+   * Controls whether the control panel UI is interactive.
+   *
+   * When loading a new Splat, we disable panel interaction to prevent users from triggering
+   * multiple concurrent load operations, which could cause race conditions or confusing visual
+   * states. The panel is re-enabled once the Splat finishes loading.
+   *
+   * This state is passed to the ControlPanel composable, which uses it to:
+   * - Disable click handlers on the preview images
+   * - Apply a visual "greyed out" effect to indicate the disabled state
+   */
+  private var isPanelInteractive = mutableStateOf(true)
   private val defaultSplatPath = splatList[0].toUri()
   private val delayVisibilityMS = 2000L
   // Rotation applied to the Splat to align it with the scene coordinate system
@@ -113,8 +126,7 @@ class SplatSampleActivity : AppSystemActivity() {
       environmentEntity.setComponent(environmentMesh)
       floorEntity = composition.getNodeByName("Floor").entity
       initializeSplat(defaultSplatPath)
-      // Make the Splat visible in the scene
-      setSplatVisibility(true)
+      setSplatVisibility(false)
     }
   }
 
@@ -167,6 +179,9 @@ class SplatSampleActivity : AppSystemActivity() {
    * - Local files: "file:///path/to/splat.spz"
    */
   private fun initializeSplat(splatPath: Uri) {
+    // Disable panel interaction while Splat is loading to prevent concurrent load requests
+    // The panel will be re-enabled in onSplatLoaded() once the Splat finishes loading
+    setPanelInteractive(false)
     splatEntity =
         Entity.create(
             listOf(
@@ -188,8 +203,28 @@ class SplatSampleActivity : AppSystemActivity() {
   }
 
   private fun onSplatLoaded() {
-    recenterScene()
-    setSplatVisibility(true)
+    // Smooth out the transition from loading to showing the splat
+    // This delay ensures the Splat is fully ready before revealing it to the user
+    activityScope.launch {
+      delay(500)
+      recenterScene()
+      setSplatVisibility(true)
+      // Re-enable panel interaction now that the Splat has finished loading
+      // Users can now select a different Splat without causing race conditions
+      setPanelInteractive(true)
+    }
+  }
+
+  /**
+   * Enables or disables interaction with the control panel.
+   *
+   * This is used to prevent users from selecting a new splat while the current one is still
+   * loading. When disabled, the panel images are not clickable.
+   *
+   * @param isInteractive true to enable panel interaction, false to disable it
+   */
+  private fun setPanelInteractive(isInteractive: Boolean) {
+    isPanelInteractive.value = isInteractive
   }
 
   /**
@@ -210,6 +245,10 @@ class SplatSampleActivity : AppSystemActivity() {
         // Optimization: Already showing this Splat, no need to reload
         // This prevents unnecessary file reloading and memory operations
       } else {
+        // Disable panel interaction during loading to prevent concurrent load requests
+        // This provides a better user experience by preventing rapid-fire selections
+        // The panel will be re-enabled in onSplatLoaded() once loading completes
+        setPanelInteractive(false)
         // Replace the existing Splat component with a new one pointing to a different file
         // setComponent() automatically unloads the old Splat from memory and loads the new one
         splatEntity.setComponent(Splat(newSplatPath.toUri()))
@@ -345,7 +384,10 @@ class SplatSampleActivity : AppSystemActivity() {
         ) {
           // Pass the loadSplat function to the UI panel
           // This allows users to select different Splat assets from the UI
-          ControlPanel(splatList, selectedIndex, ::loadSplat)
+          // Pass isPanelInteractive state to control UI interaction during Splat loading
+          // When false, the panel images become non-clickable and visually greyed out
+          // This prevents users from selecting a new Splat while one is still loading
+          ControlPanel(splatList, selectedIndex, isPanelInteractive, ::loadSplat)
         },
     )
   }

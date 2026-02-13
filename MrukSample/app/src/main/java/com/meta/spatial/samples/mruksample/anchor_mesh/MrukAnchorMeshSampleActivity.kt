@@ -66,8 +66,17 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.UUID
 
+/**
+ * Activity that demonstrates anchor mesh spawning functionality using MRUK (Mixed Reality
+ * Understanding Kit). This sample shows how to use AnchorMeshSpawner to spawn glb/gltf meshes in
+ * place of scene anchors and AnchorProceduralMesh to generate procedural meshes for floor, ceiling,
+ * and walls. It also provides a UI panel for loading scenes, showing global mesh, and other MRUK
+ * features.
+ */
 class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener {
+
   private lateinit var mrukFeature: MRUKFeature
+  private lateinit var physicsFeature: PhysicsFeature
   private lateinit var meshSpawner: AnchorMeshSpawner
   private lateinit var procMeshSpawner: AnchorProceduralMesh
   private var globalMeshSpawner: AnchorProceduralMesh? = null
@@ -87,7 +96,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
     // MRUKFeature the PhysicsFeature gets enabled as well. This is needed for having the
     // physics colliders on the AnchorProceduralMesh working.
     mrukFeature = MRUKFeature(this, systemManager)
-    return listOf(VRFeature(this), PhysicsFeature(spatial), mrukFeature)
+    physicsFeature = PhysicsFeature(spatial)
+    return listOf(VRFeature(this), physicsFeature, mrukFeature)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -196,13 +206,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
   // anchors.
   override fun onRoomAdded(room: MRUKRoom) {
     Log.d(TAG, "Activity: Room added: ${room.anchor}")
-    checkboxRoomMesh?.let {
-      if (room.roomMesh != null) {
-        it.visibility = View.VISIBLE
-      } else {
-        it.visibility = View.GONE
-      }
-    }
+    checkboxRoomMesh?.visibility = if (room.roomMesh != null) View.VISIBLE else View.GONE
   }
 
   override fun onRoomRemoved(room: MRUKRoom) {
@@ -317,7 +321,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
     recenterElementInView(getHmd(systemManager), Entity(panelId))
   }
 
-  fun toggleUiPanelVisibility() {
+  private fun toggleUiPanelVisibility() {
     setUIPanelVisibility(!showUiPanel)
   }
 
@@ -346,58 +350,54 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
 
   private fun toggleShowColliders() {
     showColliders = !showColliders
-    spatial.enablePhysicsDebugLines(showColliders)
+    physicsFeature.enablePhysicsDebugLines(showColliders)
   }
 
   private fun writeStringToFile(context: Context, fileName: String, content: String) {
-    // Check if external storage is writable
-    if (isExternalStorageWritable()) {
-      // Get the external storage directory
-      val externalStorageDir = context.getExternalFilesDir(null)
-      if (externalStorageDir != null) {
-        // Create a new file in the external storage directory
-        val file = File(externalStorageDir, fileName)
-        try {
-          FileOutputStream(file).use { fos ->
-            fos.write(content.toByteArray())
-            Log.d(TAG, "File saved at: ${file.canonicalPath}")
-          }
-        } catch (e: IOException) {
-          Log.e(TAG, "Error writing to file", e)
-        }
-      } else {
-        Log.e(TAG, "External storage directory is null")
-      }
-    } else {
+    if (!isExternalStorageWritable()) {
       Log.e(TAG, "External storage is not writable")
+      return
+    }
+
+    val externalStorageDir = context.getExternalFilesDir(null)
+    if (externalStorageDir == null) {
+      Log.e(TAG, "External storage directory is null")
+      return
+    }
+
+    val file = File(externalStorageDir, fileName)
+    try {
+      FileOutputStream(file).use { fos ->
+        fos.write(content.toByteArray())
+        Log.d(TAG, "File saved at: ${file.canonicalPath}")
+      }
+    } catch (e: IOException) {
+      Log.e(TAG, "Error writing to file", e)
     }
   }
 
   // Helper method to check if external storage is writable
-  private fun isExternalStorageWritable(): Boolean {
-    return Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
-  }
+  private fun isExternalStorageWritable(): Boolean =
+      Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
 
   private fun showRoomMesh() {
     hideRoomMesh()
 
     for (room in mrukFeature.rooms) {
-      room.entity?.let { roomEntity ->
-        if (room.roomMesh != null) {
-          val roomMesh = requireNotNull(room.roomMesh)
-          for (roomMeshFace in roomMesh.faces) {
-            val roomMeshEntity =
-                Entity.create(
-                    listOf(
-                        Mesh(Uri.parse(ROOM_MESH_ID)),
-                        RoomMeshFace(room.anchor.uuid, roomMeshFace.uuid, roomMeshFace.label),
-                        Transform(),
-                        TransformParent(roomEntity),
-                    )
-                )
-            roomMeshEntities.add(roomMeshEntity)
-          }
-        }
+      val roomEntity = room.entity ?: continue
+      val roomMesh = room.roomMesh ?: continue
+
+      for (roomMeshFace in roomMesh.faces) {
+        val roomMeshEntity =
+            Entity.create(
+                listOf(
+                    Mesh(Uri.parse(ROOM_MESH_ID)),
+                    RoomMeshFace(room.anchor.uuid, roomMeshFace.uuid, roomMeshFace.label),
+                    Transform(),
+                    TransformParent(roomEntity),
+                ),
+            )
+        roomMeshEntities.add(roomMeshEntity)
       }
     }
   }
@@ -421,23 +421,18 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
             enableTransparent = true
           }
           panel {
-            requireNotNull(rootView)
+            val root = requireNotNull(rootView)
 
-            currentRoomTextView = rootView?.findViewById<TextView>(R.id.mruk_current_room)
+            currentRoomTextView = root.findViewById(R.id.mruk_current_room)
 
-            checkboxRoomMesh = rootView?.findViewById<CheckBox>(R.id.checkbox_room_mesh)
+            checkboxRoomMesh = root.findViewById(R.id.checkbox_room_mesh)
             checkboxRoomMesh?.setOnCheckedChangeListener { _, isChecked ->
-              if (isChecked) {
-                showRoomMesh()
-              } else {
-                hideRoomMesh()
-              }
+              if (isChecked) showRoomMesh() else hideRoomMesh()
             }
 
-            val sceneModelSpinner =
-                requireNotNull(rootView?.findViewById<Spinner>(R.id.scene_model_spinner))
+            val sceneModelSpinner: Spinner = root.findViewById(R.id.scene_model_spinner)
             ArrayAdapter.createFromResource(
-                    rootView?.context!!,
+                    root.context,
                     R.array.scene_models_array,
                     android.R.layout.simple_spinner_item,
                 )
@@ -446,10 +441,9 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
                   sceneModelSpinner.adapter = adapter
                 }
 
-            val jsonFileSpinner =
-                requireNotNull(rootView?.findViewById<Spinner>(R.id.json_file_spinner))
+            val jsonFileSpinner: Spinner = root.findViewById(R.id.json_file_spinner)
             ArrayAdapter.createFromResource(
-                    rootView?.context!!,
+                    root.context,
                     R.array.json_rooms_array,
                     android.R.layout.simple_spinner_item,
                 )
@@ -458,12 +452,12 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
                   jsonFileSpinner.adapter = adapter
                 }
 
-            val loadSceneFromJSONButton = rootView?.findViewById<Button>(R.id.load_scene_from_json)
-            loadSceneFromJSONButton?.setOnClickListener {
+            val loadSceneFromJSONButton: Button = root.findViewById(R.id.load_scene_from_json)
+            loadSceneFromJSONButton.setOnClickListener {
               // Get selection from spinner
               jsonFileSpinner.selectedItem?.let { item ->
-                val file = applicationContext.assets.open("${item}.json")
-                val text = file.bufferedReader().use { reader -> reader.readText() }
+                val file = applicationContext.assets.open("$item.json")
+                val text = file.bufferedReader().use { it.readText() }
                 mrukFeature.loadSceneFromJsonString(
                     text,
                     true,
@@ -472,30 +466,29 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
               }
             }
 
-            val clearSceneButton = rootView?.findViewById<Button>(R.id.clear_scene)
-            clearSceneButton?.setOnClickListener { mrukFeature.clearRooms() }
+            val clearSceneButton: Button = root.findViewById(R.id.clear_scene)
+            clearSceneButton.setOnClickListener { mrukFeature.clearRooms() }
 
-            val loadSceneFromDeviceButton =
-                rootView?.findViewById<Button>(R.id.load_scene_from_device)
-            loadSceneFromDeviceButton?.setOnClickListener {
+            val loadSceneFromDeviceButton: Button = root.findViewById(R.id.load_scene_from_device)
+            loadSceneFromDeviceButton.setOnClickListener {
               mrukFeature.loadSceneFromDevice(true, true, getSelectedSceneModel(sceneModelSpinner))
             }
 
-            val showGlobalMeshButton = rootView?.findViewById<Button>(R.id.show_global_mesh)
-            showGlobalMeshButton?.setOnClickListener { toggleGlobalMesh() }
+            val showGlobalMeshButton: Button = root.findViewById(R.id.show_global_mesh)
+            showGlobalMeshButton.setOnClickListener { toggleGlobalMesh() }
 
-            val showCollidersButton = rootView?.findViewById<Button>(R.id.show_colliders)
-            showCollidersButton?.setOnClickListener { toggleShowColliders() }
+            val showCollidersButton: Button = root.findViewById(R.id.show_colliders)
+            showCollidersButton.setOnClickListener { toggleShowColliders() }
 
-            val launchSceneCaptureButton = rootView?.findViewById<Button>(R.id.launch_scene_capture)
-            launchSceneCaptureButton?.setOnClickListener {
+            val launchSceneCaptureButton: Button = root.findViewById(R.id.launch_scene_capture)
+            launchSceneCaptureButton.setOnClickListener {
               mrukFeature.requestSceneCapture().whenComplete { _, _ ->
                 mrukFeature.loadSceneFromDevice()
               }
             }
 
-            val saveSceneToJsonButton = rootView?.findViewById<Button>(R.id.save_to_json)
-            saveSceneToJsonButton?.setOnClickListener {
+            val saveSceneToJsonButton: Button = root.findViewById(R.id.save_to_json)
+            saveSceneToJsonButton.setOnClickListener {
               if (
                   checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
                       PackageManager.PERMISSION_GRANTED
@@ -510,8 +503,8 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
               }
             }
 
-            val closeSampleButton = rootView?.findViewById<Button>(R.id.close_sample)
-            closeSampleButton?.setOnClickListener {
+            val closeSampleButton: Button = root.findViewById(R.id.close_sample)
+            closeSampleButton.setOnClickListener {
               returnTo2DActivity(
                   this@MrukAnchorMeshSampleActivity,
                   applicationContext,
@@ -524,7 +517,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
   }
 
   private fun registerRoomMeshCreator(meshManager: MeshManager) {
-    meshManager.meshCreators.put(ROOM_MESH_ID) { entity ->
+    meshManager.meshCreators[ROOM_MESH_ID] = { entity ->
       // Access the room face mesh component
       val roomFaceComponent = entity.getComponent<RoomMeshFace>()
       // Find the room mesh
@@ -553,44 +546,40 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
             MRUKLabel.INNER_WALL_FACE -> Color.valueOf(0.4f, 0.4f, 0.6f, 1.0f) // Dark Blue
             MRUKLabel.WINDOW_FRAME -> Color.valueOf(0.7f, 0.9f, 1.0f, 1.0f) // Light Blue
             MRUKLabel.DOOR_FRAME -> Color.valueOf(0.6f, 0.4f, 0.2f, 1.0f) // Brown
-            else -> Color.valueOf(1.0f, 1.0f, 1.0f)
+            else -> Color.valueOf(1.0f, 1.0f, 1.0f, 1.0f)
           }
-      val colors: IntArray = IntArray(positions.size / 3) { color.toArgb() }
+      val colors = IntArray(positions.size / 3) { color.toArgb() }
       // Create the UV buffer for the mesh
-      val uvs: FloatArray = FloatArray(positions.size / 3 * 2)
+      val uvs = FloatArray(positions.size / 3 * 2)
 
       // Create the mesh
-      val sceneMesh =
-          SceneMesh.meshWithMaterials(
-              positions,
-              normals,
-              uvs,
-              colors,
-              indices,
-              intArrayOf(0, indices.size),
-              arrayOf(SceneMaterial(SceneTexture(Color.valueOf(1.0f, 1.0f, 1.0f, 1.0f)))),
-              false,
-          )
-      sceneMesh
+      SceneMesh.meshWithMaterials(
+          positions,
+          normals,
+          uvs,
+          colors,
+          indices,
+          intArrayOf(0, indices.size),
+          arrayOf(SceneMaterial(SceneTexture(Color.valueOf(1.0f, 1.0f, 1.0f, 1.0f)))),
+          false,
+      )
     }
   }
 
   private fun getSelectedSceneModel(sceneModelSpinner: Spinner): SceneModel {
-    return sceneModelSpinner.selectedItem?.let { item ->
-      when (item as? String) {
-        "Scene V1 (Basic Scene)" -> SceneModel.V1
-        "Scene V2 (High-Fidelity Scene)" -> SceneModel.V2
-        "Scene V2 with Fallback to Scene V1" -> SceneModel.V2_FALLBACK_V1
-        else -> SceneModel.V1
-      }
-    } ?: SceneModel.V1 // Provide a default value if null
+    return when (sceneModelSpinner.selectedItem as? String) {
+      "Scene V1 (Basic Scene)" -> SceneModel.V1
+      "Scene V2 (High-Fidelity Scene)" -> SceneModel.V2
+      "Scene V2 with Fallback to Scene V1" -> SceneModel.V2_FALLBACK_V1
+      else -> SceneModel.V1
+    }
   }
 
   companion object {
-    const val TAG: String = "MrukAnchorMeshSample"
-    const val PERMISSION_USE_SCENE: String = "com.oculus.permission.USE_SCENE"
-    const val REQUEST_CODE_PERMISSION_USE_SCENE: Int = 1
-    const val REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 2
-    const val ROOM_MESH_ID: String = "mesh://roommesh"
+    private const val TAG = "MrukAnchorMeshSample"
+    private const val PERMISSION_USE_SCENE = "com.oculus.permission.USE_SCENE"
+    private const val REQUEST_CODE_PERMISSION_USE_SCENE = 1
+    private const val REQUEST_CODE_PERMISSION_WRITE_EXTERNAL_STORAGE = 2
+    private const val ROOM_MESH_ID = "mesh://roommesh"
   }
 }

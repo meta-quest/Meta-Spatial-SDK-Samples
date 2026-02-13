@@ -17,8 +17,10 @@ import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.SpatialSDKExperimentalAPI
 import com.meta.spatial.core.SpatialSDKInternalTestingAPI
 import com.meta.spatial.core.Vector3
+import com.meta.spatial.runtime.BodyTrackingFidelity
 import com.meta.spatial.runtime.ControllerPose
 import com.meta.spatial.runtime.JointPose
+import com.meta.spatial.runtime.JointSet
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SkeletonJoint
 import com.meta.spatial.toolkit.AppSystemActivity
@@ -38,6 +40,10 @@ class BodyTrackingSampleActivity : AppSystemActivity() {
   private var skeletonChangedCount = -1
   private val jointPoses: MutableList<ControllerPose> = mutableListOf()
   private val skeletonPoses: MutableList<SkeletonJoint> = mutableListOf()
+
+  override fun registerRequiredOpenXRExtensions(): List<String> {
+    return listOf("XR_META_body_tracking_full_body", "XR_META_body_tracking_fidelity")
+  }
 
   override fun registerFeatures(): List<SpatialFeature> {
     return listOf(VRFeature(this))
@@ -71,6 +77,9 @@ class BodyTrackingSampleActivity : AppSystemActivity() {
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
         )
     )
+
+    scene.setBodyTrackingJointSet(JointSet.FULL_BODY)
+    scene.setBodyTrackingFidelity(BodyTrackingFidelity.HIGH)
   }
 
   @OptIn(SpatialSDKExperimentalAPI::class)

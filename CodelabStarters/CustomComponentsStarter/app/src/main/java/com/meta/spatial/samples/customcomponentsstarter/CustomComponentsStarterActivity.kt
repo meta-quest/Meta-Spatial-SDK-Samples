@@ -23,7 +23,6 @@ import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.NetworkedAssetLoader
 import com.meta.spatial.runtime.ReferenceSpace
 import com.meta.spatial.runtime.SceneMaterial
-import com.meta.spatial.runtime.panel.style
 import com.meta.spatial.toolkit.AppSystemActivity
 import com.meta.spatial.toolkit.GLXFInfo
 import com.meta.spatial.toolkit.Material

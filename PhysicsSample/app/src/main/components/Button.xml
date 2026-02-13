@@ -2,12 +2,32 @@
 <ComponentSchema
   packageName="com.meta.spatial.samples.physicssample"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.9.2/ComponentSchema.xsd"
+  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.10.0/ComponentSchema.xsd"
 >
-<Component
-    name="Button"
-    description="A Component that makes an object act like a button."
-  >
+<Component name="Button">
+    <Description>
+Physical push button that responds to physics collisions. Moves down
+when pressed and triggers an event. Used for interactive controls,
+puzzles, or any pressable surface.
+
+Usage:
+  buttonEntity.setComponent(Button(eventName = "door_open"))
+
+Detecting press in a system:
+  Query.where { changed(Button.id) and has(Button.id) }
+    .eval().filter { it.getComponent&lt;Button&gt;().isDown }
+    .forEach { handleButtonPress(it.getComponent&lt;Button&gt;().eventName) }
+
+Physics setup required:
+  - Button must have a Physics collider
+  - Weight object must contact the button to press it
+
+Attributes:
+  - eventName: Event identifier sent when pressed (default "trigger")
+  - isDown: Current pressed state (read by systems, set by ButtonSystem)
+  - downOffset: How far the button moves when pressed (default 12mm down)
+  - startPosition: Initial position, used to reset button
+    </Description>
     <StringAttribute name="eventName" defaultValue="trigger" />
     <BooleanAttribute name="isDown" defaultValue="false" />
     <Vector3Attribute name="downOffset" defaultValue="0.0f, -0.012f, 0.0f" />

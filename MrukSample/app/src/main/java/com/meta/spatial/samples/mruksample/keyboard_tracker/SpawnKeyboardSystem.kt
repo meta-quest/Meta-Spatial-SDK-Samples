@@ -11,7 +11,6 @@ import android.net.Uri
 import android.util.Log
 import com.meta.spatial.core.Query
 import com.meta.spatial.core.SystemBase
-import com.meta.spatial.core.Vector4
 import com.meta.spatial.mruk.MRUKFeature
 import com.meta.spatial.mruk.MRUKVolume
 import com.meta.spatial.mruk.TrackedKeyboard
@@ -21,7 +20,6 @@ import com.meta.spatial.runtime.SceneMaterialDataType
 import com.meta.spatial.runtime.SceneMesh
 import com.meta.spatial.toolkit.Mesh
 import com.meta.spatial.toolkit.MeshCreationSystem
-import com.meta.spatial.toolkit.Transform
 
 class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
 
@@ -31,7 +29,7 @@ class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
   }
 
   private var isInit = false
-  private val trackableMeshId: String = "mesh://trackable"
+  private val trackableMeshId = "mesh://trackable"
   private lateinit var ptCutoutMaterial: SceneMaterial
 
   override fun execute() {
@@ -67,11 +65,9 @@ class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
     val meshManager = systemManager.findSystem<MeshCreationSystem>().meshManager
     meshManager.meshCreators[trackableMeshId] = { entity ->
       Log.i(LOG_TAG, "Create mesh in mesh creation system")
-      val transform = entity.getComponent<Transform>().transform
       val volume = entity.getComponent<MRUKVolume>()
-      val keyboardScale = KEYBOARD_SCALE
-      val volumeMin = volume.min * keyboardScale
-      val volumeMax = volume.max * keyboardScale
+      val volumeMin = volume.min * KEYBOARD_SCALE
+      val volumeMax = volume.max * KEYBOARD_SCALE
       SceneMesh.box(
           volumeMin.x,
           volumeMin.y,

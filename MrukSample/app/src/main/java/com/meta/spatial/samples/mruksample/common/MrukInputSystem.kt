@@ -21,7 +21,7 @@ import com.meta.spatial.toolkit.Controller
  * button is pressed, it triggers the provided callback function. Button releases are logged for
  * debugging purposes.
  *
- * @param onMenuButtonPressed Callback function that is invoked when the menu button is pressed
+ * @property onMenuButtonPressed Callback function that is invoked when the menu button is pressed
  */
 class MrukInputSystem(private val onMenuButtonPressed: () -> Unit) : SystemBase() {
 

@@ -55,14 +55,16 @@ class MixedRealitySampleActivity : AppSystemActivity() {
   private var gotAllAnchors = false
   private var debug = false
   private lateinit var mrukFeature: MRUKFeature
+  private lateinit var physicsFeature: PhysicsFeature
   private lateinit var sceneEventListener: MRUKSceneEventListener
   private lateinit var procMeshSpawner: AnchorProceduralMesh
 
   override fun registerFeatures(): List<SpatialFeature> {
     mrukFeature = MRUKFeature(this, systemManager)
+    physicsFeature = PhysicsFeature(spatial, worldBounds = PhysicsWorldBounds(minY = -100.0f))
     val features =
         mutableListOf(
-            PhysicsFeature(spatial, worldBounds = PhysicsWorldBounds(minY = -100.0f)),
+            physicsFeature,
             VRFeature(this),
             ComposeFeature(),
             mrukFeature,
@@ -189,7 +191,7 @@ class MixedRealitySampleActivity : AppSystemActivity() {
                       },
                       onToggleDebugClick = {
                         debug = !debug
-                        spatial.enablePhysicsDebugLines(debug)
+                        physicsFeature.enablePhysicsDebugLines(debug)
                       },
                   )
                 }

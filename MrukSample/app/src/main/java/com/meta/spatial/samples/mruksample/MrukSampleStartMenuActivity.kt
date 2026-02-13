@@ -40,7 +40,6 @@ class MrukSampleStartMenuActivity : ComponentActivity() {
           addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
     startActivity(immersiveIntent)
-
     finish()
   }
 }
