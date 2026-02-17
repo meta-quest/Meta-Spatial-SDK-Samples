@@ -152,7 +152,9 @@ class AnimationsSampleActivity : AppSystemActivity() {
                           PanelQuadCylinderAnimation(
                               startTime = DataModel.getLocalDataModelTime(),
                               animationType = PanelQuadCylinderAnimationType.QUAD_TO_CYLINDER,
-                              targetRadius = Random.nextFloat() * 2f + 0.5f,
+                              // Random radius in [0.67, 2.67]. Angular extent = width / radius,
+                              // so with panel width = 2.048 this gives ~44° to ~175°
+                              targetRadius = Random.nextFloat() * 2f + 0.67f,
                               durationInMs = animationDurationMs,
                           )
                       )
