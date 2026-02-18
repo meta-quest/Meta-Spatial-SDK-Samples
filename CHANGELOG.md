@@ -6,6 +6,12 @@ Check out our official
 This format is roughly based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 0.10.1 - 2026-02-18
+
+### Fixed
+
+- Fix crash related to missing soloader symbol.
+
 ## 0.10.0 - 2026-02-12
 
 ### Added

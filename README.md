@@ -118,6 +118,12 @@ The documentation for Meta Spatial SDK can be found
 Find our official release notes
 [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
 
+## 0.10.1 Updates (hotfix for 0.10.0)
+
+### Fixed
+
+- Fix crash related to missing soloader symbol.
+
 ## 0.10.0 Updates
 
 ### Added
