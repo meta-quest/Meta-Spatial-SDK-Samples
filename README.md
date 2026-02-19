@@ -84,6 +84,7 @@ We have 13 sample apps, demonstrating various features of Meta Spatial SDK:
   [Getting Started](https://developers.meta.com/horizon/documentation/spatial-sdk/spatial-sdk-helloworld)
   with Meta Spatial SDK.
 - [BodyTrackingSample](/BodyTrackingSample) shows how to access body tracking and utilize skeleton joint data.
+- [UISetSample](/UISetSample) shows how to leverage the Meta Horizon OS UI Set to create high-quality, consistent user interfaces.
 
 We also have a starter app
 [CustomComponentsStarter](/CodelabStarters/CustomComponentsStarter), which only
@@ -105,7 +106,6 @@ repository.
   - [Download from the store](https://www.meta.com/experiences/media-view/8510454682344317/)
 - [Geo Voyage](/Showcases/geo_voyage)
   - [Download from the store](https://www.meta.com/experiences/geo-voyage/8230251250434003/)
-- [Meta Horizon UI Set](/Showcases/UISetSample)
 - [Spatial Scanner](/Showcases/meta_spatial_scanner)
 
 ## Documentation
