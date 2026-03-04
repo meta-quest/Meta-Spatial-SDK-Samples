@@ -63,7 +63,7 @@
     />
     <uses-native-library
       android:name="libossdk.oculus.so"
-      android:required="false"
+      android:required="true"
     />
     <activity
       android:name="com.meta.spatial.samples.mruksample.MrukSampleStartMenuActivity"
