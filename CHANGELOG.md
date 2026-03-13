@@ -6,6 +6,97 @@ Check out our official
 This format is roughly based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 0.11.0 - 2026-03-13
+
+### Added
+
+#### Entity/Component DSL
+
+- `entity.update<T> { ... }` modifies a component with auto-save.
+- `entity.with<T> { ... }` provides scoped read-only access.
+- `entity.withOrNull<T> { ... }` for safe read access returning null if missing.
+- `entity.updateIfPresent<T> { ... }` safely updates only if the component exists.
+- Multi-component variants for accessing 2-4 components together.
+- Escape hatches: `entity.raw`, `withDataModel`, `entity.entityId`, `entity.isValid`, `entity.exists`, `entity.isNullEntity`.
+
+#### Physics Constraints
+
+A full constraint system for connecting physics bodies with joints. There are six constraints options
+
+- **`BallSocketConstraint`** — Free rotation around a point (3 DOF). Simplest constraint — just two anchor points.
+- **`ConeTwistConstraint`** — Rotation within a cone \+ twist around an axis, with configurable swing/twist limits, motor support, and softness/bias/relaxation tuning. Supports incremental updates — motor/limit changes don't recreate the native constraint.
+- **`FixedConstraint`** — Locks two bodies rigidly. Typically paired with `breakForce` for destructible connections.
+- **`HingeConstraint`** — Rotation around a single axis with angular limits (radians) and optional motor. Supports incremental updates.
+- **`SliderConstraint`** — Linear motion along an axis with distance limits (meters) and optional motor. Supports incremental updates.
+- **`SpringConstraint`** — Elastic connection with configurable stiffness (N/m), damping, and rest length. Always destroys and recreates the native constraint on any property change.
+
+#### Physics Colliders & Player Avatar
+
+- **`ScenePhysicsCollider`** — Standalone collision shapes that can be shared across multiple `ScenePhysicsObject` instances. Factory methods cover box, sphere, capsule (X/Y/Z axis), cylinder (X/Y/Z axis), convex hull from glTF, exact triangle mesh from glTF, and compound shapes. Compound colliders support adding child shapes (`addChildBox`, `addChildSphere`, `addChildCylinder`) with local-space poses.
+
+- **`CollisionShapeType`** — Controls how collision geometry is generated from meshes:
+
+  - `PRIMITIVE` (0) — Uses the `shape` attribute (box, sphere, etc.). Fastest.
+  - `TRIANGLE_MESH` (1) — Exact triangle mesh from glTF. **Static bodies only.** Most accurate but slowest.
+  - `CONVEX_HULL` (2) — Convex hull from mesh vertices. Works for dynamic bodies.
+  - `CONVEX_DECOMPOSITION` (3) — V-HACD decomposition into multiple convex hulls for concave shapes. Controlled by `maxConvexHulls`.
+  - `COMPOUND` (4) — Multiple primitives via `CompoundChildShape` components on child entities.
+
+
+- **`PlayerAvatarPhysics` / `PlayerAvatarPhysicsSystem`** — Gives the player physical presence in the scene.
+  - Optional hand sphere colliders following.
+  - Configurable per-entity: `bodyRadius` , `handRadius`, `friction`, etc.
+
+#### Animation
+
+- **`BlendedAnimation`** — Delta-time-based animation component that crossfades between glTF animation tracks. Unlike the existing `Animated` component (which uses wall-clock time), `BlendedAnimation` accumulates time via frame delta-time and `playbackSpeed`, giving frame-rate-independent control.
+
+#### Toolkit & UI
+
+- **`ResolveInputSystem`** — A late-running ECS system that calls `Scene.resolveInput()` to ensure async input dispatches complete before the Choreographer's `doFrame` finishes. Prevents input events from being lost or delayed by one frame.
+
+#### Gradle Plugin Library Support
+
+- Fixed build failure when project depends on a local Android Library.
+- Added `spatial.components` extension
+  - `components.xmlDirectory` to configure component XML paths for libraries
+  - `components.registrationsClassName` to configure name for `ComponentRegistrations` object. Used for auto-registration of components.
+  - See feature\_dev\_sample for code examples.
+
+#### Sample Added
+
+- **`feature_dev_sample`** — Reference architecture sample demonstrating how to build reusable `SpatialFeature` library modules as separate Android Library projects (Gradle modules). Shows two patterns: a pure-Kotlin module (`PulsingFeature` — sine-wave scale animation) and a native C++/JNI module (`NativeBobbingFeature` — JNI-computed Y-position oscillation).
+
+### Changed
+
+#### Physics
+
+- **`Physics` component** — 3 new properties: `collisionShapeType`, `collisionMeshNode`, and `maxConvexHulls` (see above).
+- **`ScenePhysicsObject`** — New methods for runtime physics tuning:
+  - `setBodyType()` — switch between STATIC/DYNAMIC/KINEMATIC at runtime
+  - `setDamping()` — control how quickly velocity decays
+  - `setDeactivationTime()` / `setSleepingThresholds()` — tune when resting bodies go to sleep
+  - `createFromCollider()` — create a physics body from a reusable `ScenePhysicsCollider`
+- **`PhysicsCreationSystem`** — `getPhysicsObject(entity)` gives direct access to the underlying `ScenePhysicsObject` for advanced manipulation. `getPhysicsCreators()` lets you register custom shape factories.
+
+#### SDK
+
+- **`Pose.isApproximatelyEqual()`** — Fuzzy pose comparison with separate distance (meters) and angle (degrees) thresholds.
+- **`Query.any()` / `count()` / `none()`** — Check query results without iterating.
+- **`SpatialLogger.execStart()` / `execFinish()`** — Structured execution markers for lifecycle tracing.
+
+#### ISDK
+
+- **`setPanelCollisionPriority()`** — Resolve which panel receives input when panels overlap. Set priority to match the panel's `zIndex`.
+
+#### Panels
+
+- **`resolveInput()`** — Ensures async input dispatches complete within the current frame, preventing dropped or delayed input events.
+
+#### Misc
+
+- General app size and performance improvements
+
 ## 0.10.1 - 2026-02-18
 
 ### Fixed

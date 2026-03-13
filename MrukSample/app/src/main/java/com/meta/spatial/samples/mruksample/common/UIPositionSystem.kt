@@ -11,6 +11,15 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SystemBase
 import com.meta.spatial.toolkit.Transform
 
+/**
+ * System for managing UI panel visibility based on HMD pose initialization.
+ *
+ * This system monitors the HMD pose and waits until it is properly initialized before making the UI
+ * panel visible. This ensures the UI panel can be correctly positioned relative to the user's head
+ * position.
+ *
+ * @property setUIPanelVisibility Callback function to set the visibility of the UI panel
+ */
 class UIPositionSystem(
     private val setUIPanelVisibility: (Boolean) -> Unit,
 ) : SystemBase() {
@@ -19,11 +28,9 @@ class UIPositionSystem(
   override fun execute() {
     // We need to wait until the HMD pose is initialized before we can position the UI panel.
     // Keep trying until it succeeds.
-    if (!uiPositionInitialized) {
-      if (isHmdPoseInitialized()) {
-        uiPositionInitialized = true
-        setUIPanelVisibility(true)
-      }
+    if (!uiPositionInitialized && isHmdPoseInitialized()) {
+      uiPositionInitialized = true
+      setUIPanelVisibility(true)
     }
   }
 

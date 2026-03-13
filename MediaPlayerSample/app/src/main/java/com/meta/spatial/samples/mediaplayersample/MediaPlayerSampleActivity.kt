@@ -45,6 +45,7 @@ import com.meta.spatial.runtime.SceneMaterialDataType
 import com.meta.spatial.runtime.SceneMesh
 import com.meta.spatial.runtime.SceneObject
 import com.meta.spatial.runtime.SceneTexture
+import com.meta.spatial.runtime.SessionState
 import com.meta.spatial.runtime.StereoMode
 import com.meta.spatial.toolkit.ActivityPanelRegistration
 import com.meta.spatial.toolkit.AppSystemActivity
@@ -258,14 +259,42 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     }
   }
 
-  override fun onPause() {
-    super.onPause()
-    exoPlayer?.pause()
-  }
+  // Track whether video was playing before losing focus, for resumption
+  private var wasVideoPlaying = false
 
-  override fun onResume() {
-    super.onResume()
-    exoPlayer?.play()
+  /**
+   * This is the recommended approach for detecting when the Universal Menu is opened (Meta button
+   * press). Unlike onPause(), which only fires when the Activity is fully backgrounded,
+   * onSessionStateChanged fires immediately when:
+   * - Universal Menu opens: FOCUSED -> VISIBLE (app visible but no input focus)
+   * - Universal Menu closes: VISIBLE -> FOCUSED (app regains input focus)
+   *
+   * This allows media apps to pause playback immediately when the user opens the system menu,
+   * providing a better user experience.
+   */
+  override fun onSessionStateChanged(state: SessionState) {
+    super.onSessionStateChanged(state)
+
+    when (state) {
+      SessionState.VISIBLE -> {
+        // App is visible but doesn't have input focus (e.g., Universal Menu is open)
+        // Pause video playback and remember if it was playing
+        wasVideoPlaying = exoPlayer?.isPlaying == true
+        exoPlayer?.pause()
+        Log.d(TAG, "Session became VISIBLE (menu opened) - pausing video")
+      }
+      SessionState.FOCUSED -> {
+        // App has full focus again (e.g., Universal Menu closed)
+        // Resume video only if it was playing before
+        if (wasVideoPlaying) {
+          exoPlayer?.play()
+          Log.d(TAG, "Session became FOCUSED (menu closed) - resuming video")
+        }
+      }
+      else -> {
+        // Handle other states (STOPPING, IDLE, etc.) if needed
+      }
+    }
   }
 
   override fun onSceneReady() {

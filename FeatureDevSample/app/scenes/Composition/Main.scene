@@ -1,0 +1,89 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:collab_room
+            - ref:basketBall
+            - ref:robot
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:collab_room/Main.metaspatialobj
+        com.meta.components.Name:
+          name: collab_room
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+        com.meta.spatial.toolkit.SupportsLocomotion:
+          {}
+      tag: collab_room
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:basketBall/Main.metaspatialobj
+        com.meta.components.Name:
+          name: basketBall
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 1
+            - 1.20000005
+            - -1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+      tag: basketBall
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.DocumentReference:
+          transformType: None
+          documentReference: projref:robot/Main.metaspatialobj
+        com.meta.components.Name:
+          name: robot
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 0.52359879
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -1
+            - 1.25
+            - -1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+      tag: robot
+metadata:
+  version: 1.35

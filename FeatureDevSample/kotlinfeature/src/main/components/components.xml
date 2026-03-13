@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ComponentSchema
+  packageName="com.meta.spatial.samples.kotlinfeature"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.11.0/ComponentSchema.xsd"
+>
+<Component name="Pulsing">
+    <Description>
+Applies a smooth pulsing scale animation to an entity using a sine wave.
+Demonstrates a pure Kotlin SpatialFeature without native code.
+
+The pulsing effect oscillates the entity's scale between minScale and maxScale:
+  scale = minScale + (maxScale - minScale) * (0.5 + 0.5 * sin(2π * frequency * time))
+
+Usage:
+  entity.setComponent(Pulsing(
+    minScale = 0.8f,    // Scale down to 80%
+    maxScale = 1.2f,    // Scale up to 120%
+    frequency = 0.5f    // 0.5 cycles per second (2 second period)
+  ))
+
+Attributes:
+  - minScale: Minimum scale multiplier (default 0.8)
+  - maxScale: Maximum scale multiplier (default 1.2)
+  - frequency: Oscillation speed in Hz - cycles per second (default 1.0)
+    </Description>
+    <FloatAttribute name="minScale" defaultValue="0.8f" />
+    <FloatAttribute name="maxScale" defaultValue="1.2f" />
+    <FloatAttribute name="frequency" defaultValue="1.0f" />
+  </Component>
+</ComponentSchema>

@@ -1,0 +1,36 @@
+entities:
+  components:
+    com.meta.components.Name:
+      name: BasketBall
+    com.meta.components.PbrMaterial:
+      alphaCutoff: 0.5
+      baseColorFactor:
+        - 1
+        - 1
+        - 1
+        - 1
+      clearcoatNormalTexture.scale: 1
+      emissiveStrength: 1
+      ior: 1.5
+      metallicFactor: 1
+      normalTexture.scale: 1
+      occlusionTexture.textureStrength: 1
+      roughnessFactor: 1
+      specularColorFactor:
+        - 1
+        - 1
+        - 1
+      specularFactor: 1
+      volumeAttenuationColor:
+        - 1
+        - 1
+        - 1
+      volumeAttenuationDistance: 3.40282347e+38
+      baseColorTexture.texture: ref:texture3
+      metallicRoughnessTexture.texture: ref:texture2
+      normalTexture.texture: ref:texture1
+      occlusionTexture.texture: ref:texture2
+    com.meta.components.StandardMaterial:
+      isDoubleSided: true
+metadata:
+  version: 1.0

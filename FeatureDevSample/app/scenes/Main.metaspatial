@@ -1,0 +1,7 @@
+entities:
+  com.meta.models.TargetModel:
+    - components:
+        com.meta.components.TargetComponent:
+          platform: horizon_os
+metadata:
+  version: 1.0

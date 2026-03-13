@@ -24,12 +24,12 @@ import com.meta.spatial.toolkit.Controller
  * @property onMenuButtonPressed Callback function that is invoked when the menu button is pressed
  */
 class MrukInputSystem(private val onMenuButtonPressed: () -> Unit) : SystemBase() {
-
   override fun execute() {
-    // Query for local player-controlled avatar bodies
-    val avatarBodies = Query.where { has(AvatarBody.id) }.eval().toList()
+    // Query for local player-controlled avatar body
     val localPlayerAvatar =
-        avatarBodies.first { it.isLocal() && it.getComponent<AvatarBody>().isPlayerControlled }
+        Query.where { has(AvatarBody.id) }
+            .eval()
+            .first { it.isLocal() && it.getComponent<AvatarBody>().isPlayerControlled }
 
     // Get the left controller from the avatar's left hand
     val avatarBody = localPlayerAvatar.getComponent<AvatarBody>()

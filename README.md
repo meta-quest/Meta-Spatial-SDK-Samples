@@ -85,6 +85,7 @@ We have 13 sample apps, demonstrating various features of Meta Spatial SDK:
   with Meta Spatial SDK.
 - [BodyTrackingSample](/BodyTrackingSample) shows how to access body tracking and utilize skeleton joint data.
 - [UISetSample](/UISetSample) shows how to leverage the Meta Horizon OS UI Set to create high-quality, consistent user interfaces.
+- [FeatureDevSample](/FeatureDevSample) shows how to build reusable `SpatialFeature` library modules as separate Android Library projects (Gradle modules).
 
 We also have a starter app
 [CustomComponentsStarter](/CodelabStarters/CustomComponentsStarter), which only
@@ -118,345 +119,96 @@ The documentation for Meta Spatial SDK can be found
 Find our official release notes
 [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
 
-## 0.10.1 Updates (hotfix for 0.10.0)
-
-### Fixed
-
-- Fix crash related to missing soloader symbol.
-
-## 0.10.0 Updates
+## 0.11.0 Updates
 
 ### Added
 
-- `Entity.removeComponent<T>()` and
-  `Entity.tryRemoveComponent<T>()` for removing components from
-  entities at runtime.
+#### Entity/Component DSL
 
-  ```kotlin
-  // Remove a component (throws if not present)
-  entity.removeComponent<Grabbable>()
+- `entity.update<T> { ... }` modifies a component with auto-save.
+- `entity.with<T> { ... }` provides scoped read-only access.
+- `entity.withOrNull<T> { ... }` for safe read access returning null if missing.
+- `entity.updateIfPresent<T> { ... }` safely updates only if the component exists.
+- Multi-component variants for accessing 2-4 components together.
+- Escape hatches: `entity.raw`, `withDataModel`, `entity.entityId`, `entity.isValid`, `entity.exists`, `entity.isNullEntity`.
 
-  // Safe removal (returns false if not present)
-  val wasRemoved = entity.tryRemoveComponent<Grabbable>()
-  ```
-- Visual grab handle rendering for panels with animated hover,
-  grab, and resize state transitions. Audio feedback (grab and
-  drop sounds) for panel grab interactions.
-  `IsdkPanelPaddingRenderSystem` exposes `grabbableEdgeMesh`,
-  `grabbableCornerMesh`, `resizeCornerMesh`, `grabAudio`, and
-  `dropAudio` fields for customization.
-- `Entity.toString()` now prints the entity ID and all attached
-  components for easier debugging. Optional
-  `EntityDebugInfo.includeComponentsInToString` flag enables full
-  component value dumps. `EntityDebugInfo.captureCreationCallstack`
-  records creation callstacks and timestamps for debugging entity
-  lifecycle issues.
-- `SpatialLogger` - centralized logging utility with
-  runtime-configurable log levels.
-  - Supports global and per-category log level configuration via ADB
-    properties: `adb shell setprop debug.spatial.log.level <LEVEL>`.
-- `Entity.willBeDeleted()` method that returns `true` if
-  `destroy()` has been called on the entity in the current frame,
-  allowing systems to check whether an entity is scheduled for
-  deletion before it is fully removed.
-- `SceneTexture.clear(r, g, b, a)` method to clear a texture with
-  a solid color specified by RGBA float values.
-- Feature-level hit testing support, enabling features such as
-  GSplat to participate in ray intersection and ISDK interactions
-  alongside standard scene objects.
-- Batch node transform update APIs for `SceneObject`
-  - `setLocalNodePoses()` for sparse or sequential node updates.
-  - `setLocalNodePosesRange()` for contiguous range updates.
-  - `setLocalNodeTransformsBatch()` and
-    `setLocalNodeTransformsRange()` for direct float array APIs
-    with transform component flags.
-  - Static companion method for multi-object batch updates.
-- World locking for MRUK
-  - Keeps virtual content stationary relative to the real world
-    without manually parenting every object to anchors.
-  - Enabled by default. Toggle with
-    `MRUKFeature.setWorldLockingEnabled(Boolean)` and query with
-    `MRUKFeature.isWorldLockingEnabled()`.
-  - After recentering, scene anchors stay aligned with the real
-    world.
-- `Entity.requireComponent<T>(errorMessage)` method that throws a
-  `RuntimeException` with a custom mßessage if the component is not
-  found on the entity.
-- `HEAD_LOCKED` and `HEAD_RELATIVE` stereo audio offset modes
-  added to the `AudioSessionStereoOffsets` component.
-  - `HEAD_LOCKED` anchors audio to the user's head position and
-    rotation, ignoring the entity's position.
-  - `HEAD_RELATIVE` anchors audio to the user's head position but
-    rotates stereo space based on the emitter's horizontal
-    orientation.
-- Support for playing animations by name in the `Animated`
-  component. Set the `animationName` property to the name of the
-  animation track in the glTF file instead of using the `track`
-  index. When `animationName` is set, it takes precedence over
-  `track`.
-- Support for 44.1kHz and other non-standard audio sample rates.
-  Audio files are no longer restricted to multiples of 16kHz.
-  Files with other sample rates are automatically resampled to
-  48kHz.
-- Experimental: `SceneMaterial.setRenderOrder()` API for
-  fine-grained control over material render ordering. Valid range
-  is -3 to +3; higher values render later.
-- `DataModel.getComponentIdsForEntity()` to query which components
-  are attached to an entity.
-- `SceneTexture.fromResource()` for loading textures from any
-  Android drawable resource type (bitmaps, vectors, shapes) with
-  optional scaling. `baseTextureScale` attribute on `Material`
-  for scaling textures in component XML.
+#### Physics Constraints
 
-  ```kotlin
-  val texture = SceneTexture.fromResource(context, R.drawable.my_bitmap)
-  val scaled = SceneTexture.fromResource(context, R.drawable.my_bitmap, scale = 0.5f)
-  ```
+A full constraint system for connecting physics bodies with joints. There are six constraints options
 
-- URI-based mesh creators with query parameter support via
-  `registerMeshCreator(baseUrl, (entity, uri) -> SceneMesh)`.
-  Enables parameterized procedural mesh generation from a single
-  registered creator.
+- **`BallSocketConstraint`** — Free rotation around a point (3 DOF). Simplest constraint — just two anchor points.
+- **`ConeTwistConstraint`** — Rotation within a cone \+ twist around an axis, with configurable swing/twist limits, motor support, and softness/bias/relaxation tuning. Supports incremental updates — motor/limit changes don't recreate the native constraint.
+- **`FixedConstraint`** — Locks two bodies rigidly. Typically paired with `breakForce` for destructible connections.
+- **`HingeConstraint`** — Rotation around a single axis with angular limits (radians) and optional motor. Supports incremental updates.
+- **`SliderConstraint`** — Linear motion along an axis with distance limits (meters) and optional motor. Supports incremental updates.
+- **`SpringConstraint`** — Elastic connection with configurable stiffness (N/m), damping, and rest length. Always destroys and recreates the native constraint on any property change.
 
-  ```kotlin
-  registerMeshCreator("mesh://custom/box") { entity, uri ->
-      val size = uri.getQueryParameter("size")?.toFloatOrNull() ?: 0.1f
-      SceneMesh.box(-size, -size, -size, size, size, size, material)
-  }
-  // Use: Mesh(Uri.parse("mesh://custom/box?size=0.25"))
-  ```
-- `Quaternion` factory methods for common rotation patterns
-  - `fromAxisAngle(axis, angleDegrees)` and
-    `fromAxisAngleRadians(axis, angleRadians)`.
-  - `fromEuler(pitch, yaw, roll)` (also accepts `Vector3`).
-  - `fromTwoVectors(from, to)` for vector-to-vector rotation.
-  - `fromDirection(direction, up)` for look-at style orientation.
-- `OVRMetricsSystem` now supports runtime addition and removal of
-  metrics and overlay messages.
-  - `registerMetric()`, `registerMetrics()`, `unregisterMetric()`
-    for dynamic metric management.
-  - `registerOverlayMessage()` and `unregisterOverlayMessage()`
-    for dynamic overlay messages.
-  - `OVRMetricsTicks` provides `ticksPerSecond()` and
-    `maxTickTimeMs()` for monitoring ECS tick performance.
-- Distance and angle utility methods on `Pose`, `Quaternion`, and
-  `Vector3`
-  - `Vector3.isWithinDistance(other, distance)` for proximity
-    checks using squared distance internally.
-  - `Quaternion.isWithinAngle(other, angleRadians)` and
-    `isWithinAngleDegrees()` for angular similarity checks.
-  - Corresponding `Pose.isWithinDistance()` and
-    `Pose.isWithinAngle()` convenience methods.
-- Audio focus awareness
-  - Override `VrActivity.audioPauseMode()` to choose
-    `ACTIVITY_FOCUS` (default), `OPENXR_FOCUS`, or `MANUAL`.
-  - `Scene.setAudioEnabled()` for manual audio control.
-- `Scene.removeObject()` method to remove a `SceneObject` from a
-  scene without destroying it, allowing natural garbage collection.
-- Experimental Panel Resize API
-  - `PanelSceneObject.resize(newWidthInPx, newHeightInPx)` allows
-    dynamically resizing panels at runtime (programmatic).
-  - `IsdkPanelResize` component enables interactive user-driven
-    panel resizing through corner handles. Adding this component
-    auto-creates `IsdkPanelGrabHandle` on the entity.
+#### Physics Colliders & Player Avatar
 
-    ```kotlin
-    entity.setComponent(IsdkPanelResize(
-        enabled = true,
-        resizeMode = ResizeMode.Relayout,
-        preserveAspectRatio = false,
-        minDimensions = Vector2(0.3f, 0.3f),
-        maxDimensions = Vector2(1.5f, 1.5f),
-    ))
-    ```
+- **`ScenePhysicsCollider`** — Standalone collision shapes that can be shared across multiple `ScenePhysicsObject` instances. Factory methods cover box, sphere, capsule (X/Y/Z axis), cylinder (X/Y/Z axis), convex hull from glTF, exact triangle mesh from glTF, and compound shapes. Compound colliders support adding child shapes (`addChildBox`, `addChildSphere`, `addChildCylinder`) with local-space poses.
 
-  - `ResizeMode` controls resize behavior:
-    - `Simple` -- modifies entity `Scale` component (default).
-    - `Relayout` -- adjusts panel pixel dimensions and re-renders
-      UI, preserving layout quality.
-    - `None` -- handles do nothing; write custom resize logic via
-      `InputListener` on the `PanelSceneObject`.
-  - `HandleSegmentType` enum for identifying grab edges, grab
-    corners, and resize corners on panels.
-  - Haptic and audio feedback on resize start and end.
-- Experimental: Sticky grab interaction support via ISDK
-  - Allows users to maintain grip on objects after the grab
-    gesture ends, until an explicit release gesture.
-  - For hand tracking, release is triggered when all fingers are
-    fully extended.
-  - For controllers, the grip button toggles grab on and off.
-- Experimental: `CachedQuery` for incremental entity tracking
-  - Maintains a stable entity set and updates incrementally,
-    avoiding full re-queries each frame.
-  - Supports `onAdd`, `onUpdate`, and `onDelete` callbacks for
-    entity lifecycle events with filtering.
-  - Native-level `.filter` DSL for attribute-based filtering.
-  - `where { has(...) }` DSL syntax for consistency with `Query`.
-  - `hasChangedSince` query opcode for efficient incremental
-    change detection.
-- Experimental: Full body tracking support
-  - Added 14 new lower-body joints to `JointType` (legs, ankles,
-    and feet) for full-body skeleton tracking.
-  - `JointSet` enum to select between `DEFAULT` (upper body and
-    hands) and `FULL_BODY` joint topologies.
-  - `Scene.setBodyTrackingJointSet()` to configure which joint set
-    the body tracking system provides.
-  - `BodyTrackingFidelity` enum with `LOW` and `HIGH` levels, and
-    `Scene.setBodyTrackingFidelity()` for quality/performance
-    control.
-- `AIDebugToolsFeature` for headless, AI-driven app testing and
-  debugging via ADB broadcast intents.
-  - Debug commands: `get_entities`, `get_viewer_pose`,
-    `set_viewer_pose`, `get_crash_history`, `get_stack_trace`.
-  - Panel UI inspection: panel discovery, UI element inspection,
-    and programmatic view clicking.
-  - Entity interaction: lookup by name, detail inspection,
-    transform modification, and teleportation.
-  - `CrashMonitor`, `LogcatMonitor`, and `TombstoneMonitor` for
-    runtime crash detection and diagnostics.
+- **`CollisionShapeType`** — Controls how collision geometry is generated from meshes:
+
+  - `PRIMITIVE` (0) — Uses the `shape` attribute (box, sphere, etc.). Fastest.
+  - `TRIANGLE_MESH` (1) — Exact triangle mesh from glTF. **Static bodies only.** Most accurate but slowest.
+  - `CONVEX_HULL` (2) — Convex hull from mesh vertices. Works for dynamic bodies.
+  - `CONVEX_DECOMPOSITION` (3) — V-HACD decomposition into multiple convex hulls for concave shapes. Controlled by `maxConvexHulls`.
+  - `COMPOUND` (4) — Multiple primitives via `CompoundChildShape` components on child entities.
+
+
+- **`PlayerAvatarPhysics` / `PlayerAvatarPhysicsSystem`** — Gives the player physical presence in the scene.
+  - Optional hand sphere colliders following.
+  - Configurable per-entity: `bodyRadius` , `handRadius`, `friction`, etc.
+
+#### Animation
+
+- **`BlendedAnimation`** — Delta-time-based animation component that crossfades between glTF animation tracks. Unlike the existing `Animated` component (which uses wall-clock time), `BlendedAnimation` accumulates time via frame delta-time and `playbackSpeed`, giving frame-rate-independent control.
+
+#### Toolkit & UI
+
+- **`ResolveInputSystem`** — A late-running ECS system that calls `Scene.resolveInput()` to ensure async input dispatches complete before the Choreographer's `doFrame` finishes. Prevents input events from being lost or delayed by one frame.
+
+#### Gradle Plugin Library Support
+
+- Fixed build failure when project depends on a local Android Library.
+- Added `spatial.components` extension
+  - `components.xmlDirectory` to configure component XML paths for libraries
+  - `components.registrationsClassName` to configure name for `ComponentRegistrations` object. Used for auto-registration of components.
+  - See feature\_dev\_sample for code examples.
+
+#### Sample Added
+
+- **`feature_dev_sample`** — Reference architecture sample demonstrating how to build reusable `SpatialFeature` library modules as separate Android Library projects (Gradle modules). Shows two patterns: a pure-Kotlin module (`PulsingFeature` — sine-wave scale animation) and a native C++/JNI module (`NativeBobbingFeature` — JNI-computed Y-position oscillation).
 
 ### Changed
 
-- Hand outlines are now brighter.
-- Physics APIs have been decoupled from the core library into the
-  `com.meta.spatial.physics` feature module. This is a breaking
-  change.
+#### Physics
 
-  ```kotlin
-  // Before
-  import com.meta.spatial.runtime.ScenePhysicsObject
-  spatial.enablePhysicsDebugLines(true)
-  spatial.setGravity(0f, -10f, 0f)
+- **`Physics` component** — 3 new properties: `collisionShapeType`, `collisionMeshNode`, and `maxConvexHulls` (see above).
+- **`ScenePhysicsObject`** — New methods for runtime physics tuning:
+  - `setBodyType()` — switch between STATIC/DYNAMIC/KINEMATIC at runtime
+  - `setDamping()` — control how quickly velocity decays
+  - `setDeactivationTime()` / `setSleepingThresholds()` — tune when resting bodies go to sleep
+  - `createFromCollider()` — create a physics body from a reusable `ScenePhysicsCollider`
+- **`PhysicsCreationSystem`** — `getPhysicsObject(entity)` gives direct access to the underlying `ScenePhysicsObject` for advanced manipulation. `getPhysicsCreators()` lets you register custom shape factories.
 
-  // After
-  import com.meta.spatial.physics.ScenePhysicsObject
-  val physicsFeature = PhysicsFeature(spatial)
-  // register in registerFeatures()
-  physicsFeature.enablePhysicsDebugLines(true)
-  physicsFeature.setGravity(Vector3(0f, -10f, 0f))
-  ```
+#### SDK
 
-- Removed the synthetic GLTF root node from the mesh hierarchy.
-  Node indices now correspond directly to their GLTF node indices.
-- Entity and component debug logging improvements
-  - `getComponent` error messages now include the attribute name
-    and entity ID.
-  - Mesh creation provides explicit error messages when a required
-    component is missing, including the entity ID, component name,
-    and a listing of all attached components.
-  - Entity debug error messages include human-readable attribute
-    names and full entity debug info (creation callstack, time
-    alive, component list) when `EntityDebugInfo` flags are
-    enabled.
-- `CastInputForwardFeature` now accepts an optional `initialPose`
-  parameter to customize the starting position of the input
-  forwarding virtual camera.
-- `IsdkPanelGrabHandle` has been redesigned with a multi-segment
-  handle system (edges, corners, resize corners) replacing the
-  single box collider. This is a breaking change. The `offset` and
-  `padding` properties have been removed and replaced with
-  `grabHandleCollisionWidths`, `resizeCornerCollisionSizes`,
-  `resizeCornerCollisionInset`, `outset`, `zOffset`, `color`, and
-  `scaleFactor`.
-- Audio engine now supports up to 256 virtual sounds with
-  automatic focus management, selecting the best 16 for
-  simultaneous playback based on distance, volume, and priority.
-  Sounds transition smoothly to prevent audio artifacts.
-- Component registration is now auto-generated during the build.
-  Use `ComponentRegistrations.all()` in `componentsToRegister()`
-  instead of maintaining manual lists.
-- `SceneObject.materials` is now lazily populated on first access,
-  providing up to 16x faster entity creation. The property type
-  changed from `Array<SceneMaterial>?` to `List<SceneMaterial>?`.
-  ```kotlin
-  // Before
-  sceneObject.materials?.set(0, differentMaterial)
+- **`Pose.isApproximatelyEqual()`** — Fuzzy pose comparison with separate distance (meters) and angle (degrees) thresholds.
+- **`Query.any()` / `count()` / `none()`** — Check query results without iterating.
+- **`SpatialLogger.execStart()` / `execFinish()`** — Structured execution markers for lifecycle tracing.
 
-  // After (modify properties in place)
-  sceneObject.materials?.get(0)?.setColor(Color4(1f, 0f, 0f, 1f))
-  ```
+#### ISDK
 
-- `Material.sceneTextureCache` is now private. Use
-  `Material.registerSceneTexture(key, texture)` to register
-  dynamically generated textures for use with the `Material`
-  component via `baseTextureAndroidResourceId`. This is a
-  breaking change.
+- **`setPanelCollisionPriority()`** — Resolve which panel receives input when panels overlap. Set priority to match the panel's `zIndex`.
 
-  ```kotlin
-  // Before
-  Material.sceneTextureCache[resourceId] = sceneTexture
+#### Panels
 
-  // After
-  Material.registerSceneTexture(resourceId, sceneTexture)
-  ```
+- **`resolveInput()`** — Ensures async input dispatches complete within the current frame, preventing dropped or delayed input events.
 
-### Deprecated
+#### Misc
 
-- `PanelSceneObject.getDisplay()`, `getTexture()`, `getLayer()`,
-  `getPanelShapeConfig()`, `getSwapchain()`, and `getSurface()`
-  are deprecated. Use property accessors instead.
-
-### Removed
-
-- Removed the experimental `PanelConfigOptions2` API. This is a
-  breaking change. All `PanelConfigOptions2` classes, constructors,
-  extension functions, and builder methods have been deleted. Use
-  `PanelConfigOptions` and `PanelShapeConfig` instead.
-  - Replace `PanelSceneObject` constructors that accepted
-    `PanelConfigOptions2` with constructors using
-    `PanelConfigOptions` or `PanelShapeConfig`.
-  - Replace `getPanelConfigOptions2()` with
-    `getPanelShapeConfig()`.
-  - Replace `reshape(PanelConfigOptions2)` with
-    `reshape(PanelShapeConfig)`.
-  - Replace `PanelRegistration.fromConfigOptions2 { ... }` with
-    the standard `PanelRegistration` constructors.
-- Removed `SpatialInterface` physics methods:
-  `enablePhysicsDebugLines()`, `setGravity()`,
-  `createPhysicsObject()`, `deletePhysics()`, `tickPhysics()`,
-  `tickUpdatePhysicsState()`. Use `PhysicsFeature` and
-  `PhysicsBridge` instead.
-- Removed the deprecated `generateComponents` Gradle task. This
-  task has been deprecated since version 0.6.0 and is no longer
-  needed. Remove any references to `generateComponents` in your
-  `build.gradle`.
-
-### Fixed
-
-- Fixed Compose panels receiving duplicate hover and input events
-  when two controllers pointed at the same panel. Now only one
-  controller can hover a panel at a time.
-- Fixed incorrect 2D `HitInfo` UV coordinates on curved panels.
-  UV coordinates from `PointerEvent` were calculated as if the
-  panel was flat.
-- Fixed a bug where interacting with a panel during a shape
-  change (e.g., panel animation) could permanently block
-  locomotion and hide the raycast indicator.
-- Fixed entity deletion timing so that destroyed entities remain
-  accessible during the same frame in which `destroy()` is called.
-  Previously, entities were immediately removed, which could cause
-  inconsistent behavior when systems accessed entities during the
-  same tick.
-- Fixed `HitInfo.distance` to return the actual distance from the
-  interactor to the hit point instead of a hardcoded value of
-  `1.0`.
-- Fixed bug in `IsdkSystem` where lambda observers registered with
-  `registerObserver()` or `registerInteractableObserver()` would be
-  garbage collected after a few seconds, causing them to stop
-  receiving events.
-- Fixed misleading native assert message when calling
-  `getComponent` on an entity that does not have the requested
-  component. The error now correctly identifies the missing
-  attribute.
-- Fixed `SamplerConfig` not being applied to dynamically created
-  `SceneTexture` objects. Sampler settings now work correctly for
-  textures created in code, not just those loaded from glTF files.
-- Fixed `changedSince` queries not correctly detecting newly
-  created entities due to incorrect version update ordering in the
-  ECS data model.
-- Fixed texture bug during texture initialization where textures
-  would briefly appear black.
-
+- General app size and performance improvements
 
 ## Spatial SDK Gradle Plugin
 

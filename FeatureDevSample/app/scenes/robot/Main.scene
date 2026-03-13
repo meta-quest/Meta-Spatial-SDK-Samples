@@ -1,0 +1,40 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:robot1
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: robot
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0.707106829
+            - 0.707106829
+            - 0
+            - 0
+          rotation.format: Quaternion
+          scale:
+            - 0.00999999978
+            - 0.00999999978
+            - 0.00999999978
+          translation:
+            - 0
+            - -0.29721266
+            - 5.58793545e-08
+          componentVersion: 1
+        com.meta.components.SceneNodeMesh:
+          mesh: ref:robot_geo
+        com.meta.components.Visibility:
+          visible: true
+      tag: robot1
+metadata:
+  version: 1.35

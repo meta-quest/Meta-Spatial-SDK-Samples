@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ComponentSchema
+  packageName="com.meta.spatial.samples.nativefeature"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="https://developers.meta.com/horizon/spatial-sdk/0.11.0/ComponentSchema.xsd"
+>
+<Component name="NativeBobbing">
+    <Description>
+Applies a smooth vertical bobbing motion to an entity using native C++ code.
+Demonstrates how to integrate native calculations via JNI with the ECS system.
+
+The bobbing motion is computed using a sine wave:
+  offset = amplitude * sin(2π * frequency * time)
+
+Usage:
+  entity.setComponent(NativeBobbing(
+    amplitude = 0.3f,   // 0.3 meters up and down
+    frequency = 1.0f    // 1 cycle per second
+  ))
+
+Attributes:
+  - amplitude: Maximum vertical displacement in meters (default 0.2)
+  - frequency: Oscillation speed in Hz - cycles per second (default 1.0)
+    </Description>
+    <FloatAttribute name="amplitude" defaultValue="0.2f" />
+    <FloatAttribute name="frequency" defaultValue="1.0f" />
+  </Component>
+</ComponentSchema>

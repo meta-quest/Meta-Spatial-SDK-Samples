@@ -29,7 +29,7 @@ class MenuSpawner : SystemBase() {
     Query.where { changed(TrackedQrCode.id) }
         .eval()
         .forEach { qrCodeEntity ->
-          if (!qrCodeToEntity.containsKey(qrCodeEntity)) {
+          if (qrCodeEntity !in qrCodeToEntity) {
             val menu =
                 Entity.create(
                     TransformParentFollow(qrCodeEntity),
