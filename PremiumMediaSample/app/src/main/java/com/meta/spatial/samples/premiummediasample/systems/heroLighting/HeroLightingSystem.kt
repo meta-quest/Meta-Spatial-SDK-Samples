@@ -155,15 +155,14 @@ class HeroLightingSystem(
 
   private fun checkCurrentHeroLightingUpdates(forceUpdate: Boolean = false) {
     // Loop through and find moved HeroLighting and grab new position/angle/scale values
-    val query =
-        Query.where {
-          if (forceUpdate) {
-            has(HeroLighting.id, Transform.id, Scale.id)
-          } else {
-            has(HeroLighting.id, Transform.id, Scale.id) and
-                (changed(Transform.id) or changed(Scale.id))
-          }
-        }
+    val query = Query.where {
+      if (forceUpdate) {
+        has(HeroLighting.id, Transform.id, Scale.id)
+      } else {
+        has(HeroLighting.id, Transform.id, Scale.id) and
+            (changed(Transform.id) or changed(Scale.id))
+      }
+    }
 
     var updatedPositionOrScale = false
 

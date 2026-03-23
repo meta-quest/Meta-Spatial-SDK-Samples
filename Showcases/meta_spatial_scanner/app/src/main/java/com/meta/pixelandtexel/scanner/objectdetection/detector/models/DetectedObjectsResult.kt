@@ -42,19 +42,18 @@ data class DetectedObjectsResult(
         inputImageWidth: Int,
         inputImageHeight: Int,
     ): DetectedObjectsResult {
-      val detectedObjects =
-          mpDetectedObjects.mapNotNull {
-            if (it.categories().isEmpty()) {
-              return@mapNotNull null
-            }
+      val detectedObjects = mpDetectedObjects.mapNotNull {
+        if (it.categories().isEmpty()) {
+          return@mapNotNull null
+        }
 
-            val rect = it.boundingBox().toRect()
-            val point = PointF(it.boundingBox().centerX(), it.boundingBox().centerY())
-            val label = it.categories()[0].categoryName()
-            val confidence = it.categories()[0].score()
+        val rect = it.boundingBox().toRect()
+        val point = PointF(it.boundingBox().centerX(), it.boundingBox().centerY())
+        val label = it.categories()[0].categoryName()
+        val confidence = it.categories()[0].score()
 
-            DetectedObject(point, rect, label, confidence)
-          }
+        DetectedObject(point, rect, label, confidence)
+      }
 
       return DetectedObjectsResult(
           detectedObjects,
@@ -82,18 +81,17 @@ data class DetectedObjectsResult(
         inputImageWidth: Int,
         inputImageHeight: Int,
     ): DetectedObjectsResult {
-      val detectedObjects =
-          mlkitDetectedObjects.mapNotNull {
-            if (it.labels.isEmpty()) {
-              return@mapNotNull null
-            }
+      val detectedObjects = mlkitDetectedObjects.mapNotNull {
+        if (it.labels.isEmpty()) {
+          return@mapNotNull null
+        }
 
-            val point = PointF(it.boundingBox.exactCenterX(), it.boundingBox.exactCenterY())
-            val label = it.labels[0].text
-            val confidence = it.labels[0].confidence
+        val point = PointF(it.boundingBox.exactCenterX(), it.boundingBox.exactCenterY())
+        val label = it.labels[0].text
+        val confidence = it.labels[0].confidence
 
-            DetectedObject(point, it.boundingBox, label, confidence, it.trackingId)
-          }
+        DetectedObject(point, it.boundingBox, label, confidence, it.trackingId)
+      }
 
       return DetectedObjectsResult(
           detectedObjects,
@@ -121,12 +119,11 @@ data class DetectedObjectsResult(
         inputImageWidth: Int,
         inputImageHeight: Int,
     ): DetectedObjectsResult {
-      val detectedObjects =
-          cvDetectedObjects.map {
-            val point = PointF(it.bounds.exactCenterX(), it.bounds.exactCenterY())
+      val detectedObjects = cvDetectedObjects.map {
+        val point = PointF(it.bounds.exactCenterX(), it.bounds.exactCenterY())
 
-            DetectedObject(point, it.bounds, it.label, it.confidence.toFloat())
-          }
+        DetectedObject(point, it.bounds, it.label, it.confidence.toFloat())
+      }
 
       return DetectedObjectsResult(
           detectedObjects,

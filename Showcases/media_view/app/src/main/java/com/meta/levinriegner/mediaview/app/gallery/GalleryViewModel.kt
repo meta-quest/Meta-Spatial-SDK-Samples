@@ -81,27 +81,27 @@ constructor(
   fun loadMedia(
       filter: MediaFilter = this.filter.value,
       sortBy: MediaSortBy = _sortBy.value,
-  ) =
-      viewModelScope.launch {
-        _state.value = UiState.Loading
-        try {
-          Timber.i("Getting media for filter: $filter and sort by: $sortBy")
-          val media = galleryRepository.getMedia(filter, sortBy)
-          Timber.i("Got media: ${media.size}")
-          _state.value = UiState.Success(media)
-          // DEV: Use to navigate while developing
-          //                val devModel = media[0]
-          //                onMediaSelected(devModel)
-          //                delay(200L)
-          //                panelDelegate.maximizeMedia(devModel)
-        } catch (t: Throwable) {
-          Timber.w("Failed to get media: ${t.message}")
-          _state.value = UiState.Error("Failed to get media: ${t.message}")
-        }
-      }
+  ) = viewModelScope.launch {
+    _state.value = UiState.Loading
+    try {
+      Timber.i("Getting media for filter: $filter and sort by: $sortBy")
+      val media = galleryRepository.getMedia(filter, sortBy)
+      Timber.i("Got media: ${media.size}")
+      _state.value = UiState.Success(media)
+      // DEV: Use to navigate while developing
+      //                val devModel = media[0]
+      //                onMediaSelected(devModel)
+      //                delay(200L)
+      //                panelDelegate.maximizeMedia(devModel)
+    } catch (t: Throwable) {
+      Timber.w("Failed to get media: ${t.message}")
+      _state.value = UiState.Error("Failed to get media: ${t.message}")
+    }
+  }
 
-  private fun subscribeToFilterChanges() =
-      viewModelScope.launch { filter.collect { loadMedia(it) } }
+  private fun subscribeToFilterChanges() = viewModelScope.launch {
+    filter.collect { loadMedia(it) }
+  }
 
   override fun onEvent(event: AppEvent) {
     when (event) {

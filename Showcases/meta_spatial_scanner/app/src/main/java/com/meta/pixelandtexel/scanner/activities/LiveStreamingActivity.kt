@@ -314,10 +314,9 @@ class LiveStreamingActivity :
 
   // permissions requesting
 
-  private fun hasPermissions() =
-      PERMISSIONS_REQUIRED.all {
-        ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
-      }
+  private fun hasPermissions() = PERMISSIONS_REQUIRED.all {
+    ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED
+  }
 
   private fun requestPermissions(callback: (granted: Boolean) -> Unit) {
     permissionsResultCallback = callback
