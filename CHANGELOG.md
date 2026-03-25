@@ -6,6 +6,12 @@ Check out our official
 This format is roughly based on
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 0.11.1 - 2026-03-25
+
+### What's Fixed
+
+- Fixed bug where the Component XML tasks were incorrectly marked as up-to-date on subsequent builds
+
 ## 0.11.0 - 2026-03-13
 
 ### Added

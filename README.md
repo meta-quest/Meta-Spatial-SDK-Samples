@@ -119,6 +119,12 @@ The documentation for Meta Spatial SDK can be found
 Find our official release notes
 [here](https://developers.meta.com/horizon/documentation/spatial-sdk/release-notes).
 
+## 0.11.1 Updates (hotfix for 0.11.0)
+
+### What's Fixed
+
+- Fixed bug where the Component XML tasks were incorrectly marked as up-to-date on subsequent builds
+
 ## 0.11.0 Updates
 
 ### Added
