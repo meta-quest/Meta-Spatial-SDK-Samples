@@ -1,0 +1,11 @@
+<ComponentSchema packageName="com.meta.pixelandtexel.scanner">
+    <Component name="Outlined">
+        <Description
+    >A component that draws an outline around an object at a specified size.</Description>
+        <Vector2Attribute
+      name="size"
+      defaultValue="1f, 1f"
+      description="The size of the outline to draw around the object."
+    />
+    </Component>
+</ComponentSchema>

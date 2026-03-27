@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Llama query template -->
+    <string name="object_query_template">
+        Briefly describe the {{object_name}} in this image. Specifically, provide technical details or information about its construction, but do not guess details which are not apparent in the photo.
+    </string>
+
+    <!-- Camera status -->
+    <string name="camera_status_off">Paused</string>
+    <string name="camera_status_on">Scanning</string>
+
+    <!-- Buttons -->
+    <string name="btn_got_it">Got It</string>
+    <string name="btn_continue">Continue</string>
+    <string name="btn_dismiss">Dismiss</string>
+    <string name="btn_generate_objects">Generate Objects</string>
+
+    <!-- Content descriptions -->
+    <string name="camera_controls_button_description">Play/pause button</string>
+    <string name="help_button_description">Help button</string>
+    <string name="refrigerator_image_description">Refrigerator</string>
+    <string name="dot">Dot</string>
+
+    <!-- Welcome panel -->
+    <string name="notice">
+        This app has been implemented to be able to scan and identify objects in your environment using Mixed Reality capabilities. No information is sent to any external servers.
+    </string>
+    <string name="camera_controls_title">Camera Controls</string>
+    <string name="camera_controls_1">
+        Look at your left palm to activate camera scanner controls.
+    </string>
+    <string name="camera_controls_2">
+        Press play to begin the scan, and pause to end scanning.
+    </string>
+
+    <!-- Tips -->
+    <string name="select_object_title">Select Object</string>
+    <string name="select_object_copy">Select an object to be able to configure it for Mixed Reality.</string>
+    <string name="no_objects_detected_title">No Objects Detected</string>
+    <string
+    name="no_objects_detected_body"
+  >Try moving to a different room or location, or select one of the generated objects.</string>
+    <string name="find_objects_title">Find Curated Objects</string>
+    <string
+    name="find_objects_body"
+  >Look for one of the curated objects: a phone, fridge, or television. Or select one of the generated objects.</string>
+    <string name="help_title">Help</string>
+    <string name="help_body">
+        You can scan your surroundings to identify objects with the play button. Select a detected object to learn more about it, or choose from generated objects.
+    </string>
+
+
+    <string name="db_name">mruk_db</string>
+    <string name="delete_smart_things_button_description">Delete Smart Things Button</string>
+    <string name="show_smart_things_button_description">Show Smart Things Button\n</string>
+</resources>
