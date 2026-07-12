@@ -214,11 +214,11 @@ private fun setUpButton(
               Grabbable(type = GrabbableType.PIVOT_Y),
               Scale(scale),
               Physics(
-                      shape = collisionMesh,
-                      density = 0.1f,
-                      state = PhysicsState.DYNAMIC,
-                      dimensions = dimensions,
-                  )
+                  shape = collisionMesh,
+                  density = 0.1f,
+                  state = PhysicsState.DYNAMIC,
+                  dimensions = dimensions,
+              )
                   .applyMaterial(PhysicsMaterial.WOOD),
               Transform(Pose(Vector3(0f, 1.2f, 2.1f), Quaternion(0f, 180f, 0f))),
           )

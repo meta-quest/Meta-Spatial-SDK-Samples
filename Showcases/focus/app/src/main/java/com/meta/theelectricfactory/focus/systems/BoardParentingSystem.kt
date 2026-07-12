@@ -219,13 +219,12 @@ class BoardParentingSystem : SystemBase() {
       Math.abs(projection) // Use Math.abs instead of absoluteValue
     } else {
       // Otherwise, calculate the distance to the edges/vertices of the rectangle
-      val distances =
-          listOf(
-              pointToLineSegmentDistance(point, v1, v2),
-              pointToLineSegmentDistance(point, v2, v3),
-              pointToLineSegmentDistance(point, v3, v4),
-              pointToLineSegmentDistance(point, v4, v1),
-          )
+      val distances = listOf(
+          pointToLineSegmentDistance(point, v1, v2),
+          pointToLineSegmentDistance(point, v2, v3),
+          pointToLineSegmentDistance(point, v3, v4),
+          pointToLineSegmentDistance(point, v4, v1),
+      )
       distances.minOrNull() ?: 0f
     }
   }

@@ -212,29 +212,28 @@ fun ImageItem(
   val interactionSource = remember { MutableInteractionSource() }
   val isHovered by interactionSource.collectIsHoveredAsState()
   val brightness = 100f
-  val colorMatrix =
-      floatArrayOf(
-          1f,
-          0f,
-          0f,
-          0f,
-          brightness,
-          0f,
-          1f,
-          0f,
-          0f,
-          brightness,
-          0f,
-          0f,
-          1f,
-          0f,
-          brightness,
-          0f,
-          0f,
-          0f,
-          1f,
-          0f,
-      )
+  val colorMatrix = floatArrayOf(
+      1f,
+      0f,
+      0f,
+      0f,
+      brightness,
+      0f,
+      1f,
+      0f,
+      0f,
+      brightness,
+      0f,
+      0f,
+      1f,
+      0f,
+      brightness,
+      0f,
+      0f,
+      0f,
+      1f,
+      0f,
+  )
   Image(
       painter = painter,
       contentDescription = null,

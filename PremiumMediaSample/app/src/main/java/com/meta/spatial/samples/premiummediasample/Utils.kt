@@ -355,17 +355,16 @@ fun quadTriangleMesh(
   val vertexLength = (xSubDivisions + 1) * (ySubdivisions + 1)
   val trianglesLength = xSubDivisions * ySubdivisions * 2
 
-  val triangleMesh =
-      TriangleMesh(
-          vertexLength,
+  val triangleMesh = TriangleMesh(
+      vertexLength,
+      trianglesLength * 3,
+      intArrayOf(
+          0,
           trianglesLength * 3,
-          intArrayOf(
-              0,
-              trianglesLength * 3,
-          ), // what range of materials (fromMat0, toMat0, fromMat1, toMat1, fromMat2,
-          // toMat2) do the materials array apply to
-          arrayOf(material), // Materials
-      )
+      ), // what range of materials (fromMat0, toMat0, fromMat1, toMat1, fromMat2,
+      // toMat2) do the materials array apply to
+      arrayOf(material), // Materials
+  )
 
   // Array Creations
   val vertices = FloatArray(vertexLength * 3)

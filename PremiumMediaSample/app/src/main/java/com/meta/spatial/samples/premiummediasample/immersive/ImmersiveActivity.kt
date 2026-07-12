@@ -64,12 +64,11 @@ class ImmersiveActivity : BaseMrukActivity(), IPCMessageHandler {
 
   override fun registerFeatures(): List<SpatialFeature> {
     val parentFeatures = super.registerFeatures()
-    val additionalFeatures =
-        mutableListOf(
-            OVRMetricsFeature(this, HeapMetrics()),
-            ComposeFeature(),
-            spatialAudioFeature,
-        )
+    val additionalFeatures = mutableListOf(
+        OVRMetricsFeature(this, HeapMetrics()),
+        ComposeFeature(),
+        spatialAudioFeature,
+    )
     if (BuildConfig.DEBUG) {
       additionalFeatures.add(CastInputForwardFeature(this))
       additionalFeatures.add(DataModelInspectorFeature(spatial, this.componentManager))

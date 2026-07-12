@@ -49,16 +49,15 @@ class WallLightingSystem(
   private var roomUuid: UUID? = null
 
   private val meshNames: Array<MeshNameLabel>
-  private val validLabels =
-      arrayOf(
-          MRUKLabel.WALL_FACE,
-          MRUKLabel.FLOOR,
-          MRUKLabel.CEILING,
-          MRUKLabel.WALL_ART,
-          MRUKLabel.SCREEN,
-          MRUKLabel.DOOR_FRAME,
-          MRUKLabel.WINDOW_FRAME,
-      )
+  private val validLabels = arrayOf(
+      MRUKLabel.WALL_FACE,
+      MRUKLabel.FLOOR,
+      MRUKLabel.CEILING,
+      MRUKLabel.WALL_ART,
+      MRUKLabel.SCREEN,
+      MRUKLabel.DOOR_FRAME,
+      MRUKLabel.WINDOW_FRAME,
+  )
 
   val isVisible: Boolean
     get() = _isVisible

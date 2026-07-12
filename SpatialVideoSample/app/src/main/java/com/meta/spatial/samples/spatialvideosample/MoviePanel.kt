@@ -70,12 +70,11 @@ const val VIDEO_DIRECTORY = "/sdcard/Oculus/VideoShots/"
 
 data class Movie(val id: Int, val uri: Uri, val title: String) {
   companion object {
-    fun fromLocalVideo(id: Int, title: String) =
-        Movie(
-            id,
-            Uri.parse("android.resource://" + SpatialVideoSampleActivity.appPackageName + "/" + id),
-            title,
-        )
+    fun fromLocalVideo(id: Int, title: String) = Movie(
+        id,
+        Uri.parse("android.resource://" + SpatialVideoSampleActivity.appPackageName + "/" + id),
+        title,
+    )
 
     fun fromRawVideo(rawName: String, title: String): Movie? {
       val resId =
@@ -98,11 +97,11 @@ class MovieViewModel : ViewModel() {
     viewModelScope.launch {
       _movies.value =
           listOf(
-                  Movie.fromRawVideo("doggie", "Doggie"),
-                  Movie.fromRawVideo("mediagiant", "Media Giant"),
-                  Movie.fromRawVideo("carousel", "Carousel"),
-                  Movie.fromRawVideo("salmon", "Salmon"),
-              )
+              Movie.fromRawVideo("doggie", "Doggie"),
+              Movie.fromRawVideo("mediagiant", "Media Giant"),
+              Movie.fromRawVideo("carousel", "Carousel"),
+              Movie.fromRawVideo("salmon", "Salmon"),
+          )
               .filterNotNull()
       // Example of loading from a CDN url
       // Movie(

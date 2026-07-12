@@ -61,13 +61,12 @@ class UpdateRaycastSystem(
         handleDepthRaycast(rightHandPose, rightHandDirection)
       } else if (currentRoom != null) {
         val maxDistance = Float.POSITIVE_INFINITY
-        val raycastHits =
-            performRoomRaycast(
-                currentRoom,
-                rightHandPose,
-                rightHandDirection,
-                maxDistance,
-            )
+        val raycastHits = performRoomRaycast(
+            currentRoom,
+            rightHandPose,
+            rightHandDirection,
+            maxDistance,
+        )
         updateArrowEntitiesFromHits(raycastHits)
       }
     }
@@ -86,11 +85,10 @@ class UpdateRaycastSystem(
             ),
         )
       }
-      val arrowPose =
-          Pose(
-              depthRaycastResult.point,
-              Quaternion.lookRotation(depthRaycastResult.normal.normalize()),
-          )
+      val arrowPose = Pose(
+          depthRaycastResult.point,
+          Quaternion.lookRotation(depthRaycastResult.normal.normalize()),
+      )
       val arrowEntity = arrowEntities[0]
       arrowEntity.setComponent(Transform(arrowPose))
       arrowEntity.setComponent(Visible(true))
@@ -152,11 +150,10 @@ class UpdateRaycastSystem(
       }
       val hit = raycastHits[index]
       val arrowEntity = arrowEntities[index]
-      val arrowPose =
-          Pose(
-              hit.hitPosition,
-              Quaternion.lookRotation(hit.hitNormal.normalize()),
-          )
+      val arrowPose = Pose(
+          hit.hitPosition,
+          Quaternion.lookRotation(hit.hitNormal.normalize()),
+      )
       arrowEntity.setComponent(Transform(arrowPose))
       arrowEntity.setComponent(Visible(true))
     }

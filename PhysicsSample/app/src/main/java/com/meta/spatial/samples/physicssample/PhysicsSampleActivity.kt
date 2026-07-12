@@ -88,12 +88,11 @@ class BallRunActivity : AppSystemActivity() {
   private var finishCount: Int = 0
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf<SpatialFeature>(
-            PhysicsFeature(spatial, useGrabbablePhysics = false),
-            ComposeFeature(),
-            VRFeature(this),
-        )
+    val features = mutableListOf<SpatialFeature>(
+        PhysicsFeature(spatial, useGrabbablePhysics = false),
+        ComposeFeature(),
+        VRFeature(this),
+    )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))

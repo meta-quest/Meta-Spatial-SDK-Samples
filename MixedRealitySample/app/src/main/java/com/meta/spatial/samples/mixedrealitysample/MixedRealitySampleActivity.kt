@@ -62,13 +62,12 @@ class MixedRealitySampleActivity : AppSystemActivity() {
   override fun registerFeatures(): List<SpatialFeature> {
     mrukFeature = MRUKFeature(this, systemManager)
     physicsFeature = PhysicsFeature(spatial, worldBounds = PhysicsWorldBounds(minY = -100.0f))
-    val features =
-        mutableListOf(
-            physicsFeature,
-            VRFeature(this),
-            ComposeFeature(),
-            mrukFeature,
-        )
+    val features = mutableListOf(
+        physicsFeature,
+        VRFeature(this),
+        ComposeFeature(),
+        mrukFeature,
+    )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))

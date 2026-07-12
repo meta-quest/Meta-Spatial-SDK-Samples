@@ -49,11 +49,10 @@ class HybridSampleActivity : AppSystemActivity() {
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf<SpatialFeature>(
-            VRFeature(this),
-            ComposeFeature(),
-        )
+    val features = mutableListOf<SpatialFeature>(
+        VRFeature(this),
+        ComposeFeature(),
+    )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))

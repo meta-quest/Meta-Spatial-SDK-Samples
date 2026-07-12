@@ -28,36 +28,32 @@ class SpatialDebugComponent(
 
   var axis by
       EnumAttribute("axis", R.string.SpatialDebugComponent_axis, this, LookAtAxis::class.java, axis)
-  var rotationSpeed by
-      FloatAttribute(
-          "rotationSpeed",
-          R.string.SpatialDebugComponent_rotationSpeed,
-          this,
-          rotationSpeed,
-      )
+  var rotationSpeed by FloatAttribute(
+      "rotationSpeed",
+      R.string.SpatialDebugComponent_rotationSpeed,
+      this,
+      rotationSpeed,
+  )
   var followSpeed by
       FloatAttribute("followSpeed", R.string.SpatialDebugComponent_followSpeed, this, followSpeed)
-  var rotationOffset by
-      Vector3Attribute(
-          "rotationOffset",
-          R.string.SpatialDebugComponent_rotationOffset,
-          this,
-          rotationOffset,
-      )
-  var followOffset by
-      Vector3Attribute(
-          "followOffset",
-          R.string.SpatialDebugComponent_followOffset,
-          this,
-          followOffset,
-      )
-  var followCamera by
-      BooleanAttribute(
-          "followCamera",
-          R.string.SpatialDebugComponent_followCamera,
-          this,
-          followCamera,
-      )
+  var rotationOffset by Vector3Attribute(
+      "rotationOffset",
+      R.string.SpatialDebugComponent_rotationOffset,
+      this,
+      rotationOffset,
+  )
+  var followOffset by Vector3Attribute(
+      "followOffset",
+      R.string.SpatialDebugComponent_followOffset,
+      this,
+      followOffset,
+  )
+  var followCamera by BooleanAttribute(
+      "followCamera",
+      R.string.SpatialDebugComponent_followCamera,
+      this,
+      followCamera,
+  )
   var billboard by
       BooleanAttribute("billboard", R.string.SpatialDebugComponent_billboard, this, billboard)
   var distance by

@@ -507,16 +507,15 @@ fun TaskCard(
 )
 @Composable
 fun TasksPanelPreview() {
-  var task =
-      Task(
-          1,
-          "Task one",
-          "This is the body of task one.",
-          0,
-          1,
-          0,
-          0,
-          Pose(Vector3(0f, 0f, 0f), Quaternion(1f, 0f, 0f, 0f)),
-      )
+  var task = Task(
+      1,
+      "Task one",
+      "This is the body of task one.",
+      0,
+      1,
+      0,
+      0,
+      Pose(Vector3(0f, 0f, 0f), Quaternion(1f, 0f, 0f, 0f)),
+  )
   TasksPanel()
 }

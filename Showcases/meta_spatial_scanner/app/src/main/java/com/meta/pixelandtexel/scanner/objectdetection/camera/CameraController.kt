@@ -429,15 +429,14 @@ class CameraController(
     var quat = Quaternion(rotation[3], -rotation[0], -rotation[1], rotation[2]).inverse()
     quat = quat.times(Quaternion(180f, 0f, 0f))
 
-    val props =
-        CameraProperties(
-            eye,
-            Vector3(translation[0], translation[1], -translation[2]),
-            quat,
-            Vector2(intrinsicsArr[0], intrinsicsArr[1]),
-            Vector2(intrinsicsArr[2], intrinsicsArr[3]),
-            Size(sensorSizePx.right, sensorSizePx.bottom),
-        )
+    val props = CameraProperties(
+        eye,
+        Vector3(translation[0], translation[1], -translation[2]),
+        quat,
+        Vector2(intrinsicsArr[0], intrinsicsArr[1]),
+        Vector2(intrinsicsArr[2], intrinsicsArr[3]),
+        Size(sensorSizePx.right, sensorSizePx.bottom),
+    )
 
     return props
   }

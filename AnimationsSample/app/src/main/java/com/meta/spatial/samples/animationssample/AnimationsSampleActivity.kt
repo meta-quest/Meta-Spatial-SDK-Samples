@@ -79,12 +79,11 @@ class AnimationsSampleActivity : AppSystemActivity() {
 
   override fun registerFeatures(): List<SpatialFeature> {
     @OptIn(SpatialSDKExperimentalAPI::class)
-    val features =
-        mutableListOf<SpatialFeature>(
-            VRFeature(this),
-            ComposeFeature(),
-            PanelAnimationFeature(),
-        )
+    val features = mutableListOf<SpatialFeature>(
+        VRFeature(this),
+        ComposeFeature(),
+        PanelAnimationFeature(),
+    )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))

@@ -23,11 +23,11 @@ object MathUtils {
     val sinHalfAngle = sin(halfAngle).toFloat()
 
     return Quaternion(
-            cos(halfAngle).toFloat(),
-            axis.x * sinHalfAngle,
-            axis.y * sinHalfAngle,
-            axis.z * sinHalfAngle,
-        )
+        cos(halfAngle).toFloat(),
+        axis.x * sinHalfAngle,
+        axis.y * sinHalfAngle,
+        axis.z * sinHalfAngle,
+    )
         .normalize()
   }
 

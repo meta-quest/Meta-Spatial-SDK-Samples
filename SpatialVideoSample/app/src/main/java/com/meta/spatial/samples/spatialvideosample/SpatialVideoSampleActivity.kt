@@ -200,10 +200,10 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
 
   override fun registerPanels(): List<PanelRegistration> {
     return mutableListOf(
-            controlsPanelRegistration(),
-            selectorPanelRegistration(),
-            mrPanelRegistration(),
-        )
+        controlsPanelRegistration(),
+        selectorPanelRegistration(),
+        mrPanelRegistration(),
+    )
         .apply {
           if (DEBUG) {
             add(debugPanelRegistration())
@@ -342,261 +342,258 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
   @androidx.annotation.OptIn(UnstableApi::class)
   private fun createVideoPanel() {
     val videoPanelEntity = Entity(R.id.spatialized_video_panel)
-    val settings =
-        MediaPanelSettings(
-            shape = QuadShapeOptions(width = MR_SCREEN_WIDTH, height = MR_SCREEN_HEIGHT),
-            display = PixelDisplayOptions(width = 3840, height = 1080),
-            rendering = MediaPanelRenderOptions(stereoMode = StereoMode.LeftRight),
-        )
-    val panelSceneObject =
-        PanelSceneObject(
-                scene,
-                videoPanelEntity,
-                settings.toPanelConfigOptions().apply {
-                  sceneMeshCreator = { texture: SceneTexture ->
-                    val halfHeight = height / 2f
-                    val halfWidth = width / 2f
-                    val halfDepth = 0.1f
-                    val rounding = 0.075f
-                    val triMesh =
-                        TriangleMesh(
-                            8,
-                            18,
-                            intArrayOf(6, 6, 12, 6, 0, 6),
-                            arrayOf(
-                                SceneMaterial(
-                                        texture,
-                                        AlphaMode.TRANSLUCENT,
-                                        "data/shaders/spatial/reflect",
-                                    )
-                                    .apply {
-                                      setStereoMode(stereoMode)
-                                      setUnlit(true)
-                                    },
-                                SceneMaterial(
-                                        texture,
-                                        AlphaMode.TRANSLUCENT,
-                                        "data/shaders/spatial/shadow",
-                                    )
-                                    .apply { setUnlit(true) },
-                                SceneMaterial(
-                                        texture,
-                                        AlphaMode.HOLE_PUNCH,
-                                        SceneMaterial.HOLE_PUNCH_SHADER,
-                                    )
-                                    .apply {
-                                      setStereoMode(stereoMode)
-                                      setUnlit(true)
-                                    },
-                            ),
-                        )
-                    triMesh.updateGeometry(
-                        0,
-                        floatArrayOf(
-                            -halfWidth,
-                            -halfHeight,
-                            0f,
-                            halfWidth,
-                            -halfHeight,
-                            0f,
-                            halfWidth,
-                            halfHeight,
-                            0f,
-                            -halfWidth,
-                            halfHeight,
-                            0f,
-                            // shadow
-                            -halfWidth,
-                            -halfHeight,
-                            halfDepth,
-                            halfWidth,
-                            -halfHeight,
-                            halfDepth,
-                            halfWidth,
-                            -halfHeight,
-                            -halfDepth,
-                            -halfWidth,
-                            -halfHeight,
-                            -halfDepth,
-                        ),
-                        floatArrayOf(
-                            0f,
-                            0f,
-                            1f,
-                            0f,
-                            0f,
-                            1f,
-                            0f,
-                            0f,
-                            1f,
-                            0f,
-                            0f,
-                            1f,
-                            0f,
-                            0f,
-                            1f,
-                            0f,
-                            0f,
-                            1f,
-                            0f,
-                            0f,
-                            1f,
-                            0f,
-                            0f,
-                            1f,
-                        ),
-                        floatArrayOf(
-                            // front
-                            0f,
-                            1f,
-                            1f,
-                            1f,
-                            1f,
-                            0f,
-                            0f,
-                            0f,
-                            // shadow
-                            halfWidth - rounding,
-                            halfDepth - rounding,
-                            halfWidth - rounding,
-                            halfDepth - rounding,
-                            halfWidth - rounding,
-                            halfDepth - rounding,
-                            halfWidth - rounding,
-                            halfDepth - rounding,
-                        ),
-                        intArrayOf(
-                            Color.WHITE,
-                            Color.WHITE,
-                            Color.WHITE,
-                            Color.WHITE,
-                            Color.WHITE,
-                            Color.WHITE,
-                            Color.WHITE,
-                            Color.WHITE,
-                        ),
+    val settings = MediaPanelSettings(
+        shape = QuadShapeOptions(width = MR_SCREEN_WIDTH, height = MR_SCREEN_HEIGHT),
+        display = PixelDisplayOptions(width = 3840, height = 1080),
+        rendering = MediaPanelRenderOptions(stereoMode = StereoMode.LeftRight),
+    )
+    val panelSceneObject = PanelSceneObject(
+        scene,
+        videoPanelEntity,
+        settings.toPanelConfigOptions().apply {
+          sceneMeshCreator = { texture: SceneTexture ->
+            val halfHeight = height / 2f
+            val halfWidth = width / 2f
+            val halfDepth = 0.1f
+            val rounding = 0.075f
+            val triMesh = TriangleMesh(
+                8,
+                18,
+                intArrayOf(6, 6, 12, 6, 0, 6),
+                arrayOf(
+                    SceneMaterial(
+                        texture,
+                        AlphaMode.TRANSLUCENT,
+                        "data/shaders/spatial/reflect",
                     )
-                    triMesh.updatePrimitives(
-                        0,
-                        intArrayOf(0, 1, 2, 0, 2, 3, 0, 2, 1, 0, 3, 2, 4, 6, 5, 4, 7, 6),
+                        .apply {
+                          setStereoMode(stereoMode)
+                          setUnlit(true)
+                        },
+                    SceneMaterial(
+                        texture,
+                        AlphaMode.TRANSLUCENT,
+                        "data/shaders/spatial/shadow",
                     )
-                    SceneMesh.fromTriangleMesh(triMesh, false)
-                  }
-                },
+                        .apply { setUnlit(true) },
+                    SceneMaterial(
+                        texture,
+                        AlphaMode.HOLE_PUNCH,
+                        SceneMaterial.HOLE_PUNCH_SHADER,
+                    )
+                        .apply {
+                          setStereoMode(stereoMode)
+                          setUnlit(true)
+                        },
+                ),
             )
-            .apply {
-              player.repeatMode = Player.REPEAT_MODE_ONE
-              player.setSeekParameters(SeekParameters.CLOSEST_SYNC)
-              seekBar.thenAccept { it ->
-                player.addListener(
-                    object : Player.Listener {
-                      override fun onPlayerStateChanged(
-                          playWhenReady: Boolean,
-                          playbackState: Int,
-                      ) {
-                        if (playbackState == Player.STATE_READY) {
-                          seekBar.thenAccept { it.max = player.duration.toInt() }
-                        }
-                      }
-
-                      override fun onPositionDiscontinuity(reason: Int) {
-                        it.progress = player.currentPosition.toInt()
-                      }
-
-                      override fun onPlayerError(error: PlaybackException) {
-                        // The ExoPlayer can throw a decoder error under heavy load such as app
-                        // startup,
-                        // in the case of a decoding error reloading the video into exoplayer fixes
-                        // the
-                        // issue.
-                        // The theory here is that the file itself is not an issue, but the hardware
-                        // decoder
-                        // becomes backed up during app startup which causes a decoding error to be
-                        // thrown.
-                        setUri?.let { uri -> setVideo(uri) }
-                        Log.e("ExoPlayer", "Player encountered an error: $error")
-                      }
-                    }
-                )
-
-                it.setOnSeekBarChangeListener(
-                    object : SeekBar.OnSeekBarChangeListener {
-                      override fun onProgressChanged(
-                          seekBar: SeekBar?,
-                          progress: Int,
-                          fromUser: Boolean,
-                      ) {
-                        if (fromUser) {
-                          player.seekTo(progress.toLong())
-                          resetControllerFadeOutTimer()
-                        }
-                      }
-
-                      override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                        if (isPlaying) {
-                          // Pause the player while the user is dragging the SeekBar
-                          player.playWhenReady = false
-                        }
-                        resetControllerFadeOutTimer()
-                      }
-
-                      override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                        if (isPlaying) {
-                          // Resume the player when the user stops dragging the SeekBar
-                          player.playWhenReady = true
-                        }
-                      }
-                    }
-                )
-              }
-
-              addInputListener(
-                  object : InputListener {
-                    override fun onHoverStart(
-                        receiver: SceneObject,
-                        sourceOfInput: Entity,
-                    ) {
-                      animateControllerVisibility(true)
-                    }
-
-                    override fun onClick(
-                        receiver: SceneObject,
-                        hitInfo: HitInfo,
-                        sourceOfInput: Entity,
-                    ) {
-                      togglePlay()
-                    }
-
-                    override fun onInput(
-                        receiver: SceneObject,
-                        hitInfo: HitInfo,
-                        sourceOfInput: Entity,
-                        changed: Int,
-                        clicked: Int,
-                        downTime: Long,
-                    ): Boolean {
-                      resetControllerFadeOutTimer()
-                      return false
+            triMesh.updateGeometry(
+                0,
+                floatArrayOf(
+                    -halfWidth,
+                    -halfHeight,
+                    0f,
+                    halfWidth,
+                    -halfHeight,
+                    0f,
+                    halfWidth,
+                    halfHeight,
+                    0f,
+                    -halfWidth,
+                    halfHeight,
+                    0f,
+                    // shadow
+                    -halfWidth,
+                    -halfHeight,
+                    halfDepth,
+                    halfWidth,
+                    -halfHeight,
+                    halfDepth,
+                    halfWidth,
+                    -halfHeight,
+                    -halfDepth,
+                    -halfWidth,
+                    -halfHeight,
+                    -halfDepth,
+                ),
+                floatArrayOf(
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                    0f,
+                    0f,
+                    1f,
+                ),
+                floatArrayOf(
+                    // front
+                    0f,
+                    1f,
+                    1f,
+                    1f,
+                    1f,
+                    0f,
+                    0f,
+                    0f,
+                    // shadow
+                    halfWidth - rounding,
+                    halfDepth - rounding,
+                    halfWidth - rounding,
+                    halfDepth - rounding,
+                    halfWidth - rounding,
+                    halfDepth - rounding,
+                    halfWidth - rounding,
+                    halfDepth - rounding,
+                ),
+                intArrayOf(
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                    Color.WHITE,
+                ),
+            )
+            triMesh.updatePrimitives(
+                0,
+                intArrayOf(0, 1, 2, 0, 2, 3, 0, 2, 1, 0, 3, 2, 4, 6, 5, 4, 7, 6),
+            )
+            SceneMesh.fromTriangleMesh(triMesh, false)
+          }
+        },
+    )
+        .apply {
+          player.repeatMode = Player.REPEAT_MODE_ONE
+          player.setSeekParameters(SeekParameters.CLOSEST_SYNC)
+          seekBar.thenAccept { it ->
+            player.addListener(
+                object : Player.Listener {
+                  override fun onPlayerStateChanged(
+                      playWhenReady: Boolean,
+                      playbackState: Int,
+                  ) {
+                    if (playbackState == Player.STATE_READY) {
+                      seekBar.thenAccept { it.max = player.duration.toInt() }
                     }
                   }
-              )
 
-              // Default media
-              Movie.fromRawVideo("doggie", "Doggie")?.let { movie -> setVideo(movie.uri) }
+                  override fun onPositionDiscontinuity(reason: Int) {
+                    it.progress = player.currentPosition.toInt()
+                  }
 
-              val handler = Handler(Looper.getMainLooper())
-              handler.postDelayed(
-                  object : Runnable {
-                    override fun run() {
-                      if (isPlaying && !isSeeking) {
-                        seekBar.thenAccept { it.progress = player.currentPosition.toInt() }
-                      }
-                      handler.postDelayed(this, 500)
+                  override fun onPlayerError(error: PlaybackException) {
+                    // The ExoPlayer can throw a decoder error under heavy load such as app
+                    // startup,
+                    // in the case of a decoding error reloading the video into exoplayer fixes
+                    // the
+                    // issue.
+                    // The theory here is that the file itself is not an issue, but the hardware
+                    // decoder
+                    // becomes backed up during app startup which causes a decoding error to be
+                    // thrown.
+                    setUri?.let { uri -> setVideo(uri) }
+                    Log.e("ExoPlayer", "Player encountered an error: $error")
+                  }
+                }
+            )
+
+            it.setOnSeekBarChangeListener(
+                object : SeekBar.OnSeekBarChangeListener {
+                  override fun onProgressChanged(
+                      seekBar: SeekBar?,
+                      progress: Int,
+                      fromUser: Boolean,
+                  ) {
+                    if (fromUser) {
+                      player.seekTo(progress.toLong())
+                      resetControllerFadeOutTimer()
                     }
-                  },
-                  500,
-              )
-            }
+                  }
+
+                  override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                    if (isPlaying) {
+                      // Pause the player while the user is dragging the SeekBar
+                      player.playWhenReady = false
+                    }
+                    resetControllerFadeOutTimer()
+                  }
+
+                  override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    if (isPlaying) {
+                      // Resume the player when the user stops dragging the SeekBar
+                      player.playWhenReady = true
+                    }
+                  }
+                }
+            )
+          }
+
+          addInputListener(
+              object : InputListener {
+                override fun onHoverStart(
+                    receiver: SceneObject,
+                    sourceOfInput: Entity,
+                ) {
+                  animateControllerVisibility(true)
+                }
+
+                override fun onClick(
+                    receiver: SceneObject,
+                    hitInfo: HitInfo,
+                    sourceOfInput: Entity,
+                ) {
+                  togglePlay()
+                }
+
+                override fun onInput(
+                    receiver: SceneObject,
+                    hitInfo: HitInfo,
+                    sourceOfInput: Entity,
+                    changed: Int,
+                    clicked: Int,
+                    downTime: Long,
+                ): Boolean {
+                  resetControllerFadeOutTimer()
+                  return false
+                }
+              }
+          )
+
+          // Default media
+          Movie.fromRawVideo("doggie", "Doggie")?.let { movie -> setVideo(movie.uri) }
+
+          val handler = Handler(Looper.getMainLooper())
+          handler.postDelayed(
+              object : Runnable {
+                override fun run() {
+                  if (isPlaying && !isSeeking) {
+                    seekBar.thenAccept { it.progress = player.currentPosition.toInt() }
+                  }
+                  handler.postDelayed(this, 500)
+                }
+              },
+              500,
+          )
+        }
 
     player.setVideoSurface(panelSceneObject.getSurface())
 
@@ -923,16 +920,15 @@ class CustomRenderersFactory : DefaultRenderersFactory {
             metadataRendererOutput,
         )
     var rendererList = renderers.toMutableList()
-    val audioRenderer =
-        MediaCodecAudioRenderer(
-            context_,
-            getCodecAdapterFactory(),
-            MediaCodecSelector.DEFAULT,
-            false,
-            eventHandler,
-            audioRendererEventListener,
-            audioSink_,
-        )
+    val audioRenderer = MediaCodecAudioRenderer(
+        context_,
+        getCodecAdapterFactory(),
+        MediaCodecSelector.DEFAULT,
+        false,
+        eventHandler,
+        audioRendererEventListener,
+        audioSink_,
+    )
     rendererList.add(0, audioRenderer)
     return rendererList.toTypedArray()
   }

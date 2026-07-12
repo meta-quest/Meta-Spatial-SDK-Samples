@@ -139,12 +139,10 @@ class PinnableSystem(private val glxfManager: GLXFManager) : SystemBase() {
 
                   // create the new position/rotation, then transform to the pinnable
                   // entity's local coordinates
-                  val worldPose =
-                      Pose(
-                          hitInfo.point,
-                          Quaternion.lookRotation(pinnableToHitPoint)
-                              .times(Quaternion(90f, 0f, 0f)),
-                      )
+                  val worldPose = Pose(
+                      hitInfo.point,
+                      Quaternion.lookRotation(pinnableToHitPoint).times(Quaternion(90f, 0f, 0f)),
+                  )
                   val localPose =
                       entity.getComponent<Transform>().transform.inverse().times(worldPose)
                   val newTransform = Transform(localPose)

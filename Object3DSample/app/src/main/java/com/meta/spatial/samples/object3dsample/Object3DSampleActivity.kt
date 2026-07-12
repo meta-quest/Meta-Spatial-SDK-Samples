@@ -58,14 +58,13 @@ class Object3DSampleActivity : AppSystemActivity() {
   private var skybox: Entity? = null
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf<SpatialFeature>(
-            PhysicsFeature(spatial, worldBounds = PhysicsWorldBounds(minY = -100.0f)),
-            // Demonstration of how to opt-out of the InteractionSDK, and use controller-only
-            // simplified input.
-            VRFeature(this, inputSystemType = VrInputSystemType.SIMPLE_CONTROLLER),
-            ComposeFeature(),
-        )
+    val features = mutableListOf<SpatialFeature>(
+        PhysicsFeature(spatial, worldBounds = PhysicsWorldBounds(minY = -100.0f)),
+        // Demonstration of how to opt-out of the InteractionSDK, and use controller-only
+        // simplified input.
+        VRFeature(this, inputSystemType = VrInputSystemType.SIMPLE_CONTROLLER),
+        ComposeFeature(),
+    )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))

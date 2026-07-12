@@ -70,13 +70,12 @@ class CameraProperties(
    *   z-component is 1f, indicating it points forward from the camera.
    */
   fun screenPointToRayInCamera(screenPoint: Vector2): Vector3 {
-    val direction =
-        Vector3(
-                x = (screenPoint.x - principalPoint.x) / focalLength.x,
-                y = ((resolution.height - screenPoint.y) - principalPoint.y) / focalLength.y,
-                z = 1f,
-            )
-            .normalize()
+    val direction = Vector3(
+        x = (screenPoint.x - principalPoint.x) / focalLength.x,
+        y = ((resolution.height - screenPoint.y) - principalPoint.y) / focalLength.y,
+        z = 1f,
+    )
+        .normalize()
     return direction
   }
 

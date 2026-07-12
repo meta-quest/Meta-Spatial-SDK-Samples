@@ -66,17 +66,16 @@ class ControlsPanelActivity : ComponentActivity(), IPCMessageHandler {
   }
 
   fun getControlsButtons(cinemaState: CinemaState): List<ControlsPanelButton> {
-    val cinemaAndTV =
-        listOf(
-            ControlsPanelButton("Cinema") {
-              controlsPanelViewModel.updateCinemaState(CinemaState.Cinema)
-              controlsPanelViewModel.passthroughSetInteractable(false)
-            },
-            ControlsPanelButton("TV") {
-              controlsPanelViewModel.updateCinemaState(CinemaState.TV)
-              controlsPanelViewModel.passthroughSetInteractable(true)
-            },
-        )
+    val cinemaAndTV = listOf(
+        ControlsPanelButton("Cinema") {
+          controlsPanelViewModel.updateCinemaState(CinemaState.Cinema)
+          controlsPanelViewModel.passthroughSetInteractable(false)
+        },
+        ControlsPanelButton("TV") {
+          controlsPanelViewModel.updateCinemaState(CinemaState.TV)
+          controlsPanelViewModel.passthroughSetInteractable(true)
+        },
+    )
     val noButtons = listOf<ControlsPanelButton>()
     return when (cinemaState) {
       CinemaState.Cinema -> cinemaAndTV

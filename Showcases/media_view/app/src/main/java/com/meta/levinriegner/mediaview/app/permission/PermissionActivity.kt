@@ -185,12 +185,11 @@ class PermissionActivity : ComponentActivity() {
       // Android API 30+ requires manual approval through system settings
       try {
         // Launch intent to open system settings
-        val intent =
-            Intent(
-                    Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
-                    Uri.fromParts("package", packageName, null),
-                )
-                .addCategory(Intent.CATEGORY_DEFAULT)
+        val intent = Intent(
+            Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION,
+            Uri.fromParts("package", packageName, null),
+        )
+            .addCategory(Intent.CATEGORY_DEFAULT)
         startActivity(intent)
         storagePermissionActivityResult.launch(intent)
       } catch (e: Exception) {

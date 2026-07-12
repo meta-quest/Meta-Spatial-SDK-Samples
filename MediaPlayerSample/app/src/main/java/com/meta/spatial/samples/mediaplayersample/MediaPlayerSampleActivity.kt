@@ -192,12 +192,11 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
     }
 
   private fun playRandomSfx() {
-    val sfxList =
-        listOf(
-            "sounds/system_transition_mrvr_01.wav",
-            "sounds/system_transition_mrvr_02.wav",
-            "sounds/system_transition_mrvr_03.wav",
-        )
+    val sfxList = listOf(
+        "sounds/system_transition_mrvr_01.wav",
+        "sounds/system_transition_mrvr_02.wav",
+        "sounds/system_transition_mrvr_03.wav",
+    )
 
     val asset = SceneAudioAsset.loadLocalFile(sfxList.random())
     scene.playSound(asset, 2.0f)

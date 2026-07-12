@@ -70,21 +70,20 @@ class PanelManager(
   private val registeredPanels = mutableMapOf<Int, AppPanelRegistration>()
 
   fun providePanelRegistrations(): List<PanelRegistration> {
-    val panelRegistrations =
-        listOf(
-            PanelCreator(PanelRegistrationIds.GALLERY) { ent ->
-              galleryEntity = ent
+    val panelRegistrations = listOf(
+        PanelCreator(PanelRegistrationIds.GALLERY) { ent ->
+          galleryEntity = ent
 
-              createGalleryPanel(ent)
-            },
-            PanelCreator(PanelRegistrationIds.MEDIA_FILTER) { ent -> createMediaFilterPanel(ent) },
-            PanelCreator(PanelRegistrationIds.GALLERY_MENU) { ent -> createGalleryMenuPanel(ent) },
-            PanelCreator(PanelRegistrationIds.ONBOARDING) { ent -> createOnboardingPanel(ent) },
-            PanelCreator(PanelRegistrationIds.WHATS_NEW) { ent -> createWhatsNewPanel(ent) },
-            PanelCreator(PanelRegistrationIds.PRIVACY_POLICY) { ent ->
-              createPrivacyPolicyPanel(ent)
-            },
-        )
+          createGalleryPanel(ent)
+        },
+        PanelCreator(PanelRegistrationIds.MEDIA_FILTER) { ent -> createMediaFilterPanel(ent) },
+        PanelCreator(PanelRegistrationIds.GALLERY_MENU) { ent -> createGalleryMenuPanel(ent) },
+        PanelCreator(PanelRegistrationIds.ONBOARDING) { ent -> createOnboardingPanel(ent) },
+        PanelCreator(PanelRegistrationIds.WHATS_NEW) { ent -> createWhatsNewPanel(ent) },
+        PanelCreator(PanelRegistrationIds.PRIVACY_POLICY) { ent ->
+          createPrivacyPolicyPanel(ent)
+        },
+    )
 
     panelRegistrations.forEach { panelRegistration ->
       registeredPanels[panelRegistration.registrationId] =
@@ -98,23 +97,21 @@ class PanelManager(
   }
 
   private fun createWhatsNewPanel(ent: Entity): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            enableLayer = true,
-            enableTransparent = false,
-            includeGlass = false,
-        )
+    val config = PanelConfigOptions(
+        enableLayer = true,
+        enableTransparent = false,
+        includeGlass = false,
+    )
 
     return PanelSceneObject(scene, spatialContext, WhatsNewActivity::class.java, ent, config)
   }
 
   private fun createOnboardingPanel(ent: Entity): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            enableLayer = true,
-            enableTransparent = false,
-            includeGlass = false,
-        )
+    val config = PanelConfigOptions(
+        enableLayer = true,
+        enableTransparent = false,
+        includeGlass = false,
+    )
 
     return PanelSceneObject(scene, spatialContext, OnboardingActivity::class.java, ent, config)
   }
@@ -190,12 +187,11 @@ class PanelManager(
   }
 
   private fun createGalleryPanel(ent: Entity): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            enableLayer = true,
-            enableTransparent = false,
-            includeGlass = false,
-        )
+    val config = PanelConfigOptions(
+        enableLayer = true,
+        enableTransparent = false,
+        includeGlass = false,
+    )
 
     return PanelSceneObject(
         scene,
@@ -207,45 +203,41 @@ class PanelManager(
   }
 
   private fun createMediaFilterPanel(ent: Entity): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            enableLayer = true,
-            enableTransparent = false,
-            includeGlass = false,
-        )
+    val config = PanelConfigOptions(
+        enableLayer = true,
+        enableTransparent = false,
+        includeGlass = false,
+    )
     return PanelSceneObject(scene, spatialContext, MediaFilterActivity::class.java, ent, config)
   }
 
   private fun createUploadPanel(ent: Entity): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            width = 0.6f,
-            height = 0.40f,
-            enableLayer = true,
-            enableTransparent = true,
-            includeGlass = false,
-        )
+    val config = PanelConfigOptions(
+        width = 0.6f,
+        height = 0.40f,
+        enableLayer = true,
+        enableTransparent = true,
+        includeGlass = false,
+    )
 
     return PanelSceneObject(scene, spatialContext, UploadActivity::class.java, ent, config)
   }
 
   private fun createGalleryMenuPanel(ent: Entity): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            enableLayer = true,
-            enableTransparent = false,
-            includeGlass = false,
-        )
+    val config = PanelConfigOptions(
+        enableLayer = true,
+        enableTransparent = false,
+        includeGlass = false,
+    )
     return PanelSceneObject(scene, spatialContext, GalleryMenuActivity::class.java, ent, config)
   }
 
   private fun createPrivacyPolicyPanel(ent: Entity): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            enableLayer = true,
-            enableTransparent = true,
-            includeGlass = false,
-        )
+    val config = PanelConfigOptions(
+        enableLayer = true,
+        enableTransparent = true,
+        includeGlass = false,
+    )
     return PanelSceneObject(scene, spatialContext, PrivacyPolicyActivity::class.java, ent, config)
   }
 
@@ -294,16 +286,15 @@ class PanelManager(
   }
 
   private fun createPlayerMenuPanel(ent: Entity, mediaModel: MediaModel): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            width = dpToPx(Dimens.playerMenuTotalWidth) * PIXELS_TO_METERS,
-            height = dpToPx(Dimens.playerMenuTotalHeight) * PIXELS_TO_METERS,
-            layoutWidthInPx = dpToPx(Dimens.playerMenuTotalWidth),
-            layoutHeightInPx = dpToPx(Dimens.playerMenuTotalHeight),
-            enableLayer = true,
-            enableTransparent = true,
-            includeGlass = false,
-        )
+    val config = PanelConfigOptions(
+        width = dpToPx(Dimens.playerMenuTotalWidth) * PIXELS_TO_METERS,
+        height = dpToPx(Dimens.playerMenuTotalHeight) * PIXELS_TO_METERS,
+        layoutWidthInPx = dpToPx(Dimens.playerMenuTotalWidth),
+        layoutHeightInPx = dpToPx(Dimens.playerMenuTotalHeight),
+        enableLayer = true,
+        enableTransparent = true,
+        includeGlass = false,
+    )
 
     return PanelSceneObject(
         scene,
@@ -369,15 +360,14 @@ class PanelManager(
   }
 
   private fun createImmersiveMenuPanel(ent: Entity, mediaModel: MediaModel): PanelSceneObject {
-    val config =
-        PanelConfigOptions(
-            width = 0.5f,
-            height = immersiveMenuHeight,
-            layerConfig = QuadLayerConfig(zIndex = zIndexMenu),
-            panelShader = "data/shaders/punch/punch",
-            alphaMode = AlphaMode.HOLE_PUNCH,
-            includeGlass = false,
-        )
+    val config = PanelConfigOptions(
+        width = 0.5f,
+        height = immersiveMenuHeight,
+        layerConfig = QuadLayerConfig(zIndex = zIndexMenu),
+        panelShader = "data/shaders/punch/punch",
+        alphaMode = AlphaMode.HOLE_PUNCH,
+        includeGlass = false,
+    )
 
     return PanelSceneObject(
         scene,

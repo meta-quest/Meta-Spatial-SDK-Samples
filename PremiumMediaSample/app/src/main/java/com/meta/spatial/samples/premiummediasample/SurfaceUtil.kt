@@ -18,24 +18,23 @@ import javax.microedition.khronos.egl.EGLContext
 import javax.microedition.khronos.egl.EGLDisplay
 
 object SurfaceUtil {
-  val config =
-      intArrayOf(
-          EGL_RENDERABLE_TYPE,
-          EGL_OPENGL_ES2_BIT,
-          EGL_RED_SIZE,
-          8,
-          EGL_GREEN_SIZE,
-          8,
-          EGL_BLUE_SIZE,
-          8,
-          EGL_ALPHA_SIZE,
-          8,
-          EGL_DEPTH_SIZE,
-          0,
-          EGL_STENCIL_SIZE,
-          0,
-          EGL_NONE,
-      )
+  val config = intArrayOf(
+      EGL_RENDERABLE_TYPE,
+      EGL_OPENGL_ES2_BIT,
+      EGL_RED_SIZE,
+      8,
+      EGL_GREEN_SIZE,
+      8,
+      EGL_BLUE_SIZE,
+      8,
+      EGL_ALPHA_SIZE,
+      8,
+      EGL_DEPTH_SIZE,
+      0,
+      EGL_STENCIL_SIZE,
+      0,
+      EGL_NONE,
+  )
 
   private fun chooseEglConfig(egl: EGL10, eglDisplay: EGLDisplay): EGLConfig {
     val configsCount = intArrayOf(0)

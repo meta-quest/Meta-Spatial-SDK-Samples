@@ -45,12 +45,11 @@ fun CustomToggle(
   val toggleHeight = 44.dp
   val thumbPadding = 8.dp
 
-  val animatedOffset by
-      animateFloatAsState(
-          targetValue = if (toggleState == ToggleState.RIGHT) 1f else 0f,
-          animationSpec = tween(durationMillis = 300),
-          label = "toggle_offset",
-      )
+  val animatedOffset by animateFloatAsState(
+      targetValue = if (toggleState == ToggleState.RIGHT) 1f else 0f,
+      animationSpec = tween(durationMillis = 300),
+      label = "toggle_offset",
+  )
 
   val toggleColor = if (isSystemInDarkTheme()) SpatialColor.black10 else SpatialColor.white100
   val thumbColor = SpatialTheme.colorScheme.controlButton

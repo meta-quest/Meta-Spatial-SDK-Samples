@@ -49,25 +49,24 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf<SpatialFeature>(
-            VRFeature(this),
-            HotReloadFeature(this),
-            ComposeFeature(),
-            OVRMetricsFeature(
-                this,
-                OVRMetricsDataModel() {
-                  numberOfMeshes()
-                  numberOfGrabbables()
-                },
-                LookAtMetrics {
-                  pos()
-                  pitch()
-                  yaw()
-                  roll()
-                },
-            ),
-        )
+    val features = mutableListOf<SpatialFeature>(
+        VRFeature(this),
+        HotReloadFeature(this),
+        ComposeFeature(),
+        OVRMetricsFeature(
+            this,
+            OVRMetricsDataModel() {
+              numberOfMeshes()
+              numberOfGrabbables()
+            },
+            LookAtMetrics {
+              pos()
+              pitch()
+              yaw()
+              roll()
+            },
+        ),
+    )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(DataModelInspectorFeature(spatial, this.componentManager))

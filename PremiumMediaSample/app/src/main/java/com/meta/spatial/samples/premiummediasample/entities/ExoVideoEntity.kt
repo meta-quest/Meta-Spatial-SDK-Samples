@@ -98,15 +98,14 @@ class ExoVideoEntity(
               PanelRenderingStyle.DIRECT_TO_SURFACE
           else PanelRenderingStyle.READABLE
 
-      val exoVideo =
-          ExoVideoEntity(
-              exoPlayer = exoPlayer,
-              mediaSource = mediaSource,
-              panelRenderingStyle = panelRenderingStyle,
-              tweenEngine = tweenEngine,
-              ipcServiceConnection = ipcServiceConnection,
-              spatialAudioFeature = spatialAudioFeature,
-          )
+      val exoVideo = ExoVideoEntity(
+          exoPlayer = exoPlayer,
+          mediaSource = mediaSource,
+          panelRenderingStyle = panelRenderingStyle,
+          tweenEngine = tweenEngine,
+          ipcServiceConnection = ipcServiceConnection,
+          spatialAudioFeature = spatialAudioFeature,
+      )
 
       // WallLighting is only supported for Rectangular panels.
       if (mediaSource.videoShape == MediaSource.VideoShape.Rectilinear) {

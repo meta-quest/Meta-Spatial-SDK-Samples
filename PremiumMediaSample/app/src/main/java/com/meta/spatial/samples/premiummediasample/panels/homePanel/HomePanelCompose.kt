@@ -78,28 +78,25 @@ object HomePanelConstants {
   val rowSpacing = 10f.dp
 
   // Text styles
-  val titleStyle =
-      TextStyle(
-          fontFamily = Inter18,
-          fontSize = 28f.sp,
-          fontWeight = FontWeight.Bold,
-          lineHeight = 40f.sp,
-      )
+  val titleStyle = TextStyle(
+      fontFamily = Inter18,
+      fontSize = 28f.sp,
+      fontWeight = FontWeight.Bold,
+      lineHeight = 40f.sp,
+  )
 
-  val descriptionStyle =
-      TextStyle(
-          fontFamily = Inter18,
-          fontSize = 22f.sp,
-          fontWeight = FontWeight.Normal,
-          lineHeight = 32f.sp,
-      )
+  val descriptionStyle = TextStyle(
+      fontFamily = Inter18,
+      fontSize = 22f.sp,
+      fontWeight = FontWeight.Normal,
+      lineHeight = 32f.sp,
+  )
 
-  val badgeStyle =
-      TextStyle(
-          fontFamily = Inter18,
-          fontSize = 22f.sp,
-          fontWeight = FontWeight.Black,
-      )
+  val badgeStyle = TextStyle(
+      fontFamily = Inter18,
+      fontSize = 22f.sp,
+      fontWeight = FontWeight.Black,
+  )
 }
 
 @Preview(

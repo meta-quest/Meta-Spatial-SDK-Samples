@@ -73,12 +73,11 @@ class ImmersiveActivity : AppSystemActivity() {
     get() = ProjectManager.instance.currentProject
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf(
-            VRFeature(this, inputSystemType = VrInputSystemType.SIMPLE_CONTROLLER),
-            ComposeFeature(),
-            // IsdkFeature(this, spatial, systemManager)
-        )
+    val features = mutableListOf(
+        VRFeature(this, inputSystemType = VrInputSystemType.SIMPLE_CONTROLLER),
+        ComposeFeature(),
+        // IsdkFeature(this, spatial, systemManager)
+    )
     return features
   }
 

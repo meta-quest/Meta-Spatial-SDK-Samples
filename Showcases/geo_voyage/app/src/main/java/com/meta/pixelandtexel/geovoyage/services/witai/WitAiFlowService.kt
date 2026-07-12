@@ -19,12 +19,11 @@ object WitAIFlowService {
   // allowed entities for llama
   private val allowedEntitiesForLlama = WitAiEntityType.entries.toSet()
   private val allowedIntentsForLLama = WitAiIntentType.entries.toSet()
-  private val allowedTraitsForLlama =
-      setOf(
-          WitAiTraitType.PNTLocation,
-          WitAiTraitType.PNTQuestion,
-          WitAiTraitType.WitSentiment,
-      )
+  private val allowedTraitsForLlama = setOf(
+      WitAiTraitType.PNTLocation,
+      WitAiTraitType.PNTQuestion,
+      WitAiTraitType.WitSentiment,
+  )
 
   fun shouldSendResponseToLlama(response: WitAiUnderstoodResponse): Boolean {
     val isFilteringEnabled = SettingsService.get(SettingsKey.WIT_AI_FILTERING_ENABLED, true)

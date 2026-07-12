@@ -63,29 +63,28 @@ fun PanelNavContainer(
 @Preview(widthDp = 642, heightDp = 600)
 @Composable
 private fun PanelNavContainerPreview() {
-  val navButtonStates =
-      listOf(
-          NavButtonState(
-              text = "Explore",
-              route = Routes.EXPLORE_ROUTE,
-              iconImage = SpatialIcons.Regular.World,
-          ),
-          NavButtonState(
-              text = "Ask",
-              route = Routes.ASK_EARTH_ROUTE,
-              iconImage = SpatialIcons.Regular.MicrophoneOn,
-          ),
-          NavButtonState(
-              text = "Today",
-              route = Routes.TODAY_IN_HISTORY_ROUTE,
-              iconImage = SpatialIcons.Regular.StarFull,
-          ),
-          NavButtonState(
-              text = "Quiz",
-              route = Routes.DAILY_QUIZ_ROUTE,
-              iconImage = SpatialIcons.Regular.Trophy,
-          ),
-      )
+  val navButtonStates = listOf(
+      NavButtonState(
+          text = "Explore",
+          route = Routes.EXPLORE_ROUTE,
+          iconImage = SpatialIcons.Regular.World,
+      ),
+      NavButtonState(
+          text = "Ask",
+          route = Routes.ASK_EARTH_ROUTE,
+          iconImage = SpatialIcons.Regular.MicrophoneOn,
+      ),
+      NavButtonState(
+          text = "Today",
+          route = Routes.TODAY_IN_HISTORY_ROUTE,
+          iconImage = SpatialIcons.Regular.StarFull,
+      ),
+      NavButtonState(
+          text = "Quiz",
+          route = Routes.DAILY_QUIZ_ROUTE,
+          iconImage = SpatialIcons.Regular.Trophy,
+      ),
+  )
 
   GeoVoyageTheme {
     PrimaryPanel {

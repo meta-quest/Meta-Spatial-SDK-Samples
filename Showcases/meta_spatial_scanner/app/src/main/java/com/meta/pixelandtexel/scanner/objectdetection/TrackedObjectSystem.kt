@@ -463,11 +463,10 @@ class TrackedObjectSystem(
     val trWorldRayDir = cameraPose.q.times(topRight).normalize()
     val trPosition = MathUtils.rayPlaneIntersection(Ray(cameraPose.t, trWorldRayDir), viewPlane)!!
 
-    val bottomLeft =
-        screenPointToPointOnViewPlane(
-            Vector2(bounds.left.toFloat(), bounds.bottom.toFloat()),
-            Z_DIST,
-        )
+    val bottomLeft = screenPointToPointOnViewPlane(
+        Vector2(bounds.left.toFloat(), bounds.bottom.toFloat()),
+        Z_DIST,
+    )
     val blWorldRayDir = cameraPose.q.times(bottomLeft).normalize()
     val blPosition = MathUtils.rayPlaneIntersection(Ray(cameraPose.t, blWorldRayDir), viewPlane)!!
 

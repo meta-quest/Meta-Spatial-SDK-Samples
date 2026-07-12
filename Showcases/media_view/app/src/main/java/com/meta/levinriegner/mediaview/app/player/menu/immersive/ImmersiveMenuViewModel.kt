@@ -32,12 +32,11 @@ constructor(
 
   private val mediaModel = savedStateHandle.get<MediaModel>("mediaModel")!!
 
-  private val _state =
-      MutableStateFlow<ImmersiveMenuState>(
-          ImmersiveMenuState.Initial(
-              canEdit = mediaModel.editOptions.isNotEmpty() && FeatureFlags.MEDIA_EDIT_ENABLED,
-          ),
-      )
+  private val _state = MutableStateFlow<ImmersiveMenuState>(
+      ImmersiveMenuState.Initial(
+          canEdit = mediaModel.editOptions.isNotEmpty() && FeatureFlags.MEDIA_EDIT_ENABLED,
+      ),
+  )
   val state = _state.asStateFlow()
 
   fun exitImmersiveMedia() {

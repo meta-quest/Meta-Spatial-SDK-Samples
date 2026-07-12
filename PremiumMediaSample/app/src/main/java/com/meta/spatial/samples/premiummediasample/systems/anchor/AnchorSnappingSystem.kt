@@ -127,13 +127,12 @@ class AnchorSnappingSystem() : SystemBase() {
       return true
     } else {
       // Use backup raycast check if box test fails
-      val hitInfo =
-          doesRayIntersectPlane(
-              headPosition,
-              movementOffset,
-              plane,
-              maxRayLength = movementOffset.length(),
-          )
+      val hitInfo = doesRayIntersectPlane(
+          headPosition,
+          movementOffset,
+          plane,
+          maxRayLength = movementOffset.length(),
+      )
       if (hitInfo != null) {
         // Snap to plane
         snapToAnchorViaGrab(anchorable, anchorablePose, planeNormal, hitInfo.point, planeAnchor)
@@ -228,14 +227,13 @@ class AnchorSnappingSystem() : SystemBase() {
         hitPlane = true
 
         // Calculate and set new pose
-        val newPoseAbsolute =
-            calculatePoseFromAnchorPlane(
-                anchorable,
-                anchorablePose,
-                planeAnchor,
-                planeNormal,
-                hitInfo.point,
-            )
+        val newPoseAbsolute = calculatePoseFromAnchorPlane(
+            anchorable,
+            anchorablePose,
+            planeAnchor,
+            planeNormal,
+            hitInfo.point,
+        )
         anchorable.setComponent(Transform(fromAbsoluteToLocal(newPoseAbsolute, anchorable)))
 
         // Set new scale if needed (keeps the old FOV)

@@ -294,48 +294,47 @@ fun DebugPanelButton(button: DebugButtonItem) {
 @Composable
 fun DebugPanelPreview() {
 
-  val debugData =
-      DebugData(
-          items =
-              mutableListOf(
-                  DebugSliderItem(
-                      label = "Test 1",
-                      initialValue = 0.5f,
-                      onValueChanged = { value -> println(" item 1 value changed $value") },
-                  ),
-                  DebugSliderItem(
-                      label = "Test 2",
-                      initialValue = 0.5f,
-                      onValueChanged = { value -> println(" item 2 value changed $value") },
-                  ),
-                  DebugSliderItem(
-                      label = "Test 3",
-                      initialValue = 1f,
-                      range = 1f..10f,
-                      steps = 8,
-                      roundToInt = true,
-                      onValueChanged = { value -> println(" item 3 value changed $value") },
-                  ),
-                  DebugToggleItem(
-                      label = "Toggle Test 1",
-                      initialValue = true,
-                      onValueChanged = { value -> println(" toggle 1 value changed $value") },
-                  ),
-                  DebugToggleItem(
-                      label = "Toggle Test 2",
-                      initialValue = false,
-                      onValueChanged = { value -> println(" toggle 2 value changed $value") },
-                  ),
-                  DebugButtonItem(
-                      label = "Button 1",
-                      onClick = { println("clicked button 1") },
-                  ),
-                  DebugButtonItem(
-                      label = "Button 2",
-                      onClick = { println("clicked button 2") },
-                  ),
-              )
-      )
+  val debugData = DebugData(
+      items =
+          mutableListOf(
+              DebugSliderItem(
+                  label = "Test 1",
+                  initialValue = 0.5f,
+                  onValueChanged = { value -> println(" item 1 value changed $value") },
+              ),
+              DebugSliderItem(
+                  label = "Test 2",
+                  initialValue = 0.5f,
+                  onValueChanged = { value -> println(" item 2 value changed $value") },
+              ),
+              DebugSliderItem(
+                  label = "Test 3",
+                  initialValue = 1f,
+                  range = 1f..10f,
+                  steps = 8,
+                  roundToInt = true,
+                  onValueChanged = { value -> println(" item 3 value changed $value") },
+              ),
+              DebugToggleItem(
+                  label = "Toggle Test 1",
+                  initialValue = true,
+                  onValueChanged = { value -> println(" toggle 1 value changed $value") },
+              ),
+              DebugToggleItem(
+                  label = "Toggle Test 2",
+                  initialValue = false,
+                  onValueChanged = { value -> println(" toggle 2 value changed $value") },
+              ),
+              DebugButtonItem(
+                  label = "Button 1",
+                  onClick = { println("clicked button 1") },
+              ),
+              DebugButtonItem(
+                  label = "Button 2",
+                  onClick = { println("clicked button 2") },
+              ),
+          )
+  )
 
   DebugPanel(debugData)
 }

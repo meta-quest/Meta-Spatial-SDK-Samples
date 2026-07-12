@@ -11,19 +11,17 @@ data class Project(val uuid: Int, var name: String, var MR: Boolean, var environ
 // State and priority labels for tasks
 data class Label(val description: String, val containerColor: Color, val contentColor: Color)
 
-val stateLabels =
-    arrayOf(
-        Label("To do", Color(0xFFFFDBFA), Color(0xFFA6008D)),
-        Label("In progress", Color(0xFFF1DAFF), Color(0xFF6500A3)),
-        Label("Done", Color(0xFFE9E4FB), Color(0xFF2B167E)),
-    )
+val stateLabels = arrayOf(
+    Label("To do", Color(0xFFFFDBFA), Color(0xFFA6008D)),
+    Label("In progress", Color(0xFFF1DAFF), Color(0xFF6500A3)),
+    Label("Done", Color(0xFFE9E4FB), Color(0xFF2B167E)),
+)
 
-val priorityLabels =
-    arrayOf(
-        Label("Low priority", Color(0xFFFFF5DB), Color(0xFFA67700)),
-        Label("Medium priority", Color(0xFFFFE8DA), Color(0xFFA33C00)),
-        Label("High priority", Color(0xFFFFDADA), Color(0xFFA30000)),
-    )
+val priorityLabels = arrayOf(
+    Label("Low priority", Color(0xFFFFF5DB), Color(0xFFA67700)),
+    Label("Medium priority", Color(0xFFFFE8DA), Color(0xFFA33C00)),
+    Label("High priority", Color(0xFFFFDADA), Color(0xFFA30000)),
+)
 
 // Sticky note color options
 enum class StickyColor {
@@ -36,43 +34,39 @@ enum class StickyColor {
 }
 
 // Textures and models for tools
-val arrows =
-    arrayOf(
-        R.drawable.arrow1,
-        R.drawable.arrow2,
-        R.drawable.arrow3,
-        R.drawable.arrow4,
-        R.drawable.arrow5,
-        R.drawable.arrow6,
-    )
-val labels =
-    arrayOf(
-        R.drawable.label1,
-        R.drawable.label2,
-        R.drawable.label3,
-        R.drawable.label4,
-        R.drawable.label5,
-        R.drawable.label6,
-    )
+val arrows = arrayOf(
+    R.drawable.arrow1,
+    R.drawable.arrow2,
+    R.drawable.arrow3,
+    R.drawable.arrow4,
+    R.drawable.arrow5,
+    R.drawable.arrow6,
+)
+val labels = arrayOf(
+    R.drawable.label1,
+    R.drawable.label2,
+    R.drawable.label3,
+    R.drawable.label4,
+    R.drawable.label5,
+    R.drawable.label6,
+)
 val boards = arrayOf(R.drawable.board1, R.drawable.board2, R.drawable.board3, R.drawable.board4)
-val shapes =
-    arrayOf(
-        R.drawable.shape1,
-        "torus.glb",
-        R.drawable.shape3,
-        "cube.glb",
-        R.drawable.shape5,
-        "rhombus.glb",
-    )
-val stickers =
-    arrayOf(
-        R.drawable.sticker1,
-        R.drawable.sticker2,
-        R.drawable.sticker3,
-        R.drawable.sticker4,
-        R.drawable.sticker5,
-        R.drawable.sticker6,
-    )
+val shapes = arrayOf(
+    R.drawable.shape1,
+    "torus.glb",
+    R.drawable.shape3,
+    "cube.glb",
+    R.drawable.shape5,
+    "rhombus.glb",
+)
+val stickers = arrayOf(
+    R.drawable.sticker1,
+    R.drawable.sticker2,
+    R.drawable.sticker3,
+    R.drawable.sticker4,
+    R.drawable.sticker5,
+    R.drawable.sticker6,
+)
 
 // Environments and skyboxes assets
 val environments = arrayOf("environment1.glb", "environment2.glb", "environment3.glb")

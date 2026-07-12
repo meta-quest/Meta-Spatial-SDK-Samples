@@ -114,19 +114,18 @@ class LandmarkSpawnSystem(private val xmlResourceID: Int, private val resourceCo
         XmlPullParser.END_TAG -> {
           if (tagName == "landmark") {
             // create a new Landmark object with the parsed values
-            val landmark =
-                Landmark(
-                    meshName = meshFile,
-                    scale = scale,
-                    yaw = yaw,
-                    zOffset = zOffset,
-                    latitude = latitude,
-                    longitude = longitude,
-                    landmarkName = name,
-                    description = description,
-                    panoResId = panoResId,
-                    attribution,
-                )
+            val landmark = Landmark(
+                meshName = meshFile,
+                scale = scale,
+                yaw = yaw,
+                zOffset = zOffset,
+                latitude = latitude,
+                longitude = longitude,
+                landmarkName = name,
+                description = description,
+                panoResId = panoResId,
+                attribution,
+            )
             landmarks.add(landmark)
           }
         }

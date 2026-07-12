@@ -19,12 +19,11 @@ fun AnimatedOpacity(
 ) {
   val targetAlpha = if (visible) 1f else 0f
 
-  val alpha by
-      animateFloatAsState(
-          targetValue = targetAlpha,
-          animationSpec = tween(durationMillis),
-          label = "Opacity State",
-      )
+  val alpha by animateFloatAsState(
+      targetValue = targetAlpha,
+      animationSpec = tween(durationMillis),
+      label = "Opacity State",
+  )
 
   Box(modifier = modifier.graphicsLayer(alpha = alpha)) { content() }
 }

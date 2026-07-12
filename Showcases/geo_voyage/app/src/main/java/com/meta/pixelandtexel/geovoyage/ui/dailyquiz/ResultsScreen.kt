@@ -29,15 +29,14 @@ import com.meta.spatial.uiset.theme.icons.regular.CheckAlt
 
 @Composable
 fun ResultsScreen(numCorrectAnswers: Int, numTotalAnswers: Int) {
-  val resultsTitleMap =
-      mapOf(
-          0 to stringResource(R.string.quiz_result_0),
-          1 to stringResource(R.string.quiz_result_1),
-          2 to stringResource(R.string.quiz_result_2),
-          3 to stringResource(R.string.quiz_result_3),
-          4 to stringResource(R.string.quiz_result_4),
-          5 to stringResource(R.string.quiz_result_5),
-      )
+  val resultsTitleMap = mapOf(
+      0 to stringResource(R.string.quiz_result_0),
+      1 to stringResource(R.string.quiz_result_1),
+      2 to stringResource(R.string.quiz_result_2),
+      3 to stringResource(R.string.quiz_result_3),
+      4 to stringResource(R.string.quiz_result_4),
+      5 to stringResource(R.string.quiz_result_5),
+  )
 
   val tallyText =
       String.format(

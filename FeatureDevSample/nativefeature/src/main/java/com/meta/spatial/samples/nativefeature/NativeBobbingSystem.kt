@@ -80,12 +80,11 @@ class NativeBobbingSystem : SystemBase() {
       val initialY = initialYPositions.getOrPut(entity.id) { transform.transform.t.y }
 
       // Call native C++ code to calculate the bobbing offset
-      val yOffset =
-          nativeCalculateBobbingOffset(
-              elapsedTimeMs = elapsedTime,
-              amplitude = bobbing.amplitude,
-              frequency = bobbing.frequency,
-          )
+      val yOffset = nativeCalculateBobbingOffset(
+          elapsedTimeMs = elapsedTime,
+          amplitude = bobbing.amplitude,
+          frequency = bobbing.frequency,
+      )
 
       // Apply the offset to the transform's Y position
       transform.transform.t.y = initialY + yOffset

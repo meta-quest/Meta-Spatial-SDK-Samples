@@ -73,16 +73,15 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
   private var skybox: Entity? = null
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf<SpatialFeature>(
-            PhysicsFeature(
-                spatial,
-                useGrabbablePhysics = false,
-                worldBounds = PhysicsWorldBounds(minY = -100.0f),
-            ),
-            VRFeature(this),
-            ComposeFeature(),
-        )
+    val features = mutableListOf<SpatialFeature>(
+        PhysicsFeature(
+            spatial,
+            useGrabbablePhysics = false,
+            worldBounds = PhysicsWorldBounds(minY = -100.0f),
+        ),
+        VRFeature(this),
+        ComposeFeature(),
+    )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(DataModelInspectorFeature(spatial, this.componentManager))

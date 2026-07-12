@@ -84,12 +84,11 @@ class ViewLockedSystem(private var fov: Float = 72f) : SystemBase() {
     viewLockedEntities.forEach { (_, info) ->
       val viewLockedComp = info.entity.getComponent<ViewLocked>()
 
-      val quat =
-          Quaternion(
-              viewLockedComp.rotation.x,
-              viewLockedComp.rotation.y,
-              viewLockedComp.rotation.z,
-          )
+      val quat = Quaternion(
+          viewLockedComp.rotation.x,
+          viewLockedComp.rotation.y,
+          viewLockedComp.rotation.z,
+      )
       val newPose = headPose.times(Pose(viewLockedComp.position, quat))
       newPose.t += newPose.forward() * info.distance
 

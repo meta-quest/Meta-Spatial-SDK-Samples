@@ -39,33 +39,30 @@ class VRCinemaEntity(val config: VRCinemaConfig) {
     val negHalfCinemaSize = cinemaSize * -0.5f
     val meshName = "mesh://WallLightingSystem_" + MRUKLabel.WALL_FACE
 
-    val faces =
-        listOf(
-            Vector3.Up,
-            -Vector3.Up,
-            Vector3.Right,
-            -Vector3.Right,
-            Vector3.Forward,
-            -Vector3.Forward,
-        )
-    val sizes =
-        listOf(
-            Vector3(cinemaSize.x, cinemaSize.z, 1f),
-            Vector3(cinemaSize.x, cinemaSize.z, 1f),
-            Vector3(cinemaSize.z, cinemaSize.y, 1f),
-            Vector3(cinemaSize.z, cinemaSize.y, 1f),
-            Vector3(cinemaSize.x, cinemaSize.y, 1f),
-            Vector3(cinemaSize.x, cinemaSize.y, 1f),
-        )
-    val rotations =
-        listOf(
-            Quaternion(-90f, 0f, 0f),
-            Quaternion(90f, 180f, 0f),
-            Quaternion(0f, 90f, 0f),
-            Quaternion(0f, -90f, 0f),
-            Quaternion(0f, 0f, 0f),
-            Quaternion(-180f, 0f, 180f),
-        )
+    val faces = listOf(
+        Vector3.Up,
+        -Vector3.Up,
+        Vector3.Right,
+        -Vector3.Right,
+        Vector3.Forward,
+        -Vector3.Forward,
+    )
+    val sizes = listOf(
+        Vector3(cinemaSize.x, cinemaSize.z, 1f),
+        Vector3(cinemaSize.x, cinemaSize.z, 1f),
+        Vector3(cinemaSize.z, cinemaSize.y, 1f),
+        Vector3(cinemaSize.z, cinemaSize.y, 1f),
+        Vector3(cinemaSize.x, cinemaSize.y, 1f),
+        Vector3(cinemaSize.x, cinemaSize.y, 1f),
+    )
+    val rotations = listOf(
+        Quaternion(-90f, 0f, 0f),
+        Quaternion(90f, 180f, 0f),
+        Quaternion(0f, 90f, 0f),
+        Quaternion(0f, -90f, 0f),
+        Quaternion(0f, 0f, 0f),
+        Quaternion(-180f, 0f, 180f),
+    )
 
     planes = mutableListOf()
     if (config.floorOnly) {
@@ -125,11 +122,10 @@ class VRCinemaEntity(val config: VRCinemaConfig) {
   }
 
   fun setCinemaPoseRelativeToUser(headPose: Pose = getHeadPose()) {
-    val cinemaPose =
-        getPoseInFrontOfVector(
-            headPose,
-            (config.cinemaSize.z) * 0.5f - config.distanceToWallBehindYou,
-        )
+    val cinemaPose = getPoseInFrontOfVector(
+        headPose,
+        (config.cinemaSize.z) * 0.5f - config.distanceToWallBehindYou,
+    )
     cinemaPose.t +=
         Vector3(
             0f,
@@ -140,11 +136,10 @@ class VRCinemaEntity(val config: VRCinemaConfig) {
   }
 
   fun setCinemaPoseRelativeToTV(tvPose: Pose = getHeadPose(), userPose: Pose = getHeadPose()) {
-    val cinemaPose =
-        getPoseInFrontOfVector(
-            tvPose,
-            (config.cinemaSize.z) * 0.5f - config.distanceToWallBehindYou,
-        )
+    val cinemaPose = getPoseInFrontOfVector(
+        tvPose,
+        (config.cinemaSize.z) * 0.5f - config.distanceToWallBehindYou,
+    )
     cinemaPose.t +=
         Vector3(
             0f,
@@ -168,11 +163,10 @@ class VRCinemaEntity(val config: VRCinemaConfig) {
       val floorOnly: Boolean = false,
   ) {
     val cinemaSize: Vector3
-      get() =
-          Vector3(
-              screenSize.x + screenPadding * 2,
-              screenSize.y + screenPadding * 2f,
-              distanceToScreen + distanceToWallBehindYou + distanceBehindScreen,
-          )
+      get() = Vector3(
+          screenSize.x + screenPadding * 2,
+          screenSize.y + screenPadding * 2f,
+          distanceToScreen + distanceToWallBehindYou + distanceBehindScreen,
+      )
   }
 }

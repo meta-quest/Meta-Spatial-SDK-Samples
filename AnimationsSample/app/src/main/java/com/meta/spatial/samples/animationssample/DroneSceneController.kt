@@ -130,12 +130,11 @@ class DroneSceneController() {
       }
 
       // set initial anim state
-      val anim =
-          Animated(
-              System.currentTimeMillis(),
-              playbackState = PlaybackState.PAUSED,
-              track = animClipMap.get("openarm")!!,
-          )
+      val anim = Animated(
+          System.currentTimeMillis(),
+          playbackState = PlaybackState.PAUSED,
+          track = animClipMap.get("openarm")!!,
+      )
       droneEnt.setComponent(anim)
     }
 
@@ -166,13 +165,12 @@ class DroneSceneController() {
   }
 
   private fun playAnimation(track: Int, playbackType: PlaybackType = PlaybackType.CLAMP) {
-    val anim =
-        Animated(
-            System.currentTimeMillis(),
-            playbackState = PlaybackState.PLAYING,
-            playbackType = playbackType,
-            track = track,
-        )
+    val anim = Animated(
+        System.currentTimeMillis(),
+        playbackState = PlaybackState.PLAYING,
+        playbackType = playbackType,
+        track = track,
+    )
     droneEnt.setComponent(anim)
   }
 

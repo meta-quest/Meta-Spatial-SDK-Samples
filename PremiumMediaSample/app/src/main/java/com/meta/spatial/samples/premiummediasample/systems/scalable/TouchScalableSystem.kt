@@ -155,22 +155,17 @@ class TouchScalableSystem(private val minScale: Float = 0.5f, private val maxSca
     val scale = entity.getComponent<Scale>()
     val pose = getAbsoluteTransform(entity)
 
-    val offset =
-        Vector2(
-            panelDimensions.dimensions.x * scale.scale.x * 0.5f,
-            panelDimensions.dimensions.y * scale.scale.y * 0.5f,
-        )
-    val offsets =
-        arrayOf(
-            pose.right() * -(offset.x - cornerOffsetPivot) +
-                pose.up() * (offset.y - cornerOffsetPivot),
-            pose.right() * (offset.x - cornerOffsetPivot) +
-                pose.up() * (offset.y - cornerOffsetPivot),
-            pose.right() * (offset.x - cornerOffsetPivot) +
-                pose.up() * -(offset.y - cornerOffsetPivot),
-            pose.right() * -(offset.x - cornerOffsetPivot) +
-                pose.up() * -(offset.y - cornerOffsetPivot),
-        )
+    val offset = Vector2(
+        panelDimensions.dimensions.x * scale.scale.x * 0.5f,
+        panelDimensions.dimensions.y * scale.scale.y * 0.5f,
+    )
+    val offsets = arrayOf(
+        pose.right() * -(offset.x - cornerOffsetPivot) + pose.up() * (offset.y - cornerOffsetPivot),
+        pose.right() * (offset.x - cornerOffsetPivot) + pose.up() * (offset.y - cornerOffsetPivot),
+        pose.right() * (offset.x - cornerOffsetPivot) + pose.up() * -(offset.y - cornerOffsetPivot),
+        pose.right() * -(offset.x - cornerOffsetPivot) +
+            pose.up() * -(offset.y - cornerOffsetPivot),
+    )
 
     // Update position, and alpha of corners
     corners.forEachIndexed { index, corner ->
@@ -253,13 +248,12 @@ class TouchScalableSystem(private val minScale: Float = 0.5f, private val maxSca
       // Plane
       val planeTransform = getAbsoluteTransform(entity)
 
-      val resultPoint =
-          projectRayOntoPlane(
-              controllerOrigin,
-              controllerForward,
-              planeTransform.t,
-              planeTransform.forward(),
-          )
+      val resultPoint = projectRayOntoPlane(
+          controllerOrigin,
+          controllerForward,
+          planeTransform.t,
+          planeTransform.forward(),
+      )
       if (resultPoint != null) {
         val distanceToPlaneCenter = (resultPoint - planeTransform.t).length()
         if (viewData.containsKey(entity)) {
@@ -303,12 +297,11 @@ class TouchScalableSystem(private val minScale: Float = 0.5f, private val maxSca
   companion object {
     private const val TAG = "ScaleableSystemTouch"
 
-    private val cornerRotations =
-        arrayOf(
-            Quaternion(0f, 0f, 0f),
-            Quaternion(0f, 0f, -90f),
-            Quaternion(0f, 0f, -180f),
-            Quaternion(0f, 0f, -270f),
-        )
+    private val cornerRotations = arrayOf(
+        Quaternion(0f, 0f, 0f),
+        Quaternion(0f, 0f, -90f),
+        Quaternion(0f, 0f, -180f),
+        Quaternion(0f, 0f, -270f),
+    )
   }
 }

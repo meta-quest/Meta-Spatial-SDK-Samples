@@ -637,19 +637,18 @@ class CuratedObjectHandler(
               ) {
                 assert(currentMatchingLabels.isNotEmpty() && currentUiPanels.isNotEmpty())
 
-                val curatedObject =
-                    CuratedObject(
-                            currentObjectName,
-                            currentMatchingLabels.toList(),
-                            currentUiPanels.toList(),
-                            curatedObjects.size,
-                        )
-                        .apply {
-                          currentMeshPositionOffset?.let { meshPositionOffset = it }
-                          currentMeshRotationOffset?.let { meshRotationOffset = it }
-                          initialAnimationTrack = currentMeshInitialAnimationTrack
-                          meshBounds = currentMeshBounds
-                        }
+                val curatedObject = CuratedObject(
+                    currentObjectName,
+                    currentMatchingLabels.toList(),
+                    currentUiPanels.toList(),
+                    curatedObjects.size,
+                )
+                    .apply {
+                      currentMeshPositionOffset?.let { meshPositionOffset = it }
+                      currentMeshRotationOffset?.let { meshRotationOffset = it }
+                      initialAnimationTrack = currentMeshInitialAnimationTrack
+                      meshBounds = currentMeshBounds
+                    }
                 curatedObjects[currentObjectName] = curatedObject
 
                 if (currentMeshEntityName != null) {

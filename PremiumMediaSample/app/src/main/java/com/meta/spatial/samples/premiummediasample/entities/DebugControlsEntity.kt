@@ -32,33 +32,32 @@ class DebugControlsEntity() {
     private var panelLayoutDPI = 600
 
     fun createDebugPanel(controlsPanel: ControlsPanelEntity, closePlayerFn: () -> Unit): Entity {
-      val debugSchema =
-          DebugData(
-              items =
-                  mutableListOf(
-                      DebugSliderItem(
-                          label = "Cinema Controls FOV",
-                          initialValue = controlsPanel.controlsFov,
-                          range = 10f..80f,
-                          roundToInt = true,
-                          onValueChanged = { value -> controlsPanel.controlsFov = value },
-                      ),
-                      DebugSliderItem(
-                          label = "Cinema Controls Angle",
-                          initialValue = controlsPanel.controlsAngle,
-                          roundToInt = true,
-                          range = 0f..50f,
-                          onValueChanged = { value -> controlsPanel.controlsAngle = value },
-                      ),
-                      DebugSliderItem(
-                          label = "Cinema Controls Distance",
-                          range = 0.25f..4f,
-                          initialValue = controlsPanel.controlsDistance,
-                          onValueChanged = { value -> controlsPanel.controlsDistance = value },
-                      ),
-                      DebugButtonItem(label = "Exit to Menu", onClick = { closePlayerFn() }),
+      val debugSchema = DebugData(
+          items =
+              mutableListOf(
+                  DebugSliderItem(
+                      label = "Cinema Controls FOV",
+                      initialValue = controlsPanel.controlsFov,
+                      range = 10f..80f,
+                      roundToInt = true,
+                      onValueChanged = { value -> controlsPanel.controlsFov = value },
                   ),
-          )
+                  DebugSliderItem(
+                      label = "Cinema Controls Angle",
+                      initialValue = controlsPanel.controlsAngle,
+                      roundToInt = true,
+                      range = 0f..50f,
+                      onValueChanged = { value -> controlsPanel.controlsAngle = value },
+                  ),
+                  DebugSliderItem(
+                      label = "Cinema Controls Distance",
+                      range = 0.25f..4f,
+                      initialValue = controlsPanel.controlsDistance,
+                      onValueChanged = { value -> controlsPanel.controlsDistance = value },
+                  ),
+                  DebugButtonItem(label = "Exit to Menu", onClick = { closePlayerFn() }),
+              ),
+      )
 
       return create(debugSchema)
     }

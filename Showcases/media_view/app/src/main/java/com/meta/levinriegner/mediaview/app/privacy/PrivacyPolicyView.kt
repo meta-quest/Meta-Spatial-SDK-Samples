@@ -38,13 +38,12 @@ fun PrivacyPolicyView(
   val annotatedString = buildAnnotatedString {
     val termsText = stringResource(id = R.string.privacy_policy_dialog_terms)
     val privacyText = stringResource(id = R.string.privacy_policy_dialog_privacy)
-    val str =
-        stringResource(
-            id = R.string.privacy_policy_dialog_description,
-            stringResource(R.string.privacy_policy_accept_button),
-            termsText,
-            privacyText,
-        )
+    val str = stringResource(
+        id = R.string.privacy_policy_dialog_description,
+        stringResource(R.string.privacy_policy_accept_button),
+        termsText,
+        privacyText,
+    )
     val termsRange = (str.indexOf(termsText)..(str.indexOf(termsText) + termsText.length))
     val privacyRange = (str.indexOf(privacyText)..(str.indexOf(privacyText) + privacyText.length))
 

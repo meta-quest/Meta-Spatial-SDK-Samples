@@ -28,14 +28,13 @@ object Routes {
   const val RESULTS_ROUTE = "results"
 }
 
-val QuestionRoutes =
-    listOf(
-        Routes.QUESTION_1_ROUTE,
-        Routes.QUESTION_2_ROUTE,
-        Routes.QUESTION_3_ROUTE,
-        Routes.QUESTION_4_ROUTE,
-        Routes.QUESTION_5_ROUTE,
-    )
+val QuestionRoutes = listOf(
+    Routes.QUESTION_1_ROUTE,
+    Routes.QUESTION_2_ROUTE,
+    Routes.QUESTION_3_ROUTE,
+    Routes.QUESTION_4_ROUTE,
+    Routes.QUESTION_5_ROUTE,
+)
 
 @Composable
 fun DailyQuizScreen(

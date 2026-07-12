@@ -55,13 +55,12 @@ class FeatureDevSampleActivity : AppSystemActivity() {
   private val activityScope = CoroutineScope(Dispatchers.Main)
 
   override fun registerFeatures(): List<SpatialFeature> {
-    val features =
-        mutableListOf<SpatialFeature>(
-            VRFeature(this),
-            ComposeFeature(),
-            NativeBobbingFeature(), // Native C++ bobbing feature via JNI
-            PulsingFeature(), // Pure Kotlin pulsing feature (no native code)
-        )
+    val features = mutableListOf<SpatialFeature>(
+        VRFeature(this),
+        ComposeFeature(),
+        NativeBobbingFeature(), // Native C++ bobbing feature via JNI
+        PulsingFeature(), // Pure Kotlin pulsing feature (no native code)
+    )
     if (BuildConfig.DEBUG) {
       features.add(CastInputForwardFeature(this))
       features.add(DataModelInspectorFeature(spatial, this.componentManager))

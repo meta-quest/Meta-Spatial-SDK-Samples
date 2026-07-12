@@ -161,13 +161,12 @@ fun HomePanelSecondFragmentScreen() {
             horizontalArrangement = Arrangement.spacedBy(15.dp),
         ) {
           data class Environment(val name: String, val img: Int, val index: Int, val label: String)
-          val environments =
-              listOf(
-                  Environment("Desert Retreat", R.drawable.env1, 0, "VR"),
-                  Environment("Concrete Sanctuary", R.drawable.env2, 1, "VR"),
-                  Environment("Blush Oasis", R.drawable.env3, 2, "VR"),
-                  Environment("Passthrough", R.drawable.env4, 3, "MR"),
-              )
+          val environments = listOf(
+              Environment("Desert Retreat", R.drawable.env1, 0, "VR"),
+              Environment("Concrete Sanctuary", R.drawable.env2, 1, "VR"),
+              Environment("Blush Oasis", R.drawable.env3, 2, "VR"),
+              Environment("Passthrough", R.drawable.env4, 3, "MR"),
+          )
 
           items(environments) { environment ->
             Box(

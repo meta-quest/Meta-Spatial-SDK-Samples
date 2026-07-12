@@ -183,13 +183,12 @@ fun getProjectsFromDB(): List<ProjectCardData> {
 )
 @Composable
 fun HomePanelFirstFragmentScreenPreview() {
-  val fakeProjects =
-      listOf(
-          ProjectCardData(uuid = 1, name = "Project One", timeAgo = "time"),
-          ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time"),
-          ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time"),
-          ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time"),
-          ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time"),
-      )
+  val fakeProjects = listOf(
+      ProjectCardData(uuid = 1, name = "Project One", timeAgo = "time"),
+      ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time"),
+      ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time"),
+      ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time"),
+      ProjectCardData(uuid = 2, name = "Project Two", timeAgo = "time"),
+  )
   HomePanelFirstFragmentScreen(fakeProjects)
 }

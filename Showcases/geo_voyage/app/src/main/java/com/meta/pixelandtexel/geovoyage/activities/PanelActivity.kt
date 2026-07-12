@@ -90,29 +90,28 @@ class PanelActivity : ActivityCompat.OnRequestPermissionsResultCallback, Compone
     setContent {
       navController = rememberNavController()
 
-      val navButtonStates =
-          listOf(
-              NavButtonState(
-                  text = getString(R.string.explore),
-                  route = Routes.EXPLORE_ROUTE,
-                  iconImage = SpatialIcons.Regular.World,
-              ),
-              NavButtonState(
-                  text = getString(R.string.ask),
-                  route = Routes.ASK_EARTH_ROUTE,
-                  iconImage = SpatialIcons.Regular.MicrophoneOn,
-              ),
-              NavButtonState(
-                  text = getString(R.string.today),
-                  route = Routes.TODAY_IN_HISTORY_ROUTE,
-                  iconImage = SpatialIcons.Regular.StarFull,
-              ),
-              NavButtonState(
-                  text = getString(R.string.quiz),
-                  route = Routes.DAILY_QUIZ_ROUTE,
-                  iconImage = SpatialIcons.Regular.Trophy,
-              ),
-          )
+      val navButtonStates = listOf(
+          NavButtonState(
+              text = getString(R.string.explore),
+              route = Routes.EXPLORE_ROUTE,
+              iconImage = SpatialIcons.Regular.World,
+          ),
+          NavButtonState(
+              text = getString(R.string.ask),
+              route = Routes.ASK_EARTH_ROUTE,
+              iconImage = SpatialIcons.Regular.MicrophoneOn,
+          ),
+          NavButtonState(
+              text = getString(R.string.today),
+              route = Routes.TODAY_IN_HISTORY_ROUTE,
+              iconImage = SpatialIcons.Regular.StarFull,
+          ),
+          NavButtonState(
+              text = getString(R.string.quiz),
+              route = Routes.DAILY_QUIZ_ROUTE,
+              iconImage = SpatialIcons.Regular.Trophy,
+          ),
+      )
 
       // instantiate our view models
       panelVM = viewModel()
