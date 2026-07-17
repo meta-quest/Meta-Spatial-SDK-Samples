@@ -1,5 +1,5 @@
 [versions]
-spatialsdk = "0.13.1"
+spatialsdk = "0.13.2"
 agp = "8.11.1"
 kotlin = "2.1.0"
 coreKtx = "1.13.1"

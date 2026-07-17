@@ -32,4 +32,6 @@ object PanelRegistrationIds {
   const val PANEL_NAVIGATOR = 100
   const val PANEL_DEMO_VIDEO = 101
   const val PANEL_THEMES = 102
+
+  const val PANEL_LOADING = 200
 }

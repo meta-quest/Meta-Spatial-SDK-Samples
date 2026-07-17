@@ -120,17 +120,17 @@ tutorial to build a LookAt app with Meta Spatial Editor and SDK.
 
 ## Showcases
 
-The [Showcases](/Showcases) folder contains four apps. These are fully-featured
+The [Showcases](/Showcases) folder contains five apps. These are fully-featured
 applications built with Meta Spatial SDK, and are open-sourced here in this
 repository.
 
-- [Focus](/Showcases/focus) *(deprecated)*
+- [Focus](/Showcases/focus)
   - [Download from the store](https://www.meta.com/experiences/focus/8625912667430203/)
-- [Media View](/Showcases/media_view) *(deprecated)*
+- [Media View](/Showcases/media_view)
   - [Download from the store](https://www.meta.com/experiences/media-view/8510454682344317/)
-- [Geo Voyage](/Showcases/geo_voyage) *(deprecated)*
+- [Geo Voyage](/Showcases/geo_voyage)
   - [Download from the store](https://www.meta.com/experiences/geo-voyage/8230251250434003/)
-- [Spatial Scanner](/Showcases/meta_spatial_scanner) *(deprecated)*
+- [Spatial Scanner](/Showcases/meta_spatial_scanner)
 
 ## Documentation
 

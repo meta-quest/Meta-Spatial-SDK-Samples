@@ -18,7 +18,6 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,10 +37,6 @@ fun NavigationView(
     initialView: NavigationUiItem = NavigationUiItem.Button,
 ) {
   val allViewIds = NavigationUiItem.entries.map { it.panelRegistrationIds }.flatten()
-  // Open initial view
-  LaunchedEffect(initialView) {
-    panelNavigator.setPanelsVisible(initialView.panelRegistrationIds, allViewIds)
-  }
   // State
   var selectedView by remember { mutableStateOf(initialView) }
   // UI

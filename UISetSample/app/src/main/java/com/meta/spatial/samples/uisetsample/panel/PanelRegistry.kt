@@ -7,7 +7,19 @@
 
 package com.meta.spatial.samples.uisetsample.panel
 
+import android.content.res.ColorStateList
+import android.widget.ProgressBar
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.viewinterop.AndroidView
 import com.meta.spatial.compose.composePanel
 import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.samples.uisetsample.R
@@ -31,12 +43,44 @@ import com.meta.spatial.samples.uisetsample.layouts.patterns.VideoPlayerPattern
 import com.meta.spatial.samples.uisetsample.navigation.NavigationView
 import com.meta.spatial.samples.uisetsample.navigation.theme_selector.ThemeSelectorView
 import com.meta.spatial.samples.uisetsample.navigation.video.NavigationVideoView
+import com.meta.spatial.samples.uisetsample.util.view.PanelScaffold
 import com.meta.spatial.toolkit.PanelRegistration
+import com.meta.spatial.uiset.theme.SpatialTheme
 
 class PanelRegistry {
 
   fun initialPanelRegistration(): List<PanelRegistration> {
     return listOf(
+        panelRegistration(
+            PanelRegistrationIds.PANEL_LOADING,
+            layoutWidth = 400f,
+            layoutHeight = 300f,
+        ) {
+          PanelScaffold {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.size(400.dp, 300.dp),
+            ) {
+              val progressColor = SpatialTheme.colorScheme.progressOnBackground.toArgb()
+              AndroidView(
+                  factory = { context ->
+                    ProgressBar(context).apply {
+                      isIndeterminate = true
+                      indeterminateTintList = ColorStateList.valueOf(progressColor)
+                    }
+                  },
+                  modifier = Modifier.size(48.dp),
+              )
+              Spacer(Modifier.size(24.dp))
+              Text(
+                  "Loading UISet Sample...",
+                  style = SpatialTheme.typography.body1,
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
+              )
+            }
+          }
+        },
         panelRegistration(PanelRegistrationIds.PANEL_NAVIGATOR) {
           NavigationView(PanelNavigator())
         },
