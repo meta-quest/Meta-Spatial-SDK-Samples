@@ -71,7 +71,7 @@ class WhatsNewActivity : ComponentActivity() {
                         color = AppColor.MetaBlu,
                         shape = RoundedCornerShape(Dimens.radiusMedium),
                     )
-                    .clip(shape = RoundedCornerShape(Dimens.radiusMedium))
+                    .clip(shape = RoundedCornerShape(Dimens.radiusMedium)),
         ) {
           val uriHandler = LocalUriHandler.current
 
@@ -85,7 +85,7 @@ class WhatsNewActivity : ComponentActivity() {
                         .background(AppColor.DarkBackgroundSweep)
                         .padding(
                             horizontal = Dimens.small,
-                        )
+                        ),
             ) {
               Column(
                   horizontalAlignment = Alignment.CenterHorizontally,
@@ -108,7 +108,7 @@ class WhatsNewActivity : ComponentActivity() {
                 modifier =
                     Modifier.fillMaxSize()
                         .background(AppColor.BackgroundSweep)
-                        .padding(Dimens.small)
+                        .padding(Dimens.small),
             ) {
 
               // Top bar with close button
@@ -177,7 +177,7 @@ class WhatsNewActivity : ComponentActivity() {
                     modifier =
                         Modifier.padding(
                             horizontal = Dimens.xSmall,
-                        )
+                        ),
                 )
 
                 RoundedButton(

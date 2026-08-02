@@ -103,7 +103,7 @@ class StarterSampleActivity : AppSystemActivity() {
               unlit = true // Prevent scene lighting from affecting the skybox
             },
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-        )
+        ),
     )
   }
 
@@ -121,7 +121,7 @@ class StarterSampleActivity : AppSystemActivity() {
                   display = DpPerMeterDisplayOptions(),
               )
             },
-        )
+        ),
     )
   }
 

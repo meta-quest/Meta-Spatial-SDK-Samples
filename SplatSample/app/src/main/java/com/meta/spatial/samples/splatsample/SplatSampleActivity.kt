@@ -151,7 +151,7 @@ class SplatSampleActivity : AppSystemActivity() {
                   unlit = true
                 },
                 Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-            )
+            ),
         )
     panelEntity =
         Entity.createPanelEntity(
@@ -190,11 +190,11 @@ class SplatSampleActivity : AppSystemActivity() {
                     Pose(
                         Vector3(0.0f, 0.0f, 0.0f),
                         Quaternion(eulerRotation.x, eulerRotation.y, eulerRotation.z),
-                    )
+                    ),
                 ),
                 Scale(Vector3(1f)),
                 SupportsLocomotion(),
-            )
+            ),
         )
     splatEntity?.registerEventListener<SplatLoadEventArgs>(SplatLoadEventArgs.EVENT_NAME) { _, _ ->
       Log.d("SplatManager", "Splat loaded EVENT!")
@@ -289,7 +289,7 @@ class SplatSampleActivity : AppSystemActivity() {
     }
     scene.setViewOrigin(0f, 0f, z, 0f)
     panelEntity.setComponent(
-        Transform(Pose(Vector3(0f, panelHeight, z - panelOffset), Quaternion(0f, 180f, 0f)))
+        Transform(Pose(Vector3(0f, panelHeight, z - panelOffset), Quaternion(0f, 180f, 0f))),
     )
   }
 

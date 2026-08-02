@@ -47,7 +47,7 @@ fun NavigationView(
             section.displayText,
             style =
                 SpatialTheme.typography.headline2Strong.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(24.dp))

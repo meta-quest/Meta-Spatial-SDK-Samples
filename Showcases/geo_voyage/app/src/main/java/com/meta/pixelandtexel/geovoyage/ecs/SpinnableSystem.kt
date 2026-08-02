@@ -180,7 +180,7 @@ class SpinnableSystem : SystemBase() {
 
                 return true
               }
-            }
+            },
         )
       }
     }

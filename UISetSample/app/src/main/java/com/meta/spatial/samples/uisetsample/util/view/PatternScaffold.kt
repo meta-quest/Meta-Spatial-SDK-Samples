@@ -56,8 +56,8 @@ fun PatternScaffold(
                       )
                     } else {
                       LocalColorScheme.current.panel
-                    }
-            )
+                    },
+            ),
     ) {
       PanelToolbar(
           leading = leading,

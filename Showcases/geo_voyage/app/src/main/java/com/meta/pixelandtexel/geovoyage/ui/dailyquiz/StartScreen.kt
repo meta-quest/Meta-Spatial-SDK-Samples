@@ -29,7 +29,7 @@ fun StartScreen(onStartClicked: () -> Unit) {
       modifier = Modifier.fillMaxSize(),
   ) {
     SecondaryPanel(
-        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.short_panel_height))
+        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.short_panel_height)),
     ) {
       Column(
           verticalArrangement = Arrangement.SpaceEvenly,

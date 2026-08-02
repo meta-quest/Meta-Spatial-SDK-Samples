@@ -59,7 +59,7 @@ class SpawnKeyboardSystem(private val mrukFeature: MRUKFeature) : SystemBase() {
         SceneMaterial.custom(
             "pt_cutout",
             arrayOf(
-                SceneMaterialAttribute("roughnessMetallicUnlit", SceneMaterialDataType.Vector4)
+                SceneMaterialAttribute("roughnessMetallicUnlit", SceneMaterialDataType.Vector4),
             ),
         )
 

@@ -118,7 +118,7 @@ class Object3DSampleActivity : AppSystemActivity() {
                   unlit = true
                 },
                 Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-            )
+            ),
         )
 
     // uncomment to see the physics debug lines
@@ -150,7 +150,7 @@ class Object3DSampleActivity : AppSystemActivity() {
                   display = DpPerMeterDisplayOptions(),
               )
             },
-        )
+        ),
     )
   }
 

@@ -165,13 +165,13 @@ class AnchorSnappingSystem() : SystemBase() {
 
       // Lock rotation on walls
       anchorable.setComponent(
-          Transform(fromAbsoluteToLocal(Pose(snappedPosition, slerpedRotation), anchorable))
+          Transform(fromAbsoluteToLocal(Pose(snappedPosition, slerpedRotation), anchorable)),
       )
       rotationMap[anchorable] = slerpedRotation
     } else {
       // Snap just position (not rotation) to ceiling and floor
       anchorable.setComponent(
-          Transform(fromAbsoluteToLocal(Pose(snappedPosition, anchorablePose.q), anchorable))
+          Transform(fromAbsoluteToLocal(Pose(snappedPosition, anchorablePose.q), anchorable)),
       )
     }
   }

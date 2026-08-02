@@ -10,5 +10,5 @@ package com.meta.pixelandtexel.scanner.services.settings
  * @property value The string representation of the settings key.
  */
 enum class SettingsKey(val value: String) {
-  ACCEPTED_NOTICE("accepted_user_notice")
+  ACCEPTED_NOTICE("accepted_user_notice"),
 }

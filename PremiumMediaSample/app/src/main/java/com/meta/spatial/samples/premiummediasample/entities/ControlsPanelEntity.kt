@@ -58,7 +58,7 @@ class ControlsPanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
                 shape = QuadShapeOptions(width = WIDTH_IN_METERS, height = HEIGHT_IN_METERS),
                 display =
                     DpPerMeterDisplayOptions(
-                        dpPerMeter = ControlsPanelConstants.PANEL_DP_PER_METER
+                        dpPerMeter = ControlsPanelConstants.PANEL_DP_PER_METER,
                     ),
                 style = PanelStyleOptions(themeResourceId = R.style.PanelAppThemeTransparent),
             )

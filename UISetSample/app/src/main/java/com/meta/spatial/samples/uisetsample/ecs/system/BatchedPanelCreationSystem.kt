@@ -50,7 +50,7 @@ class BatchedPanelCreationSystem(
 
   override fun getDependencies(): SystemDependencies? {
     return SystemDependencies(
-        mustRunAfter = mutableSetOf(SystemDependencyConfig(PanelCreationSystem::class))
+        mustRunAfter = mutableSetOf(SystemDependencyConfig(PanelCreationSystem::class)),
     )
   }
 

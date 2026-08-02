@@ -55,7 +55,7 @@ fun ListeningScreen(amplitude: Int = 0, onStopListeningClicked: () -> Unit) {
     SecondaryPanel(
         modifier =
             Modifier.width(dimensionResource(R.dimen.centered_panel_width))
-                .height(dimensionResource(R.dimen.centered_panel_height))
+                .height(dimensionResource(R.dimen.centered_panel_height)),
     ) {
       Column(
           modifier = Modifier.fillMaxSize(),

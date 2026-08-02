@@ -85,7 +85,7 @@ fun GalleryView(
                     color = AppColor.MetaBlu,
                     shape = RoundedCornerShape(Dimens.radiusMedium),
                 )
-                .clip(RoundedCornerShape(Dimens.radiusMedium))
+                .clip(RoundedCornerShape(Dimens.radiusMedium)),
     ) { innerPadding ->
       when (uiState) {
         UiState.Idle -> Box(Modifier)
@@ -191,7 +191,7 @@ private fun Header(
             }
 
             MaterialTheme(
-                shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(16.dp))
+                shapes = MaterialTheme.shapes.copy(extraSmall = RoundedCornerShape(16.dp)),
             ) {
               DropdownMenu(
                   expanded = sortExpanded,
@@ -201,8 +201,8 @@ private fun Header(
                           .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(16.dp))
                           .background(
                               Brush.verticalGradient(
-                                  listOf(AppColor.GradientStart, AppColor.GradientEnd)
-                              )
+                                  listOf(AppColor.GradientStart, AppColor.GradientEnd),
+                              ),
                           ),
               ) {
                 for (option in MediaSortBy.entries) {
@@ -231,7 +231,7 @@ private fun Header(
                                       MediaSortBy.SizeDesc -> R.string.sort_by_size_desc
                                       MediaSortBy.NameAsc -> R.string.sort_by_name_asc
                                       MediaSortBy.NameDesc -> R.string.sort_by_name_desc
-                                    }
+                                    },
                                 ),
                         )
                       },

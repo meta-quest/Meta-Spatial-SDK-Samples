@@ -164,7 +164,7 @@ class LiveStreamingActivity :
 
             setContent { LiveStreamingScreen(liveStreamingViewModel) }
           }
-        }
+        },
     )
   }
 
@@ -174,7 +174,8 @@ class LiveStreamingActivity :
       cameraController.start(
           surfaceProviders =
               listOfNotNull(
-                  if (::cameraViewSurfaceProvider.isInitialized) cameraViewSurfaceProvider else null
+                  if (::cameraViewSurfaceProvider.isInitialized) cameraViewSurfaceProvider
+                  else null,
               ),
           imageAvailableListener = this,
       )
@@ -193,7 +194,7 @@ class LiveStreamingActivity :
    */
   private fun onCameraPropertiesChanged(properties: CameraProperties) {
     liveStreamingViewModel.updateAspectRatio(
-        properties.resolution.width.toFloat() / properties.resolution.height
+        properties.resolution.width.toFloat() / properties.resolution.height,
     )
 
     startCamera()

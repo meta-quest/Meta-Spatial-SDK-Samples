@@ -40,7 +40,7 @@ fun TitleBar(
                   shape = LocalShapes.current.small,
               )
               .background(GeoVoyageColors.navContainer, LocalShapes.current.small)
-              .height(48.dp)
+              .height(48.dp),
   ) {
     Column(
         horizontalAlignment = Alignment.Start,

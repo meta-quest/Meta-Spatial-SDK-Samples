@@ -127,7 +127,7 @@ class TrackedObjectSystem(
 
             setContent { ObjectLabelScreen(info.uiVM) { onTrackedObjectClicked(info.entity) } }
           }
-        }
+        },
     )
   }
 
@@ -240,7 +240,7 @@ class TrackedObjectSystem(
 
                 return true
               }
-            }
+            },
         )
       }
     }

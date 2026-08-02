@@ -149,7 +149,7 @@ spatial {
     shaders {
       sources.add(
           // replace with your shader directory
-          projectDir.dir("src/shaders")
+          projectDir.dir("src/shaders"),
       )
     }
   }

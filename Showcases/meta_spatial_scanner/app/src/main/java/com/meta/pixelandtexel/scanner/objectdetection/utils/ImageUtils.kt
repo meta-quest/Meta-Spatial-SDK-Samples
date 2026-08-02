@@ -14,7 +14,7 @@ object ImageUtils {
   fun Image.getByteBuffer(): ByteBuffer {
     if (this.format != ImageFormat.YUV_420_888) {
       throw IllegalArgumentException(
-          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}"
+          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}",
       )
     }
 
@@ -92,7 +92,7 @@ object ImageUtils {
   fun Image.getBitmap(): Bitmap {
     if (this.format != ImageFormat.YUV_420_888) {
       throw IllegalArgumentException(
-          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}"
+          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}",
       )
     }
 
@@ -179,7 +179,7 @@ object ImageUtils {
   fun Image.getBitmap(crop: Rect): Bitmap {
     if (this.format != ImageFormat.YUV_420_888) {
       throw IllegalArgumentException(
-          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}"
+          "Unsupported format ${this.format}; expected ${ImageFormat.YUV_420_888}",
       )
     }
 
@@ -187,7 +187,7 @@ object ImageUtils {
 
     require(!crop.isEmpty) { "Bounds empty" }
     require(
-        crop.left >= 0 && crop.top >= 0 && crop.right <= this.width && crop.bottom <= this.height
+        crop.left >= 0 && crop.top >= 0 && crop.right <= this.width && crop.bottom <= this.height,
     ) {
       "Bounds not within image dimensions"
     }

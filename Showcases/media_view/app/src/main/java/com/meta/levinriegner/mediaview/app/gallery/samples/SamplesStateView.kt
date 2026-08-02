@@ -42,8 +42,8 @@ fun SamplesStateView(
               .clip(RoundedCornerShape(Dimens.radiusMedium))
               .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(Dimens.radiusMedium))
               .background(
-                  Brush.horizontalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd))
-              )
+                  Brush.horizontalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd)),
+              ),
   ) {
     when (state) {
       is UiSamplesState.Idle -> {

@@ -44,7 +44,7 @@ fun TextTileButtonsLayout() {
             text = "Primary",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(29.dp))
@@ -68,7 +68,7 @@ fun TextTileButtonsLayout() {
             text = "Primary + Secondary",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(29.dp))
@@ -94,7 +94,7 @@ fun TextTileButtonsLayout() {
             text = "With Icon",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(29.dp))
@@ -120,7 +120,7 @@ fun TextTileButtonsLayout() {
             text = "Secondary with Icon",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(29.dp))
@@ -147,7 +147,7 @@ fun TextTileButtonsLayout() {
             text = "",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(5.dp))
@@ -159,14 +159,14 @@ fun TextTileButtonsLayout() {
               text = "Default",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground,
                   ),
           )
           Text(
               text = "Selected",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground,
                   ),
           )
         }

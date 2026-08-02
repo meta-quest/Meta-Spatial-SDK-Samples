@@ -40,7 +40,7 @@ fun InfoPanel() {
           textAlign = TextAlign.Center,
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
     }

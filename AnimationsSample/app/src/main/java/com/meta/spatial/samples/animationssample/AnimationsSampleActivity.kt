@@ -144,7 +144,7 @@ class AnimationsSampleActivity : AppSystemActivity() {
                               startTime = DataModel.getLocalDataModelTime(),
                               animationType = PanelQuadCylinderAnimationType.CYLINDER_TO_QUAD,
                               durationInMs = animationDurationMs,
-                          )
+                          ),
                       )
                     } else {
                       entity.setComponent(
@@ -155,7 +155,7 @@ class AnimationsSampleActivity : AppSystemActivity() {
                               // so with panel width = 2.048 this gives ~44° to ~175°
                               targetRadius = Random.nextFloat() * 2f + 0.67f,
                               durationInMs = animationDurationMs,
-                          )
+                          ),
                       )
                     }
                     true
@@ -215,7 +215,7 @@ class AnimationsSampleActivity : AppSystemActivity() {
               unlit = true
             },
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-        )
+        ),
     )
   }
 

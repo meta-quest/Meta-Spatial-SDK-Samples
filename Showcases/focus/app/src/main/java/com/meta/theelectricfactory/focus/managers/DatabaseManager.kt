@@ -114,7 +114,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
             "$PROJECT_NAME TEXT, " +
             "$PROJECT_MR INTEGER, " +
             "$PROJECT_ENVIRONMENT INTEGER, " +
-            "$PROJECT_LAST_OPENING TEXT)"
+            "$PROJECT_LAST_OPENING TEXT)",
     )
 
     db?.execSQL(
@@ -130,7 +130,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
             "$UNIQUE_ASSET_ROTATION_W FLOAT," +
             "$UNIQUE_ASSET_ROTATION_X FLOAT," +
             "$UNIQUE_ASSET_ROTATION_Y FLOAT," +
-            "$UNIQUE_ASSET_ROTATION_Z FLOAT)"
+            "$UNIQUE_ASSET_ROTATION_Z FLOAT)",
     )
 
     db?.execSQL(
@@ -149,7 +149,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
             "$TOOL_ROTATION_W FLOAT," +
             "$TOOL_ROTATION_X FLOAT," +
             "$TOOL_ROTATION_Y FLOAT," +
-            "$TOOL_ROTATION_Z FLOAT)"
+            "$TOOL_ROTATION_Z FLOAT)",
     )
 
     db?.execSQL(
@@ -166,7 +166,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
             "$STICKY_ROTATION_W FLOAT," +
             "$STICKY_ROTATION_X FLOAT," +
             "$STICKY_ROTATION_Y FLOAT," +
-            "$STICKY_ROTATION_Z FLOAT)"
+            "$STICKY_ROTATION_Z FLOAT)",
     )
 
     db?.execSQL(
@@ -186,7 +186,7 @@ class DatabaseManager(ctx: Context) : SQLiteOpenHelper(ctx, DATABASE_NAME, null,
             "$TASK_ROTATION_W FLOAT," +
             "$TASK_ROTATION_X FLOAT," +
             "$TASK_ROTATION_Y FLOAT," +
-            "$TASK_ROTATION_Z FLOAT)"
+            "$TASK_ROTATION_Z FLOAT)",
     )
   }
 

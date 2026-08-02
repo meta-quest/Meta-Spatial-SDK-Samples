@@ -115,7 +115,7 @@ class GrabbableNoRotationSystem : SystemBase() {
 
                 return true
               }
-            }
+            },
         )
       }
     }

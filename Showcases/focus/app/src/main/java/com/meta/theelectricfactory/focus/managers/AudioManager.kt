@@ -53,7 +53,7 @@ class AudioManager {
             Material().apply {
               baseTextureAndroidResourceId = R.drawable.speaker_on
               alphaMode = 1
-            }
+            },
         )
     // Project audio state updated in database
     immA
@@ -78,7 +78,7 @@ class AudioManager {
             Material().apply {
               baseTextureAndroidResourceId = R.drawable.speaker_off
               alphaMode = 1
-            }
+            },
         )
     // Project audio state updated in database
     immA

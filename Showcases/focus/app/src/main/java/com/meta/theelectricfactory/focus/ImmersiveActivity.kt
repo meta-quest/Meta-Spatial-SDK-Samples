@@ -234,7 +234,7 @@ class ImmersiveActivity : AppSystemActivity() {
             layoutHeightInDp = _dp * (height / width)
             includeGlass = false
           }
-        }
+        },
     )
 
     // Entity with panel component created

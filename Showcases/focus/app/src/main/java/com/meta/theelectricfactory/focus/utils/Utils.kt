@@ -102,7 +102,7 @@ fun addDeleteButton(entity: Entity, panel: PanelSceneObject? = null) {
             }
             return false
           }
-        }
+        },
     )
     // If entity has a Mesh component, object is selected with a registerEventListener
   } else {
@@ -250,8 +250,8 @@ fun selectElement(ent: Entity) {
                       billboardOrientationEuler.y,
                       billboardOrientationEuler.z,
                   ),
-              )
-          )
+              ),
+          ),
       )
 
   // Change icon if the object is a task
@@ -263,7 +263,7 @@ fun selectElement(ent: Entity) {
               baseTextureAndroidResourceId = R.drawable.close_task
               alphaMode = 1
               unlit = true
-            }
+            },
         )
   } else {
     ImmersiveActivity.getInstance()
@@ -273,7 +273,7 @@ fun selectElement(ent: Entity) {
               baseTextureAndroidResourceId = R.drawable.delete
               alphaMode = 1
               unlit = true
-            }
+            },
         )
   }
   ImmersiveActivity.getInstance()?.deleteButton?.setComponent(TransformParent(ent))

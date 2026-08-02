@@ -141,7 +141,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
                             "Furniture/Plant2.glb",
                             "Furniture/Plant3.glb",
                             "Furniture/Plant4.glb",
-                        )
+                        ),
                     ),
                 MRUKLabel.WALL_ART to
                     AnchorMeshSpawner.AnchorMeshGroup(listOf("Furniture/WallArt.glb")),
@@ -512,7 +512,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
               )
             }
           }
-        }
+        },
     )
   }
 

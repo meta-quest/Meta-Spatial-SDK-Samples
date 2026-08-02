@@ -89,7 +89,7 @@ fun MinimizedMenuView(
                   .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(16.dp))
                   .fillMaxWidth()
                   .background(
-                      Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd))
+                      Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd)),
                   ),
       ) {
         DropdownMenuItem(

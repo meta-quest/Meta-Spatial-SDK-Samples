@@ -59,7 +59,7 @@ fun DebugPanel(debugData: DebugData) {
           Modifier.clip(RoundedCornerShape(20.dp))
               .background(DebugControlsPanelConstants.BackgroundColor)
               .wrapContentHeight()
-              .fillMaxWidth()
+              .fillMaxWidth(),
   ) {
     LazyColumn(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -333,7 +333,7 @@ fun DebugPanelPreview() {
                   label = "Button 2",
                   onClick = { println("clicked button 2") },
               ),
-          )
+          ),
   )
 
   DebugPanel(debugData)

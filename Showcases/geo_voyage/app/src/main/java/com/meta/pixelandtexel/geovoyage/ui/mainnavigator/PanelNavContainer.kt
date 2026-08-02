@@ -52,7 +52,7 @@ fun PanelNavContainer(
               Modifier.fillMaxSize()
                   .padding(
                       top = dimensionResource(R.dimen.standard_margin),
-                  )
+                  ),
       ) {
         content.invoke()
       }

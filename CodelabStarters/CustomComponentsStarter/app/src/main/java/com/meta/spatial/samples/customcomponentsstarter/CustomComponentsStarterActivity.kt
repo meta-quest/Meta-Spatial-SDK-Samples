@@ -60,7 +60,7 @@ class CustomComponentsStarterActivity : AppSystemActivity() {
                 yaw()
                 roll()
               },
-          )
+          ),
       )
       features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
@@ -98,7 +98,7 @@ class CustomComponentsStarterActivity : AppSystemActivity() {
             layerConfig = LayerConfig()
             enableTransparent = true
           }
-        }
+        },
     )
   }
 
@@ -126,7 +126,7 @@ class CustomComponentsStarterActivity : AppSystemActivity() {
               unlit = true // Prevent scene lighting from affecting the skybox
             },
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-        )
+        ),
     )
   }
 

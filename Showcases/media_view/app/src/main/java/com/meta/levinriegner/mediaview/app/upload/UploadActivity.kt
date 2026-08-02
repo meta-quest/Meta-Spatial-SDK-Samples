@@ -105,7 +105,7 @@ class UploadActivity : AppCompatActivity() {
                       clientId = BuildConfig.DRIVE_CLIENT_ID,
                       apiKey = BuildConfig.DRIVE_API_KEY,
                       appId = BuildConfig.DRIVE_APP_ID,
-                  )
+                  ),
           ),
           DRIVE_CONFIG_JAVASCRIPT_INTERFACE_NAME,
       )
@@ -185,7 +185,7 @@ class UploadActivity : AppCompatActivity() {
 
   private fun onMediaDownloaded(driveMedia: DriveMedia) {
     Timber.i(
-        "onMediaDownloaded: ${driveMedia.fileName} (${driveMedia.progress.first}/${driveMedia.progress.second})"
+        "onMediaDownloaded: ${driveMedia.fileName} (${driveMedia.progress.first}/${driveMedia.progress.second})",
     )
     viewModel.onDownload(driveMedia)
   }
@@ -212,7 +212,7 @@ class UploadActivity : AppCompatActivity() {
                 document.getElementById("progress-bar").max = progressMax;
             })($escapedFileName, ${progress.first}, ${progress.second})
         """
-              .trimIndent()
+              .trimIndent(),
       ) {}
     } else {
       webView.evaluateJavascript(
@@ -223,7 +223,7 @@ class UploadActivity : AppCompatActivity() {
               document.getElementById("progress-bar").removeAttribute("max");
           })()
           """
-              .trimIndent()
+              .trimIndent(),
       ) {}
     }
   }

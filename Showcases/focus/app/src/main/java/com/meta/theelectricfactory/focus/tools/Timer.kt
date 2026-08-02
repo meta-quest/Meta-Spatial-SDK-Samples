@@ -54,7 +54,7 @@ class Timer(totalTime: Int) {
           panel {
             rootView?.findViewById<TextView>(R.id.totalTime)?.text = totalTime.toString() + "'"
           }
-        }
+        },
     )
 
     // Create an entity with the timer.glb model
@@ -83,7 +83,7 @@ class Timer(totalTime: Int) {
             type = AssetType.TIMER,
             totalTime = totalTime,
             startTime = System.currentTimeMillis(),
-        )
+        ),
     )
     // We make panel entity child to the timer model entity
     timerPanel.setComponent(TransformParent(timerObj))

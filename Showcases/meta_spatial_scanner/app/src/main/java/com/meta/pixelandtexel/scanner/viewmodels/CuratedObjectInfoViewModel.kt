@@ -53,7 +53,7 @@ class CuratedObjectInfoViewModel(
                 playbackState = PlaybackState.PLAYING,
                 playbackType = PlaybackType.CLAMP,
                 track = track,
-            )
+            ),
         )
       }
     }

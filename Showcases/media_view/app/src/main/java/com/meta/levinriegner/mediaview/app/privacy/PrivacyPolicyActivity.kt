@@ -39,7 +39,7 @@ class PrivacyPolicyActivity : ComponentActivity() {
             modifier =
                 Modifier.fillMaxSize()
                     .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(Dimens.radiusMedium))
-                    .clip(RoundedCornerShape(Dimens.radiusMedium))
+                    .clip(RoundedCornerShape(Dimens.radiusMedium)),
         ) {
           PrivacyPolicyView(
               modifier = Modifier.fillMaxSize().background(AppColor.BackgroundSweep),

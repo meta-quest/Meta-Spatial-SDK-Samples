@@ -139,7 +139,7 @@ class BoardParentingSystem : SystemBase() {
       // If the dummy point is close to the board, we stick the object to the board
       if (distance < 0.08f) {
         grabbedChild.setComponent(
-            Transform(Pose(dummyPoint, board.getComponent<Transform>().transform.q))
+            Transform(Pose(dummyPoint, board.getComponent<Transform>().transform.q)),
         )
       }
     }

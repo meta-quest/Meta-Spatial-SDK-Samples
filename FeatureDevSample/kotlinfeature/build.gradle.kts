@@ -73,7 +73,7 @@ publishing {
       pom {
         name.set("Pulsing Feature")
         description.set(
-            "A Meta Spatial SDK feature that provides pulsing/scaling animations for entities"
+            "A Meta Spatial SDK feature that provides pulsing/scaling animations for entities",
         )
       }
     }

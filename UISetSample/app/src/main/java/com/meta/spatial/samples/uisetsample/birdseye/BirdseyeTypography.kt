@@ -48,7 +48,7 @@ fun BirdseyeTypography() {
               "Headline 1 — Strong",
               style =
                   LocalTypography.current.headline1Strong.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -56,7 +56,7 @@ fun BirdseyeTypography() {
             "Bold",
             style =
                 LocalTypography.current.body2.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Box(contentAlignment = Alignment.BottomEnd, modifier = Modifier.width(300.dp)) {
@@ -64,7 +64,7 @@ fun BirdseyeTypography() {
               "32/36 | -0.2%",
               style =
                   LocalTypography.current.body2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -80,7 +80,7 @@ fun BirdseyeTypography() {
               "Headline 1",
               style =
                   LocalTypography.current.headline1.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -88,7 +88,7 @@ fun BirdseyeTypography() {
             "Light",
             style =
                 LocalTypography.current.body2.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Box(contentAlignment = Alignment.BottomEnd, modifier = Modifier.width(300.dp)) {
@@ -96,7 +96,7 @@ fun BirdseyeTypography() {
               "32/36 | -0.2%",
               style =
                   LocalTypography.current.body2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -112,7 +112,7 @@ fun BirdseyeTypography() {
               "Headline 2 — Strong",
               style =
                   LocalTypography.current.headline2Strong.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -120,7 +120,7 @@ fun BirdseyeTypography() {
             "Bold",
             style =
                 LocalTypography.current.body2.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Box(contentAlignment = Alignment.BottomEnd, modifier = Modifier.width(300.dp)) {
@@ -128,7 +128,7 @@ fun BirdseyeTypography() {
               "24/28 | -0.1%",
               style =
                   LocalTypography.current.body2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -144,7 +144,7 @@ fun BirdseyeTypography() {
               "Headline 2",
               style =
                   LocalTypography.current.headline2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -152,7 +152,7 @@ fun BirdseyeTypography() {
             "Light",
             style =
                 LocalTypography.current.body2.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Box(contentAlignment = Alignment.BottomEnd, modifier = Modifier.width(300.dp)) {
@@ -160,7 +160,7 @@ fun BirdseyeTypography() {
               "24/28 | -0.1%",
               style =
                   LocalTypography.current.body2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -176,7 +176,7 @@ fun BirdseyeTypography() {
               "Headline 3 — Strong",
               style =
                   LocalTypography.current.headline3Strong.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -184,7 +184,7 @@ fun BirdseyeTypography() {
             "Bold",
             style =
                 LocalTypography.current.body2.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Box(contentAlignment = Alignment.BottomEnd, modifier = Modifier.width(300.dp)) {
@@ -192,7 +192,7 @@ fun BirdseyeTypography() {
               "20/24",
               style =
                   LocalTypography.current.body2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -208,7 +208,7 @@ fun BirdseyeTypography() {
               "Headline 3",
               style =
                   LocalTypography.current.headline3.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -216,7 +216,7 @@ fun BirdseyeTypography() {
             "Light",
             style =
                 LocalTypography.current.body2.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Box(contentAlignment = Alignment.BottomEnd, modifier = Modifier.width(300.dp)) {
@@ -224,7 +224,7 @@ fun BirdseyeTypography() {
               "20/24",
               style =
                   LocalTypography.current.body2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -240,7 +240,7 @@ fun BirdseyeTypography() {
               "Body 1 — Strong",
               style =
                   LocalTypography.current.body1Strong.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -248,7 +248,7 @@ fun BirdseyeTypography() {
             "Bold",
             style =
                 LocalTypography.current.body2.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Box(contentAlignment = Alignment.BottomEnd, modifier = Modifier.width(300.dp)) {
@@ -256,7 +256,7 @@ fun BirdseyeTypography() {
               "14/20",
               style =
                   LocalTypography.current.body2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -272,7 +272,7 @@ fun BirdseyeTypography() {
               "Body 1",
               style =
                   LocalTypography.current.body1.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -280,7 +280,7 @@ fun BirdseyeTypography() {
             "Light",
             style =
                 LocalTypography.current.body2.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Box(contentAlignment = Alignment.BottomEnd, modifier = Modifier.width(300.dp)) {
@@ -288,7 +288,7 @@ fun BirdseyeTypography() {
               "14/20",
               style =
                   LocalTypography.current.body2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -305,7 +305,7 @@ fun BirdseyeTypography() {
               "Body 2 — Strong",
               style =
                   LocalTypography.current.body2Strong.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -313,7 +313,7 @@ fun BirdseyeTypography() {
             "Bold",
             style =
                 LocalTypography.current.body2.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Box(contentAlignment = Alignment.BottomEnd, modifier = Modifier.width(300.dp)) {
@@ -321,7 +321,7 @@ fun BirdseyeTypography() {
               "11/16",
               style =
                   LocalTypography.current.body2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -337,7 +337,7 @@ fun BirdseyeTypography() {
               "Body 2",
               style =
                   LocalTypography.current.body2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -345,7 +345,7 @@ fun BirdseyeTypography() {
             "Light",
             style =
                 LocalTypography.current.body2.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Box(contentAlignment = Alignment.BottomEnd, modifier = Modifier.width(300.dp)) {
@@ -353,7 +353,7 @@ fun BirdseyeTypography() {
               "11/16",
               style =
                   LocalTypography.current.body2.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
         }
@@ -367,7 +367,7 @@ fun BirdseyeTypography() {
             "Examples",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -377,7 +377,7 @@ fun BirdseyeTypography() {
             "Paragraph Spacing",
             style =
                 LocalTypography.current.headline2Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -389,7 +389,7 @@ fun BirdseyeTypography() {
                 "10dp Paragraph Spacing",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(10.dp))
@@ -397,7 +397,7 @@ fun BirdseyeTypography() {
                 lorem1,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(10.dp))
@@ -405,7 +405,7 @@ fun BirdseyeTypography() {
                 lorem2,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -417,7 +417,7 @@ fun BirdseyeTypography() {
                 "8dp Paragraph Spacing",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(8.dp))
@@ -425,7 +425,7 @@ fun BirdseyeTypography() {
                 lorem1,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(8.dp))
@@ -433,7 +433,7 @@ fun BirdseyeTypography() {
                 lorem2,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -446,7 +446,7 @@ fun BirdseyeTypography() {
             "Headline Spacing",
             style =
                 LocalTypography.current.headline2Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -458,7 +458,7 @@ fun BirdseyeTypography() {
                 "Headline 1 — Strong",
                 style =
                     LocalTypography.current.headline1Strong.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(12.dp))
@@ -466,7 +466,7 @@ fun BirdseyeTypography() {
                 lorem1,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(8.dp))
@@ -474,7 +474,7 @@ fun BirdseyeTypography() {
                 lorem2,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -486,7 +486,7 @@ fun BirdseyeTypography() {
                 "Headline 1 — Strong",
                 style =
                     LocalTypography.current.headline1Strong.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(12.dp))
@@ -494,7 +494,7 @@ fun BirdseyeTypography() {
                 lorem1,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(8.dp))
@@ -502,7 +502,7 @@ fun BirdseyeTypography() {
                 lorem2,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -517,7 +517,7 @@ fun BirdseyeTypography() {
                 "Headline 2 — Strong",
                 style =
                     LocalTypography.current.headline2Strong.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(12.dp))
@@ -525,7 +525,7 @@ fun BirdseyeTypography() {
                 lorem1,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(8.dp))
@@ -533,7 +533,7 @@ fun BirdseyeTypography() {
                 lorem2,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -545,7 +545,7 @@ fun BirdseyeTypography() {
                 "Headline 2 — Strong",
                 style =
                     LocalTypography.current.headline2Strong.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(12.dp))
@@ -553,7 +553,7 @@ fun BirdseyeTypography() {
                 lorem1,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
             Spacer(Modifier.height(8.dp))
@@ -561,7 +561,7 @@ fun BirdseyeTypography() {
                 lorem2,
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }

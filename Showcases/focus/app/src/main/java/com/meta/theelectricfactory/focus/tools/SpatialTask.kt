@@ -83,13 +83,13 @@ class SpatialTask(
               }
               // We add a listener to show delete button when entity is selected
             }
-            .panel { addDeleteButton(taskPanelEntity, this) }
+            .panel { addDeleteButton(taskPanelEntity, this) },
     )
 
     // Place in front of user in case is new
     if (new) placeInFront(taskPanelEntity)
     taskPanelEntity.setComponent(
-        ToolComponent(task.uuid, AssetType.TASK, Vector3(0f, 0.12f, -0.005f))
+        ToolComponent(task.uuid, AssetType.TASK, Vector3(0f, 0.12f, -0.005f)),
     )
 
     // We add an AttachableComponent to the object to be able to stick it to the boards
@@ -109,7 +109,7 @@ class SpatialTask(
 
     if (new)
         AudioManager.instance.playCreationSound(
-            taskPanelEntity.getComponent<Transform>().transform.t
+            taskPanelEntity.getComponent<Transform>().transform.t,
         )
   }
 }

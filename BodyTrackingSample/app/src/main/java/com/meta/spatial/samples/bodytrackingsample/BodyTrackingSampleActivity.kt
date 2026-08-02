@@ -75,7 +75,7 @@ class BodyTrackingSampleActivity : AppSystemActivity() {
               unlit = true
             },
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-        )
+        ),
     )
 
     scene.setBodyTrackingJointSet(JointSet.FULL_BODY)
@@ -129,7 +129,7 @@ class BodyTrackingSampleActivity : AppSystemActivity() {
                       Mesh(Uri.parse("mesh://box")),
                       Material().apply { baseColor = Color4(0.0f, 0.0f, 1.0f, 1.0f) },
                       Transform(Pose(p0, look)),
-                  )
+                  ),
               )
           boneCubes.add(entity)
         }

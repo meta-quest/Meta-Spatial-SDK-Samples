@@ -161,7 +161,7 @@ fun MovieListScreen(
               .clip(RoundedCornerShape(16.dp))
               .background(Color(0xFF1C2E33).copy(alpha = 1.0f))
               .graphicsLayer { alpha = 1.0f }
-              .padding(16.2.dp)
+              .padding(16.2.dp),
   ) {
     Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
       Text(

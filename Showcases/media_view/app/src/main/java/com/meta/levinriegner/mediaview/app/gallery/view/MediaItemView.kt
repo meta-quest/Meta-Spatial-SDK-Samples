@@ -66,7 +66,7 @@ fun MediaItemView(
           modifier
               .size(Dimens.galleryItemSize)
               .clip(RoundedCornerShape(Dimens.radiusMedium))
-              .clickable { onItemClicked(item) }
+              .clickable { onItemClicked(item) },
   ) {
     Box(contentAlignment = Alignment.Center, modifier = Modifier) {
       AsyncImage(
@@ -207,7 +207,7 @@ fun MediaItemView(
               Modifier.fillMaxSize()
                   .background(Color.Black.copy(alpha = .5f))
                   .blur(100.dp)
-                  .zIndex(-1f)
+                  .zIndex(-1f),
       )
     }
 

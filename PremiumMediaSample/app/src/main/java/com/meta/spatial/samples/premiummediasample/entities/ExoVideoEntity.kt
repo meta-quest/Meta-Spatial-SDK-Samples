@@ -180,11 +180,11 @@ class ExoVideoEntity(
                         PanelInputOptions(
                             ButtonBits.ButtonA or
                                 ButtonBits.ButtonTriggerL or
-                                ButtonBits.ButtonTriggerR
+                                ButtonBits.ButtonTriggerR,
                         ),
                 )
               },
-          )
+          ),
       )
     }
     entity = Entity.create(Panel(id), Transform(), Visible(false), PanelLayerAlpha(0f))
@@ -238,7 +238,7 @@ class ExoVideoEntity(
                     style = PanelStyleOptions(R.style.PanelAppThemeTransparent),
                 )
               },
-          )
+          ),
       )
     }
 
@@ -286,7 +286,7 @@ class ExoVideoEntity(
               )
             }
           }
-        }
+        },
     )
   }
 

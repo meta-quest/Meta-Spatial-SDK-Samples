@@ -225,7 +225,7 @@ fun AIPanel() {
                                   sendButtonIcon,
                                   stickyAvailable,
                               )
-                            }
+                            },
                         ),
                 )
               }
@@ -303,7 +303,7 @@ fun AiDisclaimerText() {
       AnnotatedString.Builder()
           .apply {
             append(
-                "This application uses generative AI to respond to queries, and those responses may be inaccurate or inappropriate. "
+                "This application uses generative AI to respond to queries, and those responses may be inaccurate or inappropriate. ",
             )
             pushStringAnnotation(tag = "OpenBrowser", annotation = "")
             withStyle(
@@ -311,7 +311,7 @@ fun AiDisclaimerText() {
                     SpanStyle(
                         color = FocusColors.purpleStickyNote,
                         textDecoration = TextDecoration.Underline,
-                    )
+                    ),
             ) {
               append("Learn More")
             }

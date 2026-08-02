@@ -203,7 +203,7 @@ class MixedRealitySampleActivity : AppSystemActivity() {
                   display = DpPerMeterDisplayOptions(),
               )
             },
-        )
+        ),
     )
   }
 

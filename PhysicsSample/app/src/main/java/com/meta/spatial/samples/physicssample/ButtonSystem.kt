@@ -65,7 +65,7 @@ class ButtonSystem() : SystemBase() {
               ) {
                 dataModel?.sendEvent(entity, "button", EventArgs("click", dataModel))
               }
-            }
+            },
         )
       }
     }

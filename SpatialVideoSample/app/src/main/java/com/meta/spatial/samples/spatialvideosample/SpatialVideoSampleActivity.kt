@@ -191,7 +191,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
       environmentGLXF?.let {
         val environmentMesh = it.getComponent<Mesh>()
         it.setComponent(
-            environmentMesh.apply { defaultShaderOverride = SceneMaterial.UNLIT_SHADER }
+            environmentMesh.apply { defaultShaderOverride = SceneMaterial.UNLIT_SHADER },
         )
       }
       setMrMode(scene.isSystemPassthroughEnabled())
@@ -266,7 +266,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                 },
                 Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
                 Visible(false),
-            )
+            ),
         )
 
     scene.updateIBLEnvironment("chromatic.env")
@@ -293,7 +293,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                   Grabbable(type = GrabbableType.PIVOT_Y, minHeight = 0.75f, maxHeight = 2.5f),
                   SpatializedAudioPanel(),
                   Transform(initialPose * Pose(Vector3(0f, 1.25f, 2f), Quaternion(0f, 0f, 0f))),
-              )
+              ),
           )
       Entity(R.id.video_selector_panel)
           .setComponents(
@@ -301,16 +301,16 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                   Grabbable(),
                   Panel(R.id.video_selector_panel),
                   Transform(
-                      initialPose * Pose(Vector3(-1f, 1.25f, 1.2f), Quaternion(0f, -45f, 0f))
+                      initialPose * Pose(Vector3(-1f, 1.25f, 1.2f), Quaternion(0f, -45f, 0f)),
                   ),
-              )
+              ),
           )
       Entity(R.id.controls_id)
           .setComponents(
               listOf(
                   Panel(R.id.controls_id),
                   TransformParent(Entity(R.id.spatialized_video_panel)),
-              )
+              ),
           )
       Entity(R.id.mr_panel)
           .setComponents(
@@ -318,7 +318,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                   Panel(R.id.mr_panel),
                   Transform(Pose(Vector3(0.0f, -0.6f, -0.1f))),
                   TransformParent(Entity(R.id.video_selector_panel)),
-              )
+              ),
           )
       environmentGLXF?.setComponents(listOf(Visible(false), Transform(initialPose)))
       if (DEBUG) {
@@ -328,7 +328,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                     Grabbable(),
                     Panel(R.id.debug_panel),
                     Transform(initialPose * Pose(Vector3(1f, 1.25f, 1f), Quaternion(0f, 45f, 0f))),
-                )
+                ),
             )
       }
       mrPanelPose = Entity(R.id.spatialized_video_panel).getComponent<Transform>().transform
@@ -513,7 +513,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                     setUri?.let { uri -> setVideo(uri) }
                     Log.e("ExoPlayer", "Player encountered an error: $error")
                   }
-                }
+                },
             )
 
             it.setOnSeekBarChangeListener(
@@ -543,7 +543,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                       player.playWhenReady = true
                     }
                   }
-                }
+                },
             )
           }
 
@@ -575,7 +575,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                   resetControllerFadeOutTimer()
                   return false
                 }
-              }
+              },
           )
 
           // Default media
@@ -647,7 +647,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
                 override fun onStartTrackingTouch(seekBar: SeekBar) = Unit
 
                 override fun onStopTrackingTouch(seekBar: SeekBar) = Unit
-              }
+              },
           )
         },
     )
@@ -808,7 +808,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
               input =
                   // want to disable left hand pinch so we can drag the panel around with hands
                   PanelInputOptions(
-                      ButtonBits.ButtonA or ButtonBits.ButtonTriggerL or ButtonBits.ButtonTriggerR
+                      ButtonBits.ButtonA or ButtonBits.ButtonTriggerL or ButtonBits.ButtonTriggerR,
                   ),
           )
         },
@@ -849,7 +849,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
       environmentGLXF?.setComponent(Visible(false))
       skydome?.setComponent(Visible(false))
       videoPanelEntity.setComponents(
-          listOf(Scale(1.0f), Transform(mrPanelPose), TransformParent(Entity.nullEntity()))
+          listOf(Scale(1.0f), Transform(mrPanelPose), TransformParent(Entity.nullEntity())),
       )
       Entity(R.id.controls_id)
           .setComponent(Transform(Pose(Vector3(0.0f, -0.6f, -0.15f), Quaternion(20f, 0f, 0f))))
@@ -858,11 +858,11 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
           listOf(
               Scale(VR_SCREEN_RATIO),
               Transform(Pose(Vector3(0.2f, 1.7f, 4.5f), Quaternion(0f, 0f, 0f))),
-          )
+          ),
       )
       Entity(R.id.controls_id)
           .setComponents(
-              listOf(Transform(Pose(Vector3(0.0f, -1.3f, -2.0f), Quaternion(20f, 0f, 0f))))
+              listOf(Transform(Pose(Vector3(0.0f, -1.3f, -2.0f), Quaternion(20f, 0f, 0f)))),
           )
     }
 

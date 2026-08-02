@@ -152,7 +152,7 @@ class PermissionActivity : ComponentActivity() {
     } else {
       viewModel.onCheckPermissionResult(
           ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) ==
-              PackageManager.PERMISSION_GRANTED
+              PackageManager.PERMISSION_GRANTED,
       )
     }
   }
@@ -218,7 +218,7 @@ private fun RequestPermissionRationale(
               .clip(RoundedCornerShape(40.dp))
               .border(1.dp, AppColor.MetaBlu, RoundedCornerShape(40.dp))
               .background(
-                  Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd))
+                  Brush.verticalGradient(listOf(AppColor.GradientStart, AppColor.GradientEnd)),
               ),
   ) {
     Column(
@@ -240,7 +240,7 @@ private fun RequestPermissionRationale(
               stringResource(
                   id =
                       if (denied) R.string.storage_permission_rationale_denied
-                      else R.string.storage_permission_rationale_description
+                      else R.string.storage_permission_rationale_description,
               ),
           textAlign = TextAlign.Center,
           style =

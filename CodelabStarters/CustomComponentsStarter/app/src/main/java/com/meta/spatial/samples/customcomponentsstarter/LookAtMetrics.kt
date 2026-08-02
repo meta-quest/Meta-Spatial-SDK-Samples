@@ -32,11 +32,13 @@ class LookAtMetrics(init: LookAtMetrics.() -> Unit = {}) : OVRMetricsGroup() {
   }
 
   fun pos() {
-    overlayMessages.add({
-      val pos = getTargetPosition()
-      val formater = DecimalFormat("#,##0.00")
-      "Target Pos: (${formater.format(pos.x)}, ${formater.format(pos.y)}, ${formater.format(pos.z)})"
-    })
+    overlayMessages.add(
+        {
+          val pos = getTargetPosition()
+          val formater = DecimalFormat("#,##0.00")
+          "Target Pos: (${formater.format(pos.x)}, ${formater.format(pos.y)}, ${formater.format(pos.z)})"
+        },
+    )
   }
 
   fun pitch() {
@@ -50,7 +52,7 @@ class LookAtMetrics(init: LookAtMetrics.() -> Unit = {}) : OVRMetricsGroup() {
                 ShowStat = false,
             ),
             { angle(getRotation().x) },
-        )
+        ),
     )
   }
 
@@ -65,7 +67,7 @@ class LookAtMetrics(init: LookAtMetrics.() -> Unit = {}) : OVRMetricsGroup() {
                 ShowStat = false,
             ),
             { angle(getRotation().y) },
-        )
+        ),
     )
   }
 
@@ -80,7 +82,7 @@ class LookAtMetrics(init: LookAtMetrics.() -> Unit = {}) : OVRMetricsGroup() {
                 ShowStat = false,
             ),
             { angle(getRotation().z) },
-        )
+        ),
     )
   }
 

@@ -93,7 +93,7 @@ class ImmersiveActivity : AppSystemActivity() {
                 Panel(PanelRegistrationIds.PANEL_LOADING),
                 Transform(Pose(loadingPosition, loadingRotation)),
                 Hittable(MeshCollision.NoCollision),
-            )
+            ),
         )
 
     loadGLXF()

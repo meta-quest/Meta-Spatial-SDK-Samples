@@ -43,7 +43,7 @@ fun ScrollableColumn(content: @Composable () -> Unit) {
       modifier =
           Modifier.fillMaxSize().onGloballyPositioned { coordinates ->
             viewportHeight = coordinates.size.height
-          }
+          },
   ) {
     Column(
         verticalArrangement = Arrangement.Top,
@@ -70,9 +70,9 @@ fun ScrollableColumn(content: @Composable () -> Unit) {
                                   listOf(
                                       Color.Transparent,
                                       SpatialColor.RLDSpanelBlackGradientBottom,
-                                  )
-                          )
-                  )
+                                  ),
+                          ),
+                  ),
       )
       Icon(
           imageVector = SpatialIcons.Regular.ArrowDown,

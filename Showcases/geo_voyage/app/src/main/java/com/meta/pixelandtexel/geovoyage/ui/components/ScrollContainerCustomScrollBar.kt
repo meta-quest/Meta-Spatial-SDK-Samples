@@ -61,7 +61,7 @@ fun ScrollableTextAreaWithScrollBar(text: String, modifier: Modifier = Modifier)
                 .padding(end = 16.dp) // Add some padding to the end to make space for the scrollbar
                 .onGloballyPositioned { layoutCoordinates ->
                   contentHeight.intValue = layoutCoordinates.size.height
-                }
+                },
     ) {
       MarkdownText(
           markdown = text,
@@ -87,7 +87,7 @@ fun ScrollableTextAreaWithScrollBar(text: String, modifier: Modifier = Modifier)
                       change.consume()
                       coroutineScope.launch { scrollState.scrollBy(dragAmount) }
                     }
-                  }
+                  },
       ) {
         val minThumbHeight = 48.dp
         val visibleRatio = containerHeight.intValue.toFloat() / contentHeight.intValue.toFloat()
@@ -107,7 +107,7 @@ fun ScrollableTextAreaWithScrollBar(text: String, modifier: Modifier = Modifier)
                     .clip(RoundedCornerShape(20.0.dp))
                     .width(8.dp)
                     .height(with(LocalDensity.current) { thumbHeight.toDp() })
-                    .background(GeoVoyageColors.textColor.copy(alpha = 0.5f))
+                    .background(GeoVoyageColors.textColor.copy(alpha = 0.5f)),
         )
       }
     }
@@ -123,7 +123,7 @@ fun ScrollableTextAreaWithScrollBar(text: String, modifier: Modifier = Modifier)
 )
 @Composable
 private fun ScrollableTextAreaPreview(
-    @PreviewParameter(ScrollableTextAreaProvider::class) text: String
+    @PreviewParameter(ScrollableTextAreaProvider::class) text: String,
 ) {
   GeoVoyageTheme { ScrollableTextAreaWithScrollBar(text) }
 }

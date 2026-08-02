@@ -54,7 +54,7 @@ class WebView(
 
     // Register the panel
     immA?.registerPanel(
-        PanelManager.instance.panelRegistration(id, 0.56f, 0.4f) { WebViewPanel(url, uuid, ent) }
+        PanelManager.instance.panelRegistration(id, 0.56f, 0.4f) { WebViewPanel(url, uuid, ent) },
     )
 
     // ToolComponent is added to web view to save properties and identify it

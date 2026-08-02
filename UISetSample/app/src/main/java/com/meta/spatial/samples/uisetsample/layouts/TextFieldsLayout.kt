@@ -43,7 +43,7 @@ fun TextFieldsLayout() {
             text = "Default",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.height(48.dp))
@@ -65,7 +65,7 @@ fun TextFieldsLayout() {
             text = "With Microphone",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.height(48.dp))
@@ -87,7 +87,7 @@ fun TextFieldsLayout() {
             text = "Default",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.height(20.dp))
@@ -110,7 +110,7 @@ fun TextFieldsLayout() {
             text = "With Icon",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.height(20.dp))

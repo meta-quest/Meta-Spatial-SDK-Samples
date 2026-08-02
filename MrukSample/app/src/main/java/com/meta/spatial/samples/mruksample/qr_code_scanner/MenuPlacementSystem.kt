@@ -45,8 +45,8 @@ class MenuPlacementSystem : SystemBase() {
                   entity
                       .getComponent<Scale>()
                       .scale
-                      .lerp(Vector3(targetScale.target), targetScale.speed)
-              )
+                      .lerp(Vector3(targetScale.target), targetScale.speed),
+              ),
           )
         }
   }

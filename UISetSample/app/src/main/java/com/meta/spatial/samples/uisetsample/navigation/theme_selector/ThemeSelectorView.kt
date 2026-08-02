@@ -51,7 +51,7 @@ fun ThemeSelectorView() {
             text = "Themes",
             style =
                 LocalTypography.current.headline2Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(24.dp))

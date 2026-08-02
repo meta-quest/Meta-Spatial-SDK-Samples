@@ -78,7 +78,7 @@ fun StartMenuLayout(
             textAlign = TextAlign.Center,
             style =
                 SpatialTheme.typography.headline1Strong.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
 

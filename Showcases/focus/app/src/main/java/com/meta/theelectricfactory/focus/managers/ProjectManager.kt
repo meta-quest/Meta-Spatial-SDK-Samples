@@ -78,67 +78,67 @@ class ProjectManager {
       while (!uniqueAssetsCursor.isAfterLast) {
         val uuid =
             uniqueAssetsCursor.getInt(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_UUID)
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_UUID),
             )
         val rawType =
             uniqueAssetsCursor.getString(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_TYPE)
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_TYPE),
             )
         val type = AssetType.entries.find { it.name == rawType }
         val state =
             uniqueAssetsCursor.getInt(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_STATE)
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_STATE),
             )
 
         val posX =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_X)
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_X),
             )
         val posY =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_Y)
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_Y),
             )
         val posZ =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_Z)
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_POSITION_Z),
             )
 
         val rotW =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_W)
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_W),
             )
         val rotX =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_X)
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_X),
             )
         val rotY =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_Y)
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_Y),
             )
         val rotZ =
             uniqueAssetsCursor.getFloat(
-                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_Z)
+                uniqueAssetsCursor.getColumnIndex(DatabaseManager.UNIQUE_ASSET_ROTATION_Z),
             )
 
         when (type) {
           AssetType.TASKS_PANEL -> {
             PanelManager.instance.tasksPanel.setComponent(
-                UniqueAssetComponent(uuid, AssetType.TASKS_PANEL)
+                UniqueAssetComponent(uuid, AssetType.TASKS_PANEL),
             )
             PanelManager.instance.tasksPanel.setComponent(Visible(if (state == 1) true else false))
             PanelManager.instance.tasksPanel.setComponent(
-                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
+                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ))),
             )
           }
           AssetType.AI_PANEL -> {
             PanelManager.instance.aiExchangePanel.setComponent(
-                UniqueAssetComponent(uuid, AssetType.AI_PANEL)
+                UniqueAssetComponent(uuid, AssetType.AI_PANEL),
             )
             PanelManager.instance.aiExchangePanel.setComponent(
-                Visible(if (state == 1 && AIManager.instance.AIenabled) true else false)
+                Visible(if (state == 1 && AIManager.instance.AIenabled) true else false),
             )
             PanelManager.instance.aiExchangePanel.setComponent(
-                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
+                Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ))),
             )
           }
           AssetType.CLOCK -> {
@@ -146,7 +146,7 @@ class ProjectManager {
             immA
                 ?.clock
                 ?.setComponent(
-                    Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
+                    Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ))),
                 )
           }
           AssetType.SPEAKER -> {
@@ -154,7 +154,7 @@ class ProjectManager {
             immA
                 ?.speaker
                 ?.setComponent(
-                    Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ)))
+                    Transform(Pose(Vector3(posX, posY, posZ), Quaternion(rotW, rotX, rotY, rotZ))),
                 )
             AudioManager.instance.audioIsOn = if (state == 1) true else false
             if (AudioManager.instance.audioIsOn) AudioManager.instance.playAmbientSound()
@@ -229,32 +229,32 @@ class ProjectManager {
 
         val posX =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_X)
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_X),
             )
         val posY =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_Y)
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_Y),
             )
         val posZ =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_Z)
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_POSITION_Z),
             )
 
         val rotW =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_W)
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_W),
             )
         val rotX =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_X)
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_X),
             )
         val rotY =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_Y)
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_Y),
             )
         val rotZ =
             stickiesCursor.getFloat(
-                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_Z)
+                stickiesCursor.getColumnIndex(DatabaseManager.STICKY_ROTATION_Z),
             )
 
         StickyNote(
@@ -301,10 +301,10 @@ class ProjectManager {
       val speakerUUID = getNewUUID()
 
       PanelManager.instance.tasksPanel.setComponent(
-          UniqueAssetComponent(tasksPanelUUID, AssetType.TASKS_PANEL)
+          UniqueAssetComponent(tasksPanelUUID, AssetType.TASKS_PANEL),
       )
       PanelManager.instance.aiExchangePanel.setComponent(
-          UniqueAssetComponent(aiPanelUUID, AssetType.AI_PANEL)
+          UniqueAssetComponent(aiPanelUUID, AssetType.AI_PANEL),
       )
       immA?.clock?.setComponent(UniqueAssetComponent(clockUUID, AssetType.CLOCK))
       immA?.speaker?.setComponent(UniqueAssetComponent(speakerUUID, AssetType.SPEAKER))

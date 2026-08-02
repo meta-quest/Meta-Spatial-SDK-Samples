@@ -264,7 +264,7 @@ object WitAiService {
                     // in case wit.ai returns an error
                     if (witAiResponse.error != null) {
                       throw Exception(
-                          "chunk:\ncode: '${witAiResponse.code}'\nerror: '${witAiResponse.error}'"
+                          "chunk:\ncode: '${witAiResponse.code}'\nerror: '${witAiResponse.error}'",
                       )
                     }
 

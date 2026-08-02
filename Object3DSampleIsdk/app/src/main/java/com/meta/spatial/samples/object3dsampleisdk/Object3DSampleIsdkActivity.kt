@@ -197,7 +197,7 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
                   else -> {} // No-op for other event types
                 }
               }
-            }
+            },
         )
   }
 
@@ -226,18 +226,18 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
                   unlit = true
                 },
                 Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-            )
+            ),
         )
 
     Entity.create(
         listOf(
             Panel(R.id.scroll_panel),
             Transform(
-                Pose(Vector3(x = -0.5f, y = 1f, z = 0.6f), Quaternion.fromEuler(0f, -45f, 0f))
+                Pose(Vector3(x = -0.5f, y = 1f, z = 0.6f), Quaternion.fromEuler(0f, -45f, 0f)),
             ),
             Grabbable(),
             IsdkPanelResize(resizeMode = ResizeMode.Relayout),
-        )
+        ),
     )
     Entity.create(
         listOf(
@@ -245,7 +245,7 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
             Transform(Pose(Vector3(x = 0.5f, y = 1f, z = 0.6f), Quaternion.fromEuler(0f, 45f, 0f))),
             Grabbable(),
             IsdkPanelResize(),
-        )
+        ),
     )
 
     // uncomment to see the physics debug lines

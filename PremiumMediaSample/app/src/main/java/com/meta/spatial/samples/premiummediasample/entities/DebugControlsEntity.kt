@@ -76,7 +76,7 @@ class DebugControlsEntity() {
               ),
               Panel(id),
               Transform(),
-          )
+          ),
       )
     }
 

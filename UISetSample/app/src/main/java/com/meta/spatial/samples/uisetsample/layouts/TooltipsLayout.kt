@@ -47,7 +47,7 @@ fun TooltipsLayout() {
           text = "Default",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
       Spacer(Modifier.width(226.dp))
@@ -67,7 +67,7 @@ fun TooltipsLayout() {
           text = "Tooltip with Icon & Subtitle",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
     }
@@ -85,7 +85,7 @@ fun TooltipsLayout() {
           text = "Default with Subtitle",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
       Spacer(Modifier.width(142.dp))
@@ -104,7 +104,7 @@ fun TooltipsLayout() {
           text = "Tooltip with Image",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
     }
@@ -128,7 +128,7 @@ fun TooltipsLayout() {
           text = "Tooltip with Icon",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
       Spacer(Modifier.width(164.dp))
@@ -148,7 +148,7 @@ fun TooltipsLayout() {
           text = "Tooltip with Image & Subtitle",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
     }

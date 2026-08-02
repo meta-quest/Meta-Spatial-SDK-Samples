@@ -32,7 +32,7 @@ data class MediaSource(
   }
 
   enum class AudioCodecType {
-    None
+    None,
   }
 
   val aspectRatio: Float

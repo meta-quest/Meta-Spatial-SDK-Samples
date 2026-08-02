@@ -134,7 +134,7 @@ class CuratedObjectHandler(
 
                   return true
                 }
-              }
+              },
           )
 
           // cache our animation track info
@@ -256,7 +256,7 @@ class CuratedObjectHandler(
               Quad(),
               Material(),
               Hittable(MeshCollision.NoCollision),
-          )
+          ),
       )
     }
 
@@ -375,7 +375,7 @@ class CuratedObjectHandler(
               playbackState = PlaybackState.PAUSED,
               playbackType = PlaybackType.CLAMP,
               curatedObject.initialAnimationTrack ?: 0,
-          )
+          ),
       )
     }
   }
@@ -403,7 +403,7 @@ class CuratedObjectHandler(
               playbackState = PlaybackState.PAUSED,
               playbackType = PlaybackType.CLAMP,
               curatedObject.initialAnimationTrack ?: 0,
-          )
+          ),
       )
     }
 
@@ -593,7 +593,7 @@ class CuratedObjectHandler(
                               currentPanelTitle,
                               currentPanelAnimationTrack,
                               currentPanelTiles,
-                          )
+                          ),
                       )
                     }
                   }
@@ -611,7 +611,7 @@ class CuratedObjectHandler(
                             currentPanelAnimationTrack,
                             currentPanelImageResId,
                             body,
-                        )
+                        ),
                     )
                   }
 

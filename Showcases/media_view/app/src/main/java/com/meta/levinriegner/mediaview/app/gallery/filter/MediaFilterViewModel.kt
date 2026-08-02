@@ -21,10 +21,9 @@ constructor(
     private val eventBus: EventBus,
 ) : ViewModel() {
 
-  private val _filters =
-      MutableStateFlow(
-          MediaFilter.entries.map { filter -> UiMediaFilter(filter, filter == MediaFilter.initial) }
-      )
+  private val _filters = MutableStateFlow(
+      MediaFilter.entries.map { filter -> UiMediaFilter(filter, filter == MediaFilter.initial) },
+  )
   val filters = _filters.asStateFlow()
 
   fun onFilterSelected(filter: UiMediaFilter) {

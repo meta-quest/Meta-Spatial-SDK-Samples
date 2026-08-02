@@ -112,7 +112,7 @@ private fun LiveStreamingScreenPreview() {
           requestPermission = {},
           onSurfaceAvailable = {},
           onSurfaceDestroyed = {},
-      )
+      ),
   )
 }
 
@@ -125,6 +125,6 @@ private fun LiveStreamingScreenPermissionGrantedPreview() {
           requestPermission = {},
           onSurfaceAvailable = {},
           onSurfaceDestroyed = {},
-      )
+      ),
   )
 }

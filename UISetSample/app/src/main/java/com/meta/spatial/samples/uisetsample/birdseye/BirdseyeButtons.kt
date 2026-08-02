@@ -56,7 +56,7 @@ fun BirdseyeButtons() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -76,7 +76,7 @@ fun BirdseyeButtons() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground
+                color = LocalColorScheme.current.primaryAlphaBackground,
             ),
     )
     Spacer(modifier = Modifier.height(40.dp))
@@ -109,7 +109,7 @@ fun BirdseyeButtons() {
             "Default",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -118,14 +118,14 @@ fun BirdseyeButtons() {
             "Primary Buttons ",
             style =
                 LocalTypography.current.body1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Text(
             "Use it to contain a high-emphasis action.",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -164,7 +164,7 @@ fun BirdseyeButtons() {
             "Disabled",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -204,7 +204,7 @@ fun BirdseyeButtons() {
             "Default",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -213,14 +213,14 @@ fun BirdseyeButtons() {
             "Secondary Buttons ",
             style =
                 LocalTypography.current.body1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Text(
             "Use a secondary button for medium-emphasis action on a surface.",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -259,7 +259,7 @@ fun BirdseyeButtons() {
             "Disabled",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -299,7 +299,7 @@ fun BirdseyeButtons() {
             "Default",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -308,14 +308,14 @@ fun BirdseyeButtons() {
             "Borderless Buttons  ",
             style =
                 LocalTypography.current.body1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Text(
             "Borderless button doesn't have a background.",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -354,7 +354,7 @@ fun BirdseyeButtons() {
             "Disabled",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -394,7 +394,7 @@ fun BirdseyeButtons() {
             "Default",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -403,14 +403,14 @@ fun BirdseyeButtons() {
             "Destructive Buttons  ",
             style =
                 LocalTypography.current.body1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Text(
             "Use it to draw user's attention in a destructive action such as \"Delete\" or \"End\".",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -449,7 +449,7 @@ fun BirdseyeButtons() {
             "Disabled",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }

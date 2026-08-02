@@ -56,7 +56,7 @@ fun ButtonsLayout() {
             text = "Label Only",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(35.dp))
@@ -88,7 +88,7 @@ fun ButtonsLayout() {
             text = "Icon & Label",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(35.dp))
@@ -124,7 +124,7 @@ fun ButtonsLayout() {
             text = "Icon Only",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(35.dp))
@@ -156,7 +156,7 @@ fun ButtonsLayout() {
             text = "Icon Selected",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(35.dp))
@@ -189,7 +189,7 @@ fun ButtonsLayout() {
             text = "",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(35.dp))
@@ -197,7 +197,7 @@ fun ButtonsLayout() {
             text = "Primary Buttons",
             style =
                 SpatialTheme.typography.body1Strong.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Text(
@@ -215,7 +215,7 @@ fun ButtonsLayout() {
             text = "Secondary Buttons",
             style =
                 SpatialTheme.typography.body1Strong.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Text(
@@ -233,7 +233,7 @@ fun ButtonsLayout() {
             text = "Borderless Buttons",
             style =
                 SpatialTheme.typography.body1Strong.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Text(
@@ -251,7 +251,7 @@ fun ButtonsLayout() {
             text = "Destructive Buttons",
             style =
                 SpatialTheme.typography.body1Strong.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Text(

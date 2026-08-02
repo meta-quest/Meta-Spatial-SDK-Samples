@@ -62,7 +62,7 @@ fun StickyNotePanel(
         Column {
           Box(
               modifier =
-                  Modifier.fillMaxWidth().fillMaxHeight(0.17f).align(Alignment.CenterHorizontally)
+                  Modifier.fillMaxWidth().fillMaxHeight(0.17f).align(Alignment.CenterHorizontally),
           )
 
           Box(modifier = Modifier.fillMaxWidth().fillMaxHeight().background(lightColor)) {
@@ -81,7 +81,7 @@ fun StickyNotePanel(
                                 uuid,
                                 messageInput.value,
                             )
-                          }
+                          },
                       ),
                   placeholder = {
                     Text(

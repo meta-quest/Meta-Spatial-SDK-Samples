@@ -46,7 +46,7 @@ fun TodayInHistoryScreen(
       modifier = Modifier.fillMaxSize(),
   ) {
     SecondaryPanel(
-        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.tall_panel_height))
+        modifier = Modifier.fillMaxWidth().height(dimensionResource(R.dimen.tall_panel_height)),
     ) {
       Column(
           horizontalAlignment = Alignment.CenterHorizontally,

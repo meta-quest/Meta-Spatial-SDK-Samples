@@ -123,13 +123,12 @@ class TweenTransformAccessor : TweenAccessor<TweenTransform> {
     }
 
     // Check if the quaternion is normalized (magnitude close to 1)
-    val magnitude =
-        sqrt(
-            orientation.x * orientation.x +
-                orientation.y * orientation.y +
-                orientation.z * orientation.z +
-                orientation.w * orientation.w
-        )
+    val magnitude = sqrt(
+        orientation.x * orientation.x +
+            orientation.y * orientation.y +
+            orientation.z * orientation.z +
+            orientation.w * orientation.w,
+    )
     return magnitude > 0.999 && magnitude < 1.001
   }
 

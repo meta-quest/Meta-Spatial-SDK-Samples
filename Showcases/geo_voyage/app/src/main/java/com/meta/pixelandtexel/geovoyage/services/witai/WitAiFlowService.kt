@@ -48,7 +48,7 @@ object WitAIFlowService {
 
   // looks at the entities in each entity group on the response and then returns all the matches
   private fun getNamedEntitiesFromResponse(
-      response: WitAiUnderstoodResponse
+      response: WitAiUnderstoodResponse,
   ): Set<WitAiEntityType> {
     return response.entities.values
         .flatten()

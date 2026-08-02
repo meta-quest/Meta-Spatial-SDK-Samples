@@ -169,7 +169,7 @@ fun MovieApp(viewModel: MovieViewModel) {
           Modifier.fillMaxSize()
               .clip(RoundedCornerShape(10.dp))
               .background(Color(0xFF0f0f0f))
-              .padding(8.dp)
+              .padding(8.dp),
   ) {
     NavHost(
         navController = navController,
@@ -300,7 +300,7 @@ fun MovieDetailScreen(navController: NavController, viewModel: MovieViewModel) {
         if (movie.id == -1) {
           SpatialActivityManager.executeOnVrActivity<MediaPlayerSampleActivity> { activity ->
             activity.playVideo(
-                "android.resource://" + context.getPackageName() + "/" + R.raw.soloist
+                "android.resource://" + context.getPackageName() + "/" + R.raw.soloist,
             )
           }
         } else {

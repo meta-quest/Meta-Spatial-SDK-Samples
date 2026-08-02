@@ -68,7 +68,7 @@ fun HomePanelSecondFragmentScreen() {
     mutableStateOf(
         if (ProjectManager.instance.currentProject != null)
             ProjectManager.instance.currentProject!!.name
-        else ""
+        else "",
     )
   }
   var envSelected = remember {
@@ -78,7 +78,7 @@ fun HomePanelSecondFragmentScreen() {
                 !ProjectManager.instance.currentProject!!.MR
         )
             ProjectManager.instance.currentProject?.environment!!
-        else 3
+        else 3,
     )
   }
   selectEnv(envSelected.intValue)

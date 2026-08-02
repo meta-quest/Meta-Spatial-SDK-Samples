@@ -166,7 +166,7 @@ class PanelActivity : ActivityCompat.OnRequestPermissionsResultCallback, Compone
                         dimensionResource(R.dimen.panel_width),
                         dimensionResource(R.dimen.panel_height),
                     )
-                    .padding(0.dp)
+                    .padding(0.dp),
         ) {
           PrimaryPanel {
             if (userAcceptedNotice) {

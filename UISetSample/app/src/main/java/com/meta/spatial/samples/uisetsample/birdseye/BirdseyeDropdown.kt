@@ -49,7 +49,7 @@ fun BirdseyeDropdown() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -74,7 +74,7 @@ fun BirdseyeDropdown() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground
+                color = LocalColorScheme.current.primaryAlphaBackground,
             ),
     )
     Spacer(modifier = Modifier.height(40.dp))
@@ -89,7 +89,7 @@ fun BirdseyeDropdown() {
             text = "Standard",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(38.dp))
@@ -146,7 +146,7 @@ fun BirdseyeDropdown() {
             text = "Standard with Icon",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(38.dp))
@@ -207,7 +207,7 @@ fun BirdseyeDropdown() {
             text = "Rounded Standard",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(38.dp))
@@ -280,7 +280,7 @@ fun BirdseyeDropdown() {
             text = "Rounded with Icon",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(38.dp))
@@ -355,7 +355,7 @@ fun BirdseyeDropdown() {
             text = "",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(38.dp))
@@ -363,7 +363,7 @@ fun BirdseyeDropdown() {
             text = "Context Menu Default",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(65.dp))
@@ -371,7 +371,7 @@ fun BirdseyeDropdown() {
             text = "Context Menu Selected",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(60.dp))
@@ -379,7 +379,7 @@ fun BirdseyeDropdown() {
             text = "Disabled",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(65.dp))
@@ -387,7 +387,7 @@ fun BirdseyeDropdown() {
             text = "Disabled",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
       }

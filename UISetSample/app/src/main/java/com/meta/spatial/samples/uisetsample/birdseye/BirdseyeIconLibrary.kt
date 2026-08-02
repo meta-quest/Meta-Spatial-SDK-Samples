@@ -623,7 +623,7 @@ fun BirdseyeIconLibrary() {
             "For optimal sizing, small icons should not exceed 32px, while large icons can start at size 33px and above.",
             style =
                 LocalTypography.current.body1.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
       }
@@ -635,7 +635,7 @@ fun BirdseyeIconLibrary() {
               "  Component",
               style =
                   LocalTypography.current.headline1Strong.copy(
-                      color = LocalColorScheme.current.primaryAlphaBackground
+                      color = LocalColorScheme.current.primaryAlphaBackground,
                   ),
           )
           Spacer(modifier = Modifier.height(20.dp))
@@ -663,7 +663,7 @@ fun BirdseyeIconLibrary() {
                     icon["name"] as String,
                     style =
                         LocalTypography.current.body1.copy(
-                            color = LocalColorScheme.current.primaryAlphaBackground
+                            color = LocalColorScheme.current.primaryAlphaBackground,
                         ),
                 )
               }
@@ -698,7 +698,7 @@ fun BirdseyeIconLibrary() {
                     icon["name"] as String,
                     style =
                         LocalTypography.current.body1.copy(
-                            color = LocalColorScheme.current.primaryAlphaBackground
+                            color = LocalColorScheme.current.primaryAlphaBackground,
                         ),
                 )
               }
@@ -733,7 +733,7 @@ fun BirdseyeIconLibrary() {
                     icon["name"] as String,
                     style =
                         LocalTypography.current.body1.copy(
-                            color = LocalColorScheme.current.primaryAlphaBackground
+                            color = LocalColorScheme.current.primaryAlphaBackground,
                         ),
                 )
               }

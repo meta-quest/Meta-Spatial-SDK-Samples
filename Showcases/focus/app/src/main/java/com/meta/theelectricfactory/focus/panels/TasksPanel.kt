@@ -426,7 +426,7 @@ fun TaskCard(
                     FocusViewModel.instance.setCurrentTaskUuid(task.uuid)
                     FocusViewModel.instance.updateCurrentSpatialTask()
                   }
-                }
+                },
             ),
         textStyle =
             TextStyle(
@@ -464,7 +464,7 @@ fun TaskCard(
                     FocusViewModel.instance.setCurrentTaskUuid(task.uuid)
                     FocusViewModel.instance.updateCurrentSpatialTask()
                   }
-                }
+                },
             ),
         textStyle =
             TextStyle(

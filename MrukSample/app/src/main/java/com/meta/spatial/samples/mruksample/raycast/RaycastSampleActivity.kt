@@ -373,7 +373,7 @@ class RaycastSampleActivity : AppSystemActivity() {
               )
             }
           }
-        }
+        },
     )
   }
 

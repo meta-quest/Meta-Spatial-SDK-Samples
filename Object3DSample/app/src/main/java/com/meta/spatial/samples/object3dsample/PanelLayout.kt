@@ -117,7 +117,7 @@ fun ObjectLibraryScreen(
           textAlign = TextAlign.Center,
           style =
               SpatialTheme.typography.headline1Strong.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
       Spacer(Modifier.size(24.dp))
@@ -127,7 +127,7 @@ fun ObjectLibraryScreen(
           modifier = Modifier.padding(horizontal = 8.dp),
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
       Spacer(Modifier.size(24.dp))
@@ -182,7 +182,7 @@ fun ImageItem(drawableRes: Int, modifier: Modifier = Modifier, onClick: () -> Un
               .aspectRatio(1f) // Maintain a 1:1 aspect ratio
               .clip(RoundedCornerShape(8.dp)) // Adjust shape as needed
               .background(color = Color(getGray())) // Use a color or a brush for the background
-              .clickable(onClick = onClick)
+              .clickable(onClick = onClick),
   ) {
     Image(
         painter = painterResource(id = drawableRes),
@@ -221,7 +221,7 @@ private fun setUpButton(
               )
                   .applyMaterial(PhysicsMaterial.WOOD),
               Transform(Pose(Vector3(0f, 1.2f, 2.1f), Quaternion(0f, 180f, 0f))),
-          )
+          ),
       )
 
   scaleUp(objModel, scale)
@@ -233,7 +233,7 @@ private fun setUpButton(
             startTime = System.currentTimeMillis(),
             playbackState = PlaybackState.PLAYING,
             playbackType = PlaybackType.LOOP,
-        )
+        ),
     )
   }
 }

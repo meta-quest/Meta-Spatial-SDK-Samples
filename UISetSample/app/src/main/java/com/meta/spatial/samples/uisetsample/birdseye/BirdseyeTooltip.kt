@@ -54,7 +54,7 @@ fun BirdseyeTooltip() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -72,7 +72,7 @@ fun BirdseyeTooltip() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground
+                color = LocalColorScheme.current.primaryAlphaBackground,
             ),
     )
     Spacer(modifier = Modifier.height(40.dp))
@@ -90,7 +90,7 @@ fun BirdseyeTooltip() {
           text = "Default",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
       Spacer(Modifier.width(226.dp))
@@ -110,7 +110,7 @@ fun BirdseyeTooltip() {
           text = "Tooltip with Icon & Subtitle",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
     }
@@ -128,7 +128,7 @@ fun BirdseyeTooltip() {
           text = "Default with Subtitle",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
       Spacer(Modifier.width(142.dp))
@@ -147,7 +147,7 @@ fun BirdseyeTooltip() {
           text = "Tooltip with Image",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
     }
@@ -171,7 +171,7 @@ fun BirdseyeTooltip() {
           text = "Tooltip with Icon",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
       Spacer(Modifier.width(164.dp))
@@ -191,7 +191,7 @@ fun BirdseyeTooltip() {
           text = "Tooltip with Image & Subtitle",
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
     }
@@ -203,7 +203,7 @@ fun BirdseyeTooltip() {
         "  Tooltip Example",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground
+                color = LocalColorScheme.current.primaryAlphaBackground,
             ),
     )
     Spacer(modifier = Modifier.height(20.dp))

@@ -89,7 +89,7 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
               }
             }
           }
-        }
+        },
     )
 
     activity.registerPanel(
@@ -106,17 +106,19 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
           }
           composePanel {
             setContent {
-              NoObjectsDetectedScreen({
-                generateCuratedObjects.invoke()
-                noObjectsPanelEntity?.destroy()
-                noObjectsPanelEntity = null
-              }) {
+              NoObjectsDetectedScreen(
+                  {
+                    generateCuratedObjects.invoke()
+                    noObjectsPanelEntity?.destroy()
+                    noObjectsPanelEntity = null
+                  },
+              ) {
                 noObjectsPanelEntity?.destroy()
                 noObjectsPanelEntity = null
               }
             }
           }
-        }
+        },
     )
 
     activity.registerPanel(
@@ -133,17 +135,19 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
           }
           composePanel {
             setContent {
-              FindObjectsScreen({
-                generateCuratedObjects.invoke()
-                findObjectsPanelEntity?.destroy()
-                findObjectsPanelEntity = null
-              }) {
+              FindObjectsScreen(
+                  {
+                    generateCuratedObjects.invoke()
+                    findObjectsPanelEntity?.destroy()
+                    findObjectsPanelEntity = null
+                  },
+              ) {
                 findObjectsPanelEntity?.destroy()
                 findObjectsPanelEntity = null
               }
             }
           }
-        }
+        },
     )
 
     activity.registerPanel(
@@ -160,17 +164,19 @@ class TipManager(activity: AppSystemActivity, generateCuratedObjects: () -> Unit
           }
           composePanel {
             setContent {
-              HelpScreen({
-                generateCuratedObjects.invoke()
-                helpPanelEntity?.destroy()
-                helpPanelEntity = null
-              }) {
+              HelpScreen(
+                  {
+                    generateCuratedObjects.invoke()
+                    helpPanelEntity?.destroy()
+                    helpPanelEntity = null
+                  },
+              ) {
                 helpPanelEntity?.destroy()
                 helpPanelEntity = null
               }
             }
           }
-        }
+        },
     )
   }
 

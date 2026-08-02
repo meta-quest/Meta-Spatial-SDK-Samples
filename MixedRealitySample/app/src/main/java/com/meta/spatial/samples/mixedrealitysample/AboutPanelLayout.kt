@@ -105,7 +105,7 @@ fun AboutPanelLayout(
             textAlign = TextAlign.Center,
             style =
                 SpatialTheme.typography.headline1Strong.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(modifier = Modifier.size(24.dp))
@@ -116,7 +116,7 @@ fun AboutPanelLayout(
             textAlign = TextAlign.Center,
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
             modifier = Modifier.widthIn(max = 300.dp),
         )
@@ -139,7 +139,7 @@ fun AboutPanelLayout(
                   textAlign = TextAlign.Center,
                   style =
                       SpatialTheme.typography.body1.copy(
-                          color = SpatialTheme.colorScheme.primaryAlphaBackground
+                          color = SpatialTheme.colorScheme.primaryAlphaBackground,
                       ),
               )
             }
@@ -166,7 +166,7 @@ fun AboutPanelLayout(
                   textAlign = TextAlign.Center,
                   style =
                       SpatialTheme.typography.body1.copy(
-                          color = SpatialTheme.colorScheme.primaryAlphaBackground
+                          color = SpatialTheme.colorScheme.primaryAlphaBackground,
                       ),
               )
             }
@@ -193,7 +193,7 @@ fun AboutPanelLayout(
                   textAlign = TextAlign.Center,
                   style =
                       SpatialTheme.typography.body1.copy(
-                          color = SpatialTheme.colorScheme.primaryAlphaBackground
+                          color = SpatialTheme.colorScheme.primaryAlphaBackground,
                       ),
               )
             }

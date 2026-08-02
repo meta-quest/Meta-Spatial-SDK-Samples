@@ -43,7 +43,7 @@ fun BirdseyeSearchBar() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -68,7 +68,7 @@ fun BirdseyeSearchBar() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground
+                color = LocalColorScheme.current.primaryAlphaBackground,
             ),
     )
     Spacer(modifier = Modifier.height(40.dp))
@@ -83,7 +83,7 @@ fun BirdseyeSearchBar() {
             text = "Default",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.height(48.dp))
@@ -115,7 +115,7 @@ fun BirdseyeSearchBar() {
             text = "With Microphone",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.height(48.dp))
@@ -146,7 +146,7 @@ fun BirdseyeSearchBar() {
             text = "",
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(Modifier.size(5.dp))
@@ -158,14 +158,14 @@ fun BirdseyeSearchBar() {
               text = "Default",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground,
                   ),
           )
           Text(
               text = "Disabled",
               style =
                   SpatialTheme.typography.body1.copy(
-                      color = SpatialTheme.colorScheme.primaryAlphaBackground
+                      color = SpatialTheme.colorScheme.primaryAlphaBackground,
                   ),
           )
         }

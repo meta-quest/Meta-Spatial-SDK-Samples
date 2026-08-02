@@ -160,7 +160,7 @@ class ObjectDetectionFeature(
             // start the camera automatically after initialization
             this@ObjectDetectionFeature.scan()
           }
-        }
+        },
     )
 
     activity.registerPanel(
@@ -181,7 +181,7 @@ class ObjectDetectionFeature(
                 rootView?.findViewById(R.id.camera_status)
                     ?: throw RuntimeException("Missing camera status text view")
           }
-        }
+        },
     )
   }
 

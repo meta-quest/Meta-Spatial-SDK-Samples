@@ -57,7 +57,7 @@ class HomePanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
               Visible(false),
               PanelDimensions(Vector2(WIDTH_IN_METERS, HEIGHT_IN_METERS)),
               PanelLayerAlpha(0f),
-          )
+          ),
       )
     }
 

@@ -55,7 +55,7 @@ fun WelcomePanel() {
             textAlign = TextAlign.Center,
             style =
                 SpatialTheme.typography.headline1Strong.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
         Spacer(modifier = Modifier.size(24.dp))
@@ -64,7 +64,7 @@ fun WelcomePanel() {
             textAlign = TextAlign.Center,
             style =
                 SpatialTheme.typography.body1.copy(
-                    color = SpatialTheme.colorScheme.primaryAlphaBackground
+                    color = SpatialTheme.colorScheme.primaryAlphaBackground,
                 ),
         )
       }

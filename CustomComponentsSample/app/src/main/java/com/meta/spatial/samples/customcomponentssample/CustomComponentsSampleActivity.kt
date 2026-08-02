@@ -91,7 +91,7 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
       val environmentEntity: Entity = composition.getNodeByName("Environment").entity
       val environmentMesh = environmentEntity.getComponent<Mesh>()
       environmentEntity.setComponent(
-          environmentMesh.apply { defaultShaderOverride = SceneMaterial.UNLIT_SHADER }
+          environmentMesh.apply { defaultShaderOverride = SceneMaterial.UNLIT_SHADER },
       )
 
       // get the robot and the basketBall entities the composition
@@ -117,7 +117,7 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
                   display = DpPerMeterDisplayOptions(),
               )
             },
-        )
+        ),
     )
   }
 
@@ -145,7 +145,7 @@ class CustomComponentsSampleActivity : AppSystemActivity() {
               unlit = true // Prevent scene lighting from affecting the skybox
             },
             Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-        )
+        ),
     )
   }
 

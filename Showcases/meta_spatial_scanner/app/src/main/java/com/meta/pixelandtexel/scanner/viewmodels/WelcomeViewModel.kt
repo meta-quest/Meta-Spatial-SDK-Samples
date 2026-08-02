@@ -10,7 +10,7 @@ import com.meta.pixelandtexel.scanner.services.settings.SettingsService
 import com.meta.pixelandtexel.scanner.views.welcome.Routes
 
 class WelcomeViewModel(
-    initialRoute: String = Routes.EMPTY // for @Preview
+    initialRoute: String = Routes.EMPTY, // for @Preview
 ) : ViewModel() {
   private val _route = mutableStateOf(initialRoute)
   val route: State<String> = _route

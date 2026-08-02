@@ -52,7 +52,7 @@ constructor(
         // Check if the media is a sample
         if (
             dto.relativePath?.startsWith(
-                "$SAVED_MEDIA_FOLDER_NAME/$SAMPLES_DEVICE_SUBFOLDER_NAME"
+                "$SAVED_MEDIA_FOLDER_NAME/$SAMPLES_DEVICE_SUBFOLDER_NAME",
             ) == true
         ) {
           if (filter == MediaFilter.SAMPLE_MEDIA) {

@@ -92,7 +92,7 @@ publishing {
       pom {
         name.set("Native Bobbing Feature")
         description.set(
-            "A Meta Spatial SDK feature that provides native-calculated bobbing motion via JNI"
+            "A Meta Spatial SDK feature that provides native-calculated bobbing motion via JNI",
         )
       }
     }

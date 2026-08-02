@@ -36,7 +36,7 @@ class HomePanelViewModel {
                   mips = 9,
                   videoSource =
                       VideoSource.Url(
-                          "https://dw9dv4drqa1gx.cloudfront.net/DASH_Chickens/SK8_Chickens_3840x1080_Stereo.mpd"
+                          "https://dw9dv4drqa1gx.cloudfront.net/DASH_Chickens/SK8_Chickens_3840x1080_Stereo.mpd",
                       ),
               ),
       ),
@@ -57,7 +57,7 @@ class HomePanelViewModel {
                   mips = 9,
                   videoSource =
                       VideoSource.Url(
-                          "https://dw9dv4drqa1gx.cloudfront.net/DASH_apo_island/echeng_apo_island_35mbps_vr180.mpd"
+                          "https://dw9dv4drqa1gx.cloudfront.net/DASH_apo_island/echeng_apo_island_35mbps_vr180.mpd",
                       ),
               ),
       ),

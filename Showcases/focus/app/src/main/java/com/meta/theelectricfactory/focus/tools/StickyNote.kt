@@ -67,7 +67,7 @@ class StickyNote(
               )
               // We add a listener to show delete button when entity is selected
             }
-            .panel { addDeleteButton(sticky, this) }
+            .panel { addDeleteButton(sticky, this) },
     )
 
     // We add it a ToolComponent to be able to identify it and get the type and uuid of the entity

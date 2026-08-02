@@ -59,7 +59,7 @@ class TasksManager {
 
       ent.destroy()
       AudioManager.instance.playDeleteSound(
-          PanelManager.instance.tasksPanel.getComponent<Transform>().transform.t
+          PanelManager.instance.tasksPanel.getComponent<Transform>().transform.t,
       )
     }
   }

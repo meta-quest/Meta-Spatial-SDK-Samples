@@ -121,7 +121,7 @@ fun ControlsPanel(
                   painterResource(
                       id =
                           if (mediaState.isMuted) R.drawable.controls_volume_off
-                          else R.drawable.controls_volume_on
+                          else R.drawable.controls_volume_on,
                   ),
               onClick = { onMuteToggle(!mediaState.isMuted) },
           )
@@ -151,7 +151,7 @@ fun ControlsPanel(
                       painterResource(
                           id =
                               if (mediaState.isPlaying) R.drawable.controls_btn_pause
-                              else R.drawable.controls_btn_play
+                              else R.drawable.controls_btn_play,
                       ),
                   contentDescription = "",
               )
@@ -320,7 +320,7 @@ fun FadeSlider(
 fun ControlsPanelPreview() {
   val viewModel = ControlsPanelViewModel()
   viewModel.updateControlButtons(
-      listOf(ControlsPanelButton("Cinema") {}, ControlsPanelButton("TV") {})
+      listOf(ControlsPanelButton("Cinema") {}, ControlsPanelButton("TV") {}),
   )
   ControlsPanel(viewModel = viewModel)
 }

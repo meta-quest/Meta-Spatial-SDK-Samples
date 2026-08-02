@@ -80,7 +80,7 @@ fun CustomToggle(
               .background(toggleColor)
               .clickable {
                 onToggleStateChange(
-                    if (toggleState == ToggleState.LEFT) ToggleState.RIGHT else ToggleState.LEFT
+                    if (toggleState == ToggleState.LEFT) ToggleState.RIGHT else ToggleState.LEFT,
                 )
               }
               .padding(thumbPadding),
@@ -100,7 +100,7 @@ fun CustomToggle(
                       y = 0,
                   )
                 }
-                .background(thumbColor, RoundedCornerShape(8.dp))
+                .background(thumbColor, RoundedCornerShape(8.dp)),
     )
 
     // Left icon (Curved Panel)

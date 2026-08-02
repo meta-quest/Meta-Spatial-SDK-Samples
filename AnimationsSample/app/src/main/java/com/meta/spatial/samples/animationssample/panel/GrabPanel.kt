@@ -47,13 +47,13 @@ fun GrabPanel(onButtonClick: () -> Unit) {
             Modifier.fillMaxSize()
                 .clip(SpatialTheme.shapes.large)
                 .background(brush = LocalColorScheme.current.panel)
-                .padding(20.dp)
+                .padding(20.dp),
     ) {
       Text(
           text = stringResource(R.string.grab_panel_title),
           style =
               SpatialTheme.typography.body1Strong.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
       Spacer(modifier = Modifier.size(8.dp))
@@ -61,7 +61,7 @@ fun GrabPanel(onButtonClick: () -> Unit) {
           text = stringResource(R.string.grab_panel),
           style =
               SpatialTheme.typography.body1.copy(
-                  color = SpatialTheme.colorScheme.primaryAlphaBackground
+                  color = SpatialTheme.colorScheme.primaryAlphaBackground,
               ),
       )
       Spacer(modifier = Modifier.size(24.dp))

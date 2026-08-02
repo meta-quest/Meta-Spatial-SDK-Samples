@@ -84,7 +84,7 @@ class OnboardingActivity : ComponentActivity() {
                         color = AppColor.MetaBlu,
                         shape = RoundedCornerShape(Dimens.radiusMedium),
                     )
-                    .clip(shape = RoundedCornerShape(Dimens.radiusMedium))
+                    .clip(shape = RoundedCornerShape(Dimens.radiusMedium)),
         ) {
           Column(Modifier.fillMaxSize()) {
             // Content
@@ -112,7 +112,7 @@ class OnboardingActivity : ComponentActivity() {
                           Uri.Builder()
                               .scheme(ContentResolver.SCHEME_ANDROID_RESOURCE)
                               .path(resourceId.toString())
-                              .build()
+                              .build(),
                       )
 
                   exoPlayer.setMediaItem(mediaItem)
@@ -157,7 +157,7 @@ class OnboardingActivity : ComponentActivity() {
                           onPressed = {
                             pagerCoroutineScope.launch { pagerState.scrollToPage(0) }
                             viewModel.close()
-                          }
+                          },
                       )
                     }
 

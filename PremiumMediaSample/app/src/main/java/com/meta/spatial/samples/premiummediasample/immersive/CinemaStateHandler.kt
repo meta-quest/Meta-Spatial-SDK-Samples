@@ -153,7 +153,7 @@ class CinemaStateHandler(private val immersiveViewModel: ImmersiveViewModel) {
                       floorOnly = true,
                       screenSize = cinemaScreenSize,
                       distanceToScreen = 15f,
-                  )
+                  ),
               )
         }
         val cinemaPose = getHeadPose()

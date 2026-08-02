@@ -48,7 +48,7 @@ fun BirdseyeControl() {
             "  Component",
             style =
                 LocalTypography.current.headline1Strong.copy(
-                    color = LocalColorScheme.current.primaryAlphaBackground
+                    color = LocalColorScheme.current.primaryAlphaBackground,
                 ),
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -69,7 +69,7 @@ fun BirdseyeControl() {
         "  Component Definitions & Variations",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground
+                color = LocalColorScheme.current.primaryAlphaBackground,
             ),
     )
     Spacer(modifier = Modifier.height(40.dp))
@@ -111,7 +111,7 @@ fun BirdseyeControl() {
                 text = "OFF",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -128,7 +128,7 @@ fun BirdseyeControl() {
                 text = "ON",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -142,7 +142,7 @@ fun BirdseyeControl() {
                 text = "OFF Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -156,7 +156,7 @@ fun BirdseyeControl() {
                 text = "ON Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -198,7 +198,7 @@ fun BirdseyeControl() {
                 text = "OFF",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -215,7 +215,7 @@ fun BirdseyeControl() {
                 text = "ON",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -229,7 +229,7 @@ fun BirdseyeControl() {
                 text = "OFF Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -243,7 +243,7 @@ fun BirdseyeControl() {
                 text = "ON Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -285,7 +285,7 @@ fun BirdseyeControl() {
                 text = "OFF",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -302,7 +302,7 @@ fun BirdseyeControl() {
                 text = "ON",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -316,7 +316,7 @@ fun BirdseyeControl() {
                 text = "OFF Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -330,7 +330,7 @@ fun BirdseyeControl() {
                 text = "ON Disabled",
                 style =
                     LocalTypography.current.body1.copy(
-                        color = LocalColorScheme.current.primaryAlphaBackground
+                        color = LocalColorScheme.current.primaryAlphaBackground,
                     ),
             )
           }
@@ -345,7 +345,7 @@ fun BirdseyeControl() {
         "  Radio Group",
         style =
             LocalTypography.current.headline1Strong.copy(
-                color = LocalColorScheme.current.primaryAlphaBackground
+                color = LocalColorScheme.current.primaryAlphaBackground,
             ),
     )
     Row() { RadioGroupDemo() }

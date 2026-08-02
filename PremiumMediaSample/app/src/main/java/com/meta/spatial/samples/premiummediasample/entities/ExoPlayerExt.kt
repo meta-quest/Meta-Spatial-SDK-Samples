@@ -171,7 +171,7 @@ fun ExoPlayer.setMediaSource(
         DefaultHttpDataSource.Factory()
             .setUserAgent(userAgent)
             .setTransferListener(
-                DefaultBandwidthMeter.Builder(context).setResetOnNetworkTypeChange(false).build()
+                DefaultBandwidthMeter.Builder(context).setResetOnNetworkTypeChange(false).build(),
             )
     val dashChunkSourceFactory: DashChunkSource.Factory =
         DefaultDashChunkSource.Factory(defaultHttpDataSourceFactory)
@@ -186,7 +186,7 @@ fun ExoPlayer.setMediaSource(
       mediaItemBuilder.setDrmConfiguration(
           MediaItem.DrmConfiguration.Builder(C.WIDEVINE_UUID)
               .setLicenseUri(Uri.parse(licenseServer))
-              .build()
+              .build(),
       )
     }
 
@@ -335,7 +335,7 @@ fun ExoPlayer.addAnalyticLogs(logId: Int? = null) {
           super.onDrmSessionManagerError(eventTime, error)
           Log.d(EXO_PLAYER_TAG, "onDrmSessionManagerError: $error")
         }
-      }
+      },
   )
 }
 
