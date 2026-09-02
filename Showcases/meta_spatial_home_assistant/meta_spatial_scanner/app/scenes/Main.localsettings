@@ -1,0 +1,7 @@
+data:
+  tabs:
+    - Composition
+    - Phone
+    - TV
+    - FridgeAnimFix
+  current_tab: Composition

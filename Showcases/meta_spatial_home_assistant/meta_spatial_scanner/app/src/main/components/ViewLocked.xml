@@ -1,0 +1,21 @@
+<ComponentSchema packageName="com.meta.pixelandtexel.scanner">
+    <Component name="ViewLocked">
+        <Description
+    >A component which locks the position and rotation of an entity which has a Panel component to the user's view.</Description>
+        <Vector3Attribute
+      name="position"
+      defaultValue="0f, 0f, 1f"
+      description="The position offset to apply to the object, relative to the head."
+    />
+        <Vector3Attribute
+      name="rotation"
+      defaultValue="0f, 0f, 0f"
+      description="The rotation offset in euler angles to apply to the object, relative to the head."
+    />
+        <BooleanAttribute
+      name="fillView"
+      defaultValue="false"
+      description="Whether or not to add a z offset so that the panel fills the camera view across the width of the panel."
+    />
+    </Component>
+</ComponentSchema>
