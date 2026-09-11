@@ -20,6 +20,7 @@ import com.meta.spatial.core.Pose
 import com.meta.spatial.core.SpatialFeature
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.datamodelinspector.DataModelInspectorFeature
+import com.meta.spatial.debugtools.AIDebugToolsFeature
 import com.meta.spatial.debugtools.HotReloadFeature
 import com.meta.spatial.okhttp3.OkHttpAssetFetcher
 import com.meta.spatial.ovrmetrics.OVRMetricsDataModel
@@ -54,6 +55,7 @@ class HybridSampleActivity : AppSystemActivity() {
         ComposeFeature(),
     )
     if (BuildConfig.DEBUG) {
+      features.add(AIDebugToolsFeature(this))
       features.add(CastInputForwardFeature(this))
       features.add(HotReloadFeature(this))
       features.add(OVRMetricsFeature(this, OVRMetricsDataModel() { numberOfMeshes() }))
@@ -131,6 +133,7 @@ class HybridSampleActivity : AppSystemActivity() {
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             .putExtra("extra_launch_in_home_pending_intent", pendingPanelIntent)
     startActivity(homeIntent)
+    finish()
   }
 
   override fun registerPanels(): List<PanelRegistration> {

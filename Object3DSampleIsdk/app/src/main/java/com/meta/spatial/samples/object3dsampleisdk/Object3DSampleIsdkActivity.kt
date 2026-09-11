@@ -54,6 +54,7 @@ import com.meta.spatial.vr.VRFeature
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 class Object3DSampleIsdkActivity : AppSystemActivity() {
@@ -87,6 +88,11 @@ class Object3DSampleIsdkActivity : AppSystemActivity() {
       features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
     return features
+  }
+
+  override fun onDestroy() {
+    activityScope.cancel()
+    super.onDestroy()
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {

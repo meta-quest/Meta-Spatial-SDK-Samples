@@ -62,6 +62,7 @@ import kotlin.random.Random
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 /**
@@ -91,6 +92,11 @@ class AnimationsSampleActivity : AppSystemActivity() {
       features.add(DataModelInspectorFeature(spatial, this.componentManager))
     }
     return features
+  }
+
+  override fun onDestroy() {
+    activityScope.cancel()
+    super.onDestroy()
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {

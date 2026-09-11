@@ -104,6 +104,7 @@ import java.util.concurrent.CompletableFuture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 fun lerp(start: Float, end: Float, fraction: Float): Float = start + (end - start) * fraction
@@ -148,6 +149,11 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
     return features
   }
 
+  override fun onDestroy() {
+    activityScope.cancel()
+    super.onDestroy()
+  }
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
@@ -156,7 +162,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
     appPackageName = getPackageName()
     appContext = spatialContext
 
-    panner.putChannelMixingMatrix(ChannelMixingMatrix.create(2, 2))
+    panner.putChannelMixingMatrix(ChannelMixingMatrix(2, 2, floatArrayOf(1f, 0f, 0f, 1f)))
 
     val audioProcessors: Array<BaseAudioProcessor> = arrayOf(panner)
 

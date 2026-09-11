@@ -15,6 +15,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
 import android.webkit.WebView
@@ -280,6 +281,7 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
         // Pause video playback and remember if it was playing
         wasVideoPlaying = exoPlayer?.isPlaying == true
         exoPlayer?.pause()
+        webView?.onPause()
         Log.d(TAG, "Session became VISIBLE (menu opened) - pausing video")
       }
       SessionState.FOCUSED -> {
@@ -289,6 +291,7 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
           exoPlayer?.play()
           Log.d(TAG, "Session became FOCUSED (menu closed) - resuming video")
         }
+        webView?.onResume()
       }
       else -> {
         // Handle other states (STOPPING, IDLE, etc.) if needed
@@ -545,6 +548,11 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
   override fun onSpatialShutdown() {
     exoPlayer?.release()
     exoPlayer = null
+    webView?.let { view ->
+      (view.parent as? ViewGroup)?.removeView(view)
+      view.destroy()
+    }
+    webView = null
     super.onSpatialShutdown()
   }
 

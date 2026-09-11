@@ -33,7 +33,6 @@ import com.meta.spatial.mruk.MRUKLabel
 import com.meta.spatial.mruk.MRUKLoadDeviceResult
 import com.meta.spatial.mruk.MRUKRoom
 import com.meta.spatial.mruk.MRUKSceneEventListener
-import com.meta.spatial.mruk.SceneModel
 import com.meta.spatial.physics.PhysicsFeature
 import com.meta.spatial.runtime.LayerConfig
 import com.meta.spatial.runtime.SceneMaterial
@@ -430,17 +429,6 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
               if (isChecked) showRoomMesh() else hideRoomMesh()
             }
 
-            val sceneModelSpinner: Spinner = root.findViewById(R.id.scene_model_spinner)
-            ArrayAdapter.createFromResource(
-                    root.context,
-                    R.array.scene_models_array,
-                    android.R.layout.simple_spinner_item,
-                )
-                .also { adapter ->
-                  adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-                  sceneModelSpinner.adapter = adapter
-                }
-
             val jsonFileSpinner: Spinner = root.findViewById(R.id.json_file_spinner)
             ArrayAdapter.createFromResource(
                     root.context,
@@ -458,11 +446,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
               jsonFileSpinner.selectedItem?.let { item ->
                 val file = applicationContext.assets.open("$item.json")
                 val text = file.bufferedReader().use { it.readText() }
-                mrukFeature.loadSceneFromJsonString(
-                    text,
-                    true,
-                    getSelectedSceneModel(sceneModelSpinner),
-                )
+                mrukFeature.loadSceneFromJsonString(text, true)
               }
             }
 
@@ -471,7 +455,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
 
             val loadSceneFromDeviceButton: Button = root.findViewById(R.id.load_scene_from_device)
             loadSceneFromDeviceButton.setOnClickListener {
-              mrukFeature.loadSceneFromDevice(true, true, getSelectedSceneModel(sceneModelSpinner))
+              mrukFeature.loadSceneFromDevice(true, true)
             }
 
             val showGlobalMeshButton: Button = root.findViewById(R.id.show_global_mesh)
@@ -566,15 +550,6 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
         arrayOf(SceneMaterial(SceneTexture(Color.valueOf(1.0f, 1.0f, 1.0f, 1.0f)))),
         false,
     )
-  }
-
-  private fun getSelectedSceneModel(sceneModelSpinner: Spinner): SceneModel {
-    return when (sceneModelSpinner.selectedItem as? String) {
-      "Scene V1 (Basic Scene)" -> SceneModel.V1
-      "Scene V2 (High-Fidelity Scene)" -> SceneModel.V2
-      "Scene V2 with Fallback to Scene V1" -> SceneModel.V2_FALLBACK_V1
-      else -> SceneModel.V1
-    }
   }
 
   companion object {

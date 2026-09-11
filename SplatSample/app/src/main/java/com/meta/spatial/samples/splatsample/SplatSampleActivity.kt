@@ -119,6 +119,23 @@ class SplatSampleActivity : AppSystemActivity() {
         File(applicationContext.getCacheDir().canonicalPath),
         OkHttpAssetFetcher(),
     )
+    skyboxEntity =
+        Entity.create(
+            listOf(
+                Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
+                Material().apply {
+                  baseTextureAndroidResourceId = R.drawable.skydome
+                  unlit = true
+                },
+                Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
+            ),
+        )
+    panelEntity =
+        Entity.createPanelEntity(
+            R.id.control_panel,
+            Transform(Pose(Vector3(0f, panelHeight, 0f), Quaternion(0f, 180f, 0f))),
+            Grabbable(type = GrabbableType.PIVOT_Y, minHeight = 0.75f, maxHeight = 2.5f),
+        )
     loadGLXF { composition ->
       environmentEntity = composition.getNodeByName("Environment").entity
       val environmentMesh = environmentEntity.getComponent<Mesh>()
@@ -142,23 +159,6 @@ class SplatSampleActivity : AppSystemActivity() {
     )
     scene.updateIBLEnvironment("environment.env")
     scene.setViewOrigin(0.0f, 0.0f, 2.5f, 90.0f)
-    skyboxEntity =
-        Entity.create(
-            listOf(
-                Mesh(Uri.parse("mesh://skybox"), hittable = MeshCollision.NoCollision),
-                Material().apply {
-                  baseTextureAndroidResourceId = R.drawable.skydome
-                  unlit = true
-                },
-                Transform(Pose(Vector3(x = 0f, y = 0f, z = 0f))),
-            ),
-        )
-    panelEntity =
-        Entity.createPanelEntity(
-            R.id.control_panel,
-            Transform(Pose(Vector3(0f, panelHeight, 0f), Quaternion(0f, 180f, 0f))),
-            Grabbable(type = GrabbableType.PIVOT_Y, minHeight = 0.75f, maxHeight = 2.5f),
-        )
     systemManager.registerSystem(ControllerListenerSystem())
   }
 

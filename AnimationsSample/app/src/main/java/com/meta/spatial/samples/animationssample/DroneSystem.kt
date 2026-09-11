@@ -45,7 +45,7 @@ class DroneSystem(val droneSceneControllerProvider: () -> DroneSceneController?)
               .filter { it.getComponent<FollowerTarget>().targetName == droneComponent.targetName }
               .firstOrNull()
 
-      if (target == null) return
+      if (target == null) return@forEach
 
       // There are two types of followable in this Sample. The built-in Followable component in
       // toolkit and the custom one here. We use the custom one to allow for faster rotation
@@ -55,10 +55,10 @@ class DroneSystem(val droneSceneControllerProvider: () -> DroneSceneController?)
       if (target.getComponent<FollowerTarget>().isBuiltInFollower) {
         followable.target = target
         followable.offset = Pose(Vector3(0f, 0f, 1f), Quaternion(1f, 0f, 0f, 0f))
-        if (followable.active) return
+        if (followable.active) return@forEach
         followable.active = true
         droneEnt.setComponent(followable)
-        return
+        return@forEach
       } else if (followable.active) {
         followable.active = false
         droneEnt.setComponent(followable)
