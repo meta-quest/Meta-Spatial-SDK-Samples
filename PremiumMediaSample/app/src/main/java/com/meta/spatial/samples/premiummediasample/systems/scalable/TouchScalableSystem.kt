@@ -25,6 +25,7 @@ import com.meta.spatial.toolkit.PanelDimensions
 import com.meta.spatial.toolkit.Scale
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.Visible
+import com.meta.spatial.toolkit.getAbsoluteScale
 import com.meta.spatial.toolkit.getAbsoluteTransform
 
 class TouchScalableSystem(private val minScale: Float = 0.5f, private val maxScale: Float = 5f) :
@@ -152,12 +153,12 @@ class TouchScalableSystem(private val minScale: Float = 0.5f, private val maxSca
   private fun updatePanel(entity: Entity, resetTime: Boolean = true) {
     val panelDimensions = entity.tryGetComponent<PanelDimensions>() ?: return
 
-    val scale = entity.getComponent<Scale>()
+    val scale = getAbsoluteScale(entity)
     val pose = getAbsoluteTransform(entity)
 
     val offset = Vector2(
-        panelDimensions.dimensions.x * scale.scale.x * 0.5f,
-        panelDimensions.dimensions.y * scale.scale.y * 0.5f,
+        panelDimensions.dimensions.x * scale.x * 0.5f,
+        panelDimensions.dimensions.y * scale.y * 0.5f,
     )
     val offsets = arrayOf(
         pose.right() * -(offset.x - cornerOffsetPivot) + pose.up() * (offset.y - cornerOffsetPivot),

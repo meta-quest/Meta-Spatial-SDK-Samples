@@ -522,7 +522,7 @@ class MrukAnchorMeshSampleActivity : AppSystemActivity(), MRUKSceneEventListener
       indices[i] = i
     }
     // Create the normals buffer for the mesh
-    val normals = FloatArray(positions.size) { 0.0f }
+    val normals = FloatArray(positions.size)
     // Create the colors buffer for the mesh
     val color =
         when (roomFace.label) {

@@ -2,10 +2,7 @@
 
 The Mixed Reality sample shows how to use Meta Spatial SDK to create an immersive experience that interacts with the user's physical environment. Shoot basketballs at targets on your room's walls, and watch them bounce off walls, ceilings, and objects.
 
-
 ![Mixed Reality Sample](documentation/mixed-reality-sample.jpg)
-
-
 
 ## Highlighted features
 The Mixed Reality sample uses these Meta Spatial SDK features:

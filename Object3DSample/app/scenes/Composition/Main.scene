@@ -232,6 +232,7 @@ entities:
         com.meta.spatial.physics.Physics:
           state: 0
           shape: room_collision.glb
+          collisionShapeType: 1
         com.meta.spatial.toolkit.SupportsLocomotion:
           {}
       tag: Environment

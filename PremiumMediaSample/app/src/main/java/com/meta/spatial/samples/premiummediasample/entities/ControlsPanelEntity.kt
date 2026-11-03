@@ -38,7 +38,9 @@ import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
 import com.meta.spatial.toolkit.UIPanelSettings
 import com.meta.spatial.toolkit.Visible
+import com.meta.spatial.toolkit.getAbsoluteScale
 import com.meta.spatial.toolkit.getAbsoluteTransform
+import com.meta.spatial.toolkit.setAbsoluteScale
 import dorkbox.tweenEngine.TweenEngine
 import dorkbox.tweenEngine.TweenEquations
 
@@ -181,15 +183,17 @@ class ControlsPanelEntity(tweenEngine: TweenEngine) : FadingPanel(tweenEngine) {
       entity.setComponent(transformParent)
       entity.setComponent(ScaledChild(localPosition = controlsOffset, pivotOffset = pivotOffset))
     }
-    entity.setComponent(Scale(1f))
+    setAbsoluteScale(entity, Vector3(1f))
   }
 
   fun detachFromEntity() {
     val scaledChild = entity.tryGetComponent<ScaledChild>()
     scaledChild?.isEnabled = false
     val globalPosition = getAbsoluteTransform(entity)
+    val globalScale = getAbsoluteScale(entity)
     entity.setComponent(TransformParent(Entity.nullEntity()))
     entity.setComponent(Transform(globalPosition))
+    entity.setComponent(Scale(globalScale))
     if (scaledChild != null) {
       entity.setComponent(scaledChild)
     }

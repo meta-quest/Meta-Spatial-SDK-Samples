@@ -278,9 +278,9 @@ class BallRunActivity : AppSystemActivity() {
 
   private fun shootBall(entity: Entity, direction: Vector3, speed: Float) {
     val physics = entity.getComponent<Physics>()
-    physics.linearVelocity = Vector3(0f) // reset velocity
     physics.state = PhysicsState.DYNAMIC
-    physics.applyForce = direction * Vector3(speed) // apply force at the given direction and speed
+    // Applied once, as an impulse that adds to the ball's current velocity.
+    physics.applyForce = direction * Vector3(speed)
     entity.setComponent(physics)
   }
 

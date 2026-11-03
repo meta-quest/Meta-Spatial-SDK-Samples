@@ -13,6 +13,7 @@ import com.meta.spatial.core.Quaternion
 import com.meta.spatial.core.SystemBase
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.physics.Physics
+import com.meta.spatial.physics.PhysicsState
 import com.meta.spatial.toolkit.PlayerBodyAttachmentSystem
 import com.meta.spatial.toolkit.SpatialActivityManager
 import com.meta.spatial.toolkit.Transform
@@ -53,7 +54,12 @@ class UiPanelUpdateSystem() : SystemBase() {
 
     // set physics on panel after position is set (otherwise physics interferes with position)
     panel.entity.setComponent(
-        Physics("box", dimensions = Vector3(1.0f, 0.75f, 0f), restitution = 0.9f),
+        Physics(
+            "box",
+            dimensions = Vector3(1.0f, 0.75f, 0f),
+            restitution = 0.9f,
+            state = PhysicsState.STATIC,
+        ),
     )
 
     return true

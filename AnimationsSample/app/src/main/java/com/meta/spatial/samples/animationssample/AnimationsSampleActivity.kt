@@ -142,8 +142,7 @@ class AnimationsSampleActivity : AppSystemActivity() {
                     false
                   } else {
                     if (
-                        panelSceneObject.getPanelShapeConfig()?.panelShapeType ==
-                            PanelShapeType.CYLINDER
+                        panelSceneObject.panelShapeConfig?.panelShapeType == PanelShapeType.CYLINDER
                     ) {
                       entity.setComponent(
                           PanelQuadCylinderAnimation(

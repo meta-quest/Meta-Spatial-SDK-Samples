@@ -3,7 +3,6 @@
 @REM This source code is licensed under the MIT license found in the
 @REM LICENSE file in the root directory of this source tree.
 
-
 @rem
 @rem Copyright 2015 the original author or authors.
 @rem
@@ -74,7 +73,6 @@ goto fail
 @rem Setup the command line
 
 set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
-
 
 @rem Execute Gradle
 "%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %GRADLE_OPTS% "-Dorg.gradle.appname=%APP_BASE_NAME%" -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*

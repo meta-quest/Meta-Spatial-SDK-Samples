@@ -12,6 +12,7 @@ import com.meta.spatial.core.Query
 import com.meta.spatial.core.SystemBase
 import com.meta.spatial.core.Vector3
 import com.meta.spatial.toolkit.Transform
+import kotlin.math.abs
 
 class TriggerSystem() : SystemBase() {
 
@@ -26,37 +27,25 @@ class TriggerSystem() : SystemBase() {
       val transform = areaEntity.getComponent<Transform>()
       val targetPosition = transform.transform.t
       val targetRotation = transform.transform.q
-      val targetSize = triggerArea.size
-
-      targetSize.x = targetSize.x / 2
-      targetSize.y = targetSize.y / 2
-      targetSize.z = targetSize.z / 2
+      val targetHalfSize = triggerArea.size / 2f
+      val toAreaSpace = targetRotation.inverse()
 
       val triggers = Query.where { has(Trigger.id, Transform.id) }
       // loop through all the triggers to see if they are inside the target area
       for (triggerEntity in triggers.eval()) {
         val trigger = triggerEntity.getComponent<Trigger>()
         val triggerTransform = triggerEntity.getComponent<Transform>()
-        val triggerPosition = triggerTransform.transform.t
+        val triggerHalfSize = trigger.size / 2f
 
-        val triggerSize = trigger.size
-        triggerSize.x = triggerSize.x / 2
-        triggerSize.y = triggerSize.y / 2
-        triggerSize.z = triggerSize.z / 2
-
-        // Calculate the distance from the current position to the center of the target area
-        val distanceX = triggerPosition.x - targetPosition.x
-        val distanceY = triggerPosition.y - targetPosition.y
-        val distanceZ = triggerPosition.z - targetPosition.z
+        // The trigger's offset from the center of the area, along the area's own axes, so that a
+        // rotated area covers the box it is drawn as.
+        val offset = toAreaSpace * (triggerTransform.transform.t - targetPosition)
 
         // Check if the current position is inside the target area
-        var isInside =
-            (distanceX >= -(targetSize.x + triggerSize.x) &&
-                distanceX <= (targetSize.x + triggerSize.x) &&
-                distanceY >= -(targetSize.y + triggerSize.y) &&
-                distanceY <= (targetSize.y + triggerSize.y) &&
-                distanceZ >= -(targetSize.z + triggerSize.z) &&
-                distanceZ <= (targetSize.z + triggerSize.z))
+        val isInside =
+            abs(offset.x) <= targetHalfSize.x + triggerHalfSize.x &&
+                abs(offset.y) <= targetHalfSize.y + triggerHalfSize.y &&
+                abs(offset.z) <= targetHalfSize.z + triggerHalfSize.z
 
         // if the current position has entered inside the trigger
         if (isInside && trigger.insideAreaId != areaEntity.id) {

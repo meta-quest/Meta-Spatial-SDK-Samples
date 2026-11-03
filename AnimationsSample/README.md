@@ -2,10 +2,7 @@
 
 The Animations sample shows how to play animation clips, create reusable animation drivers, and demonstrates frame-based procedural animation.
 
-
 ![Animation Sample](documentation/animations-sample.jpg)
-
-
 
 ## Highlighted features
 The Animations sample uses the following Meta Spatial SDK features:

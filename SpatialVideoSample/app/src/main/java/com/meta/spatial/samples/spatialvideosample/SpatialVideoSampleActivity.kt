@@ -601,7 +601,7 @@ class SpatialVideoSampleActivity : AppSystemActivity() {
           )
         }
 
-    player.setVideoSurface(panelSceneObject.getSurface())
+    player.setVideoSurface(panelSceneObject.surface)
 
     systemManager
         .findSystem<SceneObjectSystem>()

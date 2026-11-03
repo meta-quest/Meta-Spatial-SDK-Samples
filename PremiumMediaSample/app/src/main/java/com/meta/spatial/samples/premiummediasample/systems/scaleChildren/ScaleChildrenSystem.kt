@@ -16,6 +16,7 @@ import com.meta.spatial.samples.premiummediasample.ScaledParent
 import com.meta.spatial.toolkit.Scale
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
+import com.meta.spatial.toolkit.setAbsoluteScale
 
 class ScaleChildrenSystem : SystemBase() {
   override fun execute() {
@@ -32,16 +33,24 @@ class ScaleChildrenSystem : SystemBase() {
     }
   }
 
+  // The child inherits the parent's Scale, which also scales its local position: localPosition
+  // stretches with the parent, and pivotOffset is divided out so it stays in meters. The child's
+  // own
+  // Scale cancels the parent's, so it keeps its size.
   private fun updateChildTransform(child: Entity, scaledChild: ScaledChild, parentScale: Vector3) {
     val transformComponent = child.getComponent<Transform>()
     transformComponent.transform.t.x =
-        (scaledChild.localPosition.x * parentScale.x) + scaledChild.pivotOffset.x
+        scaledChild.localPosition.x + divideOrKeep(scaledChild.pivotOffset.x, parentScale.x)
     transformComponent.transform.t.y =
-        (scaledChild.localPosition.y * parentScale.y) + scaledChild.pivotOffset.y
+        scaledChild.localPosition.y + divideOrKeep(scaledChild.pivotOffset.y, parentScale.y)
     transformComponent.transform.t.z =
-        (scaledChild.localPosition.z * parentScale.z) + scaledChild.pivotOffset.z
+        scaledChild.localPosition.z + divideOrKeep(scaledChild.pivotOffset.z, parentScale.z)
     child.setComponent(transformComponent)
+    setAbsoluteScale(child, Vector3(1f))
   }
+
+  private fun divideOrKeep(value: Float, divisor: Float): Float =
+      if (divisor != 0f) value / divisor else value
 
   private fun getScaledChildren(parent: Entity): MutableList<Entity> {
     val children: MutableList<Entity> = mutableListOf()

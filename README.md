@@ -22,7 +22,6 @@ leverage the power of spatial computing in your applications.
 To try out these sample apps, you will need:
 
 - A Meta Quest device (Quest 2/3/3S/Pro)
-  - [Meta Quest build v69.0 or newer](https://www.meta.com/help/quest/articles/whats-new/release-notes/)
 - Mac or Windows
   - [Android Studio Narwhal (2025.1.1) or newer](https://developer.android.com/studio) — required for Android Gradle Plugin 8.11
   - JDK 17 (bundled with Android Studio; needed separately only if you build from the command line)

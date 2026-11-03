@@ -410,7 +410,7 @@ class MediaPlayerSampleActivity : AppSystemActivity() {
           webSettings.setJavaScriptEnabled(true)
           webSettings.setMediaPlaybackRequiresUserGesture(false)
           // have the panel influence the theatre
-          updateTextures(so.getTexture()!!)
+          updateTextures(so.texture!!)
         },
     )
   }

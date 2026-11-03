@@ -231,6 +231,7 @@ entities:
           visible: true
         com.meta.spatial.physics.Physics:
           shape: room_collision.glb
+          collisionShapeType: 1
           state: 0
         com.meta.spatial.toolkit.SupportsLocomotion:
           {}

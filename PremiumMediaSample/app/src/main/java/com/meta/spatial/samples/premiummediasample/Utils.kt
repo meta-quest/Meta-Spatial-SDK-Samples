@@ -22,10 +22,13 @@ import com.meta.spatial.toolkit.Controller
 import com.meta.spatial.toolkit.GrabbableType
 import com.meta.spatial.toolkit.PanelCreationSystem
 import com.meta.spatial.toolkit.PanelDimensions
-import com.meta.spatial.toolkit.Scale
 import com.meta.spatial.toolkit.Transform
 import com.meta.spatial.toolkit.TransformParent
+import com.meta.spatial.toolkit.getAbsoluteScale
 import com.meta.spatial.toolkit.getAbsoluteTransform
+import com.meta.spatial.toolkit.getLocalPoseForAbsoluteTransform
+import com.meta.spatial.toolkit.setAbsoluteScale
+import com.meta.spatial.toolkit.setAbsoluteTransform
 import kotlin.math.atan
 
 // Used for panel registration
@@ -145,24 +148,11 @@ fun fromAxisAngle(axis: Vector3, angle: Float): Quaternion {
 
 // Converts from Global to Local Pose
 // Will convert to local co-ordinates that could be added to entity's parent to become global again
-fun fromAbsoluteToLocal(globalPose: Pose = Pose(), localRelativeTo: Entity): Pose {
-  if (localRelativeTo.hasComponent<TransformParent>()) {
-    val parentGlobal = getAbsoluteTransform(localRelativeTo.getComponent<TransformParent>().entity)
-    return parentGlobal.inverse().times(globalPose)
-  }
-  return globalPose
-}
+fun fromAbsoluteToLocal(globalPose: Pose = Pose(), localRelativeTo: Entity): Pose =
+    getLocalPoseForAbsoluteTransform(localRelativeTo, globalPose)
 
 fun setAbsolutePosition(entity: Entity, abolutePosition: Pose) {
-  val transformParent = entity.tryGetComponent<TransformParent>()
-  if (transformParent == null) {
-    entity.setComponent(Transform(abolutePosition))
-    return
-  }
-
-  val parentsAbsolute = transformParent.entity.getComponent<Transform>()
-  val localPose = parentsAbsolute.transform.inverse().times(abolutePosition)
-  entity.setComponent(Transform(localPose))
+  setAbsoluteTransform(entity, abolutePosition)
 }
 
 fun getControllers(): List<Controller> {
@@ -424,28 +414,25 @@ fun quadTriangleMesh(
 
 fun getSize(entity: Entity): Vector3 {
   val panelDimensions = entity.tryGetComponent<PanelDimensions>()
-  val scale = entity.tryGetComponent<Scale>()
-  if (panelDimensions != null && scale != null) {
+  val scale = getAbsoluteScale(entity)
+  if (panelDimensions != null) {
     return Vector3(
-        panelDimensions.dimensions.x * scale.scale.x,
-        panelDimensions.dimensions.y * scale.scale.y,
-        scale.scale.z,
+        panelDimensions.dimensions.x * scale.x,
+        panelDimensions.dimensions.y * scale.y,
+        scale.z,
     )
-  } else if (panelDimensions != null)
-      return Vector3(panelDimensions.dimensions.x, panelDimensions.dimensions.y, 1f)
-  else if (scale != null) return scale.scale
-
-  return Vector3(1f)
+  }
+  return scale
 }
 
 fun setSize(entity: Entity, size: Vector3) {
-  val scale = if (entity.hasComponent<Scale>()) entity.getComponent<Scale>() else Scale()
+  val scale = getAbsoluteScale(entity)
   val panel = entity.tryGetComponent<PanelDimensions>()
   if (panel != null) {
-    scale.scale.x = if (panel.dimensions.x != 0f) size.x / panel.dimensions.x else 0f
-    scale.scale.y = if (panel.dimensions.y != 0f) size.y / panel.dimensions.y else 0f
+    scale.x = if (panel.dimensions.x != 0f) size.x / panel.dimensions.x else 0f
+    scale.y = if (panel.dimensions.y != 0f) size.y / panel.dimensions.y else 0f
   }
-  entity.setComponent(scale)
+  setAbsoluteScale(entity, scale)
 }
 
 fun getFovFromSize(size: Vector3, distance: Float, basedOnWidth: Boolean = true): Float {

@@ -9,7 +9,6 @@ entities:
             - ref:Panel
             - ref:InfoPanel
             - ref:ramps
-            - ref:triggerArea01
             - ref:triggerArea1
             - ref:triggerArea2
             - ref:triggerArea31
@@ -46,6 +45,7 @@ entities:
           state: 0
           densityInternal: 1
           shape: room_collision.glb
+          collisionShapeType: 1
         com.meta.spatial.toolkit.SupportsLocomotion:
           {}
       tag: Environment
@@ -195,6 +195,7 @@ entities:
           restitution: 0
           state: 0
           shape: marbleRun_collision.glb
+          collisionShapeType: 1
           frictionInternal:
             - 0
             - 0
@@ -323,42 +324,6 @@ entities:
         com.meta.spatial.toolkit.PanelDimensions:
           {}
       tag: InfoPanel
-    - components:
-        com.meta.components.Animatable:
-          {}
-        com.meta.components.DocumentReference:
-          transformType: None
-          documentReference: projref:cubePrimitive/Main.metaspatialobj
-        com.meta.components.Name:
-          name: triggerArea0
-        com.meta.components.PointerNodeInverseComponent:
-          {}
-        com.meta.components.SceneNode:
-          rotation.data:
-            - 0.761159301
-            - 0
-            - -0.648564994
-            - 0
-          rotation.format: Quaternion
-          scale:
-            - 1
-            - 0.25
-            - 0.300000012
-          translation:
-            - -0.555736065
-            - 1.83244526
-            - 2.1440146
-          componentVersion: 1
-        com.meta.components.Visibility:
-          visible: true
-        com.meta.spatial.samples.physicssample.TriggerArea:
-          eventName: speed_up
-          size:
-            - 1
-            - 0.25
-            - 0.300000012
-          value: 70
-      tag: triggerArea01
     - components:
         com.meta.components.Animatable:
           {}

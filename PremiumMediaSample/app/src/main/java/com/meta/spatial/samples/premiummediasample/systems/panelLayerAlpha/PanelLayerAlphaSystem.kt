@@ -37,7 +37,7 @@ class PanelLayerAlphaSystem() : SystemBase() {
             .getSceneObject(entity)
             ?.thenAccept { sceneObject ->
               val panelSceneObject = sceneObject as? PanelSceneObject
-              val sceneObjectLayer = panelSceneObject?.getLayer()
+              val sceneObjectLayer = panelSceneObject?.layer
               if (sceneObjectLayer != null) {
                 val plaComp = entity.getComponent<PanelLayerAlpha>()
                 // Assuming color scale bias is default other than alpha
