@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <!-- main panels -->
+    <integer name="welcome_panel_id">0</integer>
+    <integer name="object_label_panel_id">1</integer>
+    <integer name="info_panel_id">2</integer>
+    <integer name="curated_info_panel_id">3</integer>
+
+    <!-- tip panels -->
+    <integer name="select_object_tip_panel_id">4</integer>
+    <integer name="no_objects_tip_panel_id">5</integer>
+    <integer name="find_objects_tip_panel_id">6</integer>
+    <integer name="help_tip_panel_id">7</integer>
+
+    <integer name="object_panel_id">10</integer>
+</resources>

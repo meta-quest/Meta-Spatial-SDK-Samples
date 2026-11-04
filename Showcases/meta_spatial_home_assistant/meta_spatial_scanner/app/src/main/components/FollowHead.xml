@@ -1,0 +1,18 @@
+<ComponentSchema packageName="com.meta.pixelandtexel.scanner">
+    <Enum name="RotationMode">
+        <EnumValue value="FULL" />
+        <EnumValue value="Y_ROTATION" />
+    </Enum>
+    <Component name="FollowHead">
+        <Description>
+            Component that makes an entity look at a specified target entity's head.
+        </Description>
+
+        <BooleanAttribute name="lookAtHead" defaultValue="true"
+                description="Whether to look at the target's head instead of the root." />
+
+        <EnumAttribute name="rotationMode" defaultValue="RotationMode.FULL" />
+
+    </Component>
+</ComponentSchema>
+

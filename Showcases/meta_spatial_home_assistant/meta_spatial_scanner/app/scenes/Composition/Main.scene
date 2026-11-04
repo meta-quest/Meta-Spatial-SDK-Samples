@@ -1,0 +1,260 @@
+entities:
+  com.meta.models.Scene:
+    - components:
+        com.meta.components.Name:
+          {}
+        com.meta.components.Scene:
+          nodes:
+            - ref:WelcomePanel
+            - ref:CameraControlsPanel
+            - ref:ShowSmartButtonPanel
+            - ref:SmartThingButtonDeletePanel
+      tag: Scene
+  com.meta.models.SceneNode:
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: CameraControlsPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.0399999991
+            - 0.0399999991
+            - 1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
+        com.meta.pixelandtexel.scanner.WristAttached:
+          faceUser: true
+          rotation:
+            - -30
+            - -55
+            - -90
+          position:
+            - 0.0799999982
+            - -0.0399999991
+            - -0.0199999996
+        com.meta.spatial.toolkit.Panel:
+          panel: "@layout/ui_camera_controls_view"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: CameraControlsPanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: WelcomePanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.data:
+            - 0
+            - 3.14159274
+            - 0
+            - 0
+          rotation.format: Euler
+          scale:
+            - 0.370000005
+            - 0.400000006
+            - 1
+          translation:
+            - 0
+            - 1.70000005
+            - -1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+        com.meta.spatial.toolkit.Grabbable:
+          type: 1
+        com.meta.spatial.toolkit.Panel:
+          panel: "@integer/welcome_panel_id"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: WelcomePanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: min
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.423324108
+            - -0.812217712
+            - 0
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: max
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.422205925
+            - 0.823295593
+            - 0.772341907
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: ShowSmartButtonPanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.0399999991
+            - 0.0399999991
+            - 1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
+        com.meta.pixelandtexel.scanner.WristAttached:
+          position:
+            - 0.0700000003
+            - -0.0799999982
+            - -0.0299999993
+          rotation:
+            - -30
+            - -55
+            - -90
+          faceUser: true
+        com.meta.spatial.toolkit.Panel:
+          panel: "@layout/ui_show_smart_things_button_view"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: ShowSmartButtonPanel
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: min
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.501837969
+            - -0.297210693
+            - 0.00251603499
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: max
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.506229162
+            - 0.302787781
+            - 0.0970481634
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: min
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - -0.220475674
+            - -0.4633255
+            - 0
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: max
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 1
+            - 1
+            - 1
+          translation:
+            - 0.21383369
+            - 0.453491211
+            - 0.056432277
+          componentVersion: 1
+        com.meta.components.Visibility:
+          visible: true
+    - components:
+        com.meta.components.Animatable:
+          {}
+        com.meta.components.Name:
+          name: SmartThingButtonDeletePanel
+        com.meta.components.PointerNodeInverseComponent:
+          {}
+        com.meta.components.SceneNode:
+          rotation.format: Euler
+          scale:
+            - 0.0399999991
+            - 0.0399999991
+            - 1
+          componentVersion: 1
+        com.meta.components.Visibility:
+          {}
+        com.meta.pixelandtexel.scanner.WristAttached:
+          position:
+            - 0.0700000003
+            - -0.109999999
+            - -0.0299999993
+          rotation:
+            - -30
+            - -55
+            - -100
+          faceUser: true
+        com.meta.spatial.toolkit.Panel:
+          panel: "@layout/ui_delete_smart_things_button_view"
+        com.meta.spatial.toolkit.PanelDimensions:
+          {}
+      tag: SmartThingButtonDeletePanel
+metadata:
+  version: 1.35

@@ -1,0 +1,26 @@
+<ComponentSchema packageName="com.meta.pixelandtexel.scanner">
+    <Enum name="HandSide">
+        <EnumValue value="LEFT" />
+        <EnumValue value="RIGHT" />
+    </Enum>
+    <Component name="WristAttached">
+        <Description
+    >A component which positions and orients the entity on the user's wrist.</Description>
+        <Vector3Attribute
+      name="position"
+      defaultValue="0f, 0f, 0f"
+      description="The position offset to apply to the object, relative to the hand."
+    />
+        <Vector3Attribute
+      name="rotation"
+      defaultValue="0f, 0f, 0f"
+      description="The rotation offset in euler angles to apply to the object, relative to the hand."
+    />
+        <EnumAttribute name="side" defaultValue="HandSide.LEFT" />
+        <BooleanAttribute
+      name="faceUser"
+      defaultValue="false"
+      description="Whether or not to orient the entity such that it faces the user (ignores the rotation offset)."
+    />
+    </Component>
+</ComponentSchema>

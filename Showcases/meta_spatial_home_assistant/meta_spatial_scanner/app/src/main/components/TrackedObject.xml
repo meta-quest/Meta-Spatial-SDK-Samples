@@ -1,0 +1,11 @@
+<ComponentSchema packageName="com.meta.pixelandtexel.scanner">
+    <Component name="TrackedObject">
+        <Description
+    >A component representing an object detected using ML and tracked across frames.</Description>
+        <IntAttribute
+      name="objectId"
+      defaultValue="-1"
+      description="The detected object id."
+    />
+    </Component>
+</ComponentSchema>
